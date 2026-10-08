@@ -4,6 +4,8 @@ import { intro, work, caseHeader } from '../../data/home';
 // Layout per /mnt/project-files/research/visual-research.md: priority sized tiles,
 // headline led tiles with a metadata line, hero proven by a live moment, one motion system.
 const sizes = ['wide', 'half', 'half', 'wide'];
+// Preview only: loops cut from Vishal's own showreels. They move to the chosen video host before launch.
+const loops = ['ixigo', 'split', 'twelve', 'jarvis'];
 const results = [
   { n: 60, label: 'conversion lift on critical flows' },
   { n: 50, label: 'click through lift on landing pages, rebuilt from Hotjar and Clarity recordings' },
@@ -83,10 +85,10 @@ const results = [
   .meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--muted);margin:0 0 14px}
   .pill{border:1px solid var(--rule);border-radius:999px;padding:1px 10px;color:var(--ink)}
   .media{position:relative;background:var(--card);border-radius:20px;overflow:hidden;aspect-ratio:4/3;border:1px solid transparent;transition:border-color var(--hover) var(--ease-out),transform var(--enter) var(--ease-out)}
-  .tile.wide .media{aspect-ratio:16/8}
-  @media (max-width:760px){.tile.wide .media{aspect-ratio:4/3}}
+  @media (min-width:761px){.tile.wide{display:grid;grid-template-columns:1.35fr 1fr;grid-template-rows:auto 1fr auto auto auto 1fr;gap:0 48px}.tile.wide .meta{grid-column:1/-1}.tile.wide .media{grid-row:2/7}.tile.wide h3{grid-column:2;grid-row:3;margin-top:0}.tile.wide p{grid-column:2;grid-row:4}.tile.wide .more{grid-column:2;grid-row:5;justify-self:start}}
   .media img,.media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0}
-  .media img{transition:object-position 6s linear}
+  .media video{opacity:0;transition:opacity var(--enter) var(--ease-out)}
+  .media.playing video{opacity:1}
   .play{position:absolute;left:16px;bottom:16px;font-size:13px;font-weight:600;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(8px);padding:6px 12px;border-radius:999px;opacity:0;transform:translateY(4px);transition:opacity var(--hover) var(--ease-out),transform var(--hover) var(--ease-out)}
   .tile h3{font-size:clamp(26px,2.6vw,36px);line-height:1.1;letter-spacing:-.025em;font-weight:650;margin:22px 0 8px}
   .tile.wide h3{font-size:clamp(30px,3.6vw,48px)}
@@ -95,12 +97,9 @@ const results = [
   .tile .more::after{content:"";display:inline-block;width:.5em;height:.5em;border-top:2px solid currentColor;border-right:2px solid currentColor;transform:rotate(45deg);margin-left:.45em;transition:transform var(--hover) var(--ease-out)}
   @media (hover:hover) and (pointer:fine){
     .tile:hover .media{border-color:var(--ink)}
-    .tile:hover .media img{object-position:50% 100%}
     .tile:hover .play,.tile:focus-visible .play{opacity:1;transform:none}
     .tile:hover .more::after{transform:translateX(4px) rotate(45deg)}
   }
-  .tile.inview .media img{object-position:50% 100%}
-  @media (hover:hover) and (pointer:fine){.tile.inview .media img{object-position:50% 0}.tile.inview:hover .media img{object-position:50% 100%}}
 
   /* results */
   .results{background:var(--dark);color:#F2F2F3;border-radius:28px;padding:56px 48px;margin:0 0 128px}
@@ -133,11 +132,9 @@ const results = [
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation:none!important;transition-duration:150ms!important;scroll-behavior:auto!important}
     .js .reveal{transform:none}
-    .media img{object-position:50% 0!important}
   }
   .calm *,.calm *::before,.calm *::after{animation:none!important;transition-duration:150ms!important}
   .calm .js .reveal,.calm .reveal{transform:none!important}
-  .calm .media img{object-position:50% 0!important}
 </style>
 <script is:inline>document.documentElement.classList.add('js');try{if(localStorage.getItem('calm')==='1')document.documentElement.classList.add('calm')}catch(e){}</script>
 </head>
@@ -180,7 +177,8 @@ const results = [
       <a class={`tile reveal ${sizes[i]}`} href={`#${w.slug}`}>
         <div class="meta"><span class="pill">{w.type.includes('B2B') ? 'B2B concept' : 'Concept'}</span><span>{w.year}</span><span>{w.role}</span></div>
         <div class="media">
-          <img src={w.image} alt={w.alt} width="1464" height="1532" loading={i ? 'lazy' : 'eager'} decoding="async" />
+          <img src={`/loops/${loops[i]}.jpg`} alt={w.alt} width="1200" height="900" loading={i ? 'lazy' : 'eager'} decoding="async" />
+          <video muted loop playsinline preload="none" poster={`/loops/${loops[i]}.jpg`} aria-hidden="true" tabindex="-1"><source src={`/loops/${loops[i]}.webm`} type="video/webm" /><source src={`/loops/${loops[i]}.mp4`} type="video/mp4" /></video>
           <span class="play" aria-hidden="true">{w.detail}</span>
         </div>
         <h3>{w.headline}</h3>
@@ -227,9 +225,17 @@ const results = [
   // Reveal once, and on touch screens pan a tile while it is in view
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) e.target.classList.add('on');
-    if (e.target.classList.contains('tile')) e.target.classList.toggle('inview', e.intersectionRatio > .6);
   }), { threshold: [0, .15, .6] });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Loops: hover or focus on desktop, in view on touch, off under reduced motion
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const play = (t, on) => { const v = t.querySelector('video'), m = t.querySelector('.media'); if (!v) return;
+    if (on && !reduced()) { v.play().then(() => m.classList.add('playing')).catch(() => {}); } else { v.pause(); m.classList.remove('playing'); } };
+  document.querySelectorAll('.tile').forEach(t => {
+    if (fine) { ['mouseenter','focus'].forEach(ev => t.addEventListener(ev, () => play(t, true))); ['mouseleave','blur'].forEach(ev => t.addEventListener(ev, () => play(t, false))); }
+  });
+  if (!fine) { const vio = new IntersectionObserver(es => es.forEach(e => play(e.target, e.intersectionRatio > .6)), { threshold: [0, .6] }); document.querySelectorAll('.tile').forEach(t => vio.observe(t)); }
 
   // Count up the results once
   const nums = document.querySelectorAll('.r-num');
