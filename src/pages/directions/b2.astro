@@ -65,7 +65,7 @@ const results = [
   .m-state{font-size:40px;line-height:1.05;letter-spacing:-.03em;font-weight:650;margin:18px 0 6px;min-height:2.1em}
   .m-sub{color:#B8B8BE;font-size:15px;min-height:3em;margin:0 0 18px}
   .m-bar{height:4px;border-radius:4px;background:#2C2D33;overflow:hidden}
-  .m-bar i{display:block;height:100%;width:var(--p,8%);background:#F2F2F3;border-radius:4px;transition:width var(--section) var(--ease-io)}
+  .m-bar i{display:block;height:100%;width:100%;background:#F2F2F3;border-radius:4px;transform-origin:0 50%;transform:scaleX(var(--p,.08));transition:transform var(--section) var(--ease-io)}
   .m-steps{display:flex;justify-content:space-between;font-size:12px;color:#8A8A90;margin-top:8px}
   .m-steps b{color:#F2F2F3;font-weight:600}
   .m-btn{margin-top:20px;width:100%;padding:12px;border-radius:12px;border:0;background:#F2F2F3;color:#16171A;font:600 15px var(--sans);cursor:pointer;transition:transform var(--press) var(--ease-out),opacity var(--hover)}
@@ -245,9 +245,9 @@ const results = [
   // The unsure moment: a countdown that resolves into a decision
   const $ = id => document.getElementById(id);
   const states = [
-    { s: 'Waitlist 24, 70 percent', sub: 'Honest odds, a countdown to the chart, and a backup seat held on the 12138. Nothing is charged now.', p: '8%', step: 2, btn: 'Skip to chart time' },
-    { s: 'The chart did not clear', sub: 'Said plainly, no softening. Your refund is already moving.', p: '62%', step: 3, btn: 'Show the way out' },
-    { s: 'Take the held seat on the 12138', sub: 'One tap and you are booked. The refund comes separately, so you never wait for money to travel again.', p: '100%', step: 4, btn: 'Start again' },
+    { s: 'Waitlist 24, 70 percent', sub: 'Honest odds, a countdown to the chart, and a backup seat held on the 12138. Nothing is charged now.', p: '.08', step: 2, btn: 'Skip to chart time' },
+    { s: 'The chart did not clear', sub: 'Said plainly, no softening. Your refund is already moving.', p: '.62', step: 3, btn: 'Show the way out' },
+    { s: 'Take the held seat on the 12138', sub: 'One tap and you are booked. The refund comes separately, so you never wait for money to travel again.', p: '1', step: 4, btn: 'Start again' },
   ];
   let i = 0, secs = 4 * 3600 - 1;
   const fmt = s => `${Math.floor(s / 3600)}:${String(Math.floor(s / 60) % 60).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
