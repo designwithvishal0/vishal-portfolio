@@ -2,7 +2,7 @@
 import '@fontsource-variable/hanken-grotesk';
 import { intro, work, caseHeader } from '../../data/home';
 // Layout per /mnt/project-files/research/visual-research.md: priority sized tiles,
-// headline led tiles with a metadata line, hero proven by a live moment, one motion system.
+// headline led tiles with a metadata line, hero proven by the shipped results right under it, one motion system.
 const sizes = ['wide', 'half', 'half', 'wide'];
 // Preview only: loops cut from Vishal's own showreels. They move to the chosen video host before launch.
 const loops = ['ixigo', 'split', 'twelve', 'jarvis'];
@@ -44,8 +44,8 @@ const results = [
   @media (max-width:640px){.top{flex-direction:column;align-items:flex-start}}
 
   /* hero */
-  .hero{display:grid;grid-template-columns:1.25fr .75fr;gap:56px;align-items:end;padding:96px 0 112px}
-  @media (max-width:900px){.hero{grid-template-columns:1fr;padding:56px 0 80px}}
+  .hero{padding:56px 0 40px}
+  @media (max-width:900px){.hero{padding:40px 0 40px}}
   .pos{font-size:clamp(46px,7vw,104px);line-height:.98;letter-spacing:-.045em;font-weight:650;margin:0 0 32px}
   .sup{font-size:19px;color:var(--muted);max-width:50ch;margin:0 0 28px}
   .aud{display:flex;flex-direction:column;gap:6px;margin:0 0 32px;padding:0;list-style:none;font-size:16px}
@@ -59,21 +59,6 @@ const results = [
   .btn.primary:hover{background:color-mix(in srgb,var(--accent) 88%,#000)}
   @media (prefers-color-scheme:dark){.btn.primary{color:#0B1230}}
 
-  /* the moment card: a live illustration of an unsure moment */
-  .moment{background:var(--dark);color:#F2F2F3;border-radius:24px;padding:24px;box-shadow:0 30px 60px -30px rgba(20,24,40,.45)}
-  .moment small{display:block;color:#9A9AA0;font-size:13px;margin-bottom:18px}
-  .m-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-  .m-train{font-weight:600}
-  .m-state{font-size:40px;line-height:1.05;letter-spacing:-.03em;font-weight:650;margin:18px 0 6px;min-height:2.1em}
-  .m-sub{color:#B8B8BE;font-size:15px;min-height:3em;margin:0 0 18px}
-  .m-bar{height:4px;border-radius:4px;background:#2C2D33;overflow:hidden}
-  .m-bar i{display:block;height:100%;width:100%;background:#F2F2F3;border-radius:4px;transform-origin:0 50%;transform:scaleX(var(--p,.08));transition:transform var(--section) var(--ease-io)}
-  .m-steps{display:flex;justify-content:space-between;font-size:12px;color:#8A8A90;margin-top:8px}
-  .m-steps b{color:#F2F2F3;font-weight:600}
-  .m-btn{margin-top:20px;width:100%;padding:12px;border-radius:12px;border:0;background:#F2F2F3;color:#16171A;font:600 15px var(--sans);cursor:pointer;transition:transform var(--press) var(--ease-out),opacity var(--hover)}
-  .m-btn:active{transform:scale(.97)}
-  .swap{animation:swap var(--enter) var(--ease-out)}
-  @keyframes swap{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
   /* work */
   .sec-head{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--rule);padding:20px 0 32px;font-size:15px;color:var(--muted)}
@@ -102,12 +87,12 @@ const results = [
   }
 
   /* results */
-  .results{background:var(--dark);color:#F2F2F3;border-radius:28px;padding:56px 48px;margin:0 0 128px}
-  .results h2{font-size:15px;font-weight:600;color:#A1A1A6;margin:0 0 40px}
+  .results{background:var(--dark);color:#F2F2F3;border-radius:28px;padding:32px 40px;margin:0 0 128px}
+  .results h2{font-size:15px;font-weight:600;color:#A1A1A6;margin:0 0 20px}
   .r-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
   @media (max-width:760px){.results{padding:40px 24px}.r-grid{grid-template-columns:1fr}}
-  .r-num{font-size:clamp(56px,7vw,96px);line-height:1;letter-spacing:-.05em;font-weight:650;font-variant-numeric:tabular-nums}
-  .r-label{color:#B8B8BE;margin-top:12px;max-width:30ch}
+  .r-num{font-size:clamp(48px,4.6vw,64px);line-height:1;letter-spacing:-.05em;font-weight:650;font-variant-numeric:tabular-nums}
+  .r-label{color:#B8B8BE;margin-top:8px;max-width:34ch;font-size:16px}
 
   /* case header */
   .case{padding:0 0 140px}
@@ -159,15 +144,14 @@ const results = [
         <a class="btn" href={intro.links[0].href}>{intro.links[0].label}</a>
       </div>
     </div>
+  </section>
 
-    <div class="moment enter" style="animation-delay:120ms" aria-live="polite">
-      <small>An unsure moment, from the ixigo case study</small>
-      <div class="m-row"><span class="m-train">Chart prepares at 5:40 PM</span><span id="m-time" style="font-variant-numeric:tabular-nums">3:59:59</span></div>
-      <p class="m-state" id="m-state">Waitlist 24, 70 percent</p>
-      <p class="m-sub" id="m-sub">Honest odds, a countdown to the chart, and a backup seat held on the 12138. Nothing is charged now.</p>
-      <div class="m-bar"><i id="m-bar"></i></div>
-      <div class="m-steps" aria-hidden="true"><span>Booked</span><b id="m-s2">Waiting</b><span id="m-s3">Chart</span><span id="m-s4">Decided</span></div>
-      <button class="m-btn" id="m-btn" type="button">Skip to chart time</button>
+  <section class="results" id="results" aria-labelledby="r-h">
+    <h2 id="r-h">Shipped at CashKaro, for 25M+ users</h2>
+    <div class="r-grid">
+      {results.map(r => (
+        <div><div class="r-num" data-n={r.n}>{r.n}%</div><div class="r-label">{r.label}</div></div>
+      ))}
     </div>
   </section>
 
@@ -186,15 +170,6 @@ const results = [
         <span class="more">View the case study</span>
       </a>
     ))}
-  </section>
-
-  <section class="results reveal" id="results" aria-labelledby="r-h">
-    <h2 id="r-h">Shipped at CashKaro, for 25M+ users</h2>
-    <div class="r-grid">
-      {results.map(r => (
-        <div><div class="r-num" data-n={r.n}>{r.n}%</div><div class="r-label">{r.label}</div></div>
-      ))}
-    </div>
   </section>
 
   <section class="case reveal" aria-labelledby="case">
@@ -248,25 +223,6 @@ const results = [
   }), { threshold: .5 });
   nums.forEach(n => cio.observe(n));
 
-  // The unsure moment: a countdown that resolves into a decision
-  const $ = id => document.getElementById(id);
-  const states = [
-    { s: 'Waitlist 24, 70 percent', sub: 'Honest odds, a countdown to the chart, and a backup seat held on the 12138. Nothing is charged now.', p: '.08', step: 2, btn: 'Skip to chart time' },
-    { s: 'The chart did not clear', sub: 'Said plainly, no softening. Your refund is already moving.', p: '.62', step: 3, btn: 'Show the way out' },
-    { s: 'Take the held seat on the 12138', sub: 'One tap and you are booked. The refund comes separately, so you never wait for money to travel again.', p: '1', step: 4, btn: 'Start again' },
-  ];
-  let i = 0, secs = 4 * 3600 - 1;
-  const fmt = s => `${Math.floor(s / 3600)}:${String(Math.floor(s / 60) % 60).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
-  const render = () => {
-    const st = states[i];
-    $('m-state').textContent = st.s; $('m-sub').textContent = st.sub; $('m-btn').textContent = st.btn;
-    $('m-bar').style.setProperty('--p', st.p);
-    ['m-s2', 'm-s3', 'm-s4'].forEach((id, k) => { const el = $(id); el.style.color = k + 2 === st.step ? '#F2F2F3' : ''; el.style.fontWeight = k + 2 === st.step ? '600' : '400'; });
-    if (!reduced()) { $('m-state').classList.remove('swap'); void $('m-state').offsetWidth; $('m-state').classList.add('swap'); }
-    if (i) $('m-time').textContent = '0:00:00';
-  };
-  setInterval(() => { if (i === 0 && secs > 0 && !reduced()) $('m-time').textContent = fmt(--secs); }, 1000);
-  $('m-btn').addEventListener('click', () => { i = (i + 1) % states.length; if (!i) secs = 4 * 3600 - 1; render(); });
 })();
 </script>
 </body>
