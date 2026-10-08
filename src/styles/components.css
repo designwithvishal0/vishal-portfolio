@@ -7,8 +7,9 @@ body{margin:0;background:var(--bg);color:var(--ink);font:var(--w-regular) var(--
 .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:var(--r-focus)}
-.ul{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size var(--hover) var(--ease-out)}
-.ul:hover,.ul:focus-visible{background-size:100% 1px}
+/* underline draws in from the left, leaves to the right */
+.ul{text-decoration:none;background:linear-gradient(currentColor,currentColor) no-repeat 100% 100%/0 1px;transition:background-size var(--hover) var(--ease-out)}
+.ul:hover,.ul:focus-visible{background-size:100% 1px;background-position:0 100%}
 
 /* top bar */
 .top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px 0;font-size:15px}
@@ -88,10 +89,36 @@ footer button{font:inherit;color:var(--ink);background:none;border:1px solid var
 .enter{animation:enter var(--enter) var(--ease-out) both}
 @keyframes enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
+/* microinteractions */
+/* 1. headline rises in word by word, once */
+.words .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em;margin-bottom:-.1em}
+.words .w>span{display:inline-block;animation:rise 760ms var(--ease-out) both;animation-delay:calc(var(--i) * 45ms + 80ms)}
+@keyframes rise{from{transform:translateY(110%)}to{transform:none}}
+/* 3. button label rolls up to a copy of itself */
+.roll{display:inline-block;position:relative;overflow:hidden;vertical-align:top}
+.roll>span{display:block;transition:transform var(--hover) var(--ease-out)}
+.roll::after{content:attr(data-t) / "";position:absolute;left:0;top:100%;white-space:nowrap;transition:transform var(--hover) var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.btn:hover .roll>span,.btn:hover .roll::after{transform:translateY(-100%)}}
+/* 2. cursor label over work tiles */
+.cursor{position:fixed;left:0;top:0;z-index:50;pointer-events:none}
+.cursor span{display:block;background:var(--accent);color:var(--on-accent);font-size:var(--fs-meta);font-weight:var(--w-strong);padding:8px 14px;border-radius:var(--r-pill);white-space:nowrap;opacity:0;transform:scale(.6);transition:opacity var(--hover) var(--ease-out),transform var(--hover) var(--ease-out)}
+.cursor.on span{opacity:1;transform:none}
+@media (hover:hover) and (pointer:fine){.js .tile .media{cursor:none}}
+/* 5. theme change spreads from the switch */
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+/* 6. copy the email */
+.copy{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;display:inline-flex;align-items:baseline;gap:8px;font-weight:var(--w-strong)}
+.copy .tag{font-size:var(--fs-caption);font-weight:var(--w-strong);border:1px solid var(--rule);border-radius:var(--r-pill);padding:1px 9px;color:var(--muted);transition:background-color var(--hover) var(--ease-out),color var(--hover) var(--ease-out),border-color var(--hover) var(--ease-out),transform var(--press) var(--ease-out)}
+.copy:hover .tag{border-color:var(--ink);color:var(--ink)}
+.copy:active .tag{transform:scale(.94)}
+.copy.done .tag{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+
 /* reduced motion: OS setting or the footer toggle */
 @media (prefers-reduced-motion:reduce){
+  .roll>span,.roll::after{transform:none!important}
   *,*::before,*::after{animation:none!important;transition-duration:150ms!important;scroll-behavior:auto!important}
   .js .reveal{transform:none}
 }
 .calm *,.calm *::before,.calm *::after{animation:none!important;transition-duration:150ms!important}
 .calm .js .reveal,.calm .reveal{transform:none!important}
+.calm .roll>span,.calm .roll::after{transform:none!important}

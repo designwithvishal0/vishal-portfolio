@@ -2,6 +2,7 @@
 import '@fontsource-variable/hanken-grotesk';
 import '../styles/components.css';
 import { work } from '../data/home';
+import Boot from '../components/Boot.astro';
 
 // Every token and component the site uses, in one place, for review.
 const colours = [
@@ -58,11 +59,9 @@ const w = work[0];
   .radii div{width:120px;height:88px;background:var(--card);border:1px solid var(--rule)}
   .demo{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center}
   footer{flex-wrap:wrap} footer button{white-space:nowrap}
-  .ease{position:relative;height:40px;border-bottom:1px solid var(--rule)}
-  .ease i{position:absolute;left:0;bottom:8px;width:24px;height:24px;border-radius:50%;background:var(--accent)}
-  .ease.go i{transform:translateX(min(600px,70vw));transition:transform 900ms var(--ease-out)}
+  .demo-words{font-size:var(--fs-h2);line-height:var(--lh-head);letter-spacing:var(--track-head);font-weight:var(--w-head);margin:0}
 </style>
-<script is:inline>document.documentElement.classList.add('js');try{if(localStorage.getItem('calm')==='1')document.documentElement.classList.add('calm')}catch(e){}</script>
+<Boot />
 </head>
 <body>
 <div class="wrap sys">
@@ -94,10 +93,15 @@ const w = work[0];
   </section>
 
   <section aria-labelledby="m">
-    <div class="sec-head"><h2 id="m">Motion</h2><span>Transform and opacity only</span></div>
-    <p class="note">Everything eases out, so it starts fast and settles. All motion stops when the visitor asks for reduced motion, or switches it off with the footer toggle.</p>
-    {motion.map(([v, ms, use]) => <div class="row"><small>{v}</small><p style="font-weight:var(--w-regular)">{ms}, {use}</p></div>)}
-    <div class="row"><small>--ease-out</small><div><div class="ease" id="ease"><i></i></div><button class="btn" type="button" id="play" style="margin-top:var(--s4)">Play the curve</button></div></div>
+    <div class="sec-head"><h2 id="m">Motion</h2><span>Try each one, they are live</span></div>
+    <p class="note">Everything eases out, so it starts fast and settles: press 120ms, hover 180ms, enter 360ms, section 500ms. Only transform and opacity move. All of it stops when the visitor asks for reduced motion, or switches it off below.</p>
+    <div class="row"><small>Headline rises in, once</small><div><p class="words demo-words" id="words" aria-label="I design for the moment people are unsure.">{'I design for the moment people are unsure.'.split(' ').map((w, i) => <><span class="w" aria-hidden="true"><span style={`--i:${i}`}>{w}</span></span>{' '}</>)}</p><button class="btn" type="button" id="replay" style="margin-top:var(--s4)"><span class="roll" data-t="Replay"><span>Replay</span></span></button></div></div>
+    <div class="row"><small>Button label rolls, press sinks</small><div class="demo"><a class="btn primary" href="#m"><span class="roll" data-t="Book a call"><span>Book a call</span></span></a><a class="btn" href="#m"><span class="roll" data-t="Resume"><span>Resume</span></span></a></div></div>
+    <div class="row"><small>Underline draws in from the left, leaves to the right</small><div><a class="ul" href="#m" style="font-weight:var(--w-strong)">Hiring a product designer</a></div></div>
+    <div class="row"><small>Copy the email</small><div><button class="copy" type="button" data-copy="design.vishaly@gmail.com">design.vishaly@gmail.com <span class="tag" aria-live="polite">Copy</span></button></div></div>
+    <div class="row"><small>Theme spreads from the switch</small><div><p style="margin:0" class="note">Use the Dark mode button in the footer.</p></div></div>
+    <div class="row"><small>Cursor label and loop</small><div><p style="margin:0" class="note">Hover the work tile below. On a phone the loop plays when the tile is in view.</p></div></div>
+    <div class="row"><small>Numbers count up in view</small><div><p style="margin:0" class="note">See the results panel at the end.</p></div></div>
   </section>
 
   <section aria-labelledby="k">
@@ -129,43 +133,20 @@ const w = work[0];
   <section aria-labelledby="r" style="padding-top:var(--s18)">
     <div class="results">
       <h2 id="r">Shipped at CashKaro, for 25M+ users</h2>
-      <div class="r-grid"><div><div class="r-num">60%</div><div class="r-label">conversion lift on critical flows</div></div></div>
+      <div class="r-grid"><div><div class="r-num" data-n="60">60%</div><div class="r-label">conversion lift on critical flows</div></div></div>
     </div>
   </section>
 
   <footer>
     <span>Design system, from direction B2</span>
-    <span style="display:flex;gap:var(--s2)"><button id="theme" type="button">Switch to dark</button><button id="calm" type="button" aria-pressed="false">Reduce motion</button></span>
+    <span style="display:flex;gap:var(--s2)"><button id="theme" type="button">Dark mode</button><button id="calm" type="button" aria-pressed="false">Reduce motion</button></span>
   </footer>
 </div>
 
-<script is:inline>
-(() => {
-  const root = document.documentElement;
-  const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches || root.classList.contains('calm');
-  const calm = document.getElementById('calm');
-  const sync = () => { const on = root.classList.contains('calm'); calm.setAttribute('aria-pressed', on); calm.textContent = on ? 'Motion off' : 'Reduce motion'; };
-  calm.addEventListener('click', () => { root.classList.toggle('calm'); try { localStorage.setItem('calm', root.classList.contains('calm') ? '1' : '0'); } catch (e) {} sync(); });
-  sync();
-
-  // Theme preview: flips the tokens so both modes can be checked on one device
-  const theme = document.getElementById('theme');
-  const dark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-  const label = () => { theme.textContent = dark() ? 'Switch to light' : 'Switch to dark'; };
-  theme.addEventListener('click', () => { root.dataset.theme = dark() ? 'light' : 'dark'; label(); });
-  label();
-
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }), { threshold: [0, .15] });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-  const tile = document.querySelector('.tile'), v = tile.querySelector('video'), m = tile.querySelector('.media');
-  const play = on => { if (on && !reduced()) v.play().then(() => m.classList.add('playing')).catch(() => {}); else { v.pause(); m.classList.remove('playing'); } };
-  if (matchMedia('(hover: hover) and (pointer: fine)').matches) { ['mouseenter','focus'].forEach(e => tile.addEventListener(e, () => play(true))); ['mouseleave','blur'].forEach(e => tile.addEventListener(e, () => play(false))); }
-  else new IntersectionObserver(es => es.forEach(e => play(e.intersectionRatio > .6)), { threshold: [0, .6] }).observe(tile);
-
-  const ease = document.getElementById('ease');
-  document.getElementById('play').addEventListener('click', () => { if (reduced()) return; ease.classList.remove('go'); void ease.offsetWidth; ease.classList.add('go'); });
-})();
+<script>
+import '../scripts/ui';
+const w = document.getElementById('words');
+document.getElementById('replay')?.addEventListener('click', () => { if (!w) return; w.classList.remove('words'); void w.offsetWidth; w.classList.add('words'); });
 </script>
 </body>
 </html>
