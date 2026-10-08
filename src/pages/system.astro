@@ -1,0 +1,171 @@
+---
+import '@fontsource-variable/hanken-grotesk';
+import '../styles/components.css';
+import { work } from '../data/home';
+
+// Every token and component the site uses, in one place, for review.
+const colours = [
+  ['--bg', 'Page', 'Light #F7F7F6, dark #111113'],
+  ['--ink', 'Text', '15.7:1 on page'],
+  ['--muted', 'Secondary text', '4.73:1 on page'],
+  ['--accent', 'Links, focus, primary button', '5.86:1 on page'],
+  ['--rule', 'Dividers and quiet borders', 'Decoration only'],
+  ['--card', 'Image wells', 'Keep body text off it'],
+  ['--dark', 'Proof panels', 'Text on it is 7:1 or better'],
+  ['--live', 'Availability dot', 'Always paired with text'],
+];
+const type = [
+  ['--fs-display', 'Display', 'I design for the moment people are unsure.'],
+  ['--fs-h1', 'Page title', 'The four hours nobody designs for'],
+  ['--fs-h2', 'Lead tile and section title', 'The split that stays alive'],
+  ['--fs-h3', 'Tile headline', 'Plans in years, not months.'],
+  ['--fs-lead', 'Lead paragraph, 21px', 'Four hours before departure, a chart decides whether you travel at all.'],
+  ['--fs-body', 'Body, 18px', 'A store manager swipes away a false alert at 3 AM, and nothing tells them it counted.'],
+  ['--fs-ui', 'Buttons and links, 16px', 'View the case study'],
+  ['--fs-small', 'Section labels, 15px', 'Selected work'],
+  ['--fs-meta', 'Tile metadata, 14px', 'Research, flow, UI, copy'],
+];
+const space = ['s1','s2','s3','s4','s5','s6','s8','s10','s12','s14','s18','s32'];
+const motion = [
+  ['--press', '120ms', 'Button press'],
+  ['--hover', '180ms', 'Hover and focus'],
+  ['--enter', '360ms', 'Elements entering'],
+  ['--section', '500ms', 'Sections revealing on scroll'],
+];
+const w = work[0];
+---
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Design system</title>
+<style>
+  .sys h1{font-size:var(--fs-h2);line-height:var(--lh-head);letter-spacing:var(--track-head);font-weight:var(--w-head);margin:var(--s14) 0 var(--s3)}
+  .sys .intro{color:var(--muted);max-width:var(--measure);margin:0 0 var(--s8)}
+  .sys section{padding:0 0 var(--s18)}
+  .sys .note{color:var(--muted);font-size:var(--fs-small);margin:0 0 var(--s6);max-width:var(--measure)}
+  .swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s6)}
+  @media (max-width:900px){.swatches{grid-template-columns:1fr 1fr}}
+  .chip{height:88px;border-radius:var(--r-card);border:1px solid var(--rule);margin:0 0 var(--s3)}
+  .swatches b{display:block;font-size:var(--fs-ui)}
+  .swatches span{display:block;font-size:var(--fs-meta);color:var(--muted)}
+  .row{display:grid;grid-template-columns:220px 1fr;gap:var(--s6);align-items:baseline;padding:var(--s5) 0;border-top:1px solid var(--rule)}
+  @media (max-width:760px){.row{grid-template-columns:1fr;gap:var(--s2)}}
+  .row small{font-size:var(--fs-meta);color:var(--muted)}
+  .row p{margin:0;font-weight:var(--w-head);overflow-wrap:anywhere}
+  .bar{height:16px;background:var(--accent);border-radius:var(--r-focus)}
+  .radii{display:flex;flex-wrap:wrap;gap:var(--s6)}
+  .radii div{width:120px;height:88px;background:var(--card);border:1px solid var(--rule)}
+  .demo{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center}
+  footer{flex-wrap:wrap} footer button{white-space:nowrap}
+  .ease{position:relative;height:40px;border-bottom:1px solid var(--rule)}
+  .ease i{position:absolute;left:0;bottom:8px;width:24px;height:24px;border-radius:50%;background:var(--accent)}
+  .ease.go i{transform:translateX(min(600px,70vw));transition:transform 900ms var(--ease-out)}
+</style>
+<script is:inline>document.documentElement.classList.add('js');try{if(localStorage.getItem('calm')==='1')document.documentElement.classList.add('calm')}catch(e){}</script>
+</head>
+<body>
+<div class="wrap sys">
+  <h1>Design system</h1>
+  <p class="intro">Every colour, size, space and motion the site uses, taken from the approved B2 direction. Pages use these tokens and nothing else.</p>
+
+  <section aria-labelledby="c">
+    <div class="sec-head"><h2 id="c">Colour</h2><span>One accent, contrast checked</span></div>
+    <div class="swatches">
+      {colours.map(([v, name, note]) => (
+        <div><div class="chip" style={`background:var(${v})`}></div><b>{name}</b><span>{v}</span><span>{note}</span></div>
+      ))}
+    </div>
+  </section>
+
+  <section aria-labelledby="t">
+    <div class="sec-head"><h2 id="t">Type</h2><span>Hanken Grotesk, one family</span></div>
+    {type.map(([v, name, sample]) => (
+      <div class="row"><small>{name}<br />{v}</small><p style={`font-size:var(${v});line-height:${v === '--fs-display' ? 'var(--lh-tight)' : 'var(--lh-head)'};letter-spacing:${v.match(/display|h1|h2|h3/) ? 'var(--track-head)' : 'normal'};font-weight:${v.match(/display|h1|h2|h3/) ? 'var(--w-head)' : 'var(--w-regular)'}`}>{sample}</p></div>
+    ))}
+    <div class="row"><small>Result number<br />--fs-stat</small><p class="r-num" style="color:var(--ink)">60%</p></div>
+  </section>
+
+  <section aria-labelledby="s">
+    <div class="sec-head"><h2 id="s">Space and shape</h2><span>4px base</span></div>
+    {space.map(k => <div class="row"><small>--{k}</small><div class="bar" style={`width:var(--${k})`}></div></div>)}
+    <p class="note" style="margin-top:var(--s8)">Corners: pill for anything you press, 20px for image wells, 28px for proof panels.</p>
+    <div class="radii"><div style="border-radius:var(--r-pill)"></div><div style="border-radius:var(--r-card)"></div><div style="border-radius:var(--r-panel)"></div></div>
+  </section>
+
+  <section aria-labelledby="m">
+    <div class="sec-head"><h2 id="m">Motion</h2><span>Transform and opacity only</span></div>
+    <p class="note">Everything eases out, so it starts fast and settles. All motion stops when the visitor asks for reduced motion, or switches it off with the footer toggle.</p>
+    {motion.map(([v, ms, use]) => <div class="row"><small>{v}</small><p style="font-weight:var(--w-regular)">{ms}, {use}</p></div>)}
+    <div class="row"><small>--ease-out</small><div><div class="ease" id="ease"><i></i></div><button class="btn" type="button" id="play" style="margin-top:var(--s4)">Play the curve</button></div></div>
+  </section>
+
+  <section aria-labelledby="k">
+    <div class="sec-head"><h2 id="k">Components</h2><span>Hover them, tab to them</span></div>
+    <div class="row"><small>Buttons</small><div class="demo"><a class="btn primary" href="#k">Book a call</a><a class="btn" href="#k">Resume</a></div></div>
+    <div class="row"><small>Text link</small><div><a class="ul" href="#k" style="font-weight:var(--w-strong)">Hiring a product designer</a></div></div>
+    <div class="row"><small>Status</small><span class="status"><span class="dot" aria-hidden="true"></span>Open to product design roles and freelance projects</span></div>
+    <div class="row"><small>Tile metadata</small><div class="meta" style="margin:0"><span class="pill">Concept</span><span>{w.year}</span><span>{w.role}</span></div></div>
+    <div class="row"><small>Case facts</small><dl class="facts" style="margin:0"><div><dt>Role</dt><dd>Product and UX design</dd></div><div><dt>Type</dt><dd>Self initiated</dd></div><div><dt>Year</dt><dd>2026</dd></div></dl></div>
+  </section>
+
+  <section aria-label="Work tile">
+    <div class="sec-head"><h2>Work tile</h2><span>Loop plays on hover, or in view on a phone</span></div>
+    <div class="work" style="padding:0">
+      <a class="tile reveal half" href="#k">
+        <div class="meta"><span class="pill">Concept</span><span>{w.year}</span><span>{w.role}</span></div>
+        <div class="media">
+          <img src="/loops/ixigo.jpg" alt={w.alt} width="1200" height="900" loading="lazy" decoding="async" />
+          <video muted loop playsinline preload="none" poster="/loops/ixigo.jpg" aria-hidden="true" tabindex="-1"><source src="/loops/ixigo.webm" type="video/webm" /><source src="/loops/ixigo.mp4" type="video/mp4" /></video>
+          <span class="play" aria-hidden="true">{w.detail}</span>
+        </div>
+        <h3>{w.headline}</h3>
+        <p>{w.problem}</p>
+        <span class="more">View the case study</span>
+      </a>
+    </div>
+  </section>
+
+  <section aria-labelledby="r" style="padding-top:var(--s18)">
+    <div class="results">
+      <h2 id="r">Shipped at CashKaro, for 25M+ users</h2>
+      <div class="r-grid"><div><div class="r-num">60%</div><div class="r-label">conversion lift on critical flows</div></div></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Design system, from direction B2</span>
+    <span style="display:flex;gap:var(--s2)"><button id="theme" type="button">Switch to dark</button><button id="calm" type="button" aria-pressed="false">Reduce motion</button></span>
+  </footer>
+</div>
+
+<script is:inline>
+(() => {
+  const root = document.documentElement;
+  const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches || root.classList.contains('calm');
+  const calm = document.getElementById('calm');
+  const sync = () => { const on = root.classList.contains('calm'); calm.setAttribute('aria-pressed', on); calm.textContent = on ? 'Motion off' : 'Reduce motion'; };
+  calm.addEventListener('click', () => { root.classList.toggle('calm'); try { localStorage.setItem('calm', root.classList.contains('calm') ? '1' : '0'); } catch (e) {} sync(); });
+  sync();
+
+  // Theme preview: flips the tokens so both modes can be checked on one device
+  const theme = document.getElementById('theme');
+  const dark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  const label = () => { theme.textContent = dark() ? 'Switch to light' : 'Switch to dark'; };
+  theme.addEventListener('click', () => { root.dataset.theme = dark() ? 'light' : 'dark'; label(); });
+  label();
+
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }), { threshold: [0, .15] });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const tile = document.querySelector('.tile'), v = tile.querySelector('video'), m = tile.querySelector('.media');
+  const play = on => { if (on && !reduced()) v.play().then(() => m.classList.add('playing')).catch(() => {}); else { v.pause(); m.classList.remove('playing'); } };
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) { ['mouseenter','focus'].forEach(e => tile.addEventListener(e, () => play(true))); ['mouseleave','blur'].forEach(e => tile.addEventListener(e, () => play(false))); }
+  else new IntersectionObserver(es => es.forEach(e => play(e.intersectionRatio > .6)), { threshold: [0, .6] }).observe(tile);
+
+  const ease = document.getElementById('ease');
+  document.getElementById('play').addEventListener('click', () => { if (reduced()) return; ease.classList.remove('go'); void ease.offsetWidth; ease.classList.add('go'); });
+})();
+</script>
+</body>
+</html>

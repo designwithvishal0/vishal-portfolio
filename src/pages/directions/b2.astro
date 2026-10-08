@@ -11,116 +11,13 @@ const results = [
   { n: 50, label: 'click through lift on landing pages, rebuilt from Hotjar and Clarity recordings' },
   { n: 30, label: 'faster campaign turnaround from the Figma design system I built' },
 ];
+import '../../styles/components.css';
 ---
 <html lang="en">
 <head>
 <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex" />
 <title>Direction B2, Quiet with motion</title>
-<style>
-  :root{
-    --bg:#F7F7F6;--ink:#1D1D1F;--muted:#6E6E73;--rule:#E2E2E0;--accent:#2B54D6;--card:#EDEDEB;--dark:#16171A;
-    --sans:'Hanken Grotesk Variable',system-ui,sans-serif;
-    --ease-out:cubic-bezier(.23,1,.32,1);--ease-io:cubic-bezier(.77,0,.175,1);
-    --press:120ms;--hover:180ms;--enter:360ms;--section:500ms;
-  }
-  @media (prefers-color-scheme:dark){:root{--bg:#111113;--ink:#F2F2F3;--muted:#A1A1A6;--rule:#26262A;--accent:#7D9BFF;--card:#1C1C1F;--dark:#000}}
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;background:var(--bg);color:var(--ink);font:400 18px/1.45 var(--sans);-webkit-font-smoothing:antialiased}
-  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
-  a{color:inherit}
-  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-  .ul{text-decoration:none;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size var(--hover) var(--ease-out)}
-  .ul:hover,.ul:focus-visible{background-size:100% 1px}
-
-  /* top bar */
-  .top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px 0;font-size:15px}
-  .top h1{font-size:15px;font-weight:600;margin:0}
-  .status{color:var(--muted);display:inline-flex;align-items:center;gap:8px}
-  .dot{position:relative;width:7px;height:7px;border-radius:50%;background:#1F9D55}
-  .dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:#1F9D55;animation:ping 2.4s var(--ease-out) infinite}
-  @keyframes ping{from{transform:scale(1);opacity:.6}to{transform:scale(3);opacity:0}}
-  @media (max-width:640px){.top{flex-direction:column;align-items:flex-start}}
-
-  /* hero */
-  .hero{padding:56px 0 40px}
-  @media (max-width:900px){.hero{padding:40px 0 40px}}
-  .pos{font-size:clamp(46px,7vw,104px);line-height:.98;letter-spacing:-.045em;font-weight:650;margin:0 0 32px}
-  .sup{font-size:19px;color:var(--muted);max-width:50ch;margin:0 0 28px}
-  .aud{display:flex;flex-direction:column;gap:6px;margin:0 0 32px;padding:0;list-style:none;font-size:16px}
-  .aud a{font-weight:600}
-  .aud span{color:var(--muted);font-weight:400}
-  .cta{display:flex;gap:10px;flex-wrap:wrap}
-  .btn{display:inline-block;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:600;font-size:16px;border:1px solid var(--rule);background:var(--bg);transition:background-color var(--hover) var(--ease-out),border-color var(--hover) var(--ease-out),transform var(--press) var(--ease-out)}
-  .btn:hover{border-color:var(--ink)}
-  .btn:active{transform:scale(.97)}
-  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-  .btn.primary:hover{background:color-mix(in srgb,var(--accent) 88%,#000)}
-  @media (prefers-color-scheme:dark){.btn.primary{color:#0B1230}}
-
-
-  /* work */
-  .sec-head{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--rule);padding:20px 0 32px;font-size:15px;color:var(--muted)}
-  .sec-head h2{font-size:15px;font-weight:600;color:var(--ink);margin:0}
-  .work{display:grid;grid-template-columns:1fr 1fr;gap:72px 32px;padding:0 0 128px}
-  .tile{display:block;text-decoration:none}
-  .tile.wide{grid-column:1/-1}
-  @media (max-width:760px){.work{grid-template-columns:1fr;gap:56px}}
-  .meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--muted);margin:0 0 14px}
-  .pill{border:1px solid var(--rule);border-radius:999px;padding:1px 10px;color:var(--ink)}
-  .media{position:relative;background:var(--card);border-radius:20px;overflow:hidden;aspect-ratio:4/3;border:1px solid transparent;transition:border-color var(--hover) var(--ease-out),transform var(--enter) var(--ease-out)}
-  @media (min-width:761px){.tile.wide{display:grid;grid-template-columns:1.35fr 1fr;grid-template-rows:auto 1fr auto auto auto 1fr;gap:0 48px}.tile.wide .meta{grid-column:1/-1}.tile.wide .media{grid-row:2/7}.tile.wide h3{grid-column:2;grid-row:3;margin-top:0}.tile.wide p{grid-column:2;grid-row:4}.tile.wide .more{grid-column:2;grid-row:5;justify-self:start}}
-  .media img,.media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0}
-  .media video{opacity:0;transition:opacity var(--enter) var(--ease-out)}
-  .media.playing video{opacity:1}
-  .play{position:absolute;left:16px;bottom:16px;font-size:13px;font-weight:600;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(8px);padding:6px 12px;border-radius:999px;opacity:0;transform:translateY(4px);transition:opacity var(--hover) var(--ease-out),transform var(--hover) var(--ease-out)}
-  .tile h3{font-size:clamp(26px,2.6vw,36px);line-height:1.1;letter-spacing:-.025em;font-weight:650;margin:22px 0 8px}
-  .tile.wide h3{font-size:clamp(30px,3.6vw,48px)}
-  .tile p{margin:0;color:var(--muted);max-width:52ch}
-  .tile .more{display:inline-block;margin-top:14px;font-weight:600;font-size:16px}
-  .tile .more::after{content:"";display:inline-block;width:.5em;height:.5em;border-top:2px solid currentColor;border-right:2px solid currentColor;transform:rotate(45deg);margin-left:.45em;transition:transform var(--hover) var(--ease-out)}
-  @media (hover:hover) and (pointer:fine){
-    .tile:hover .media{border-color:var(--ink)}
-    .tile:hover .play,.tile:focus-visible .play{opacity:1;transform:none}
-    .tile:hover .more::after{transform:translateX(4px) rotate(45deg)}
-  }
-
-  /* results */
-  .results{background:var(--dark);color:#F2F2F3;border-radius:28px;padding:32px 40px;margin:0 0 128px}
-  .results h2{font-size:15px;font-weight:600;color:#A1A1A6;margin:0 0 20px}
-  .r-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
-  @media (max-width:760px){.results{padding:40px 24px}.r-grid{grid-template-columns:1fr}}
-  .r-num{font-size:clamp(48px,4.6vw,64px);line-height:1;letter-spacing:-.05em;font-weight:650;font-variant-numeric:tabular-nums}
-  .r-label{color:#B8B8BE;margin-top:8px;max-width:34ch;font-size:16px}
-
-  /* case header */
-  .case{padding:0 0 140px}
-  .eyebrow{font-size:15px;color:var(--accent);font-weight:600;margin:0 0 20px}
-  .case h2{font-size:clamp(40px,6vw,84px);line-height:1.02;letter-spacing:-.035em;font-weight:650;margin:0 0 32px;max-width:14ch}
-  .sum{font-size:21px;max-width:60ch;margin:0 0 48px}
-  .facts{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:16px 56px;margin:0 0 56px;padding:20px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
-  @media (max-width:640px){.facts{grid-template-columns:1fr 1fr}}
-  .facts dt{font-size:14px;color:var(--muted)}
-  .facts dd{margin:4px 0 0;font-weight:600}
-
-  footer{border-top:1px solid var(--rule);padding:24px 0 48px;display:flex;justify-content:space-between;gap:16px;font-size:15px;color:var(--muted)}
-  footer button{font:inherit;color:var(--ink);background:none;border:1px solid var(--rule);border-radius:999px;padding:6px 14px;cursor:pointer}
-
-  /* entrance and reveal: content is visible without JS */
-  .js .reveal{opacity:0;transform:translateY(12px)}
-  .js .reveal.on{opacity:1;transform:none;transition:opacity var(--section) var(--ease-out),transform var(--section) var(--ease-out)}
-  .enter{animation:enter var(--enter) var(--ease-out) both}
-  @keyframes enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-
-  /* reduced motion: OS setting or the footer toggle */
-  @media (prefers-reduced-motion:reduce){
-    *,*::before,*::after{animation:none!important;transition-duration:150ms!important;scroll-behavior:auto!important}
-    .js .reveal{transform:none}
-  }
-  .calm *,.calm *::before,.calm *::after{animation:none!important;transition-duration:150ms!important}
-  .calm .js .reveal,.calm .reveal{transform:none!important}
-</style>
 <script is:inline>document.documentElement.classList.add('js');try{if(localStorage.getItem('calm')==='1')document.documentElement.classList.add('calm')}catch(e){}</script>
 </head>
 <body>

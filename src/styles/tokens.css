@@ -1,0 +1,53 @@
+/* Design tokens. Source of truth: direction B2, locked 2026-10-08.
+   Colours are the approved B2 values. Contrast (WCAG 2.2) is noted per pair. */
+:root{
+  /* colour, light */
+  --bg:#F7F7F6;          /* page */
+  --card:#EDEDEB;        /* media wells only. Muted text is 4.33:1 here, so keep body text off it */
+  --ink:#1D1D1F;         /* 15.7:1 on bg */
+  --muted:#6E6E73;       /* 4.73:1 on bg */
+  --rule:#E2E2E0;        /* dividers, quiet borders */
+  --accent:#2B54D6;      /* 5.86:1 on bg, the only accent */
+  --on-accent:#FFFFFF;   /* 6.28:1 on accent */
+  --dark:#16171A;        /* proof panels */
+  --on-dark:#F2F2F3;
+  --on-dark-muted:#A1A1A6; /* 6.97:1 on dark */
+  --on-dark-soft:#B8B8BE;  /* 9.08:1 on dark */
+  --live:#1F9D55;        /* availability dot, always paired with text */
+
+  /* type: Hanken Grotesk, one family */
+  --sans:'Hanken Grotesk Variable',system-ui,sans-serif;
+  --fs-display:clamp(46px,7vw,104px);  /* positioning line */
+  --fs-h1:clamp(40px,6vw,84px);        /* case study title */
+  --fs-h2:clamp(30px,3.6vw,48px);      /* lead tile, section titles */
+  --fs-h3:clamp(26px,2.6vw,36px);      /* tile headline */
+  --fs-stat:clamp(48px,4.6vw,64px);    /* result numbers */
+  --fs-lead:21px;  --fs-sup:19px;  --fs-body:18px;  --fs-ui:16px;
+  --fs-small:15px; --fs-meta:14px; --fs-caption:13px;
+  --lh-tight:.98;  --lh-head:1.1;  --lh-body:1.45;
+  --track-display:-.045em; --track-head:-.025em; --track-stat:-.05em;
+  --w-regular:400; --w-strong:600; --w-head:650;
+  --measure:52ch;
+
+  /* space, 4px base */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px;
+  --s10:40px; --s12:48px; --s14:56px; --s18:72px; --s32:128px;
+
+  /* shape */
+  --r-pill:999px; --r-card:20px; --r-panel:28px; --r-focus:4px;
+
+  /* layout */
+  --max:1200px; --gutter:24px;
+
+  /* motion: transform and opacity only */
+  --ease-out:cubic-bezier(.23,1,.32,1); --ease-io:cubic-bezier(.77,0,.175,1);
+  --press:120ms; --hover:180ms; --enter:360ms; --section:500ms;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --bg:#111113;--card:#1C1C1F;--ink:#F2F2F3;--muted:#A1A1A6;--rule:#26262A;
+  --accent:#7D9BFF;--on-accent:#0B1230;--dark:#000;
+}}
+:root[data-theme=dark]{
+  --bg:#111113;--card:#1C1C1F;--ink:#F2F2F3;--muted:#A1A1A6;--rule:#26262A;
+  --accent:#7D9BFF;--on-accent:#0B1230;--dark:#000;
+}
