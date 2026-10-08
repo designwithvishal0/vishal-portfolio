@@ -41,7 +41,7 @@ export const work: Work[] = [
     detail: '1 hub, 6 journey states',
     question: 'Will I travel tonight?',
     image: img('koB2fjrEzJwcseu22ei43G30SI.png'),
-    alt: 'ixigo Trains post booking redesign, the waiting state with odds and a countdown',
+    alt: 'ixigo Trains post booking hub: a waitlisted booking on track to confirm, with 94% and 70% seat odds and seats decided around 5:40 PM, then the chart prepared with both passengers confirmed in coach S6',
   },
   {
     slug: 'split-and-request',
@@ -55,7 +55,7 @@ export const work: Work[] = [
     detail: '5 flows, 40+ screens',
     question: 'Has everyone paid me back?',
     image: img('6XJ129lhXDLdgdUkSFRyQsb7v9o.png'),
-    alt: 'Google Pay Split and Request redesign, the shared board after a split',
+    alt: 'Google Pay Split and Request: the shared Dinner at Social board, where Nidhi’s payment arrives and the bill moves from 1 of 3 paid to 2 of 3, with ₹2,560 of ₹2,910 back',
   },
   {
     slug: 'twelve',
@@ -69,7 +69,7 @@ export const work: Work[] = [
     detail: '9 screens, each a different way the AI shows up',
     question: 'Am I okay this month?',
     image: img('kuxfbvAC0UkDAKqn73xqLYvDw.png'),
-    alt: 'Twelve, an AI finance app showing one safe to spend number',
+    alt: 'Twelve home screen showing ₹1,850 safe to spend today, then scrolling to the year’s upcoming costs, each with a confidence level',
   },
   {
     slug: 'staqu-jarvis',
@@ -83,7 +83,7 @@ export const work: Work[] = [
     detail: 'Built in 1 day',
     question: 'Is this alert real?',
     image: 'https://framerusercontent.com/assets/LcvPY6k6LxQU60K2x3tVDpZ8.png',
-    alt: 'JARVIS Alerts, a false alert flow on a phone',
+    alt: 'JARVIS Alerts: marking an Unknown Car alert as false, choosing Something else, typing that it was their own car, then a note that 27 similar alerts won’t interrupt them again',
   },
 ];
 
