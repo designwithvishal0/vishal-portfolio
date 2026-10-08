@@ -1,14 +1,17 @@
-// Every microinteraction on the site. Each one is off under reduced motion or the footer toggle.
+// Every interaction on the site. Motion stops under the OS reduced motion setting or the footer toggle.
 const root = document.documentElement;
-const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches || root.classList.contains('calm');
-const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+const osCalm = matchMedia('(prefers-reduced-motion: reduce)');
+const reduced = () => osCalm.matches || root.classList.contains('calm');
 const save = (k: string, v: string) => { try { localStorage.setItem(k, v); } catch {} };
+const resyncs: (() => void)[] = [];
+const resync = () => resyncs.forEach(f => f());
+osCalm.addEventListener('change', resync);
 
 // Reduce motion toggle
 const calm = document.getElementById('calm');
 if (calm) {
-  const sync = () => { const on = root.classList.contains('calm'); calm.setAttribute('aria-pressed', String(on)); calm.textContent = on ? 'Motion off' : 'Reduce motion'; };
-  calm.addEventListener('click', () => { root.classList.toggle('calm'); save('calm', root.classList.contains('calm') ? '1' : '0'); sync(); });
+  const sync = () => calm.setAttribute('aria-pressed', String(root.classList.contains('calm')));
+  calm.addEventListener('click', () => { root.classList.toggle('calm'); save('calm', root.classList.contains('calm') ? '1' : '0'); sync(); resync(); });
   sync();
 }
 
@@ -30,51 +33,32 @@ if (theme) {
   label();
 }
 
-// Sections reveal once as they enter
+// Work enters once as it scrolls in
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), { threshold: .15 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// Work loops: hover or focus on desktop, in view on touch
-const tiles = document.querySelectorAll<HTMLElement>('.tile');
-const play = (t: Element, on: boolean) => {
-  const v = t.querySelector('video'), m = t.querySelector('.media'); if (!v || !m) return;
-  if (on && !reduced()) v.play().then(() => m.classList.add('playing')).catch(() => {});
-  else { v.pause(); m.classList.remove('playing'); }
-};
-if (fine) tiles.forEach(t => {
-  ['mouseenter', 'focus'].forEach(ev => t.addEventListener(ev, () => play(t, true)));
-  ['mouseleave', 'blur'].forEach(ev => t.addEventListener(ev, () => play(t, false)));
+// Work loops play while mostly in view, on every device. Under reduced motion nothing starts on its own.
+// The button pauses or plays one loop, and that choice wins until the page reloads.
+document.querySelectorAll<HTMLElement>('.media').forEach(m => {
+  const v = m.querySelector('video'), b = m.querySelector<HTMLButtonElement>('.vctl');
+  if (!v || !b) return;
+  let shown = 0, user: boolean | null = null;
+  const sync = () => {
+    const run = user === null ? shown >= .6 && !reduced() : user && shown > 0;
+    if (run) v.play().catch(() => {}); else v.pause();
+    m.dataset.state = run ? 'playing' : 'paused';
+    b.setAttribute('aria-label', `${run ? 'Pause' : 'Play'} the ${b.dataset.name} preview`);
+  };
+  v.addEventListener('playing', () => m.classList.add('started'), { once: true });
+  b.addEventListener('click', () => { user = m.dataset.state !== 'playing'; m.dataset.user = ''; sync(); });
+  new IntersectionObserver(([e]) => { shown = e.isIntersecting ? e.intersectionRatio : 0; sync(); }, { threshold: [0, .6] }).observe(m);
+  resyncs.push(sync);
 });
-else { const vio = new IntersectionObserver(es => es.forEach(e => play(e.target, e.intersectionRatio > .6)), { threshold: [0, .6] }); tiles.forEach(t => vio.observe(t)); }
-
-// A "View case study" label follows the cursor over a tile's image, with a little lag
-if (fine && tiles.length) {
-  const c = document.createElement('div');
-  c.className = 'cursor'; c.setAttribute('aria-hidden', 'true'); c.innerHTML = '<span>View case study</span>';
-  document.body.append(c);
-  let x = 0, y = 0, tx = 0, ty = 0, on = false;
-  const loop = () => { x += (tx - x) * .22; y += (ty - y) * .22; c.style.transform = `translate(${x}px,${y}px) translate(-50%,-50%)`; if (on) requestAnimationFrame(loop); };
-  document.querySelectorAll<HTMLElement>('.tile .media').forEach(m => {
-    m.addEventListener('pointerenter', e => { x = tx = e.clientX; y = ty = e.clientY; on = true; c.classList.add('on'); loop(); });
-    m.addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; if (reduced()) { x = tx; y = ty; } });
-    m.addEventListener('pointerleave', () => { on = false; c.classList.remove('on'); });
-  });
-}
-
-// Result numbers count up once in view
-const cio = new IntersectionObserver(es => es.forEach(e => {
-  if (!e.isIntersecting) return; cio.unobserve(e.target);
-  const el = e.target as HTMLElement; if (reduced()) return;
-  const n = +el.dataset.n!, t0 = performance.now(), d = 900;
-  const tick = (t: number) => { const p = Math.min((t - t0) / d, 1); el.textContent = Math.round(n * (1 - Math.pow(1 - p, 4))) + '%'; if (p < 1) requestAnimationFrame(tick); };
-  requestAnimationFrame(tick);
-}), { threshold: .5 });
-document.querySelectorAll('.r-num[data-n]').forEach(n => cio.observe(n));
 
 // Email copies on tap, the tag says so, then resets
+const status = document.getElementById('copied');
 document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach(b => b.addEventListener('click', async () => {
-  const tag = b.querySelector('.tag')!;
   try { await navigator.clipboard.writeText(b.dataset.copy!); } catch { location.href = `mailto:${b.dataset.copy}`; return; }
-  tag.textContent = 'Copied'; b.classList.add('done');
-  setTimeout(() => { tag.textContent = 'Copy'; b.classList.remove('done'); }, 2000);
+  b.classList.add('done'); if (status) status.textContent = 'Email address copied';
+  setTimeout(() => { b.classList.remove('done'); if (status) status.textContent = ''; }, 2000);
 }));

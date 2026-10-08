@@ -10,6 +10,7 @@
   --accent:#2B54D6;      /* 5.86:1 on bg, the only accent */
   --on-accent:#FFFFFF;   /* 6.28:1 on accent */
   --dark:#16171A;        /* proof panels */
+  --dark-edge:transparent; /* panel outline, only needed in dark mode */
   --on-dark:#F2F2F3;
   --on-dark-muted:#A1A1A6; /* 6.97:1 on dark */
   --on-dark-soft:#B8B8BE;  /* 9.08:1 on dark */
@@ -45,9 +46,9 @@
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){
   --bg:#111113;--card:#1C1C1F;--ink:#F2F2F3;--muted:#A1A1A6;--rule:#26262A;
-  --accent:#7D9BFF;--on-accent:#0B1230;--dark:#000;
+  --accent:#7D9BFF;--on-accent:#0B1230;--dark:#000;--dark-edge:#2A2A2F;
 }}
 :root[data-theme=dark]{
   --bg:#111113;--card:#1C1C1F;--ink:#F2F2F3;--muted:#A1A1A6;--rule:#26262A;
-  --accent:#7D9BFF;--on-accent:#0B1230;--dark:#000;
+  --accent:#7D9BFF;--on-accent:#0B1230;--dark:#000;--dark-edge:#2A2A2F;
 }

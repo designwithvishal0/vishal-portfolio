@@ -2,123 +2,174 @@
 @import "./tokens.css";
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
 body{margin:0;background:var(--bg);color:var(--ink);font:var(--w-regular) var(--fs-body)/var(--lh-body) var(--sans);-webkit-font-smoothing:antialiased}
+h1,h2,h3,.pos{text-wrap:balance}
+p,dd,li{text-wrap:pretty}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
 a{color:inherit}
+a,button{-webkit-tap-highlight-color:transparent}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:var(--r-focus)}
-/* underline draws in from the left, leaves to the right */
-.ul{text-decoration:none;background:linear-gradient(currentColor,currentColor) no-repeat 100% 100%/0 1px;transition:background-size var(--hover) var(--ease-out)}
-.ul:hover,.ul:focus-visible{background-size:100% 1px;background-position:0 100%}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* text link: a faint underline at rest so it reads as a link, a full one draws in from the left on hover and leaves to the right */
+.ul{text-decoration:none;background:linear-gradient(color-mix(in srgb,currentColor 28%,transparent),color-mix(in srgb,currentColor 28%,transparent)) no-repeat 0 100%/100% 1px,linear-gradient(currentColor,currentColor) no-repeat 100% 100%/0 1px;transition:background-size var(--hover) var(--ease-out)}
+.ul:hover,.ul:focus-visible{background-size:100% 1px,100% 1px;background-position:0 100%,0 100%}
+
+/* arrow: a chevron that grows a stem and moves on hover, "there is more" becomes "go" */
+.arrow{flex:none;width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.arrow .stem{opacity:0;transition:opacity var(--hover) var(--ease-out)}
+.arrow .tip{transition:transform var(--hover) var(--ease-out)}
+.go:focus-visible .arrow .stem{opacity:1}
+.go:focus-visible .arrow .tip{transform:translateX(3px)}
+@media (hover:hover) and (pointer:fine){.go:hover .arrow .stem{opacity:1}.go:hover .arrow .tip{transform:translateX(3px)}}
+@media (hover:none),(pointer:coarse){.arrow .stem{opacity:1}.arrow .tip{transform:translateX(3px)}}
+.more{display:inline-flex;align-items:center;gap:7px;font-weight:var(--w-strong);font-size:var(--fs-ui);text-decoration:none}
 
 /* top bar */
-.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px 0;font-size:15px}
-.top h1{font-size:15px;font-weight:600;margin:0}
-.status{color:var(--muted);display:inline-flex;align-items:center;gap:8px}
-.dot{position:relative;width:7px;height:7px;border-radius:50%;background:var(--live)}
-.dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--live);animation:ping 2.4s var(--ease-out) infinite}
-@keyframes ping{from{transform:scale(1);opacity:.6}to{transform:scale(3);opacity:0}}
-@media (max-width:640px){.top{flex-direction:column;align-items:flex-start}}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px 0;font-size:var(--fs-small)}
+.top h1{font-size:var(--fs-small);font-weight:var(--w-strong);margin:0}
+.status{color:var(--muted);display:inline-flex;align-items:flex-start;gap:8px}
+.dot{flex:none;width:7px;height:7px;margin-top:.5em;border-radius:50%;background:var(--live)}
+@media (max-width:640px){.top{flex-direction:column;align-items:flex-start;gap:8px;padding:16px 0}}
 
 /* hero */
-.hero{padding:56px 0 40px}
-@media (max-width:900px){.hero{padding:40px 0 40px}}
-.pos{font-size:var(--fs-display);line-height:var(--lh-tight);letter-spacing:var(--track-display);font-weight:var(--w-head);margin:0 0 32px}
-.sup{font-size:var(--fs-sup);color:var(--muted);max-width:50ch;margin:0 0 28px}
-.aud{display:flex;flex-direction:column;gap:6px;margin:0 0 32px;padding:0;list-style:none;font-size:16px}
-.aud a{font-weight:600}
-.aud span{color:var(--muted);font-weight:400}
+.hero{padding:32px 0}
+.pos{font-size:var(--fs-display);line-height:var(--lh-tight);letter-spacing:var(--track-display);font-weight:var(--w-head);margin:0 0 24px;max-width:20ch}
+.sup{font-size:var(--fs-sup);color:var(--muted);max-width:68ch;margin:0 0 20px}
+.aud{display:flex;flex-direction:column;margin:0 0 24px;padding:0;list-style:none;font-size:var(--fs-ui)}
+.aud a{display:inline-flex;align-items:center;gap:8px;min-height:36px;text-decoration:none}
+.aud strong{font-weight:var(--w-strong)}
+.aud span{color:var(--muted)}
+@media (pointer:coarse){.aud a{min-height:44px}}
+@media (max-width:560px){.aud a{flex-wrap:wrap;row-gap:2px;padding:8px 0}.aud strong{flex-basis:100%}}
 .cta{display:flex;gap:10px;flex-wrap:wrap}
-.btn{display:inline-block;padding:12px 22px;border-radius:var(--r-pill);text-decoration:none;font-weight:600;font-size:16px;border:1px solid var(--rule);background:var(--bg);transition:background-color var(--hover) var(--ease-out),border-color var(--hover) var(--ease-out),transform var(--press) var(--ease-out)}
-.btn:hover{border-color:var(--ink)}
-.btn:active{transform:scale(.97)}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
-.btn.primary:hover{background:color-mix(in srgb,var(--accent) 88%,#000)}
 
+/* buttons: rest, hover and pressed are three tones of one colour; only the press moves */
+.btn{display:inline-block;padding:12px 22px;border-radius:var(--r-pill);font:inherit;font-weight:var(--w-strong);font-size:var(--fs-ui);line-height:1.25;text-decoration:none;color:var(--ink);background:var(--bg);border:1px solid var(--rule);cursor:pointer;transition:transform var(--press) var(--ease-out)}
+.btn.primary{background:var(--accent);border-color:transparent;color:var(--on-accent)}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover{background:color-mix(in oklab,var(--ink) 5%,var(--bg));border-color:var(--ink)}
+  .btn.primary:hover{background:color-mix(in oklab,var(--accent) 88%,var(--ink));border-color:transparent}
+}
+.btn:active{transform:scale(.97);background:color-mix(in oklab,var(--ink) 9%,var(--bg));border-color:var(--ink)}
+.btn.primary:active{background:color-mix(in oklab,var(--accent) 80%,var(--ink));border-color:transparent}
 
-/* work */
-.sec-head{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--rule);padding:20px 0 32px;font-size:15px;color:var(--muted)}
-.sec-head h2{font-size:15px;font-weight:600;color:var(--ink);margin:0}
-.work{display:grid;grid-template-columns:1fr 1fr;gap:72px 32px;padding:0 0 128px}
-.tile{display:block;text-decoration:none}
+/* section heads */
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 16px;border-top:1px solid var(--rule);padding:20px 0 32px;font-size:var(--fs-small);color:var(--muted)}
+.sec-head h2{font-size:var(--fs-small);font-weight:var(--w-strong);color:var(--ink);margin:0}
+@media (max-width:560px){.sec-head{flex-direction:column;align-items:flex-start}}
+
+/* labels */
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:var(--fs-meta);color:var(--muted);margin:0 0 14px}
+.pname{color:var(--ink);font-weight:var(--w-strong)}
+.pill{border:1px solid var(--rule);border-radius:var(--r-pill);padding:1px 10px;color:var(--ink);font-size:var(--fs-meta);white-space:nowrap}
+.pill.shipped{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+
+/* work tiles: the whole tile is one link (the headline's), the loop plays in view, the frame firms and the arrow forms on hover */
+.work{display:grid;grid-template-columns:1fr 1fr;gap:72px 32px;padding:0 0 var(--s8)}
+.tile{position:relative}
 .tile.wide{grid-column:1/-1}
 @media (max-width:760px){.work{grid-template-columns:1fr;gap:56px}}
-.meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--muted);margin:0 0 14px}
-.pill{border:1px solid var(--rule);border-radius:var(--r-pill);padding:1px 10px;color:var(--ink)}
-.media{position:relative;background:var(--card);border-radius:var(--r-card);overflow:hidden;aspect-ratio:4/3;border:1px solid transparent;transition:border-color var(--hover) var(--ease-out),transform var(--enter) var(--ease-out)}
-@media (min-width:761px){.tile.wide{display:grid;grid-template-columns:1.35fr 1fr;grid-template-rows:auto 1fr auto auto auto 1fr;gap:0 48px}.tile.wide .meta{grid-column:1/-1}.tile.wide .media{grid-row:2/7}.tile.wide h3{grid-column:2;grid-row:3;margin-top:0}.tile.wide p{grid-column:2;grid-row:4}.tile.wide .more{grid-column:2;grid-row:5;justify-self:start}}
-.media img,.media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0}
+/* the media sits above the tile link but lets clicks through to it; only the loop control catches its own */
+.media{position:relative;z-index:3;isolation:isolate;pointer-events:none;background:var(--card);border-radius:var(--r-card);overflow:hidden;aspect-ratio:4/3;transition:transform var(--press) var(--ease-out)}
+.media img,.media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .media video{opacity:0;transition:opacity var(--enter) var(--ease-out)}
-.media.playing video{opacity:1}
-.play{position:absolute;left:16px;bottom:16px;font-size:13px;font-weight:600;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(8px);padding:6px 12px;border-radius:var(--r-pill);opacity:0;transform:translateY(4px);transition:opacity var(--hover) var(--ease-out),transform var(--hover) var(--ease-out)}
-.tile h3{font-size:var(--fs-h3);line-height:var(--lh-head);letter-spacing:var(--track-head);font-weight:var(--w-head);margin:22px 0 8px}
+.media.started video{opacity:1}
+.media::before,.media::after{content:"";position:absolute;inset:0;z-index:1;border-radius:inherit;pointer-events:none}
+.media::before{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 8%,transparent)}
+.media::after{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 28%,transparent);opacity:0;transition:opacity var(--hover) var(--ease-out)}
+.tile .meta{margin:20px 0 10px}
+.tile h3{font-size:var(--fs-h3);line-height:var(--lh-head);letter-spacing:var(--track-head);font-weight:var(--w-head);margin:0 0 8px}
 .tile.wide h3{font-size:var(--fs-h2)}
+.tile h3 a{text-decoration:none}
+.tile h3 a::after{content:"";position:absolute;inset:0;z-index:2}
+.tile h3 a:focus-visible{outline:none}
+.tile:has(h3 a:focus-visible) .media{outline:2px solid var(--accent);outline-offset:4px}
 .tile p{margin:0;color:var(--muted);max-width:var(--measure)}
-.tile .more{display:inline-block;margin-top:14px;font-weight:600;font-size:16px}
-.tile .more::after{content:"";display:inline-block;width:.5em;height:.5em;border-top:2px solid currentColor;border-right:2px solid currentColor;transform:rotate(45deg);margin-left:.45em;transition:transform var(--hover) var(--ease-out)}
+.tile .scope{margin-top:12px;font-size:var(--fs-meta);display:flex;flex-wrap:wrap;gap:4px 12px}
+.tile .more{margin-top:16px}
+.tile:has(h3 a:active) .media{transform:scale(.985)}
+.tile:has(h3 a:focus-visible) .arrow .stem{opacity:1}
+.tile:has(h3 a:focus-visible) .arrow .tip{transform:translateX(3px)}
 @media (hover:hover) and (pointer:fine){
-  .tile:hover .media{border-color:var(--ink)}
-  .tile:hover .play,.tile:focus-visible .play{opacity:1;transform:none}
-  .tile:hover .more::after{transform:translateX(4px) rotate(45deg)}
+  .tile:hover .media::after,.tile:hover .arrow .stem{opacity:1}
+  .tile:hover .arrow .tip{transform:translateX(3px)}
+}
+@media (min-width:761px){
+  .tile.wide{display:grid;grid-template-columns:1.35fr 1fr;grid-template-rows:1fr auto auto auto auto 1fr;column-gap:48px}
+  .tile.wide .media{grid-column:1;grid-row:1/-1}
+  .tile.wide .meta,.tile.wide h3,.tile.wide p,.tile.wide .scope,.tile.wide .more{grid-column:2}
+  .tile.wide .meta{grid-row:2;margin-top:0}.tile.wide h3{grid-row:3}.tile.wide p{grid-row:4}.tile.wide .scope{grid-row:5}
+  .tile.wide .more{grid-row:6;align-self:start;justify-self:start}
 }
 
+/* loop control: pause and play, above the tile link */
+.vctl{position:absolute;right:12px;bottom:12px;z-index:2;pointer-events:auto;width:40px;height:40px;padding:0;border:0;border-radius:50%;display:grid;place-items:center;color:var(--ink);background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(8px);cursor:pointer;opacity:.9;transition:opacity var(--hover) var(--ease-out),transform var(--press) var(--ease-out)}
+.vctl:active{transform:scale(.92)}
+.vctl svg{grid-area:1/1;width:14px;height:14px;fill:currentColor;transition:opacity var(--hover) var(--ease-out)}
+.vctl .i-play{opacity:0}
+.media[data-state=paused] .vctl .i-play{opacity:1}
+.media[data-state=paused] .vctl .i-pause{opacity:0}
+@media (hover:hover) and (pointer:fine){
+  .vctl{opacity:0}
+  .tile:hover .vctl,.tile:focus-within .vctl,.media[data-user] .vctl{opacity:1}
+}
+@media (prefers-reduced-motion:reduce){.vctl{opacity:1!important}}
+.calm .vctl{opacity:1!important}
+
 /* results */
-.results{background:var(--dark);color:var(--on-dark);border-radius:var(--r-panel);padding:32px 40px;margin:0 0 128px}
-.results h2{font-size:15px;font-weight:600;color:var(--on-dark-muted);margin:0 0 20px}
+.results{background:var(--dark);color:var(--on-dark);box-shadow:inset 0 0 0 1px var(--dark-edge);border-radius:var(--r-panel);padding:32px 40px;margin:0 0 var(--s32)}
+.results h2{font-size:var(--fs-sup);font-weight:var(--w-strong);color:var(--on-dark);margin:0 0 24px}
 .r-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
-@media (max-width:760px){.results{padding:40px 24px}.r-grid{grid-template-columns:1fr}}
+@media (max-width:760px){.results{padding:32px 24px;margin-bottom:var(--s18)}.r-grid{grid-template-columns:1fr;gap:28px}}
 .r-num{font-size:var(--fs-stat);line-height:1;letter-spacing:var(--track-stat);font-weight:var(--w-head);font-variant-numeric:tabular-nums}
-.r-label{color:var(--on-dark-soft);margin-top:8px;max-width:34ch;font-size:16px}
+.r-label{color:var(--on-dark-soft);margin-top:8px;max-width:30ch;font-size:var(--fs-ui)}
 
 /* case header */
 .case{padding:0 0 140px}
-.eyebrow{font-size:15px;color:var(--accent);font-weight:600;margin:0 0 20px}
+.eyebrow{font-size:var(--fs-small);color:var(--accent);font-weight:var(--w-strong);margin:0 0 20px}
 .case h2{font-size:var(--fs-h1);line-height:1.02;letter-spacing:-.035em;font-weight:var(--w-head);margin:0 0 32px;max-width:14ch}
 .sum{font-size:var(--fs-lead);max-width:60ch;margin:0 0 48px}
 .facts{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:16px 56px;margin:0 0 56px;padding:20px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
 @media (max-width:640px){.facts{grid-template-columns:1fr 1fr}}
-.facts dt{font-size:14px;color:var(--muted)}
-.facts dd{margin:4px 0 0;font-weight:600}
+.facts dt{font-size:var(--fs-meta);color:var(--muted)}
+.facts dd{margin:4px 0 0;font-weight:var(--w-strong)}
 
-footer{border-top:1px solid var(--rule);padding:24px 0 48px;display:flex;justify-content:space-between;gap:16px;font-size:15px;color:var(--muted)}
-footer button{font:inherit;color:var(--ink);background:none;border:1px solid var(--rule);border-radius:var(--r-pill);padding:6px 14px;cursor:pointer}
+/* footer */
+footer{border-top:1px solid var(--rule);padding:24px 0 48px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;font-size:var(--fs-small);color:var(--muted)}
+footer button{font:inherit;min-height:40px;color:var(--ink);background:none;border:1px solid var(--rule);border-radius:var(--r-pill);padding:6px 16px;cursor:pointer;white-space:nowrap;transition:background-color var(--hover) var(--ease-out),color var(--hover) var(--ease-out),border-color var(--hover) var(--ease-out),transform var(--press) var(--ease-out)}
+footer button:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){footer button:hover{border-color:var(--ink)}}
+footer button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
 
-/* entrance and reveal: content is visible without JS */
+/* reveal: only the work enters, and only once. Content is visible without JS */
 .js .reveal{opacity:0;transform:translateY(12px)}
 .js .reveal.on{opacity:1;transform:none;transition:opacity var(--section) var(--ease-out),transform var(--section) var(--ease-out)}
-.enter{animation:enter var(--enter) var(--ease-out) both}
+/* load: one short sequence, settled by about 480ms */
+.enter{animation:enter var(--enter) var(--ease-out) both;animation-delay:var(--d,0ms)}
 @keyframes enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* microinteractions */
-/* 1. headline rises in word by word, once */
-.words .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em;margin-bottom:-.1em}
-.words .w>span{display:inline-block;animation:rise 760ms var(--ease-out) both;animation-delay:calc(var(--i) * 45ms + 80ms)}
-@keyframes rise{from{transform:translateY(110%)}to{transform:none}}
-/* 3. button label rolls up to a copy of itself */
-.roll{display:inline-block;position:relative;overflow:hidden;vertical-align:top}
-.roll>span{display:block;transition:transform var(--hover) var(--ease-out)}
-.roll::after{content:attr(data-t) / "";position:absolute;left:0;top:100%;white-space:nowrap;transition:transform var(--hover) var(--ease-out)}
-@media (hover:hover) and (pointer:fine){.btn:hover .roll>span,.btn:hover .roll::after{transform:translateY(-100%)}}
-/* 2. cursor label over work tiles */
-.cursor{position:fixed;left:0;top:0;z-index:50;pointer-events:none}
-.cursor span{display:block;background:var(--accent);color:var(--on-accent);font-size:var(--fs-meta);font-weight:var(--w-strong);padding:8px 14px;border-radius:var(--r-pill);white-space:nowrap;opacity:0;transform:scale(.6);transition:opacity var(--hover) var(--ease-out),transform var(--hover) var(--ease-out)}
-.cursor.on span{opacity:1;transform:none}
-@media (hover:hover) and (pointer:fine){.js .tile .media{cursor:none}}
-/* 5. theme change spreads from the switch */
+/* theme change spreads from the switch */
 ::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
-/* 6. copy the email */
+
+/* copy the email: the tag keeps its width, Copy crossfades to Copied */
 .copy{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;display:inline-flex;align-items:baseline;gap:8px;font-weight:var(--w-strong)}
-.copy .tag{font-size:var(--fs-caption);font-weight:var(--w-strong);border:1px solid var(--rule);border-radius:var(--r-pill);padding:1px 9px;color:var(--muted);transition:background-color var(--hover) var(--ease-out),color var(--hover) var(--ease-out),border-color var(--hover) var(--ease-out),transform var(--press) var(--ease-out)}
-.copy:hover .tag{border-color:var(--ink);color:var(--ink)}
+.copy .tag{display:inline-grid;font-size:var(--fs-caption);font-weight:var(--w-strong);border:1px solid var(--rule);border-radius:var(--r-pill);padding:1px 9px;color:var(--muted);transition:background-color var(--hover) var(--ease-out),color var(--hover) var(--ease-out),border-color var(--hover) var(--ease-out),transform var(--press) var(--ease-out)}
+.copy .tag>span{grid-area:1/1;text-align:center;transition:opacity var(--hover) var(--ease-out)}
+.copy .tag .t-done,.copy.done .tag .t-copy{opacity:0}
+.copy.done .tag .t-done{opacity:1}
+@media (hover:hover) and (pointer:fine){.copy:hover .tag{border-color:var(--ink);color:var(--ink)}}
 .copy:active .tag{transform:scale(.94)}
 .copy.done .tag{background:var(--ink);border-color:var(--ink);color:var(--bg)}
 
 /* reduced motion: OS setting or the footer toggle */
 @media (prefers-reduced-motion:reduce){
-  .roll>span,.roll::after{transform:none!important}
   *,*::before,*::after{animation:none!important;transition-duration:150ms!important;scroll-behavior:auto!important}
   .js .reveal{transform:none}
+  .btn:active,.tile:has(h3 a:active) .media{transform:none}
 }
+.calm{scroll-behavior:auto}
 .calm *,.calm *::before,.calm *::after{animation:none!important;transition-duration:150ms!important}
-.calm .js .reveal,.calm .reveal{transform:none!important}
-.calm .roll>span,.calm .roll::after{transform:none!important}
+.calm.js .reveal{opacity:1;transform:none!important}
+.calm .btn:active,.calm .tile:has(h3 a:active) .media{transform:none}

@@ -60,7 +60,6 @@ import '../../styles/components.css';
         <div class="media">
           <img src={`/loops/${loops[i]}.jpg`} alt={w.alt} width="1200" height="900" loading={i ? 'lazy' : 'eager'} decoding="async" />
           <video muted loop playsinline preload="none" poster={`/loops/${loops[i]}.jpg`} aria-hidden="true" tabindex="-1"><source src={`/loops/${loops[i]}.webm`} type="video/webm" /><source src={`/loops/${loops[i]}.mp4`} type="video/mp4" /></video>
-          <span class="play" aria-hidden="true">{w.detail}</span>
         </div>
         <h3>{w.headline}</h3>
         <p>{w.problem}</p>
@@ -103,7 +102,7 @@ import '../../styles/components.css';
   // Loops: hover or focus on desktop, in view on touch, off under reduced motion
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
   const play = (t, on) => { const v = t.querySelector('video'), m = t.querySelector('.media'); if (!v) return;
-    if (on && !reduced()) { v.play().then(() => m.classList.add('playing')).catch(() => {}); } else { v.pause(); m.classList.remove('playing'); } };
+    if (on && !reduced()) { v.play().then(() => m.classList.add('started')).catch(() => {}); } else { v.pause(); m.classList.remove('playing'); } };
   document.querySelectorAll('.tile').forEach(t => {
     if (fine) { ['mouseenter','focus'].forEach(ev => t.addEventListener(ev, () => play(t, true))); ['mouseleave','blur'].forEach(ev => t.addEventListener(ev, () => play(t, false))); }
   });
