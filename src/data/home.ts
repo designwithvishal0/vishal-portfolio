@@ -101,3 +101,46 @@ export const caseHeader = {
   ] as [string, string][],
   image: work[0].image,
 };
+
+// Everything below was in the home page file; it lives here so every look uses the same locked copy.
+// Preview: case studies still live on the Framer site until each one moves here.
+export const live = (slug: string) => `https://designwvishal.framer.website/work/${slug}`;
+export const behance = (id: string) => `https://www.behance.net/gallery/${id}`;
+export const email = 'design.vishaly@gmail.com';
+export const social = [
+  ['LinkedIn', 'https://www.linkedin.com/in/vishaldesigns'],
+  ['Behance', 'https://www.behance.net/design_vishaly'],
+  ['X', 'https://x.com/design_vishaly'],
+  ['Instagram', 'https://www.instagram.com/vishal.y0109'],
+];
+
+// Loop file names in /public/loops, in the same order as work.
+export const loops = ['ixigo', 'split', 'twelve', 'jarvis'];
+// Each number counts up from zero the first time it scrolls into view.
+export const results = [
+  { n: '60%', label: 'conversion lift on critical flows' },
+  { n: '50%', label: 'click through lift on landing pages, after I rebuilt them from Hotjar and Clarity recordings' },
+  { n: '30%', label: 'faster campaign turnaround, from the Figma design system I built' },
+];
+export const more = [
+  { img: 'reward', name: 'Unified Reward Centre', line: 'Every reward. One place.', href: behance('256413187') },
+  { img: 'onebanc', name: 'OneBanc', line: 'A month, not a balance.', href: live('onebanc') },
+];
+export const lead = { img: 'pwl', name: 'Profit Wala Love, CashKaro', tag: 'Shipped, 2026', line: "Valentine’s campaign across app, web and social.", stats: [['1,542', 'transactions'], ['₹9.89 lakh', 'GMV'], ['13,707', 'shares']] };
+export const pages = [
+  { img: 'bbb', name: 'Big Birthday Bash, EarnKaro', tag: 'Shipped, July 2026', line: 'A week long campaign landing page plus the 777 Jackpot game, one deal a day.', href: behance('256577531') },
+  { img: 'basil', name: 'Basil product page', tag: 'Concept', line: 'Sell the set, not the second product.', href: behance('256493837') },
+  { img: 'pdp', name: 'Beauty product page', tag: 'Concept', line: 'Will this shade match me?', href: behance('256556067') },
+  { img: 'cosiq', name: 'CosIQ landing page', line: 'Build your own routine.', href: behance('230420275') },
+];
+export const how = [
+  { h: 'Start where people drop off', p: 'I read the recordings and the reviews before I draw anything. At CashKaro that meant hours of Hotjar and Clarity sessions, and the landing pages I rebuilt from them got 50% more clicks.', link: 'About me', href: '#about' },
+  { h: 'Design the uncertain moment', p: "The waitlist before the chart. The request nobody has paid. The alert at 3 AM. That’s where people give up, so that’s where I spend the work.", link: 'ixigo Trains', href: live('ixigo-trains') },
+  { h: 'Honest copy over comforting copy', p: "If the odds are 70%, the screen says 70%. A promise the product can’t keep costs more trust than saying nothing.", link: 'Twelve', href: live('twelve') },
+];
+export const jobs = [
+  ['CashKaro', 'UI/UX and Graphic Designer', '2023 to 2026'],
+  ['Fabulous Media', 'Graphic Designer', '2022 to 2023'],
+  ['EKarma India', 'UI/UX Design Trainee', '2021 to 2022'],
+];
+

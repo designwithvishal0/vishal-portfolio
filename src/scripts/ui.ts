@@ -38,17 +38,19 @@ const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 // Result numbers count up from zero once, the first time they are half in view. Under reduced motion they just show.
+// data-suf sets what follows the number (default %).
 const nums = document.querySelectorAll<HTMLElement>('.r-num[data-n]');
-if (!reduced()) nums.forEach(el => { el.textContent = '0%'; });
+const suf = (el: HTMLElement) => el.dataset.suf ?? '%';
+if (!reduced()) nums.forEach(el => { el.textContent = `0${suf(el)}`; });
 const cio = new IntersectionObserver(es => es.forEach(e => {
   if (!e.isIntersecting) return;
   cio.unobserve(e.target);
   const el = e.target as HTMLElement, n = +el.dataset.n!;
-  if (reduced()) { el.textContent = `${n}%`; return; }
+  if (reduced()) { el.textContent = `${n}${suf(el)}`; return; }
   const t0 = performance.now();
   const tick = (t: number) => {
     const p = Math.min((t - t0) / 900, 1);
-    el.textContent = `${Math.round(n * (1 - (1 - p) ** 4))}%`;
+    el.textContent = `${Math.round(n * (1 - (1 - p) ** 4))}${suf(el)}`;
     if (p < 1) requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);

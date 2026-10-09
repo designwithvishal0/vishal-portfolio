@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /system
 Disallow: /directions/
+Disallow: /looks/

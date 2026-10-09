@@ -3,55 +3,16 @@ import '@fontsource-variable/hanken-grotesk';
 import '../styles/components.css';
 import Boot from '../components/Boot.astro';
 import Arrow from '../components/Arrow.astro';
-import { intro, work } from '../data/home';
+import { intro, work, live, email, social, loops, results, more, lead, pages, how, jobs } from '../data/home';
 
 // Approved home copy, Phase 1 doc. Layout is direction B2 on the design system.
 const title = 'Vishal Yadav, Product Designer in Gurugram';
 const description = 'Vishal Yadav is a product (UI/UX) designer in Gurugram. Case studies in travel, fintech, ecommerce and B2B, plus shipped campaign work for CashKaro.';
 
-// Preview: case studies still live on the Framer site until each one moves here.
-const live = (slug: string) => `https://designwvishal.framer.website/work/${slug}`;
-const behance = (id: string) => `https://www.behance.net/gallery/${id}`;
-const email = 'design.vishaly@gmail.com';
-const social = [
-  ['LinkedIn', 'https://www.linkedin.com/in/vishaldesigns'],
-  ['Behance', 'https://www.behance.net/design_vishaly'],
-  ['X', 'https://x.com/design_vishaly'],
-  ['Instagram', 'https://www.instagram.com/vishal.y0109'],
-];
-
 const sizes = ['wide', 'half', 'half', 'wide'];
-const loops = ['ixigo', 'split', 'twelve', 'jarvis'];
 // The resume button shows once the site copy of the CV exists.
 const words = intro.positioning.split(' ');
 const ctas = intro.links.filter(l => l.href !== '#').reverse();
-// Each number counts up from zero the first time it scrolls into view.
-const results = [
-  { n: '60%', label: 'conversion lift on critical flows' },
-  { n: '50%', label: 'click through lift on landing pages, after I rebuilt them from Hotjar and Clarity recordings' },
-  { n: '30%', label: 'faster campaign turnaround, from the Figma design system I built' },
-];
-const more = [
-  { img: 'reward', name: 'Unified Reward Centre', line: 'Every reward. One place.', href: behance('256413187') },
-  { img: 'onebanc', name: 'OneBanc', line: 'A month, not a balance.', href: live('onebanc') },
-];
-const lead = { img: 'pwl', name: 'Profit Wala Love, CashKaro', tag: 'Shipped, 2026', line: "Valentine’s campaign across app, web and social.", stats: [['1,542', 'transactions'], ['₹9.89 lakh', 'GMV'], ['13,707', 'shares']] };
-const pages = [
-  { img: 'bbb', name: 'Big Birthday Bash, EarnKaro', tag: 'Shipped, July 2026', line: 'A week long campaign landing page plus the 777 Jackpot game, one deal a day.', href: behance('256577531') },
-  { img: 'basil', name: 'Basil product page', tag: 'Concept', line: 'Sell the set, not the second product.', href: behance('256493837') },
-  { img: 'pdp', name: 'Beauty product page', tag: 'Concept', line: 'Will this shade match me?', href: behance('256556067') },
-  { img: 'cosiq', name: 'CosIQ landing page', line: 'Build your own routine.', href: behance('230420275') },
-];
-const how = [
-  { h: 'Start where people drop off', p: 'I read the recordings and the reviews before I draw anything. At CashKaro that meant hours of Hotjar and Clarity sessions, and the landing pages I rebuilt from them got 50% more clicks.', link: 'About me', href: '#about' },
-  { h: 'Design the uncertain moment', p: "The waitlist before the chart. The request nobody has paid. The alert at 3 AM. That’s where people give up, so that’s where I spend the work.", link: 'ixigo Trains', href: live('ixigo-trains') },
-  { h: 'Honest copy over comforting copy', p: "If the odds are 70%, the screen says 70%. A promise the product can’t keep costs more trust than saying nothing.", link: 'Twelve', href: live('twelve') },
-];
-const jobs = [
-  ['CashKaro', 'UI/UX and Graphic Designer', '2023 to 2026'],
-  ['Fabulous Media', 'Graphic Designer', '2022 to 2023'],
-  ['EKarma India', 'UI/UX Design Trainee', '2021 to 2022'],
-];
 
 const person = {
   '@context': 'https://schema.org', '@type': 'Person', name: 'Vishal Yadav', jobTitle: 'Product Designer',

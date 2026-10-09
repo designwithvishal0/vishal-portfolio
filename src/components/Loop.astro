@@ -1,0 +1,15 @@
+---
+// One work loop. The image link, the poster, the silent loop and its pause button.
+// ui.ts plays it while 60% in view and wires the button. Style it with .media in each look.
+interface Props { href: string; loop: string; name: string; alt: string; eager?: boolean; class?: string }
+const { href, loop, name, alt, eager = false, class: cls = '' } = Astro.props;
+---
+<div class={`media ${cls}`} data-state="paused">
+  <a class="mlink" href={href} tabindex="-1" aria-hidden="true"></a>
+  <img src={`/loops/${loop}.jpg`} alt={alt} width="1200" height="900" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+  <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"><source src={`/loops/${loop}.mp4`} type="video/mp4" /><source src={`/loops/${loop}.webm`} type="video/webm" /></video>
+  <button class="vctl" type="button" data-name={name} aria-label={`Play the ${name} preview`}>
+    <svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12" rx="1" /><rect x="8.5" y="1" width="3.5" height="12" rx="1" /></svg>
+    <svg class="i-play" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.8.8 0 0 0 1.2.7l9-5.4a.8.8 0 0 0 0-1.4l-9-5.4A.8.8 0 0 0 3 1.6z" /></svg>
+  </button>
+</div>
