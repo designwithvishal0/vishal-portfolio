@@ -239,6 +239,14 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     <div class="prun">
       <div class="p-pin">
         <ul class="ptrack">
+          {/* Profit Wala Love's seat on the track: with motion on, its row's picture drops into this slot as you scroll, then everything slides sideways */}
+          <li class="pwl" aria-hidden="true"><a class="card go" href={lead.href} tabindex="-1">
+            <span class="cthumb"><img src={`/pages/${lead.img}.webp`} alt="" width="960" height="1004" loading="lazy" decoding="async" /></span>
+            <span class="ctag"><span class="pill shipped">{lead.tag}</span></span>
+            <strong>{lead.name}</strong>
+            <span class="cline">{lead.line}</span>
+            <span class="more">View on Dribbble <Arrow /></span>
+          </a></li>
           {pages.map(p => (
             <li><a class="card go" href={p.href}>
               <span class="cthumb"><img src={`/pages/${p.img}.webp`} alt={`${p.name}, preview`} width="960" height="1004" loading="lazy" decoding="async" /></span>
@@ -529,6 +537,16 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   let ov = 0, pst: ScrollTrigger | null = null;
   const setOv = () => { ov = root.classList.contains('hpin') ? Math.max(0, ptrack.offsetWidth - root.clientWidth) : 0; pagesSec.style.setProperty('--ov', `${ov}px`); };
   ScrollTrigger.addEventListener('refreshInit', setOv);
+  // where Profit Wala Love's picture has to land: its seat on the track, at the moment the track pins (measured with any current transforms taken out)
+  const lthumb = q('.lthumb'), ltext = q('.ltext'), pwl = q('.ptrack .pwl'), pthumb = q('.cthumb', pwl), ppin = q('.p-pin');
+  let fly = { x: 0, y: 0, s: 1 };
+  const measure = () => {
+    if (!root.classList.contains('hpin')) return;
+    const g = (el: Element, k: string) => +gsap.getProperty(el, k);
+    const tr = lthumb.getBoundingClientRect(), sr = pthumb.getBoundingClientRect(), pr = ppin.getBoundingClientRect(), rr = pagesSec.getBoundingClientRect();
+    fly = { x: sr.left - g(ptrack, 'x') - (tr.left - g(lthumb, 'x')), y: rr.top + sr.top - pr.top - (tr.top - g(lthumb, 'y')), s: sr.width / (tr.width / g(lthumb, 'scale')) };
+  };
+  ScrollTrigger.addEventListener('refreshInit', measure);
 
   // ---------- Scrubs with motion allowed: the pages track at every width, the rest at 1024+. Reduce motion reverts all of it.
   let mm: gsap.MatchMedia | null = null;
@@ -555,6 +573,15 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
         .fromTo(ptrack, { x: 0 }, { x: () => -ov, ease: 'none' }, 0)
         .fromTo(pprog, { scaleX: 0 }, { scaleX: 1, ease: 'none' }, 0);
       pst = tl.scrollTrigger!;
+      // as the track comes up, the lead's picture travels down into the first seat and its story fades; the seat's own card takes over once it lands
+      measure();
+      gsap.set(lthumb, { transformOrigin: '0 0' });
+      gsap.timeline({ scrollTrigger: { trigger: pagesSec, start: 'top 85%', end: () => `top ${bar.offsetHeight}px`, scrub: .4, invalidateOnRefresh: true } })
+        .fromTo(lthumb, { x: 0, y: 0, scale: 1 }, { x: () => fly.x, y: () => fly.y, scale: () => fly.s, ease: 'power1.inOut', duration: 1 }, 0)
+        .fromTo(ltext, { opacity: 1, x: 0 }, { opacity: 0, x: -40, ease: 'power1.in', duration: .35 }, 0)
+        .fromTo(qa(':scope > a > :not(.cthumb)', pwl), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .3 }, .7)
+        .fromTo(lthumb, { opacity: 1 }, { opacity: 0, duration: .001, immediateRender: false }, 1)
+        .fromTo(pthumb, { opacity: 0 }, { opacity: 1, duration: .001 }, 1);
       return () => { root.classList.remove('hpin'); pst = null; setOv(); };
     });
   };

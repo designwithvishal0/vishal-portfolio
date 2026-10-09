@@ -432,6 +432,10 @@ html.hpin .prun{height:calc(100svh - var(--bar) + var(--ov,0px))}
 html.hpin .p-pin{position:sticky;top:var(--bar);height:calc(100svh - var(--bar));overflow:clip;display:flex;flex-direction:column;justify-content:center}
 html.hpin .ptrack{width:max-content;overflow:visible;scroll-snap-type:none;padding-bottom:0}
 html.hpin .p-prog{display:block}
+/* Profit Wala Love's seat on the track exists only when its picture can travel into it; the lead row sits above the pinned track while it does */
+.ptrack>li.pwl{display:none}
+html.hpin .ptrack>li.pwl{display:block}
+html.hpin .lead{position:relative;z-index:3}
 
 @media (max-width:759px){
   .pages{--th:clamp(200px,min(78vw / .956,100svh - var(--bar) - 340px),420px);padding:56px 0 72px}
