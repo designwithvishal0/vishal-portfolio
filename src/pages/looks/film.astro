@@ -1,0 +1,416 @@
+---
+import '@fontsource-variable/instrument-sans/wdth.css';
+import sansUrl from '@fontsource-variable/instrument-sans/files/instrument-sans-latin-wdth-normal.woff2?url';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '../../styles/film.css';
+import Boot from '../../components/Boot.astro';
+import Arrow from '../../components/Arrow.astro';
+import { intro, work, live, email, social, loops, results, more, lead, pages, how, jobs } from '../../data/home';
+
+// Film: his showreel is screened first with his positioning as its caption, each project then gets a chapter on a stage
+// in its own colour while the story scrolls past, and the page closes on the contact question.
+const words = intro.positioning.split(' ');
+const cwords = 'Hiring, or need a page that sells?'.split(' ');
+const book = intro.links.find(l => l.label === 'Book a call')!.href;
+// each reel's own ground, so a contained frame never shows a bar of another colour
+const ground: Record<string, string> = { ixigo: '#0B0C10', split: '#F6F8FC', twelve: '#F2F0E4', jarvis: '#F5F6FB' };
+const pause = `<svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12" rx="1"/><rect x="8.5" y="1" width="3.5" height="12" rx="1"/></svg><svg class="i-play" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.8.8 0 0 0 1.2.7l9-5.4a.8.8 0 0 0 0-1.4l-9-5.4A.8.8 0 0 0 3 1.6z"/></svg>`;
+
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Look: Film, Vishal Yadav</title>
+<meta name="robots" content="noindex" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="preload" as="font" type="font/woff2" href={sansUrl} crossorigin />
+<Boot />
+<script is:inline>addEventListener('load',()=>setTimeout(()=>document.documentElement.classList.add('ready'),2500))</script>
+</head>
+<body>
+<span id="sentinel" aria-hidden="true"></span>
+<header class="bar">
+  <a class="who" href="#top">Vishal Yadav</a>
+  <nav aria-label="Sections"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+  <button id="theme" type="button">Dark mode</button>
+</header>
+
+<main>
+  <section class="hero" id="top" aria-labelledby="h1">
+    <div class="sur">
+      <div class="pic" data-state="paused">
+        <picture>
+          <source data-th="dark" data-m="(min-aspect-ratio: 1/1)" media="(min-aspect-ratio: 1/1) and (prefers-color-scheme: dark)" srcset="/film/reel/hero-wide-dark.jpg" width="1600" height="900" />
+          <source data-th="light" data-m="(min-aspect-ratio: 1/1)" media="(min-aspect-ratio: 1/1)" srcset="/film/reel/hero-wide-light.jpg" width="1600" height="900" />
+          <source data-th="dark" data-m="all" media="(prefers-color-scheme: dark)" srcset="/film/reel/hero-tall-dark.jpg" width="864" height="1080" />
+          <img src="/film/reel/hero-tall-light.jpg" width="864" height="1080" alt="Phone screens from four of my case studies: ixigo Trains, Google Pay Split and Request, Twelve and Staqu JARVIS Alerts" fetchpriority="high" decoding="async" />
+        </picture>
+        <script is:inline>(()=>{const t=document.documentElement.dataset.theme;if(t)document.querySelectorAll('.hero source[data-th]').forEach(s=>{s.media=s.dataset.th===t?s.dataset.m:'not all'})})()</script>
+        <video muted playsinline loop preload="auto" aria-hidden="true" tabindex="-1"></video>
+        <span class="ph" aria-hidden="true"><i></i></span>
+        <button class="vctl" type="button" aria-label="Play the previews"><Fragment set:html={pause} /></button>
+      </div>
+      <div class="cap">
+        <div class="now mono" data-k="ixigo">
+          <a class="now-l" href={`#ch-${work[0].slug}`}><span class="sq" aria-hidden="true"></span><span class="now-n">{work[0].name}</span></a>
+        </div>
+        <h1 id="h1" class="speaker mono">{intro.name}</h1>
+        <p class="avail"><span class="dot" aria-hidden="true"></span>{intro.availability}</p>
+        <a class="btn primary book" href={book}>Book a call</a>
+        <p class="pos words"><span class="vh">{intro.positioning}</span>{words.map((w, i) => <><span class="w" aria-hidden="true" style={`--i:${i}`}>{w}</span>{i === 4 && <span class="bk" aria-hidden="true"></span>}{i < words.length - 1 && ' '}</>)}</p>
+      </div>
+    </div>
+  </section>
+
+  <nav class="aud" aria-label="Start here">
+    <a class="go" href="#work"><strong>Hiring a product designer</strong><span class="act">See the case studies</span><Arrow /></a>
+    <a class="go" href="#results"><strong>Recruiting</strong><span class="act">The 30 second version</span><Arrow /></a>
+    <a class="go" href="#pages"><strong>Founder</strong><span class="act">Need a page that sells</span><Arrow /></a>
+  </nav>
+
+  <section class="work" id="work" aria-labelledby="w-h">
+    <div class="head"><h2 id="w-h">Selected work</h2><span class="mono">4 case studies</span></div>
+    <div class="chapters">
+      <div class="stage" data-ch="ixigo">
+        <div class="frame" data-state="paused">
+          {work.map((w, i) => (
+            <div class={`sv${i ? '' : ' on'}`} style={`--ground:${ground[loops[i]]}`}>
+              <img src={`/reel/${loops[i]}-phone.jpg`} alt={`${w.name}, preview`} width="720" height="900" loading="lazy" decoding="async" />
+              <video muted playsinline loop preload="none" aria-hidden="true" tabindex="-1" data-src={`/reel/${loops[i]}-phone.mp4`}></video>
+            </div>
+          ))}
+          <a class="flink" href={live(work[0].slug)} tabindex="-1" aria-hidden="true"></a>
+          <button class="vctl" type="button" aria-label={`Play the ${work[0].name} preview`}><Fragment set:html={pause} /></button>
+        </div>
+        <div class="ind mono">
+          <span class="ind-n">1 / 4</span>
+          <span class="ticks">{work.map((w, i) => <a href={`#ch-${w.slug}`} aria-label={w.name} aria-current={i ? undefined : 'true'} style={`--tl:--c${i}`}><i></i></a>)}</span>
+          <span class="ind-name">{work[0].name}</span>
+        </div>
+      </div>
+      {work.map((w, i) => (
+        <article class={`ch ch-${loops[i]}`} id={`ch-${w.slug}`} data-k={loops[i]} data-name={w.name}>
+          <div class="ch-head mono">{i + 1} / 4 · {w.name}</div>
+          <div class="ch-media" data-state="paused" style={`--ground:${ground[loops[i]]}`}>
+            <img src={`/reel/${loops[i]}-phone.jpg`} width="720" height="900" alt={`${w.name}, preview`} loading="lazy" decoding="async" />
+            <video muted playsinline loop preload="none" aria-hidden="true" tabindex="-1" data-src={`/reel/${loops[i]}-phone.mp4`}></video>
+            <a class="mlink" href={live(w.slug)} tabindex="-1" aria-hidden="true"></a>
+            <button class="vctl" type="button" aria-label={`Play the ${w.name} preview`}><Fragment set:html={pause} /></button>
+          </div>
+          <div class="ch-text">
+            <p class="meta mono"><span class="m-name">{w.name} · </span>{w.type} · {w.year}</p>
+            <h3><a href={live(w.slug)}>{w.headline}<span class="vh">, the {w.name} case study</span></a></h3>
+            <p class="prob">{w.problem}</p>
+            <p class="role">{w.role}</p>
+            <p class="proof">{w.detail}</p>
+            <a class="more" href={live(w.slug)} tabindex="-1" aria-hidden="true">View the case study <Arrow /></a>
+          </div>
+        </article>
+      ))}
+    </div>
+    <ul class="morework reveal" aria-label="More work">
+      {more.map(m => (
+        <li><a class="mw go" href={m.href}>
+          <img src={`/pages/${m.img}.webp`} alt="" width="96" height="96" loading="lazy" decoding="async" />
+          <span class="mwt"><strong>{m.name}</strong><span>{m.line}</span></span>
+          <span class="pill">Concept</span><Arrow />
+        </a></li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="results" id="results" aria-labelledby="r-h">
+    <h2 id="r-h">Shipped at CashKaro, for 25M+ users</h2>
+    <div class="r-grid">
+      {results.map(r => <div class="r"><p class="r-stat"><span class="vh">{r.n}</span><span aria-hidden="true"><span class="r-num" data-n={parseInt(r.n)} data-suf="">{parseInt(r.n)}</span><span class="pct">%</span></span></p><p class="r-label">{r.label}</p></div>)}
+    </div>
+  </section>
+
+  <section class="pages" id="pages" aria-labelledby="p-h">
+    <div class="p-sticky">
+      <div class="p-head"><h2 id="p-h">Pages that sell</h2><p>Campaigns, landing pages and product pages for commerce brands.</p></div>
+      <ul class="track">
+        <li class="lead">
+          <article class="lead-c">
+            <div class="thumb"><img src={`/pages/${lead.img}.webp`} alt={`${lead.name}, preview`} width="960" height="1004" loading="lazy" decoding="async" /></div>
+            <div class="lt">
+              <span class="pill shipped">{lead.tag}</span>
+              <h3>{lead.name}</h3>
+              <p>{lead.line}</p>
+              <dl class="pstats">
+                {lead.stats.map(([n, l]) => {
+                  const lakh = n.includes('lakh');
+                  const v = lakh ? parseFloat(n.replace(/[^\d.]/g, '')) : parseInt(n.replace(/,/g, ''));
+                  return <div><dt>{l}</dt><dd><span class="vh">{n}</span><span aria-hidden="true" data-count={v} data-dec={lakh ? 2 : 0} data-pre={lakh ? '₹' : ''} data-suf={lakh ? ' lakh' : ''}>{n}</span></dd></div>;
+                })}
+              </dl>
+            </div>
+          </article>
+        </li>
+        {pages.map(p => (
+          <li class="pc"><a class="page go" href={p.href}>
+            <span class="thumb"><img src={`/pages/${p.img}.webp`} alt={`${p.name}, preview`} width="960" height="1004" loading="lazy" decoding="async" /></span>
+            <span class="ptag">{p.tag && <span class={`pill${p.tag.startsWith('Shipped') ? ' shipped' : ''}`}>{p.tag}</span>}</span>
+            <h3>{p.name}</h3>
+            <span class="pline">{p.line}</span>
+            <span class="more">View on Behance <Arrow /></span>
+          </a></li>
+        ))}
+        <li class="pend"><p>Need a page that sells?</p><a class="ul" href="#contact">See how I work with founders</a></li>
+      </ul>
+      <div class="p-prog" aria-hidden="true"><i></i></div>
+    </div>
+  </section>
+  <p class="freelance">Need a page that sells? <a class="ul" href="#contact">See how I work with founders</a></p>
+
+  <section class="how" aria-labelledby="h-h">
+    <h2 id="h-h">How I work</h2>
+    <div class="how-items">
+      {how.map((x, i) => <div class="hi reveal" style={`--d:${i * 80}ms`}><h3>{x.h}</h3><p>{x.p}</p><a class="more go" href={x.href}>{x.link} <Arrow /></a></div>)}
+    </div>
+  </section>
+
+  <section class="about" id="about" aria-labelledby="a-h">
+    <h2 id="a-h" class="mono">About</h2>
+    <p class="lead-p reveal">{intro.supporting}</p>
+    <p class="story reveal">From October 2023 to August 2026 I designed app and web flows at CashKaro, India’s largest cashback platform, and built the Figma design system its campaigns run on. Before that I was a graphic designer at an agency, which is why what I ship looks finished (that work lives in <a class="ul" href={social[1][1]}>the archive</a>). I studied Computer Science, so I know what engineers need at handoff, and I use AI to move faster through research and iteration while the design calls stay mine.</p>
+    <ul class="cast">
+      {jobs.map(([c, r, y], i) => <li class="reveal" style={`--d:${i * 80}ms`}><span class="c-role">{r}</span><span class="c-co"><strong>{c}</strong> <span class="c-yr mono">{y}</span></span></li>)}
+    </ul>
+  </section>
+
+  <section class="contact" id="contact" aria-labelledby="c-h">
+    <div class="sur2">
+      <h2 id="c-h" class="q words"><span class="vh">{cwords.join(' ')}</span>{cwords.map((x, k) => <><span class="w" aria-hidden="true" style={`--i:${k}`}>{x}</span>{k < cwords.length - 1 && ' '}</>)}</h2>
+      <div class="cta">
+        <a class="btn primary" href={book}>Book a call</a>
+        <a class="btn" href={`mailto:${email}`}>Email</a>
+      </div>
+      <p class="mail">Email me at <button class="copy" type="button" data-copy={email}>{email} <span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button> or book a call. I reply within a day.</p>
+      <span class="vh" role="status" id="copied"></span>
+      <p class="elsewhere">You can also find me on <a class="ul" href={social[0][1]}>LinkedIn</a> and <a class="ul" href={social[1][1]}>Behance</a>.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <nav aria-label="Elsewhere" class="social mono">{social.map(([l, h]) => <a class="ul" href={h}>{l}</a>)}</nav>
+  <button id="calm" type="button" aria-pressed="false">Reduce motion</button>
+</footer>
+
+<script>
+  import '../../scripts/ui';
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  const root = document.documentElement;
+  const mq = (s: string) => matchMedia(s);
+  const osCalm = mq('(prefers-reduced-motion: reduce)'), land = mq('(min-aspect-ratio: 1/1)'), desk = mq('(min-width: 1024px)');
+  const osDark = mq('(prefers-color-scheme: dark)');
+  const calm = () => osCalm.matches || root.classList.contains('calm');
+  const dark = () => root.dataset.theme ? root.dataset.theme === 'dark' : osDark.matches;
+  const q = <T extends Element = HTMLElement>(s: string, el: ParentNode = document) => el.querySelector<T>(s)!;
+  const qa = <T extends Element = HTMLElement>(s: string, el: ParentNode = document) => [...el.querySelectorAll<T>(s)];
+  // scroll led reveals below may now hide until they enter; html.ready alone no longer forces them visible
+  root.classList.add('live');
+
+  const bar = q('.bar');
+  new IntersectionObserver(([e]) => bar.classList.toggle('scrolled', !e.isIntersecting)).observe(q('#sentinel'));
+
+  // One controller for every video. Each plays only while enough of it is in view and motion is allowed;
+  // its button wins until reload. No src is assigned until a video is about to play.
+  type Item = { box: HTMLElement; v: HTMLVideoElement; btn: HTMLButtonElement | null; name: string; src: () => string; thr: number; ratio: number; user: boolean | null };
+  const items: Item[] = [];
+  const say = (it: Item, run: boolean) => it.btn?.setAttribute('aria-label', `${run ? 'Pause' : 'Play'} the ${it.name}`);
+  const load = (it: Item) => {
+    const s = it.src(), v = it.v;
+    if (v.dataset.cur === s) return;
+    v.dataset.cur = s; v.src = s;
+  };
+  // visible share measured live, so a stale observer entry (for example during the theme transition) never pauses a film
+  const seen = (el: HTMLElement) => { const r = el.getBoundingClientRect(); return r.height ? Math.max(0, Math.min(r.bottom, innerHeight) - Math.max(r.top, 0)) / r.height : 0; };
+  const sync = (it: Item) => {
+    if (it.box.hasAttribute('data-novid')) return;
+    it.ratio = seen(it.box);
+    const run = it.user === null ? it.ratio >= it.thr - .01 && !calm() : !!it.user && it.ratio > 0;
+    if (run) { load(it); it.v.play().catch(() => { if (it.v.paused && it.user === null) { it.box.dataset.state = 'paused'; say(it, false); } }); }
+    else if (!it.v.paused) it.v.pause();
+    it.box.dataset.state = run ? 'playing' : 'paused';
+    say(it, run);
+  };
+  const vio = new IntersectionObserver(es => es.forEach(e => {
+    const it = items.find(x => x.box === e.target);
+    if (it) sync(it);
+  }), { threshold: [0, .3, .5, .6, .8, 1] });
+  const add = (o: Omit<Item, 'ratio' | 'user'>) => {
+    const it: Item = { ...o, ratio: 0, user: null };
+    items.push(it);
+    it.v.addEventListener('playing', () => it.v.parentElement!.classList.add('started'));
+    it.v.addEventListener('error', () => { if (!it.v.getAttribute('src')) return; it.box.setAttribute('data-novid', ''); it.box.dataset.state = 'paused'; it.v.removeAttribute('src'); });
+    it.btn?.addEventListener('click', () => { it.user = it.box.dataset.state !== 'playing'; sync(it); });
+    vio.observe(it.box);
+    return it;
+  };
+
+  // Hero: the four phone cuts of his showreels back to back, so the page caption is the only headline on screen. Landscape or portrait cut by aspect ratio;
+  // light opens on Split (a light ground), dark on ixigo. Each cut lists the project order and where each one starts.
+  // the hero ships as H.264 and as WebM; WebM only where H.264 cannot play
+  const ext = document.createElement('video').canPlayType('video/mp4; codecs="avc1.640028"') ? '.mp4' : '.webm';
+  const hpic = q('.hero .pic'), hv = q<HTMLVideoElement>('video', hpic);
+  const cutsOf: Record<string, { o: number[]; c: number[] }> = {
+    'wide-dark': { o: [0, 1, 2, 3], c: [5.8, 12.3, 18.6, 25.5] }, 'wide-light': { o: [1, 2, 3, 0], c: [6.1, 12.4, 19.3, 25.5] },
+    'tall-dark': { o: [0, 1, 2, 3], c: [5.8, 12.3, 18.6, 25.5] }, 'tall-light': { o: [1, 2, 3, 0], c: [6.1, 12.4, 19.3, 25.5] },
+  };
+  const hkey = () => `${land.matches ? 'wide' : 'tall'}-${dark() ? 'dark' : 'light'}`;
+  const hero = add({ box: hpic, v: hv, btn: q('.vctl', hpic), name: 'previews', src: () => `/film/reel/hero-${hkey()}${ext}`, thr: .3 });
+  const chs = qa('.ch'), names = chs.map(c => c.dataset.name!), keys = chs.map(c => c.dataset.k!);
+  const nowRow = q('.now'), nowL = q<HTMLAnchorElement>('.now-l'), nowN = q('.now-n'), fill = q('.ph i');
+  let shown = 0, raf = 0, fadeT = 0;
+  const setP = (i: number) => { shown = i; nowN.textContent = names[i]; nowL.href = `#${chs[i].id}`; nowRow.dataset.k = keys[i]; };
+  const showP = (i: number) => {
+    if (i === shown || nowRow.contains(document.activeElement)) return;
+    shown = i; nowRow.classList.add('fade'); clearTimeout(fadeT);
+    fadeT = window.setTimeout(() => { setP(i); nowRow.classList.remove('fade'); }, 160);
+  };
+  const projAt = (k: string, t: number) => { const { o, c } = cutsOf[k]; const s = c.filter(x => t >= x).length; return o[s % 4]; };
+  setP(cutsOf[hkey()].o[0]);
+  const frame = () => {
+    const d = hv.duration, k = hv.dataset.key;
+    if (d && k) { fill.style.transform = `scaleX(${hv.currentTime / d})`; showP(projAt(k, hv.currentTime)); }
+    raf = requestAnimationFrame(frame);
+  };
+  hv.addEventListener('play', () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(frame); });
+  hv.addEventListener('pause', () => cancelAnimationFrame(raf));
+  // a new cut (rotated, or the other theme) picks up on the project already on screen
+  const reHero = () => {
+    qa<HTMLSourceElement>('.hero source[data-th]').forEach(x => { x.media = root.dataset.theme ? (x.dataset.th === root.dataset.theme ? x.dataset.m! : 'not all') : x.media; });
+    // not playing yet (or no video): the new poster shows its first project, so the chip follows it
+    if (!hpic.classList.contains('started') || hpic.hasAttribute('data-novid')) {
+      setP(cutsOf[hkey()].o[0]);
+      if (hv.dataset.cur && !hpic.hasAttribute('data-novid')) sync(hero);
+      return;
+    }
+    const k = hkey(), { o, c } = cutsOf[k], at = o.indexOf(shown);
+    hpic.classList.remove('started');
+    hv.dataset.cur = hero.src(); hv.dataset.key = k; hv.src = hv.dataset.cur;
+    if (at > 0) hv.addEventListener('loadedmetadata', () => { hv.currentTime = c[at - 1] + .25; }, { once: true });
+    sync(hero);
+  };
+  hv.addEventListener('loadstart', () => { hv.dataset.key = hkey(); });
+  land.addEventListener('change', reHero);
+
+  // Chapters below 1024 (and on the calm layout): each band's own phone cut
+  chs.forEach(c => {
+    const box = q('.ch-media', c), v = q<HTMLVideoElement>('video', box);
+    add({ box, v, btn: q('.vctl', box), name: `${c.dataset.name} preview`, src: () => v.dataset.src!, thr: .6 });
+  });
+
+  // Chapters at 1024+: one sticky stage. The chapter crossing the middle of the screen sets its colour and its reel.
+  const stage = q('.stage'), sframe = q('.frame', stage), svs = qa('.sv', stage), flink = q<HTMLAnchorElement>('.flink', stage);
+  const indN = q('.ind-n', stage), indName = q('.ind-name', stage), ticks = qa('.ticks a', stage);
+  const sv = (i: number) => q<HTMLVideoElement>('video', svs[i]);
+  let cur = 0, wasT = 0;
+  const st: Item = add({ box: sframe, v: sv(0), btn: q('.vctl', sframe), name: `${names[0]} preview`, src: () => st.v.dataset.src!, thr: .5 });
+  svs.forEach((s, i) => sv(i).addEventListener('playing', () => {
+    s.classList.add('started');
+    const n = sv((i + 1) % svs.length);
+    if (i === cur && !n.dataset.cur) { n.preload = 'auto'; n.src = n.dataset.src!; n.dataset.cur = n.dataset.src; }
+  }));
+  const setCh = (i: number) => {
+    if (i === cur || i < 0) return;
+    const prev = cur; cur = i;
+    stage.dataset.ch = keys[i];
+    indN.textContent = `${i + 1} / 4`; indName.textContent = names[i];
+    ticks.forEach((t, k) => { t.toggleAttribute('data-past', k < i); if (k === i) t.setAttribute('aria-current', 'true'); else t.removeAttribute('aria-current'); });
+    flink.href = q<HTMLAnchorElement>('h3 a', chs[i]).href;
+    svs.forEach((s, k) => { if (k !== i && k !== prev) s.classList.remove('on', 'was'); });
+    svs[prev].classList.remove('on'); svs[prev].classList.add('was');
+    svs[i].classList.remove('was'); svs[i].classList.add('on');
+    st.v = sv(i); st.name = `${names[i]} preview`;
+    if (st.v.dataset.cur) st.v.currentTime = 0;
+    sync(st);
+    clearTimeout(wasT);
+    wasT = window.setTimeout(() => svs.forEach((s, k) => { if (k === cur) return; s.classList.remove('was'); sv(k).pause(); }), 540);
+  };
+  const cio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) setCh(chs.indexOf(e.target as HTMLElement)); }), { rootMargin: '-45% 0px -45% 0px' });
+  chs.forEach(c => cio.observe(c));
+
+  new MutationObserver(reHero).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+  osDark.addEventListener('change', reHero);
+
+  // The contact question rises word by word once it is mostly in view
+  const cq = q('.q');
+  const qio = new IntersectionObserver(([e]) => { if (e.isIntersecting) { cq.classList.add('go'); qio.disconnect(); } }, { threshold: .6 });
+  qio.observe(cq);
+
+  // Profit Wala Love numbers count up once, in Indian grouping
+  const fmt = new Intl.NumberFormat('en-IN');
+  const cnt = qa('[data-count]');
+  const put = (el: HTMLElement, p: number) => {
+    const v = +el.dataset.count! * p, d = +(el.dataset.dec || 0);
+    el.textContent = (el.dataset.pre || '') + (d ? v.toFixed(d) : fmt.format(Math.round(v))) + (el.dataset.suf || '');
+  };
+  if (!calm()) cnt.forEach(el => put(el, 0));
+  const pio = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    pio.disconnect();
+    if (calm()) return cnt.forEach(el => put(el, 1));
+    const t0 = performance.now();
+    const step = (t: number) => { const p = Math.min((t - t0) / 900, 1); cnt.forEach(el => put(el, 1 - (1 - p) ** 4)); if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }, { threshold: .4 });
+  pio.observe(q('.lead-c'));
+
+  // Two scrubs only: the hero settling into a frame, and the Pages that sell track moving past a sticky view
+  const heroEl = q('.hero'), sur = q('.sur', heroEl);
+  const pagesSec = q('.pages'), track = q('.track'), prog = q('.p-prog i');
+  let ov = 0;
+  const setOv = () => { ov = Math.max(0, track.offsetWidth - root.clientWidth); pagesSec.style.setProperty('--ov', `${ov}px`); };
+  ScrollTrigger.addEventListener('refreshInit', setOv);
+  const top = () => `top ${bar.offsetHeight}px`;
+  let mm: gsap.MatchMedia | undefined;
+  const init = () => {
+    mm?.revert();
+    mm = gsap.matchMedia();
+    if (root.classList.contains('calm')) return;
+    mm.add({ ok: '(prefers-reduced-motion: no-preference)', wide: '(min-aspect-ratio: 1/1)', dk: '(min-width: 1024px)' }, ctx => {
+      const { ok, wide, dk } = ctx.conditions as Record<string, boolean>;
+      if (!ok) return;
+      const ins = wide ? 24 : 12, rad = wide ? 24 : 18;
+      const hs = { trigger: heroEl, start: top, end: '+=60%', scrub: true };
+      gsap.fromTo(sur, { clipPath: 'inset(0px 0px 0px 0px round 0px)' }, { clipPath: `inset(0px ${ins}px 0px ${ins}px round ${rad}px)`, ease: 'none', scrollTrigger: hs });
+      gsap.fromTo(hpic, { scale: 1 }, { scale: () => wide ? .96 : (innerWidth - 2 * ins - 4) / innerWidth, ease: 'none', scrollTrigger: { ...hs } });
+      if (!dk) return;
+      setOv();
+      const ps = { trigger: pagesSec, start: top, end: 'bottom bottom', scrub: .5, invalidateOnRefresh: true };
+      gsap.fromTo(track, { x: 0 }, { x: () => -ov, ease: 'none', scrollTrigger: ps });
+      gsap.fromTo(prog, { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { ...ps } });
+    });
+  };
+  init();
+  // keyboard focus in the moving track: scroll the page to where that card sits in view
+  track.addEventListener('focusin', e => {
+    const li = (e.target as HTMLElement).closest('li');
+    if (!li) return;
+    if (!desk.matches || calm()) return li.scrollIntoView({ inline: 'start', block: 'nearest' });
+    const x = Math.min(Math.max(li.offsetLeft - parseFloat(getComputedStyle(track).paddingLeft), 0), ov);
+    scrollTo({ top: pagesSec.getBoundingClientRect().top + scrollY - bar.offsetHeight + x, behavior: 'instant' });
+  });
+
+  const resync = () => {
+    if (calm()) items.forEach(it => { it.user = null; });
+    items.forEach(sync);
+    init();
+  };
+  osCalm.addEventListener('change', resync);
+  // Chromium keeps a stale smooth scroll-behavior on the root after html.calm is added; an inline value forces the recompute
+  const scrollMode = () => { root.style.scrollBehavior = root.classList.contains('calm') ? 'auto' : ''; };
+  scrollMode();
+  q('#calm').addEventListener('click', () => { scrollMode(); setTimeout(resync); });
+</script>
+</body>
+</html>
