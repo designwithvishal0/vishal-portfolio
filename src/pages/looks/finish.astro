@@ -21,7 +21,7 @@ const tick = (k: number) => { const a = (k * 30 - 90) * Math.PI / 180; return [2
 const art = [
   `<circle class="ln" cx="200" cy="150" r="120"/><circle class="ln" cx="200" cy="150" r="84"/>${Array.from({ length: 12 }, (_, k) => { const [a, b, c, d] = tick(k); return `<line class="ln" x1="${a}" y1="${b}" x2="${c}" y2="${d}"/>`; }).join('')}<path class="hi" d="M200 30A120 120 0 0 1 303.9 210"/><circle class="dt" cx="303.9" cy="210" r="5"/>`,
   `<circle class="fl" cx="132" cy="128" r="104"/><circle class="ln" cx="132" cy="128" r="104"/><circle class="ln" cx="268" cy="128" r="104"/><circle class="ln" cx="200" cy="232" r="104"/>`,
-  `${Array.from({ length: 12 }, (_, k) => `<line class="${k === 9 ? 'hi' : 'ln'}" x1="${(16 + k * 33.45).toFixed(1)}" y1="${k === 9 ? 24 : 44}" x2="${(16 + k * 33.45).toFixed(1)}" y2="300"/>`).join('')}<circle class="dt" cx="317.1" cy="24" r="5"/>`,
+  `${Array.from({ length: 12 }, (_, k) => `<line class="ln" x1="${(16 + k * 33.45).toFixed(1)}" y1="44" x2="${(16 + k * 33.45).toFixed(1)}" y2="300"/>`).join('')}<line class="hi" x1="317.1" y1="24" x2="317.1" y2="210"/><circle class="dt" cx="317.1" cy="24" r="5"/>`,
   `<path class="fl" d="M108 60L408 60A300 300 0 0 1 320.1 272.1Z"/>${[50, 100, 150, 200, 250, 300, 350].map(r => `<circle class="ln" cx="108" cy="60" r="${r}"/>`).join('')}<circle class="dt" cx="108" cy="60" r="5"/>`,
 ];
 // His one hand drawn mark: a double stroke, drawn under the last word of the first and the last headline.
@@ -55,6 +55,17 @@ const Art = (i: number) => `<svg class="art" viewBox="0 0 400 300" preserveAspec
       ? <><span class="w" aria-hidden="true"><span style={`--i:${i}`}>{w}</span></span>{' '}</>
       : <span class="mk"><span class="w" aria-hidden="true"><span style={`--i:${i}`}>{w}</span></span><Fragment set:html={mark} /></span>)}</p>
     <div class="hero-row">
+      <div class="hero-copy">
+        <p class="sup enter" style="--d:260ms">{intro.supporting}</p>
+        <ul class="aud enter" style="--d:320ms" aria-label="Start here">
+          <li><a class="go" href="#work"><strong>Hiring a product designer</strong> <span>See the case studies</span><Arrow /></a></li>
+          <li><a class="go" href="#results"><strong>Recruiting</strong> <span>The 30 second version</span><Arrow /></a></li>
+          <li><a class="go" href="#pages"><strong>Founder</strong> <span>Need a page that sells</span><Arrow /></a></li>
+        </ul>
+        <div class="cta enter" style="--d:380ms">
+          {ctas.map((l, i) => <a class={`btn${i ? '' : ' primary'}`} href={l.href}>{l.label}</a>)}
+        </div>
+      </div>
       <figure class={`reel enter w-${loops[0]}`} style="--d:440ms" data-state="paused" data-i="0" aria-label="Previews of the four case studies">
         <div class="stage">
           {work.map((w, i) => (
@@ -82,17 +93,6 @@ const Art = (i: number) => `<svg class="art" viewBox="0 0 400 300" preserveAspec
           ))}
         </figcaption>
       </figure>
-      <div class="hero-copy">
-        <p class="sup enter" style="--d:260ms">{intro.supporting}</p>
-        <ul class="aud enter" style="--d:320ms" aria-label="Start here">
-          <li><a class="go" href="#work"><strong>Hiring a product designer</strong> <span>See the case studies</span><Arrow /></a></li>
-          <li><a class="go" href="#results"><strong>Recruiting</strong> <span>The 30 second version</span><Arrow /></a></li>
-          <li><a class="go" href="#pages"><strong>Founder</strong> <span>Need a page that sells</span><Arrow /></a></li>
-        </ul>
-        <div class="cta enter" style="--d:380ms">
-          {ctas.map((l, i) => <a class={`btn${i ? '' : ' primary'}`} href={l.href}>{l.label}</a>)}
-        </div>
-      </div>
     </div>
   </section>
 
