@@ -10,7 +10,7 @@ osCalm.addEventListener('change', resync);
 // Reduce motion toggle
 const calm = document.getElementById('calm');
 if (calm) {
-  const sync = () => calm.setAttribute('aria-pressed', String(root.classList.contains('calm')));
+  const sync = () => calm.setAttribute(calm.classList.contains('sw') ? 'aria-checked' : 'aria-pressed', String(root.classList.contains('calm')));
   calm.addEventListener('click', () => { root.classList.toggle('calm'); save('calm', root.classList.contains('calm') ? '1' : '0'); sync(); resync(); });
   sync();
 }
@@ -19,7 +19,7 @@ if (calm) {
 const theme = document.getElementById('theme');
 if (theme) {
   const dark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-  const label = () => { theme.textContent = dark() ? 'Light mode' : 'Dark mode'; };
+  const label = () => { if (theme.classList.contains('sw')) theme.setAttribute('aria-checked', String(dark())); else theme.textContent = dark() ? 'Light mode' : 'Dark mode'; };
   const apply = () => { root.dataset.theme = dark() ? 'light' : 'dark'; save('theme', root.dataset.theme); label(); };
   theme.addEventListener('click', () => {
     const d = document as Document & { startViewTransition?: (cb: () => void) => { ready: Promise<void> } };
