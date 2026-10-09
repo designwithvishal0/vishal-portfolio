@@ -33,21 +33,11 @@ if (theme) {
   label();
 }
 
-// Accessibility menu: a click or tap opens it everywhere. With a mouse, hovering opens it too and leaving closes it,
-// unless it was clicked open; then it stays until a second click, a click outside or Escape.
+// Accessibility menu opens on click or tap (native popover). Screen readers hear whether it is open.
 const a11y = document.querySelector<HTMLButtonElement>('.a11y'), menu = document.getElementById('a11y-menu');
-if (a11y && menu && matchMedia('(hover: hover) and (pointer: fine)').matches) {
-  let t = 0, byHover = false, pinned = false;
-  const isOpen = () => menu.matches(':popover-open');
-  const open = () => { clearTimeout(t); if (!isOpen()) { menu.showPopover(); byHover = true; } };
-  const close = () => { clearTimeout(t); t = window.setTimeout(() => { if (isOpen() && !pinned) menu.hidePopover(); }, 300); };
-  a11y.addEventListener('click', () => {
-    // runs before the button's own popover toggle: a click on a menu hover opened pins it instead of shutting it
-    if (byHover && isOpen()) { a11y.popoverTargetAction = 'show'; setTimeout(() => { a11y.popoverTargetAction = 'toggle'; }); }
-    pinned = true; byHover = false;
-  });
-  menu.addEventListener('toggle', e => { if ((e as ToggleEvent).newState === 'closed') pinned = byHover = false; });
-  [a11y, menu].forEach(el => { el.addEventListener('pointerenter', open); el.addEventListener('pointerleave', close); });
+if (a11y && menu) {
+  a11y.setAttribute('aria-expanded', 'false');
+  menu.addEventListener('toggle', e => a11y.setAttribute('aria-expanded', String((e as ToggleEvent).newState === 'open')));
 }
 
 // Sections enter once as they scroll in
