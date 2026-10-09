@@ -8,7 +8,7 @@
 <meta name="description" content="A false alert flow for Staqu's AI CCTV platform that makes every correction visible, so the people woken up at 3 AM can see the system learning.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap">
 <style>
 /* Layout: text column of ~66ch beside a sticky contents rail on desktop; one column on phones.
    Single dark theme by choice: the calmer navy agreed for JARVIS. */
@@ -178,23 +178,36 @@ figcaption{font-size:14px;color:var(--muted)}
 .pill:hover{background:rgba(22,41,122,.9)}
 .pill:focus-visible{outline:2px solid #AFC6FF;outline-offset:2px}
 @media (max-width:620px){.pills{right:10px;bottom:10px}.pill{height:32px;padding:0 11px;font-size:11px}}
-/* The screens: as on the live Framer page */
-#screens{background:#EEF2FB;border-radius:28px;padding:72px 56px;max-width:none}
-#screens .eyebrow{color:#2348C4}
-#screens h2,#screens h3{color:#0E1424}
-#screens p{color:#3B4458}
-#screens .k{color:#2348C4;font-weight:500}
-#screens .screens{gap:96px;margin-top:24px}
-#screens .screen{grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:56px;max-width:none;align-items:start}
-#screens .screen>div{position:sticky;top:120px;align-self:start}
-#screens .screen>figure{order:2;justify-self:end;width:100%;max-width:360px}
-#screens .shot.phone{max-width:360px;border-radius:40px;border:1px solid rgba(14,20,36,.10);box-shadow:0 16px 40px rgba(13,31,94,.12)}
-#screens :focus-visible{outline-color:#2348C4}
 .up{opacity:0;transform:translateY(20px);transition:opacity .4s ease,transform .4s ease;transition-delay:var(--d,0ms)}
 .up.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.up{opacity:1;transform:none;transition:none}}
-@media (max-width:900px){#screens{padding:56px 32px}#screens .screen{grid-template-columns:minmax(0,1fr);gap:24px}#screens .screen>div{position:static}#screens .screen>figure{justify-self:start}}
-@media (max-width:620px){#screens{padding:48px 20px;border-radius:20px;margin-inline:-8px}#screens .screens{gap:72px}}
+</style>
+<style>
+/* Matched to the live Framer JARVIS page (measured 2026-10-09): Albert Sans, full width bands that swap
+   navy and light, one 760px reading column, the screens as text left and a 360px phone right. */
+:root{--sans:"Albert Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:var(--sans);
+  --bg:#0C1631;--card:#17223F;--fg:#E6EAF2;--body:#E6EAF2;--muted:#8C99B6;--acc:#A9BBE6;--warm:#E8A23B;--line:#26355C;--band:#0C1631}
+.lt{--fg:#0E1424;--body:#3B4458;--muted:#5A6478;--acc:#2348C4;--card:#E2E6EE;--line:#D3D8E3;--band:#EEF0F5;--warm:#A35A00}
+html{overflow-x:clip}
+.eyebrow,.k{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.14em;color:var(--acc)}
+.wrap{max-width:1080px}
+.layout{display:block;margin-top:96px}
+nav.toc{display:none}
+article{gap:0}
+article>section{padding-block:120px;max-width:760px;margin-inline:auto;color:var(--fg);border-image:conic-gradient(var(--band) 0 0) fill 0//0 100vmax}
+article>section.wide{max-width:1080px}
+section h2{font-size:clamp(32px,4vw,48px);font-weight:700;line-height:1.08;letter-spacing:-.02em;color:var(--fg)}
+section h3{color:var(--fg)}
+section p{color:var(--body);font-size:18px;line-height:1.6}
+.stats b{color:var(--acc)}
+#screens .screens{gap:120px;margin-top:56px}
+#screens .screen{grid-template-columns:minmax(0,640px) 360px;justify-content:space-between;gap:48px;max-width:none;align-items:start}
+#screens .screen>figure{order:2;margin:0}
+#screens .screen h3{font-size:32px;line-height:1.2;letter-spacing:-.01em}
+#screens .shot.phone{width:360px;max-width:100%;border:0;border-radius:40px;box-shadow:0 16px 40px rgba(13,31,94,.12)}
+.lt :focus-visible{outline-color:#2348C4}
+@media (max-width:900px){article>section{padding-block:80px}#screens .screen{grid-template-columns:minmax(0,1fr);gap:24px}#screens .screen>figure{order:0}}
+@media (max-width:620px){article>section{padding-block:64px}.layout{margin-top:64px}#screens .screens{gap:72px}#screens .screen h3{font-size:26px}}
 </style>
 </head>
 
@@ -259,7 +272,7 @@ figcaption{font-size:14px;color:var(--muted)}
     </nav>
 
     <article>
-      <section id="hardest">
+      <section id="hardest" class="lt">
         <p class="eyebrow">The hardest call</p>
         <h2>The false alert wasn’t the problem. The silent dismiss was.</h2>
         <p>The obvious brief is “fewer false alerts”. But that’s a model problem, and no screen I design retrains a model.</p>
@@ -283,7 +296,7 @@ figcaption{font-size:14px;color:var(--muted)}
         <p>The store manager at 3 AM is my own picture of the user, built from the brief and from Staqu’s site, which sells JARVIS to retail stores, warehouses and factories. I didn’t get to talk to a real customer in the time I had.</p>
       </section>
 
-      <section id="found">
+      <section id="found" class="lt">
         <p class="eyebrow">What I found</p>
         <h2>Three reasons good alerts get ignored</h2>
         <div class="list">
@@ -309,7 +322,7 @@ figcaption{font-size:14px;color:var(--muted)}
         <p>Most camera apps I looked at let you snooze a camera or turn off a detection type. Almost none tell you whether dismissing an alert taught the system anything. That gap is where option 01 sits.</p>
       </section>
 
-      <section id="flow" class="wide">
+      <section id="flow" class="lt wide">
         <div style="display:grid;gap:22px;max-width:66ch">
           <p class="eyebrow">The flow</p>
           <h2>Three taps from annoyance to proof</h2>
@@ -320,26 +333,26 @@ figcaption{font-size:14px;color:var(--muted)}
         </figure>
       </section>
 
-      <section id="screens" class="wide">
+      <section id="screens" class="lt wide">
         <div style="display:grid;gap:22px;max-width:66ch">
           <p class="eyebrow">The screens</p>
           <h2>Four screens, one promise: your correction counts</h2>
         </div>
         <div class="screens">
           <div class="screen">
-            <figure><img class="shot phone" src="img/01-alert-feed.webp" alt="JARVIS Alerts screen: alert feed with High, Medium and Low tiers" loading="lazy"></figure>
+            <figure><img class="shot phone" src="img/01-alert-feed.webp" width="412" height="917" alt="JARVIS Alerts screen: alert feed with High, Medium and Low tiers" loading="lazy"></figure>
             <div><span class="k">01 · Triage</span><h3>Not every alert gets the same voice</h3><p>Alerts are tiered High, Medium and Low, both as filters along the top and as a coloured tag on every card: warm for Medium, cool for Low. The camera still sits on the card, so a glance is often enough to judge. And the way to say “this was wrong” isn’t hidden in a menu. “Was this alert accurate? Tell us if not!” sits under every single alert.</p></div>
           </div>
           <div class="screen">
-            <figure><img class="shot phone" src="img/02-pick-a-reason.webp" alt="JARVIS Alerts screen: what made this a false alert?" loading="lazy"></figure>
+            <figure><img class="shot phone" src="img/02-pick-a-reason.webp" width="412" height="917" alt="JARVIS Alerts screen: what made this a false alert?" loading="lazy"></figure>
             <div><span class="k">02 · Flag</span><h3>What made this a false alert?</h3><p>Five reasons, and each one points the model at a different fix. Wrong person identified is a recognition error. Normal activity for this time is a time rule. Wrong zone triggered is a zone rule. Known staff or visitor is an allow list. This is where option 02 sneaks back in: every tap collects the zone and time rules nobody would ever sit down and configure.</p></div>
           </div>
           <div class="screen">
-            <figure><img class="shot phone" src="img/03-tell-us-more.webp" alt="JARVIS Alerts screen: tell us more in plain words" loading="lazy"></figure>
+            <figure><img class="shot phone" src="img/03-tell-us-more.webp" width="412" height="917" alt="JARVIS Alerts screen: tell us more in plain words" loading="lazy"></figure>
             <div><span class="k">03 · Explain</span><h3>Something else? Say it in plain words</h3><p>Reasons can’t cover everything. “The unidentified vehicle was my own car” is exactly the kind of context a camera can’t see and a person knows instantly. Free text comes second, never first, so the quick path stays quick.</p></div>
           </div>
           <div class="screen">
-            <figure><img class="shot phone" src="img/04-noted.webp" alt="JARVIS Alerts screen: JARVIS has noted this" loading="lazy"></figure>
+            <figure><img class="shot phone" src="img/04-noted.webp" width="412" height="917" alt="JARVIS Alerts screen: JARVIS has noted this" loading="lazy"></figure>
             <div><span class="k">04 · Proof</span><h3>Noted. And here’s what it changed.</h3><p>This is the screen the whole concept exists for. “JARVIS has noted this. Based on feedback like yours this week, 27 similar alerts won’t interrupt you again.” Not “thanks for your feedback” into the void. A number, tied to your correction, that you can hold the system to. And “feedback like yours” makes it a team effort: everyone on the site teaches the same JARVIS.</p></div>
           </div>
         </div>
@@ -363,7 +376,7 @@ figcaption{font-size:14px;color:var(--muted)}
         </div>
       </section>
 
-      <section id="tradeoffs">
+      <section id="tradeoffs" class="lt">
         <p class="eyebrow">Trade offs</p>
         <h2>Every decision closed a door</h2>
         <div class="trades">
@@ -375,7 +388,7 @@ figcaption{font-size:14px;color:var(--muted)}
         </div>
       </section>
 
-      <section id="changed">
+      <section id="changed" class="lt">
         <p class="eyebrow">What changed</p>
         <h2>The same Unknown Car, two different tomorrows</h2>
         <div class="beforeafter">

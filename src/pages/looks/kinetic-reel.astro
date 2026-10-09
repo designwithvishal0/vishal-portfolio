@@ -340,8 +340,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     const ls = qa('.jl', word), r = seeded(seed), s = (n: number) => (r() * 2 - 1) * n;
     word.dataset.busy = '1'; word.classList.remove('settle');
     // a different colour on each letter, neighbours never matching; the starting hue changes every shake
-    const pal = ['--q1', '--q2', '--q3', '--q4'], o = Math.floor(r() * 4);
-    ls.forEach((l, i) => l.style.setProperty('--lc', `var(${pal[(i + o) % 4]})`));
+    const pal = ['--u1', '--u2', '--u3', '--u4', '--u5', '--u6', '--u7'], o = Math.floor(r() * 7);
+    ls.forEach((l, i) => l.style.setProperty('--lc', `var(${pal[(i + o) % 7]})`));
     // lock the word's box at its settled width so the right aligned line never shifts (jitter weights stay at or under 800)
     const box = word.parentElement!; box.style.width = `${box.getBoundingClientRect().width}px`;
     let n = 0;
