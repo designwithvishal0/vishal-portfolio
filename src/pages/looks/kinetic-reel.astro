@@ -39,21 +39,37 @@ const hartAlt: Record<string, string> = {
   ixigo: 'ixigo Trains reel still: the waitlist did not clear, and the hub switches to its chart failed state with the next options',
   twelve: 'Twelve reel still: it warns you that March insurance will be ₹6,400 short, and nothing changes until you say so',
 };
+// the Contra showreel's own chapters, coloured like the reel; Profit Wala Love links straight to its shot
+const chapters = [
+  { k: 'ixigo', name: 'Landing pages', href: '#pages' },
+  { k: 'split', name: 'Product pages', href: '#pages' },
+  { k: 'twelve', name: 'Apps', href: '#work' },
+  { k: 'jarvis', name: 'Profit Wala Love', href: lead.href },
+];
 const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 ---
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Look: Kinetic, Vishal Yadav</title>
+<title>Look: Kinetic with the Contra reel, Vishal Yadav</title>
 <meta name="robots" content="noindex" />
 <meta name="color-scheme" content="light dark" />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="preload" as="font" type="font/woff2" href={fontUrl} crossorigin />
-<link rel="preload" as="image" href="/kinetic/reel/hero-wide-lit.jpg" media="(orientation: landscape)" />
-<link rel="preload" as="image" href="/kinetic/reel/hero-tall.jpg" media="(orientation: portrait)" />
+<link rel="preload" as="image" href="/kinetic-reel/contra-poster.jpg" />
 <Boot />
 <script is:inline>addEventListener('load',()=>setTimeout(()=>document.documentElement.classList.add('ready'),2500))</script>
+<style is:global>
+  /* Contra reel version: the hero is the 4:3 reel, and the hero type takes the reel's own chapter colours (all AA on the page ground) */
+  section.hero.c{--t-ixigo:#3F6A00;--t-split:#A3156A;--t-twelve:#A35A00;--t-jarvis:#B81F35;
+    --sw:max(min(60vw,(100svh - 380px) * 4 / 3),min(48vw,520px))}
+  @media (prefers-color-scheme:dark){:root:not([data-theme=light]) section.hero.c{--t-ixigo:#B8E04A;--t-split:#FF7AC2;--t-twelve:#F2B640;--t-jarvis:#FF7A85}}
+  :root[data-theme=dark] section.hero.c{--t-ixigo:#B8E04A;--t-split:#FF7AC2;--t-twelve:#F2B640;--t-jarvis:#FF7A85}
+  .slot,.slot[class]{aspect-ratio:4/3}
+  @media (orientation:portrait) and (min-width:760px){section.hero.c{--sw:max(min(70vw,(100svh - 380px) * 4 / 3),min(52vw,420px))}}
+  @media (max-width:759px){section.hero.c{--sw:100%}}
+</style>
 </head>
 <body>
 <div id="sentinel" aria-hidden="true"></div>
@@ -67,20 +83,18 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 
 <main>
   <!-- The sentence, split open by the reel -->
-  <section class="hero c" aria-label="Introduction">
+  <!-- data-on="1": until the reel plays, the type matches its poster, the product pages chapter -->
+  <section class="hero c" data-on="1" aria-label="Introduction">
     <h1 class="hm">{intro.name}</h1>
     <p class="sup">{intro.supporting}</p>
-    <!-- what the reel is showing right now; each name jumps to its case study row -->
-    <ol class="idx">{work.map((w, i) => <li class={`q-${loops[i]}`}><a href={`#w-${w.slug}`}>{w.name}</a></li>)}</ol>
+    <!-- what the reel is showing right now (its own chapter names); each jumps to where that work sits on this page -->
+    <ol class="idx">{chapters.map(c => <li class={`q-${c.k}`}><a href={c.href}>{c.name}</a></li>)}</ol>
     <p class="l1 words"><span class="vh">{intro.positioning}</span>{hero1.map(g => (
       <span class="grp" aria-hidden="true">{g.map(({ w, i }) => <><span class="w"><span style={`--i:${i}`}>{w}</span></span>{' '}</>)}</span>
     ))}</p>
     <figure class="slot" data-state="paused">
-      <picture>
-        <source media="(orientation: portrait)" srcset="/kinetic/reel/hero-tall.jpg" width="1080" height="1350" />
-        <img src="/kinetic/reel/hero-wide-lit.jpg" width="1600" height="900" alt="Showreel: ixigo Trains, Google Pay Split and Request, Twelve and Staqu JARVIS Alerts" fetchpriority="high" decoding="async" />
-      </picture>
-      <video muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" data-wide="/kinetic/reel/hero-wide.mp4" data-tall="/kinetic/reel/hero-tall.mp4"></video>
+      <img src="/kinetic-reel/contra-poster.jpg" width="1280" height="960" alt="Showreel: landing pages, product pages, upsells and apps, ending on Profit Wala Love's 1,542 transactions in a single week" fetchpriority="high" decoding="async" />
+      <video muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" data-wide="/kinetic-reel/contra.mp4" data-tall="/kinetic-reel/contra.mp4"></video>
       <button class="vctl" type="button" aria-label="Play the showreel"><Fragment set:html={Btn} /></button>
     </figure>
     <script is:inline>setTimeout(()=>document.querySelector('.slot').classList.add('open'),300)</script>
@@ -398,8 +412,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   // Hero slot: the reel that fits the screen's orientation, the only eager video
   const slot = q('.slot'), hv = q<HTMLVideoElement>('video', slot);
   const hero = add({ box: slot, v: hv, btn: q('.vctl', slot), name: 'showreel', src: () => (land.matches ? hv.dataset.wide : hv.dataset.tall)!, thr: .3 });
-  // the index beside the reel follows the project on screen (beat starts in seconds, from tools/motion/kinetic/hero-cut.sh)
-  const heroSec = q('.hero'), idx = q('.idx'), beats = { wide: [0, 5.6, 11.6, 16.9], tall: [0, 5.6, 10.1, 15.3] };
+  // the index beside the reel follows the project on screen (chapter starts in seconds in the Contra reel: landing pages, product pages and upsells, apps, Profit Wala Love)
+  const heroSec = q('.hero'), idx = q('.idx'), beats = { wide: [0, 16, 23.5, 28.5], tall: [0, 16, 23.5, 28.5] };
   const follow = () => {
     if (hv.paused) { idx.removeAttribute('data-on'); return; }
     const b = beats[land.matches ? 'wide' : 'tall'], t = hv.currentTime + .2;

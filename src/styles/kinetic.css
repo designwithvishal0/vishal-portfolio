@@ -93,7 +93,7 @@ img,video,canvas{display:block}
 
 /* jitter: per letter offsets from script; the clean, settled state is the default */
 .jw{display:inline-block;white-space:nowrap}
-.jl{display:inline-block;transform:translateY(var(--y,0));font-weight:var(--wt,800)}
+.jl{display:inline-block;transform:translateY(var(--y,0)) rotate(var(--r,0deg));font-weight:var(--wt,800)}
 .jw.settle .jl{transition:transform 700ms var(--spring),font-weight 700ms var(--spring)}
 /* colour: the settled word wears --hc. While it hesitates it is plain ink, and the colour sweeps in letter by letter as it settles */
 .jl{color:var(--hc,currentColor);transition:color 900ms var(--ease)}
