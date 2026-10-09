@@ -15,8 +15,9 @@
   --h-ixigo:#4B32C9; --h-split:#8A6400; --h-twelve:#0E6B5C; --h-jarvis:#B53A16;
   /* type tones: the hero words take the colour of the project on the reel. On bg: 7.7, 5.0, 6.0, 5.2:1 */
   --t-ixigo:#4A2FD0; --t-split:#A35A00; --t-twelve:#006A80; --t-jarvis:#C03A0A;
-  /* seven muted tones, one per letter of "unsure." while it shakes (same lightness, hues spread round the wheel; all 5.1 to 5.5:1 on bg) */
-  --u1:#8F5753; --u2:#856136; --u3:#5F713F; --u4:#367762; --u5:#2B7484; --u6:#4F6994; --u7:#735E8C;
+  /* seven coloured pencil hues, one per letter of "unsure." while it shakes: coral, tangerine, leaf, teal, sky, violet, pink.
+     Same lightness, full colour; 3.0 to 3.5:1 on bg, which clears the large text bar for this display size */
+  --u1:#DC5E59; --u2:#D16E0D; --u3:#40A449; --u4:#19A0A0; --u5:#0593E6; --u6:#9C72DE; --u7:#D15D9A;
   --t-sells:#A3330A;  /* on the JARVIS wash: 4.8:1 */
   --theme-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z'/%3E%3C/svg%3E");
   --sans:'Bricolage Grotesque Variable',system-ui,sans-serif;
@@ -37,7 +38,7 @@
   --w-jarvis:#43160B; --m-jarvis:#E0B7A9;
   --h-ixigo:#BBAAFF; --h-split:#FFD466; --h-twelve:#7FE0CB; --h-jarvis:#FF9C78;
   --t-ixigo:#B4A6FF; --t-split:#F2B640; --t-twelve:#5CC8F0; --t-jarvis:#FF8A4C;   /* 9.2, 10.7, 10.2, 8.4:1 */
-  --u1:#ECB4AF; --u2:#E0BD97; --u3:#BACC9E; --u4:#9AD2BE; --u5:#93CFDF; --u6:#ACC5EF; --u7:#CEBAE7;   /* 10.9 to 11.5:1 */
+  --u1:#FFBFB8; --u2:#FDC39C; --u3:#A3E4A4; --u4:#6DE8E7; --u5:#ABD7FD; --u6:#D9C6FE; --u7:#FDBBD9;   /* pastel pencils, 12.4 to 13.4:1 */
   --t-sells:#FF9A5C;  /* 7.4:1 on the JARVIS wash */
   --theme-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4.6'/%3E%3Cg stroke='%23000' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M12 1.8v2.4M12 19.8v2.4M1.8 12h2.4M19.8 12h2.4M4.8 4.8l1.7 1.7M17.5 17.5l1.7 1.7M4.8 19.2l1.7-1.7M17.5 6.5l1.7-1.7'/%3E%3C/g%3E%3C/svg%3E");
   color-scheme:dark;
@@ -51,7 +52,7 @@
   --w-jarvis:#43160B; --m-jarvis:#E0B7A9;
   --h-ixigo:#BBAAFF; --h-split:#FFD466; --h-twelve:#7FE0CB; --h-jarvis:#FF9C78;
   --t-ixigo:#B4A6FF; --t-split:#F2B640; --t-twelve:#5CC8F0; --t-jarvis:#FF8A4C;   /* 9.2, 10.7, 10.2, 8.4:1 */
-  --u1:#ECB4AF; --u2:#E0BD97; --u3:#BACC9E; --u4:#9AD2BE; --u5:#93CFDF; --u6:#ACC5EF; --u7:#CEBAE7;   /* 10.9 to 11.5:1 */
+  --u1:#FFBFB8; --u2:#FDC39C; --u3:#A3E4A4; --u4:#6DE8E7; --u5:#ABD7FD; --u6:#D9C6FE; --u7:#FDBBD9;   /* pastel pencils, 12.4 to 13.4:1 */
   --t-sells:#FF9A5C;  /* 7.4:1 on the JARVIS wash */
   --theme-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4.6'/%3E%3Cg stroke='%23000' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M12 1.8v2.4M12 19.8v2.4M1.8 12h2.4M19.8 12h2.4M4.8 4.8l1.7 1.7M17.5 17.5l1.7 1.7M4.8 19.2l1.7-1.7M17.5 6.5l1.7-1.7'/%3E%3C/g%3E%3C/svg%3E");
   color-scheme:dark;
@@ -103,7 +104,7 @@ img,video,canvas{display:block}
 .jl{color:var(--hc,currentColor);transition:color 900ms var(--ease)}
 .jw.settle .jl{transition:transform 700ms var(--spring),font-weight 700ms var(--spring),color 380ms var(--out) calc(var(--k,0) * 45ms)}
 @media (prefers-reduced-motion:no-preference){
-  /* while it shakes every letter wears its own muted tone, then the settle sweeps them back to --hc */
+  /* while it shakes every letter wears its own pencil colour, then the settle sweeps them back to --hc */
   html.live:not(.calm) .jw:is([data-busy],:not(.landed)):not(.settle) .jl{color:var(--lc,var(--ink));transition-duration:120ms}
 }
 .words .wu{padding:.12em .1em;margin:-.12em -.1em}
