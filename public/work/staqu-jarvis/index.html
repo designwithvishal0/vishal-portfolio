@@ -234,6 +234,43 @@ video::cue{font:500 18px/1.4 var(--sans);background:rgba(12,22,49,.82);color:#ff
   .swipe img{width:100%;height:auto;border-radius:28px;margin-top:8px;box-shadow:0 12px 32px rgba(13,31,94,.12)}
 }
 @media (max-width:620px){article>section{padding-block:64px}.layout{margin-top:64px}#screens .screens{gap:72px}#screens .screen h3{font-size:26px}}
+
+/* ---- audit Phase 2 and 3 ---- */
+/* one break between two bands of the same colour, not two */
+article>section.lt+section.lt,article>section:not(.lt)+section:not(.lt){padding-top:0}
+/* type scale: 13 label, 16 small, 18 body, 22 lead, 32 titles, 48 sections, 68 page title */
+.facts p,.stats span,.note,.source,figcaption,.opt p,.fix p,.trade p,.trade .cost,.nextgrid span{font-size:16px}
+.list .n,.trade .n,.tag{font-size:13px}
+.opt h3,.fix h3,.trade h3,.list h3,.nextgrid b{font-size:18px}
+blockquote,.dek,.closing>p,.metric b,.next h2{font-size:22px}
+.closing h2,.stats b{font-size:32px}
+@media (min-width:621px){.closing h2{font-size:48px}}
+/* what I'd change: each pair on its own card, Problem in amber */
+.fixes{border-top:0;gap:12px}
+.fix{background:var(--card);border:0;border-radius:16px;padding:24px 28px}
+.fix>div{display:grid;gap:6px;align-content:start}
+.k.pr{color:var(--warm)}
+/* the closing line reads as the point, not a footnote */
+.closing>p{font-weight:600;color:var(--acc)}
+/* more work: a picture and a clear hover */
+.nextgrid a{padding:0;overflow:hidden;gap:0;transition:transform .2s ease,box-shadow .2s ease}
+.nextgrid img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.nextgrid b{padding:16px 20px 20px;line-height:1.35}
+.nextgrid a:hover,.nextgrid a:focus-visible{transform:translateY(-2px);box-shadow:0 0 0 1px var(--acc)}
+.nextgrid a:hover b{text-decoration:underline;text-underline-offset:.2em}
+/* prototype: a still and a way out while Figma loads */
+.protowrap{position:relative;margin:0}
+.protowait{position:absolute;inset:0;border-radius:24px;background:var(--card);display:grid;place-content:center;justify-items:center;gap:12px;text-align:center;transition:opacity .3s ease}
+.protowait img{width:120px;height:auto;border-radius:16px;opacity:.9}
+.protowait p{font-size:16px;color:var(--muted)}
+.protowait a{font-size:16px;font-weight:600;color:var(--fg);padding:10px 4px}
+.protowrap.ready .protowait{opacity:0;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.nextgrid a,.protowait{transition:none}}
+@media (max-width:620px){
+  .opt{grid-template-columns:minmax(0,1fr)}
+  .opt .tag{order:-1;justify-self:start}
+  .fix{padding:20px}
+}
 </style>
 </head>
 
@@ -398,17 +435,18 @@ video::cue{font:500 18px/1.4 var(--sans);background:rgba(12,22,49,.82);color:#ff
         <p class="eyebrow">Try it</p>
         <h2>Flag a false alert yourself</h2>
         <p>Tap “Tell us if not” under an alert to start.</p>
-        <figure><iframe class="proto" title="JARVIS Alerts Figma prototype" loading="lazy" allowfullscreen src="https://www.figma.com/embed?embed_host=share&amp;url=https%3A%2F%2Fwww.figma.com%2Fproto%2FNEbmc8cqnHE2l7J1zSV3ER%2FStaqu-Assignment%3Fnode-id%3D1-2%26starting-point-node-id%3D1%253A2%26scaling%3Dscale-down%26content-scaling%3Dfixed"></iframe></figure>
+        <figure class="protowrap"><iframe class="proto" title="JARVIS Alerts Figma prototype" loading="lazy" allowfullscreen src="https://www.figma.com/embed?embed_host=share&amp;url=https%3A%2F%2Fwww.figma.com%2Fproto%2FNEbmc8cqnHE2l7J1zSV3ER%2FStaqu-Assignment%3Fnode-id%3D1-2%26starting-point-node-id%3D1%253A2%26scaling%3Dscale-down%26content-scaling%3Dfixed"></iframe><div class="protowait"><img src="img/01-alert-feed.webp" width="412" height="917" alt="" loading="lazy"><p>Loading the prototype</p><a href="https://www.figma.com/proto/NEbmc8cqnHE2l7J1zSV3ER/Staqu-Assignment?node-id=1-2&amp;starting-point-node-id=1%3A2" target="_blank" rel="noopener">Open in Figma</a></div></figure>
+        <script>(()=>{const f=document.currentScript.previousElementSibling;f.querySelector('iframe').addEventListener('load',()=>f.classList.add('ready'))})()</script>
       </section>
 
       <section id="change">
         <p class="eyebrow">What I’d change</p>
         <h2>Built in a day, so here’s what I’d fix on day two</h2>
         <div class="fixes">
-          <div class="fix"><h3><span class="k">Problem</span><br>The tiers lost their verbs.</h3><p><span class="k">Fix</span><br>My first sketch called them Act now, Review soon and FYI. The screens shipped as High, Medium and Low, which only say how loud an alert is, not what to do about it. I’d put the verb back on the tag.</p></div>
-          <div class="fix"><h3><span class="k">Problem</span><br>Checkboxes under a “pick the closest reason” question.</h3><p><span class="k">Fix</span><br>The control says “pick many”, the copy says “pick one”. I’d switch to single select rows, since one clear reason is more useful to the model than three vague ones.</p></div>
-          <div class="fix"><h3><span class="k">Problem</span><br>“27 won’t interrupt you again” is also a risk.</h3><p><span class="k">Fix</span><br>A real intruder can look a lot like your own car. Suppressed alerts shouldn’t vanish. They should drop into a quiet FYI queue you can check, with an Undo on the confirmation screen.</p></div>
-          <div class="fix"><h3><span class="k">Problem</span><br>It’s mobile only.</h3><p><span class="k">Fix</span><br>The person who renews the contract is often a security head watching many sites from a desktop. That’s where the weekly noise report (option 03) belongs.</p></div>
+          <div class="fix"><div><span class="k pr">Problem</span><h3>The tiers lost their verbs.</h3></div><div><span class="k">Fix</span><p>My first sketch called them Act now, Review soon and FYI. The screens shipped as High, Medium and Low, which only say how loud an alert is, not what to do about it. I’d put the verb back on the tag.</p></div></div>
+          <div class="fix"><div><span class="k pr">Problem</span><h3>Checkboxes under a “pick the closest reason” question.</h3></div><div><span class="k">Fix</span><p>The control says “pick many”, the copy says “pick one”. I’d switch to single select rows, since one clear reason is more useful to the model than three vague ones.</p></div></div>
+          <div class="fix"><div><span class="k pr">Problem</span><h3>“27 won’t interrupt you again” is also a risk.</h3></div><div><span class="k">Fix</span><p>A real intruder can look a lot like your own car. Suppressed alerts shouldn’t vanish. They should drop into a quiet FYI queue you can check, with an Undo on the confirmation screen.</p></div></div>
+          <div class="fix"><div><span class="k pr">Problem</span><h3>It’s mobile only.</h3></div><div><span class="k">Fix</span><p>The person who renews the contract is often a security head watching many sites from a desktop. That’s where the weekly noise report (option 03) belongs.</p></div></div>
         </div>
       </section>
 
@@ -453,17 +491,17 @@ video::cue{font:500 18px/1.4 var(--sans);background:rgba(12,22,49,.82);color:#ff
     <p>Every correction, visible.</p>
     <div class="btns">
       <a class="btn primary" href="https://www.figma.com/design/NEbmc8cqnHE2l7J1zSV3ER" target="_blank" rel="noopener">View the Figma file<svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill-opacity="0" fill="currentColor" height="9.75px" transform="translate(8.25 6)" width="9.75px"></path><path d="M 0 7.125 L 7.125 0" fill="transparent" height="7.125px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(6 10.875)" width="7.125px"></path><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill="transparent" height="9.75px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(8.25 6)" width="9.75px"></path></svg></a>
-      <a class="btn ghost" href="https://designwvishal.framer.website/"><svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill-opacity="0" fill="currentColor" height="13.5px" transform="translate(3.75 5.25)" width="6.75px"></path><path d="M 9.75 0 L 0 0" fill="transparent" height="1px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(10.5 12)" width="9.75px"></path><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill="transparent" height="13.5px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(3.75 5.25)" width="6.75px"></path></svg>Back to home</a>
+      <a class="btn ghost" href="/looks/kinetic/"><svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill-opacity="0" fill="currentColor" height="13.5px" transform="translate(3.75 5.25)" width="6.75px"></path><path d="M 9.75 0 L 0 0" fill="transparent" height="1px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(10.5 12)" width="9.75px"></path><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill="transparent" height="13.5px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(3.75 5.25)" width="6.75px"></path></svg>Back to home</a>
     </div>
   </footer>
 
   <nav class="next" aria-label="More work">
     <span class="k">More work</span>
-    <h2 style="font-size:24px">Check out more work</h2>
+    <h2>Check out more work</h2>
     <div class="nextgrid">
-      <a href="https://designwvishal.framer.website/work/ixigo-trains"><b>ixigo Trains · The four hours nobody designs for</b></a>
-      <a href="https://designwvishal.framer.website/work/twelve"><b>Twelve · Plans in years, not months</b></a>
-      <a href="https://designwvishal.framer.website/work/split-and-request"><b>Google Pay Split and Request</b></a>
+      <a href="https://designwvishal.framer.website/work/ixigo-trains"><img src="/kinetic/reel/ixigo-scene-lit.jpg" width="1280" height="720" alt="" loading="lazy"><b>ixigo Trains · The four hours nobody designs for</b></a>
+      <a href="https://designwvishal.framer.website/work/twelve"><img src="/reel/twelve-scene.jpg" width="1280" height="720" alt="" loading="lazy"><b>Twelve · Plans in years, not months</b></a>
+      <a href="https://designwvishal.framer.website/work/split-and-request"><img src="/reel/split-scene.jpg" width="1280" height="720" alt="" loading="lazy"><b>Google Pay Split and Request</b></a>
     </div>
   </nav>
 </div>

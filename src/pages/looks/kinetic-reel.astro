@@ -173,7 +173,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
             <div class="pan">
               <div class="vbox" style={`--gr:${grounds[i]}`} data-state="paused">
                 <picture>
-                  <source media="(min-width: 1024px)" srcset={poster(loops[i], 'scene')} width="1280" height="720" />
+                  <source media="(min-width: 700px)" srcset={poster(loops[i], 'scene')} width="1280" height="720" />
                   <img src={poster(loops[i], 'phone')} width="720" height="900" alt={posterAlt[loops[i]] ?? w.alt} loading="lazy" decoding="async" />
                 </picture>
                 <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-wide={`/reel/${loops[i]}-scene.mp4`} data-tall={`/reel/${loops[i]}-phone.mp4`}></video>
@@ -457,13 +457,13 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   snd.addEventListener('click', () => { hv.muted = !hv.muted; snd.setAttribute('aria-pressed', String(!hv.muted)); if (!hv.muted && hv.paused) q<HTMLButtonElement>('.vctl', slot).click(); });
   land.addEventListener('change', () => { if (!hv.dataset.cur) return; load(hero); sync(hero); });
 
-  // Work rows: the scene cut at 1024+, the phone cut below
+  // Work rows: the scene cut at 700+, the phone cut below
   const rows = qa('.row');
   rows.forEach(r => {
     const box = q('.vbox', r), v = q<HTMLVideoElement>('video', box);
-    add({ box, v, btn: q('.vctl', box), name: `${q('.meta', r).textContent!.split(' · ')[0]} preview`, src: () => (desk.matches ? v.dataset.wide : v.dataset.tall)!, thr: .5 });
+    add({ box, v, btn: q('.vctl', box), name: `${q('.meta', r).textContent!.split(' · ')[0]} preview`, src: () => (bandWide.matches ? v.dataset.wide : v.dataset.tall)!, thr: .5 });
   });
-  desk.addEventListener('change', () => items.forEach(it => {
+  bandWide.addEventListener('change', () => items.forEach(it => {
     if (!it.box.classList.contains('vbox') || !it.v.dataset.cur) return;
     delete it.v.dataset.cur; it.v.removeAttribute('src'); it.v.load(); it.box.classList.remove('started'); sync(it);
   }));

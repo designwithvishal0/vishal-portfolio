@@ -336,6 +336,8 @@ html.scrub .vbox .vctl{right:auto;left:12px}
 @media (max-width:1023px){
   .rg{display:flex;flex-direction:column-reverse;align-items:stretch;gap:28px;margin-top:28px}
   .vbox{aspect-ratio:4/5;width:min(100%,448px)}
+  /* tablets get the wide scene cut across the card, not a phone cut with empty space beside it */
+  @media (min-width:700px){.vbox{aspect-ratio:16/9;width:100%}}
   @media (prefers-reduced-motion:no-preference){
     html.live:not(.calm) .pan{transition:opacity 450ms var(--out),transform 450ms var(--out)}
     html.live:not(.calm) .pan:not(.in){opacity:0;transform:translateY(24px)}
@@ -363,10 +365,10 @@ html.scrub .vbox .vctl{right:auto;left:12px}
 .mrow:has(a:hover,a:focus-visible) .mthumb{opacity:1;transform:none}
 .mrow:has(a:hover) h3 a{text-decoration-line:underline}
 @media (hover:none),(pointer:coarse){.mthumb{opacity:1;transform:none}}
-@media (max-width:759px){
+@media (max-width:1023px){
   .mrow{grid-template-columns:56px 1fr;grid-template-areas:"thumb name" "thumb line" "thumb pill";column-gap:16px;row-gap:4px;min-height:0;padding:20px 0;align-items:start}
   .mthumb{width:56px;height:56px;border-radius:10px;opacity:1;transform:none}
-  .mrow h3{font-size:32px}
+  .mrow h3{font-size:clamp(32px,5.5vw,48px)}
   .mline{font-size:15px}
   .mrow .pill{justify-self:start;margin-top:4px}
 }
@@ -552,7 +554,7 @@ html.hpin .lead{position:relative;z-index:3}
 /* ---------- footer */
 .foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:28px 0 40px;border-top:1px solid var(--line);font-size:15px}
 .social{display:flex;flex-wrap:wrap;gap:8px 24px}
-.social a{padding:10px 8px;margin-inline:-8px;min-width:24px;text-align:center}
+.social a{padding:10px 8px;margin-inline:-8px;min-width:24px;text-align:center;background-origin:content-box;background-clip:content-box}
 @media (max-width:759px){.foot{flex-direction:column;align-items:flex-start}}
 @media (pointer:coarse){.copy{padding-block:10px;margin-block:-10px}}
 
