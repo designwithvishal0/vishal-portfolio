@@ -13,6 +13,9 @@
   --w-twelve:#BDEBDF; --m-twelve:#40474A;
   --w-jarvis:#FFCDB8; --m-jarvis:#4D4441;
   --h-ixigo:#4B32C9; --h-split:#8A6400; --h-twelve:#0E6B5C; --h-jarvis:#B53A16;
+  /* type tones: the hero words take the colour of the project on the reel. On bg: 7.7, 5.0, 6.0, 5.2:1 */
+  --t-ixigo:#4A2FD0; --t-split:#A35A00; --t-twelve:#006A80; --t-jarvis:#C03A0A;
+  --t-sells:#A3330A;  /* on the JARVIS wash: 4.8:1 */
   --theme-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z'/%3E%3C/svg%3E");
   --sans:'Bricolage Grotesque Variable',system-ui,sans-serif;
   --bar:56px; --gut:32px; --max:1376px; --inset:16px;
@@ -31,6 +34,8 @@
   --w-twelve:#062E28; --m-twelve:#A5CFC5;
   --w-jarvis:#43160B; --m-jarvis:#E0B7A9;
   --h-ixigo:#BBAAFF; --h-split:#FFD466; --h-twelve:#7FE0CB; --h-jarvis:#FF9C78;
+  --t-ixigo:#B4A6FF; --t-split:#F2B640; --t-twelve:#5CC8F0; --t-jarvis:#FF8A4C;   /* 9.2, 10.7, 10.2, 8.4:1 */
+  --t-sells:#FF9A5C;  /* 7.4:1 on the JARVIS wash */
   --theme-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4.6'/%3E%3Cg stroke='%23000' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M12 1.8v2.4M12 19.8v2.4M1.8 12h2.4M19.8 12h2.4M4.8 4.8l1.7 1.7M17.5 17.5l1.7 1.7M4.8 19.2l1.7-1.7M17.5 6.5l1.7-1.7'/%3E%3C/g%3E%3C/svg%3E");
   color-scheme:dark;
 }}
@@ -42,6 +47,8 @@
   --w-twelve:#062E28; --m-twelve:#A5CFC5;
   --w-jarvis:#43160B; --m-jarvis:#E0B7A9;
   --h-ixigo:#BBAAFF; --h-split:#FFD466; --h-twelve:#7FE0CB; --h-jarvis:#FF9C78;
+  --t-ixigo:#B4A6FF; --t-split:#F2B640; --t-twelve:#5CC8F0; --t-jarvis:#FF8A4C;   /* 9.2, 10.7, 10.2, 8.4:1 */
+  --t-sells:#FF9A5C;  /* 7.4:1 on the JARVIS wash */
   --theme-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4.6'/%3E%3Cg stroke='%23000' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M12 1.8v2.4M12 19.8v2.4M1.8 12h2.4M19.8 12h2.4M4.8 4.8l1.7 1.7M17.5 17.5l1.7 1.7M4.8 19.2l1.7-1.7M17.5 6.5l1.7-1.7'/%3E%3C/g%3E%3C/svg%3E");
   color-scheme:dark;
 }
@@ -88,6 +95,12 @@ img,video,canvas{display:block}
 .jw{display:inline-block;white-space:nowrap}
 .jl{display:inline-block;transform:translateY(var(--y,0));font-weight:var(--wt,800)}
 .jw.settle .jl{transition:transform 700ms var(--spring),font-weight 700ms var(--spring)}
+/* colour: the settled word wears --hc. While it hesitates it is plain ink, and the colour sweeps in letter by letter as it settles */
+.jl{color:var(--hc,currentColor);transition:color 900ms var(--ease)}
+.jw.settle .jl{transition:transform 700ms var(--spring),font-weight 700ms var(--spring),color 380ms var(--out) calc(var(--k,0) * 45ms)}
+@media (prefers-reduced-motion:no-preference){
+  html.live:not(.calm) .jw:is([data-busy],:not(.landed)):not(.settle) .jl{color:var(--ink);transition-duration:120ms}
+}
 .words .wu{padding:.12em .1em;margin:-.12em -.1em}
 
 /* pills and buttons */
@@ -102,14 +115,13 @@ img,video,canvas{display:block}
 .pill.shipped{background:var(--ink);border-color:var(--ink);color:var(--bg)}
 
 /* video button: pause and play, above any media link */
-.vctl,.dctl{z-index:4;width:44px;height:44px;padding:0;border:0;border-radius:50%;display:grid;place-items:center;color:#F2F1EC;background:rgba(12,12,14,.72);box-shadow:0 0 0 1px rgba(242,241,236,.28);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);cursor:pointer;transition:transform 120ms var(--out)}
+.vctl{z-index:4;width:44px;height:44px;padding:0;border:0;border-radius:50%;display:grid;place-items:center;color:#F2F1EC;background:rgba(12,12,14,.72);box-shadow:0 0 0 1px rgba(242,241,236,.28);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);cursor:pointer;transition:transform 120ms var(--out)}
 .vctl{position:absolute;right:12px;bottom:12px}
-.vctl:active,.dctl:active{transform:scale(.92)}
-.vctl svg,.dctl svg{grid-area:1/1;width:14px;height:14px;fill:currentColor}
+.vctl:active{transform:scale(.92)}
+.vctl svg{grid-area:1/1;width:14px;height:14px;fill:currentColor}
 /* a light ring inside a dark halo, so focus shows on any frame in either theme */
-.vctl:focus-visible,.dctl:focus-visible{outline:2px solid #F2F1EC;outline-offset:2px;box-shadow:0 0 0 6px #0C0C0E}
-[data-state=playing]>.vctl .i-play,[data-state=paused]>.vctl .i-pause,
-.drift[data-state=playing] .dctl .i-play,.drift[data-state=paused] .dctl .i-pause{opacity:0}
+.vctl:focus-visible{outline:2px solid #F2F1EC;outline-offset:2px;box-shadow:0 0 0 6px #0C0C0E}
+[data-state=playing]>.vctl .i-play,[data-state=paused]>.vctl .i-pause{opacity:0}
 [data-novid]>.vctl{display:none}
 
 /* ---------- top bar */
@@ -156,6 +168,14 @@ img,video,canvas{display:block}
 .dot{position:relative;flex:none;width:7px;height:7px;margin-top:.55em;border-radius:50%;background:var(--live)}
 .dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--live)}
 @media (prefers-reduced-motion:no-preference){html:not(.calm) .dot::after{animation:ping 2.4s var(--out) infinite}}
+/* the moment, and unsure: coloured by the project on the reel, easing as the reel moves on. Static (paused, calm): the frame on screen */
+.hero{--hc:var(--t-ixigo)}
+.hero[data-on="1"]{--hc:var(--t-split)}
+.hero[data-on="2"]{--hc:var(--t-twelve)}
+.hero[data-on="3"]{--hc:var(--t-jarvis)}
+.l1>.grp:last-child{color:var(--hc);transition:color 900ms var(--ease)}
+.hero .q-ixigo{--h:var(--t-ixigo)}.hero .q-split{--h:var(--t-split)}.hero .q-twelve{--h:var(--t-twelve)}.hero .q-jarvis{--h:var(--t-jarvis)}
+.ct{--hc:var(--t-sells)}
 @keyframes ping{from{transform:scale(1);opacity:.6}to{transform:scale(3);opacity:0}}
 
 .slot{grid-area:slot;position:relative;width:var(--sw);aspect-ratio:16/9;border-radius:20px;overflow:hidden;background:#0B0C10;clip-path:inset(0 round 20px)}
@@ -354,55 +374,82 @@ canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;mix-blend-mode
 .res[data-row="1"] .big [data-r="1"],.res[data-row="2"] .big [data-r="2"],.res[data-row="3"] .big [data-r="3"]{opacity:1;filter:none}
 .res.frames .big{visibility:hidden}
 
-/* ---------- pages that sell */
-.pages{padding:72px 0 0}
-.phead{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;margin-bottom:48px}
+/* ---------- pages that sell: one track. Default (no script, reduced motion, Reduce motion): a native rail that snaps.
+   html.hpin (motion allowed, every width): the section pins under the bar and scrolling down moves the track sideways */
+.pages{--pad:max(var(--gut),(100% - var(--max)) / 2);
+  --th:clamp(220px,100svh - var(--bar) - 390px,400px);   /* card thumbnail height */
+  --cw:calc(var(--th) * .956);                            /* card width, from the thumbnails' 960 by 1004 */
+  padding:72px 0 120px}
+.phead{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;margin-bottom:40px}
 .phead h2{font-size:56px;font-weight:700;font-stretch:85%;line-height:1;letter-spacing:-.02em}
 .phead p{font-size:17px;color:var(--muted)}
-.lead{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:32px;align-items:center;margin-bottom:72px}
-.lthumb{grid-column:1/5}
-.lthumb img{width:100%;height:auto;aspect-ratio:400/418;object-fit:cover;border-radius:16px}
-.ltext{grid-column:5/13;display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding-left:16px}
-.ltext h3{font-size:32px;font-weight:700;font-stretch:85%;line-height:1.1}
-.ltext>p{font-size:17px;color:var(--muted)}
-.stats{display:flex;flex-wrap:wrap;gap:16px 56px;margin-top:20px}
-.stats div{display:flex;flex-direction:column-reverse}
-.stats dd{font-size:96px;font-weight:800;font-stretch:75%;line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.stats dt{font-size:15px;color:var(--muted);margin-top:6px}
+.ptrack{display:flex;align-items:stretch;gap:24px;padding:0 var(--pad) 16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--pad);overscroll-behavior-x:contain;scrollbar-width:thin}
+.ptrack>li{flex:none;width:var(--cw);scroll-snap-align:start}
 
-.drift{display:flex;align-items:flex-end;gap:16px}
-.dview{flex:1;min-width:0;overflow:hidden}
-/* cards fade at the gutters instead of being cut mid word */
-@media (min-width:760px){.dview{-webkit-mask-image:linear-gradient(90deg,transparent,#000 40px,#000 calc(100% - 40px),transparent);mask-image:linear-gradient(90deg,transparent,#000 40px,#000 calc(100% - 40px),transparent)}}
-.track{display:flex;width:max-content}
-.set{display:flex;gap:24px;padding-right:24px}
-.set li{width:320px;flex:none}
 .card{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-decoration:none}
-.cthumb{display:block;width:100%;border-radius:16px;overflow:hidden;margin-bottom:8px}
-.cthumb img{width:100%;height:auto;aspect-ratio:320/334;object-fit:cover;transition:transform 300ms var(--out)}
+.cthumb,.lthumb{display:block;width:100%;border-radius:16px;overflow:hidden}
+.cthumb{margin-bottom:8px}
+.cthumb img{width:100%;height:auto;aspect-ratio:960/1004;object-fit:cover;transition:transform 300ms var(--out)}
 .ctag{height:26px;display:flex;align-items:center}
 .card strong{font-size:20px;font-weight:700;line-height:1.2}
 .cline{font-size:15px;color:var(--muted)}
-.card .more{min-height:36px}
-@media (hover:hover) and (pointer:fine){.card:hover .cthumb img{transform:scale(1.03)}.card:hover strong{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.15em}}
-.dctl{flex:none;width:40px;height:40px;margin-bottom:8px;position:static}
-@media (prefers-reduced-motion:no-preference) and (min-width:760px){
-  html:not(.calm) .track{animation:drift 80s linear infinite}
-  html:not(.calm) .drift:hover .track,html:not(.calm) .drift:focus-within .track,html:not(.calm) .drift[data-paused] .track,html:not(.calm) .drift.off .track{animation-play-state:paused}
+.card .more,.lead .more{min-height:36px}
+
+/* the lead: wider, its thumbnail as tall as a whole card, the numbers set like the results */
+.ptrack>li.plead{width:calc((var(--th) + 150px) * .956 + 32px + 380px)}   /* narrow enough that the next card peeks in at 1440 */
+.lead{height:100%;display:grid;grid-template-columns:calc((var(--th) + 150px) * .956) minmax(0,1fr);column-gap:32px}
+.lthumb img{width:100%;height:100%;min-height:calc(var(--th) + 150px);object-fit:cover;object-position:50% 0;transition:transform 300ms var(--out)}
+.ltext{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:4px 0 0}
+.ltext h3{font-size:32px;font-weight:700;font-stretch:85%;line-height:1.05;letter-spacing:-.01em}
+.ltext h3 a{text-decoration:none;text-decoration-thickness:2px;text-underline-offset:.12em}
+.ltext>p{font-size:16px;color:var(--muted)}
+.stats{display:grid;gap:10px;margin:auto 0 4px;padding-top:8px}
+.stats div{display:flex;flex-direction:column-reverse}
+.stats dd{font-size:clamp(48px,var(--th) * .2,80px);font-weight:800;font-stretch:75%;line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stats dt{font-size:14px;color:var(--muted);margin-top:2px}
+@media (hover:hover) and (pointer:fine){
+  .card:hover .cthumb img,.lead:has(a:hover) .lthumb img{transform:scale(1.03)}
+  .card:hover strong{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.15em}
+  .lead:has(a:hover) h3 a{text-decoration-line:underline}
+  .lead:has(a:hover) .arrow .stem{opacity:1}
+  .lead:has(a:hover) .arrow .tip{transform:translateX(3px)}
 }
-@keyframes drift{to{transform:translateX(-50%)}}
-/* static rail: phones, reduced motion, Reduce motion */
+.lead:has(.lthumb:active,h3 a:active,.more:active) .lthumb img{transform:scale(.985)}
+
+/* the end card: the contact section's wash, so the next step already has its colour */
+.pend{display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;gap:16px;padding:28px;border-radius:20px}
+.pend p{font-size:clamp(36px,var(--cw) * .14,52px);font-weight:800;font-stretch:75%;line-height:.95;letter-spacing:-.02em}
+.pend .more{min-height:44px}
+
+.p-prog{display:none;position:relative;height:2px;margin-top:28px;background:var(--line)}
+.p-prog i{position:absolute;inset:0;background:var(--ink);transform:scaleX(0);transform-origin:0 50%}
+
+/* the pinned view centres its content, so its own slack is most of the space around it */
+html.hpin .pages{height:calc(100svh - var(--bar) + var(--ov,0px));padding:0;margin:24px 0 40px}
+html.hpin .p-pin{position:sticky;top:var(--bar);height:calc(100svh - var(--bar));overflow:clip;display:flex;flex-direction:column;justify-content:center}
+html.hpin .ptrack{width:max-content;overflow:visible;scroll-snap-type:none;padding-bottom:0}
+html.hpin .p-prog{display:block}
+
 @media (max-width:759px){
-  .dview{overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 calc(var(--gut) * -1);padding:0 var(--gut);scroll-padding-inline:var(--gut)}
-  .dview::-webkit-scrollbar{display:none}
-  .set li{width:78vw;scroll-snap-align:start}
-  .set{gap:16px;padding-right:var(--gut)}
-  .dup,.dctl{display:none}
+  .pages{--th:clamp(200px,min(78vw / .956,100svh - var(--bar) - 340px),420px);padding:56px 0 72px}
+  .phead{margin-bottom:24px;gap:6px}
+  .phead h2{font-size:40px}
+  .phead p{font-size:16px}
+  .ptrack{gap:16px}
+  .p-prog{margin-top:20px}
+  html.hpin .pages{margin:16px 0 24px}
+  /* the lead on a phone: wider than a card, its thumbnail cropped to the top of the page, the numbers in one row */
+  .ptrack>li.plead{width:min(88vw,var(--cw) * 1.16)}
+  .lead{display:flex;flex-direction:column}
+  .lthumb img{min-height:0;height:calc(var(--th) * .56)}
+  .ltext{gap:8px;padding-top:14px;flex:1}
+  .ltext h3{font-size:24px}
+  .ltext>p{font-size:15px}
+  .stats{display:flex;gap:18px;margin-top:4px;padding:0}
+  .stats dd{font-size:30px}
+  .stats dt{font-size:13px}
+  .pend{padding:22px}
 }
-@media (prefers-reduced-motion:reduce){.dup,.dctl{display:none}.dview{overflow-x:auto}}
-html.calm .dup,html.calm .dctl{display:none}
-html.calm .dview{overflow-x:auto}
-.freelance{font-size:17px;margin-top:48px;padding-bottom:120px}
 
 /* ---------- how I work */
 .sh{font-size:20px;font-weight:700;font-stretch:85%;margin-bottom:28px}
@@ -418,19 +465,6 @@ html.calm .dview{overflow-x:auto}
 .hart{width:100%;height:auto;aspect-ratio:16/9;border-radius:12px;margin-top:20px}
 @media (max-width:1023px){.hrow>div{display:block}}
 .wash .pill-btn:not(.primary),.wash .copy .tag{border-color:currentColor}
-@media (max-width:759px){
-  .lead{display:block;margin-bottom:48px}
-  .lthumb img{margin-bottom:24px}
-  .ltext{padding:0}
-  .ltext h3{font-size:26px}
-  .stats{flex-direction:column;gap:20px;margin-top:12px}
-  .stats dd{font-size:56px}
-  .phead{margin-bottom:32px}
-  .phead h2{font-size:40px}
-  .phead p{font-size:16px}
-  .freelance{font-size:16px;padding-bottom:72px}
-  .pages{padding-top:56px}
-}
 @media (max-width:759px){
   .how{padding-bottom:56px}
   .hrow{display:block;padding:28px 0}

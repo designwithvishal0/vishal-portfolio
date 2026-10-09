@@ -126,7 +126,7 @@ export const more = [
   { img: 'reward', name: 'Unified Reward Centre', line: 'Every reward. One place.', href: behance('256413187') },
   { img: 'onebanc', name: 'OneBanc', line: 'A month, not a balance.', href: live('onebanc') },
 ];
-export const lead = { img: 'pwl', name: 'Profit Wala Love, CashKaro', tag: 'Shipped, 2026', line: "Valentine’s campaign across app, web and social.", stats: [['1,542', 'transactions'], ['₹9.89 lakh', 'GMV'], ['13,707', 'shares']] };
+export const lead = { img: 'pwl', name: 'Profit Wala Love, CashKaro', tag: 'Shipped, 2026', line: "Valentine’s campaign across app, web and social.", href: 'https://dribbble.com/shots/27168211-Valentines-Day-Landing-Page', stats: [['1,542', 'transactions'], ['₹9.89 lakh', 'GMV'], ['13,707', 'shares']] };
 export const pages = [
   { img: 'bbb', name: 'Big Birthday Bash, EarnKaro', tag: 'Shipped, July 2026', line: 'A week long campaign landing page plus the 777 Jackpot game, one deal a day.', href: behance('256577531') },
   { img: 'basil', name: 'Basil product page', tag: 'Concept', line: 'Sell the set, not the second product.', href: behance('256493837') },

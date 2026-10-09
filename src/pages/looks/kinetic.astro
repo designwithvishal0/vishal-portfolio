@@ -86,7 +86,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     <script is:inline>setTimeout(()=>document.querySelector('.slot').classList.add('open'),300)</script>
     <div class="l3 words" aria-hidden="true">
       <span class="grp">{hero3.map(({ w, i }) => <><span class="w"><span style={`--i:${i}`}>{w}</span></span>{' '}</>)}</span>
-      <span class="w wu"><span style={`--i:${lastI}`} class="jw" id="unsure">{[...last].map(ch => <span class="jl">{ch}</span>)}</span></span>
+      <span class="w wu"><span style={`--i:${lastI}`} class="jw" id="unsure">{[...last].map((ch, j) => <span class="jl" style={`--k:${j}`}>{ch}</span>)}</span></span>
     </div>
     <div class="hb">
       <p class="status"><span class="dot" aria-hidden="true"></span>{intro.availability}</p>
@@ -188,41 +188,39 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     </div>
   </section>
 
-  <!-- Pages that sell -->
-  <section class="pages c" id="pages" aria-labelledby="pg-h">
-    <div class="phead"><h2 id="pg-h">Pages that sell</h2><p>Campaigns, landing pages and product pages for commerce brands.</p></div>
-    <article class="lead reveal">
-      <div class="lthumb"><img src={`/pages/${lead.img}.webp`} alt={`${lead.name}, preview`} width="960" height="1004" loading="lazy" decoding="async" /></div>
-      <div class="ltext">
-        <span class="pill shipped">{lead.tag}</span>
-        <h3>{lead.name}</h3>
-        <p>{lead.line}</p>
-        <dl class="stats">{lead.stats.map(([n, l]) => { const s = stat(n); return (
-          <div><dt>{l}</dt><dd><span class="vh">{n}</span><span class="cnt" aria-hidden="true" data-v={s.n} data-dec={s.dec} data-pre={s.pre} data-suf={s.suf}>{n}</span></dd></div>
-        ); })}</dl>
-      </div>
-    </article>
-    <div class="drift" data-state="playing">
-      <div class="dview">
-        <div class="track">
-          {[0, 1].map(k => (
-            <ul class={k ? 'set dup' : 'set'} aria-hidden={k ? 'true' : undefined} inert={k ? true : undefined}>
-              {pages.map(p => (
-                <li><a class="card go" href={p.href}>
-                  <span class="cthumb"><img src={`/pages/${p.img}.webp`} alt={`${p.name}, preview`} width="960" height="1004" loading="lazy" decoding="async" /></span>
-                  <span class="ctag">{p.tag && <span class={`pill${p.tag.startsWith('Shipped') ? ' shipped' : ''}`}>{p.tag}</span>}</span>
-                  <strong>{p.name}</strong>
-                  <span class="cline">{p.line}</span>
-                  <span class="more">View on Behance <Arrow /></span>
-                </a></li>
-              ))}
-            </ul>
-          ))}
-        </div>
-      </div>
-      <button class="dctl" type="button" aria-label="Pause the previews"><Fragment set:html={Btn} /></button>
+  <!-- Pages that sell: one track. With motion allowed the section pins under the bar and scrolling down moves it sideways;
+       otherwise it is a native rail that snaps -->
+  <section class="pages" id="pages" aria-labelledby="pg-h">
+    <div class="p-pin">
+      <div class="phead c"><h2 id="pg-h">Pages that sell</h2><p>Campaigns, landing pages and product pages for commerce brands.</p></div>
+      <ul class="ptrack">
+        <li class="plead">
+          <article class="lead">
+            <a class="lthumb" href={lead.href} tabindex="-1" aria-hidden="true"><img src={`/pages/${lead.img}.webp`} alt="" width="960" height="1004" loading="lazy" decoding="async" /></a>
+            <div class="ltext">
+              <span class="pill shipped">{lead.tag}</span>
+              <h3><a href={lead.href}>{lead.name}</a></h3>
+              <p>{lead.line}</p>
+              <dl class="stats">{lead.stats.map(([n, l]) => { const s = stat(n); return (
+                <div><dt>{l}</dt><dd><span class="vh">{n}</span><span class="cnt" aria-hidden="true" data-v={s.n} data-dec={s.dec} data-pre={s.pre} data-suf={s.suf}>{n}</span></dd></div>
+              ); })}</dl>
+              <a class="more go" href={lead.href}>View on Dribbble <Arrow /></a>
+            </div>
+          </article>
+        </li>
+        {pages.map(p => (
+          <li><a class="card go" href={p.href}>
+            <span class="cthumb"><img src={`/pages/${p.img}.webp`} alt={`${p.name}, preview`} width="960" height="1004" loading="lazy" decoding="async" /></span>
+            <span class="ctag">{p.tag && <span class={`pill${p.tag.startsWith('Shipped') ? ' shipped' : ''}`}>{p.tag}</span>}</span>
+            <strong>{p.name}</strong>
+            <span class="cline">{p.line}</span>
+            <span class="more">View on Behance <Arrow /></span>
+          </a></li>
+        ))}
+        <li class="pend wash r-jarvis"><p>Need a page that sells?</p><a class="more go" href="#contact">See how I work with founders <Arrow /></a></li>
+      </ul>
+      <div class="p-prog c" aria-hidden="true"><i></i></div>
     </div>
-    <p class="freelance">Need a page that sells? <a class="ul" href="#contact">See how I work with founders</a></p>
   </section>
 
   <!-- How I work -->
@@ -246,7 +244,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     <div class="c">
       <h2 id="c-h" class="words"><span class="vh">Hiring, or need a page that sells?</span><span aria-hidden="true">{cwords.map((x, k) => k < cwords.length - 1
         ? <><span class="w"><span style={`--i:${k}`}>{x}</span></span>{' '}</>
-        : <span class="w wu"><span style={`--i:${k}`} class="jw" id="sells">{[...x].map(ch => <span class="jl">{ch}</span>)}</span></span>)}</span></h2>
+        : <span class="w wu"><span style={`--i:${k}`} class="jw" id="sells">{[...x].map((ch, j) => <span class="jl" style={`--k:${j}`}>{ch}</span>)}</span></span>)}</span></h2>
       <div class="ct-r">
       <div class="cta">
         <a class="pill-btn primary" href={book.href}>{book.label}</a>
@@ -292,7 +290,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   const later = (f: () => void, ms: number) => { const t = window.setTimeout(() => { timers.delete(t); f(); }, ms); timers.add(t); };
   const props = ['--y', '--wt'];
   const settle = (word: HTMLElement) => {
-    word.classList.add('settle');
+    word.classList.add('settle', 'landed');
     qa('.jl', word).forEach(l => props.forEach(p => l.style.removeProperty(p)));
     later(() => { word.classList.remove('settle'); delete word.dataset.busy; word.parentElement!.style.removeProperty('width'); }, 760);
   };
@@ -366,11 +364,11 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   const slot = q('.slot'), hv = q<HTMLVideoElement>('video', slot);
   const hero = add({ box: slot, v: hv, btn: q('.vctl', slot), name: 'showreel', src: () => (land.matches ? hv.dataset.wide : hv.dataset.tall)!, thr: .3 });
   // the index beside the reel follows the project on screen (beat starts in seconds, from tools/motion/kinetic/hero-cut.sh)
-  const idx = q('.idx'), beats = { wide: [0, 5.6, 11.6, 16.9], tall: [0, 5.6, 10.1, 15.3] };
+  const heroSec = q('.hero'), idx = q('.idx'), beats = { wide: [0, 5.6, 11.6, 16.9], tall: [0, 5.6, 10.1, 15.3] };
   const follow = () => {
     if (hv.paused) { idx.removeAttribute('data-on'); return; }
     const b = beats[land.matches ? 'wide' : 'tall'], t = hv.currentTime + .2;
-    idx.dataset.on = String(b.filter(s => t >= s).length - 1);
+    idx.dataset.on = heroSec.dataset.on = String(b.filter(s => t >= s).length - 1);
   };
   ['timeupdate', 'pause', 'playing'].forEach(ev => hv.addEventListener(ev, follow));
   land.addEventListener('change', () => { if (!hv.dataset.cur) return; load(hero); sync(hero); });
@@ -454,10 +452,16 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   osDark.addEventListener('change', rethemeFrames);
   const setRow = (p: number) => { prog = p; res.dataset.row = p < .33 ? '1' : p < .66 ? '2' : '3'; draw(); };
 
-  // ---------- Scrubs at 1024+ with motion allowed. Reduce motion reverts all of it.
+  // ---------- Pages that sell: the track is measured before every refresh, so the pinned length always equals its overflow
+  const pagesSec = q('#pages'), ptrack = q('.ptrack'), pprog = q('.p-prog i');
+  let ov = 0, pst: ScrollTrigger | null = null;
+  const setOv = () => { ov = root.classList.contains('hpin') ? Math.max(0, ptrack.offsetWidth - root.clientWidth) : 0; pagesSec.style.setProperty('--ov', `${ov}px`); };
+  ScrollTrigger.addEventListener('refreshInit', setOv);
+
+  // ---------- Scrubs with motion allowed: the pages track at every width, the rest at 1024+. Reduce motion reverts all of it.
   let mm: gsap.MatchMedia | null = null;
   const init = () => {
-    mm?.revert(); mm = null; root.classList.remove('scrub');
+    mm?.revert(); mm = null; root.classList.remove('scrub', 'hpin');
     if (calm()) return;
     mm = gsap.matchMedia();
     mm.add({ ok: '(prefers-reduced-motion: no-preference)', desk: '(min-width: 1024px)' }, c => {
@@ -472,6 +476,14 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
       ScrollTrigger.create({ trigger: res, start: 'top 56px', end: 'bottom bottom', onUpdate: s => setRow(s.progress), onRefresh: s => setRow(s.progress) });
       want();
       return () => { root.classList.remove('scrub'); res.classList.remove('frames'); res.dataset.row = '1'; };
+    });
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      root.classList.add('hpin'); setOv();
+      const tl = gsap.timeline({ scrollTrigger: { trigger: pagesSec, start: () => `top ${bar.offsetHeight}px`, end: 'bottom bottom', scrub: .4, invalidateOnRefresh: true } })
+        .fromTo(ptrack, { x: 0 }, { x: () => -ov, ease: 'none' }, 0)
+        .fromTo(pprog, { scaleX: 0 }, { scaleX: 1, ease: 'none' }, 0);
+      pst = tl.scrollTrigger!;
+      return () => { root.classList.remove('hpin'); pst = null; setOv(); };
     });
   };
   init();
@@ -497,16 +509,17 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   counter(q('.stats'), qa('.cnt'), .4);
   counter(q('.rows'), qa('.rc'), .4);
 
-  // ---------- The drifting shop window: stops on hover, focus, the button, or when out of view
-  const drift = q('.drift'), dctl = q<HTMLButtonElement>('.dctl', drift);
-  dctl.addEventListener('click', () => {
-    const p = !drift.hasAttribute('data-paused');
-    drift.toggleAttribute('data-paused', p); drift.dataset.state = p ? 'paused' : 'playing';
-    dctl.setAttribute('aria-label', `${p ? 'Play' : 'Pause'} the previews`);
+  // ---------- Keyboard focus on a card out of view brings it in: the rail scrolls itself; the pinned track moves the page
+  ptrack.addEventListener('focusin', e => {
+    const li = (e.target as HTMLElement).closest('li');
+    if (!li) return;
+    if (!pst || !ov) return li.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+    const pad = parseFloat(getComputedStyle(ptrack).paddingLeft), vw = root.clientWidth;
+    const now = Math.min(Math.max((scrollY - pst.start) / (pst.end - pst.start), 0), 1) * ov, l = li.offsetLeft - pad, r = li.offsetLeft + li.offsetWidth + pad - vw;
+    const x = Math.min(Math.max(l < now ? l : r > now ? r : now, 0), ov);
+    // always set: this also cancels the browser's own smooth scroll to the focused element, which ignores the track
+    scrollTo({ top: pst.start + x / ov * (pst.end - pst.start), behavior: 'instant' });
   });
-  new IntersectionObserver(([e]) => drift.classList.toggle('off', !e.isIntersecting)).observe(drift);
-  // keyboard focus on a card in the phone rail scrolls that card into place
-  drift.addEventListener('focusin', e => (e.target as HTMLElement).closest('li')?.scrollIntoView({ inline: 'nearest', block: 'nearest' }));
 
   // ---------- Reduce motion, pressed mid page: stop everything now
   const calmNow = () => {
@@ -516,6 +529,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
       items.forEach(it => { it.user = null; });
       qa('.cnt, .rc').forEach(el => { el.textContent = fmt(el, +el.dataset.v!); });
     }
+    // whichever way it was switched, the words keep their settled colour
+    [unsure, sells].forEach(w => w.classList.add('landed'));
     init();
     items.forEach(sync);
     ScrollTrigger.refresh();
