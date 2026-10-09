@@ -377,7 +377,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;mix-blend-mode
 /* ---------- pages that sell: one track. Default (no script, reduced motion, Reduce motion): a native rail that snaps.
    html.hpin (motion allowed, every width): the section pins under the bar and scrolling down moves the track sideways */
 .pages{--pad:max(var(--gut),(100% - var(--max)) / 2);
-  --th:clamp(220px,100svh - var(--bar) - 390px,400px);   /* card thumbnail height */
+  --th:clamp(220px,100svh - var(--bar) - 330px,460px);   /* card thumbnail height: the track has the pinned view to itself */
   --cw:calc(var(--th) * .956);                            /* card width, from the thumbnails' 960 by 1004 */
   padding:72px 0 120px}
 .phead{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;margin-bottom:40px}
@@ -395,18 +395,18 @@ canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;mix-blend-mode
 .cline{font-size:15px;color:var(--muted)}
 .card .more,.lead .more{min-height:36px}
 
-/* the lead: wider, its thumbnail as tall as a whole card, the numbers set like the results */
-.ptrack>li.plead{width:calc((var(--th) + 150px) * .956 + 32px + 380px)}   /* narrow enough that the next card peeks in at 1440 */
-.lead{height:100%;display:grid;grid-template-columns:calc((var(--th) + 150px) * .956) minmax(0,1fr);column-gap:32px}
-.lthumb img{width:100%;height:100%;min-height:calc(var(--th) + 150px);object-fit:cover;object-position:50% 0;transition:transform 300ms var(--out)}
-.ltext{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:4px 0 0}
-.ltext h3{font-size:32px;font-weight:700;font-stretch:85%;line-height:1.05;letter-spacing:-.01em}
+/* the lead: its own row above the track, as in the first Kinetic draft; the numbers set like the results */
+.lead{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:32px;align-items:center;margin-bottom:64px}
+.lthumb{grid-column:1/5}
+.lthumb img{width:100%;height:auto;aspect-ratio:960/1004;object-fit:cover;transition:transform 300ms var(--out)}
+.ltext{grid-column:5/13;display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding-left:16px}
+.ltext h3{font-size:40px;font-weight:700;font-stretch:85%;line-height:1.05;letter-spacing:-.01em}
 .ltext h3 a{text-decoration:none;text-decoration-thickness:2px;text-underline-offset:.12em}
-.ltext>p{font-size:16px;color:var(--muted)}
-.stats{display:grid;gap:10px;margin:auto 0 4px;padding-top:8px}
+.ltext>p{font-size:17px;color:var(--muted)}
+.stats{display:flex;flex-wrap:wrap;gap:16px 56px;margin:20px 0 8px}
 .stats div{display:flex;flex-direction:column-reverse}
-.stats dd{font-size:clamp(48px,var(--th) * .2,80px);font-weight:800;font-stretch:75%;line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
-.stats dt{font-size:14px;color:var(--muted);margin-top:2px}
+.stats dd{font-size:clamp(56px,7vw,104px);font-weight:800;font-stretch:75%;line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stats dt{font-size:15px;color:var(--muted);margin-top:6px}
 @media (hover:hover) and (pointer:fine){
   .card:hover .cthumb img,.lead:has(a:hover) .lthumb img{transform:scale(1.03)}
   .card:hover strong{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.15em}
@@ -425,7 +425,9 @@ canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;mix-blend-mode
 .p-prog i{position:absolute;inset:0;background:var(--ink);transform:scaleX(0);transform-origin:0 50%}
 
 /* the pinned view centres its content, so its own slack is most of the space around it */
-html.hpin .pages{height:calc(100svh - var(--bar) + var(--ov,0px));padding:0;margin:24px 0 40px}
+html.hpin .pages{padding-bottom:40px}
+html.hpin .lead{margin-bottom:0}
+html.hpin .prun{height:calc(100svh - var(--bar) + var(--ov,0px))}
 html.hpin .p-pin{position:sticky;top:var(--bar);height:calc(100svh - var(--bar));overflow:clip;display:flex;flex-direction:column;justify-content:center}
 html.hpin .ptrack{width:max-content;overflow:visible;scroll-snap-type:none;padding-bottom:0}
 html.hpin .p-prog{display:block}
@@ -437,17 +439,16 @@ html.hpin .p-prog{display:block}
   .phead p{font-size:16px}
   .ptrack{gap:16px}
   .p-prog{margin-top:20px}
-  html.hpin .pages{margin:16px 0 24px}
-  /* the lead on a phone: wider than a card, its thumbnail cropped to the top of the page, the numbers in one row */
-  .ptrack>li.plead{width:min(88vw,var(--cw) * 1.16)}
-  .lead{display:flex;flex-direction:column}
-  .lthumb img{min-height:0;height:calc(var(--th) * .56)}
-  .ltext{gap:8px;padding-top:14px;flex:1}
-  .ltext h3{font-size:24px}
-  .ltext>p{font-size:15px}
-  .stats{display:flex;gap:18px;margin-top:4px;padding:0}
-  .stats dd{font-size:30px}
-  .stats dt{font-size:13px}
+  html.hpin .pages{padding-bottom:24px}
+  /* the lead on a phone: the page, then the story and the numbers stacked */
+  .lead{display:block;margin-bottom:48px}
+  .lthumb img{margin-bottom:20px}
+  .ltext{padding:0;gap:10px}
+  .ltext h3{font-size:28px}
+  .ltext>p{font-size:16px}
+  .stats{flex-direction:column;gap:18px;margin-top:8px}
+  .stats dd{font-size:56px}
+  .stats dt{font-size:14px}
   .pend{padding:22px}
 }
 

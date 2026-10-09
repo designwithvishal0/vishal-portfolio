@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>JARVIS Alerts</title>
+<meta name="description" content="A false alert flow for Staqu's AI CCTV platform that makes every correction visible, so the people woken up at 3 AM can see the system learning.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: text column of ~66ch beside a sticky contents rail on desktop; one column on phones.
+   Single dark theme by choice: the calmer navy agreed for JARVIS. */
+:root{
+  --bg:#0C1631; --card:#17223F; --fg:#E6EAF2; --muted:#9AA8C4; --line:#26355C;
+  --warm:#F2B35E; --cool:#86B4F0;
+  --sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;padding-inline:20px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cool);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{text-wrap:balance;margin:0;font-weight:600;letter-spacing:-.015em}
+p{margin:0}
+.mono,.eyebrow,.k{font-family:var(--mono)}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.k{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:10;padding-top:env(safe-area-inset-top,0px)}
+.progress i{display:block;height:100%;width:0;background:var(--warm)}
+
+.wrap{max-width:1120px;margin:0 auto;padding-block:56px 96px}
+.top{display:flex;justify-content:space-between;gap:16px;font-size:14px;color:var(--muted);padding-bottom:56px}
+.top a{text-decoration:none}.top a:hover{color:var(--fg)}
+
+header.hero{max-width:66ch;display:grid;gap:20px}
+h1{font-size:clamp(40px,7vw,68px);line-height:1.02;letter-spacing:-.03em}
+.hook{font-size:clamp(22px,3vw,30px);font-weight:500;letter-spacing:-.015em;color:var(--warm);margin-top:-8px}
+.dek{font-size:clamp(19px,2.2vw,22px);line-height:1.5;color:var(--fg)}
+.alertline{font-family:var(--mono);font-size:13px;color:var(--warm);display:flex;gap:10px;align-items:center}
+.alertline::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--warm)}
+
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:40px;padding-block:24px;border-block:1px solid var(--line)}
+.facts div{display:grid;gap:6px;min-width:0}
+.facts p{font-size:15px;line-height:1.45}
+.note{margin-top:16px;font-size:14px;color:var(--muted);max-width:72ch}
+
+.summary{margin-top:48px;background:var(--card);border-radius:14px;padding:28px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+.summary h2{grid-column:1/-1;font-size:14px;font-family:var(--mono);font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.summary div{display:grid;gap:8px;align-content:start;min-width:0}
+.summary p{font-size:15.5px;line-height:1.5}
+
+.layout{display:grid;grid-template-columns:200px minmax(0,1fr);gap:64px;margin-top:80px}
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 32px);align-self:start;display:grid;gap:4px;font-size:14px}
+nav.toc .k{margin-bottom:10px}
+nav.toc a{text-decoration:none;color:var(--muted);padding:5px 0 5px 14px;border-left:1px solid var(--line)}
+nav.toc a:hover{color:var(--fg)}
+nav.toc a.on{color:var(--fg);border-left-color:var(--warm)}
+
+article{display:grid;gap:104px;min-width:0}
+section{display:grid;gap:22px;max-width:66ch;scroll-margin-top:32px}
+section.wide{max-width:none}
+section h2{font-size:clamp(28px,3.6vw,38px);line-height:1.12}
+section p{color:#C9D1E2}
+section p strong{color:var(--fg);font-weight:600}
+
+blockquote{margin:8px 0 0;padding:4px 0 4px 20px;border-left:2px solid var(--warm);font-size:22px;line-height:1.4;color:var(--fg);font-weight:500;letter-spacing:-.01em}
+
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-top:8px}
+.stats div{display:grid;gap:6px;align-content:start}
+.stats b{font-size:32px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stats span{font-size:15px;color:var(--muted);line-height:1.45}
+.source{font-size:13px;color:var(--muted)}
+
+.list{display:grid;gap:28px;counter-reset:n}
+.list > div{display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 12px}
+.list .n{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:4px}
+.list h3{font-size:20px}
+.list p{grid-column:2}
+
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.goals div{background:var(--card);border-radius:12px;padding:20px;display:grid;gap:8px}
+.goals p{color:var(--fg)}
+
+.options{display:grid;gap:12px}
+.opt{border:1px solid var(--line);border-radius:12px;padding:20px 22px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 20px}
+.opt h3{font-size:18px}
+.opt p{grid-column:1/-1;font-size:16px}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:3px 8px;border-radius:4px;align-self:start;color:var(--muted);border:1px solid var(--line)}
+.opt.built{border-color:var(--warm)}
+.opt.built .tag{color:var(--bg);background:var(--warm);border-color:var(--warm)}
+
+figure{margin:0;display:grid;gap:10px}
+.slot{background:var(--card);border:1px dashed var(--line);border-radius:12px;display:grid;place-items:center;text-align:center;padding:20px;color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.04em;max-width:100%}
+.slot.flow{aspect-ratio:3/2}
+.shot{display:block;max-width:100%;height:auto;border-radius:16px}
+.shot.wide{width:100%}
+.shot.phone{width:100%;max-width:300px;border-radius:32px;border:1px solid var(--line)}
+.slot.phone{aspect-ratio:412/917;border-radius:28px;width:100%;max-width:300px}
+figcaption{font-size:14px;color:var(--muted)}
+
+.screen{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:40px;align-items:start;max-width:880px}
+.screen > div{display:grid;gap:14px;min-width:0}
+.screen h3{font-size:24px;line-height:1.2}
+.screens{display:grid;gap:72px}
+
+.fixes{display:grid;gap:0;border-top:1px solid var(--line)}
+.fix{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:24px;padding-block:22px;border-bottom:1px solid var(--line)}
+.fix h3{font-size:18px;line-height:1.35}
+.fix p{font-size:16px}
+
+.trades{display:grid;gap:0;border-top:1px solid var(--line)}
+.trade{display:grid;grid-template-columns:28px minmax(0,1fr) minmax(0,1fr);gap:8px 20px;padding-block:20px;border-bottom:1px solid var(--line)}
+.trade .n{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:3px}
+.trade h3{font-size:17px;margin-bottom:6px}
+.trade p{font-size:15.5px}
+.trade .cost{color:var(--warm);font-size:15.5px}
+.trade .cost .k{display:block;margin-bottom:4px}
+
+.beforeafter{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.beforeafter div{border-radius:12px;padding:22px;display:grid;gap:10px;align-content:start}
+.beforeafter .b{border:1px solid var(--line)}
+.beforeafter .a{background:var(--card);box-shadow:inset 0 0 0 1px var(--cool)}
+.beforeafter .a .k{color:var(--cool)}
+.metric{display:grid;gap:6px;padding:22px 0 4px;border-top:1px solid var(--line)}
+.metric b{font-size:clamp(24px,3vw,30px);font-weight:600;letter-spacing:-.02em;color:var(--warm)}
+.measures{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.measures div{display:grid;gap:8px}
+
+.closing{margin-top:120px;padding-top:48px;border-top:1px solid var(--line);display:grid;gap:18px}
+.closing h2{font-size:clamp(32px,5vw,48px);letter-spacing:-.025em}
+.closing > p{color:var(--muted);font-size:19px}
+.btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:54px;padding:0 24px;border-radius:100px;font-weight:600;font-size:18px;line-height:1.3;text-decoration:none;transition:transform .2s ease,opacity .2s ease}
+.btn .ic{flex:none;width:16px;height:16px}
+.btn.primary{background:#A9BBE6;color:var(--bg)}
+.btn.ghost{border:1px solid #ffffff47;color:var(--fg)}
+.btn:hover{transform:translateY(-1px);opacity:.92}
+@media (max-width:620px){.btns{flex-direction:column}.btn{width:100%}}
+
+.next{margin-top:64px;display:grid;gap:14px}
+.nextgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.nextgrid a{background:var(--card);border-radius:12px;padding:20px;display:grid;gap:8px;text-decoration:none;align-content:start}
+.nextgrid a:hover{box-shadow:inset 0 0 0 1px var(--line)}
+.nextgrid b{font-size:18px;font-weight:600;letter-spacing:-.01em}
+.nextgrid span{font-size:14px;color:var(--muted)}
+
+@media (max-width:900px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:0}
+  nav.toc{display:none}
+  .summary{grid-template-columns:1fr 1fr}
+  .screen{grid-template-columns:minmax(0,1fr);gap:20px}
+  .slot.phone{max-width:240px}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  .wrap{padding-block:32px 64px}
+  .top{padding-bottom:40px}
+  .facts,.summary,.goals,.beforeafter,.measures,.nextgrid{grid-template-columns:minmax(0,1fr)}
+  .facts{gap:18px}
+  .stats{grid-template-columns:minmax(0,1fr)}
+  .fix{grid-template-columns:minmax(0,1fr);gap:8px}
+  .trade{grid-template-columns:28px minmax(0,1fr)}
+  .trade .cost{grid-column:2}
+  article{gap:80px}
+  .summary{padding:22px}
+}
+</style>
+<style>.proto{display:block;width:100%;aspect-ratio:16/10;border:0;border-radius:24px;background:var(--card)}@media (max-width:640px){.proto{aspect-ratio:9/16}}video.shot{background:var(--card)}</style>
+</head>
+
+
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
+
+<div class="wrap">
+  <div class="top">
+    <a href="https://designwvishal.framer.website/">Vishal Yadav</a>
+  </div>
+
+  <header class="hero">
+    <p class="eyebrow">Case study · B2B product design</p>
+    <h1>JARVIS Alerts</h1>
+    <p class="hook">Alerts worth waking up for</p>
+    <p class="dek">A false alert flow for Staqu’s AI CCTV platform that makes every correction visible, so the people who get woken up at 3 AM can finally see the system learning.</p>
+  </header>
+
+  <div class="facts">
+    <div><span class="k">Role</span><p>Solo. Problem framing, flow, UI and copy</p></div>
+    <div><span class="k">Type</span><p>Independent B2B concept</p></div>
+    <div><span class="k">Timeline</span><p>1 day, March 2026</p></div>
+    <div><span class="k">Tools</span><p>FigJam, Figma</p></div>
+  </div>
+  <p class="note">Independent concept work. Not affiliated with Staqu. JARVIS is Staqu’s video analytics product. Camera stills, times and counts in the screens are illustrative.</p>
+  <figure style="margin-top:32px"><video class="shot wide" src="showreel.mp4" poster="img/00-hero-poster.jpg" width="1280" height="720" muted loop playsinline controls preload="metadata" aria-label="JARVIS Alerts showreel, no sound"></video></figure>
+  <script>(()=>{const v=document.currentScript.previousElementSibling.querySelector('video');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)v.play().catch(()=>{})})()</script>
+
+  <section class="summary" aria-labelledby="sum">
+    <h2 id="sum">The 30 second version</h2>
+    <div><span class="k">Problem</span><p>Someone opens it, sees their own car or their own night guard, and swipes it away. And then nothing. No sign the swipe counted.</p></div>
+    <div><span class="k">Decision</span><p>Confidence tiers and a visible feedback loop. Every alert carries a way to say “this was wrong”, and every correction gets an answer.</p></div>
+    <div><span class="k">The one metric that matters</span><p>Repeat false alerts after a flag. If this design works, repeat alerts per camera fall every week.</p></div>
+    <div><span class="k">What I learned</span><p>In B2B AI, trust is a UI problem before it’s a model problem.</p></div>
+  </section>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Contents">
+      <span class="k">Contents</span>
+      <a href="#hardest">The hardest call</a>
+      <a href="#who">Who it’s for</a>
+      <a href="#found">What I found</a>
+      <a href="#options">The options</a>
+      <a href="#flow">The flow</a>
+      <a href="#screens">The screens</a>
+      <a href="#try">Try it</a>
+      <a href="#change">What I’d change</a>
+      <a href="#tradeoffs">Trade offs</a>
+      <a href="#changed">What changed</a>
+      <a href="#learned">What I learned</a>
+    </nav>
+
+    <article>
+      <section id="hardest">
+        <p class="eyebrow">The hardest call</p>
+        <h2>The false alert wasn’t the problem. The silent dismiss was.</h2>
+        <p>The obvious brief is “fewer false alerts”. But that’s a model problem, and no screen I design retrains a model.</p>
+        <p>So I looked at what happens after a false alert lands. Someone opens it, sees their own car or their own night guard, and swipes it away. And then nothing. No sign the swipe counted. Tomorrow the same camera fires the same alert, and the system looks exactly as dumb as yesterday, even if it’s quietly getting better.</p>
+        <p>That’s where I spent the design. Not on another filter screen, but on making every correction visible.</p>
+        <blockquote>A system can be improving and still lose your trust, if you never see it improve.</blockquote>
+        <p>My first idea was a smarter filter screen, where people could mute a camera or switch off a detection type. I dropped it in the first hour. Muting hides the noise from one person and teaches the system nothing.</p>
+      </section>
+
+      <section id="who">
+        <p class="eyebrow">Who this is for</p>
+        <h2>The person holding the phone at 3:14 AM</h2>
+        <p>JARVIS turns a business’s existing CCTV into alerts: a retail store, a warehouse, a factory floor. Those alerts land on a phone. The person holding it is usually not a security analyst in a control room. It’s a store manager or a site head with a dozen other jobs.</p>
+        <p>At 3:14 AM their phone says Restricted Entry, Camera 7, Zone B. At 5:16 PM the next day it says Unknown Car, Camera 2, Zone F. It’s their own car. After a week of that, they stop opening alerts. And the one that matters arrives looking exactly like the dozens that didn’t.</p>
+        <div class="stats">
+          <div><b>90 to 99%</b><span>of alarms reaching monitoring centres are false or not actionable</span></div>
+          <div><b>About half</b><span>of target events caught by trained operators in a 90 minute video review study</span></div>
+          <div><b>200+</b><span>businesses running JARVIS, each with its own cameras and its own idea of normal</span></div>
+        </div>
+        <p class="source">Industry figures, not Staqu’s: The Monitoring Association and CSAA data as cited by Actuate (2026), and a study of 42 video operators in Applied Ergonomics as cited by Security Journal Americas (2026). Client count from staqu.com.</p>
+        <p>The store manager at 3 AM is my own picture of the user, built from the brief and from Staqu’s site, which sells JARVIS to retail stores, warehouses and factories. I didn’t get to talk to a real customer in the time I had.</p>
+      </section>
+
+      <section id="found">
+        <p class="eyebrow">What I found</p>
+        <h2>Three reasons good alerts get ignored</h2>
+        <div class="list">
+          <div><span class="n">01</span><h3>Generic models, specific sites</h3><p>A model trained on generic footage meets a store under neon at 8 PM and a warehouse at 4 AM. The problem isn’t that thresholds exist. It’s that tuning them for every site is ongoing work nobody on site has time for.</p></div>
+          <div><span class="n">02</span><h3>The invisible correction</h3><p>When someone dismisses a false alert, does anything tell them it counted? If not, the feedback loop can work perfectly and still be invisible. Trust never builds, even while accuracy does.</p></div>
+          <div><span class="n">03</span><h3>Every alert looks the same</h3><p>A forklift in the wrong lane and a stranger at the back door arrive with the same weight. When everything is urgent, nothing is.</p></div>
+        </div>
+        <div class="goals">
+          <div><span class="k">User goal</span><p>Only alert me when something actually happens.</p></div>
+          <div><span class="k">Business goal</span><p>Stop customers churning out of frustration, keep the ones already wavering, and build a system that gets better on its own, so support load drops instead of rising.</p></div>
+        </div>
+      </section>
+
+      <section id="options">
+        <p class="eyebrow">The options</p>
+        <h2>I had three answers. I built the one that lives inside the alert.</h2>
+        <div class="options">
+          <div class="opt built"><h3><span class="mono">01</span> Confidence tiers and a visible feedback loop</h3><span class="tag">BUILT</span><p>Alerts arrive in tiers, so the system only interrupts for what it’s sure about. Every alert carries a way to say “this was wrong”, and every correction gets an answer.</p></div>
+          <div class="opt"><h3><span class="mono">02</span> Zone and time rules</h3><span class="tag">LATER</span><p>Let people draw zones on a camera and set rules per zone, because a loading dock at 2 AM and 2 PM are different places. Powerful, but it hands the tuning job back to the exact person who has no time for it. That’s problem 01 again.</p></div>
+          <div class="opt"><h3><span class="mono">03</span> A weekly noise report</h3><span class="tag">LATER</span><p>Alerts this week against last week, false alert rate by camera, the noisiest cameras, the zones that improved. Great for the person who renews the contract. Useless to the person holding the phone at 3 AM.</p></div>
+        </div>
+        <p>Option 01 won because it works inside the moment people already live in: the alert itself. No setup screen, no report to remember to open. It’s also the most practical of the three: it ships on top of the alert feed that already exists, with no new setup screen and no new product to sell. And it quietly feeds the other two. More on that in the screens.</p>
+        <p>Most camera apps I looked at let you snooze a camera or turn off a detection type. Almost none tell you whether dismissing an alert taught the system anything. That gap is where option 01 sits.</p>
+      </section>
+
+      <section id="flow" class="wide">
+        <div style="display:grid;gap:22px;max-width:66ch">
+          <p class="eyebrow">The flow</p>
+          <h2>Three taps from annoyance to proof</h2>
+          <p>Tap “Tell us if not” under any alert. Pick the closest reason, or write your own. Submit. JARVIS answers straight away with what your correction changed. The whole loop happens on top of the alert feed, so nobody loses their place.</p>
+        </div>
+        <figure>
+          <img class="shot wide" src="img/05-feedback-loop.webp" alt="JARVIS Alerts false alert feedback loop" loading="lazy">
+        </figure>
+      </section>
+
+      <section id="screens" class="wide">
+        <div style="display:grid;gap:22px;max-width:66ch">
+          <p class="eyebrow">The screens</p>
+          <h2>Four screens, one promise: your correction counts</h2>
+        </div>
+        <div class="screens">
+          <div class="screen">
+            <figure><img class="shot phone" src="img/01-alert-feed.webp" alt="JARVIS Alerts screen: alert feed with High, Medium and Low tiers" loading="lazy"></figure>
+            <div><span class="k">01 · Triage</span><h3>Not every alert gets the same voice</h3><p>Alerts are tiered High, Medium and Low, both as filters along the top and as a coloured tag on every card: warm for Medium, cool for Low. The camera still sits on the card, so a glance is often enough to judge. And the way to say “this was wrong” isn’t hidden in a menu. “Was this alert accurate? Tell us if not!” sits under every single alert.</p></div>
+          </div>
+          <div class="screen">
+            <figure><img class="shot phone" src="img/02-pick-a-reason.webp" alt="JARVIS Alerts screen: what made this a false alert?" loading="lazy"></figure>
+            <div><span class="k">02 · Flag</span><h3>What made this a false alert?</h3><p>Five reasons, and each one points the model at a different fix. Wrong person identified is a recognition error. Normal activity for this time is a time rule. Wrong zone triggered is a zone rule. Known staff or visitor is an allow list. This is where option 02 sneaks back in: every tap collects the zone and time rules nobody would ever sit down and configure.</p></div>
+          </div>
+          <div class="screen">
+            <figure><img class="shot phone" src="img/03-tell-us-more.webp" alt="JARVIS Alerts screen: tell us more in plain words" loading="lazy"></figure>
+            <div><span class="k">03 · Explain</span><h3>Something else? Say it in plain words</h3><p>Reasons can’t cover everything. “The unidentified vehicle was my own car” is exactly the kind of context a camera can’t see and a person knows instantly. Free text comes second, never first, so the quick path stays quick.</p></div>
+          </div>
+          <div class="screen">
+            <figure><img class="shot phone" src="img/04-noted.webp" alt="JARVIS Alerts screen: JARVIS has noted this" loading="lazy"></figure>
+            <div><span class="k">04 · Proof</span><h3>Noted. And here’s what it changed.</h3><p>This is the screen the whole concept exists for. “JARVIS has noted this. Based on feedback like yours this week, 27 similar alerts won’t interrupt you again.” Not “thanks for your feedback” into the void. A number, tied to your correction, that you can hold the system to. And “feedback like yours” makes it a team effort: everyone on the site teaches the same JARVIS.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="try">
+        <p class="eyebrow">Try it</p>
+        <h2>Flag a false alert yourself</h2>
+        <p>Tap “Tell us if not” under an alert to start.</p>
+        <figure><iframe class="proto" title="JARVIS Alerts Figma prototype" loading="lazy" allowfullscreen src="https://www.figma.com/embed?embed_host=share&amp;url=https%3A%2F%2Fwww.figma.com%2Fproto%2FNEbmc8cqnHE2l7J1zSV3ER%2FStaqu-Assignment%3Fnode-id%3D1-2%26starting-point-node-id%3D1%253A2%26scaling%3Dscale-down%26content-scaling%3Dfixed"></iframe></figure>
+      </section>
+
+      <section id="change">
+        <p class="eyebrow">What I’d change</p>
+        <h2>Built in a day, so here’s what I’d fix on day two</h2>
+        <div class="fixes">
+          <div class="fix"><h3><span class="k">Problem</span><br>The tiers lost their verbs.</h3><p><span class="k">Fix</span><br>My first sketch called them Act now, Review soon and FYI. The screens shipped as High, Medium and Low, which only say how loud an alert is, not what to do about it. I’d put the verb back on the tag.</p></div>
+          <div class="fix"><h3><span class="k">Problem</span><br>Checkboxes under a “pick the closest reason” question.</h3><p><span class="k">Fix</span><br>The control says “pick many”, the copy says “pick one”. I’d switch to single select rows, since one clear reason is more useful to the model than three vague ones.</p></div>
+          <div class="fix"><h3><span class="k">Problem</span><br>“27 won’t interrupt you again” is also a risk.</h3><p><span class="k">Fix</span><br>A real intruder can look a lot like your own car. Suppressed alerts shouldn’t vanish. They should drop into a quiet FYI queue you can check, with an Undo on the confirmation screen.</p></div>
+          <div class="fix"><h3><span class="k">Problem</span><br>It’s mobile only.</h3><p><span class="k">Fix</span><br>The person who renews the contract is often a security head watching many sites from a desktop. That’s where the weekly noise report (option 03) belongs.</p></div>
+        </div>
+      </section>
+
+      <section id="tradeoffs">
+        <p class="eyebrow">Trade offs</p>
+        <h2>Every decision closed a door</h2>
+        <div class="trades">
+          <div class="trade"><span class="n">01</span><div><h3>Visible proof over silent learning</h3><p>Showing the result of a correction is what builds trust.</p></div><p class="cost"><span class="k">What it cost</span>once you promise a number, the model has to be able to back it.</p></div>
+          <div class="trade"><span class="n">02</span><div><h3>Feedback on the card, not in settings</h3><p>The correction lives where the frustration happens.</p></div><p class="cost"><span class="k">What it cost</span>one more line on every single alert.</p></div>
+          <div class="trade"><span class="n">03</span><div><h3>Reasons first, free text second</h3><p>Fast for the common cases, and structured enough for the model to use.</p></div><p class="cost"><span class="k">What it cost</span>the list only covers the failures I could predict.</p></div>
+          <div class="trade"><span class="n">04</span><div><h3>Tiers instead of mute</h3><p>Nothing gets switched off, low confidence alerts just get quieter.</p></div><p class="cost"><span class="k">What it cost</span>Low alerts still arrive, so the feed never goes fully silent.</p></div>
+          <div class="trade"><span class="n">05</span><div><h3>The alert moment over the setup screen</h3><p>I designed for the person at 3 AM, not the admin configuring cameras.</p></div><p class="cost"><span class="k">What it cost</span>zone and time rules only build up slowly, one flag at a time.</p></div>
+        </div>
+      </section>
+
+      <section id="changed">
+        <p class="eyebrow">What changed</p>
+        <h2>The same Unknown Car, two different tomorrows</h2>
+        <div class="beforeafter">
+          <div class="b"><span class="k">Before (dismiss and hope)</span><p>Unknown Car, Camera 2. It’s my car. I swipe it away. Nothing tells me that mattered. Tomorrow at 5:16 PM, same car, same alert, and I trust JARVIS a little less.</p></div>
+          <div class="a"><span class="k">After (flag and see)</span><p>Tell us if not. Something else: “The unidentified vehicle was my own car.” Submit. JARVIS answers: 27 similar alerts won’t interrupt you again. Tomorrow at 5:16 PM, my phone stays quiet, and I know why.</p></div>
+        </div>
+        <p>The number I’d measure first is how often the same false alert comes back after someone has flagged it. Today that number is invisible, so nobody can tell whether flagging helps. If this design works, repeat alerts per camera fall every week.</p>
+        <div class="metric"><span class="k">The one metric that matters</span><b>Repeat false alerts after a flag</b></div>
+        <div class="measures">
+          <div><span class="k">For the person on site</span><p>Share of alerts actually opened, climbing back up because what’s left is worth opening. Share of false alerts that get flagged, which tells me the loop is easy enough to use at 3 AM.</p></div>
+          <div><span class="k">For the business</span><p>Support tickets about false alerts, falling. Renewals from accounts that flag often against accounts that never do, because the first group can see JARVIS getting better and the second can’t.</p></div>
+        </div>
+      </section>
+
+      <section id="learned">
+        <p class="eyebrow">What I learned</p>
+        <h2>In B2B AI, trust is a UI problem before it’s a model problem</h2>
+        <p>I came in thinking the job was to reduce false alerts. But the model can get better every week and the customer can still churn, because nobody on site ever sees it get better. The most valuable screen in this project isn’t a dashboard or a filter. It’s one sentence after you submit a correction.</p>
+        <p>Having one day also taught me something. I found the single screen that carries the idea, the Noted screen, and built everything else backwards from it. The tiers, the reasons, the free text all exist to earn that one sentence.</p>
+      </section>
+    </article>
+  </div>
+
+  <footer class="closing">
+    <h2>JARVIS Alerts</h2>
+    <p>Every correction, visible.</p>
+    <div class="btns">
+      <a class="btn primary" href="https://www.figma.com/design/NEbmc8cqnHE2l7J1zSV3ER" target="_blank" rel="noopener">View the Figma file<svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill-opacity="0" fill="currentColor" height="9.75px" transform="translate(8.25 6)" width="9.75px"></path><path d="M 0 7.125 L 7.125 0" fill="transparent" height="7.125px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(6 10.875)" width="7.125px"></path><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill="transparent" height="9.75px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(8.25 6)" width="9.75px"></path></svg></a>
+      <a class="btn ghost" href="https://designwvishal.framer.website/"><svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill-opacity="0" fill="currentColor" height="13.5px" transform="translate(3.75 5.25)" width="6.75px"></path><path d="M 9.75 0 L 0 0" fill="transparent" height="1px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(10.5 12)" width="9.75px"></path><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill="transparent" height="13.5px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(3.75 5.25)" width="6.75px"></path></svg>Back to home</a>
+    </div>
+  </footer>
+
+  <nav class="next" aria-label="More work">
+    <span class="k">More work</span>
+    <h2 style="font-size:24px">Check out more work</h2>
+    <div class="nextgrid">
+      <a href="https://designwvishal.framer.website/work/ixigo-trains"><b>ixigo Trains · The four hours nobody designs for</b></a>
+      <a href="https://designwvishal.framer.website/work/twelve"><b>Twelve · Plans in years, not months</b></a>
+      <a href="https://designwvishal.framer.website/work/split-and-request"><b>Google Pay Split and Request</b></a>
+    </div>
+  </nav>
+</div>
+
+<script>
+(function(){
+  var bar=document.getElementById('bar');
+  var links=[].slice.call(document.querySelectorAll('nav.toc a'));
+  function onScroll(){
+    var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';
+    var cur=null;
+    links.forEach(function(a){var s=document.querySelector(a.getAttribute('href'));if(s&&s.getBoundingClientRect().top<160)cur=a;});
+    links.forEach(function(a){a.classList.toggle('on',a===cur)});
+  }
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+
+</html>
