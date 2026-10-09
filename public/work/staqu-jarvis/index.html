@@ -171,7 +171,31 @@ figcaption{font-size:14px;color:var(--muted)}
   .summary{padding:22px}
 }
 </style>
-<style>.proto{display:block;width:100%;aspect-ratio:16/10;border:0;border-radius:24px;background:var(--card)}@media (max-width:640px){.proto{aspect-ratio:9/16}}video.shot{background:var(--card)}</style>
+<style>.proto{display:block;width:100%;aspect-ratio:16/10;border:0;border-radius:24px;background:var(--card)}@media (max-width:640px){.proto{aspect-ratio:9/16}}video.shot{background:var(--card)}
+.reel{position:relative}
+.pills{position:absolute;right:16px;bottom:16px;display:flex;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:100px;border:1px solid rgba(255,255,255,.22);background:rgba(13,31,94,.78);color:#fff;font:600 12px/1 var(--sans);letter-spacing:.08em;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.pill:hover{background:rgba(22,41,122,.9)}
+.pill:focus-visible{outline:2px solid #AFC6FF;outline-offset:2px}
+@media (max-width:620px){.pills{right:10px;bottom:10px}.pill{height:32px;padding:0 11px;font-size:11px}}
+/* The screens: as on the live Framer page */
+#screens{background:#EEF2FB;border-radius:28px;padding:72px 56px;max-width:none}
+#screens .eyebrow{color:#2348C4}
+#screens h2,#screens h3{color:#0E1424}
+#screens p{color:#3B4458}
+#screens .k{color:#2348C4;font-weight:500}
+#screens .screens{gap:96px;margin-top:24px}
+#screens .screen{grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:56px;max-width:none;align-items:start}
+#screens .screen>div{position:sticky;top:120px;align-self:start}
+#screens .screen>figure{order:2;justify-self:end;width:100%;max-width:360px}
+#screens .shot.phone{max-width:360px;border-radius:40px;border:1px solid rgba(14,20,36,.10);box-shadow:0 16px 40px rgba(13,31,94,.12)}
+#screens :focus-visible{outline-color:#2348C4}
+.up{opacity:0;transform:translateY(20px);transition:opacity .4s ease,transform .4s ease;transition-delay:var(--d,0ms)}
+.up.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.up{opacity:1;transform:none;transition:none}}
+@media (max-width:900px){#screens{padding:56px 32px}#screens .screen{grid-template-columns:minmax(0,1fr);gap:24px}#screens .screen>div{position:static}#screens .screen>figure{justify-self:start}}
+@media (max-width:620px){#screens{padding:48px 20px;border-radius:20px;margin-inline:-8px}#screens .screens{gap:72px}}
+</style>
 </head>
 
 
@@ -196,8 +220,19 @@ figcaption{font-size:14px;color:var(--muted)}
     <div><span class="k">Tools</span><p>FigJam, Figma</p></div>
   </div>
   <p class="note">Independent concept work. Not affiliated with Staqu. JARVIS is Staqu’s video analytics product. Camera stills, times and counts in the screens are illustrative.</p>
-  <figure style="margin-top:32px"><video class="shot wide" src="showreel.mp4" poster="img/00-hero-poster.jpg" width="1280" height="720" muted loop playsinline controls preload="metadata" aria-label="JARVIS Alerts showreel, no sound"></video></figure>
-  <script>(()=>{const v=document.currentScript.previousElementSibling.querySelector('video');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)v.play().catch(()=>{})})()</script>
+  <figure class="reel" style="margin-top:32px"><video class="shot wide" src="showreel.mp4" poster="img/00-hero-poster.jpg" width="1920" height="1080" muted loop playsinline preload="metadata" aria-label="JARVIS Alerts showreel with voiceover"></video>
+    <div class="pills"><button type="button" class="pill" data-act="play" aria-pressed="false"><span aria-hidden="true">▷</span> PLAY</button><button type="button" class="pill" data-act="sound" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> SOUND ON</button></div></figure>
+  <script>(()=>{
+    const f=document.currentScript.previousElementSibling, v=f.querySelector('video'), [pb,sb]=f.querySelectorAll('.pill');
+    const on='<svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>';
+    const off=sb.innerHTML.split('</svg>')[0]+'</svg>';
+    const paint=()=>{pb.innerHTML=v.paused?'<span aria-hidden="true">▷</span> PLAY':'<span aria-hidden="true">❙❙</span> PAUSE';pb.setAttribute('aria-pressed',String(!v.paused));
+      sb.innerHTML=v.muted?off+' SOUND ON':on+' SOUND OFF';sb.setAttribute('aria-pressed',String(!v.muted));};
+    pb.onclick=()=>{v.paused?v.play():v.pause()};
+    sb.onclick=()=>{v.muted=!v.muted;if(!v.muted&&v.paused)v.play()};
+    ['play','pause','volumechange'].forEach(e=>v.addEventListener(e,paint));
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches)v.play().catch(()=>{});paint();
+  })()</script>
 
   <section class="summary" aria-labelledby="sum">
     <h2 id="sum">The 30 second version</h2>
@@ -396,6 +431,14 @@ figcaption{font-size:14px;color:var(--muted)}
     links.forEach(function(a){a.classList.toggle('on',a===cur)});
   }
   addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+<script>
+(function(){
+  var sec=document.getElementById('screens'); if(!sec||!('IntersectionObserver' in window))return;
+  var groups=[sec.querySelector(':scope > div')].concat([].slice.call(sec.querySelectorAll('.screen')));
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -10% 0px'});
+  groups.forEach(function(g){[].slice.call(g.children).forEach(function(el,i){el.classList.add('up');el.style.setProperty('--d',i*60+'ms');io.observe(el)})});
 })();
 </script>
 

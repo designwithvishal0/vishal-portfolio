@@ -70,6 +70,14 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   @media (prefers-color-scheme:dark){:root:not([data-theme=light]) section.hero.c{--t-ixigo:#B8E04A;--t-split:#FF7AC2;--t-twelve:#F2B640;--t-jarvis:#FF7A85}}
   :root[data-theme=dark] section.hero.c{--t-ixigo:#B8E04A;--t-split:#FF7AC2;--t-twelve:#F2B640;--t-jarvis:#FF7A85}
   .slot,.slot[class]{aspect-ratio:4/3}
+  /* the Contra reel has music: a sound switch beside play, muted until pressed */
+  .vsnd{position:absolute;z-index:4;right:64px;bottom:12px;width:44px;height:44px;padding:0;border:0;border-radius:50%;display:grid;place-items:center;color:#F2F1EC;background:rgba(12,12,14,.72);box-shadow:0 0 0 1px rgba(242,241,236,.28);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);cursor:pointer}
+  .vsnd svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+  .vsnd svg path:first-child{fill:currentColor;stroke:none}
+  .vsnd .s-on,.vsnd[aria-pressed=true] .s-off{display:none}
+  .vsnd[aria-pressed=true] .s-on{display:inline}
+  [data-novid]>.vsnd{display:none}
+  .vsnd:focus-visible{outline:2px solid #F2F1EC;outline-offset:2px;box-shadow:0 0 0 6px #0C0C0E}
   /* the reel has five chapters, one more than Kinetic's index */
   .idx[data-on="4"] li:nth-child(5) a{color:var(--ink)}
   .idx[data-on="4"] li:nth-child(5) a::before{transform:scale(1.25)}
@@ -102,6 +110,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
       <img src="/kinetic-reel/contra-poster.jpg" width="1200" height="900" alt="Showreel: landing pages, product pages, store audits and apps, ending on Profit Wala Love's ₹9.89 lakh in sales in one week" fetchpriority="high" decoding="async" />
       <video muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" data-wide="/kinetic-reel/contra.mp4" data-tall="/kinetic-reel/contra.mp4"></video>
       <button class="vctl" type="button" aria-label="Play the showreel"><Fragment set:html={Btn} /></button>
+      <button class="vsnd" type="button" aria-label="Sound" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" /><path class="s-off" d="M17 9l5 6M22 9l-5 6" /><path class="s-on" d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" /></svg></button>
     </figure>
     <script is:inline>setTimeout(()=>document.querySelector('.slot').classList.add('open'),300)</script>
     <div class="l3 words" aria-hidden="true">
@@ -429,6 +438,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     idx.dataset.on = String(i); heroSec.dataset.on = String(tint[i]);
   };
   ['timeupdate', 'pause', 'playing'].forEach(ev => hv.addEventListener(ev, follow));
+  const snd = q('.vsnd', slot);
+  snd.addEventListener('click', () => { hv.muted = !hv.muted; snd.setAttribute('aria-pressed', String(!hv.muted)); if (!hv.muted && hv.paused) q<HTMLButtonElement>('.vctl', slot).click(); });
   land.addEventListener('change', () => { if (!hv.dataset.cur) return; load(hero); sync(hero); });
 
   // Work rows: the scene cut at 1024+, the phone cut below
