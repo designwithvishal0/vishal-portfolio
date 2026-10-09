@@ -1,9 +1,9 @@
 /* Look 3, Signature. One deep green field, a cool off white page, one soft pink for the mark.
-   Pink is never text on the light ground (1.5:1). On the light ground the mark is drawn in the field green. */
+   Pink is never text on the light ground (1.5:1), and the mark only ever sits on the field, so it is always pink. */
 :root{
   --bg:#F4F5F2; --ink:#10201A; --muted:#4B5C53; --rule:#D3D9D4; --focus:#0F3D2E;
   --field:#0F3D2E; --on:#F1F4EE; --on-muted:#B3C8BC; --on-rule:rgb(241 244 238/.22); --edge:transparent;
-  --pink:#F6B8CF; --pink-ink:#10201A; --mark:#0F3D2E; --hair:rgb(16 32 26/.09);
+  --pink:#F6B8CF; --pink-ink:#10201A; --hair:rgb(16 32 26/.09);
   --hl:0 88%/0 .3em; --hl-on:0 88%/100% .3em;
   --font:'Schibsted Grotesk Variable',ui-sans-serif,system-ui,sans-serif;
   --max:1312px; --gut:clamp(20px,4.5vw,64px); --pad:max(var(--gut),calc((100% - var(--max))/2));
@@ -11,12 +11,12 @@
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){
   --bg:#0B1712; --ink:#E8EEE9; --muted:#9DB0A5; --rule:#24352D; --focus:#F6B8CF;
-  --field:#123F30; --edge:#2E6B54; --pink-ink:#0B1712; --mark:#F6B8CF; --hair:rgb(232 238 233/.1);
+  --field:#123F30; --edge:#2E6B54; --pink-ink:#0B1712; --hair:rgb(232 238 233/.1);
   --hl:0 100%/0 .09em; --hl-on:0 100%/100% .09em;
 }}
 :root[data-theme=dark]{
   --bg:#0B1712; --ink:#E8EEE9; --muted:#9DB0A5; --rule:#24352D; --focus:#F6B8CF;
-  --field:#123F30; --edge:#2E6B54; --pink-ink:#0B1712; --mark:#F6B8CF; --hair:rgb(232 238 233/.1);
+  --field:#123F30; --edge:#2E6B54; --pink-ink:#0B1712; --hair:rgb(232 238 233/.1);
   --hl:0 100%/0 .09em; --hl-on:0 100%/100% .09em;
 }
 
@@ -26,15 +26,14 @@ h1,h2,h3,p,ul,dl{margin:0}
 .top,.hero,.facts,.work,.pages,.how,.about,.contact,.foot{padding-inline:var(--pad)}
 
 /* the field: inside it every token flips, so links, rules, buttons and the mark just work */
-.band{background:var(--field);color:var(--on);--ink:var(--on);--muted:var(--on-muted);--rule:var(--on-rule);--focus:var(--pink);--mark:var(--pink)}
+.band{background:var(--field);color:var(--on);--ink:var(--on);--muted:var(--on-muted);--rule:var(--on-rule);--focus:var(--pink)}
 
 /* the mark */
-.q,.tick{fill:none;stroke:var(--mark);stroke-linecap:round;stroke-linejoin:round;overflow:visible;stroke-width:var(--sw,8)}
+.q,.tick{fill:none;stroke:var(--pink);stroke-linecap:round;stroke-linejoin:round;overflow:visible;stroke-width:var(--sw,8)}
 .q-hero .q-hook{stroke-dasharray:1 2;animation:draw 1150ms cubic-bezier(.65,.05,.35,1) 380ms both}
 .q-hero .q-dot{transform-box:fill-box;transform-origin:center;animation:dab 180ms var(--ease-out) 1560ms both}
 @keyframes draw{from{stroke-dashoffset:1.03}to{stroke-dashoffset:0}}
 @keyframes dab{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:none}}
-.mk{--sw:15;height:.7em;width:auto;margin-right:.16em;vertical-align:-.02em}
 /* nothing else moves on its own here, so the availability dot stays still */
 .dot::after{display:none}
 
@@ -44,7 +43,7 @@ h1,h2,h3,p,ul,dl{margin:0}
 .top nav{display:flex}
 .top nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;font-weight:600;font-size:16px;text-decoration:none;transition:color var(--hover) var(--ease-out)}
 .top nav a:hover{color:var(--pink)}
-#theme,#calm{justify-self:end;font:600 15px/1 var(--font);color:var(--ink);background:none;border:1.5px solid var(--rule);border-radius:999px;padding:0 16px;min-height:40px;cursor:pointer;transition:border-color var(--hover) var(--ease-out),transform var(--press) var(--ease-out)}
+#theme,#calm{justify-self:end;font:600 15px/1 var(--font);color:var(--ink);background:none;border:1.5px solid var(--rule);border-radius:999px;padding:0 16px;min-height:44px;cursor:pointer;transition:border-color var(--hover) var(--ease-out),transform var(--press) var(--ease-out)}
 #theme:hover,#calm:hover{border-color:var(--ink)}
 #theme:active,#calm:active{transform:scale(.96)}
 
@@ -54,7 +53,10 @@ h1,h2,h3,p,ul,dl{margin:0}
 .say{font-size:clamp(48px,8vw,116px);display:flex;align-items:flex-end;gap:.3em}
 .opinion{flex:0 1 auto;font-size:1em;font-weight:860;line-height:.94;letter-spacing:-.042em;max-width:9.15em}
 .opinion .w{padding-bottom:.14em;margin-bottom:-.14em}
-.q-hero{--sw:7;flex:none;height:2.75em;width:auto;margin-bottom:.04em}
+.q-hero{--sw:9;flex:none;height:2.75em;width:auto;margin-bottom:.04em}
+/* tablet and up: two lines that keep "the moment" together, so the CashKaro numbers reach the first screen.
+   7.1vw is what the line plus the mark can take inside the gutters, so it never wraps early. */
+@media (min-width:601px){.say{font-size:clamp(40px,7.1vw,104px)}.opinion{max-width:11.4em}.q-hero{height:2.05em}}
 .hero-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"sup aud" "cta aud";column-gap:clamp(32px,6vw,112px);row-gap:28px;margin-top:clamp(32px,3.6vw,52px);align-items:start}
 .sup{grid-area:sup;font-size:clamp(17px,1.35vw,20px);line-height:1.5;max-width:44ch}
 .hero .cta{grid-area:cta}
@@ -86,7 +88,8 @@ h1,h2,h3,p,ul,dl{margin:0}
 .work,.pages,.how,.about{padding-block:clamp(80px,10vw,152px) 0}
 .shead{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 20px;margin-bottom:clamp(36px,4.6vw,72px)}
 .shead h2,h2.shead{font-size:clamp(42px,6.2vw,96px);font-weight:860;letter-spacing:-.045em;line-height:.95}
-.shead.stack{flex-direction:column;align-items:flex-start}
+.shead.stack{flex-direction:column;align-items:flex-start;row-gap:14px}
+h2.shead{display:block}
 .count{color:var(--muted);font-size:17px;font-weight:500}
 .shead.stack .count{font-size:clamp(17px,1.5vw,21px);max-width:44ch}
 
@@ -101,8 +104,8 @@ h1,h2,h3,p,ul,dl{margin:0}
 .p1 .p-text,.p2 .p-text{margin-top:28px}
 .p-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;font-size:15px;color:var(--muted);margin-bottom:14px}
 .p-name{font-weight:650;color:var(--ink)}
-.tag{display:inline-flex;align-items:center;min-height:26px;padding:0 11px;border:1.5px solid currentColor;border-radius:999px;font-size:13.5px;font-weight:600;line-height:1;color:var(--ink);white-space:nowrap}
-.tag.ship{background:var(--pink);border-color:var(--pink);color:var(--pink-ink)}
+.chip{display:inline-flex;align-items:center;min-height:26px;padding:0 11px;border:1.5px solid currentColor;border-radius:999px;font-size:13.5px;font-weight:600;line-height:1;color:var(--ink);white-space:nowrap}
+.chip.ship{background:var(--pink);border-color:var(--pink);color:var(--pink-ink)}
 .project h3{font-size:clamp(30px,3.3vw,50px);font-weight:840;line-height:1.02;letter-spacing:-.038em;margin-bottom:16px;max-width:15ch}
 .p0 h3,.p3 h3{font-size:clamp(32px,3.9vw,60px)}
 .p-link,.mw-n,.page p{text-decoration:none;background:linear-gradient(var(--pink),var(--pink)) no-repeat var(--hl);-webkit-box-decoration-break:clone;box-decoration-break:clone;transition:background-size 360ms var(--ease-out)}
@@ -122,13 +125,14 @@ h1,h2,h3,p,ul,dl{margin:0}
 .morework h3{font-size:clamp(20px,1.7vw,24px);font-weight:750;letter-spacing:-.01em;padding-bottom:14px}
 .morework ul{list-style:none;padding:0;border-top:2px solid var(--ink)}
 .mw{display:grid;grid-template-columns:auto minmax(0,max-content) minmax(0,1fr) auto;align-items:center;gap:8px clamp(14px,2vw,28px);padding:clamp(18px,2.2vw,30px) 0;border-bottom:1px solid var(--rule);text-decoration:none}
-.mw .arrow{width:clamp(16px,2.2vw,30px);height:clamp(16px,2.2vw,30px);stroke-width:1.6}
+.mw .arrow{width:clamp(16px,2.2vw,30px);height:clamp(16px,2.2vw,30px);stroke-width:2.2}
 .mw-n{font-size:clamp(30px,5.4vw,84px);font-weight:860;letter-spacing:-.045em;line-height:1}
 .mw-l{color:var(--muted);font-size:clamp(16px,1.3vw,19px);line-height:1.35}
 
 /* pages that sell */
 .lead{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(28px,5vw,88px);align-items:center;margin-bottom:clamp(64px,8vw,120px)}
-.thumb{border-radius:var(--r);overflow:hidden;aspect-ratio:960/1004;position:relative}
+.thumb{border-radius:var(--r);overflow:hidden;aspect-ratio:960/1004;position:relative;isolation:isolate}
+.thumb::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px var(--hair);pointer-events:none}
 .thumb img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0;transition:transform var(--section) var(--ease-out)}
 .lead-t{display:flex;flex-direction:column;align-items:flex-start}
 .lead h3{font-size:18px;font-weight:650;color:var(--muted);margin:20px 0 8px}
@@ -136,7 +140,7 @@ h1,h2,h3,p,ul,dl{margin:0}
 .stats{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:16px clamp(28px,3.4vw,56px);margin-top:clamp(28px,3vw,44px);padding-top:22px;border-top:2px solid var(--ink)}
 .stats div{display:flex;flex-direction:column-reverse;gap:4px}
 .stats dt{font-size:15px;color:var(--muted)}
-.stats dd{margin:0;font-size:clamp(26px,2.6vw,40px);font-weight:840;letter-spacing:-.035em;line-height:1;white-space:nowrap;font-variant-numeric:tabular-nums}
+.stats dd{margin:0;font-size:clamp(26px,2.6vw,40px);font-weight:840;letter-spacing:-.035em;line-height:1;white-space:nowrap}
 .rail{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(20px,2.4vw,36px)}
 .rail li{min-width:0}
 .page{display:block;text-decoration:none}
@@ -167,18 +171,18 @@ h1,h2,h3,p,ul,dl{margin:0}
 .contact{padding-block:clamp(80px,10vw,152px) clamp(72px,8vw,120px);border-top:1px solid var(--edge)}
 .c-head{display:flex;align-items:flex-end;gap:.3em;font-size:clamp(48px,9vw,136px)}
 .contact h2{flex:0 1 auto;font-size:1em;font-weight:880;line-height:.93;letter-spacing:-.045em;max-width:7.7em}
-.tick{--sw:8;flex:none;width:1.3em;height:auto;margin-bottom:.08em}
+.tick{--sw:11.5;flex:none;width:1.45em;height:auto;margin-bottom:.06em}
 .c-body{margin-top:clamp(36px,4.4vw,64px);display:grid;gap:28px;justify-items:start}
-.c-mail{font-size:clamp(19px,1.6vw,23px);max-width:44ch}
-.copy{font-weight:650;text-align:left;flex-wrap:wrap;padding:4px 0}
-.copy .tag{min-height:0;padding:1px 9px;font-size:.66em;font-weight:600;vertical-align:.12em;color:inherit}
+.c-mail{font-size:clamp(19px,1.6vw,23px);max-width:40em;text-wrap:balance}
+.copy{font-weight:650;text-align:left;padding:4px 0;align-items:center;gap:10px;min-height:44px}
+.copy .tag{padding:2px 10px;font-size:.62em;font-weight:600;align-self:center}
 .copy:hover{color:var(--pink)}
 .elsewhere{color:var(--muted);font-size:16px}
 .elsewhere a{color:var(--ink)}
 
 /* footer, same field */
 .foot{display:flex;flex-wrap:wrap;align-items:center;gap:16px 32px;padding-block:22px 28px;border-top:1px solid var(--rule)}
-.q-foot{--sw:11;height:34px;width:auto}
+.q-foot{--sw:20;height:34px;width:auto}
 .social{display:flex;flex-wrap:wrap;gap:0 22px;margin-right:auto}
 .social a{display:inline-flex;align-items:center;min-height:44px;font-weight:600;font-size:16px;text-decoration:none}
 
@@ -187,6 +191,9 @@ h1,h2,h3,p,ul,dl{margin:0}
   .rail{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:56px}
 }
 @media (max-width:860px){
+  .top{grid-template-columns:minmax(0,1fr) auto;align-items:start;padding-top:12px;min-height:0}
+  .top nav{grid-column:1/-1;grid-row:2;margin:0 -14px}
+  .status{padding-top:12px}
   .hero-row{grid-template-columns:minmax(0,1fr);grid-template-areas:"sup" "cta" "aud";row-gap:28px}
   .aud{margin-top:8px}
   .fgrid{grid-template-columns:minmax(0,1fr)}
@@ -201,16 +208,14 @@ h1,h2,h3,p,ul,dl{margin:0}
   .mw .arrow{grid-area:a}
   .mw-n{grid-area:n}
   .mw-l{grid-area:l}
-  .mw .tag{grid-area:t}
+  .mw .chip{grid-area:t}
 }
 /* phone */
 @media (max-width:600px){
-  .top{grid-template-columns:minmax(0,1fr) auto;align-items:start;padding-top:12px;min-height:0}
-  .top nav{grid-column:1/-1;grid-row:2;margin:0 -14px}
-  .status{font-size:14px;padding-top:11px}
-  .say{font-size:clamp(40px,12.3vw,60px);position:relative;padding-bottom:.45em}
+  .status{font-size:14px}
+  .say{font-size:clamp(40px,12.3vw,60px);position:relative;padding-bottom:.7em}
   .opinion{max-width:5.8em}
-  .q-hero{position:absolute;right:0;bottom:0;height:3.4em;margin:0}
+  .q-hero{position:absolute;right:0;bottom:0;height:2.55em;margin:0}
   .aud a{display:grid;grid-template-columns:minmax(0,1fr) auto;row-gap:2px}
   .aud span{grid-row:2}
   .aud .arrow{grid-row:1/3;grid-column:2}
@@ -219,14 +224,12 @@ h1,h2,h3,p,ul,dl{margin:0}
   .project h3,.p0 h3,.p3 h3{font-size:clamp(30px,8.6vw,38px)}
   .stats{grid-template-columns:repeat(3,minmax(0,auto));gap:12px 22px}
   .stats dd{font-size:clamp(22px,6.4vw,28px)}
-  .rail{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:80%;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(var(--gut) * -1);padding:0 var(--gut) 8px;scroll-padding:0 var(--gut);scrollbar-width:none}
+  .rail{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:80%;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(var(--gut) * -1);padding:6px var(--gut) 8px;margin-top:-6px;scroll-padding:0 var(--gut);scrollbar-width:none}
   .rail::-webkit-scrollbar{display:none}
   .rail li{scroll-snap-align:start}
   .c-head{flex-direction:column;align-items:flex-start;gap:.25em;font-size:clamp(40px,11.4vw,56px)}
   .contact h2{max-width:7.6em}
-  .tick{width:1.2em;margin:0 0 0 .04em}
+  .tick{align-self:flex-end;width:1.7em;margin:-.15em .1em 0 0}
   .foot{gap:8px 24px}
   .q-foot{height:28px}
-  #theme,#calm{min-height:44px}
 }
-@media (pointer:coarse){#theme,#calm{min-height:44px}}

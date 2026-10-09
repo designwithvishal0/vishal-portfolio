@@ -69,7 +69,6 @@ const facts = ['4.5 years in design, 2+ in core UI/UX', 'UI/UX and Graphic Desig
     <div class="shead reveal"><h2 id="w-h">Selected work</h2><span class="count">4 case studies</span></div>
     {work.map((w, i) => (
       <article class="project reveal">
-        <Loop href={live(w.slug)} loop={loops[i]} name={w.name} alt={w.alt} eager={i === 0} />
         <div class="p-text">
           <p class="p-meta"><span class="p-name">{w.name}</span><span class="tag">{w.type.includes('B2B') ? 'B2B concept' : 'Concept'}</span><span>{w.year}</span></p>
           <h3><a class="p-link" href={live(w.slug)}>{w.headline}<span class="vh">, the {w.name} case study</span></a></h3>
@@ -77,6 +76,8 @@ const facts = ['4.5 years in design, 2+ in core UI/UX', 'UI/UX and Graphic Desig
           <p class="scope"><span>{w.role}</span><span>{w.detail}</span></p>
           <a class="more go" href={live(w.slug)} tabindex="-1" aria-hidden="true">View the case study <Arrow /></a>
         </div>
+        {/* after the text so focus runs headline, then the loop's button; every loop is below the first screen, so all lazy */}
+        <Loop href={live(w.slug)} loop={loops[i]} name={w.name} alt={w.alt} eager={false} />
       </article>
     ))}
     <div class="morework reveal">

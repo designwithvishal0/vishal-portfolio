@@ -33,13 +33,13 @@ main{display:block}
 #calm[aria-pressed=true]{background:var(--ink);color:var(--bg)}
 
 /* hero: the name spans the content width. Its size comes from the measured width of the words. */
-.hero{container-type:inline-size;padding-top:clamp(20px,1.8vw,28px)}
-.name{display:flex;justify-content:space-between;align-items:last baseline;gap:.1em;font-size:min(calc(100cqi / 4.9),330px);line-height:.8}
+.hero{container-type:inline-size;padding-top:12px}
+.name{display:flex;justify-content:space-between;align-items:last baseline;gap:.1em;font-size:min(calc(100cqi / 5),330px);line-height:.8}
 .name .n{white-space:nowrap}
 .name .role{font-size:.255em;line-height:.9;width:min-content;letter-spacing:-.005em}
-.lede{margin-top:clamp(18px,2.2vw,30px);border-top:var(--thick) solid var(--ink);padding-top:clamp(18px,2.2vw,30px)}
+.lede{margin-top:clamp(14px,1.6vw,22px);border-top:var(--thick) solid var(--ink);padding-top:clamp(14px,1.6vw,22px)}
 .opinion{margin:0;font-family:var(--disp);font-weight:700;font-stretch:100%;font-size:clamp(38px,6vw,100px);line-height:.98;letter-spacing:-.035em;text-wrap:balance;max-width:12em}
-.hero-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);margin-top:clamp(28px,3.4vw,52px);align-items:start}
+.hero-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);margin-top:clamp(24px,2.4vw,36px);align-items:start}
 .hero-l{grid-column:1/7}
 .sup{margin:0;font-size:clamp(18px,1.45vw,20px);max-width:36em}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
@@ -53,15 +53,16 @@ main{display:block}
 .aud a span{color:var(--muted)}
 .aud a:hover span{color:var(--ink)}
 
-/* results, Juhi's fact grid: three counting numbers over three plain facts */
-.facts{margin-top:clamp(64px,6.4vw,112px)}
+/* results, Juhi's fact grid: three counting numbers over three plain facts. Close enough to the hero
+   that its heading and top rules sit inside the first screen at 1440x900, as on Juhi's site. */
+.facts{margin-top:clamp(40px,3.6vw,56px)}
 .facts h2{font-size:clamp(34px,3.6vw,56px);line-height:.95;margin-bottom:clamp(16px,1.6vw,24px)}
 .fgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--gap)}
 .f{border-top:var(--thick) solid var(--ink)}
 .f.num{padding:18px 0 30px}
 .r-num{display:block;font-size:clamp(96px,11.5vw,184px);line-height:.8;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .f-l{display:block;margin-top:18px;max-width:30ch;font-size:17px;line-height:1.45}
-.f.txt{border-top-width:1px;border-bottom:var(--thick) solid var(--ink);padding:14px 0 16px;font-size:18px;font-weight:600;line-height:1.35}
+.f.txt{border-top-width:1px;border-bottom:var(--thick) solid var(--ink);padding:14px 0 16px;font-size:18px;font-weight:600;line-height:1.35;text-wrap:balance}
 
 /* section heads: giant display words (Lash, Doug Alves) */
 .shead{display:flex;justify-content:space-between;align-items:last baseline;gap:16px 24px;flex-wrap:wrap;margin:clamp(96px,11vw,176px) 0 clamp(20px,2.4vw,36px)}
@@ -83,11 +84,13 @@ main{display:block}
 .p-prob{margin:0 0 18px;font-size:clamp(18px,1.55vw,22px);max-width:30em}
 .scope{display:flex;flex-direction:column;margin:0 0 24px;color:var(--muted);font-size:16px;line-height:1.5}
 .more{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:650;text-decoration:none}
-.p-text .more{margin-top:auto}
 .project:has(.mlink:hover,.p-link:hover,.more:hover) .p-link{text-decoration-color:currentColor}
 .project:has(.mlink:hover,.p-link:hover,.more:hover) .media :is(img,video){transform:scale(1.03)}
 .project:has(.mlink:hover,.p-link:hover,.more:hover) .more .arrow .stem{opacity:1}
 .project:has(.mlink:hover,.p-link:hover,.more:hover) .more .arrow .tip{transform:translateX(3px)}
+
+/* inline text links: the resting underline at 60% so it reads as a link (about 4:1 on both grounds) */
+.ul{background-image:linear-gradient(color-mix(in srgb,currentColor 60%,transparent),color-mix(in srgb,currentColor 60%,transparent)),linear-gradient(currentColor,currentColor)}
 
 /* tags: Shipped is solid ink, Concept is outlined */
 .tag{display:inline-flex;align-items:center;height:26px;padding:0 11px;border:1.5px solid var(--ink);border-radius:999px;font:600 13px/1 var(--text);white-space:nowrap}
@@ -150,15 +153,15 @@ main{display:block}
 .c-body{margin-top:clamp(32px,3.4vw,52px);max-width:920px}
 .c-body>p{margin:0;font-size:clamp(19px,1.6vw,22px)}
 .c-body .cta{margin-top:28px}
-.copy{font-weight:650}
+.copy{font-weight:650;align-items:center}
 .copy .tag{height:auto;font-size:.68em;padding:3px 10px;border-width:1.5px}
 .elsewhere{margin-top:28px!important;font-size:17px!important;color:var(--muted)}
 .elsewhere a{color:var(--ink)}
 
 /* footer */
 .foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-top:clamp(96px,10vw,160px);border-top:var(--thick) solid var(--ink);padding:18px 0 32px}
-.social{display:flex;flex-wrap:wrap;gap:0 28px}
-.social a{font-weight:600;padding:10px 0;background-origin:content-box;background-clip:content-box}
+.social{display:flex;flex-wrap:wrap;gap:0;margin-left:-16px}
+.social a{font-weight:600;padding:10px 16px;background-origin:content-box;background-clip:content-box}
 
 /* tablet */
 @media (max-width:1000px){
@@ -175,6 +178,8 @@ main{display:block}
   .project{grid-template-columns:minmax(0,1fr)}
   .project .media,.p-text{grid-column:1}
   .p-text{grid-row:2;margin-top:22px}
+  /* each loop is a portrait phone: a taller frame shows its UI about 1.67x larger at 390 */
+  .project .media{aspect-ratio:4/5}
   .lead{grid-template-columns:minmax(0,1fr)}
   .lead .thumb,.lead-t{grid-column:1}
   .how li{grid-template-columns:minmax(0,1fr)}
