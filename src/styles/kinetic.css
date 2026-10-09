@@ -290,7 +290,8 @@ html.scrub .whead{padding-bottom:0}
 }
 .rg{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:32px;margin-top:40px;align-items:stretch}
 .tx{grid-column:1/5;display:flex;flex-direction:column;align-items:flex-start}
-.tx .det{margin-top:auto;padding-top:20px}
+/* number and link sit right under the text they belong to, not pinned to the bottom of the video */
+.tx .det{padding-top:20px}
 .pan{grid-column:5/13}
 .meta{font-size:14px;font-weight:600;margin-bottom:14px}
 .pb{font-size:18px;line-height:1.5;margin-bottom:14px}

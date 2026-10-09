@@ -207,6 +207,32 @@ section p{color:var(--body);font-size:18px;line-height:1.6}
 #screens .shot.phone{width:360px;max-width:100%;border:0;border-radius:40px;box-shadow:0 16px 40px rgba(13,31,94,.12)}
 .lt :focus-visible{outline-color:#2348C4}
 @media (max-width:900px){article>section{padding-block:80px}#screens .screen{grid-template-columns:minmax(0,1fr);gap:24px}#screens .screen>figure{order:0}}
+article>section{width:100%}
+/* site top bar, same as the home page; no theme toggle because this case study keeps its own fixed look */
+.wrap{padding-top:40px}
+.bar{position:sticky;top:0;z-index:20;height:64px;margin-inline:calc(50% - 50vw);padding-inline:28px;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1080px;height:100%;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+.who{justify-self:start;font-size:15px;font-weight:600;text-decoration:none;padding:12px 0}
+.nav{display:flex;gap:32px;font-size:15px;font-weight:500}
+.nav a{text-decoration:none;padding:12px 0;text-underline-offset:.25em;text-decoration-thickness:1px}
+.who:hover,.nav a:hover{text-decoration-line:underline}
+.progress{z-index:30}
+.summary{max-width:1080px;margin-inline:auto}
+.summary h2{font-size:13px;font-family:var(--sans);font-weight:600;letter-spacing:.14em;color:var(--acc)}
+.summary p{font-size:16px}
+.pill[aria-pressed=true][data-act=cc]{background:#fff;color:#0C1631}
+video::cue{font:500 18px/1.4 var(--sans);background:rgba(12,22,49,.82);color:#fff}
+.beforeafter .a{box-shadow:inset 0 0 0 1px #2348C4}
+.beforeafter .a .k{color:#2348C4}
+.swipe{display:none}
+@media (max-width:759px){.bar-in{grid-template-columns:auto 1fr;gap:8px}.who{font-size:14px}.nav{justify-self:end;gap:18px;font-size:14px}}
+@media (max-width:620px){
+  #flow figure{display:none}
+  .swipe{display:flex;gap:16px;list-style:none;margin:32px -28px 0;padding:0 28px 8px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:28px;overscroll-behavior-x:contain}
+  .swipe li{flex:0 0 260px;scroll-snap-align:start;display:grid;gap:8px;align-content:start}
+  .swipe p{font-size:17px;font-weight:600;line-height:1.3;color:var(--fg);min-height:2.6em}
+  .swipe img{width:100%;height:auto;border-radius:28px;margin-top:8px;box-shadow:0 12px 32px rgba(13,31,94,.12)}
+}
 @media (max-width:620px){article>section{padding-block:64px}.layout{margin-top:64px}#screens .screens{gap:72px}#screens .screen h3{font-size:26px}}
 </style>
 </head>
@@ -214,10 +240,12 @@ section p{color:var(--body);font-size:18px;line-height:1.6}
 
 <div class="progress" aria-hidden="true"><i id="bar"></i></div>
 
+<header class="bar"><div class="bar-in">
+  <a class="who" href="/looks/kinetic/">Vishal Yadav</a>
+  <nav class="nav" aria-label="Site"><a href="/looks/kinetic/#work">Work</a><a href="/looks/kinetic/#about">About</a><a href="/looks/kinetic/#contact">Contact</a></nav>
+</div></header>
+
 <div class="wrap">
-  <div class="top">
-    <a href="https://designwvishal.framer.website/">Vishal Yadav</a>
-  </div>
 
   <header class="hero">
     <p class="eyebrow">Case study · B2B product design</p>
@@ -233,10 +261,12 @@ section p{color:var(--body);font-size:18px;line-height:1.6}
     <div><span class="k">Tools</span><p>FigJam, Figma</p></div>
   </div>
   <p class="note">Independent concept work. Not affiliated with Staqu. JARVIS is Staqu’s video analytics product. Camera stills, times and counts in the screens are illustrative.</p>
-  <figure class="reel" style="margin-top:32px"><video class="shot wide" src="showreel.mp4" poster="img/00-hero-poster.jpg" width="1920" height="1080" muted loop playsinline preload="metadata" aria-label="JARVIS Alerts showreel with voiceover"></video>
-    <div class="pills"><button type="button" class="pill" data-act="play" aria-pressed="false"><span aria-hidden="true">▷</span> PLAY</button><button type="button" class="pill" data-act="sound" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> SOUND ON</button></div></figure>
+  <figure class="reel" style="margin-top:32px"><video class="shot wide" src="showreel.mp4" poster="img/00-hero-poster.jpg" width="1920" height="1080" muted loop playsinline preload="metadata" aria-label="JARVIS Alerts showreel with voiceover"><track kind="captions" src="captions.vtt" srclang="en" label="English"></video>
+    <div class="pills"><button type="button" class="pill" data-act="play" aria-pressed="false"><span aria-hidden="true">▷</span> PLAY</button><button type="button" class="pill" data-act="sound" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> SOUND ON</button><button type="button" class="pill" data-act="cc" aria-pressed="false" aria-label="Captions">CC</button></div></figure>
   <script>(()=>{
-    const f=document.currentScript.previousElementSibling, v=f.querySelector('video'), [pb,sb]=f.querySelectorAll('.pill');
+    const f=document.currentScript.previousElementSibling, v=f.querySelector('video'), [pb,sb,cb]=f.querySelectorAll('.pill'), tr=v.textTracks[0];
+    tr.mode='hidden';
+    cb.onclick=()=>{const on=tr.mode!=='showing';tr.mode=on?'showing':'hidden';cb.setAttribute('aria-pressed',String(on))};
     const on='<svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>';
     const off=sb.innerHTML.split('</svg>')[0]+'</svg>';
     const paint=()=>{pb.innerHTML=v.paused?'<span aria-hidden="true">▷</span> PLAY':'<span aria-hidden="true">❙❙</span> PAUSE';pb.setAttribute('aria-pressed',String(!v.paused));
@@ -329,8 +359,14 @@ section p{color:var(--body);font-size:18px;line-height:1.6}
           <p>Tap “Tell us if not” under any alert. Pick the closest reason, or write your own. Submit. JARVIS answers straight away with what your correction changed. The whole loop happens on top of the alert feed, so nobody loses their place.</p>
         </div>
         <figure>
-          <img class="shot wide" src="img/05-feedback-loop.webp" alt="JARVIS Alerts false alert feedback loop" loading="lazy">
+          <img class="shot wide" src="img/05-feedback-loop.webp" width="2160" height="1440" alt="JARVIS Alerts false alert feedback loop" loading="lazy">
         </figure>
+        <ol class="swipe" aria-label="The flow, one screen at a time">
+          <li><span class="k">01 · Alert</span><p>Every alert carries a priority tier</p><img src="img/01-alert-feed.webp" width="412" height="917" alt="Alert feed with High, Medium and Low tiers" loading="lazy"></li>
+          <li><span class="k">02 · Flag</span><p>Pick the closest reason</p><img src="img/02-pick-a-reason.webp" width="412" height="917" alt="What made this a false alert? Pick the closest reason" loading="lazy"></li>
+          <li><span class="k">03 · Explain</span><p>Something else? Say it in plain words</p><img src="img/03-tell-us-more.webp" width="412" height="917" alt="Tell us more in plain words" loading="lazy"></li>
+          <li><span class="k">04 · Proof</span><p>See what your correction changed</p><img src="img/04-noted.webp" width="412" height="917" alt="JARVIS has noted this and says what changed" loading="lazy"></li>
+        </ol>
       </section>
 
       <section id="screens" class="lt wide">
@@ -358,7 +394,7 @@ section p{color:var(--body);font-size:18px;line-height:1.6}
         </div>
       </section>
 
-      <section id="try">
+      <section id="try" class="wide">
         <p class="eyebrow">Try it</p>
         <h2>Flag a false alert yourself</h2>
         <p>Tap “Tell us if not” under an alert to start.</p>
