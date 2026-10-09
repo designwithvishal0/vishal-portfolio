@@ -35,6 +35,7 @@ const motion = [
   ['--section', '500ms', 'Sections revealing on scroll'],
 ];
 const w = work[0];
+const demoLine = 'I design for the moment people are unsure.';
 ---
 <html lang="en">
 <head>
@@ -97,13 +98,14 @@ const w = work[0];
   <section aria-labelledby="m">
     <div class="sec-head"><h2 id="m">Motion</h2><span>Try each one, they are live</span></div>
     <p class="note">Everything eases out, so it starts fast and settles: press 120ms, hover 180ms, enter 360ms, section 500ms. Only transform and opacity move. All of it stops when the visitor asks for reduced motion, or switches it off below.</p>
-    <div class="row"><small>Page load, once, settled by about 480ms</small><div><p class="enter demo-enter" id="enter">I design for the moment people are unsure.</p><button class="btn" type="button" id="replay" style="margin-top:var(--s4)">Replay</button></div></div>
+    <div class="row"><small>Page load, once: the headline rises word by word, then the lines under it fade up in order</small><div><p class="words demo-enter" id="enter"><span class="vh">{demoLine}</span>{demoLine.split(' ').map((x, i, a) => <><span class="w" aria-hidden="true"><span style={`--i:${i}`}>{x}</span></span>{i < a.length - 1 && ' '}</>)}</p><button class="btn" type="button" id="replay" style="margin-top:var(--s4)">Replay</button></div></div>
     <div class="row"><small>Buttons: rest, hover and press are three tones of one colour, and only the press moves</small><div class="demo"><a class="btn primary" href="#m">Book a call</a><a class="btn" href="#m">Email</a></div></div>
     <div class="row"><small>Text link: a faint underline at rest, the full one draws in from the left</small><div><a class="ul" href="#m" style="font-weight:var(--w-strong)">See how I work with founders</a></div></div>
     <div class="row"><small>Arrow: a chevron grows a stem and moves 3px on hover. On a phone it stays formed</small><div><a class="more go" href="#m">View the case study <Arrow /></a></div></div>
     <div class="row"><small>Copy the email</small><div><button class="copy" type="button" data-copy="design.vishaly@gmail.com">design.vishaly@gmail.com <span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button><span class="vh" role="status" id="copied"></span></div></div>
-    <div class="row"><small>Theme spreads from the switch</small><div><p style="margin:0" class="note">Use the Dark mode button in the footer.</p></div></div>
-    <div class="row"><small>Work loop</small><div><p style="margin:0" class="note">Plays while the tile is mostly in view, on every device, and pauses when it leaves. The round button pauses or plays it. With reduced motion on, nothing starts by itself. Hovering the tile firms the frame and forms the arrow.</p></div></div>
+    <div class="row"><small>Theme spreads from the switch</small><div><p style="margin:0" class="note">On the site the Dark mode switch sits in the top bar, so the new theme spreads down from it. Try the one at the bottom of this page.</p></div></div>
+    <div class="row"><small>Result numbers count up from zero once, the first time they are half in view</small><div><p style="margin:0" class="note">Scroll to the CashKaro panel at the bottom of this page.</p></div></div>
+    <div class="row"><small>Work loop</small><div><p style="margin:0" class="note">Plays while the tile is mostly in view, on every device, and pauses when it leaves. The round button pauses or plays it. With reduced motion on, nothing starts by itself. Hovering the image, the headline or View the case study firms the frame and forms the arrow.</p></div></div>
   </section>
 
   <section aria-labelledby="k">
@@ -117,10 +119,11 @@ const w = work[0];
   </section>
 
   <section aria-label="Work tile">
-    <div class="sec-head"><h2>Work tile</h2><span>The whole tile is one link. The loop plays in view</span></div>
+    <div class="sec-head"><h2>Work tile</h2><span>The image, headline and View the case study open it. The text stays text</span></div>
     <div class="work" style="padding:0">
       <article class="tile reveal half">
         <div class="media" data-state="paused">
+          <a class="mlink" href="#k" tabindex="-1" aria-hidden="true"></a>
           <img src="/loops/ixigo.jpg" alt={w.alt} width="1200" height="900" loading="lazy" decoding="async" />
           <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"><source src="/loops/ixigo.mp4" type="video/mp4" /><source src="/loops/ixigo.webm" type="video/webm" /></video>
           <button class="vctl" type="button" data-name={w.name} aria-label={`Play the ${w.name} preview`}>
@@ -132,7 +135,7 @@ const w = work[0];
         <h3><a href="#k">{w.headline}</a></h3>
         <p>{w.problem}</p>
         <p class="scope"><span>{w.role}</span><span>{w.detail}</span></p>
-        <span class="more" aria-hidden="true">View the case study <Arrow /></span>
+        <a class="more" href="#k" tabindex="-1" aria-hidden="true">View the case study <Arrow /></a>
       </article>
     </div>
   </section>
@@ -140,7 +143,7 @@ const w = work[0];
   <section aria-labelledby="r" style="padding-top:var(--s18)">
     <div class="results">
       <h2 id="r">Shipped at CashKaro, for 25M+ users</h2>
-      <div class="r-grid"><div><div class="r-num">60%</div><div class="r-label">conversion lift on critical flows</div></div></div>
+      <div class="r-grid"><div><div class="r-num" data-n="60">60%</div><div class="r-label">conversion lift on critical flows</div></div></div>
     </div>
   </section>
 
@@ -153,7 +156,7 @@ const w = work[0];
 <script>
 import '../scripts/ui';
 const e = document.getElementById('enter');
-document.getElementById('replay')?.addEventListener('click', () => { if (!e) return; e.classList.remove('enter'); void e.offsetWidth; e.classList.add('enter'); });
+document.getElementById('replay')?.addEventListener('click', () => { if (!e) return; e.classList.remove('words'); void e.offsetWidth; e.classList.add('words'); });
 </script>
 </body>
 </html>

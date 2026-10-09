@@ -33,9 +33,27 @@ if (theme) {
   label();
 }
 
-// Work enters once as it scrolls in
+// Sections enter once as they scroll in
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), { threshold: .15 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Result numbers count up from zero once, the first time they are half in view. Under reduced motion they just show.
+const nums = document.querySelectorAll<HTMLElement>('.r-num[data-n]');
+if (!reduced()) nums.forEach(el => { el.textContent = '0%'; });
+const cio = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  cio.unobserve(e.target);
+  const el = e.target as HTMLElement, n = +el.dataset.n!;
+  if (reduced()) { el.textContent = `${n}%`; return; }
+  const t0 = performance.now();
+  const tick = (t: number) => {
+    const p = Math.min((t - t0) / 900, 1);
+    el.textContent = `${Math.round(n * (1 - (1 - p) ** 4))}%`;
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}), { threshold: .5 });
+nums.forEach(el => cio.observe(el));
 
 // Work loops play while mostly in view, on every device. Under reduced motion nothing starts on its own.
 // The button pauses or plays one loop, and that choice wins until the page reloads.
