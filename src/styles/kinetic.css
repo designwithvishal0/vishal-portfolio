@@ -99,7 +99,8 @@ img,video,canvas{display:block}
 .jl{color:var(--hc,currentColor);transition:color 900ms var(--ease)}
 .jw.settle .jl{transition:transform 700ms var(--spring),font-weight 700ms var(--spring),color 380ms var(--out) calc(var(--k,0) * 45ms)}
 @media (prefers-reduced-motion:no-preference){
-  html.live:not(.calm) .jw:is([data-busy],:not(.landed)):not(.settle) .jl{color:var(--ink);transition-duration:120ms}
+  /* while it shakes every letter wears a different project colour (all four pass AA in both themes), then the settle sweeps them back to --hc */
+  html.live:not(.calm) .jw:is([data-busy],:not(.landed)):not(.settle) .jl{color:var(--lc,var(--ink));transition-duration:120ms}
 }
 .words .wu{padding:.12em .1em;margin:-.12em -.1em}
 

@@ -293,7 +293,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   const seeded = (a: number) => () => { a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
   const timers = new Set<number>();
   const later = (f: () => void, ms: number) => { const t = window.setTimeout(() => { timers.delete(t); f(); }, ms); timers.add(t); };
-  const props = ['--y', '--wt', '--r'];
+  const props = ['--y', '--wt', '--r', '--lc'];
   const settle = (word: HTMLElement) => {
     word.classList.add('settle', 'landed');
     qa('.jl', word).forEach(l => props.forEach(p => l.style.removeProperty(p)));
@@ -304,6 +304,9 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     if (calm() || word.dataset.busy) return;
     const ls = qa('.jl', word), r = seeded(seed), s = (n: number) => (r() * 2 - 1) * n;
     word.dataset.busy = '1'; word.classList.remove('settle');
+    // a different colour on each letter, neighbours never matching; the starting hue changes every shake
+    const pal = ['--t-ixigo', '--t-split', '--t-twelve', '--t-jarvis'], o = Math.floor(r() * 4);
+    ls.forEach((l, i) => l.style.setProperty('--lc', `var(${pal[(i + o) % 4]})`));
     // lock the word's box at its settled width so the right aligned line never shifts (jitter weights stay at or under 800)
     const box = word.parentElement!; box.style.width = `${box.getBoundingClientRect().width}px`;
     let n = 0;
