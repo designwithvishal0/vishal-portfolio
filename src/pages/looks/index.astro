@@ -1,0 +1,29 @@
+---
+// Three visual directions for the home page, built 9 Oct 2026 after "very basic, very bland".
+const looks = [
+  { href: '/looks/poster', name: 'Poster', note: 'Your name at poster size with a fact grid under it, one ink colour on blush. Basis: Juhi Chitra, Doug Alves, Lash.' },
+  { href: '/looks/stage', name: 'Stage', note: 'Each project on its own full width stage at real size, with a marker highlight on the headline. Basis: Pleurat Shala, Amy La, Mike Matas, Eemon Roy.' },
+  { href: '/looks/signature', name: 'Signature', note: 'One deep green field and one hand drawn mark: a question mark at the top that the page answers with a tick. Basis: Axelle Pasquier, Andy Reff, Atul Khola.' },
+];
+---
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Three looks for the home page</title>
+<style>
+  body{font:17px/1.45 system-ui,sans-serif;max-width:40rem;margin:4rem auto;padding:0 1.25rem;color:#1d1d1f;background:#fff}
+  a{color:inherit;font-weight:600;text-underline-offset:3px}
+  li{margin:0 0 1.25rem}
+  p{margin:.25rem 0 0;color:#555}
+  @media (prefers-color-scheme:dark){body{background:#111316;color:#eee}p{color:#aaa}}
+</style>
+</head>
+<body>
+<h1>Three looks for the home page</h1>
+<p>Same copy, same sections and the same motion in all three. Only the visual language changes. Open each on your phone too.</p>
+<ol style="padding:0;list-style:none;margin-top:2rem">
+  {looks.map(l => <li><a href={l.href}>{l.name}</a><p>{l.note}</p></li>)}
+</ol>
+</body>
+</html>

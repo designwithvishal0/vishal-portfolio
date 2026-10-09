@@ -1,0 +1,174 @@
+---
+import '@fontsource-variable/instrument-sans/wdth.css';
+import '../../styles/looks-base.css';
+import '../../styles/looks-stage.css';
+import Boot from '../../components/Boot.astro';
+import Arrow from '../../components/Arrow.astro';
+import Loop from '../../components/Loop.astro';
+import { intro, work, live, email, social, loops, results, more, lead, pages, how, jobs } from '../../data/home';
+
+// Look 2, Stage: the product is on stage. Each project gets its own full bleed world.
+const ctas = intro.links.filter(l => l.href !== '#');
+
+// Positioning line, written by hand so "the moment people are unsure." can carry the marker.
+// Words rise one by one (looks-base), then one marker stroke sweeps left to right at a steady pace, once.
+// Each marked word turns to dark ink as the stroke reaches it, so it stays readable on yellow in dark mode.
+const words = intro.positioning.split(' ');
+const HL = words.indexOf('the');
+const PER = 24; // ms per character of the sweep
+const START = 980;
+let chars = 0;
+const inks = words.map((w, i) => {
+  if (i < HL) return '';
+  const s = `;--hd:${START + Math.round((chars + w.length / 2) * PER)}ms`;
+  chars += w.length + 1;
+  return s;
+});
+const sweep = `--hd:${START}ms;--hs:${(chars - 1) * PER}ms`;
+
+// Split and Twelve share a row on desktop; ixigo and JARVIS each get a full width stage.
+const rows = [[0], [1, 2], [3]];
+const facts = ['4.5 years in design, 2+ in core UI/UX', 'UI/UX and Graphic Designer at CashKaro, 2023 to 2026', 'Based in Gurugram'];
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Look: Stage, Vishal Yadav</title>
+<meta name="robots" content="noindex" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<Boot />
+</head>
+<body>
+<header class="top c">
+  <span class="status"><span class="dot" aria-hidden="true"></span>{intro.availability}</span>
+  <nav class="topnav" aria-label="Sections"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+  <button id="theme" type="button">Dark mode</button>
+</header>
+
+<main>
+  <section class="hero c">
+    <h1 class="name">{intro.name}</h1>
+    <p class="pos words"><span class="vh">{intro.positioning}</span>{words.slice(0, HL).map((w, i) => <><span class="w" aria-hidden="true"><span style={`--i:${i}`}>{w}</span></span>{' '}</>)}<span class="mk" style={sweep}>{words.slice(HL).map((w, j) => <>{j > 0 && ' '}<span class="w" aria-hidden="true"><span style={`--i:${HL + j}${inks[HL + j]}`}>{w}</span></span>{w === 'moment' && <br class="br" />}</>)}</span></p>
+    <div class="hero-row">
+      <div>
+        <p class="sup enter" style="--d:260ms">{intro.supporting}</p>
+        <div class="cta enter" style="--d:380ms">
+          {ctas.map(l => <a class="btn primary" href={l.href}>{l.label}</a>)}
+        </div>
+      </div>
+      <ul class="aud enter" style="--d:320ms" aria-label="Start here">
+        <li><a class="go" href="#work"><strong>Hiring a product designer</strong> <span>See the case studies</span><Arrow /></a></li>
+        <li><a class="go" href="#results"><strong>Recruiting</strong> <span>The 30 second version</span><Arrow /></a></li>
+        <li><a class="go" href="#pages"><strong>Founder</strong> <span>Need a page that sells</span><Arrow /></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="work" id="work" aria-labelledby="w-h">
+    <div class="sec-head c"><h2 id="w-h">Selected work</h2><span>4 case studies</span></div>
+    {rows.map((g, gi) => (
+      <div class={`row${g.length > 1 ? ' duo' : ' solo'}${gi ? ' reveal' : ''}`}>
+        {g.map(i => { const w = work[i]; return (
+          <article class={`project p-${loops[i]}`}>
+            <div class={`stage s-${loops[i]}`}>
+              <Loop href={live(w.slug)} loop={loops[i]} name={w.name} alt={w.alt} eager={i === 0} />
+            </div>
+            <div class="cap">
+              <div class="cap-a">
+                <p class="meta"><span class="pname">{w.name}</span><span class="pill">{w.type.includes('B2B') ? 'B2B concept' : 'Concept'}</span><span class="yr">{w.year}</span></p>
+                <h3><a class="p-link" href={live(w.slug)}>{w.headline}<span class="vh">, the {w.name} case study</span></a></h3>
+              </div>
+              <div class="cap-b">
+                <p class="prob">{w.problem}</p>
+                <p class="scope"><span>{w.role}</span><span>{w.detail}</span></p>
+                <a class="more go" href={live(w.slug)} tabindex="-1" aria-hidden="true">View the case study <Arrow /></a>
+              </div>
+            </div>
+          </article>
+        ); })}
+      </div>
+    ))}
+  </section>
+
+  <section class="mws c reveal" aria-labelledby="mw-h">
+    <h2 id="mw-h" class="h2">More work</h2>
+    <ul class="mw-list">
+      {more.map(m => (
+        <li><a class="mw go" href={m.href}>
+          <span class="mw-name">{m.name}</span>
+          <span class="mw-line">{m.line}</span>
+          <span class="pill">Concept</span><Arrow />
+        </a></li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="results c reveal" id="results" aria-labelledby="r-h">
+    <h2 id="r-h" class="h2">Shipped at CashKaro, for 25M+ users</h2>
+    <div class="facts">
+      {results.map(r => <div class="fact"><span class="r-num" data-n={parseInt(r.n)}>{r.n}</span><p>{r.label}</p></div>)}
+      {facts.map(f => <div class="fact plain"><p>{f}</p></div>)}
+    </div>
+  </section>
+
+  <section class="pages c" id="pages" aria-labelledby="p-h">
+    <div class="pages-head reveal"><h2 id="p-h" class="h2">Pages that sell</h2><p>Campaigns, landing pages and product pages for commerce brands.</p></div>
+    <article class="lead reveal">
+      <div class="thumb"><img src={`/pages/${lead.img}.webp`} alt={`${lead.name}, preview`} width="960" height="1004" loading="lazy" decoding="async" /></div>
+      <div class="lead-t">
+        <span class="pill shipped">{lead.tag}</span>
+        <h3>{lead.name}</h3>
+        <p>{lead.line}</p>
+        <dl class="pstats">{lead.stats.map(([n, l]) => <div><dt>{l}</dt><dd>{n}</dd></div>)}</dl>
+      </div>
+    </article>
+    <ul class="rail reveal">
+      {pages.map(p => (
+        <li><a class="page go" href={p.href}>
+          <div class="thumb"><img src={`/pages/${p.img}.webp`} alt={`${p.name}, preview`} width="960" height="1004" loading="lazy" decoding="async" /></div>
+          <span class="ptag">{p.tag && <span class={`pill${p.tag.startsWith('Shipped') ? ' shipped' : ''}`}>{p.tag}</span>}</span>
+          <h3>{p.name}</h3>
+          <p>{p.line}</p>
+          <span class="more">View on Behance <Arrow /></span>
+        </a></li>
+      ))}
+    </ul>
+    <p class="freelance reveal">Need a page that sells? <a class="ul" href="#contact">See how I work with founders</a></p>
+  </section>
+
+  <section class="how-sec c reveal" aria-labelledby="h-h">
+    <h2 id="h-h" class="h2">How I work</h2>
+    <div class="how">
+      {how.map(x => <div><h3>{x.h}</h3><p>{x.p}</p><a class="more go" href={x.href}>{x.link} <Arrow /></a></div>)}
+    </div>
+  </section>
+
+  <section class="about c reveal" id="about" aria-labelledby="a-h">
+    <h2 id="a-h" class="h2">About</h2>
+    <div class="about-g">
+      <p class="lead-p">From October 2023 to August 2026 I designed app and web flows at CashKaro, India’s largest cashback platform, and built the Figma design system its campaigns run on. Before that I was a graphic designer at an agency, which is why what I ship looks finished (that work lives in <a class="ul" href="https://www.behance.net/design_vishaly">the archive</a>). I studied Computer Science, so I know what engineers need at handoff, and I use AI to move faster through research and iteration while the design calls stay mine.</p>
+      <dl class="jobs">{jobs.map(([c, r, y]) => <div><dt>{c}</dt><dd>{r}</dd><dd class="y">{y}</dd></div>)}</dl>
+    </div>
+  </section>
+
+  <section class="contact c reveal" id="contact" aria-labelledby="c-h">
+    <h2 id="c-h">Hiring, or need a page that sells?</h2>
+    <p>Email me at <button class="copy" type="button" data-copy={email}>{email} <span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button> or book a call. I reply within a day.</p>
+    <span class="vh" role="status" id="copied"></span>
+    <div class="cta">
+      <a class="btn primary" href="https://cal.com/designwvishal">Book a call</a>
+      <a class="btn" href={`mailto:${email}`}>Email</a>
+    </div>
+    <p class="elsewhere">You can also find me on <a class="ul" href={social[0][1]}>LinkedIn</a> and <a class="ul" href={social[1][1]}>Behance</a>.</p>
+  </section>
+</main>
+
+<footer class="foot c">
+  <nav aria-label="Elsewhere" class="social">{social.map(([l, h]) => <a class="ul" href={h}>{l}</a>)}</nav>
+  <button id="calm" type="button" aria-pressed="false">Reduce motion</button>
+</footer>
+<script>import '../../scripts/ui';</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+---
+// Look 3, Signature: one deep green field and one small hand drawn mark that is reused, so the site is remembered
+// (Axelle Pasquier's fox on one deep colour, Andy Reff's one coloured character, Atul Khola's green field).
+// The mark is a question mark, the moment people are unsure. The contact band answers it with a tick in the same pen.
+import '@fontsource-variable/schibsted-grotesk';
+import display from '@fontsource-variable/schibsted-grotesk/files/schibsted-grotesk-latin-wght-normal.woff2?url';
+import '../../styles/looks-base.css';
+import '../../styles/looks-signature.css';
+import Boot from '../../components/Boot.astro';
+import Arrow from '../../components/Arrow.astro';
+import Loop from '../../components/Loop.astro';
+import Words from '../../components/Words.astro';
+import { intro, work, live, email, social, loops, results, more, lead, pages, how, jobs } from '../../data/home';
+
+// The resume button shows once the site copy of the CV exists.
+const ctas = intro.links.filter(l => l.href !== '#').reverse();
+const facts = ['4.5 years in design, 2+ in core UI/UX', 'UI/UX and Graphic Designer at CashKaro, 2023 to 2026', 'Based in Gurugram'];
+
+// The mark, drawn as single pen strokes (uneven curve, round caps). A stand in for Vishal's own drawing.
+const q = (cls: string) => `<svg class="q ${cls}" viewBox="0 0 100 160" aria-hidden="true" focusable="false"><path class="q-hook" pathLength="1" d="M21 57C15 37 29 15 52 12C74 9 91 24 86 45C83 60 70 66 60 76C52 84 49 95 52 111"/><path class="q-dot" d="M50 137c2 0 3.5 2 2.6 4.6"/></svg>`;
+const tick = `<svg class="tick" viewBox="0 0 140 110" aria-hidden="true" focusable="false"><path d="M9 63C19 64 31 76 43 97C57 64 84 31 132 11"/></svg>`;
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Look: Signature, Vishal Yadav</title>
+<meta name="robots" content="noindex" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="preload" href={display} as="font" type="font/woff2" crossorigin />
+<Boot />
+</head>
+<body class="sig">
+<header class="top band">
+  <p class="status"><span class="dot" aria-hidden="true"></span>{intro.availability}</p>
+  <nav aria-label="Sections"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+  <button id="theme" type="button">Dark mode</button>
+</header>
+
+<main>
+<section class="hero band" aria-labelledby="hero-h">
+  <h1 id="hero-h" class="name">{intro.name}</h1>
+  <div class="say">
+    <Words text={intro.positioning} class="opinion" />
+    <!-- The question mark and the tick are stand ins for Vishal's own drawing. Swap the paths when he draws them. -->
+    <Fragment set:html={q('q-hero')} />
+  </div>
+  <div class="hero-row">
+    <p class="sup enter" style="--d:260ms">{intro.supporting}</p>
+    <div class="cta enter" style="--d:320ms">
+      {ctas.map(l => <a class="btn primary" href={l.href}>{l.label}</a>)}
+    </div>
+    <ul class="aud enter" style="--d:380ms" aria-label="Start here">
+      <li><a class="go" href="#work"><strong>Hiring a product designer</strong> <span>See the case studies</span><Arrow /></a></li>
+      <li><a class="go" href="#results"><strong>Recruiting</strong> <span>The 30 second version</span><Arrow /></a></li>
+      <li><a class="go" href="#pages"><strong>Founder</strong> <span>Need a page that sells</span><Arrow /></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="facts band" id="results" aria-labelledby="r-h">
+  <div class="reveal">
+    <h2 id="r-h">Shipped at CashKaro, for 25M+ users</h2>
+    <ul class="fgrid">
+      {results.map(r => <li class="f num"><span class="r-num" data-n={parseInt(r.n)}>{r.n}</span><span class="f-l">{r.label}</span></li>)}
+      {facts.map(f => <li class="f txt">{f}</li>)}
+    </ul>
+  </div>
+</section>
+
+<section class="work" id="work" aria-labelledby="w-h">
+  <div class="shead reveal"><h2 id="w-h"><Fragment set:html={q('mk')} />Selected work</h2><span class="count">4 case studies</span></div>
+  <div class="projects">
+    {work.map((w, i) => (
+      <article class={`project reveal p${i}`}>
+        <Loop href={live(w.slug)} loop={loops[i]} name={w.name} alt={w.alt} eager={i === 0} />
+        <div class="p-text">
+          <p class="p-meta"><span class="p-name">{w.name}</span><span class="tag">{w.type.includes('B2B') ? 'B2B concept' : 'Concept'}</span><span>{w.year}</span></p>
+          <h3><a class="p-link" href={live(w.slug)}>{w.headline}<span class="vh">, the {w.name} case study</span></a></h3>
+          <p class="p-prob">{w.problem}</p>
+          <p class="scope"><span>{w.role}</span><span>{w.detail}</span></p>
+          <a class="more go" href={live(w.slug)} tabindex="-1" aria-hidden="true">View the case study <Arrow /></a>
+        </div>
+      </article>
+    ))}
+  </div>
+  <div class="morework reveal">
+    <h3 id="m-h">More work</h3>
+    <ul aria-labelledby="m-h">
+      {more.map(m => (
+        <li><a class="mw go" href={m.href}><Arrow /><span class="mw-n">{m.name}</span><span class="mw-l">{m.line}</span><span class="tag">Concept</span></a></li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<section class="pages" id="pages" aria-labelledby="p-h">
+  <div class="shead stack reveal"><h2 id="p-h"><Fragment set:html={q('mk')} />Pages that sell</h2><p class="count">Campaigns, landing pages and product pages for commerce brands.</p></div>
+  <article class="lead reveal">
+    <div class="thumb"><img src={`/pages/${lead.img}.webp`} alt={`${lead.name}, preview`} width="960" height="1004" loading="lazy" decoding="async" /></div>
+    <div class="lead-t">
+      <span class="tag ship">{lead.tag}</span>
+      <h3>{lead.name}</h3>
+      <p>{lead.line}</p>
+      <dl class="stats">{lead.stats.map(([n, l]) => <div><dt>{l}</dt><dd>{n}</dd></div>)}</dl>
+    </div>
+  </article>
+  <ul class="rail">
+    {pages.map(p => (
+      <li class="reveal"><a class="page go" href={p.href}>
+        <div class="thumb"><img src={`/pages/${p.img}.webp`} alt={`${p.name}, preview`} width="960" height="1004" loading="lazy" decoding="async" /></div>
+        <span class="ptag">{p.tag && <span class={`tag${p.tag.startsWith('Shipped') ? ' ship' : ''}`}>{p.tag}</span>}</span>
+        <h3>{p.name}</h3>
+        <p>{p.line}</p>
+        <span class="more">View on Behance <Arrow /></span>
+      </a></li>
+    ))}
+  </ul>
+  <p class="freelance reveal">Need a page that sells? <a class="ul" href="#contact">See how I work with founders</a></p>
+</section>
+
+<section class="how" aria-labelledby="h-h">
+  <h2 id="h-h" class="shead reveal"><Fragment set:html={q('mk')} />How I work</h2>
+  <ul>
+    {how.map(x => <li class="reveal"><h3>{x.h}</h3><div><p>{x.p}</p><a class="more go" href={x.href}>{x.link} <Arrow /></a></div></li>)}
+  </ul>
+</section>
+
+<section class="about" id="about" aria-labelledby="a-h">
+  <h2 id="a-h" class="shead reveal"><Fragment set:html={q('mk')} />About</h2>
+  <div class="about-in reveal">
+    <p class="lead-p">From October 2023 to August 2026 I designed app and web flows at CashKaro, India’s largest cashback platform, and built the Figma design system its campaigns run on. Before that I was a graphic designer at an agency, which is why what I ship looks finished (that work lives in <a class="ul" href="https://www.behance.net/design_vishaly">the archive</a>). I studied Computer Science, so I know what engineers need at handoff, and I use AI to move faster through research and iteration while the design calls stay mine.</p>
+    <dl class="jobs">{jobs.map(([c, r, y]) => <div><dt>{c}</dt><dd>{r}</dd><dd class="y">{y}</dd></div>)}</dl>
+  </div>
+</section>
+
+<section class="contact band" id="contact" aria-labelledby="c-h">
+  <div class="reveal">
+    <div class="c-head">
+      <h2 id="c-h">Hiring, or need a page that sells?</h2>
+      <Fragment set:html={tick} />
+    </div>
+    <div class="c-body">
+      <p class="c-mail">Email me at <button class="copy" type="button" data-copy={email}>{email} <span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button> or book a call. I reply within a day.</p>
+      <span class="vh" role="status" id="copied"></span>
+      <div class="cta">
+        <a class="btn primary" href="https://cal.com/designwvishal">Book a call</a>
+        <a class="btn" href={`mailto:${email}`}>Email</a>
+      </div>
+      <p class="elsewhere">You can also find me on <a class="ul" href={social[0][1]}>LinkedIn</a> and <a class="ul" href={social[1][1]}>Behance</a>.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot band">
+  <Fragment set:html={q('q-foot')} />
+  <nav aria-label="Elsewhere" class="social">{social.map(([l, h]) => <a class="ul" href={h}>{l}</a>)}</nav>
+  <button id="calm" type="button" aria-pressed="false">Reduce motion</button>
+</footer>
+<script>import '../../scripts/ui';</script>
+</body>
+</html>
