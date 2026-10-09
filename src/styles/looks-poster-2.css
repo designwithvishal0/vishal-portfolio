@@ -1,0 +1,250 @@
+/* Poster 2. Type is the hero: Bricolage Grotesque at 75% width and 800 weight for the name
+   and the big heads, Hanken Grotesk for reading. A red of his own on a near white ground, oxblood at night.
+   Red goes only to the name, the counting numbers, the primary button and the live dot. Rules are the ink
+   at low opacity: 2px structural, 1px small. */
+:root{
+  --bg:#F5F5F3;--ink:#151515;--muted:#5B5B5B;--red:#D3261C;--on-red:#fff;
+  --rule:color-mix(in srgb,var(--ink) 18%,transparent);
+  --focus:var(--ink);--live:var(--red);
+  --well:color-mix(in srgb,var(--ink) 6%,var(--bg));
+  --duo-f:url(#duo-l);
+  --disp:'Bricolage Grotesque Variable','Arial Narrow',sans-serif;
+  --text:'Hanken Grotesk Variable',system-ui,sans-serif;
+  --g:clamp(20px,3.6vw,56px);
+  --gap:clamp(16px,2.4vw,40px);
+  --thick:2px;--r:10px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#2A0B09;--ink:#FFE7E1;--muted:#D7A9A0;--red:#FF6A52;--on-red:#2A0B09;--duo-f:url(#duo-d)}}
+:root[data-theme=dark]{--bg:#2A0B09;--ink:#FFE7E1;--muted:#D7A9A0;--red:#FF6A52;--on-red:#2A0B09;--duo-f:url(#duo-d)}
+::selection{background:var(--red);color:var(--on-red)}
+
+body{font-family:var(--text);font-size:18px;line-height:1.55;font-kerning:normal}
+.pg{max-width:1760px;margin:0 auto;padding:0 var(--g)}
+main{display:block}
+
+/* one display voice for every big word on the page */
+.name,.facts h2,.r-num,.shead h2,.shead-m,.project h3,.morework h3,.mw-n,.lead h3,.stats dd,.page p,.how h3,.contact h2{
+  font-family:var(--disp);font-weight:800;font-stretch:75%;letter-spacing:-.012em;margin:0}
+
+/* top bar: status left, sections centred, theme right */
+.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;min-height:76px}
+.status{display:flex;align-items:center;gap:10px;margin:0;font-size:15px;font-weight:500;line-height:1.3}
+.top nav{display:flex;gap:32px}
+.top nav a{font-size:16px;font-weight:600;text-decoration:none;padding:12px 0;background:linear-gradient(currentColor,currentColor) no-repeat 0 calc(100% - 8px)/0 2px;transition:background-size var(--hover) var(--ease-out)}
+.top nav a:hover,.top nav a:focus-visible{background-size:100% 2px}
+#theme,#calm{justify-self:end;font:600 15px/1 var(--text);color:var(--ink);background:none;border:1.5px solid var(--ink);border-radius:999px;padding:0 18px;height:40px;cursor:pointer;transition:background-color var(--hover) var(--ease-out),color var(--hover) var(--ease-out)}
+#theme:hover,#calm:hover{background:var(--ink);color:var(--bg)}
+#calm[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+
+/* hero: the name spans the content width. Its size comes from the measured width of the words. */
+.hero{container-type:inline-size;padding-top:12px}
+.name{display:flex;justify-content:space-between;align-items:last baseline;gap:.1em;font-size:min(calc(100cqi / 5),330px);line-height:.8}
+.name .n{white-space:nowrap;color:var(--red)}
+.name .role{font-size:.255em;line-height:.9;width:min-content;letter-spacing:-.005em}
+
+/* under the name: the opinion line over the pitch and the ways in, his photo on the right. Three columns,
+   the same as the fact grid below, so the pitch, the ways in and the photo sit over the three numbers. */
+.lede{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto auto 1fr;column-gap:var(--gap);margin-top:clamp(14px,1.6vw,22px);border-top:var(--thick) solid var(--rule);padding-top:clamp(16px,1.8vw,26px)}
+.opinion{grid-column:1/3;grid-row:1;margin:0;font-family:var(--disp);font-weight:700;font-stretch:100%;font-size:clamp(30px,3.9vw,56px);line-height:1;letter-spacing:-.03em;text-wrap:balance;max-width:16em}
+.hero-l{grid-column:1;grid-row:2;margin-top:40px}
+.aud{grid-column:2;grid-row:2;margin-top:40px}
+.portrait{position:relative;grid-column:3;grid-row:1/4;width:100%;aspect-ratio:4/5;margin:0;overflow:hidden;isolation:isolate;background:var(--well)}
+/* printed in the page's red by an SVG filter in the page: greys mapped black, red, white, like red laid over
+   the photo in overlay. That keeps the face's full range, where a plain multiply crushed it into the darkest
+   quarter. At night the map runs from near oxblood to the lifted red, so the photo is printed in the same ink as the name. */
+.portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%;filter:var(--duo-f)}
+.duo{position:absolute;width:0;height:0;overflow:hidden}
+.sup{margin:0;font-size:clamp(17px,1.35vw,19px);max-width:36em}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 26px;border-radius:999px;border:1.5px solid var(--ink);font:600 17px/1 var(--text);text-decoration:none;white-space:nowrap;transition:box-shadow var(--hover) var(--ease-out),transform var(--press) var(--ease-out)}
+.btn.primary{background:var(--red);border-color:var(--red);color:var(--on-red)}
+.btn:hover{box-shadow:0 0 0 3px var(--bg),0 0 0 4.5px var(--ink)}
+.btn.primary:hover{box-shadow:0 0 0 3px var(--bg),0 0 0 4.5px var(--red)}
+.btn:active{transform:scale(.97)}
+.aud{list-style:none;margin-bottom:0;padding:0;border-top:1px solid var(--rule)}
+.aud a{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:14px;min-height:60px;padding:10px 0;border-bottom:1px solid var(--rule);text-decoration:none;line-height:1.35}
+.aud strong{grid-column:1;font-weight:650}
+.aud a span{grid-column:1;grid-row:2;color:var(--muted)}
+.aud .arrow{grid-column:2;grid-row:1/3}
+.aud a:hover span{color:var(--ink)}
+
+/* results: three counting numbers in red over three plain facts */
+.facts{margin-top:clamp(40px,3.6vw,56px)}
+.facts h2{font-size:clamp(34px,3.6vw,56px);line-height:.95;margin-bottom:clamp(16px,1.6vw,24px)}
+.fgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:var(--gap)}
+.f{border-top:var(--thick) solid var(--rule)}
+.f.num{padding:18px 0 30px}
+.r-num{display:block;color:var(--red);font-size:clamp(96px,11.5vw,184px);line-height:.8;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.f-l{display:block;margin-top:18px;max-width:30ch;font-size:17px;line-height:1.45}
+.f.txt{border-top-width:1px;border-bottom:var(--thick) solid var(--rule);padding:14px 0 16px;font-size:18px;font-weight:600;line-height:1.35;text-wrap:balance}
+
+/* section heads: giant display words (Lash, Doug Alves) */
+.shead{display:flex;justify-content:space-between;align-items:last baseline;gap:16px 24px;flex-wrap:wrap;margin:clamp(96px,11vw,176px) 0 clamp(20px,2.4vw,36px)}
+.shead h2{font-size:clamp(68px,11.5vw,188px);line-height:.8}
+.count{margin:0;font-size:17px;font-weight:600}
+.shead.stack{display:block}
+.shead.stack .count{margin-top:clamp(16px,1.6vw,24px);font-weight:500;font-size:clamp(18px,1.45vw,20px);max-width:36em}
+.shead-m{font-size:clamp(56px,8vw,128px);line-height:.82}
+
+/* selected work: poster rows, headline big beside a large loop */
+.project{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);border-top:var(--thick) solid var(--rule);padding:clamp(20px,2.4vw,32px) 0 clamp(64px,7vw,112px)}
+.project .media{grid-column:6/13;grid-row:1;border-radius:var(--r);background:var(--well)}
+.media img,.media video{transition:transform var(--section) var(--ease-out),opacity var(--enter) var(--ease-out)}
+.p-text{grid-column:1/6;grid-row:1;display:flex;flex-direction:column;align-items:flex-start}
+.p-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:0 0 clamp(18px,2vw,28px);font-size:15px}
+.p-name{font-weight:650}
+.project h3{font-size:clamp(42px,5.6vw,86px);line-height:.88;margin-bottom:clamp(18px,2vw,28px)}
+.p-link{text-decoration:underline;text-decoration-thickness:.06em;text-underline-offset:.1em;text-decoration-color:transparent;transition:text-decoration-color var(--hover) var(--ease-out)}
+.p-prob{margin:0 0 18px;font-size:clamp(18px,1.55vw,22px);max-width:30em}
+.scope{display:flex;flex-direction:column;margin:0 0 24px;color:var(--muted);font-size:16px;line-height:1.5}
+.more{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:650;text-decoration:none}
+.project:has(.mlink:hover,.p-link:hover,.more:hover) .p-link{text-decoration-color:currentColor}
+.project:has(.mlink:hover,.p-link:hover,.more:hover) .media :is(img,video){transform:scale(1.03)}
+.project:has(.mlink:hover,.p-link:hover,.more:hover) .more .arrow .stem{opacity:1}
+.project:has(.mlink:hover,.p-link:hover,.more:hover) .more .arrow .tip{transform:translateX(3px)}
+
+/* inline text links: the resting underline at 60% so it reads as a link (about 4:1 on both grounds) */
+.ul{background-image:linear-gradient(color-mix(in srgb,currentColor 60%,transparent),color-mix(in srgb,currentColor 60%,transparent)),linear-gradient(currentColor,currentColor)}
+
+/* tags: Shipped is solid ink, Concept is outlined */
+.tag{display:inline-flex;align-items:center;height:26px;padding:0 11px;border:1.5px solid var(--ink);border-radius:999px;font:600 13px/1 var(--text);white-space:nowrap}
+.tag.solid{background:var(--ink);color:var(--bg)}
+
+/* more work: a short list in big display type, the whole row is the link */
+.morework{border-top:var(--thick) solid var(--rule);padding-top:clamp(18px,2vw,28px)}
+.morework h3{font-size:clamp(28px,2.6vw,40px);line-height:.95;margin-bottom:clamp(8px,1vw,16px)}
+.morework ul{list-style:none;margin:0;padding:0}
+.mw{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;align-items:center;column-gap:clamp(16px,2.4vw,40px);padding:clamp(14px,1.6vw,22px) 0;border-bottom:1px solid var(--rule);text-decoration:none}
+.mw-n{font-size:clamp(40px,6vw,96px);line-height:.9}
+.mw-l{font-size:clamp(17px,1.45vw,20px);color:var(--muted)}
+.mw .arrow{width:clamp(22px,2.6vw,36px);height:clamp(22px,2.6vw,36px);stroke-width:1.4}
+.mw:hover .mw-l{color:var(--ink)}
+
+/* pages that sell */
+.lead{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);align-items:end;border-top:var(--thick) solid var(--rule);padding-top:clamp(20px,2.4vw,32px)}
+.thumb{aspect-ratio:1;overflow:hidden;border-radius:var(--r);background:var(--well)}
+.thumb img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0;transition:transform var(--section) var(--ease-out)}
+.lead .thumb{grid-column:1/6}
+.lead-t{grid-column:7/13;display:flex;flex-direction:column;align-items:flex-start}
+.lead h3{font-size:clamp(44px,5.6vw,86px);line-height:.88;margin:20px 0 18px}
+.lead-t>p{margin:0;font-size:clamp(18px,1.6vw,22px);max-width:26em}
+.stats{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:16px clamp(24px,3.4vw,56px);margin:clamp(28px,3vw,44px) 0 0;padding-top:16px;border-top:1px solid var(--rule);width:100%}
+.stats div{display:flex;flex-direction:column-reverse}
+.stats dt{font-size:15px;color:var(--muted);margin-top:8px}
+.stats dd{margin:0;font-size:clamp(40px,4.6vw,72px);line-height:.85;white-space:nowrap;font-variant-numeric:tabular-nums}
+.rail{list-style:none;margin:clamp(56px,6vw,96px) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gap)}
+.rail li{min-width:0}
+.page{display:block;text-decoration:none;height:100%}
+.ptag{display:flex;align-items:center;min-height:26px;margin-top:18px}
+.page h3{margin:12px 0 6px;font-size:15px;font-weight:650}
+.page p{font-size:clamp(26px,2.3vw,36px);line-height:.95;margin-bottom:14px;text-wrap:balance}
+.page .more{min-height:0}
+@media (hover:hover) and (pointer:fine){a.page:hover .thumb img{transform:scale(1.03)}}
+.freelance{margin:clamp(56px,6vw,96px) 0 0;font-size:clamp(20px,1.9vw,26px);font-weight:600}
+
+/* how I work: ruled rows, the heading carries the idea */
+.how{margin-top:clamp(96px,11vw,176px)}
+.how .shead-m{margin-bottom:clamp(20px,2.4vw,36px)}
+.how ul{list-style:none;margin:0;padding:0}
+.how li{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);border-top:1px solid var(--rule);padding:clamp(18px,2vw,26px) 0 clamp(28px,3vw,40px)}
+.how li:first-child{border-top-width:var(--thick)}
+.how h3{grid-column:1/6;font-size:clamp(34px,3.6vw,56px);line-height:.92}
+.how li>div{grid-column:7/13}
+.how p{margin:0 0 12px;max-width:34em}
+
+/* about */
+.about{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gap);margin-top:clamp(96px,11vw,176px)}
+.about .shead-m{grid-column:1/-1;margin-bottom:clamp(20px,2.4vw,36px)}
+.lead-p{grid-column:1/8;margin:0;border-top:var(--thick) solid var(--rule);padding-top:clamp(18px,2vw,26px);font-size:clamp(19px,1.6vw,22px);line-height:1.5;max-width:36em}
+.jobs{grid-column:9/13;margin:0;border-top:var(--thick) solid var(--rule)}
+.jobs div{padding:14px 0 16px;border-bottom:1px solid var(--rule)}
+.jobs dt{font-weight:650}
+.jobs dd{margin:0;color:var(--muted)}
+
+/* contact: the bookend, set at poster scale like the name */
+.contact{container-type:inline-size;margin-top:clamp(112px,12vw,192px);border-top:var(--thick) solid var(--rule);padding-top:clamp(20px,2.4vw,32px)}
+.contact h2{font-size:min(calc(100cqi / 5.25),300px);line-height:.86;text-wrap:balance}
+.c-body{margin-top:clamp(32px,3.4vw,52px);max-width:920px}
+.c-body>p{margin:0;font-size:clamp(19px,1.6vw,22px)}
+.c-body .cta{margin-top:28px}
+.copy{font-weight:650;align-items:center}
+.copy .tag{height:auto;font-size:.68em;padding:3px 10px;border-width:1.5px}
+.elsewhere{margin-top:28px!important;font-size:17px!important;color:var(--muted)}
+.elsewhere a{color:var(--ink)}
+
+/* footer */
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-top:clamp(96px,10vw,160px);border-top:var(--thick) solid var(--rule);padding:18px 0 32px}
+.social{display:flex;flex-wrap:wrap;gap:0;margin-left:-16px}
+.social a{font-weight:600;padding:10px 16px;background-origin:content-box;background-clip:content-box}
+
+/* tablet: the left column stacks, the photo widens to five columns */
+@media (max-width:1100px){
+  .lede{grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:auto auto auto 1fr}
+  .opinion,.hero-l,.aud{grid-column:1/8}
+  .hero-l{grid-row:2;margin-top:24px}
+  .aud{grid-row:3;margin-top:36px}
+  .portrait{grid-column:8/13;grid-row:1/5;align-self:start;width:100%}
+}
+@media (max-width:1000px){
+  .lead .thumb{grid-column:1/7}
+  .rail{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:56px}
+  .lead-p{grid-column:1/-1}
+  .jobs{grid-column:1/-1;margin-top:40px}
+  .stats{grid-template-columns:repeat(3,auto);justify-content:space-between;gap:16px}
+  .stats dd{font-size:clamp(28px,4.2vw,44px)}
+}
+@media (max-width:760px){
+  .project{grid-template-columns:minmax(0,1fr)}
+  .project .media,.p-text{grid-column:1}
+  .p-text{grid-row:2;margin-top:22px}
+  /* each loop is a portrait phone: a taller frame shows its UI about 1.67x larger at 390 */
+  .project .media{aspect-ratio:4/5}
+  .lead{grid-template-columns:minmax(0,1fr)}
+  .lead .thumb,.lead-t{grid-column:1}
+  .lead-t{margin-top:20px}
+  .how li{grid-template-columns:minmax(0,1fr)}
+  .how h3,.how li>div{grid-column:1}
+  .how h3{margin-bottom:14px}
+  .fgrid{grid-template-columns:minmax(0,1fr)}
+  .f.num{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:end;column-gap:20px;padding:16px 0 20px}
+  .f-l{margin:0;font-size:16px}
+  .f.txt{border-bottom:0}
+  .f.txt:last-child{border-bottom:var(--thick) solid var(--rule)}
+}
+
+/* phone */
+@media (max-width:640px){
+  .top{grid-template-columns:minmax(0,1fr) auto;row-gap:0;padding-top:12px}
+  .status{font-size:14px}
+  .top nav{grid-column:1/-1;grid-row:2;gap:28px}
+  #theme{height:44px}
+  .btn{height:52px}
+  /* one column: name, opinion, pitch and Book a call in the first screen, then the photo, then the ways in */
+  .lede{grid-template-columns:minmax(0,1fr);grid-template-rows:none}
+  .opinion,.hero-l,.aud,.portrait{grid-column:1;grid-row:auto}
+  .hero-l{margin-top:16px}
+  .portrait{width:72%;justify-self:start;margin-top:44px}
+  .aud{margin-top:36px}
+  .aud a{padding:12px 0}
+  .mw{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"n a" "l t";row-gap:10px}
+  .mw-n{grid-area:n}
+  .mw .arrow{grid-area:a}
+  .mw-l{grid-area:l}
+  .mw .tag{grid-area:t}
+  .rail{grid-template-columns:minmax(0,1fr);row-gap:0;border-top:1px solid var(--rule)}
+  .rail li{border-bottom:1px solid var(--rule)}
+  .page{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;padding:16px 0 18px}
+  .page .ptag{margin-top:0}
+  .page p{font-size:26px}
+  .stats dd{font-size:clamp(28px,8.4vw,40px)}
+  .contact h2{font-size:calc(100cqi / 3.05)}
+  .foot{flex-direction:column;align-items:flex-start}
+  #calm{justify-self:start;height:44px}
+}
+
+/* small phones: the name breaks onto two lines, each word spanning the width */
+@media (max-width:520px){
+  .name{display:block;font-size:calc(100cqi / 1.99)}
+  .name .n{white-space:normal}
+  .name .role{display:block;width:auto;font-size:.24em;margin-top:.14em}
+}

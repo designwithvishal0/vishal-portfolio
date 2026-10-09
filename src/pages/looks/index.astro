@@ -1,5 +1,11 @@
 ---
-// Three visual directions for the home page, built 9 Oct 2026 after "very basic, very bland".
+// Round 2 (9 Oct 2026): three versions rebuilt from Vishal's scores (Poster 40, Stage 10, Signature 60).
+const latest = [
+  { href: '/looks/clean', name: 'Old version', note: 'Your earlier minimal home page, now with your photo beside the intro and the CashKaro numbers on a deep cobalt panel.' },
+  { href: '/looks/signature-2', name: 'Signature', note: 'Your own peacock and marigold colours instead of green and pink. The whole page now switches between light and dark, and the drawn question mark sits on your photo like pen.' },
+  { href: '/looks/poster-2', name: 'Poster', note: 'A poster red of your own instead of Juhi’s colours. Your name is the only giant type, and your photo is printed in the same red.' },
+];
+// Round 1, kept for comparison.
 const looks = [
   { href: '/looks/poster', name: 'Poster', note: 'Your name at poster size with a fact grid under it, one ink colour on blush. Basis: Juhi Chitra, Doug Alves, Lash.' },
   { href: '/looks/stage', name: 'Stage', note: 'Each project on its own full width stage at real size, with a marker highlight on the headline. Basis: Pleurat Shala, Amy La, Mike Matas, Eemon Roy.' },
@@ -10,7 +16,7 @@ const looks = [
 <head>
 <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex" />
-<title>Three looks for the home page</title>
+<title>Home page versions</title>
 <style>
   body{font:17px/1.45 system-ui,sans-serif;max-width:40rem;margin:4rem auto;padding:0 1.25rem;color:#1d1d1f;background:#fff}
   a{color:inherit;font-weight:600;text-underline-offset:3px}
@@ -20,9 +26,14 @@ const looks = [
 </style>
 </head>
 <body>
-<h1>Three looks for the home page</h1>
-<p>Same copy, same sections and the same motion in all three. Only the visual language changes. Open each on your phone too.</p>
-<ol style="padding:0;list-style:none;margin-top:2rem">
+<h1>Home page versions</h1>
+<p>Same copy, same sections and the same motion in all three. Only the visual language changes. Open each on your phone too, and try the Dark mode button.</p>
+<h2>Latest, from your notes</h2>
+<ol style="padding:0;list-style:none;margin-top:1rem">
+  {latest.map(l => <li><a href={l.href}>{l.name}</a><p>{l.note}</p></li>)}
+</ol>
+<h2>First round</h2>
+<ol style="padding:0;list-style:none;margin-top:1rem">
   {looks.map(l => <li><a href={l.href}>{l.name}</a><p>{l.note}</p></li>)}
 </ol>
 </body>
