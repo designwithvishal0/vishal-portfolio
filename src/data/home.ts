@@ -120,9 +120,9 @@ export const social = [
 export const loops = ['ixigo', 'split', 'twelve', 'jarvis'];
 // Each number counts up from zero the first time it scrolls into view.
 export const results = [
-  { n: '60%', label: 'conversion lift on critical flows' },
-  { n: '50%', label: 'click through lift on landing pages, after I rebuilt them from Hotjar and Clarity recordings' },
-  { n: '30%', label: 'faster campaign turnaround, from the Figma design system I built' },
+  { n: '60%', label: 'conversion lift on critical flows, across homepage modules, collections and landing pages' },
+  { n: '50%', label: 'click through lift on affiliate landing pages, by fixing the hierarchy and CTAs where Hotjar and Clarity showed people dropping off' },
+  { n: '30%', label: 'faster campaign turnaround, from one Figma design system shared by product and marketing' },
 ];
 export const more = [
   { img: 'reward', name: 'Unified Reward Centre', line: 'Every reward. One place.', href: behance('256413187') },
@@ -136,7 +136,7 @@ export const pages = [
   { img: 'cosiq', name: 'CosIQ landing page', line: 'Build your own routine.', href: behance('230420275') },
 ];
 export const how = [
-  { h: 'Start where people drop off', p: 'I read the recordings and the reviews before I draw anything. At CashKaro that meant hours of Hotjar and Clarity sessions, and the landing pages I rebuilt from them got 50% more clicks.', link: 'About me', href: '#about' },
+  { h: 'Start where people drop off', p: 'I read the recordings and the reviews before I draw anything. At CashKaro that meant hours of Hotjar and Clarity sessions, and fixing the landing pages where people dropped off lifted click through by 50%.', link: 'About me', href: '#about' },
   { h: 'Design the uncertain moment', p: "The waitlist before the chart. The request nobody has paid. The alert at 3 AM. That’s where people give up, so that’s where I spend the work.", link: 'ixigo Trains', href: live('ixigo-trains') },
   { h: 'Honest copy over comforting copy', p: "If the odds are 70%, the screen says 70%. A promise the product can’t keep costs more trust than saying nothing.", link: 'Twelve', href: live('twelve') },
 ];
