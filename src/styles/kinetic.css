@@ -673,9 +673,9 @@ html.hpin .lead{position:relative;z-index:3}
 .me:hover{transform:rotate(-4deg) scale(1.06)}
 @media (max-width:759px){.me{right:-6px;top:-18px}}
 
-/* Hero option: "the moment", snapped. Two blades in the project colour close on the words, hold for a beat and open on the new frame;
-   the words take their new colour while the shutter is shut. Fires on pointer enter and on each reel cut (see /looks/hero/snap) */
-.hv-snap .l1>.grp:last-child{position:relative;display:inline-block;transition:color 0s 150ms}
+/* Hero option: "the moment", snapped. Two blades in the project colour close on the words, hold for a beat and open again.
+   Fires only on pointer enter (see /looks/hero/snap) */
+.hv-snap .l1>.grp:last-child{position:relative;display:inline-block}
 .hv-snap .l1>.grp:last-child::before,.hv-snap .l1>.grp:last-child::after{content:"";position:absolute;left:-.06em;right:-.06em;height:calc(50% + .06em);background:var(--hc);transform:scaleY(0);pointer-events:none}
 .hv-snap .l1>.grp:last-child::before{top:-.04em;transform-origin:50% 0;border-radius:.12em .12em 0 0}
 .hv-snap .l1>.grp:last-child::after{bottom:-.04em;transform-origin:50% 100%;border-radius:0 0 .12em .12em}
