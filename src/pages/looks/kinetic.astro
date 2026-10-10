@@ -177,12 +177,12 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   <!-- Results: the numerals are type too -->
   <section class="res" id="results" data-row="1" aria-labelledby="res-h">
     <div class="res-in c">
+      <h2 id="res-h">Shipped at CashKaro, for 25M+ users</h2>
       <div class="cv" aria-hidden="true">
         <div class="big">{results.map((r, i) => <span data-r={i + 1}>{r.n}</span>)}</div>
         <canvas width="640" height="640"></canvas>
       </div>
       <div class="rt">
-        <h2 id="res-h">Shipped at CashKaro, for 25M+ users</h2>
         <div class="rows">
           {results.map((r, i) => (
             <div class="rr" data-r={i + 1}>
@@ -234,7 +234,6 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
               <span class="more">View on Behance <Arrow /></span>
             </a></li>
           ))}
-          <li class="pend wash r-jarvis"><p>Need a page that sells?</p><a class="more go" href="#contact">See how I work with founders <Arrow /></a></li>
         </ul>
         <div class="p-prog c" aria-hidden="true"><i></i></div>
       </div>
@@ -343,36 +342,39 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   // after the face is in, so the locked width is the real one
   if (!calm()) document.fonts.ready.then(() => later(() => jitter(unsure, 6, 7), 450));
 
-  // "unsure." answers the pointer on the word itself (it used to listen to the whole line, so it only fired when you came in from its edge).
-  // While the pointer is on it the letters near the pointer keep hesitating; it settles when you leave, or after a few seconds.
-  // On touch, a tap does the same. When nobody touches it, it hesitates on its own every few seconds while the hero is in view.
-  {
-    const hit = unsure.parentElement!;
-    let px = 0, over = false, seed = 101;
+  // "unsure." and "sells?" answer the pointer on the word itself: the letters near the pointer keep hesitating, each in its own
+  // pencil colour, and settle when you leave. On touch, a tap does the same. Left alone, each hesitates on its own every few seconds while in view.
+  const alive = (word: HTMLElement, seed: number, before?: () => void) => {
+    const hit = word.parentElement!;
+    let px = 0, over = false;
     const nearTo = (x: number) => (l: HTMLElement) => {
       const b = l.getBoundingClientRect(), w = hit.getBoundingClientRect().width;
       return Math.max(0, 1 - Math.abs(x - (b.left + b.width / 2)) / (w * .45));
     };
     const follow = (l: HTMLElement) => nearTo(px)(l);
-    const shake = (ticks: number, near?: (l: HTMLElement) => number) => jitter(unsure, ticks, seed++, near);
+    const shake = (ticks: number, near?: (l: HTMLElement) => number) => jitter(word, ticks, seed++, near);
     hit.addEventListener('pointerenter', e => {
       over = true; px = e.clientX;
       if (e.pointerType !== 'touch') shake(30, follow);
     });
-    hit.addEventListener('pointermove', e => { px = e.clientX; if (over && !unsure.dataset.busy && e.pointerType !== 'touch') shake(30, follow); });
+    hit.addEventListener('pointermove', e => { px = e.clientX; if (over && !word.dataset.busy && e.pointerType !== 'touch') shake(30, follow); });
     hit.addEventListener('pointerleave', () => {
       over = false;
       // leaving ends the hesitation: it settles on the next tick instead of running out the ticks
-      if (unsure.dataset.busy && !unsure.classList.contains('settle')) unsure.dataset.stop = '1';
+      if (word.dataset.busy && !word.classList.contains('settle')) word.dataset.stop = '1';
     });
     hit.addEventListener('pointerdown', e => { if (e.pointerType === 'touch') shake(9, nearTo(e.clientX)); });
     let seen = false;
     new IntersectionObserver(([e]) => { seen = e.isIntersecting; }, { threshold: .3 }).observe(hit);
-    setInterval(() => { if (seen && !over && !document.hidden) shake(4); }, 5200);
-  }
+    setInterval(() => { if (seen && !over && !document.hidden && !calm() && !word.dataset.busy) { before?.(); shake(4); } }, 5200);
+  };
+  alive(unsure, 101);
 
   // Contact: words rise when half in view, then "sells?" settles exactly like "unsure."
-  const ch = q('#c-h');
+  // Each time it hesitates on its own, the block moves to the next project's colour and the word settles into it.
+  const ch = q('#c-h'), ct = q('#contact');
+  let cOn = 3;
+  alive(sells, 201, () => { cOn = (cOn + 1) % 4; ct.dataset.on = String(cOn); });
   const cio = new IntersectionObserver(([e]) => {
     if (!e.isIntersecting) return;
     cio.disconnect(); ch.classList.add('go');
@@ -552,7 +554,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
       measure();
       gsap.set(lthumb, { transformOrigin: '0 0' });
       gsap.timeline({ scrollTrigger: { trigger: pagesSec, start: 'top 85%', end: () => `top ${bar.offsetHeight}px`, scrub: .4, invalidateOnRefresh: true } })
-        .fromTo(lthumb, { x: 0, y: 0, scale: 1 }, { x: () => fly.x, y: () => fly.y, scale: () => fly.s, ease: 'power1.inOut', duration: 1 }, 0)
+        .fromTo(lthumb, { x: 0, y: 0, scale: 1 }, { x: () => fly.x, y: () => fly.y, scale: () => fly.s, ease: 'none', duration: 1 }, 0)
         .fromTo(ltext, { opacity: 1, x: 0 }, { opacity: 0, x: -40, ease: 'power1.in', duration: .35 }, 0)
         .fromTo(qa(':scope > a > :not(.cthumb)', pwl), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .3 }, .7)
         .fromTo(lthumb, { opacity: 1 }, { opacity: 0, duration: .001, immediateRender: false }, 1)

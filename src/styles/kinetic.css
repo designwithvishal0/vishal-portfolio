@@ -209,7 +209,12 @@ html.calm .sw .knob{transition:none}
 .hero[data-on="3"]{--hc:var(--t-jarvis)}
 .l1>.grp:last-child{color:var(--hc);transition:color 900ms var(--ease)}
 .hero .q-ixigo{--h:var(--t-ixigo)}.hero .q-split{--h:var(--t-split)}.hero .q-twelve{--h:var(--t-twelve)}.hero .q-jarvis{--h:var(--t-jarvis)}
-.ct{--hc:var(--t-sells)}
+.ct{--hc:var(--t-sells);transition:background-color 900ms var(--ease)}
+/* contact: the block walks through the four project colours, one step each time "sells?" hesitates on its own */
+.ct[data-on="0"]{--rw:var(--w-ixigo);--rm:var(--m-ixigo);--hc:var(--h-ixigo)}
+.ct[data-on="1"]{--rw:var(--w-split);--rm:var(--m-split);--hc:var(--h-split)}
+.ct[data-on="2"]{--rw:var(--w-twelve);--rm:var(--m-twelve);--hc:var(--h-twelve)}
+.ct[data-on="3"]{--rw:var(--w-jarvis);--rm:var(--m-jarvis);--hc:var(--t-sells)}
 @keyframes ping{from{transform:scale(1);opacity:.6}to{transform:scale(3);opacity:0}}
 
 .slot{grid-area:slot;position:relative;width:var(--sw);aspect-ratio:16/9;border-radius:20px;overflow:hidden;background:#0B0C10;clip-path:inset(0 round 20px)}
@@ -362,20 +367,23 @@ html.scrub .vbox .vctl{right:auto;left:12px}
 
 /* ---------- more work: a type list */
 .mw{padding:24px 0 0}
-.mrow{position:relative;display:grid;grid-template-columns:auto auto 1fr 160px;grid-template-areas:"name line pill thumb";align-items:center;column-gap:32px;min-height:176px;border-bottom:1px solid var(--line)}
+.mrow{position:relative;display:grid;grid-template-columns:auto auto 1fr;grid-template-areas:"name line pill";align-items:center;column-gap:32px;min-height:176px;border-bottom:1px solid var(--line)}
 .mw ul{border-top:1px solid var(--line)}
 .mrow h3{grid-area:name;font-size:64px;font-weight:700;font-stretch:85%;line-height:1;letter-spacing:-.02em}
 .mrow h3 a{text-decoration:none;text-decoration-thickness:2px;text-underline-offset:.1em}
 .mrow h3 a::after{content:"";position:absolute;inset:0}
 .mline{grid-area:line;font-size:17px;color:var(--muted)}
 .mrow .pill{grid-area:pill;justify-self:start}
-.mthumb{grid-area:thumb;width:160px;height:160px;object-fit:cover;border-radius:16px;opacity:0;transform:scale(.9);transition:opacity 180ms var(--out),transform 180ms var(--out)}
+/* hovering a name shows the whole page, big, floating over the list */
+.mthumb{position:absolute;right:0;top:0;z-index:2;width:clamp(260px,26vw,380px);height:auto;aspect-ratio:960/1004;object-fit:cover;object-position:top;border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.18);pointer-events:none;opacity:0;transform:scale(.92);transform-origin:right top;transition:opacity 200ms var(--out),transform 200ms var(--out)}
+.mrow:has(a:hover,a:focus-visible){z-index:3}
 .mrow:has(a:hover,a:focus-visible) .mthumb{opacity:1;transform:none}
+.mrow:last-child:not(:first-child) .mthumb{top:auto;bottom:0;transform-origin:right bottom}
 .mrow:has(a:hover) h3 a{text-decoration-line:underline}
-@media (hover:none),(pointer:coarse){.mthumb{opacity:1;transform:none}}
+@media (hover:none),(pointer:coarse){.mthumb{opacity:1;transform:none;top:50%;bottom:auto;translate:0 -50%;width:140px;box-shadow:none}}
 @media (max-width:1023px){
-  .mrow{grid-template-columns:56px 1fr;grid-template-areas:"thumb name" "thumb line" "thumb pill";column-gap:16px;row-gap:4px;min-height:0;padding:20px 0;align-items:start}
-  .mthumb{width:56px;height:56px;border-radius:10px;opacity:1;transform:none}
+  .mrow{grid-template-columns:104px 1fr;grid-template-areas:"thumb name" "thumb line" "thumb pill";column-gap:16px;row-gap:4px;min-height:0;padding:20px 0;align-items:start}
+  .mthumb{position:static;grid-area:thumb;width:104px;border-radius:12px;box-shadow:none;opacity:1;transform:none}
   .mrow h3{font-size:clamp(32px,5.5vw,48px)}
   .mline{font-size:15px}
   .mrow .pill{justify-self:start;margin-top:4px}
@@ -384,7 +392,7 @@ html.scrub .vbox .vctl{right:auto;left:12px}
 /* ---------- results */
 .res{padding:120px 0}
 .cv{display:none}
-.rt h2{font-size:clamp(26px,3vw,36px);font-weight:700;font-stretch:85%;line-height:1.1;letter-spacing:-.01em;max-width:18ch}
+#res-h{font-size:clamp(26px,3vw,36px);font-weight:700;font-stretch:85%;line-height:1.1;letter-spacing:-.01em;max-width:18ch}
 .rows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:40px}
 .rn{font-size:96px;font-weight:800;font-stretch:75%;line-height:.9;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .rl{font-size:16px;margin-top:10px;max-width:30ch;color:var(--muted)}
@@ -393,8 +401,10 @@ html.scrub .vbox .vctl{right:auto;left:12px}
   .rows{grid-template-columns:1fr;gap:36px;margin-top:32px}
 }
 html.scrub .res{height:220svh;padding:0}
-html.scrub .res-in{position:sticky;top:var(--bar);height:calc(100svh - var(--bar));display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:32px;align-items:center}
-html.scrub .cv{display:block;container-type:size;grid-column:1/7;position:relative;width:min(640px,100svh - var(--bar) - 96px,100%);aspect-ratio:1;justify-self:start}
+html.scrub .res-in{position:sticky;top:var(--bar);height:calc(100svh - var(--bar));display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-rows:auto auto;align-content:center;row-gap:clamp(16px,4svh,40px);column-gap:32px;align-items:center}
+/* the heading reads as one line above the number and its line, so nothing sits between them */
+html.scrub #res-h{grid-column:1/-1;max-width:none}
+html.scrub .cv{display:block;container-type:size;grid-column:1/7;position:relative;width:min(640px,100svh - var(--bar) - 200px,100%);aspect-ratio:1;justify-self:start}
 html.scrub .rt{grid-column:7/13}
 /* scrubbed: the big numeral is the number, so the side shows only the active line, swapping with it */
 html.scrub .rows{grid-template-columns:1fr;gap:0;margin-top:28px}
