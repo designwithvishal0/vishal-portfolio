@@ -385,8 +385,9 @@ html.scrub .vbox .vctl{right:auto;left:12px}
 .mrow:has(a:hover,a:focus-visible){z-index:3}
 .mrow:has(a:hover,a:focus-visible) .mthumb{opacity:1;transform:perspective(1100px) rotateX(var(--rx,4deg)) rotateY(var(--ry,-10deg)) rotate(-1deg);animation:float 3.2s ease-in-out 520ms infinite alternate}
 @keyframes float{to{translate:0 -8px}}
-.calm .mthumb{transition:opacity 200ms;animation:none!important}
-@media (prefers-reduced-motion:reduce){.mthumb{transition:opacity 200ms;animation:none!important}.mrow:has(a:hover,a:focus-visible) .mthumb{transform:none}}
+/* Reduce motion: no floating preview. Each page sits flat inside its own row, always shown, the way the list first looked */
+.calm .mthumb,.calm .mrow:has(a:hover,a:focus-visible) .mthumb,.calm .mrow:last-child:not(:first-child) .mthumb{top:50%;bottom:auto;translate:0 -50%;width:144px;height:144px;aspect-ratio:auto;border-radius:12px;box-shadow:none;opacity:1;transform:none;transition:none;animation:none!important}
+@media (prefers-reduced-motion:reduce){.mthumb,.mrow:has(a:hover,a:focus-visible) .mthumb,.mrow:last-child:not(:first-child) .mthumb{top:50%;bottom:auto;translate:0 -50%;width:144px;height:144px;aspect-ratio:auto;border-radius:12px;box-shadow:none;opacity:1;transform:none;transition:none;animation:none!important}}
 .mrow:last-child:not(:first-child) .mthumb{top:auto;bottom:0;transform-origin:right bottom}
 .mrow:has(a:hover) h3 a{text-decoration-line:underline}
 @media (hover:none),(pointer:coarse){.mthumb,.mrow:has(a:hover,a:focus-visible) .mthumb{opacity:1;transform:none;animation:none;top:50%;bottom:auto;translate:0 -50%;width:140px;box-shadow:none}}
