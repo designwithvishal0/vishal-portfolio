@@ -672,3 +672,16 @@ html.hpin .lead{position:relative;z-index:3}
 .me{position:absolute;right:14px;top:-26px;width:clamp(84px,8vw,124px);height:auto;border-radius:50%;border:5px solid #fff;box-shadow:0 10px 30px rgba(0,0,0,.25);transform:rotate(8deg);pointer-events:auto;transition:transform 400ms var(--spring)}
 .me:hover{transform:rotate(-4deg) scale(1.06)}
 @media (max-width:759px){.me{right:-6px;top:-18px}}
+
+/* Hero option: "the moment", snapped. Two blades in the project colour close on the words, hold for a beat and open on the new frame;
+   the words take their new colour while the shutter is shut. Fires on pointer enter and on each reel cut (see /looks/hero/snap) */
+.hv-snap .l1>.grp:last-child{position:relative;display:inline-block;transition:color 0s 150ms}
+.hv-snap .l1>.grp:last-child::before,.hv-snap .l1>.grp:last-child::after{content:"";position:absolute;left:-.06em;right:-.06em;height:calc(50% + .06em);background:var(--hc);transform:scaleY(0);pointer-events:none}
+.hv-snap .l1>.grp:last-child::before{top:-.04em;transform-origin:50% 0;border-radius:.12em .12em 0 0}
+.hv-snap .l1>.grp:last-child::after{bottom:-.04em;transform-origin:50% 100%;border-radius:0 0 .12em .12em}
+@media (prefers-reduced-motion:no-preference){
+  html:not(.calm) .hv-snap .l1>.grp.shot::before,html:not(.calm) .hv-snap .l1>.grp.shot::after{animation:shutter 400ms cubic-bezier(.6,0,.2,1)}
+  html:not(.calm) .hv-snap .l1>.grp.shot{animation:caught 420ms cubic-bezier(.2,.8,.2,1)}
+}
+@keyframes shutter{0%{transform:scaleY(0)}35%,50%{transform:scaleY(1)}100%{transform:scaleY(0)}}
+@keyframes caught{0%,45%{scale:1}62%{scale:1.04}100%{scale:1}}

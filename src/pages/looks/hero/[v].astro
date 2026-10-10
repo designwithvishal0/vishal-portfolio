@@ -6,9 +6,9 @@ import Boot from '../../../components/Boot.astro';
 import Arrow from '../../../components/Arrow.astro';
 import { intro, work, live, email, social, contra, loops, results, more, lead, pages, how, jobs } from '../../../data/home';
 
-export function getStaticPaths() { return ['notify', 'cursor', 'proof', 'me'].map(v => ({ params: { v } })); }
+export function getStaticPaths() { return ['notify', 'cursor', 'proof', 'me', 'snap'].map(v => ({ params: { v } })); }
 const { v } = Astro.params as { v: string };
-const vname: Record<string, string> = { notify: 'a real notification', cursor: 'a hesitating cursor', proof: 'proof on the reel', me: 'your face' };
+const vname: Record<string, string> = { notify: 'a real notification', cursor: 'a hesitating cursor', proof: 'proof on the reel', me: 'your face', snap: 'the moment, snapped' };
 // each notification is lifted from that project's own screens (new copy, needs Vishal's yes)
 const toasts = [
   { app: 'ixigo', title: 'Your waitlist did not clear', body: 'Sleeper seats are held on 12136 Punjab Mail.' },
@@ -111,6 +111,14 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
       <button class="vctl" type="button" aria-label="Play the showreel"><Fragment set:html={Btn} /></button>
     </figure>
     <script is:inline>setTimeout(()=>document.querySelector('.slot').classList.add('open'),300)</script>
+    {v === 'snap' && <script is:inline>{`(()=>{
+      // "the moment" works like a camera: a shutter closes on it in the project colour and opens on the new frame.
+      // It fires when the pointer reaches the words and when the reel cuts to the next project. Never under reduce motion.
+      const h=document.querySelector('.hero'), g=document.querySelector('.l1>.grp:last-child'), os=matchMedia('(prefers-reduced-motion: reduce)');
+      const snap=()=>{ if(os.matches||document.documentElement.classList.contains('calm')||g.classList.contains('shot'))return; g.classList.add('shot'); setTimeout(()=>g.classList.remove('shot'),420); };
+      g.addEventListener('pointerenter',snap);
+      new MutationObserver(snap).observe(h,{attributes:true,attributeFilter:['data-on']});
+    })()`}</script>}
     <div class={`ov ov-${v}`} aria-hidden={v === 'notify' || v === 'cursor' ? 'true' : undefined}>
       {v === 'notify' && toasts.map((t, i) => <div class={`toast q-${loops[i]}`} data-n={i} style={`--tx:${phoneX[i]}%`}><span class="ti">{t.app[0]}</span><div><p class="ta">{t.app}<span>now</span></p><p class="tt">{t.title}</p><p class="tb">{t.body}</p></div></div>)}
       {v === 'cursor' && taps.map(({ a, b, t }, i) => <div class="cur" data-n={i} style={`--ax:${a[0]}%;--ay:${a[1]}%;--bx:${b[0]}%;--by:${b[1]}%;--x:${t[0]}%;--y:${t[1]}%`}><i class="ring"></i><svg viewBox="0 0 24 24"><path d="M4 2.5v17.2l4.6-4.4 3.1 6.9 3.1-1.4-3.1-6.8h6.5z" /></svg></div>)}
