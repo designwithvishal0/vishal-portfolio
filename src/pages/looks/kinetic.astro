@@ -160,7 +160,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 
   <!-- Work: titles that open up -->
   <section class="work" id="work" data-p={loops[0]} aria-labelledby="work-h">
-    <div class="c whead"><h2 id="work-h">Selected work</h2><span>4 case studies</span></div>
+    {/* Draft copy (2026-10-10): with the results now between the hero and ixigo, this line hands the hero's "unsure" thought back before "Will I travel tonight?". Same pattern as Pages that sell */}
+    <div class="c phead wk-head"><h2 id="work-h">Selected work</h2><p>Four moments people get unsure, and what I designed for each.</p></div>
     {work.map((w, i) => (
       <article class={`row r-${loops[i]}`} id={`w-${w.slug}`} data-k={loops[i]}>
         <div class="c">

@@ -325,6 +325,9 @@ html.scrub .whead{padding-bottom:0}
 .work .whead{color:var(--ink)}
 .row{padding:10svh 0}
 .whead+.row{padding-top:56px}
+.wk-head{padding-top:96px;margin-bottom:0;color:var(--ink)}
+.wk-head p{max-width:none}
+.wk-head+.row{padding-top:56px}
 .row .q{font-size:15px;font-weight:500;color:var(--mw);margin-bottom:12px}
 .tt{--wd:85;font-size:clamp(40px,6vw,64px);font-weight:720;font-stretch:calc(var(--wd) * 1%);line-height:.95;letter-spacing:-.02em;text-wrap:initial}
 .tt a{text-decoration:none;text-decoration-thickness:2px;text-underline-offset:.1em}
