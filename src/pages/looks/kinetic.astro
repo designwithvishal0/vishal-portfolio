@@ -27,6 +27,7 @@ const grounds = ['#0B0C10', '#F6F8FC', '#F2F0E4', '#F5F6FB'];
 // lead stats: number, decimals, before, after, so they can count in en-IN
 const stat = (s: string) => { const m = s.match(/^(\D*)([\d,.]+)(.*)$/)!; const n = m[2].replace(/,/g, ''); return { pre: m[1], n, dec: (n.split('.')[1] || '').length, suf: m[3] }; };
 const book = intro.links.find(l => l.label === 'Book a call')!;
+const resume = intro.links.find(l => l.label === 'Resume')!; // site copy of the CV: no current employer, no phone (2026-10-10)
 let wi = 0;
 const W = (w: string) => ({ w, i: wi++ });
 const hero1 = [l1a.map(W), l1b.map(W)];
@@ -63,7 +64,11 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   <div class="c bar-in">
     <span class="who">Vishal Yadav</span>
     <nav class="nav" aria-label="Sections"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
-    <button class="a11y" type="button" popovertarget="a11y-menu" aria-label="Accessibility settings"><span>Accessibility</span></button>
+    <div class="bar-r">
+      <!-- appears once the hero's own Book a call scrolls away, hides again at Contact (audit 2026-10-10) -->
+      <a class="bar-book" href={book.href}>{book.label}</a>
+      <button class="a11y" type="button" popovertarget="a11y-menu" aria-label="Accessibility settings"><span>Accessibility</span></button>
+    </div>
     <div id="a11y-menu" class="a11y-menu" popover>
       <p class="a11y-h">Accessibility</p>
       <div class="a11y-row"><span id="l-night">Dark mode</span><button id="theme" class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="l-night"><i class="sun"></i><i class="moon"></i><span class="knob"></span></button></div>
@@ -99,7 +104,10 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     </div>
     <div class="hb">
       <p class="status"><span class="dot" aria-hidden="true"></span>{intro.availability}</p>
-      <a class="pill-btn primary" href={book.href}>{book.label}</a>
+      <div class="hb-cta">
+        <a class="pill-btn primary" href={book.href}>{book.label}</a>
+        <a class="pill-btn" href={resume.href} target="_blank" rel="noopener">{resume.label}</a>
+      </div>
     </div>
   </section>
 
@@ -110,6 +118,27 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
       <li><a class="go" href="#results"><strong>Recruiting</strong><span>The 30 second version</span><Arrow /></a></li>
       <li><a class="go" href="#pages"><strong>Founder</strong><span>Need a page that sells</span><Arrow /></a></li>
     </ul>
+  </section>
+
+  <!-- Results: the shipped CashKaro proof sits right under the hero, before the concepts (Vishal approved, audit 2026-10-10). The numerals are type too -->
+  <section class="res" id="results" data-row="1" aria-labelledby="res-h">
+    <div class="res-in c">
+      <h2 id="res-h">Shipped at CashKaro, for 25M+ users</h2>
+      <div class="cv" aria-hidden="true">
+        <div class="big">{results.map((r, i) => <span data-r={i + 1}>{r.n}</span>)}</div>
+        <canvas width="640" height="640"></canvas>
+      </div>
+      <div class="rt">
+        <div class="rows">
+          {results.map((r, i) => (
+            <div class="rr" data-r={i + 1}>
+              <p class="rn"><span class="vh">{r.n}</span><span class="rc" aria-hidden="true" data-v={parseInt(r.n)}>{r.n}</span></p>
+              <p class="rl">{r.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Bridge: the four questions, from noise to order (decorative film; the questions are real text in the rows below) -->
@@ -174,27 +203,6 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
         </li>
       ))}
     </ul>
-  </section>
-
-  <!-- Results: the numerals are type too -->
-  <section class="res" id="results" data-row="1" aria-labelledby="res-h">
-    <div class="res-in c">
-      <h2 id="res-h">Shipped at CashKaro, for 25M+ users</h2>
-      <div class="cv" aria-hidden="true">
-        <div class="big">{results.map((r, i) => <span data-r={i + 1}>{r.n}</span>)}</div>
-        <canvas width="640" height="640"></canvas>
-      </div>
-      <div class="rt">
-        <div class="rows">
-          {results.map((r, i) => (
-            <div class="rr" data-r={i + 1}>
-              <p class="rn"><span class="vh">{r.n}</span><span class="rc" aria-hidden="true" data-v={parseInt(r.n)}>{r.n}</span></p>
-              <p class="rl">{r.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
   </section>
 
   <!-- Pages that sell: Profit Wala Love on its own row, then one track. With motion allowed the track pins under the bar and
@@ -268,6 +276,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
       <div class="cta">
         <a class="pill-btn primary" href={book.href}>{book.label}</a>
         <a class="pill-btn" href={`mailto:${email}`}>Email</a>
+        <a class="pill-btn" href={resume.href} target="_blank" rel="noopener">{resume.label}</a>
       </div>
       <p class="cl">Email me at <button class="copy" type="button" data-copy={email} aria-label={`Copy ${email}`}>{email} <span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button> or book a call. I reply within a day.</p>
       <span class="vh" role="status" id="copied"></span>
@@ -300,6 +309,10 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 
   const bar = q('.bar');
   new IntersectionObserver(([e]) => bar.classList.toggle('scrolled', !e.isIntersecting)).observe(q('#sentinel'));
+  // Book a call in the bar: only while the hero's button is above the screen and Contact (which has its own) is not on it
+  { let past = false, atEnd = false; const set = () => bar.classList.toggle('book-on', past && !atEnd);
+    new IntersectionObserver(([e]) => { past = !e.isIntersecting && e.boundingClientRect.top < 0; set(); }).observe(q('.hero .hb-cta'));
+    new IntersectionObserver(([e]) => { atEnd = e.isIntersecting; set(); }).observe(q('#contact')); }
 
   // ---------- Jitter: one word hesitates in weight, then settles on a spring. Seeded, so it never repeats the same way twice in a row.
   // Weight, a lift and (only while the pointer is on it) a small tilt; the box is locked so the line never shifts.

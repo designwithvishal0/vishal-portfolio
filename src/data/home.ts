@@ -8,7 +8,7 @@ export const intro = {
     'Product (UI/UX) designer in Gurugram. 4.5 years in design, 2+ of them in core UI/UX. I work on B2C and B2B products in commerce and fintech, from the first research session to the screens that ship.',
   availability: 'Open to product design roles and freelance projects',
   links: [
-    { label: 'Resume', href: '#' },
+    { label: 'Resume', href: '/Vishal_Yadav_Resume.pdf' },
     { label: 'Book a call', href: 'https://cal.com/designwvishal' },
   ],
 };

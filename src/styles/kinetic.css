@@ -140,6 +140,14 @@ img,video,canvas{display:block}
 .nav{display:flex;gap:32px;font-size:15px;font-weight:500}
 .nav a{text-decoration:none;padding:12px 0;text-underline-offset:.25em;text-decoration-thickness:1px}
 @media (hover:hover) and (pointer:fine){.nav a:hover{text-decoration-line:underline}}
+/* right side of the bar: Book a call (Kinetic, shown once the hero button scrolls away) and Accessibility */
+.bar-r{justify-self:end;display:flex;align-items:center;gap:8px}
+.bar-book{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:999px;background:var(--btn);color:var(--on-btn);font-size:14px;font-weight:650;text-decoration:none;
+  visibility:hidden;opacity:0;transform:translateY(-4px);transition:opacity 180ms var(--out),transform 180ms var(--out),visibility 0s 180ms}
+.bar.book-on .bar-book{visibility:visible;opacity:1;transform:none;transition:opacity 180ms var(--out),transform 180ms var(--out)}
+@media (hover:hover){.bar-book:hover{background:color-mix(in oklab,var(--btn) 84%,var(--bg))}}
+.calm .bar-book{transition:none}
+@media (prefers-reduced-motion:reduce){.bar-book{transition:none}}
 /* Accessibility menu: night mode and reduce motion, one tap from every screen */
 .a11y{justify-self:end;height:36px;padding:0 16px;border-radius:999px;border:1px solid var(--edge);background:transparent;color:var(--ink);font:inherit;font-size:14px;font-weight:550;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
 .a11y::before{content:"";width:18px;height:18px;background:currentColor;-webkit-mask:var(--a11y-ic) center/contain no-repeat;mask:var(--a11y-ic) center/contain no-repeat}
@@ -202,6 +210,7 @@ html.calm .sw .knob{transition:none}
 .idx[data-on="0"] li:nth-child(1) a,.idx[data-on="1"] li:nth-child(2) a,.idx[data-on="2"] li:nth-child(3) a,.idx[data-on="3"] li:nth-child(4) a{color:var(--ink)}
 .idx[data-on="0"] li:nth-child(1) a::before,.idx[data-on="1"] li:nth-child(2) a::before,.idx[data-on="2"] li:nth-child(3) a::before,.idx[data-on="3"] li:nth-child(4) a::before{transform:scale(1.25)}
 @media (hover:hover) and (pointer:fine){.idx a:hover{text-decoration:underline;text-underline-offset:.2em}}
+.hb-cta{display:flex;flex-wrap:wrap;gap:10px}
 .hb{grid-area:b;align-self:end;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
 .status{display:flex;align-items:flex-start;gap:10px;font-size:15px;color:var(--muted);max-width:32ch}
 .dot{position:relative;flex:none;width:7px;height:7px;margin-top:.55em;border-radius:50%;background:var(--live)}
@@ -489,7 +498,8 @@ canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;mix-blend-mode
 /* the pinned view centres its content, so its own slack is most of the space around it */
 html.hpin .pages{padding-bottom:40px}
 /* Pages rises into the empty band under the pinned numbers and meets them as they let go, so no blank screen sits between the two */
-html.scrub .pages{position:relative;z-index:1;margin-top:calc(var(--rgap) * -1)}
+/* whichever section follows the results (the questions band on Kinetic, Pages on the other looks) */
+html.scrub .res+.pages,html.scrub .res+.band{position:relative;z-index:1;margin-top:calc(var(--rgap) * -1)}
 html.hpin .lead{margin-bottom:0}
 html.hpin .prun{height:calc(100svh - var(--bar) + var(--ov,0px))}
 html.hpin .p-pin{position:sticky;top:var(--bar);height:calc(100svh - var(--bar));overflow:clip;display:flex;flex-direction:column;justify-content:center}
