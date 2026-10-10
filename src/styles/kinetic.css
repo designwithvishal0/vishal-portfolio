@@ -416,11 +416,11 @@ html.scrub .res-in{position:sticky;top:var(--bar);height:calc(100svh - var(--bar
 html.scrub #res-h{grid-column:1/-1;max-width:none}
 /* the frames are square with the numeral in their middle band, so the box is pulled in to the numeral: no dead space above, below or beside it */
 html.scrub .cv{display:block;container-type:size;grid-column:1;position:relative;width:var(--cvw);aspect-ratio:1;justify-self:start;margin:calc(var(--cvw) * -.25) calc(var(--cvw) * -.06) calc(var(--cvw) * -.25) calc(var(--cvw) * -.09)}
-/* the line hangs from the top of the numeral, level with the top of the % */
-html.scrub .rt{grid-column:2;align-self:start;padding-top:calc(var(--cvw) * .04)}
+/* the line sits centred on the numeral (Vishal, 2026-10-10) */
+html.scrub .rt{grid-column:2;align-self:center}
 /* scrubbed: the big numeral is the number, so the side shows only the active line, swapping with it */
 html.scrub .rows{grid-template-columns:1fr;gap:0;margin-top:0}
-html.scrub .rr{grid-area:1/1;opacity:0;filter:blur(6px);transition:opacity 260ms var(--out),filter 260ms var(--out)}
+html.scrub .rr{grid-area:1/1;align-self:center;opacity:0;filter:blur(6px);transition:opacity 260ms var(--out),filter 260ms var(--out)}
 html.scrub .rn .rc{display:none}
 html.scrub .rl{margin:0;color:var(--ink);font-size:clamp(24px,2.4vw,32px);font-weight:550;line-height:1.25;max-width:26ch;text-wrap:pretty}
 .res[data-row="1"] .rr[data-r="1"],.res[data-row="2"] .rr[data-r="2"],.res[data-row="3"] .rr[data-r="3"]{opacity:1;filter:none}

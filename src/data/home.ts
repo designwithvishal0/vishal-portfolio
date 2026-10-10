@@ -122,7 +122,7 @@ export const loops = ['ixigo', 'split', 'twelve', 'jarvis'];
 export const results = [
   { n: '60%', label: 'conversion lift on critical flows, across homepage modules, collections and landing pages' },
   { n: '50%', label: 'click through lift on affiliate landing pages, by fixing the hierarchy and CTAs where Hotjar and Clarity showed people dropping off' },
-  { n: '30%', label: 'faster campaign turnaround, from one Figma design system shared by product and marketing' },
+  { n: '30%', label: 'faster campaign turnaround, from one design system I built in Figma for product and marketing' },
 ];
 export const more = [
   { img: 'reward', name: 'Unified Reward Centre', line: 'Every reward. One place.', href: behance('256413187') },
