@@ -74,7 +74,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 
 <main>
   <!-- The sentence, split open by the reel -->
-  <section class="hero c" aria-label="Introduction">
+  <section class="hero c lit" aria-label="Introduction">
     <h1 class="hm">{intro.name}</h1>
     <p class="sup">{intro.supporting}</p>
     <!-- what the reel is showing right now; each name jumps to its case study row -->
@@ -427,6 +427,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     if (hv.paused) { idx.removeAttribute('data-on'); return; }
     const b = beats[land.matches ? 'wide' : 'tall'], t = hv.currentTime + .2;
     idx.dataset.on = heroSec.dataset.on = String(b.filter(s => t >= s).length - 1);
+    heroSec.classList.add('rolling');
   };
   ['timeupdate', 'pause', 'playing'].forEach(ev => hv.addEventListener(ev, follow));
   land.addEventListener('change', () => { if (!hv.dataset.cur) return; load(hero); sync(hero); });

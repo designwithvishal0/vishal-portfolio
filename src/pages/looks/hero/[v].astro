@@ -1,7 +1,6 @@
 ---
 import '@fontsource-variable/bricolage-grotesque/standard.css';
 import fontUrl from '@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-standard-normal.woff2?url';
-import '@fontsource/caveat/500.css';
 import '../../../styles/kinetic.css';
 import Boot from '../../../components/Boot.astro';
 import Arrow from '../../../components/Arrow.astro';
@@ -20,7 +19,13 @@ const toasts = [
 // where the cursor lands on each beat of the wide reel, in % of the reel
 // where each reel's phone sits, so the notification lands on it
 const phoneX = [71, 82, 70, 83];
-const taps = [[71, 83], [70, 62], [69, 43], [66, 33]];
+// where the cursor wavers (a, b) and where it finally taps (t), as % of the reel, timed to each beat
+const taps = [
+  { a: [66, 55], b: [71, 89], t: [71, 83] },   // ixigo: reads the sheet, drifts to Change train, then confirms
+  { a: [69, 50], b: [79, 50], t: [78, 66] },   // Split: You or Rahul, then joins on Kabir
+  { a: [74, 72], b: [61, 72], t: [67, 89] },   // Twelve: hovers the keypad, then types
+  { a: [66, 33], b: [66, 72], t: [68, 86] },   // JARVIS: scans the alerts, then Got it
+];
 // Kinetic: his sentence is split open by his reel, so the work sits in "the moment" between the words.
 // The one uncertain word trembles, then settles. Every later motion repeats that move from unsure to sure.
 const words = intro.positioning.split(' ');            // I design for the moment people are unsure.
@@ -108,13 +113,9 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     <script is:inline>setTimeout(()=>document.querySelector('.slot').classList.add('open'),300)</script>
     <div class={`ov ov-${v}`} aria-hidden={v === 'notify' || v === 'cursor' ? 'true' : undefined}>
       {v === 'notify' && toasts.map((t, i) => <div class={`toast q-${loops[i]}`} data-n={i} style={`--tx:${phoneX[i]}%`}><span class="ti">{t.app[0]}</span><div><p class="ta">{t.app}<span>now</span></p><p class="tt">{t.title}</p><p class="tb">{t.body}</p></div></div>)}
-      {v === 'cursor' && taps.map(([x, y], i) => <div class="cur" data-n={i} style={`--x:${x}%;--y:${y}%`}><i class="ring"></i><svg viewBox="0 0 24 24"><path d="M4 2.5v17.2l4.6-4.4 3.1 6.9 3.1-1.4-3.1-6.8h6.5z" /></svg></div>)}
+      {v === 'cursor' && taps.map(({ a, b, t }, i) => <div class="cur" data-n={i} style={`--ax:${a[0]}%;--ay:${a[1]}%;--bx:${b[0]}%;--by:${b[1]}%;--x:${t[0]}%;--y:${t[1]}%`}><i class="ring"></i><svg viewBox="0 0 24 24"><path d="M4 2.5v17.2l4.6-4.4 3.1 6.9 3.1-1.4-3.1-6.8h6.5z" /></svg></div>)}
       {v === 'proof' && <p class="proof"><strong>60%</strong><span>conversion lift on critical flows at CashKaro, 25M+ users</span></p>}
       {v === 'me' && <img class="me" src="/me/vishal-face-240.webp" width="240" height="240" alt="Vishal Yadav" />}
-    </div>
-    <!-- the moment itself: a pencil note, written fresh for each project on the reel, pointing up at it (handwriting is a stand in for Vishal's own hand) -->
-    <div class="note" aria-hidden="true">
-      {work.map((w, i) => <div class={`nq q-${loops[i]}`} data-n={i}><p>{w.question}</p><svg viewBox="0 0 120 90" fill="none"><path pathLength="1" d="M6 82 C 30 84, 70 70, 88 40 S 104 12, 100 6" /><path class="tip" pathLength="1" d="M86 13 L 100 5 L 107 20" /></svg></div>)}
     </div>
     <div class="l3 words" aria-hidden="true">
       <span class="grp">{hero3.map(({ w, i }) => <><span class="w"><span style={`--i:${i}`}>{w}</span></span>{' '}</>)}</span>
