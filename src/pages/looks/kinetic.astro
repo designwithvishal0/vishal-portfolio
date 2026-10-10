@@ -549,7 +549,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     });
     mm.add('(prefers-reduced-motion: no-preference)', () => {
       root.classList.add('hpin'); setOv();
-      const tl = gsap.timeline({ scrollTrigger: { trigger: pagesSec, start: () => `top ${bar.offsetHeight}px`, end: 'bottom bottom', scrub: .4, invalidateOnRefresh: true } })
+      const tl = gsap.timeline({ scrollTrigger: { trigger: pagesSec, start: () => `top ${bar.offsetHeight}px`, end: 'bottom bottom', scrub: true, invalidateOnRefresh: true } })
+        // no scrub lag here either, so Profit Wala Love's picture and its seat swap at the exact same spot in both directions
         // the track eases into its sideways run (velocity matched where the two parts meet), so it never starts at full speed
         .fromTo(ptrack, { x: 0 }, { x: () => -ov * EDGE, ease: 'power2.in', duration: .15 }, 0)
         .to(ptrack, { x: () => -ov, ease: 'none', duration: .85 }, .15)
@@ -559,8 +560,9 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
       measure();
       gsap.set(lthumb, { transformOrigin: '0 0' });
       // the picture leaves moving with the page and arrives at rest, so neither end of the drop has a jolt:
-      // on screen it slows steadily from the page's speed to a stop (speed (1 - t)^(m - 1)), never reversing, so it can't bob
-      const flyTl = gsap.timeline({ scrollTrigger: { trigger: pagesSec, start: 'top 85%', end: () => `top ${bar.offsetHeight}px`, scrub: .4, invalidateOnRefresh: true } });
+      // on screen it slows steadily from the page's speed to a stop (speed (1 - t)^(m - 1)), never reversing, so it can't bob.
+      // scrub: true, no lag: a lagged drop trails the page, so it bobbed on every wheel tick and was still travelling when the track pinned, then snapped into its seat (Vishal, 2026-10-10)
+      const flyTl = gsap.timeline({ scrollTrigger: { trigger: pagesSec, start: 'top 85%', end: () => `top ${bar.offsetHeight}px`, scrub: true, invalidateOnRefresh: true } });
       const glide = (t: number) => {
         const st = flyTl.scrollTrigger, L = st ? st.end - st.start : 0;
         if (!L || fly.y <= 1 || fly.y >= L) return t;
