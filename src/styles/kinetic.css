@@ -428,12 +428,6 @@ canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;mix-blend-mode
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--blend:lighten}}
 :root[data-theme=dark]{--blend:lighten}
 .res.frames canvas{opacity:1}
-/* each number wears its own pencil colour, with the hero's glow behind it: a wash over the black (light) or white (dark) numeral */
-.res{--rc:var(--u1)}.res[data-row="2"]{--rc:var(--u5)}.res[data-row="3"]{--rc:var(--u3)}
-html.scrub .cv::before{content:"";position:absolute;inset:22% 12%;z-index:-1;border-radius:50%;background:var(--rc);opacity:.22;filter:blur(70px);transition:background-color 500ms var(--out)}
-html.scrub .cv::after{content:"";position:absolute;inset:27% 7% 27% 0;background:var(--rc);mix-blend-mode:lighten;pointer-events:none;transition:background-color 500ms var(--out)}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]) html.scrub .cv::after,:root:not([data-theme=light]).scrub .cv::after{mix-blend-mode:darken}}
-:root[data-theme=dark].scrub .cv::after{mix-blend-mode:darken}
 /* until the frames exist (or while they load), the numeral is set live and crossfades */
 .big{position:absolute;inset:0;display:grid;place-items:center;font-size:44cqw;font-weight:800;font-stretch:75%;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
 .big span{grid-area:1/1;opacity:0;filter:blur(8px);transition:opacity 260ms var(--out),filter 260ms var(--out)}
