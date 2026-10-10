@@ -344,7 +344,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 
   // "unsure." and "sells?" answer the pointer on the word itself: the letters near the pointer keep hesitating, each in its own
   // pencil colour, and settle when you leave. On touch, a tap does the same. Left alone, each hesitates on its own every few seconds while in view.
-  const alive = (word: HTMLElement, seed: number, before?: () => void) => {
+  // before(): runs as the word starts to hesitate, on hover, tap or its own (Contact uses it to step the block's colour)
+  const alive = (word: HTMLElement, seed: number, every: number, before?: () => void) => {
     const hit = word.parentElement!;
     let px = 0, over = false;
     const nearTo = (x: number) => (l: HTMLElement) => {
@@ -355,7 +356,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     const shake = (ticks: number, near?: (l: HTMLElement) => number) => jitter(word, ticks, seed++, near);
     hit.addEventListener('pointerenter', e => {
       over = true; px = e.clientX;
-      if (e.pointerType !== 'touch') shake(30, follow);
+      if (e.pointerType !== 'touch') { before?.(); shake(30, follow); }
     });
     hit.addEventListener('pointermove', e => { px = e.clientX; if (over && !word.dataset.busy && e.pointerType !== 'touch') shake(30, follow); });
     hit.addEventListener('pointerleave', () => {
@@ -363,18 +364,18 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
       // leaving ends the hesitation: it settles on the next tick instead of running out the ticks
       if (word.dataset.busy && !word.classList.contains('settle')) word.dataset.stop = '1';
     });
-    hit.addEventListener('pointerdown', e => { if (e.pointerType === 'touch') shake(9, nearTo(e.clientX)); });
+    hit.addEventListener('pointerdown', e => { if (e.pointerType === 'touch') { before?.(); shake(9, nearTo(e.clientX)); } });
     let seen = false;
     new IntersectionObserver(([e]) => { seen = e.isIntersecting; }, { threshold: .3 }).observe(hit);
-    setInterval(() => { if (seen && !over && !document.hidden && !calm() && !word.dataset.busy) { before?.(); shake(4); } }, 5200);
+    setInterval(() => { if (seen && !over && !document.hidden && !calm() && !word.dataset.busy) { before?.(); shake(4); } }, every);
   };
-  alive(unsure, 101);
+  alive(unsure, 101, 5200);
 
   // Contact: words rise when half in view, then "sells?" settles exactly like "unsure."
-  // Each time it hesitates on its own, the block moves to the next project's colour and the word settles into it.
+  // Each time it hesitates (on its own every 3 s, or when you hover or tap it) the block moves to the next project's colour and the word settles into it.
   const ch = q('#c-h'), ct = q('#contact');
   let cOn = 3;
-  alive(sells, 201, () => { cOn = (cOn + 1) % 4; ct.dataset.on = String(cOn); });
+  alive(sells, 201, 3000, () => { cOn = (cOn + 1) % 4; ct.dataset.on = String(cOn); });
   const cio = new IntersectionObserver(([e]) => {
     if (!e.isIntersecting) return;
     cio.disconnect(); ch.classList.add('go');
