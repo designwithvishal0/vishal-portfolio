@@ -74,7 +74,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 
 <main>
   <!-- The sentence, split open by the reel -->
-  <section class="hero c lit" aria-label="Introduction">
+  <section class="hero c lit hv-snap" aria-label="Introduction">
     <h1 class="hm">{intro.name}</h1>
     <p class="sup">{intro.supporting}</p>
     <!-- what the reel is showing right now; each name jumps to its case study row -->
@@ -91,6 +91,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
       <button class="vctl" type="button" aria-label="Play the showreel"><Fragment set:html={Btn} /></button>
     </figure>
     <script is:inline>setTimeout(()=>document.querySelector('.slot').classList.add('open'),300)</script>
+    {/* "the moment" snaps like a camera shutter on hover only (Vishal, 2026-10-10). Styles: .hv-snap in kinetic.css */}
+    <script is:inline>(()=>{const g=document.querySelector('.l1>.grp:last-child'),os=matchMedia('(prefers-reduced-motion: reduce)');g.addEventListener('pointerenter',()=>{if(os.matches||document.documentElement.classList.contains('calm')||g.classList.contains('shot'))return;g.classList.add('shot');setTimeout(()=>g.classList.remove('shot'),420)})})()</script>
     <div class="l3 words" aria-hidden="true">
       <span class="grp">{hero3.map(({ w, i }) => <><span class="w"><span style={`--i:${i}`}>{w}</span></span>{' '}</>)}</span>
       <span class="w wu"><span style={`--i:${lastI}`} class="jw" id="unsure">{[...last].map((ch, j) => <span class="jl" style={`--k:${j}`}>{ch}</span>)}</span></span>
