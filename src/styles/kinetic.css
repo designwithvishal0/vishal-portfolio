@@ -592,3 +592,27 @@ html.hpin .lead{position:relative;z-index:3}
 /* narrow desktops: keep the column inside the reel's height so line 3 stays on the first screen */
 @media (min-width:760px) and (max-width:1279px){.hero .sup{font-size:17px;line-height:1.5}}
 @media (min-width:760px) and (max-width:1199px){.idx{display:none}}
+
+/* ---------- Kinetic with a note (/looks/kinetic-note): the reel's light spills onto the page, and a pencil note names the moment */
+.hero.lit{position:relative;isolation:isolate}
+.hero.lit::before{content:"";grid-area:slot;z-index:-1;border-radius:48px;background:var(--hc);opacity:.16;filter:blur(72px);transform:scale(.94,.88);transition:background-color 900ms var(--ease),opacity 900ms var(--ease)}
+.hero.lit.rolling::before{opacity:.4}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .hero.lit.rolling::before{opacity:.42}}
+:root[data-theme=dark] .hero.lit.rolling::before{opacity:.42}
+.note{display:none}
+@media (min-width:1024px){
+  .note{display:grid;grid-area:l3;justify-self:start;align-self:center;margin-top:10px;z-index:1}
+  .nq{grid-area:1/1;display:none;align-items:flex-end;gap:4px;color:var(--h);transform:rotate(-3deg)}
+  .hero:not([data-on]) .nq[data-n="0"],.hero[data-on="0"] .nq[data-n="0"],.hero[data-on="1"] .nq[data-n="1"],.hero[data-on="2"] .nq[data-n="2"],.hero[data-on="3"] .nq[data-n="3"]{display:flex}
+  .nq p{font-family:'Caveat',cursive;font-weight:500;font-size:clamp(30px,2.7vw,42px);line-height:1;white-space:nowrap;padding-bottom:6px}
+  .nq svg{flex:none;width:clamp(64px,6vw,96px);height:auto;margin-bottom:22px;overflow:visible}
+  .nq path{stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+  @media (prefers-reduced-motion:no-preference){
+    /* written left to right, then the arrow is drawn up toward the reel */
+    html:not(.calm) .nq p{animation:write 1100ms steps(22,end) both}
+    html:not(.calm) .nq path{stroke-dasharray:1;animation:draw 480ms var(--out) 1050ms both}
+    html:not(.calm) .nq path.tip{animation-delay:1450ms;animation-duration:220ms}
+  }
+}
+@keyframes write{from{clip-path:inset(-20% 100% -20% 0)}to{clip-path:inset(-20% 0 -20% 0)}}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
