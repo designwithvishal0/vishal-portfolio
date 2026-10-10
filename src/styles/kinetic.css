@@ -375,15 +375,19 @@ html.scrub .vbox .vctl{right:auto;left:12px}
 .mline{grid-area:line;font-size:17px;color:var(--muted)}
 .mrow .pill{grid-area:pill;justify-self:start}
 /* hovering a name shows the whole page, big, floating over the list */
-.mthumb{position:absolute;right:0;top:0;z-index:2;width:clamp(260px,26vw,380px);height:auto;aspect-ratio:960/1004;object-fit:cover;object-position:top;border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.18);pointer-events:none;opacity:0;transform:scale(.92);transform-origin:right top;transition:opacity 200ms var(--out),transform 200ms var(--out)}
+/* it swings in from an angle, then tilts toward the pointer and floats a little, like a printed page held up to the light */
+.mthumb{position:absolute;right:0;top:0;z-index:2;width:clamp(260px,26vw,380px);height:auto;aspect-ratio:960/1004;object-fit:cover;object-position:top;border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.18);pointer-events:none;opacity:0;transform:perspective(1100px) rotateY(-28deg) rotateX(10deg) rotate(-4deg) scale(.86);transform-origin:right top;transition:opacity 220ms var(--out),transform 520ms var(--spring)}
 .mrow:has(a:hover,a:focus-visible){z-index:3}
-.mrow:has(a:hover,a:focus-visible) .mthumb{opacity:1;transform:none}
+.mrow:has(a:hover,a:focus-visible) .mthumb{opacity:1;transform:perspective(1100px) rotateX(var(--rx,4deg)) rotateY(var(--ry,-10deg)) rotate(-1deg);animation:float 3.2s ease-in-out 520ms infinite alternate}
+@keyframes float{to{translate:0 -8px}}
+.calm .mthumb{transition:opacity 200ms;animation:none!important}
+@media (prefers-reduced-motion:reduce){.mthumb{transition:opacity 200ms;animation:none!important}.mrow:has(a:hover,a:focus-visible) .mthumb{transform:none}}
 .mrow:last-child:not(:first-child) .mthumb{top:auto;bottom:0;transform-origin:right bottom}
 .mrow:has(a:hover) h3 a{text-decoration-line:underline}
-@media (hover:none),(pointer:coarse){.mthumb{opacity:1;transform:none;top:50%;bottom:auto;translate:0 -50%;width:140px;box-shadow:none}}
+@media (hover:none),(pointer:coarse){.mthumb,.mrow:has(a:hover,a:focus-visible) .mthumb{opacity:1;transform:none;animation:none;top:50%;bottom:auto;translate:0 -50%;width:140px;box-shadow:none}}
 @media (max-width:1023px){
   .mrow{grid-template-columns:104px 1fr;grid-template-areas:"thumb name" "thumb line" "thumb pill";column-gap:16px;row-gap:4px;min-height:0;padding:20px 0;align-items:start}
-  .mthumb{position:static;grid-area:thumb;width:104px;border-radius:12px;box-shadow:none;opacity:1;transform:none}
+  .mthumb,.mrow:has(a:hover,a:focus-visible) .mthumb{position:static;grid-area:thumb;width:104px;border-radius:12px;box-shadow:none;opacity:1;transform:none;animation:none;translate:none}
   .mrow h3{font-size:clamp(32px,5.5vw,48px)}
   .mline{font-size:15px}
   .mrow .pill{justify-self:start;margin-top:4px}

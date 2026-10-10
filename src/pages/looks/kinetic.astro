@@ -598,6 +598,17 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     scrollTo({ top: pst.start + x / ov * (pst.end - pst.start), behavior: 'instant' });
   });
 
+  // ---------- More work: the big preview tilts toward the pointer
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) qa('.mrow').forEach(r => {
+    const t = q('.mthumb', r);
+    r.addEventListener('pointermove', e => {
+      if (calm()) return;
+      const b = r.getBoundingClientRect(), x = (e.clientX - b.left) / b.width - .5, y = (e.clientY - b.top) / b.height - .5;
+      t.style.setProperty('--ry', `${(x * 22 - 6).toFixed(1)}deg`); t.style.setProperty('--rx', `${(-y * 12 + 2).toFixed(1)}deg`);
+    });
+    r.addEventListener('pointerleave', () => { t.style.removeProperty('--ry'); t.style.removeProperty('--rx'); });
+  });
+
   // ---------- Reduce motion, pressed mid page: stop everything now
   const calmNow = () => {
     if (calm()) {
