@@ -5,7 +5,7 @@ import '@fontsource/caveat/500.css';
 import '../../styles/kinetic.css';
 import Boot from '../../components/Boot.astro';
 import Arrow from '../../components/Arrow.astro';
-import { intro, work, live, email, social, loops, results, more, lead, pages, how, jobs } from '../../data/home';
+import { intro, work, live, email, social, contra, loops, results, more, lead, pages, how, jobs } from '../../data/home';
 
 // Kinetic: his sentence is split open by his reel, so the work sits in "the moment" between the words.
 // The one uncertain word trembles, then settles. Every later motion repeats that move from unsure to sure.
@@ -274,7 +274,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
       </div>
       <p class="cl">Email me at <button class="copy" type="button" data-copy={email} aria-label={`Copy ${email}`}>{email} <span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button> or book a call. I reply within a day.</p>
       <span class="vh" role="status" id="copied"></span>
-      <p class="cl">You can also find me on <a class="ul" href={social[0][1]}>LinkedIn</a> and <a class="ul" href={social[1][1]}>Behance</a>.</p>
+      {contra && <p class="cl">You can also hire me on <a class="ul" href={contra}>Contra</a>.</p>}
       </div>
     </div>
   </section>
@@ -524,6 +524,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   // where Profit Wala Love's picture has to land: its seat on the track, at the moment the track pins (measured with any current transforms taken out)
   const lthumb = q('.lthumb'), ltext = q('.ltext'), pwl = q('.ptrack .pwl'), pthumb = q('.cthumb', pwl), ppin = q('.p-pin');
   let fly = { x: 0, y: 0, s: 1 };
+  const EDGE = .15 / 1.85;   // share of the run covered while easing in: power2.in ends at twice its average speed, which then equals the linear part's
   const measure = () => {
     if (!root.classList.contains('hpin')) return;
     const g = (el: Element, k: string) => +gsap.getProperty(el, k);
@@ -554,14 +555,25 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     mm.add('(prefers-reduced-motion: no-preference)', () => {
       root.classList.add('hpin'); setOv();
       const tl = gsap.timeline({ scrollTrigger: { trigger: pagesSec, start: () => `top ${bar.offsetHeight}px`, end: 'bottom bottom', scrub: .4, invalidateOnRefresh: true } })
-        .fromTo(ptrack, { x: 0 }, { x: () => -ov, ease: 'none' }, 0)
-        .fromTo(pprog, { scaleX: 0 }, { scaleX: 1, ease: 'none' }, 0);
+        // the track eases into its sideways run (velocity matched where the two parts meet), so it never starts at full speed
+        .fromTo(ptrack, { x: 0 }, { x: () => -ov * EDGE, ease: 'power2.in', duration: .15 }, 0)
+        .to(ptrack, { x: () => -ov, ease: 'none', duration: .85 }, .15)
+        .fromTo(pprog, { scaleX: 0 }, { scaleX: 1, ease: 'none', duration: 1 }, 0);
       pst = tl.scrollTrigger!;
       // as the track comes up, the lead's picture travels down into the first seat and its story fades; the seat's own card takes over once it lands
       measure();
       gsap.set(lthumb, { transformOrigin: '0 0' });
-      gsap.timeline({ scrollTrigger: { trigger: pagesSec, start: 'top 85%', end: () => `top ${bar.offsetHeight}px`, scrub: .4, invalidateOnRefresh: true } })
-        .fromTo(lthumb, { x: 0, y: 0, scale: 1 }, { x: () => fly.x, y: () => fly.y, scale: () => fly.s, ease: 'none', duration: 1 }, 0)
+      // the picture leaves moving with the page and arrives at rest, so neither end of the drop has a jolt:
+      // on screen it slows steadily from the page's speed to a stop (speed (1 - t)^(m - 1)), never reversing, so it can't bob
+      const flyTl = gsap.timeline({ scrollTrigger: { trigger: pagesSec, start: 'top 85%', end: () => `top ${bar.offsetHeight}px`, scrub: .4, invalidateOnRefresh: true } });
+      const glide = (t: number) => {
+        const st = flyTl.scrollTrigger, L = st ? st.end - st.start : 0;
+        if (!L || fly.y <= 1 || fly.y >= L) return t;
+        const m = L / (L - fly.y);
+        return (L * t - L * (1 - (1 - t) ** m) / m) / fly.y;
+      };
+      flyTl
+        .fromTo(lthumb, { x: 0, y: 0, scale: 1 }, { x: () => fly.x, y: () => fly.y, scale: () => fly.s, ease: glide, duration: 1 }, 0)
         .fromTo(ltext, { opacity: 1, x: 0 }, { opacity: 0, x: -40, ease: 'power1.in', duration: .35 }, 0)
         .fromTo(qa(':scope > a > :not(.cthumb)', pwl), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .3 }, .7)
         .fromTo(lthumb, { opacity: 1 }, { opacity: 0, duration: .001, immediateRender: false }, 1)

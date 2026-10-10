@@ -107,6 +107,8 @@ export const caseHeader = {
 export const live = (slug: string) => `https://designwvishal.framer.website/work/${slug}`;
 export const behance = (id: string) => `https://www.behance.net/gallery/${id}`;
 export const email = 'design.vishaly@gmail.com';
+// his Contra profile, shown in Contact instead of repeating the footer's LinkedIn and Behance. Empty until Vishal sends the link.
+export const contra = '';
 export const social = [
   ['LinkedIn', 'https://www.linkedin.com/in/vishaldesigns'],
   ['Behance', 'https://www.behance.net/design_vishaly'],
