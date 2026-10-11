@@ -5,7 +5,7 @@ export const intro = {
   name: 'Vishal Yadav, product designer',
   positioning: 'I design for the moment people are unsure.',
   supporting:
-    'Product designer in Gurugram, with 4.5 years in design and 2+ in core UI/UX. I design from what people actually do: at CashKaro I read the session recordings before I touched a flow. My recent concepts take on fintech and B2B.',
+    'Product designer in Gurugram, with 4.5 years in design and 2+ in core UI/UX. At CashKaro I watched where people dropped off in session recordings, then designed for that moment. My recent concepts take on fintech and B2B.',
   availability: 'Open to product design roles and freelance projects',
   links: [
     { label: 'Resume', href: '/Vishal_Yadav_Resume.pdf' },
