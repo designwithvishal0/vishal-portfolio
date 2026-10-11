@@ -33,11 +33,11 @@ const W = (w: string) => ({ w, i: wi++ });
 const hero1 = [l1a.map(W), l1b.map(W)];
 const hero3 = l3a.map(W);
 const gfx = [
-  ['eid', 'Eid sale campaign banners for BuyKaro, on laptop and phone', '215659939/Eid-Sale-Campaign-Banner-Design-for-BuyKaro'],
-  ['social', 'Social media posts, volume one', '199128645/Social-Media-Posts-Vol-1'],
-  ['realestate', 'Real estate flyer and Content Conclave event poster', '199104047/Marketing-Materials-for-Real-Estate-and-Events-Industry'],
-  ['moi', 'Birthday party invitation posters for Museum of Illusions', '194665377/MOI-Birthday-PartyInvitation-Poster-Design'],
-  ['trigo', 'TriGo roll up standee', '187441931/Standee-Design-TriGo'],
+  ['eid', 'BuyKaro Eid sale banners', 'BuyKaro Eid sale banners on the home page, on laptop and phone', '215659939/Eid-Sale-Campaign-Banner-Design-for-BuyKaro'],
+  ['social', 'Social media posts', 'Social media posts for fashion and motorbike brands', '199128645/Social-Media-Posts-Vol-1'],
+  ['realestate', 'Real estate and event posters', 'Real estate flyer and Content Conclave event poster', '199104047/Marketing-Materials-for-Real-Estate-and-Events-Industry'],
+  ['moi', 'Museum of Illusions invites', 'Birthday party invitation posters for Museum of Illusions', '194665377/MOI-Birthday-PartyInvitation-Poster-Design'],
+  ['trigo', 'TriGo roll up standee', 'TriGo roll up standee', '187441931/Standee-Design-TriGo'],
 ];
 const lastI = wi;
 const Btn = `<svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12" rx="1" /><rect x="8.5" y="1" width="3.5" height="12" rx="1" /></svg><svg class="i-play" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.8.8 0 0 0 1.2.7l9-5.4a.8.8 0 0 0 0-1.4l-9-5.4A.8.8 0 0 0 3 1.6z" /></svg>`;
@@ -84,7 +84,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   </div>
 </header>
 
-<main>
+<main class="kf">
   <!-- The sentence, split open by the reel -->
   <section class="hero c lit hv-snap" aria-label="Introduction">
     <h1 class="hm">{intro.name}</h1>
@@ -260,7 +260,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
         <div class="p-prog c" aria-hidden="true"><i></i></div>
       </div>
     </div>
-    <div class="c p-end"><a class="more go" href={book.href}>Need a page like these? Book a call <Arrow /></a></div>
+    <div class="c p-end"><p>Need a page like these?</p><a class="pill-btn primary" href={book.href}>{book.label}</a></div>
   </section>
 
   <!-- How I work -->
@@ -278,12 +278,17 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     <h2 id="ab-h" class="sh">About</h2>
     {/* Stand in photo for layout (Vishal 2026-10-11: "just put it there for structure", to be replaced) */}
     <div class="ab-photo"><img src="/me/vishal-600.webp" srcset="/me/vishal-600.webp 600w, /me/vishal-1200.webp 1200w" sizes="320px" width="1200" height="1500" alt="Vishal Yadav" loading="lazy" decoding="async" /></div>
-    <p class="story">From October 2023 to August 2026 I designed app and web flows at CashKaro, India’s largest cashback platform, and built its design system in Figma for product and marketing. Before that I spent a year at a design agency making social graphics for 20+ clients a month, which is why what I ship looks finished (that work is on <a class="ul" href="https://www.behance.net/design_vishaly">Behance</a>). I studied Computer Science, so I know what engineers need at handoff. I use AI to get through research and iteration faster, and the design calls stay mine.</p>
-    <dl class="jobs">{jobs.map(([c, r, y]) => <div><dt>{c}</dt><dd>{r}</dd><dd class="y">{y}</dd></div>)}</dl>
-    <!-- A small taste of the agency years (Vishal 2026-10-11): five covers, each opening its Behance project -->
-    <ul class="gfx" aria-label="Graphic work on Behance">
-      {gfx.map(([f, alt, id]) => <li><a href={`https://www.behance.net/gallery/${id}`}><img src={`/graphics/${f}.webp`} alt={alt} width="808" height="632" loading="lazy" decoding="async" /></a></li>)}
-    </ul>
+    <div class="ab-r">
+      <p class="story">From October 2023 to August 2026 I designed app and web flows at CashKaro, India’s largest cashback platform, and built its design system in Figma for product and marketing. Before that I spent a year at a design agency making social graphics for 20+ clients a month, which is why what I ship looks finished (that work is on <a class="ul" href="https://www.behance.net/design_vishaly">Behance</a>). I studied Computer Science, so I know what engineers need at handoff. I use AI to get through research and iteration faster, and the design calls stay mine.</p>
+      <dl class="jobs">{jobs.map(([c, r, y]) => <div><dt>{c}</dt><dd>{r}</dd><dd class="y">{y}</dd></div>)}</dl>
+    </div>
+    <!-- Graphic work (Vishal 2026-10-11): five pieces cropped to the work itself, each with a caption, each opening its Behance project -->
+    <div class="ab-g">
+      <div class="ab-gh"><h3>Graphic design</h3><a class="more go" href="https://www.behance.net/design_vishaly">See all on Behance <Arrow /></a></div>
+      <ul class="gfx" aria-label="Graphic work on Behance">
+        {gfx.map(([f, cap, alt, id]) => <li><a href={`https://www.behance.net/gallery/${id}`}><span class="gimg"><img src={`/graphics/${f}.webp`} alt={alt} width="800" height="600" loading="lazy" decoding="async" /></span><span class="gcap">{cap}</span></a></li>)}
+      </ul>
+    </div>
   </section>
 
   <!-- Contact: a question that settles into a next step -->
