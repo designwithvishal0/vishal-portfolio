@@ -35,7 +35,7 @@ export const work: Work[] = [
     headline: 'The four hours nobody designs for',
     problem:
       'A waitlisted passenger waits four hours for the chart, and the app shows a status when they need a decision.',
-    role: 'Research, flow, UI, copy',
+    role: 'Solo: research, flow, UI, copy',
     type: 'Concept',
     year: '2026',
     detail: '1 hub, 6 journey states, 2 decision sheets',
@@ -49,7 +49,7 @@ export const work: Work[] = [
     headline: 'The split that stays alive',
     problem:
       'Google Pay only opens when money has to move, and a split is over the moment you send it.',
-    role: 'Research, flows, UI, interface copy, prototype',
+    role: 'Solo: research, flows, UI, interface copy, prototype',
     type: 'Concept',
     year: '2026',
     detail: 'A shared board replaces the reminder, so a split returns 4 times',
