@@ -1,0 +1,162 @@
+---
+import '@fontsource-variable/hanken-grotesk';
+import '../styles/components.css';
+import { work } from '../data/home';
+import Boot from '../components/Boot.astro';
+import Arrow from '../components/Arrow.astro';
+
+// Every token and component the site uses, in one place, for review.
+const colours = [
+  ['--bg', 'Page', 'Light #F7F7F6, dark #111113'],
+  ['--ink', 'Text', '15.7:1 on page'],
+  ['--muted', 'Secondary text', '4.73:1 on page'],
+  ['--accent', 'Links, focus, primary button', '5.86:1 on page'],
+  ['--rule', 'Dividers and quiet borders', 'Decoration only'],
+  ['--card', 'Image wells', 'Keep body text off it'],
+  ['--dark', 'Proof panels', 'Text on it is 7:1 or better'],
+  ['--live', 'Availability dot', 'Always paired with text'],
+];
+const type = [
+  ['--fs-display', 'Display', 'I design for the moment people are unsure.'],
+  ['--fs-h1', 'Page title', 'The four hours nobody designs for'],
+  ['--fs-h2', 'Lead tile and section title', 'The split that stays alive'],
+  ['--fs-h3', 'Tile headline', 'Plans in years, not months.'],
+  ['--fs-lead', 'Lead paragraph, 21px', 'Four hours before departure, a chart decides whether you travel at all.'],
+  ['--fs-body', 'Body, 18px', 'A store manager swipes away a false alert at 3 AM, and nothing tells them it counted.'],
+  ['--fs-ui', 'Buttons and links, 16px', 'View the case study'],
+  ['--fs-small', 'Section labels, 15px', 'Selected work'],
+  ['--fs-meta', 'Tile metadata, 14px', 'Research, flow, UI, copy'],
+];
+const space = ['s1','s2','s3','s4','s5','s6','s8','s10','s12','s14','s18','s32'];
+const motion = [
+  ['--press', '120ms', 'Button press'],
+  ['--hover', '180ms', 'Hover and focus'],
+  ['--enter', '360ms', 'Elements entering'],
+  ['--section', '500ms', 'Sections revealing on scroll'],
+];
+const w = work[0];
+const demoLine = 'I design for the moment people are unsure.';
+---
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Design system</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<style>
+  .sys h1{font-size:var(--fs-h2);line-height:var(--lh-head);letter-spacing:var(--track-head);font-weight:var(--w-head);margin:var(--s14) 0 var(--s3)}
+  .sys .intro{color:var(--muted);max-width:var(--measure);margin:0 0 var(--s8)}
+  .sys section{padding:0 0 var(--s18)}
+  .sys .note{color:var(--muted);font-size:var(--fs-small);font-weight:var(--w-regular);margin:0 0 var(--s6);max-width:var(--measure)}
+  .swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s6)}
+  @media (max-width:900px){.swatches{grid-template-columns:1fr 1fr}}
+  .chip{height:88px;border-radius:var(--r-card);border:1px solid var(--rule);margin:0 0 var(--s3)}
+  .swatches b{display:block;font-size:var(--fs-ui)}
+  .swatches span{display:block;font-size:var(--fs-meta);color:var(--muted)}
+  .row{display:grid;grid-template-columns:220px 1fr;gap:var(--s6);align-items:baseline;padding:var(--s5) 0;border-top:1px solid var(--rule)}
+  @media (max-width:760px){.row{grid-template-columns:1fr;gap:var(--s2)}}
+  .row small{font-size:var(--fs-meta);color:var(--muted)}
+  .row p{margin:0;font-weight:var(--w-head);overflow-wrap:anywhere}
+  .bar{height:16px;background:var(--accent);border-radius:var(--r-focus)}
+  .radii{display:flex;flex-wrap:wrap;gap:var(--s6)}
+  .radii div{width:120px;height:88px;background:var(--card);border:1px solid var(--rule)}
+  .demo{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center}
+  footer{flex-wrap:wrap} footer button{white-space:nowrap}
+  .demo-enter{font-size:var(--fs-h2);line-height:var(--lh-head);letter-spacing:var(--track-head);font-weight:var(--w-head);margin:0}
+</style>
+<Boot />
+</head>
+<body>
+<div class="wrap sys">
+  <h1>Design system</h1>
+  <p class="intro">Every colour, size, space and motion the site uses, taken from the approved B2 direction. Pages use these tokens and nothing else.</p>
+
+  <section aria-labelledby="c">
+    <div class="sec-head"><h2 id="c">Colour</h2><span>One accent, contrast checked</span></div>
+    <div class="swatches">
+      {colours.map(([v, name, note]) => (
+        <div><div class="chip" style={`background:var(${v})`}></div><b>{name}</b><span>{v}</span><span>{note}</span></div>
+      ))}
+    </div>
+  </section>
+
+  <section aria-labelledby="t">
+    <div class="sec-head"><h2 id="t">Type</h2><span>Hanken Grotesk, one family</span></div>
+    {type.map(([v, name, sample]) => (
+      <div class="row"><small>{name}<br />{v}</small><p style={`font-size:var(${v});line-height:${v === '--fs-display' ? 'var(--lh-tight)' : 'var(--lh-head)'};letter-spacing:${v.match(/display|h1|h2|h3/) ? 'var(--track-head)' : 'normal'};font-weight:${v.match(/display|h1|h2|h3/) ? 'var(--w-head)' : 'var(--w-regular)'}`}>{sample}</p></div>
+    ))}
+    <div class="row"><small>Result number<br />--fs-stat</small><p class="r-num" style="color:var(--ink)">60%</p></div>
+  </section>
+
+  <section aria-labelledby="s">
+    <div class="sec-head"><h2 id="s">Space and shape</h2><span>4px base</span></div>
+    {space.map(k => <div class="row"><small>--{k}</small><div class="bar" style={`width:var(--${k})`}></div></div>)}
+    <p class="note" style="margin-top:var(--s8)">Corners: pill for anything you press, 20px for image wells, 28px for proof panels.</p>
+    <div class="radii"><div style="border-radius:var(--r-pill)"></div><div style="border-radius:var(--r-card)"></div><div style="border-radius:var(--r-panel)"></div></div>
+  </section>
+
+  <section aria-labelledby="m">
+    <div class="sec-head"><h2 id="m">Motion</h2><span>Try each one, they are live</span></div>
+    <p class="note">Everything eases out, so it starts fast and settles: press 120ms, hover 180ms, enter 360ms, section 500ms. Only transform and opacity move. All of it stops when the visitor asks for reduced motion, or switches it off below.</p>
+    <div class="row"><small>Page load, once: the headline rises word by word, then the lines under it fade up in order</small><div><p class="words demo-enter" id="enter"><span class="vh">{demoLine}</span>{demoLine.split(' ').map((x, i, a) => <><span class="w" aria-hidden="true"><span style={`--i:${i}`}>{x}</span></span>{i < a.length - 1 && ' '}</>)}</p><button class="btn" type="button" id="replay" style="margin-top:var(--s4)">Replay</button></div></div>
+    <div class="row"><small>Buttons: rest, hover and press are three tones of one colour, and only the press moves</small><div class="demo"><a class="btn primary" href="#m">Book a call</a><a class="btn" href="#m">Email</a></div></div>
+    <div class="row"><small>Text link: a faint underline at rest, the full one draws in from the left</small><div><a class="ul" href="#m" style="font-weight:var(--w-strong)">See how I work with founders</a></div></div>
+    <div class="row"><small>Arrow: a chevron grows a stem and moves 3px on hover. On a phone it stays formed</small><div><a class="more go" href="#m">View the case study <Arrow /></a></div></div>
+    <div class="row"><small>Copy the email</small><div><button class="copy" type="button" data-copy="design.vishaly@gmail.com">design.vishaly@gmail.com <span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button><span class="vh" role="status" id="copied"></span></div></div>
+    <div class="row"><small>Theme spreads from the switch</small><div><p style="margin:0" class="note">On the site the Dark mode switch sits in the top bar, so the new theme spreads down from it. Try the one at the bottom of this page.</p></div></div>
+    <div class="row"><small>Result numbers count up from zero once, the first time they are half in view</small><div><p style="margin:0" class="note">Scroll to the CashKaro panel at the bottom of this page.</p></div></div>
+    <div class="row"><small>Work loop</small><div><p style="margin:0" class="note">Plays while the tile is mostly in view, on every device, and pauses when it leaves. The round button pauses or plays it. With reduced motion on, nothing starts by itself. Hovering the image, the headline or View the case study firms the frame and forms the arrow.</p></div></div>
+  </section>
+
+  <section aria-labelledby="k">
+    <div class="sec-head"><h2 id="k">Components</h2><span>Hover them, tab to them</span></div>
+    <div class="row"><small>Buttons</small><div class="demo"><a class="btn primary" href="#k">Book a call</a><a class="btn" href="#k">Email</a></div></div>
+    <div class="row"><small>Text link</small><div><a class="ul" href="#k" style="font-weight:var(--w-strong)">Hiring a product designer</a></div></div>
+    <div class="row"><small>Status</small><span class="status"><span class="dot" aria-hidden="true"></span>Open to product design roles and freelance projects</span></div>
+    <div class="row"><small>Tile metadata</small><div class="meta" style="margin:0"><span class="pname">{w.name}</span><span class="pill">Concept</span><span>{w.year}</span></div></div>
+    <div class="row"><small>Shipped tag</small><div><span class="pill shipped">Shipped, 2026</span></div></div>
+    <div class="row"><small>Case facts</small><dl class="facts" style="margin:0"><div><dt>Role</dt><dd>Product and UX design</dd></div><div><dt>Type</dt><dd>Self initiated</dd></div><div><dt>Year</dt><dd>2026</dd></div></dl></div>
+  </section>
+
+  <section aria-label="Work tile">
+    <div class="sec-head"><h2>Work tile</h2><span>The image, headline and View the case study open it. The text stays text</span></div>
+    <div class="work" style="padding:0">
+      <article class="tile reveal half">
+        <div class="media" data-state="paused">
+          <a class="mlink" href="#k" tabindex="-1" aria-hidden="true"></a>
+          <img src="/loops/ixigo.jpg" alt={w.alt} width="1200" height="900" loading="lazy" decoding="async" />
+          <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"><source src="/loops/ixigo.mp4" type="video/mp4" /><source src="/loops/ixigo.webm" type="video/webm" /></video>
+          <button class="vctl" type="button" data-name={w.name} aria-label={`Play the ${w.name} preview`}>
+            <svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12" rx="1" /><rect x="8.5" y="1" width="3.5" height="12" rx="1" /></svg>
+            <svg class="i-play" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.8.8 0 0 0 1.2.7l9-5.4a.8.8 0 0 0 0-1.4l-9-5.4A.8.8 0 0 0 3 1.6z" /></svg>
+          </button>
+        </div>
+        <div class="meta"><span class="pname">{w.name}</span><span class="pill">Concept</span><span>{w.year}</span></div>
+        <h3><a href="#k">{w.headline}</a></h3>
+        <p>{w.problem}</p>
+        <p class="scope"><span>{w.role}</span><span>{w.detail}</span></p>
+        <a class="more" href="#k" tabindex="-1" aria-hidden="true">View the case study <Arrow /></a>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="r" style="padding-top:var(--s18)">
+    <div class="results">
+      <h2 id="r">Shipped at CashKaro, for 25M+ users</h2>
+      <div class="r-grid"><div><div class="r-num" data-n="60">60%</div><div class="r-label">conversion lift on critical flows</div></div></div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Design system, from direction B2</span>
+    <span style="display:flex;gap:var(--s2)"><button id="theme" type="button">Dark mode</button><button id="calm" type="button" aria-pressed="false">Reduce motion</button></span>
+  </footer>
+</div>
+
+<script>
+import '../scripts/ui';
+const e = document.getElementById('enter');
+document.getElementById('replay')?.addEventListener('click', () => { if (!e) return; e.classList.remove('words'); void e.offsetWidth; e.classList.add('words'); });
+</script>
+</body>
+</html>

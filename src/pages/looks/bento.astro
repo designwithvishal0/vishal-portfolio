@@ -1,0 +1,506 @@
+---
+import '@fontsource-variable/hanken-grotesk';
+import '../../styles/bento.css';
+import Boot from '../../components/Boot.astro';
+import Arrow from '../../components/Arrow.astro';
+import { intro, work, live, email, social, results, more, lead, pages, how, jobs } from '../../data/home';
+
+// Bento: the first screen is one desk of tiles (reel, claim, proof, time, action) that lands from a loose pile into a grid.
+// Below, the work is a grid of video tiles that open in place into one preview sheet.
+const keys = ['ixigo', 'split', 'twelve', 'jarvis'];
+const grounds = ['#0B0C10', '#F6F8FC', '#F2F0E4', '#F5F6FB'];
+// wide tiles (ixigo, JARVIS) show the scene cut at 1024+, narrow ones the phone cut
+const wide = [true, false, false, true];
+const words = intro.positioning.split(' ');
+const cwords = 'Hiring, or need a page that sells?'.split(' ');
+const book = intro.links.find(l => l.label === 'Book a call')!.href;
+// project boundaries in each showreel, seconds
+const chips = work.map((w, i) => ({ name: w.name, href: `#w-${w.slug}` }));
+// the bento hero cut (tools/motion/bento/hero.sh) opens every project on its phone UI; same timing in both cuts
+const chipAt = [0, 5.0, 9.2, 13.2];
+const aud = [
+  ['Hiring a product designer', 'See the case studies', '#work'],
+  ['Recruiting', 'The 30 second version', '#results'],
+  ['Founder', 'Need a page that sells', '#pages'],
+];
+const P = `<svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12" rx="1" /><rect x="8.5" y="1" width="3.5" height="12" rx="1" /></svg><svg class="i-play" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.8.8 0 0 0 1.2.7l9-5.4a.8.8 0 0 0 0-1.4l-9-5.4A.8.8 0 0 0 3 1.6z" /></svg>`;
+const statNum = (s: string) => { const m = s.match(/[\d,.]+/)![0]; return { pre: s.slice(0, s.indexOf(m)), n: m, suf: s.slice(s.indexOf(m) + m.length), dec: (m.split('.')[1] || '').length }; };
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Look: Bento, Vishal Yadav</title>
+<meta name="robots" content="noindex" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="preload" as="image" href="/bento/hero/hero-wide.jpg" media="(min-width:600px)" fetchpriority="high" />
+<link rel="preload" as="image" href="/bento/hero/hero-tall.jpg" media="(max-width:599px)" fetchpriority="high" />
+<Boot />
+<script is:inline>addEventListener('load',()=>setTimeout(()=>document.documentElement.classList.add('ready'),2500))</script>
+</head>
+<body>
+<header class="bar">
+  <a class="me" href="#top">Vishal Yadav</a>
+  <nav class="pill nav" aria-label="Sections">
+    <span class="navdot" aria-hidden="true"></span>
+    <a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a>
+  </nav>
+  <button id="theme" class="pill" type="button">Dark mode</button>
+</header>
+
+<main id="top">
+  <div class="deskwrap">
+  <section class="desk" aria-label="Introduction">
+    <figure class="t t-a reel" data-state="paused" style={`--g:${grounds[0]}`}>
+      <div class="rm">
+        <picture>
+          <source media="(max-width:599px)" srcset="/bento/hero/hero-tall.jpg" width="1080" height="1350" />
+          <img src="/bento/hero/hero-wide.jpg" width="1920" height="1080" alt="Showreel of four case studies: ixigo Trains, Google Pay Split and Request, Twelve and Staqu JARVIS Alerts" fetchpriority="high" decoding="async" />
+        </picture>
+        <video muted playsinline loop preload="none" aria-hidden="true" tabindex="-1" data-wide="/bento/hero/hero-wide" data-tall="/bento/hero/hero-tall"></video>
+      </div>
+      <figcaption class="chip-wrap">
+        {chips.map((c, i) => <a class={`chip${i ? '' : ' on'}`} href={c.href} data-at={chipAt[i]} hidden={i ? true : undefined}>{c.name}<Arrow /></a>)}
+      </figcaption>
+      <button class="vctl big" type="button" aria-label="Play the previews"><Fragment set:html={P} /></button>
+    </figure>
+
+    <div class="t t-b cobalt">
+      <div class="b-top">
+        <h1>{intro.name}</h1>
+        <p class="avail"><span class="live" aria-hidden="true"></span>{intro.availability}</p>
+      </div>
+      <p class="pos words"><span class="vh">{intro.positioning}</span>{words.map((w, i) => i === words.length - 1
+        ? <span class="uw" aria-hidden="true"><span class="w"><span style={`--i:${i}`}>{w}</span></span><svg class="scrib" viewBox="0 0 200 24" preserveAspectRatio="none" focusable="false"><path pathLength="1" d="M4 15c22-6 52-9 86-8 30 1 58 3 104-5M38 19c30-4 70-5 118-3" /></svg></span>
+        : <><span class="w" aria-hidden="true"><span style={`--i:${i}`}>{w}</span></span>{' '}{[2, 4, 6].includes(i) && <br class="dbr" />}</>)}</p>
+    </div>
+
+    <section class="t t-c nums" id="results" aria-labelledby="r-h">
+      <h2 id="r-h">Shipped at CashKaro, for 25M+ users</h2>
+      <div class="r-grid">
+        {results.map(r => <div class="r"><p class="r-n"><span class="vh">{r.n}</span><span aria-hidden="true"><span class="cnt" data-to={parseInt(r.n)} data-delay="640">{parseInt(r.n)}</span>%</span></p><p class="r-l">{r.label}</p></div>)}
+      </div>
+    </section>
+
+    <div class="t t-d sky" data-sky="day">
+      <video muted playsinline preload="none" aria-hidden="true" tabindex="-1" data-src="/bento/motion/sky.mp4" data-webm="/bento/motion/sky.webm"></video>
+      <p class="clock"><span class="city">Gurugram</span><time class="now"></time></p>
+      <script is:inline>(()=>{const d=document.currentScript.parentElement,v=d.querySelector('video');const h=+new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',hour:'numeric',hourCycle:'h23'}).format(new Date())%24;const m=+new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',minute:'numeric'}).format(new Date()),x=h+m/60;const p=x<5?'night':x<6.5?'dawn':x<17.5?'day':x<19?'dusk':'night';d.dataset.sky=p;d.dataset.ink=x>=6.5&&x<17.5?'1':'0';v.poster='/bento/motion/sky-'+p+'.jpg';d.querySelector('time').textContent=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit'}).format(new Date()).toUpperCase();})()</script>
+    </div>
+
+    <a class="t t-e mari" href={book}>
+      <span class="e-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 18L18 6M8 6h10v10" /></svg></span>
+      <span class="e-l">Book a call</span>
+    </a>
+  </section>
+  </div>
+
+  <div class="wrap">
+    <section class="t paper start reveal" aria-label="Start here">
+      <p class="f">{intro.supporting}</p>
+      <ul class="g">
+        {aud.map(([l, a, h]) => <li><a class="go" href={h}><strong>{l}</strong><span>{a}</span><Arrow /></a></li>)}
+      </ul>
+    </section>
+
+    <div class="head" id="work"><h2>Selected work</h2><span>4 case studies</span></div>
+    <section class="work" aria-label="Selected work" data-sec="work">
+      {work.map((w, i) => (
+        <article class={`wt t ${wide[i] ? 'wide' : 'narrow'} ${i ? 'day' : 'night'} reveal`} id={`w-${w.slug}`} data-i={i} style={`--g:${grounds[i]}`}>
+          <div class="wm" data-state="paused">
+            <div class="mi">
+              <picture>
+                {wide[i] && <source media="(min-width:1024px)" srcset={`/reel/${keys[i]}-scene.jpg`} width="1280" height="720" />}
+                <img src={`/reel/${keys[i]}-phone.jpg`} width="720" height="900" alt={w.alt} loading="lazy" decoding="async" />
+              </picture>
+              <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-s={wide[i] ? `/reel/${keys[i]}-scene.mp4` : undefined} data-p={`/reel/${keys[i]}-phone.mp4`} data-sw={wide[i] ? `/bento/reel/${keys[i]}-scene.webm` : undefined} data-pw={`/bento/reel/${keys[i]}-phone.webm`}></video>
+            </div>
+            <button class="open" type="button" aria-label={`Show ${w.name}`} aria-haspopup="dialog"><span class="xp" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M9.5 2.5h4v4M13.5 2.5L9 7M6.5 13.5h-4v-4M2.5 13.5L7 9" /></svg></span></button>
+            <button class="vctl" type="button" data-name={w.name} aria-label={`Play the ${w.name} preview`}><Fragment set:html={P} /></button>
+          </div>
+          <div class="wtx">
+            <p class="meta">{w.name} · {w.type} <span class="nw">· {w.year}</span></p>
+            <h3><a href={live(w.slug)}>{w.headline}<span class="vh">, the {w.name} case study</span></a></h3>
+            <p class="prob">{w.problem}</p>
+          </div>
+        </article>
+      ))}
+    </section>
+    <ul class="more" aria-label="More work">
+      {more.map(m => (
+        <li class="reveal"><a class="t paper mw go" href={m.href}>
+          <img src={`/pages/${m.img}.webp`} alt="" width="72" height="72" loading="lazy" decoding="async" />
+          <span class="mwt"><strong>{m.name}</strong><span>{m.line}</span></span>
+          <span class="tag">Concept</span><Arrow />
+        </a></li>
+      ))}
+    </ul>
+
+    <div class="head" id="pages"><h2>Pages that sell</h2><span>Campaigns, landing pages and product pages for commerce brands.</span></div>
+  </div>
+  <section class="railwrap" aria-label="Pages that sell">
+    <ul class="rail">
+      <li class="t paper lead">
+        <img class="th" src={`/pages/${lead.img}.webp`} alt={`${lead.name}, preview`} width="960" height="1004" loading="lazy" decoding="async" />
+        <div class="ltx">
+          <span class="tag shipped">{lead.tag}</span>
+          <h3>{lead.name}</h3>
+          <p>{lead.line}</p>
+          <dl class="lstats">{lead.stats.map(([n, l]) => { const s = statNum(n); return <div><dt>{l}</dt><dd><span class="vh">{n}</span><span aria-hidden="true">{s.pre}<span class="cnt" data-to={s.n.replace(/,/g, '')} data-dec={s.dec} data-at=".4">{s.n}</span>{s.suf && <span class="suf">{s.suf}</span>}</span></dd></div>; })}</dl>
+        </div>
+      </li>
+      {pages.map(p => (
+        <li><a class="t paper pg go" href={p.href}>
+          <img class="th" src={`/pages/${p.img}.webp`} alt={`${p.name}, preview`} width="960" height="1004" loading="lazy" decoding="async" />
+          {p.tag && <span class={`tag${p.tag.startsWith('Shipped') ? ' shipped' : ''}`}>{p.tag}</span>}
+          <h3>{p.name}</h3>
+          <p>{p.line}</p>
+          <span class="lk">View on Behance <Arrow /></span>
+        </a></li>
+      ))}
+      <li class="t fold">
+        <h3>Need a page that sells?</h3>
+        <a class="lk go" href="#contact">See how I work with founders <Arrow /></a>
+      </li>
+    </ul>
+  </section>
+
+  <div class="wrap">
+    <div class="head"><h2>How I work</h2></div>
+    <section class="t how reveal" aria-label="How I work">
+      {how.map(x => <div class="hw"><h3>{x.h}</h3><p>{x.p}</p><a class="lk go" href={x.href}>{x.link} <Arrow /></a></div>)}
+    </section>
+
+    <section class="about" id="about" aria-labelledby="a-h" data-sec="about">
+      <div class="t paper ab reveal">
+        <img class="face" src="/me/vishal-600.webp" width="600" height="750" alt="Vishal Yadav" loading="lazy" decoding="async" />
+        <h2 id="a-h">About</h2>
+        <p>From October 2023 to August 2026 I designed app and web flows at CashKaro, India’s largest cashback platform, and built, in Figma, the design system its campaigns run on. Before that I was a graphic designer at an agency, which is why what I ship looks finished (that work lives in <a class="ul" href="https://www.behance.net/design_vishaly">the archive</a>). I studied Computer Science, so I know what engineers need at handoff, and I use AI to move faster through research and iteration while the design calls stay mine.</p>
+      </div>
+      <dl class="t jobs reveal">{jobs.map(([c, r, y]) => <div><dt>{c}</dt><dd>{r}</dd><dd class="y">{y}</dd></div>)}</dl>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="c-h" data-sec="contact">
+      <div class="t cobalt ask">
+        <h2 id="c-h" class="cq"><span class="vh">Hiring, or need a page that sells?</span>{cwords.map((x, k) => <><span class="w" aria-hidden="true"><span>{x}</span></span>{' '}</>)}</h2>
+        <div class="btns">
+          <a class="b b-mari" href={book}>Book a call</a>
+          <a class="b b-line" href={`mailto:${email}`}>Email</a>
+        </div>
+      </div>
+      <div class="t paper side">
+        <p>Email me at <button class="copy" type="button" data-copy={email}>{email} <span class="ctag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button> or book a call. I reply within a day.</p>
+        <span class="vh" role="status" id="copied"></span>
+        <p class="else">You can also find me on <a class="ul" href={social[0][1]}>LinkedIn</a> and <a class="ul" href={social[1][1]}>Behance</a>.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div class="wrap">
+  <footer class="t paper foot">
+    <nav aria-label="Elsewhere" class="social">{social.map(([l, h]) => <a class="ul" href={h}>{l}</a>)}</nav>
+    <button id="calm" class="pill" type="button" aria-pressed="false">Reduce motion</button>
+  </footer>
+</div>
+
+<dialog class="sheet" aria-labelledby="sh-h-0">
+  <div class="sh-in">
+    <button class="x" type="button" aria-label="Close" autofocus><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" /></svg></button>
+    {work.map((w, i) => (
+      <div class="sh-p" data-i={i} hidden>
+        <div class="sh-m media" data-state="paused" style={`--g:${grounds[i]}`}>
+          <picture>
+            <source media="(min-width:1024px)" srcset={`/reel/${keys[i]}-scene.jpg`} width="1280" height="720" />
+            <img src={`/reel/${keys[i]}-phone.jpg`} width="720" height="900" alt="" loading="lazy" decoding="async" />
+          </picture>
+          <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-s={`/reel/${keys[i]}-scene.mp4`} data-p={`/reel/${keys[i]}-phone.mp4`} data-sw={`/bento/reel/${keys[i]}-scene.webm`} data-pw={`/bento/reel/${keys[i]}-phone.webm`}></video>
+          <button class="vctl" type="button" data-name={w.name} aria-label={`Play the ${w.name} preview`}><Fragment set:html={P} /></button>
+        </div>
+        <div class="sh-t">
+          <p class="meta">{w.name} · {w.type} <span class="nw">· {w.year}</span></p>
+          <h2 id={`sh-h-${i}`}><a href={live(w.slug)}>{w.headline}</a></h2>
+          <p class="prob">{w.problem}</p>
+          <p class="role">{w.role}</p>
+          <p class="det">{w.detail}</p>
+          <a class="b b-cobalt" href={live(w.slug)}>View the case study<span class="vh">: {w.name}</span></a>
+        </div>
+      </div>
+    ))}
+  </div>
+</dialog>
+
+<script is:inline>(()=>{const m=matchMedia('(min-width: 1024px)');const w=!document.createElement('video').canPlayType('video/mp4; codecs="avc1.640028"');const set=()=>document.querySelectorAll('video[data-p]').forEach(v=>{const d=v.dataset,s=m.matches&&d.s;const u=w?(s?d.sw:d.pw):(s?d.s:d.p);if(v.getAttribute('src')!==u){const t=v.currentTime;v.src=u;if(t)v.currentTime=t}});set();m.addEventListener('change',set)})()</script>
+<script>import '../../scripts/ui';</script>
+<script>
+  const root = document.documentElement;
+  const osCalm = matchMedia('(prefers-reduced-motion: reduce)');
+  const calm = () => osCalm.matches || root.classList.contains('calm');
+  const resyncs: (() => void)[] = [];
+  const resync = () => resyncs.forEach(f => f());
+  osCalm.addEventListener('change', resync);
+  document.getElementById('calm')?.addEventListener('click', () => setTimeout(() => {
+    if (calm()) document.getAnimations().forEach(a => { if (!(a instanceof CSSAnimation)) a.cancel(); });
+    resync();
+  }));
+
+  /* Pile to grid: the desk starts as a loose pile at its centre and lands into the grid on a spring, once per load.
+     Tiles are visible in CSS; WAAPI only adds the start pose, so a failure leaves the grid in place. */
+  const spring = (k = 170, c = 18, m = 1, dur = .64, n = 40) => {
+    const w0 = Math.sqrt(k / m), z = c / (2 * Math.sqrt(k * m)), wd = w0 * Math.sqrt(1 - z * z), pts: string[] = [];
+    for (let i = 0; i <= n; i++) { const t = dur * i / n; pts.push((i === n ? 1 : 1 - Math.exp(-z * w0 * t) * (Math.cos(wd * t) + z * w0 / wd * Math.sin(wd * t))).toFixed(4)); }
+    return `linear(${pts.join(',')})`;
+  };
+  const desk = document.querySelector<HTMLElement>('.desk')!;
+  if (!calm() && scrollY < 80) {
+    const ease = CSS.supports('animation-timing-function', 'linear(0, 1)') ? spring() : 'cubic-bezier(.2,.9,.25,1.15)';
+    const d = desk.getBoundingClientRect(), cx = d.left + d.width / 2, cy = d.top + Math.min(d.height, innerHeight - d.top) / 2;
+    const seed = [[-18, 10, -4], [16, -20, 5], [-8, 22, -6], [22, 6, 3], [-24, -14, 6]];
+    ['.t-a', '.t-b', '.t-c', '.t-d', '.t-e'].forEach((s, i) => {
+      const el = desk.querySelector<HTMLElement>(s)!, r = el.getBoundingClientRect();
+      const [ox, oy, rot] = seed[i];
+      el.animate([{ transform: `translate(${cx - (r.left + r.width / 2) + ox}px,${cy - (r.top + r.height / 2) + oy}px) rotate(${rot}deg) scale(.55)` }, { transform: 'none' }],
+        { duration: 640, delay: i * 55, easing: ease, fill: 'backwards' });
+    });
+  }
+
+  /* The reel: plays while in view, its chip names the project on screen. Under reduced motion it waits for Play. */
+  const reel = document.querySelector<HTMLElement>('.reel')!;
+  {
+    const v = reel.querySelector('video')!, btn = reel.querySelector<HTMLButtonElement>('.vctl')!;
+    const chipsEl = [...reel.querySelectorAll<HTMLAnchorElement>('.chip')];
+    const tall = matchMedia('(max-width: 599px)');
+    const ext = v.canPlayType('video/mp4; codecs="avc1.640028"') ? '.mp4' : '.webm';
+    const src = () => (tall.matches ? v.dataset.tall! : v.dataset.wide!) + ext;
+    let shown = false, user: boolean | null = null, cur = 0;
+    const mark = (on: boolean) => { reel.dataset.state = on ? 'playing' : 'paused'; btn.setAttribute('aria-label', `${on ? 'Pause' : 'Play'} the previews`); };
+    // the poster covers first paint; the video only starts downloading after load, so it never competes with the LCP image
+    const sync = () => {
+      const run = user === null ? shown && !calm() : user && shown;
+      if (run && document.readyState === 'complete') {
+        if (!v.getAttribute('src')) { v.preload = 'auto'; v.src = src(); }
+        v.play().catch(e => { if (e.name !== 'AbortError') mark(false); });
+      } else v.pause();
+      mark(run);
+    };
+    addEventListener('load', () => sync());
+    v.addEventListener('timeupdate', () => {
+      let k = 0; chipsEl.map(c => +c.dataset.at!).forEach((t, i) => { if (v.currentTime >= t) k = i; });
+      if (k === cur || chipsEl[cur].contains(document.activeElement)) return;
+      chipsEl[cur].classList.remove('on'); chipsEl[cur].hidden = true;
+      cur = k; chipsEl[k].hidden = false; chipsEl[k].classList.add('on');
+    });
+    v.addEventListener('playing', () => reel.classList.add('started'), { once: true });
+    btn.addEventListener('click', () => { user = reel.dataset.state !== 'playing'; reel.dataset.user = ''; sync(); });
+    new IntersectionObserver(([e]) => { shown = e.isIntersecting; sync(); }, { threshold: .4 }).observe(reel);
+    // turning a tablet or resizing across 600px swaps the cut and keeps the same project on screen
+    tall.addEventListener('change', () => {
+      if (!v.getAttribute('src')) return;
+      v.src = src();
+      v.currentTime = +chipsEl[cur].dataset.at!;
+      sync();
+    });
+    resyncs.push(sync);
+  }
+
+  /* Count ups: numbers render final in HTML; with motion they restart from zero when first in view. */
+  const fmt = (n: number, dec: number) => n.toLocaleString('en-IN', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+  document.querySelectorAll<HTMLElement>('.cnt').forEach(el => {
+    const to = +el.dataset.to!, dec = +(el.dataset.dec || 0), delay = +(el.dataset.delay || 0);
+    if (calm()) return;
+    el.textContent = fmt(0, dec);
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return; io.disconnect();
+      setTimeout(() => {
+        if (calm()) { el.textContent = fmt(to, dec); return; }
+        const t0 = performance.now();
+        const tick = (t: number) => { const p = Math.min((t - t0) / 900, 1); el.textContent = fmt(to * (1 - (1 - p) ** 4), dec); if (p < 1) requestAnimationFrame(tick); };
+        requestAnimationFrame(tick);
+      }, delay);
+    }, { threshold: +(el.dataset.at || .5) });
+    io.observe(el.closest('.t') || el);
+    resyncs.push(() => { if (calm()) el.textContent = fmt(to, dec); });
+  });
+
+  /* Gurugram: live time, and a sky that seeks to the current hour (a short time lapse from six hours ago on first view). */
+  {
+    const tile = document.querySelector<HTMLElement>('.sky')!, v = tile.querySelector('video')!, out = tile.querySelector('time')!;
+    const clock = new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', hour: 'numeric', minute: '2-digit' });
+    const parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', hour: 'numeric', minute: 'numeric', hourCycle: 'h23' });
+    const hours = () => { const [h, m] = parts.format(new Date()).split(':').map(Number); return (h % 24) + m / 60; };
+    // per half hour, the type colour the motion designer checked against the sky behind the text (sky-calm.json)
+    let types: string[] | null = null;
+    const tick = () => {
+      out.textContent = clock.format(new Date()).toUpperCase();
+      const h = hours();
+      const z = types?.[Math.floor(h * 2) % types.length];
+      tile.dataset.ink = z ? (z === 'ink' ? '1' : '0') : (h >= 6.5 && h < 17.5 ? '1' : '0');
+      if (v.readyState >= 1 && v.paused && !lapsing) v.currentTime = Math.min(h, 23.9);
+    };
+    let lapsing = false, played = false;
+    v.addEventListener('timeupdate', () => {
+      if (!lapsing) return;
+      const t = v.currentTime, z = types?.[Math.floor(t * 2) % 48];
+      tile.dataset.ink = z ? (z === 'ink' ? '1' : '0') : (t >= 6.5 && t < 17.5 ? '1' : '0');
+    });
+    tick(); setInterval(tick, 15_000);
+    fetch('/bento/motion/sky-calm.json').then(r => r.ok ? r.json() : null).then(j => {
+      if (Array.isArray(j?.halfHours)) { types = j.halfHours.map((e: { type: string }) => e.type); tick(); }
+    }).catch(() => {});
+    const lapse = () => {
+      if (played) return; played = true;
+      const now = hours(), from = Math.max(0, now - 6);
+      if (calm() || now - from < .5) { v.currentTime = Math.min(now, 23.9); return; }
+      lapsing = true; v.currentTime = from; v.playbackRate = 2.5;
+      v.play().then(() => setTimeout(() => { v.pause(); v.playbackRate = 1; lapsing = false; v.currentTime = Math.min(hours(), 23.9); }, (now - from) / 2.5 * 1000)).catch(() => { lapsing = false; v.currentTime = Math.min(now, 23.9); });
+    };
+    addEventListener('load', () => {
+      v.addEventListener('loadedmetadata', () => {
+        new IntersectionObserver(([e], o) => { if (e.isIntersecting) { o.disconnect(); lapse(); } }, { threshold: .5 }).observe(tile);
+      }, { once: true });
+      v.preload = 'auto';
+      // the motion designer also ships a VP9 cut, a sixth of the size; it is used where the browser is sure it can play it
+      v.src = v.canPlayType('video/webm; codecs="vp9"') === 'probably' ? v.dataset.webm! : v.dataset.src!;
+    });
+    resyncs.push(() => { if (calm() && lapsing) { v.pause(); lapsing = false; v.playbackRate = 1; v.currentTime = Math.min(hours(), 23.9); } });
+  }
+
+  /* Work tiles: only the most visible tile plays (with the reel that makes two videos at most; none while the sheet is open).
+     Its button pauses or plays that tile, and that choice wins until reload. Under reduced motion nothing starts on its own. */
+  {
+    const ms = [...document.querySelectorAll<HTMLElement>('.wm')];
+    const ratio = new Map<HTMLElement, number>(), user = new Map<HTMLElement, boolean>();
+    const sheet = document.querySelector<HTMLDialogElement>('dialog.sheet')!;
+    const mark = (m: HTMLElement, on: boolean) => {
+      const b = m.querySelector<HTMLButtonElement>('.vctl')!;
+      m.dataset.state = on ? 'playing' : 'paused';
+      b.setAttribute('aria-label', `${on ? 'Pause' : 'Play'} the ${b.dataset.name} preview`);
+    };
+    const sync = () => {
+      const auto = calm() || sheet.open ? null : ms.filter(m => (ratio.get(m) || 0) >= .6 && user.get(m) !== false).sort((a, b) => ratio.get(b)! - ratio.get(a)!)[0];
+      ms.forEach(m => {
+        const v = m.querySelector('video')!;
+        const run = !sheet.open && ((user.get(m) === true && (ratio.get(m) || 0) > 0) || m === auto);
+        if (run) v.play().catch(e => { if (e.name !== 'AbortError') mark(m, false); }); else v.pause();
+        mark(m, run);
+      });
+    };
+    ms.forEach(m => m.querySelector('.vctl')!.addEventListener('click', () => {
+      const on = m.dataset.state !== 'playing';
+      if (on) ms.forEach(o => { if (o !== m && user.get(o)) user.delete(o); });
+      user.set(m, on); sync();
+    }));
+    const io = new IntersectionObserver(es => { es.forEach(e => ratio.set(e.target as HTMLElement, e.isIntersecting ? e.intersectionRatio : 0)); sync(); }, { threshold: [0, .3, .6, .8, 1] });
+    ms.forEach(m => io.observe(m));
+    resyncs.push(sync);
+  }
+
+  /* Pill nav: a small dot marks the section in view and slides between links. */
+  {
+    const nav = document.querySelector<HTMLElement>('.nav')!, dot = nav.querySelector<HTMLElement>('.navdot')!;
+    const links = [...nav.querySelectorAll<HTMLAnchorElement>('a')];
+    const seen = new Map<string, boolean>();
+    let at: HTMLAnchorElement | null = null;
+    const narrow = matchMedia('(max-width: 599px)');
+    const x = (a: HTMLAnchorElement) => narrow.matches ? a.offsetLeft + a.offsetWidth / 2 - 3 : a.offsetLeft - parseFloat(getComputedStyle(nav).columnGap) / 2 - 3;
+    const place = (a: HTMLAnchorElement | null) => {
+      if (a === at) return;
+      const from = at ? x(at) : null;
+      links.forEach(l => l === a ? l.setAttribute('aria-current', 'location') : l.removeAttribute('aria-current'));
+      at = a;
+      if (!a) { nav.classList.remove('has-dot'); return; }
+      dot.style.transform = `translateX(${x(a)}px)`;
+      nav.classList.add('has-dot');
+      if (from !== null && !calm()) dot.animate([{ transform: `translateX(${from}px)` }, { transform: `translateX(${x(a)}px)` }], { duration: 220, easing: 'cubic-bezier(.23,1,.32,1)' });
+    };
+    const io = new IntersectionObserver(es => {
+      es.forEach(e => seen.set((e.target as HTMLElement).dataset.sec!, e.isIntersecting));
+      const id = ['contact', 'about', 'work'].find(k => seen.get(k));
+      place(id ? links.find(l => l.hash === `#${id}`)! : null);
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    document.querySelectorAll('[data-sec]').forEach(el => io.observe(el));
+    addEventListener('resize', () => { if (at) dot.style.transform = `translateX(${x(at)}px)`; });
+  }
+
+  /* Rail: mouse drag scrolls, touch stays native, keyboard focus brings a card into view. */
+  {
+    const rail = document.querySelector<HTMLElement>('.rail')!;
+    let x0 = 0, s0 = 0, moved = false, down = false;
+    rail.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse' || e.button) return; down = true; moved = false; x0 = e.clientX; s0 = rail.scrollLeft; });
+    addEventListener('pointermove', e => { if (!down) return; const dx = e.clientX - x0; if (Math.abs(dx) > 6 && !moved) { moved = true; rail.classList.add('drag'); } if (moved) { rail.scrollLeft = s0 - dx; e.preventDefault(); } });
+    addEventListener('pointerup', () => { down = false; rail.classList.remove('drag'); });
+    rail.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    rail.addEventListener('dragstart', e => e.preventDefault());
+    rail.addEventListener('focusin', e => (e.target as HTMLElement).closest('li')?.scrollIntoView({ block: 'nearest', inline: 'nearest' }));
+  }
+
+  /* Contact question rises word by word as it scrolls in. The words are never hidden before that. */
+  {
+    const h = document.querySelector<HTMLElement>('.cq')!;
+    new IntersectionObserver(([e], o) => {
+      if (!e.isIntersecting) return; o.disconnect();
+      if (calm()) return;
+      h.querySelectorAll<HTMLElement>('.w>span').forEach((s, i) => s.animate([{ transform: 'translateY(110%)' }, { transform: 'none' }], { duration: 760, delay: i * 45, easing: 'cubic-bezier(.23,1,.32,1)', fill: 'backwards' }));
+    }, { threshold: 0 }).observe(h);
+  }
+
+  /* Preview sheet: the tile media morphs into the sheet media (View Transitions), and back on close. */
+  {
+    const dlg = document.querySelector<HTMLDialogElement>('.sheet')!;
+    const panes = [...dlg.querySelectorAll<HTMLElement>('.sh-p')];
+    const tiles = [...document.querySelectorAll<HTMLElement>('.wt')];
+    type VT = { finished: Promise<void> };
+    const doc = document as Document & { startViewTransition?: (cb: () => void) => VT };
+    let open = -1, busy: Promise<void> | null = null;
+    // a second open or close while one is in flight waits for it, so the sheet never ends half way
+    const vt = (cb: () => void, dir: 'open' | 'close') => {
+      if (!doc.startViewTransition || calm()) { cb(); return Promise.resolve(); }
+      root.dataset.vt = dir;
+      const t = doc.startViewTransition(cb);
+      busy = t.finished.catch(() => {}).finally(() => { delete root.dataset.vt; busy = null; });
+      return busy;
+    };
+    const tm = (i: number) => tiles[i].querySelector<HTMLElement>('.wm')!;
+    const show = (i: number) => {
+      if (busy) { busy.then(() => show(i)); return; }
+      const tv = tm(i).querySelector('video')!, pane = panes[i], sv = pane.querySelector('video')!;
+      const t = tv.currentTime; tv.pause();
+      tm(i).style.viewTransitionName = 'sheet-media';
+      vt(() => {
+        tm(i).style.viewTransitionName = '';
+        panes.forEach(p => p.hidden = p !== pane);
+        pane.querySelector<HTMLElement>('.sh-m')!.style.viewTransitionName = 'sheet-media';
+        dlg.setAttribute('aria-labelledby', `sh-h-${i}`);
+        dlg.showModal();
+        open = i;
+        resync();
+      }, 'open').then(() => { pane.querySelector<HTMLElement>('.sh-m')!.style.viewTransitionName = ''; });
+      if (t) { const seek = () => { try { sv.currentTime = t; } catch {} }; if (sv.readyState >= 1) seek(); else { sv.preload = 'auto'; sv.addEventListener('loadedmetadata', seek, { once: true }); sv.load(); } }
+    };
+    const hide = () => {
+      if (busy) { busy.then(hide); return; }
+      if (open < 0) return;
+      const i = open, pane = panes[i], sv = pane.querySelector('video')!, tv = tm(i).querySelector('video')!;
+      const t = sv.currentTime; sv.pause();
+      pane.querySelector<HTMLElement>('.sh-m')!.style.viewTransitionName = 'sheet-media';
+      vt(() => {
+        pane.querySelector<HTMLElement>('.sh-m')!.style.viewTransitionName = '';
+        tm(i).style.viewTransitionName = 'sheet-media';
+        dlg.close();
+        open = -1;
+        resync();
+        tiles[i].querySelector<HTMLButtonElement>('.open')!.focus({ preventScroll: true });
+      }, 'close').then(() => {
+        tm(i).style.viewTransitionName = '';
+        if (t && tv.readyState >= 1) tv.currentTime = t;
+      });
+    };
+    tiles.forEach((tile, i) => tile.querySelector('.open')!.addEventListener('click', () => show(i)));
+    dlg.querySelector('.x')!.addEventListener('click', hide);
+    dlg.addEventListener('cancel', e => { e.preventDefault(); hide(); });
+    dlg.addEventListener('click', e => { if (e.target === dlg) hide(); });
+  }
+</script>
+</body>
+</html>

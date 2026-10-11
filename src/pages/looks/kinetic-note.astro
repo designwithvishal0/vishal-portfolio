@@ -1,0 +1,648 @@
+---
+import '@fontsource-variable/bricolage-grotesque/standard.css';
+import fontUrl from '@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-standard-normal.woff2?url';
+import '@fontsource/caveat/500.css';
+import '../../styles/kinetic.css';
+import Boot from '../../components/Boot.astro';
+import Arrow from '../../components/Arrow.astro';
+import { intro, work, live, email, social, contra, loops, results, more, lead, pages, how, jobs } from '../../data/home';
+
+// Kinetic: his sentence is split open by his reel, so the work sits in "the moment" between the words.
+// The one uncertain word trembles, then settles. Every later motion repeats that move from unsure to sure.
+const words = intro.positioning.split(' ');            // I design for the moment people are unsure.
+const l1a = words.slice(0, 3), l1b = words.slice(3, 5), l3a = words.slice(5, 7), last = words[7];
+const cwords = 'Hiring, or need a page that sells?'.split(' ');
+// each headline from home.ts, broken after this many words into its two authored lines
+const breaks: Record<string, number> = { 'ixigo-trains': 3, 'split-and-request': 3, 'twelve': 3, 'staqu-jarvis': 2 };
+const titles = Object.fromEntries(work.map(w => { const p = w.headline.split(' '), b = breaks[w.slug] ?? Math.ceil(p.length / 2); return [w.slug, [p.slice(0, b).join(' '), p.slice(b).join(' ')]]; }));
+// row posters are reel frames, so their alt text describes the frame shown (new copy, needs Vishal's yes)
+const posterAlt: Record<string, string> = {
+  ixigo: 'ixigo Trains reel: the post booking hub in its chart failed state, saying the waitlist did not clear and offering a held backup train, a bus and a flight',
+  split: 'Google Pay Split and Request reel: the Social, Hauz Khas bill split item by item, with Butter chicken being dragged onto Nidhi',
+  twelve: 'Twelve reel: ₹14,000 typed into Ask Twelve, which warns that past ₹4,200 it starts eating March and moves safe to spend from ₹1,850 to ₹1,240',
+  jarvis: 'JARVIS Alerts reel: the Your Alerts list with a Restricted Entry and an Unknown Car alert, and a tap on Tell us if not under the Unknown Car alert',
+};
+// the ixigo reel cut opens mid caption, so its posters are a later frame of the same beat with the caption fully lit
+const poster = (k: string, cut: 'scene' | 'phone') => k === 'ixigo' ? `/kinetic/reel/ixigo-${cut}-lit.jpg` : `/reel/${k}-${cut}.jpg`;
+const grounds = ['#0B0C10', '#F6F8FC', '#F2F0E4', '#F5F6FB'];
+// lead stats: number, decimals, before, after, so they can count in en-IN
+const stat = (s: string) => { const m = s.match(/^(\D*)([\d,.]+)(.*)$/)!; const n = m[2].replace(/,/g, ''); return { pre: m[1], n, dec: (n.split('.')[1] || '').length, suf: m[3] }; };
+const book = intro.links.find(l => l.label === 'Book a call')!;
+let wi = 0;
+const W = (w: string) => ({ w, i: wi++ });
+const hero1 = [l1a.map(W), l1b.map(W)];
+const hero3 = l3a.map(W);
+const lastI = wi;
+const Btn = `<svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12" rx="1" /><rect x="8.5" y="1" width="3.5" height="12" rx="1" /></svg><svg class="i-play" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.8.8 0 0 0 1.2.7l9-5.4a.8.8 0 0 0 0-1.4l-9-5.4A.8.8 0 0 0 3 1.6z" /></svg>`;
+// How I work: a statement that links to a case study sits on that project's wash, with one still from its reel
+// JARVIS opens the case study built on this site; the rest still go to the live Framer pages
+const cs = (slug: string) => slug === 'staqu-jarvis' ? '/work/staqu-jarvis/' : live(slug);
+const hk = (href: string) => { const i = work.findIndex(w => live(w.slug) === href); return i < 0 ? '' : loops[i]; };
+const hartAlt: Record<string, string> = {
+  ixigo: 'ixigo Trains reel still: the waitlist did not clear, and the hub switches to its chart failed state with the next options',
+  twelve: 'Twelve reel still: it warns you that March insurance will be ₹6,400 short, and nothing changes until you say so',
+};
+const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Look: Kinetic with a note, Vishal Yadav</title>
+<meta name="robots" content="noindex" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="preload" as="font" type="font/woff2" href={fontUrl} crossorigin />
+<link rel="preload" as="image" href="/kinetic/reel/hero-wide-lit.jpg" media="(orientation: landscape)" />
+<link rel="preload" as="image" href="/kinetic/reel/hero-tall.jpg" media="(orientation: portrait)" />
+<Boot />
+<script is:inline>addEventListener('load',()=>setTimeout(()=>document.documentElement.classList.add('ready'),2500))</script>
+</head>
+<body>
+<div id="sentinel" aria-hidden="true"></div>
+<header class="bar">
+  <div class="c bar-in">
+    <span class="who">Vishal Yadav</span>
+    <nav class="nav" aria-label="Sections"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+    <button class="a11y" type="button" popovertarget="a11y-menu" aria-label="Accessibility settings"><span>Accessibility</span></button>
+    <div id="a11y-menu" class="a11y-menu" popover>
+      <p class="a11y-h">Accessibility</p>
+      <div class="a11y-row"><span id="l-night">Dark mode</span><button id="theme" class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="l-night"><i class="sun"></i><i class="moon"></i><span class="knob"></span></button></div>
+      <div class="a11y-row"><span id="l-calm">Reduce motion</span><button id="calm" class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="l-calm"><span class="knob"></span></button></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- The sentence, split open by the reel -->
+  <section class="hero c lit" aria-label="Introduction">
+    <h1 class="hm">{intro.name}</h1>
+    <p class="sup">{intro.supporting}</p>
+    <!-- what the reel is showing right now; each name jumps to its case study row -->
+    <ol class="idx">{work.map((w, i) => <li class={`q-${loops[i]}`}><a href={`#w-${w.slug}`}>{w.name}</a></li>)}</ol>
+    <p class="l1 words"><span class="vh">{intro.positioning}</span>{hero1.map(g => (
+      <span class="grp" aria-hidden="true">{g.map(({ w, i }) => <><span class="w"><span style={`--i:${i}`}>{w}</span></span>{' '}</>)}</span>
+    ))}</p>
+    <figure class="slot" data-state="paused">
+      <picture>
+        <source media="(orientation: portrait)" srcset="/kinetic/reel/hero-tall.jpg" width="1080" height="1350" />
+        <img src="/kinetic/reel/hero-wide-lit.jpg" width="1600" height="900" alt="Showreel: ixigo Trains, Google Pay Split and Request, Twelve and Staqu JARVIS Alerts" fetchpriority="high" decoding="async" />
+      </picture>
+      <video muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" data-wide="/kinetic/reel/hero-wide.mp4" data-tall="/kinetic/reel/hero-tall.mp4"></video>
+      <button class="vctl" type="button" aria-label="Play the showreel"><Fragment set:html={Btn} /></button>
+    </figure>
+    <script is:inline>setTimeout(()=>document.querySelector('.slot').classList.add('open'),300)</script>
+    <!-- the moment itself: a pencil note, written fresh for each project on the reel, pointing up at it (handwriting is a stand in for Vishal's own hand) -->
+    <div class="note" aria-hidden="true">
+      {work.map((w, i) => <div class={`nq q-${loops[i]}`} data-n={i}><p>{w.question}</p><svg viewBox="0 0 120 90" fill="none"><path pathLength="1" d="M6 82 C 30 84, 70 70, 88 40 S 104 12, 100 6" /><path class="tip" pathLength="1" d="M86 13 L 100 5 L 107 20" /></svg></div>)}
+    </div>
+    <div class="l3 words" aria-hidden="true">
+      <span class="grp">{hero3.map(({ w, i }) => <><span class="w"><span style={`--i:${i}`}>{w}</span></span>{' '}</>)}</span>
+      <span class="w wu"><span style={`--i:${lastI}`} class="jw" id="unsure">{[...last].map((ch, j) => <span class="jl" style={`--k:${j}`}>{ch}</span>)}</span></span>
+    </div>
+    <div class="hb">
+      <p class="status"><span class="dot" aria-hidden="true"></span>{intro.availability}</p>
+      <a class="pill-btn primary" href={book.href}>{book.label}</a>
+    </div>
+  </section>
+
+  <!-- Who he is, and where to go -->
+  <section class="intro c reveal" aria-label="Start here">
+    <ul class="aud" aria-label="Start here">
+      <li><a class="go" href="#work"><strong>Hiring a product designer</strong><span>See the case studies</span><Arrow /></a></li>
+      <li><a class="go" href="#results"><strong>Recruiting</strong><span>The 30 second version</span><Arrow /></a></li>
+      <li><a class="go" href="#pages"><strong>Founder</strong><span>Need a page that sells</span><Arrow /></a></li>
+    </ul>
+  </section>
+
+  <!-- Bridge: the four questions, from noise to order (decorative film; the questions are real text in the rows below) -->
+  <div class="band" data-state="paused">
+    <div class="band-v" aria-hidden="true">
+      <div class="band-fb">
+        <ol>{work.map((w, i) => <li class={`q-${loops[i]}`}>{w.question}</li>)}</ol>
+      </div>
+      {['light', 'dark'].map(t => (
+        <picture class={`band-p t-${t}`}>
+          <source media="(max-width: 699px)" srcset={`${qfile('tall', t)}.jpg`} width="1080" height="600" />
+          <img src={`${qfile('wide', t)}.jpg`} width="1920" height="600" alt="" loading="lazy" decoding="async" onerror="this.parentElement.hidden=true" />
+        </picture>
+      ))}
+      <video muted playsinline preload="none" tabindex="-1"></video>
+    </div>
+    <button class="vctl" type="button" aria-label="Play the Selected work preview"><Fragment set:html={Btn} /></button>
+  </div>
+
+  <!-- Work: titles that open up -->
+  <section class="work" id="work" data-p={loops[0]} aria-labelledby="work-h">
+    <div class="c whead"><h2 id="work-h">Selected work</h2><span>4 case studies</span></div>
+    {work.map((w, i) => (
+      <article class={`row r-${loops[i]}`} id={`w-${w.slug}`} data-k={loops[i]}>
+        <div class="c">
+          <p class="q">{w.question}</p>
+          <h3 class="tt"><a href={cs(w.slug)}><span class="ln">{titles[w.slug][0]}</span> <span class="ln">{titles[w.slug][1]}</span><span class="vh">, the {w.name} case study</span></a></h3>
+          <div class="rg">
+            <div class="tx">
+              <p class="meta">{w.name} · {w.type} · {w.year}</p>
+              <p class="pb">{w.problem}</p>
+              <p class="role">{w.role}</p>
+              <p class="det">{w.detail}</p>
+              <a class="more go" href={cs(w.slug)} tabindex="-1" aria-hidden="true">View the case study <Arrow /></a>
+            </div>
+            <div class="pan">
+              <div class="vbox" style={`--gr:${grounds[i]}`} data-state="paused">
+                <picture>
+                  <source media="(min-width: 700px)" srcset={poster(loops[i], 'scene')} width="1280" height="720" />
+                  <img src={poster(loops[i], 'phone')} width="720" height="900" alt={posterAlt[loops[i]] ?? w.alt} loading="lazy" decoding="async" />
+                </picture>
+                <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-wide={`/reel/${loops[i]}-scene.mp4`} data-tall={`/reel/${loops[i]}-phone.mp4`}></video>
+                <a class="mlink" href={cs(w.slug)} tabindex="-1" aria-hidden="true"></a>
+                <button class="vctl" type="button" aria-label={`Play the ${w.name} preview`}><Fragment set:html={Btn} /></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <!-- More work, in the same voice as the titles -->
+  <section class="mw c" aria-label="More work">
+    <ul>
+      {more.map(m => (
+        <li class="mrow reveal">
+          <img class="mthumb" src={`/pages/${m.img}.webp`} alt="" width="160" height="160" loading="lazy" decoding="async" />
+          <h3><a href={m.href}>{m.name}</a></h3>
+          <p class="mline">{m.line}</p>
+          <span class="pill">Concept</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Results: the numerals are type too -->
+  <section class="res" id="results" data-row="1" aria-labelledby="res-h">
+    <div class="res-in c">
+      <h2 id="res-h">Shipped at CashKaro, for 25M+ users</h2>
+      <div class="cv" aria-hidden="true">
+        <div class="big">{results.map((r, i) => <span data-r={i + 1}>{r.n}</span>)}</div>
+        <canvas width="640" height="640"></canvas>
+      </div>
+      <div class="rt">
+        <div class="rows">
+          {results.map((r, i) => (
+            <div class="rr" data-r={i + 1}>
+              <p class="rn"><span class="vh">{r.n}</span><span class="rc" aria-hidden="true" data-v={parseInt(r.n)}>{r.n}</span></p>
+              <p class="rl">{r.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pages that sell: Profit Wala Love on its own row, then one track. With motion allowed the track pins under the bar and
+       scrolling down moves it sideways; otherwise it is a native rail that snaps -->
+  <section class="pages" id="pages" aria-labelledby="pg-h">
+    <!-- the shipped campaign gets its own row; the other pages follow on one track that the page scroll moves sideways -->
+    <div class="c">
+      <div class="phead"><h2 id="pg-h">Pages that sell</h2><p>Campaigns, landing pages and product pages for commerce brands.</p></div>
+      <article class="lead">
+        <a class="lthumb" href={lead.href} tabindex="-1" aria-hidden="true"><img src={`/pages/${lead.img}.webp`} alt="" width="960" height="1004" loading="lazy" decoding="async" /></a>
+        <div class="ltext">
+          <span class="pill shipped">{lead.tag}</span>
+          <h3><a href={lead.href}>{lead.name}</a></h3>
+          <p>{lead.line}</p>
+          <dl class="stats">{lead.stats.map(([n, l]) => { const s = stat(n); return (
+            <div><dt>{l}</dt><dd><span class="vh">{n}</span><span class="cnt" aria-hidden="true" data-v={s.n} data-dec={s.dec} data-pre={s.pre} data-suf={s.suf}>{n}</span></dd></div>
+          ); })}</dl>
+          <a class="more go" href={lead.href}>View on Dribbble <Arrow /></a>
+        </div>
+      </article>
+    </div>
+    <div class="prun">
+      <div class="p-pin">
+        <ul class="ptrack">
+          {/* Profit Wala Love's seat on the track: with motion on, its row's picture drops into this slot as you scroll, then everything slides sideways */}
+          <li class="pwl" aria-hidden="true"><a class="card go" href={lead.href} tabindex="-1">
+            <span class="cthumb"><img src={`/pages/${lead.img}.webp`} alt="" width="960" height="1004" loading="lazy" decoding="async" /></span>
+            <span class="ctag"><span class="pill shipped">{lead.tag}</span></span>
+            <strong>{lead.name}</strong>
+            <span class="cline">{lead.line}</span>
+            <span class="more">View on Dribbble <Arrow /></span>
+          </a></li>
+          {pages.map(p => (
+            <li><a class="card go" href={p.href}>
+              <span class="cthumb"><img src={`/pages/${p.img}.webp`} alt={`${p.name}, preview`} width="960" height="1004" loading="lazy" decoding="async" /></span>
+              <span class="ctag">{p.tag && <span class={`pill${p.tag.startsWith('Shipped') ? ' shipped' : ''}`}>{p.tag}</span>}</span>
+              <strong>{p.name}</strong>
+              <span class="cline">{p.line}</span>
+              <span class="more">View on Behance <Arrow /></span>
+            </a></li>
+          ))}
+        </ul>
+        <div class="p-prog c" aria-hidden="true"><i></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How I work -->
+  <section class="how c" aria-labelledby="how-h">
+    <h2 id="how-h" class="sh">How I work</h2>
+    {how.map(x => { const k = hk(x.href); return (
+      <div class={`hrow reveal${k ? ` wash r-${k}` : ''}`}><h3>{x.h}</h3><div><p>{x.p}</p><a class="more go" href={x.href}>{x.link} <Arrow /></a>
+        {k && <img class="hart" src={`/reel/frames/${k}-4.jpg`} alt={hartAlt[k]} width="1600" height="900" loading="lazy" decoding="async" />}</div></div>
+    ); })}
+  </section>
+
+  <!-- About -->
+  <section class="about c reveal" id="about" aria-labelledby="ab-h">
+    <h2 id="ab-h" class="sh">About</h2>
+    <p class="story">From October 2023 to August 2026 I designed app and web flows at CashKaro, India’s largest cashback platform, and built, in Figma, the design system its campaigns run on. Before that I was a graphic designer at an agency, which is why what I ship looks finished (that work lives in <a class="ul" href="https://www.behance.net/design_vishaly">the archive</a>). I studied Computer Science, so I know what engineers need at handoff, and I use AI to move faster through research and iteration while the design calls stay mine.</p>
+    <dl class="jobs">{jobs.map(([c, r, y]) => <div><dt>{c}</dt><dd>{r}</dd><dd class="y">{y}</dd></div>)}</dl>
+  </section>
+
+  <!-- Contact: a question that settles into a next step -->
+  <section class="ct wash r-jarvis" id="contact" aria-labelledby="c-h">
+    <div class="c">
+      <h2 id="c-h" class="words"><span class="vh">Hiring, or need a page that sells?</span><span aria-hidden="true">{cwords.map((x, k) => k < cwords.length - 1
+        ? <><span class="w"><span style={`--i:${k}`}>{x}</span></span>{' '}</>
+        : <span class="w wu"><span style={`--i:${k}`} class="jw" id="sells">{[...x].map((ch, j) => <span class="jl" style={`--k:${j}`}>{ch}</span>)}</span></span>)}</span></h2>
+      <div class="ct-r">
+      <div class="cta">
+        <a class="pill-btn primary" href={book.href}>{book.label}</a>
+        <a class="pill-btn" href={`mailto:${email}`}>Email</a>
+      </div>
+      <p class="cl">Email me at <button class="copy" type="button" data-copy={email} aria-label={`Copy ${email}`}>{email} <span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button> or book a call. I reply within a day.</p>
+      <span class="vh" role="status" id="copied"></span>
+      {contra && <p class="cl">You can also hire me on <a class="ul" href={contra}>Contra</a>.</p>}
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot c">
+  <nav aria-label="Elsewhere" class="social">{social.map(([l, h]) => <a class="ul" href={h}>{l}</a>)}</nav>
+</footer>
+
+<script>
+  import '../../scripts/ui';
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  const root = document.documentElement;
+  const mq = (s: string) => matchMedia(s);
+  const osCalm = mq('(prefers-reduced-motion: reduce)'), land = mq('(orientation: landscape)'), desk = mq('(min-width: 1024px)');
+  const bandWide = mq('(min-width: 700px)'), osDark = mq('(prefers-color-scheme: dark)'), fine = mq('(hover: hover) and (pointer: fine)');
+  const calm = () => osCalm.matches || root.classList.contains('calm');
+  const dark = () => root.dataset.theme ? root.dataset.theme === 'dark' : osDark.matches;
+  const q = <T extends Element = HTMLElement>(s: string, el: ParentNode = document) => el.querySelector<T>(s)!;
+  const qa = <T extends Element = HTMLElement>(s: string, el: ParentNode = document) => [...el.querySelectorAll<T>(s)];
+  // scroll led hidden states may now apply; without this script everything stays visible
+  root.classList.add('live');
+
+  const bar = q('.bar');
+  new IntersectionObserver(([e]) => bar.classList.toggle('scrolled', !e.isIntersecting)).observe(q('#sentinel'));
+
+  // ---------- Jitter: one word hesitates in weight, then settles on a spring. Seeded, so it never repeats the same way twice in a row.
+  // Weight, a lift and (only while the pointer is on it) a small tilt; the box is locked so the line never shifts.
+  const seeded = (a: number) => () => { a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  const timers = new Set<number>();
+  const later = (f: () => void, ms: number) => { const t = window.setTimeout(() => { timers.delete(t); f(); }, ms); timers.add(t); };
+  const props = ['--y', '--wt', '--r', '--lc'];
+  const settle = (word: HTMLElement) => {
+    word.classList.add('settle', 'landed');
+    qa('.jl', word).forEach(l => props.forEach(p => l.style.removeProperty(p)));
+    later(() => { word.classList.remove('settle'); delete word.dataset.busy; word.parentElement!.style.removeProperty('width'); }, 760);
+  };
+  // near(): 0..1 per letter, how close the pointer is (null = no pointer). Letters under the pointer shake hardest.
+  const jitter = (word: HTMLElement, ticks: number, seed: number, near?: (l: HTMLElement) => number | null) => {
+    if (calm() || word.dataset.busy) return;
+    const ls = qa('.jl', word), r = seeded(seed), s = (n: number) => (r() * 2 - 1) * n;
+    word.dataset.busy = '1'; word.classList.remove('settle');
+    // a different colour on each letter, neighbours never matching; the starting hue changes every shake
+    const pal = ['--u1', '--u2', '--u3', '--u4', '--u5', '--u6', '--u7'], o = Math.floor(r() * 7);
+    ls.forEach((l, i) => l.style.setProperty('--lc', `var(${pal[(i + o) % 7]})`));
+    // lock the word's box at its settled width so the right aligned line never shifts (jitter weights stay at or under 800)
+    const box = word.parentElement!; box.style.width = `${box.getBoundingClientRect().width}px`;
+    let n = 0;
+    const step = () => {
+      if (calm() || n++ >= ticks || word.dataset.stop) { delete word.dataset.stop; return settle(word); }
+      ls.forEach(l => {
+        const f = near?.(l);
+        if (f == null) {
+          l.style.setProperty('--y', `${s(2).toFixed(1)}px`);
+          l.style.setProperty('--wt', String(Math.round(300 + r() * 500)));
+        } else {
+          l.style.setProperty('--y', `${(s(3 + 9 * f) - 4 * f).toFixed(1)}px`);
+          l.style.setProperty('--r', `${s(1 + 5 * f).toFixed(1)}deg`);
+          l.style.setProperty('--wt', String(Math.round(800 - (0.35 + 0.65 * f) * r() * 600)));
+        }
+      });
+      later(step, 90);
+    };
+    step();
+  };
+  const unsure = q('#unsure'), sells = q('#sells');
+  // after the face is in, so the locked width is the real one
+  if (!calm()) document.fonts.ready.then(() => later(() => jitter(unsure, 6, 7), 450));
+
+  // "unsure." and "sells?" answer the pointer on the word itself: the letters near the pointer keep hesitating, each in its own
+  // pencil colour, and settle when you leave. On touch, a tap does the same. Left alone, each hesitates on its own every few seconds while in view.
+  // before(): runs as the word starts to hesitate, on hover, tap or its own (Contact uses it to step the block's colour)
+  const alive = (word: HTMLElement, seed: number, every: number, before?: () => void) => {
+    const hit = word.parentElement!;
+    let px = 0, over = false;
+    const nearTo = (x: number) => (l: HTMLElement) => {
+      const b = l.getBoundingClientRect(), w = hit.getBoundingClientRect().width;
+      return Math.max(0, 1 - Math.abs(x - (b.left + b.width / 2)) / (w * .45));
+    };
+    const follow = (l: HTMLElement) => nearTo(px)(l);
+    const shake = (ticks: number, near?: (l: HTMLElement) => number) => jitter(word, ticks, seed++, near);
+    hit.addEventListener('pointerenter', e => {
+      over = true; px = e.clientX;
+      if (e.pointerType !== 'touch') { before?.(); shake(30, follow); }
+    });
+    hit.addEventListener('pointermove', e => { px = e.clientX; if (over && !word.dataset.busy && e.pointerType !== 'touch') shake(30, follow); });
+    hit.addEventListener('pointerleave', () => {
+      over = false;
+      // leaving ends the hesitation: it settles on the next tick instead of running out the ticks
+      if (word.dataset.busy && !word.classList.contains('settle')) word.dataset.stop = '1';
+    });
+    hit.addEventListener('pointerdown', e => { if (e.pointerType === 'touch') { before?.(); shake(9, nearTo(e.clientX)); } });
+    let seen = false;
+    new IntersectionObserver(([e]) => { seen = e.isIntersecting; }, { threshold: .3 }).observe(hit);
+    setInterval(() => { if (seen && !over && !document.hidden && !calm() && !word.dataset.busy) { before?.(); shake(4); } }, every);
+  };
+  alive(unsure, 101, 5200);
+
+  // Contact: words rise when half in view, then "sells?" settles exactly like "unsure."
+  // Each time it hesitates (on its own every 3 s, or when you hover or tap it) the block moves to the next project's colour and the word settles into it.
+  const ch = q('#c-h'), ct = q('#contact');
+  let cOn = 3;
+  alive(sells, 201, 3000, () => { cOn = (cOn + 1) % 4; ct.dataset.on = String(cOn); });
+  const cio = new IntersectionObserver(([e]) => {
+    if (!e.isIntersecting) return;
+    cio.disconnect(); ch.classList.add('go');
+    if (!calm()) later(() => jitter(sells, 6, 11), 6 * 45 + 520);
+  }, { threshold: .5 });
+  cio.observe(ch);
+
+  // ---------- One controller for every video. Each plays only while enough of it is in view and motion is allowed;
+  // its button wins until reload, and Reduce motion clears that. No src is assigned until a video is about to play.
+  type Item = { box: HTMLElement; v: HTMLVideoElement; btn: HTMLButtonElement; name: string; src: () => string; thr: number; user: boolean | null; keep?: boolean; once?: boolean; done?: boolean };
+  const items: Item[] = [];
+  const say = (it: Item, run: boolean) => it.btn.setAttribute('aria-label', `${run ? 'Pause' : 'Play'} the ${it.name}`);
+  const load = (it: Item) => {
+    const s = it.src(), v = it.v;
+    if (v.dataset.cur === s) return;
+    const t = it.keep && v.dataset.cur ? v.currentTime : 0;
+    v.dataset.cur = s; v.src = s;
+    if (t) v.addEventListener('loadedmetadata', () => { v.currentTime = Math.min(t, v.duration - .05); }, { once: true });
+  };
+  const seen = (el: HTMLElement) => { const r = el.getBoundingClientRect(); return r.height ? Math.max(0, Math.min(r.bottom, innerHeight) - Math.max(r.top, 0)) / r.height : 0; };
+  const sync = (it: Item) => {
+    if (it.box.hasAttribute('data-novid')) return;
+    const ratio = seen(it.box);
+    if (it.once && ratio === 0) it.done = false;   // a play once film may run again after it has left the screen
+    const run = it.user === null ? ratio >= it.thr - .01 && !calm() && !it.done : !!it.user && ratio > 0;
+    if (run) { load(it); it.v.play().catch(() => { if (it.v.paused && it.user === null) { it.box.dataset.state = 'paused'; say(it, false); } }); }
+    else if (!it.v.paused) it.v.pause();
+    it.box.dataset.state = run ? 'playing' : 'paused';
+    say(it, run);
+  };
+  const vio = new IntersectionObserver(es => es.forEach(e => { const it = items.find(x => x.box === e.target); if (it) sync(it); }), { threshold: [0, .3, .5, .6, 1] });
+  const add = (o: Omit<Item, 'user'>) => {
+    const it: Item = { ...o, user: null };
+    items.push(it);
+    it.v.addEventListener('playing', () => it.box.classList.add('started'));
+    it.v.addEventListener('ended', () => { it.done = true; it.user = null; sync(it); });
+    it.v.addEventListener('error', () => { if (!it.v.getAttribute('src')) return; it.box.setAttribute('data-novid', ''); it.box.dataset.state = 'paused'; it.v.removeAttribute('src'); });
+    it.btn.addEventListener('click', () => { it.user = it.box.dataset.state !== 'playing'; sync(it); });
+    vio.observe(it.box);
+    return it;
+  };
+
+  // Hero slot: the reel that fits the screen's orientation, the only eager video
+  const slot = q('.slot'), hv = q<HTMLVideoElement>('video', slot);
+  const hero = add({ box: slot, v: hv, btn: q('.vctl', slot), name: 'showreel', src: () => (land.matches ? hv.dataset.wide : hv.dataset.tall)!, thr: .3 });
+  // the index beside the reel follows the project on screen (beat starts in seconds, from tools/motion/kinetic/hero-cut.sh)
+  const heroSec = q('.hero'), idx = q('.idx'), beats = { wide: [0, 5.6, 11.6, 16.9], tall: [0, 5.6, 10.1, 15.3] };
+  const follow = () => {
+    if (hv.paused) { idx.removeAttribute('data-on'); return; }
+    const b = beats[land.matches ? 'wide' : 'tall'], t = hv.currentTime + .2;
+    idx.dataset.on = heroSec.dataset.on = String(b.filter(s => t >= s).length - 1);
+    heroSec.classList.add('rolling');
+  };
+  ['timeupdate', 'pause', 'playing'].forEach(ev => hv.addEventListener(ev, follow));
+  land.addEventListener('change', () => { if (!hv.dataset.cur) return; load(hero); sync(hero); });
+
+  // Work rows: the scene cut at 700+, the phone cut below
+  const rows = qa('.row');
+  rows.forEach(r => {
+    const box = q('.vbox', r), v = q<HTMLVideoElement>('video', box);
+    add({ box, v, btn: q('.vctl', box), name: `${q('.meta', r).textContent!.split(' · ')[0]} preview`, src: () => (bandWide.matches ? v.dataset.wide : v.dataset.tall)!, thr: .5 });
+  });
+  bandWide.addEventListener('change', () => items.forEach(it => {
+    if (!it.box.classList.contains('vbox') || !it.v.dataset.cur) return;
+    delete it.v.dataset.cur; it.v.removeAttribute('src'); it.v.load(); it.box.classList.remove('started'); sync(it);
+  }));
+
+  // The four questions film: its theme and its shape. It opens and ends on the settled list and plays once per visit.
+  const band = q('.band'), bv = q<HTMLVideoElement>('video', band);
+  const bandIt = add({ box: band, v: bv, btn: q('.vctl', band), name: 'Selected work preview', src: () => `/kinetic/motion/questions-${bandWide.matches ? 'wide' : 'tall'}-${dark() ? 'dark' : 'light'}.mp4`, thr: .5, keep: true, once: true });
+  const retheme = () => { if (bv.dataset.cur) { band.classList.remove('started'); load(bandIt); sync(bandIt); } };
+  new MutationObserver(retheme).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+  osDark.addEventListener('change', retheme);
+  bandWide.addEventListener('change', retheme);
+
+  // ---------- Washes: the project crossing the middle of the screen colours the section
+  const work = q('.work');
+  // measured on scroll, so a fast jump past a row still lands on the right colour
+  let wraf = 0;
+  const wash = () => { wraf = 0; const mid = innerHeight / 2; let k = rows[0].dataset.k; rows.forEach(r => { if (r.getBoundingClientRect().top <= mid) k = r.dataset.k; }); if (work.dataset.p !== k) work.dataset.p = k; };
+  addEventListener('scroll', () => { if (!wraf) wraf = requestAnimationFrame(wash); }, { passive: true });
+  wash();
+  // below 1024 the phone cut slides in once
+  const pio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); pio.unobserve(e.target); } }), { threshold: .4 });
+  qa('.pan').forEach(p => pio.observe(p));
+
+  // ---------- Titles: two fixed lines, sized once so the widest line fits at full stretch
+  const titles = qa('.tt');
+  const fit = () => titles.forEach(h => {
+    if (!desk.matches) { h.style.removeProperty('--fs'); return; }
+    h.style.setProperty('--fs', '100px'); h.classList.add('measure');
+    const w = Math.max(...qa('.ln', h).map(l => l.getBoundingClientRect().width));
+    h.classList.remove('measure');
+    h.style.setProperty('--fs', `${Math.min(108, Math.floor(100 * h.clientWidth / w * .98))}px`);
+  });
+  let rt = 0;
+  document.fonts.ready.then(() => { fit(); ScrollTrigger.refresh(); });
+  addEventListener('resize', () => { clearTimeout(rt); rt = window.setTimeout(fit, 120); });
+
+  // ---------- Results: 60 pre-rendered frames, one numeral melting into the next as you scroll
+  const res = q('.res'), canvas = q<HTMLCanvasElement>('canvas', res), ctx = canvas.getContext('2d');
+  const sets: Record<string, { imgs: HTMLImageElement[]; ok: number; bad: boolean }> = {};
+  let lastF = -1, prog = 0, near = false, loaded = document.readyState === 'complete';
+  const theme = () => (dark() ? 'dark' : 'light');
+  const draw = (force = false) => {
+    const f = Math.round(prog * 59), s = sets[theme()];
+    if (!ctx || !s || s.bad || s.ok < 60) { res.classList.remove('frames'); return; }
+    if (f === lastF && !force) return;
+    lastF = f;
+    const dpr = Math.min(devicePixelRatio || 1, 900 / 640), px = Math.round(canvas.clientWidth * dpr);
+    if (canvas.width !== px) { canvas.width = px; canvas.height = px; }
+    ctx.drawImage(s.imgs[f], 0, 0, px, px);
+    res.classList.add('frames');
+  };
+  const want = () => {
+    if (!loaded || !near || !root.classList.contains('scrub')) return;
+    const t = theme();
+    if (sets[t]) return;
+    const s = sets[t] = { imgs: [], ok: 0, bad: false };
+    for (let k = 1; k <= 60; k++) {
+      const im = new Image();
+      im.decoding = 'async';
+      im.onload = () => { if (++s.ok === 60) draw(true); };
+      im.onerror = () => { s.bad = true; };
+      im.src = `/kinetic/motion/numerals-${t}/f${String(k).padStart(2, '0')}.webp`;
+      s.imgs.push(im);
+    }
+  };
+  addEventListener('load', () => { loaded = true; want(); });
+  new IntersectionObserver(([e]) => { near = e.isIntersecting; want(); }, { rootMargin: '200% 0px' }).observe(res);
+  const rethemeFrames = () => { lastF = -1; want(); draw(true); };
+  new MutationObserver(rethemeFrames).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+  osDark.addEventListener('change', rethemeFrames);
+  const setRow = (p: number) => { prog = p; res.dataset.row = p < .33 ? '1' : p < .66 ? '2' : '3'; draw(); };
+
+  // ---------- Pages that sell: the lead row scrolls normally, then the track pins. The track is measured before every refresh, so the pinned length always equals its overflow
+  const pagesSec = q('.prun'), ptrack = q('.ptrack'), pprog = q('.p-prog i');
+  let ov = 0, pst: ScrollTrigger | null = null;
+  const setOv = () => { ov = root.classList.contains('hpin') ? Math.max(0, ptrack.offsetWidth - root.clientWidth) : 0; pagesSec.style.setProperty('--ov', `${ov}px`); };
+  ScrollTrigger.addEventListener('refreshInit', setOv);
+  // where Profit Wala Love's picture has to land: its seat on the track, at the moment the track pins (measured with any current transforms taken out)
+  const lthumb = q('.lthumb'), ltext = q('.ltext'), pwl = q('.ptrack .pwl'), pthumb = q('.cthumb', pwl), ppin = q('.p-pin');
+  let fly = { x: 0, y: 0, s: 1 };
+  const EDGE = .15 / 1.85;   // share of the run covered while easing in: power2.in ends at twice its average speed, which then equals the linear part's
+  const measure = () => {
+    if (!root.classList.contains('hpin')) return;
+    const g = (el: Element, k: string) => +gsap.getProperty(el, k);
+    const tr = lthumb.getBoundingClientRect(), sr = pthumb.getBoundingClientRect(), pr = ppin.getBoundingClientRect(), rr = pagesSec.getBoundingClientRect();
+    fly = { x: sr.left - g(ptrack, 'x') - (tr.left - g(lthumb, 'x')), y: rr.top + sr.top - pr.top - (tr.top - g(lthumb, 'y')), s: sr.width / (tr.width / g(lthumb, 'scale')) };
+  };
+  ScrollTrigger.addEventListener('refreshInit', measure);
+
+  // ---------- Scrubs with motion allowed: the pages track at every width, the rest at 1024+. Reduce motion reverts all of it.
+  let mm: gsap.MatchMedia | null = null;
+  const init = () => {
+    mm?.revert(); mm = null; root.classList.remove('scrub', 'hpin');
+    if (calm()) return;
+    mm = gsap.matchMedia();
+    mm.add({ ok: '(prefers-reduced-motion: no-preference)', desk: '(min-width: 1024px)' }, c => {
+      const { ok, desk: d } = c.conditions!;
+      if (!ok || !d) return;
+      root.classList.add('scrub');
+      rows.forEach(r => {
+        gsap.timeline({ scrollTrigger: { trigger: r, start: 'top 80%', end: 'center 55%', scrub: .4 } })
+          .fromTo(q('.tt', r), { '--wd': 75 }, { '--wd': 100, ease: 'none' }, 0)
+          .fromTo(q('.pan', r), { '--x': '12vw', '--clip': '100%' }, { '--x': '0vw', '--clip': '0%', ease: 'none' }, 0);
+      });
+      ScrollTrigger.create({ trigger: res, start: 'top 56px', end: 'bottom bottom', onUpdate: s => setRow(s.progress), onRefresh: s => setRow(s.progress) });
+      want();
+      return () => { root.classList.remove('scrub'); res.classList.remove('frames'); res.dataset.row = '1'; };
+    });
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      root.classList.add('hpin'); setOv();
+      const tl = gsap.timeline({ scrollTrigger: { trigger: pagesSec, start: () => `top ${bar.offsetHeight}px`, end: 'bottom bottom', scrub: .4, invalidateOnRefresh: true } })
+        // the track eases into its sideways run (velocity matched where the two parts meet), so it never starts at full speed
+        .fromTo(ptrack, { x: 0 }, { x: () => -ov * EDGE, ease: 'power2.in', duration: .15 }, 0)
+        .to(ptrack, { x: () => -ov, ease: 'none', duration: .85 }, .15)
+        .fromTo(pprog, { scaleX: 0 }, { scaleX: 1, ease: 'none', duration: 1 }, 0);
+      pst = tl.scrollTrigger!;
+      // as the track comes up, the lead's picture travels down into the first seat and its story fades; the seat's own card takes over once it lands
+      measure();
+      gsap.set(lthumb, { transformOrigin: '0 0' });
+      // the picture leaves moving with the page and arrives at rest, so neither end of the drop has a jolt:
+      // on screen it slows steadily from the page's speed to a stop (speed (1 - t)^(m - 1)), never reversing, so it can't bob
+      const flyTl = gsap.timeline({ scrollTrigger: { trigger: pagesSec, start: 'top 85%', end: () => `top ${bar.offsetHeight}px`, scrub: .4, invalidateOnRefresh: true } });
+      const glide = (t: number) => {
+        const st = flyTl.scrollTrigger, L = st ? st.end - st.start : 0;
+        if (!L || fly.y <= 1 || fly.y >= L) return t;
+        const m = L / (L - fly.y);
+        return (L * t - L * (1 - (1 - t) ** m) / m) / fly.y;
+      };
+      flyTl
+        .fromTo(lthumb, { x: 0, y: 0, scale: 1 }, { x: () => fly.x, y: () => fly.y, scale: () => fly.s, ease: glide, duration: 1 }, 0)
+        .fromTo(ltext, { opacity: 1, x: 0 }, { opacity: 0, x: -40, ease: 'power1.in', duration: .35 }, 0)
+        .fromTo(qa(':scope > a > :not(.cthumb)', pwl), { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .3 }, .7)
+        .fromTo(lthumb, { opacity: 1 }, { opacity: 0, duration: .001, immediateRender: false }, 1)
+        .fromTo(pthumb, { opacity: 0 }, { opacity: 1, duration: .001 }, 1);
+      return () => { root.classList.remove('hpin'); pst = null; setOv(); };
+    });
+  };
+  init();
+
+  // ---------- Numbers count once, in en-IN. The result rows only count where the scrubbed numeral is not showing them.
+  const fmt = (el: HTMLElement, v: number) => `${el.dataset.pre ?? ''}${v.toLocaleString('en-IN', { minimumFractionDigits: +(el.dataset.dec ?? 0), maximumFractionDigits: +(el.dataset.dec ?? 0) })}${el.dataset.suf ?? '%'}`;
+  const counter = (group: HTMLElement, els: HTMLElement[], thr: number) => {
+    // only zero what will actually count: the scrubbed result rows show their real number at once
+    if (!calm() && !root.classList.contains('scrub')) els.forEach(el => { el.textContent = fmt(el, 0); });
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      const t0 = performance.now();
+      const tick = (t: number) => {
+        const p = calm() || root.classList.contains('scrub') ? 1 : Math.min((t - t0) / 1100, 1), k = 1 - (1 - p) ** 4;
+        els.forEach(el => { el.textContent = fmt(el, +el.dataset.v! * k); });
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }), { threshold: thr });
+    io.observe(group);
+  };
+  counter(q('.stats'), qa('.cnt'), .4);
+  counter(q('.rows'), qa('.rc'), .4);
+
+  // ---------- Keyboard focus on a card out of view brings it in: the rail scrolls itself; the pinned track moves the page
+  ptrack.addEventListener('focusin', e => {
+    const li = (e.target as HTMLElement).closest('li');
+    if (!li) return;
+    if (!pst || !ov) return li.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+    const pad = parseFloat(getComputedStyle(ptrack).paddingLeft), vw = root.clientWidth;
+    const now = Math.min(Math.max((scrollY - pst.start) / (pst.end - pst.start), 0), 1) * ov, l = li.offsetLeft - pad, r = li.offsetLeft + li.offsetWidth + pad - vw;
+    const x = Math.min(Math.max(l < now ? l : r > now ? r : now, 0), ov);
+    // always set: this also cancels the browser's own smooth scroll to the focused element, which ignores the track
+    scrollTo({ top: pst.start + x / ov * (pst.end - pst.start), behavior: 'instant' });
+  });
+
+  // ---------- More work: the big preview tilts toward the pointer
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) qa('.mrow').forEach(r => {
+    const t = q('.mthumb', r);
+    r.addEventListener('pointermove', e => {
+      if (calm()) return;
+      const b = r.getBoundingClientRect(), x = (e.clientX - b.left) / b.width - .5, y = (e.clientY - b.top) / b.height - .5;
+      t.style.setProperty('--ry', `${(x * 22 - 6).toFixed(1)}deg`); t.style.setProperty('--rx', `${(-y * 12 + 2).toFixed(1)}deg`);
+    });
+    r.addEventListener('pointerleave', () => { t.style.removeProperty('--ry'); t.style.removeProperty('--rx'); });
+  });
+
+  // ---------- Reduce motion, pressed mid page: stop everything now
+  const calmNow = () => {
+    if (calm()) {
+      timers.forEach(t => clearTimeout(t)); timers.clear();
+      [unsure, sells].forEach(w => { qa('.jl', w).forEach(l => props.forEach(p => l.style.removeProperty(p))); w.classList.remove('settle'); delete w.dataset.busy; delete w.dataset.stop; w.parentElement!.style.removeProperty('width'); });
+      items.forEach(it => { it.user = null; });
+      qa('.cnt, .rc').forEach(el => { el.textContent = fmt(el, +el.dataset.v!); });
+    }
+    // whichever way it was switched, the words keep their settled colour
+    [unsure, sells].forEach(w => w.classList.add('landed'));
+    init();
+    items.forEach(sync);
+    ScrollTrigger.refresh();
+  };
+  document.getElementById('calm')?.addEventListener('click', () => setTimeout(calmNow));
+  osCalm.addEventListener('change', calmNow);
+</script>
+</body>
+</html>
