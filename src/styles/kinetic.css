@@ -432,6 +432,11 @@ html.scrub{--cvw:min(680px,100svh - var(--bar) - 150px,50vw);--rgap:calc((100svh
 html.scrub .res-in{position:sticky;top:var(--bar);height:calc(100svh - var(--bar));display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;align-content:center;row-gap:clamp(16px,4svh,40px);column-gap:clamp(16px,2vw,32px);align-items:center}
 /* the heading reads as one line above the number and its line, so nothing sits between them */
 html.scrub #res-h{grid-column:1/-1;max-width:none}
+/* Kinetic: NDA note under the results heading, and the pinned results pulled up so no blank screen sits under the hero (two lens audit 2026-10-11) */
+.nda{font-size:16px;color:var(--muted);margin-top:12px;max-width:60ch}
+html.scrub .nda{grid-column:1/-1;margin-top:calc(clamp(16px,4svh,40px) * -1 + 8px)}
+html.scrub .res.tight{margin-top:calc(var(--rgap) * -1 + 40px);pointer-events:none}
+.p-end{margin-top:-56px;font-size:20px;font-weight:650}
 /* the frames are square with the numeral in their middle band, so the box is pulled in to the numeral: no dead space above, below or beside it */
 html.scrub .cv{display:block;container-type:size;grid-column:1;position:relative;width:var(--cvw);aspect-ratio:1;justify-self:start;margin:calc(var(--cvw) * -.25) calc(var(--cvw) * -.06) calc(var(--cvw) * -.25) calc(var(--cvw) * -.09)}
 /* the line sits centred on the numeral (Vishal, 2026-10-10) */

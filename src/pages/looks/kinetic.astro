@@ -128,9 +128,10 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   </section>
 
   <!-- Results: the shipped CashKaro proof sits right under the hero, before the concepts (Vishal approved, audit 2026-10-10). The numerals are type too -->
-  <section class="res" id="results" data-row="1" aria-labelledby="res-h">
+  <section class="res tight" id="results" data-row="1" aria-labelledby="res-h">
     <div class="res-in c">
       <h2 id="res-h">Shipped at CashKaro, for 25M+ users</h2>
+      <p class="nda">Most of this work is under NDA, so the screens aren’t public. Ask me and I’ll walk you through it.</p>
       <div class="cv" aria-hidden="true">
         <div class="big">{results.map((r, i) => <span data-r={i + 1}>{r.n}</span>)}</div>
         <canvas width="640" height="640"></canvas>
@@ -256,6 +257,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
         <div class="p-prog c" aria-hidden="true"><i></i></div>
       </div>
     </div>
+    <p class="c p-end"><a class="more go" href={book.href}>Need a page like these? Book a call <Arrow /></a></p>
   </section>
 
   <!-- How I work -->
@@ -290,6 +292,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
         <a class="pill-btn primary" href={book.href}>{book.label}</a>
         <a class="pill-btn" href={`mailto:${email}`}>Email</a>
         <a class="pill-btn" href={resume.href} target="_blank" rel="noopener">{resume.label}</a>
+        <a class="pill-btn" href={social.find(([l]) => l === 'LinkedIn')![1]}>LinkedIn</a>
       </div>
       <p class="cl">Email me at <button class="copy" type="button" data-copy={email} aria-label={`Copy ${email}`}>{email} <span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button> or book a call. I reply within a day.</p>
       <span class="vh" role="status" id="copied"></span>
