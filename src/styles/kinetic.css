@@ -625,7 +625,7 @@ html.hpin .lead{position:relative;z-index:3}
 html.hpin .kf .pages{padding-bottom:0}
 .kf .how{padding:144px 0 0}
 .kf .about{padding:160px 0 0}
-.kf .ct{margin-top:160px}
+.kf .ct{margin-top:160px}  /* superseded on Kinetic by .end below */
 @media (max-width:759px){
   .about{padding:56px 0 72px}
   .story{font-size:21px;line-height:1.38}
@@ -810,3 +810,13 @@ html.hpin .kf .p-end{margin-top:-16px}
 [data-novid]>.chap{display:none}
 @media (orientation:portrait){.chap{border-radius:0 0 16px 16px}}
 .slot>.vctl{z-index:5}
+/* The ending (Vishal 2026-10-11, option A): Contact and the footer in one dark block. Light page: ink block. Dark page: a lifted surface with an edge.
+   Tokens are reset inside so buttons, links and the copy tag invert on their own. #FF9A5C "sells?" on #141416: 8.2:1 */
+.end{--bg:#141416;--ink:#F2F1EC;--muted:#A7A7AE;--edge:#6B6B72;--line:#2A2A30;--btn:#F2F1EC;--on-btn:#0C0C0E;--live:#4CC38A;--t-sells:#FF9A5C;
+  margin:160px var(--inset) 16px;border-radius:32px;background:var(--bg);color:var(--ink);color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .end{--bg:#18181B;box-shadow:inset 0 0 0 1px #26262B}}
+:root[data-theme=dark] .end{--bg:#18181B;box-shadow:inset 0 0 0 1px #26262B}
+.end .ct{margin:0;padding:104px 0 0;border-radius:0;background:none}
+.end .foot{margin-top:112px;padding:28px 0 32px}
+.here{display:flex;align-items:center;gap:10px;margin-top:22px;font-size:15px;color:var(--muted)}
+.here i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--live);box-shadow:0 0 0 4px color-mix(in srgb,var(--live) 22%,transparent)}

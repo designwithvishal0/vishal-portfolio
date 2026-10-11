@@ -294,6 +294,10 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   </section>
 
   <!-- Contact: a question that settles into a next step -->
+</main>
+
+{/* The ending (Vishal 2026-10-11, option A): Contact and the footer share one dark block; colour stays with the work */}
+<div class="end">
   <section class="ct" id="contact" aria-labelledby="c-h">
     <div class="c">
       <h2 id="c-h" class="words"><span class="vh">Hiring, or need a page that sells?</span><span aria-hidden="true">{cwords.map((x, k) => k < cwords.length - 1
@@ -307,16 +311,17 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
       <p class="cl">Email me at <button class="copy" type="button" data-copy={email} aria-label={`Copy ${email}`}>{email} <span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button>. I reply within a day.</p>
       <p class="cl">Share the page or store you want fixed, and I’ll bring my top three fixes to the call.</p>
       <span class="vh" role="status" id="copied"></span>
+      <p class="here"><i aria-hidden="true"></i><span id="clock">Based in Gurugram, India</span></p>
       {contra && <p class="cl">You can also hire me on <a class="ul" href={contra}>Contra</a>.</p>}
       </div>
     </div>
   </section>
-</main>
-
-<footer class="foot c">
-  <nav aria-label="Elsewhere" class="social">{social.map(([l, h]) => <a class="ul" href={h}>{l}</a>)}</nav>
-  <p class="copyr">© 2026 Vishal Yadav. All rights reserved.</p>
-</footer>
+  <footer class="foot c">
+    <nav aria-label="Elsewhere" class="social">{social.map(([l, h]) => <a class="ul" href={h}>{l}</a>)}</nav>
+    <p class="copyr">© 2026 Vishal Yadav. All rights reserved.</p>
+  </footer>
+</div>
+<script is:inline>(()=>{const c=document.getElementById('clock'),f=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit',hour12:true}),t=()=>{c.textContent='It’s '+f.format(new Date()).toUpperCase()+' in Gurugram'};t();setInterval(t,30000)})()</script>
 
 <script>
   import '../../scripts/ui';
