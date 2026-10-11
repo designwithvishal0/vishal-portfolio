@@ -160,13 +160,13 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 
   <!-- Work: titles that open up -->
   <section class="work" id="work" data-p={loops[0]} aria-labelledby="work-h">
-    {/* Draft copy (2026-10-10): with the results now between the hero and ixigo, this line hands the hero's "unsure" thought back before "Will I travel tonight?". Same pattern as Pages that sell */}
-    <div class="c phead wk-head"><h2 id="work-h">Selected work</h2><p>Four moments people get unsure, and what I designed for each.</p></div>
+    {/* Approved 2026-10-11 (Apply all): this line hands the hero's "unsure" thought back before "Will I travel tonight?". Same pattern as Pages that sell */}
+    <div class="c phead wk-head"><h2 id="work-h">Selected work</h2><p>Four moments when people are unsure, and what I designed for each.</p></div>
     {work.map((w, i) => (
       <article class={`row r-${loops[i]}`} id={`w-${w.slug}`} data-k={loops[i]}>
         <div class="c">
           <p class="q">{w.question}</p>
-          <h3 class="tt"><a href={cs(w.slug)}><span class="ln">{titles[w.slug][0]}</span> <span class="ln">{titles[w.slug][1]}</span><span class="vh">, the {w.name} case study</span></a></h3>
+          <h3 class="tt"><a href={cs(w.slug)}><span class="ln">{titles[w.slug][0]}</span> <span class="ln">{titles[w.slug][1].replace(/\.$/, '')}{titles[w.slug][1].endsWith('.') && <span aria-hidden="true">.</span>}</span><span class="vh">, the {w.name} case study</span></a></h3>
           <div class="rg">
             <div class="tx">
               <p class="meta">{w.name} · {w.type} · {w.year}</p>
@@ -211,7 +211,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   <section class="pages" id="pages" aria-labelledby="pg-h">
     <!-- the shipped campaign gets its own row; the other pages follow on one track that the page scroll moves sideways -->
     <div class="c">
-      <div class="phead"><h2 id="pg-h">Pages that sell</h2><p>Campaigns, landing pages and product pages for commerce brands.</p></div>
+      <div class="phead"><h2 id="pg-h">Pages that sell</h2><p>Campaigns and landing pages I shipped at CashKaro and EarnKaro, plus product page concepts.</p></div>
       <article class="lead">
         <a class="lthumb" href={lead.href} tabindex="-1" aria-hidden="true"><img src={`/pages/${lead.img}.webp`} alt="" width="960" height="1004" loading="lazy" decoding="async" /></a>
         <div class="ltext">
@@ -263,7 +263,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   <!-- About -->
   <section class="about c reveal" id="about" aria-labelledby="ab-h">
     <h2 id="ab-h" class="sh">About</h2>
-    <p class="story">From October 2023 to August 2026 I designed app and web flows at CashKaro, India’s largest cashback platform, and built, in Figma, the design system its campaigns run on. Before that I was a graphic designer at an agency, which is why what I ship looks finished (that work lives in <a class="ul" href="https://www.behance.net/design_vishaly">the archive</a>). I studied Computer Science, so I know what engineers need at handoff, and I use AI to move faster through research and iteration while the design calls stay mine.</p>
+    <p class="story">From October 2023 to August 2026 I designed app and web flows at CashKaro, India’s largest cashback platform, and built its design system in Figma for product and marketing. Before that I spent a year at a design agency making social graphics for 20+ clients a month, which is why what I ship looks finished (that work is on <a class="ul" href="https://www.behance.net/design_vishaly">Behance</a>). I studied Computer Science, so I know what engineers need at handoff. I use AI to get through research and iteration faster, and the design calls stay mine.</p>
     <dl class="jobs">{jobs.map(([c, r, y]) => <div><dt>{c}</dt><dd>{r}</dd><dd class="y">{y}</dd></div>)}</dl>
   </section>
 
