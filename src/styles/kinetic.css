@@ -762,3 +762,24 @@ html.hpin .kf .pages{padding-bottom:0}
 @keyframes caught{0%,45%{scale:1}62%{scale:1.04}100%{scale:1}}
 /* the pinned track already leaves room under the progress line; the question sits close to it */
 html.hpin .kf .p-end{margin-top:-16px}
+/* Selected work wears each project's own colours (Vishal, 2026-10-11): ixigo orange, Google Pay blue, Twelve citrus
+   on forest, JARVIS royal blue. Pastels in light, the reels' own deep grounds in dark. Scoped to the work section, so
+   the hero, How I work and Contact keep their colours. Contrast on each wash: ink 13.5+, question 4.5+, muted 6.4+ */
+.kf .work{
+  --w-ixigo:#FFE2CC; --m-ixigo:#4F4640; --h-ixigo:#A34400;
+  --w-split:#D3E3FD; --m-split:#3D4657; --h-split:#1558C7;
+  --w-twelve:#E4F2B8; --m-twelve:#434B38; --h-twelve:#1D5A3A;
+  --w-jarvis:#CAD4FF; --m-jarvis:#3F4466; --h-jarvis:#2A44C4;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .kf .work{
+  --w-ixigo:#1B1E2C; --m-ixigo:#B8BCCB; --h-ixigo:#FF9A57;
+  --w-split:#0F2247; --m-split:#AEC0DE; --h-split:#9EC2FF;
+  --w-twelve:#0B2A1F; --m-twelve:#A9C4B3; --h-twelve:#CDE86F;
+  --w-jarvis:#15287E; --m-jarvis:#C0C9F2; --h-jarvis:#B9C6FF;
+}}
+:root[data-theme=dark] .kf .work{
+  --w-ixigo:#1B1E2C; --m-ixigo:#B8BCCB; --h-ixigo:#FF9A57;
+  --w-split:#0F2247; --m-split:#AEC0DE; --h-split:#9EC2FF;
+  --w-twelve:#0B2A1F; --m-twelve:#A9C4B3; --h-twelve:#CDE86F;
+  --w-jarvis:#15287E; --m-jarvis:#C0C9F2; --h-jarvis:#B9C6FF;
+}

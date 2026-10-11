@@ -17,13 +17,15 @@ const titles = Object.fromEntries(work.map(w => { const p = w.headline.split(' '
 // row posters are reel frames, so their alt text describes the frame shown (new copy, needs Vishal's yes)
 const posterAlt: Record<string, string> = {
   ixigo: 'ixigo Trains reel: the post booking hub in its chart failed state, saying the waitlist did not clear and offering a held backup train, a bus and a flight',
-  split: 'Google Pay Split and Request reel: the Social, Hauz Khas bill split item by item, with Butter chicken being dragged onto Nidhi',
-  twelve: 'Twelve reel: ₹14,000 typed into Ask Twelve, which warns that past ₹4,200 it starts eating March and moves safe to spend from ₹1,850 to ₹1,240',
-  jarvis: 'JARVIS Alerts reel: the Your Alerts list with a Restricted Entry and an Unknown Car alert, and a tap on Tell us if not under the Unknown Car alert',
+  split: 'Google Pay Split and Request reel: one split, four states. Open board, good news, a memory and a recap, four reasons to open the app that need no money to move',
+  twelve: 'Twelve: your bank says ₹84,000, and Twelve says ₹1,850 is safe to spend today because March insurance still needs ₹4,200, on its home screen',
+  jarvis: 'JARVIS Alerts reel: a 3:14 AM lock screen flooded with alerts, since 90 to 99% of alarms are false, then one flagged alert, and the next day the same car brings no alert',
 };
 // the ixigo reel cut opens mid caption, so its posters are a later frame of the same beat with the caption fully lit
-const poster = (k: string, cut: 'scene' | 'phone') => k === 'ixigo' ? `/kinetic/reel/ixigo-${cut}-lit.jpg` : `/reel/${k}-${cut}.jpg`;
-const grounds = ['#0B0C10', '#F6F8FC', '#F2F0E4', '#F5F6FB'];
+const poster = (k: string, cut: 'scene' | 'phone') => k === 'ixigo' ? `/kinetic/reel/ixigo-${cut}-lit.jpg` : `/kinetic/reel/${k}-${cut}.jpg`;
+// Split, Twelve and JARVIS loops are home page cuts (2026-10-11): public/kinetic/reel/cut.sh and tools/twelve-loop
+const clip = (k: string, cut: 'scene' | 'phone') => `/${k === 'ixigo' ? 'reel' : 'kinetic/reel'}/${k}-${cut}.mp4`;
+const grounds = ['#0B0C10', '#F6F8FC', '#062219', '#0D1F5F'];
 // lead stats: number, decimals, before, after, so they can count in en-IN
 const stat = (s: string) => { const m = s.match(/^(\D*)([\d,.]+)(.*)$/)!; const n = m[2].replace(/,/g, ''); return { pre: m[1], n, dec: (n.split('.')[1] || '').length, suf: m[3] }; };
 const book = intro.links.find(l => l.label === 'Book a call')!;
@@ -189,7 +191,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
                   <source media="(min-width: 700px)" srcset={poster(loops[i], 'scene')} width="1280" height="720" />
                   <img src={poster(loops[i], 'phone')} width="720" height="900" alt={posterAlt[loops[i]] ?? w.alt} loading="lazy" decoding="async" />
                 </picture>
-                <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-wide={`/reel/${loops[i]}-scene.mp4`} data-tall={`/reel/${loops[i]}-phone.mp4`}></video>
+                <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-wide={clip(loops[i], 'scene')} data-tall={clip(loops[i], 'phone')}></video>
                 <a class="mlink" href={cs(w.slug)} tabindex="-1" aria-hidden="true"></a>
                 <button class="vctl" type="button" aria-label={`Play the ${w.name} preview`}><Fragment set:html={Btn} /></button>
               </div>
