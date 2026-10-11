@@ -219,7 +219,15 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   <section class="pages" id="pages" aria-labelledby="pg-h">
     <!-- the shipped campaign gets its own row; the other pages follow on one track that the page scroll moves sideways -->
     <div class="c">
-      <div class="phead"><h2 id="pg-h">Pages that sell</h2><p>Campaigns and landing pages I shipped at CashKaro and EarnKaro, plus product page concepts.</p></div>
+      <div class="phead"><h2 id="pg-h">Pages that sell</h2><p>Campaigns and landing pages I shipped at CashKaro and EarnKaro, plus product page concepts.</p>
+        {/* Freelance offer, first person, no packages or prices (Vishal 2026-10-11: "I am an individual", tapped Build all three) */}
+        <div class="hire"><h3>What you can hire me for</h3><ul>
+          <li><strong>Landing pages</strong> for a launch or a sale week, built around the one click that matters.</li>
+          <li><strong>Product pages</strong> that answer the buyer’s doubt before they scroll away.</li>
+          <li><strong>Store UX audits.</strong> I watch your session recordings, find where people leave, and hand you a ranked list of fixes.</li>
+          <li><strong>App and web product design</strong>, from the flow to the final screens.</li>
+        </ul></div>
+      </div>
       <article class="lead">
         <a class="lthumb" href={lead.href} tabindex="-1" aria-hidden="true"><img src={`/pages/${lead.img}.webp`} alt="" width="960" height="1004" loading="lazy" decoding="async" /></a>
         <div class="ltext">
@@ -257,7 +265,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
         <div class="p-prog c" aria-hidden="true"><i></i></div>
       </div>
     </div>
-    <p class="c p-end"><a class="more go" href={book.href}>Need a page like these? Book a call <Arrow /></a></p>
+    <div class="c p-end"><p class="brands">I’ve designed pages for CashKaro, EarnKaro, CosIQ and BuyKaro.</p><a class="more go" href={book.href}>Need a page like these? Book a call <Arrow /></a></div>
   </section>
 
   <!-- How I work -->
@@ -295,6 +303,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
         <a class="pill-btn" href={social.find(([l]) => l === 'LinkedIn')![1]}>LinkedIn</a>
       </div>
       <p class="cl">Email me at <button class="copy" type="button" data-copy={email} aria-label={`Copy ${email}`}>{email} <span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button> or book a call. I reply within a day.</p>
+      <p class="cl">Send me your page or store link first, and I’ll come to the call with the three things I’d fix.</p>
       <span class="vh" role="status" id="copied"></span>
       {contra && <p class="cl">You can also hire me on <a class="ul" href={contra}>Contra</a>.</p>}
       </div>

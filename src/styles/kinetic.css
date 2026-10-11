@@ -437,6 +437,13 @@ html.scrub #res-h{grid-column:1/-1;max-width:none}
 html.scrub .nda{grid-column:1/-1;margin-top:calc(clamp(16px,4svh,40px) * -1 + 8px)}
 html.scrub .res.tight{margin-top:calc(var(--rgap) * -1 + 40px);pointer-events:none}
 .p-end{margin-top:-56px;font-size:20px;font-weight:650}
+.p-end .brands{font-size:18px;font-weight:500;color:var(--muted);margin-bottom:10px}
+/* Kinetic: freelance offer under the Pages that sell intro */
+.hire{margin-top:22px}
+.hire h3{font-size:18px;font-weight:650;margin-bottom:12px}
+.hire ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.hire li{font-size:17px;line-height:1.4;color:var(--muted);border-top:1px solid var(--rule);padding-top:12px}
+.hire li strong{color:var(--ink);font-weight:650}
 /* the frames are square with the numeral in their middle band, so the box is pulled in to the numeral: no dead space above, below or beside it */
 html.scrub .cv{display:block;container-type:size;grid-column:1;position:relative;width:var(--cvw);aspect-ratio:1;justify-self:start;margin:calc(var(--cvw) * -.25) calc(var(--cvw) * -.06) calc(var(--cvw) * -.25) calc(var(--cvw) * -.09)}
 /* the line sits centred on the numeral (Vishal, 2026-10-10) */
@@ -467,6 +474,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;mix-blend-mode
 .phead{display:grid;gap:14px;margin-bottom:40px}
 .phead h2{font-size:clamp(56px,6vw,88px);font-weight:760;font-stretch:82%;line-height:.92;letter-spacing:-.01em}
 .phead p{font-size:clamp(19px,1.6vw,23px);line-height:1.35;font-weight:500;max-width:34ch}
+.phead .hire li{max-width:none}
 .ptrack{display:flex;align-items:stretch;gap:24px;padding:0 var(--pad) 16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--pad);overscroll-behavior-x:contain;scrollbar-width:thin}
 .ptrack>li{flex:none;width:var(--cw);scroll-snap-align:start}
 
