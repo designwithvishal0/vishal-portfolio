@@ -36,7 +36,7 @@ export const work: Work[] = [
     problem:
       'A waitlisted passenger waits four hours for the chart, and the app shows a status when they need a decision.',
     role: 'Research, flow, UI, copy',
-    type: 'Self initiated concept',
+    type: 'Concept',
     year: '2026',
     detail: '1 hub, 6 journey states',
     question: 'Will I travel tonight?',
@@ -50,7 +50,7 @@ export const work: Work[] = [
     problem:
       'Google Pay only opens when money has to move, and a split is over the moment you send it.',
     role: 'Research, flows, UI, interface copy, prototype',
-    type: 'Self initiated concept',
+    type: 'Concept',
     year: '2026',
     detail: '5 flows, 40+ screens',
     question: 'Has everyone paid me back?',
@@ -64,7 +64,7 @@ export const work: Work[] = [
     problem:
       'The bank says ₹84,000, and nothing mentions the ₹18,000 insurance renewal coming in March.',
     role: 'Solo: research, concept, IA, UI, identity, copy',
-    type: 'Self initiated concept',
+    type: 'Concept',
     year: '2026',
     detail: '9 screens, each a different way the AI shows up',
     question: 'Am I okay this month?',
@@ -78,7 +78,7 @@ export const work: Work[] = [
     problem:
       'A store manager swipes away a false alert at 3 AM, and nothing tells them it counted.',
     role: 'Solo: problem framing, flow, UI, copy',
-    type: 'Independent B2B concept',
+    type: 'Concept',
     year: '2026',
     detail: 'Built in 1 day',
     question: 'Is this alert real?',
