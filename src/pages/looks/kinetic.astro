@@ -32,6 +32,13 @@ let wi = 0;
 const W = (w: string) => ({ w, i: wi++ });
 const hero1 = [l1a.map(W), l1b.map(W)];
 const hero3 = l3a.map(W);
+const gfx = [
+  ['eid', 'Eid sale campaign banners for BuyKaro, on laptop and phone', '215659939/Eid-Sale-Campaign-Banner-Design-for-BuyKaro'],
+  ['social', 'Social media posts, volume one', '199128645/Social-Media-Posts-Vol-1'],
+  ['realestate', 'Real estate flyer and Content Conclave event poster', '199104047/Marketing-Materials-for-Real-Estate-and-Events-Industry'],
+  ['moi', 'Birthday party invitation posters for Museum of Illusions', '194665377/MOI-Birthday-PartyInvitation-Poster-Design'],
+  ['trigo', 'TriGo roll up standee', '187441931/Standee-Design-TriGo'],
+];
 const lastI = wi;
 const Btn = `<svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12" rx="1" /><rect x="8.5" y="1" width="3.5" height="12" rx="1" /></svg><svg class="i-play" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.8.8 0 0 0 1.2.7l9-5.4a.8.8 0 0 0 0-1.4l-9-5.4A.8.8 0 0 0 3 1.6z" /></svg>`;
 // How I work: a statement that links to a case study sits on that project's wash, with one still from its reel
@@ -265,6 +272,10 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   <section class="about c reveal" id="about" aria-labelledby="ab-h">
     <h2 id="ab-h" class="sh">About</h2>
     <p class="story">From October 2023 to August 2026 I designed app and web flows at CashKaro, India’s largest cashback platform, and built its design system in Figma for product and marketing. Before that I spent a year at a design agency making social graphics for 20+ clients a month, which is why what I ship looks finished (that work is on <a class="ul" href="https://www.behance.net/design_vishaly">Behance</a>). I studied Computer Science, so I know what engineers need at handoff. I use AI to get through research and iteration faster, and the design calls stay mine.</p>
+    <!-- A small taste of the agency years (Vishal 2026-10-11): five covers, each opening its Behance project -->
+    <ul class="gfx" aria-label="Graphic work on Behance">
+      {gfx.map(([f, alt, id]) => <li><a href={`https://www.behance.net/gallery/${id}`}><img src={`/graphics/${f}.webp`} alt={alt} width="808" height="632" loading="lazy" decoding="async" /></a></li>)}
+    </ul>
     <dl class="jobs">{jobs.map(([c, r, y]) => <div><dt>{c}</dt><dd>{r}</dd><dd class="y">{y}</dd></div>)}</dl>
   </section>
 

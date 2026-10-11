@@ -569,6 +569,12 @@ html.hpin .lead{position:relative;z-index:3}
 /* ---------- about */
 .about{padding:72px 0 96px}
 .story{font-size:30px;line-height:1.32;max-width:none;width:75%;letter-spacing:-.005em}
+/* Graphics strip under the About story: five quiet covers, a slight lift on hover */
+.gfx{list-style:none;margin:48px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.gfx a{display:block;border-radius:16px;overflow:hidden;box-shadow:0 0 0 1px var(--line);transition:transform 240ms var(--out)}
+.gfx img{display:block;width:100%;height:auto}
+.gfx a:hover{transform:translateY(-4px)}
+@media (prefers-reduced-motion:reduce){.gfx a{transition:none}.gfx a:hover{transform:none}}
 .jobs{margin-top:56px;border-top:1px solid var(--line)}
 .jobs div{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:32px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line)}
 .jobs dt{grid-column:1/5;font-size:22px;font-weight:700;font-stretch:85%}
