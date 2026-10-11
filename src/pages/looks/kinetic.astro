@@ -115,8 +115,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   <section class="intro c reveal" aria-label="Start here">
     <ul class="aud two" aria-label="Start here">
       <!-- Two readers (Vishal 2026-10-11): hiring = recruiters and design leads, freelance = founders and agencies -->
-      <li><a class="go" href="#work"><strong>Hiring full time</strong><span>Four case studies</span><Arrow /></a></li>
-      <li><a class="go" href="#pages"><strong>Hiring a freelancer</strong><span>Pages that sold</span><Arrow /></a></li>
+      <li><a class="go" href="#work"><strong>Hiring full time</strong><Arrow /></a></li>
+      <li><a class="go" href="#pages"><strong>Hiring a freelancer</strong><Arrow /></a></li>
     </ul>
   </section>
 
@@ -254,8 +254,9 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   <!-- How I work -->
   <section class="how c" aria-labelledby="how-h">
     <h2 id="how-h" class="sh">How I work</h2>
-    {how.map(x => { const k = hk(x.href); return (
-      <div class={`hrow reveal${k ? ` wash r-${k}` : ''}`}><h3>{x.h}</h3><div><p>{x.p}</p><a class="more go" href={x.href}>{x.link} <Arrow /></a>
+    <!-- Rows start plain; hover or keyboard focus fills each with its own colour (Vishal 2026-10-11): sky, then the colour of the case study it links to -->
+    {how.map((x, i) => { const k = hk(x.href); return (
+      <div class={`hrow hov reveal hv-${k || (x.href.includes('jarvis') ? 'jarvis' : 'sky')}`}><h3>{x.h}</h3><div><p>{x.p}</p><a class="more go" href={x.href}>{x.link} <Arrow /></a>
         {k && <img class="hart" src={`/reel/frames/${k}-4.jpg`} alt={hartAlt[k]} width="1600" height="900" loading="lazy" decoding="async" />}</div></div>
     ); })}
   </section>

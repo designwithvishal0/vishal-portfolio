@@ -12,6 +12,7 @@
   --w-split:#FFE7A8; --m-split:#45454A;
   --w-twelve:#BDEBDF; --m-twelve:#40474A;
   --w-jarvis:#FFCDB8; --m-jarvis:#4D4441;
+  --w-sky:#CFE6FF; --m-sky:#3F4A57;
   --h-ixigo:#4B32C9; --h-split:#8A6400; --h-twelve:#0E6B5C; --h-jarvis:#B53A16;
   /* type tones: the hero words take the colour of the project on the reel. On bg: 7.7, 5.0, 6.0, 5.2:1 */
   --t-ixigo:#4A2FD0; --t-split:#A35A00; --t-twelve:#006A80; --t-jarvis:#C03A0A;
@@ -35,6 +36,7 @@
   --w-split:#3B2A02; --m-split:#D6C7A0;
   --w-twelve:#062E28; --m-twelve:#A5CFC5;
   --w-jarvis:#43160B; --m-jarvis:#E0B7A9;
+  --w-sky:#0C2C4D; --m-sky:#AFC8E2;
   --h-ixigo:#BBAAFF; --h-split:#FFD466; --h-twelve:#7FE0CB; --h-jarvis:#FF9C78;
   --t-ixigo:#B4A6FF; --t-split:#F2B640; --t-twelve:#5CC8F0; --t-jarvis:#FF8A4C;   /* 9.2, 10.7, 10.2, 8.4:1 */
   --u1:#FFBFB8; --u2:#FDC39C; --u3:#A3E4A4; --u4:#6DE8E7; --u5:#ABD7FD; --u6:#D9C6FE; --u7:#FDBBD9;   /* pastel pencils, 12.4 to 13.4:1 */
@@ -48,6 +50,7 @@
   --w-split:#3B2A02; --m-split:#D6C7A0;
   --w-twelve:#062E28; --m-twelve:#A5CFC5;
   --w-jarvis:#43160B; --m-jarvis:#E0B7A9;
+  --w-sky:#0C2C4D; --m-sky:#AFC8E2;
   --h-ixigo:#BBAAFF; --h-split:#FFD466; --h-twelve:#7FE0CB; --h-jarvis:#FF9C78;
   --t-ixigo:#B4A6FF; --t-split:#F2B640; --t-twelve:#5CC8F0; --t-jarvis:#FF8A4C;   /* 9.2, 10.7, 10.2, 8.4:1 */
   --u1:#FFBFB8; --u2:#FDC39C; --u3:#A3E4A4; --u4:#6DE8E7; --u5:#ABD7FD; --u6:#D9C6FE; --u7:#FDBBD9;   /* pastel pencils, 12.4 to 13.4:1 */
@@ -268,6 +271,7 @@ html.calm .sw .knob{transition:none}
 .aud a{display:flex;align-items:center;gap:16px;min-height:72px;border-top:1px solid var(--edge);text-decoration:none}
 .aud strong{font-size:22px;font-weight:700;font-stretch:85%;letter-spacing:-.01em}
 .aud span{margin-left:auto;font-size:15px;color:var(--muted)}
+.aud.two .arrow{margin-left:auto}
 @media (max-width:1199px){.aud{grid-template-columns:1fr}.aud li:last-child a{border-bottom:1px solid var(--line)}.aud a{border-top-color:var(--line)}}
 @media (max-width:759px){
   .intro{padding:28px 0 40px}
@@ -546,6 +550,12 @@ html.hpin .lead{position:relative;z-index:3}
 .wash{background:var(--rw);--muted:var(--rm)}
 .hrow.wash{margin:8px calc(var(--inset) - var(--gut));padding:44px calc(var(--gut) - var(--inset)) 48px;border-radius:28px}
 .hart{width:100%;height:auto;aspect-ratio:16/9;border-radius:12px;margin-top:20px}
+/* How I work hover (Kinetic): same box as a wash row at rest, so nothing moves; only the fill fades in */
+.hrow.hov{--hv:var(--w-sky);--hm:var(--m-sky);margin:8px calc(var(--inset) - var(--gut));padding:44px calc(var(--gut) - var(--inset)) 48px;border-radius:28px;transition:background-color 320ms var(--ease)}
+.hrow.hv-jarvis{--hv:var(--w-jarvis);--hm:var(--m-jarvis)}
+.hrow.hv-ixigo{--hv:var(--w-ixigo);--hm:var(--m-ixigo)}
+.hrow.hov:hover,.hrow.hov:focus-within{background:var(--hv);--muted:var(--hm)}
+@media (prefers-reduced-motion:reduce){.hrow.hov{transition:none}}
 @media (max-width:1023px){.hrow>div{display:block}}
 .wash .pill-btn:not(.primary),.wash .copy .tag{border-color:currentColor}
 @media (max-width:759px){
