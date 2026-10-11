@@ -274,14 +274,14 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   </section>
 
   <!-- About -->
-  <section class="about c reveal" id="about" aria-labelledby="ab-h">
+  <section class="about about2 c reveal" id="about" aria-labelledby="ab-h">
     <h2 id="ab-h" class="sh">About</h2>
     <p class="story">From October 2023 to August 2026 I designed app and web flows at CashKaro, India’s largest cashback platform, and built its design system in Figma for product and marketing. Before that I spent a year at a design agency making social graphics for 20+ clients a month, which is why what I ship looks finished (that work is on <a class="ul" href="https://www.behance.net/design_vishaly">Behance</a>). I studied Computer Science, so I know what engineers need at handoff. I use AI to get through research and iteration faster, and the design calls stay mine.</p>
+    <dl class="jobs">{jobs.map(([c, r, y]) => <div><dt>{c}</dt><dd>{r}</dd><dd class="y">{y}</dd></div>)}</dl>
     <!-- A small taste of the agency years (Vishal 2026-10-11): five covers, each opening its Behance project -->
     <ul class="gfx" aria-label="Graphic work on Behance">
       {gfx.map(([f, alt, id]) => <li><a href={`https://www.behance.net/gallery/${id}`}><img src={`/graphics/${f}.webp`} alt={alt} width="808" height="632" loading="lazy" decoding="async" /></a></li>)}
     </ul>
-    <dl class="jobs">{jobs.map(([c, r, y]) => <div><dt>{c}</dt><dd>{r}</dd><dd class="y">{y}</dd></div>)}</dl>
   </section>
 
   <!-- Contact: a question that settles into a next step -->
