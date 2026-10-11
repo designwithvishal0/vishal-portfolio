@@ -120,6 +120,27 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     </ul>
   </section>
 
+  <!-- Results: the shipped CashKaro proof sits right under the hero, before the concepts (Vishal approved, audit 2026-10-10). The numerals are type too -->
+  <section class="res" id="results" data-row="1" aria-labelledby="res-h">
+    <div class="res-in c">
+      <h2 id="res-h">Shipped at CashKaro, for 25M+ users</h2>
+      <div class="cv" aria-hidden="true">
+        <div class="big">{results.map((r, i) => <span data-r={i + 1}>{r.n}</span>)}</div>
+        <canvas width="640" height="640"></canvas>
+      </div>
+      <div class="rt">
+        <div class="rows">
+          {results.map((r, i) => (
+            <div class="rr" data-r={i + 1}>
+              <p class="rn"><span class="vh">{r.n}</span><span class="rc" aria-hidden="true" data-v={parseInt(r.n)}>{r.n}</span></p>
+              <p class="rl">{r.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Bridge: the four questions, from noise to order (decorative film; the questions are real text in the rows below) -->
   <div class="band" data-state="paused">
     <div class="band-v" aria-hidden="true">
@@ -137,66 +158,39 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     <button class="vctl" type="button" aria-label="Play the Selected work preview"><Fragment set:html={Btn} /></button>
   </div>
 
-  <!-- Work: titles that open up. ixigo follows the hero straight on, so its question picks up the hero's "unsure";
-       then the shipped CashKaro results; then the other three (Vishal, 2026-10-11). One markup for both parts -->
-  {[[0], [1, 2, 3]].map((ids, s) => (<>
-    {s === 1 && <>
-      <!-- Results: the shipped CashKaro proof, one project in, before the other three concepts (audit 2026-10-10, moved 2026-10-11). The numerals are type too -->
-      <section class="res" id="results" data-row="1" aria-labelledby="res-h">
-        <div class="res-in c">
-          <h2 id="res-h">Shipped at CashKaro, for 25M+ users</h2>
-          <div class="cv" aria-hidden="true">
-            <div class="big">{results.map((r, i) => <span data-r={i + 1}>{r.n}</span>)}</div>
-            <canvas width="640" height="640"></canvas>
-          </div>
-          <div class="rt">
-            <div class="rows">
-              {results.map((r, i) => (
-                <div class="rr" data-r={i + 1}>
-                  <p class="rn"><span class="vh">{r.n}</span><span class="rc" aria-hidden="true" data-v={parseInt(r.n)}>{r.n}</span></p>
-                  <p class="rl">{r.label}</p>
-                </div>
-              ))}
+  <!-- Work: titles that open up -->
+  <section class="work" id="work" data-p={loops[0]} aria-labelledby="work-h">
+    {/* Draft copy (2026-10-10): with the results now between the hero and ixigo, this line hands the hero's "unsure" thought back before "Will I travel tonight?". Same pattern as Pages that sell */}
+    <div class="c phead wk-head"><h2 id="work-h">Selected work</h2><p>Four moments people get unsure, and what I designed for each.</p></div>
+    {work.map((w, i) => (
+      <article class={`row r-${loops[i]}`} id={`w-${w.slug}`} data-k={loops[i]}>
+        <div class="c">
+          <p class="q">{w.question}</p>
+          <h3 class="tt"><a href={cs(w.slug)}><span class="ln">{titles[w.slug][0]}</span> <span class="ln">{titles[w.slug][1]}</span><span class="vh">, the {w.name} case study</span></a></h3>
+          <div class="rg">
+            <div class="tx">
+              <p class="meta">{w.name} · {w.type} · {w.year}</p>
+              <p class="pb">{w.problem}</p>
+              <p class="role">{w.role}</p>
+              <p class="det">{w.detail}</p>
+              <a class="more go" href={cs(w.slug)} tabindex="-1" aria-hidden="true">View the case study <Arrow /></a>
+            </div>
+            <div class="pan">
+              <div class="vbox" style={`--gr:${grounds[i]}`} data-state="paused">
+                <picture>
+                  <source media="(min-width: 700px)" srcset={poster(loops[i], 'scene')} width="1280" height="720" />
+                  <img src={poster(loops[i], 'phone')} width="720" height="900" alt={posterAlt[loops[i]] ?? w.alt} loading="lazy" decoding="async" />
+                </picture>
+                <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-wide={`/reel/${loops[i]}-scene.mp4`} data-tall={`/reel/${loops[i]}-phone.mp4`}></video>
+                <a class="mlink" href={cs(w.slug)} tabindex="-1" aria-hidden="true"></a>
+                <button class="vctl" type="button" aria-label={`Play the ${w.name} preview`}><Fragment set:html={Btn} /></button>
+              </div>
             </div>
           </div>
         </div>
-      </section>
-    </>}
-    <section class="work" id={s ? undefined : 'work'} data-p={loops[ids[0]]} aria-labelledby={s ? undefined : 'work-h'} aria-label={s ? 'More case studies' : undefined}>
-      {s === 0 && <>
-        {/* Draft copy (2026-10-10), waiting on Vishal's OK. Same pattern as Pages that sell */}
-        <div class="c phead wk-head"><h2 id="work-h">Selected work</h2><p>Four moments people get unsure, and what I designed for each.</p></div>
-      </>}
-      {ids.map(i => { const w = work[i]; return (
-          <article class={`row r-${loops[i]}`} id={`w-${w.slug}`} data-k={loops[i]}>
-            <div class="c">
-              <p class="q">{w.question}</p>
-              <h3 class="tt"><a href={cs(w.slug)}><span class="ln">{titles[w.slug][0]}</span> <span class="ln">{titles[w.slug][1]}</span><span class="vh">, the {w.name} case study</span></a></h3>
-              <div class="rg">
-                <div class="tx">
-                  <p class="meta">{w.name} · {w.type} · {w.year}</p>
-                  <p class="pb">{w.problem}</p>
-                  <p class="role">{w.role}</p>
-                  <p class="det">{w.detail}</p>
-                  <a class="more go" href={cs(w.slug)} tabindex="-1" aria-hidden="true">View the case study <Arrow /></a>
-                </div>
-                <div class="pan">
-                  <div class="vbox" style={`--gr:${grounds[i]}`} data-state="paused">
-                    <picture>
-                      <source media="(min-width: 700px)" srcset={poster(loops[i], 'scene')} width="1280" height="720" />
-                      <img src={poster(loops[i], 'phone')} width="720" height="900" alt={posterAlt[loops[i]] ?? w.alt} loading="lazy" decoding="async" />
-                    </picture>
-                    <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-wide={`/reel/${loops[i]}-scene.mp4`} data-tall={`/reel/${loops[i]}-phone.mp4`}></video>
-                    <a class="mlink" href={cs(w.slug)} tabindex="-1" aria-hidden="true"></a>
-                    <button class="vctl" type="button" aria-label={`Play the ${w.name} preview`}><Fragment set:html={Btn} /></button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </article>
-      ); })}
-    </section>
-  </>))}
+      </article>
+    ))}
+  </section>
 
   <!-- More work, in the same voice as the titles -->
   <section class="mw c" aria-label="More work">
@@ -474,10 +468,10 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   bandWide.addEventListener('change', retheme);
 
   // ---------- Washes: the project crossing the middle of the screen colours the section
-  const works = qa('.work');
+  const work = q('.work');
   // measured on scroll, so a fast jump past a row still lands on the right colour
   let wraf = 0;
-  const wash = () => { wraf = 0; const mid = innerHeight / 2; works.forEach(work => { const rs = qa('.row', work); let k = rs[0].dataset.k; rs.forEach(r => { if (r.getBoundingClientRect().top <= mid) k = r.dataset.k; }); if (work.dataset.p !== k) work.dataset.p = k; }); };
+  const wash = () => { wraf = 0; const mid = innerHeight / 2; let k = rows[0].dataset.k; rows.forEach(r => { if (r.getBoundingClientRect().top <= mid) k = r.dataset.k; }); if (work.dataset.p !== k) work.dataset.p = k; };
   addEventListener('scroll', () => { if (!wraf) wraf = requestAnimationFrame(wash); }, { passive: true });
   wash();
   // below 1024 the phone cut slides in once
