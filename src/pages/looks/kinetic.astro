@@ -293,12 +293,10 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
       <div class="ct-r">
       <div class="cta">
         <a class="pill-btn primary" href={book.href}>{book.label}</a>
-        <a class="pill-btn" href={`mailto:${email}`}>Email</a>
         <a class="pill-btn" href={resume.href} target="_blank" rel="noopener">{resume.label}</a>
-        <a class="pill-btn" href={social.find(([l]) => l === 'LinkedIn')![1]}>LinkedIn</a>
       </div>
-      <p class="cl">Email me at <button class="copy" type="button" data-copy={email} aria-label={`Copy ${email}`}>{email} <span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button> or book a call. I reply within a day.</p>
-      <p class="cl">Send me your page or store link first, and I’ll come to the call with the three things I’d fix.</p>
+      <p class="cl">Email me at <button class="copy" type="button" data-copy={email} aria-label={`Copy ${email}`}>{email} <span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button>. I reply within a day.</p>
+      <p class="cl">Share the page or store you want fixed, and I’ll bring my top three fixes to the call.</p>
       <span class="vh" role="status" id="copied"></span>
       {contra && <p class="cl">You can also hire me on <a class="ul" href={contra}>Contra</a>.</p>}
       </div>

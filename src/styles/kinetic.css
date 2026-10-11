@@ -440,7 +440,7 @@ html.scrub .res.tight{margin-top:calc(var(--rgap) * -1 + 40px);pointer-events:no
 /* Kinetic: freelance offer, one line under the Pages that sell intro */
 .phead p.hire{font-size:18px;font-weight:500;color:var(--muted);max-width:none}
 /* Kinetic: Pages that sell intro on two lines, and every card link on one line (section audit 2026-10-11) */
-#pages .phead p:not(.hire){max-width:46ch}
+#pages .phead p{max-width:none}
 .ptrack>li{display:flex}
 .ptrack .card{flex:1}
 .ptrack .card .more{margin-top:auto}
