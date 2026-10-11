@@ -264,6 +264,7 @@ html.calm .sw .knob{transition:none}
 /* ---------- intro: where to go, as three rows */
 .intro{padding:72px 0}
 .aud{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:32px}
+.aud.two{grid-template-columns:repeat(2,minmax(0,1fr))}
 .aud a{display:flex;align-items:center;gap:16px;min-height:72px;border-top:1px solid var(--edge);text-decoration:none}
 .aud strong{font-size:22px;font-weight:700;font-stretch:85%;letter-spacing:-.01em}
 .aud span{margin-left:auto;font-size:15px;color:var(--muted)}
