@@ -38,10 +38,16 @@ reel() {
   $FF -i "$TMP/$out.mkv" -frames:v 1 -q:v 3 "$out.jpg"
 }
 
-# Wide 16:9: one UI beat per project (ixigo opens on its backup plan sheet, not the reframe beat its work row already shows)
+# The hero plays the four Selected work loops back to back (Vishal 2026-10-11: the reel should show what the rows show).
+# Twelve is drawn, not cut: render its raw takes first with tools/twelve-loop/render.mjs <dir> wide|tall raw, and pass that dir as TWR.
+TWR=${TWR:?set TWR to the folder holding twelve-scene-raw.mkv and twelve-phone-raw.mkv}
+# Wide 16:9: ixigo's six states, Split's four states, Twelve's safe to spend, JARVIS flood then correction
 reel hero-wide 1600 900 23 \
-  "$IX 61.8 6.4 $FULL"  "$SP 33.1 6.4 $FULL"  "$TW 24.05 2.4 $FULL"  "$TW 40.8 3.7 $FULL"  "$JV 6.15 3.4 $FULL"  "$JV 33.8 2.6 $FULL"
-# Tall 4:5 for phones: the phone crops only
+  "$IX 45.8 7.1 $FULL"  "$SP 47.8 15.6 $FULL"  "$TWR/twelve-scene-raw.mkv 0 8.6 0:0:1920:1080"  "$JV 6.15 3.4 $FULL"  "$JV 33.8 2.6 $FULL"
+# Tall 4:5 for phones: the same beats, phone crops
 reel hero-tall 1080 1350 23 \
-  "$IX 61.8 6.4 $IX_PHONE"  "$SP 35.5 4.9 $SP_PHONE"  "$TW 42.5 2.0 $TW_PHONE"  "$TW 52.3 4.0 $TW_PHONE"  "$JV 30.0 5.6 $JV_PHONE"
+  "$IX 45.8 7.1 $IX_PHONE"  "$SP 47.8 15.6 150:0:864:1080"  "$TWR/twelve-phone-raw.mkv 0 8.6 0:0:1080:1350"  "$JV 30.0 5.6 $JV_PHONE"
+# posters open on ixigo's chart failed state with its caption lit, the same frame as the ixigo row poster
+$FF -ss 56.0 -i "$IX" -frames:v 1 -vf scale=1600:900:flags=lanczos -q:v 3 hero-wide-lit.jpg
+$FF -ss 56.0 -i "$IX" -frames:v 1 -vf "crop=853:1066:942:0,scale=1080:1350:flags=lanczos" -q:v 3 hero-tall.jpg
 ls -la "$out"

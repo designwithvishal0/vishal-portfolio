@@ -464,7 +464,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   const slot = q('.slot'), hv = q<HTMLVideoElement>('video', slot);
   const hero = add({ box: slot, v: hv, btn: q('.vctl', slot), name: 'showreel', src: () => (land.matches ? hv.dataset.wide : hv.dataset.tall)!, thr: .3 });
   // the index beside the reel follows the project on screen (beat starts in seconds, from tools/motion/kinetic/hero-cut.sh)
-  const heroSec = q('.hero'), idx = q('.idx'), beats = { wide: [0, 5.6, 11.6, 16.9], tall: [0, 5.6, 10.1, 15.3] };
+  const heroSec = q('.hero'), idx = q('.idx'), beats = { wide: [0, 6.3, 21.5, 29.7], tall: [0, 6.3, 21.5, 29.7] };
   const follow = () => {
     if (hv.paused) { idx.removeAttribute('data-on'); return; }
     const b = beats[land.matches ? 'wide' : 'tall'], t = hv.currentTime + .2;

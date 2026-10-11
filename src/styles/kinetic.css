@@ -763,23 +763,28 @@ html.hpin .kf .pages{padding-bottom:0}
 /* the pinned track already leaves room under the progress line; the question sits close to it */
 html.hpin .kf .p-end{margin-top:-16px}
 /* Selected work wears each project's own colours (Vishal, 2026-10-11): ixigo orange, Google Pay blue, Twelve citrus
-   on forest, JARVIS royal blue. Pastels in light, the reels' own deep grounds in dark. Scoped to the work section, so
+   on forest, JARVIS the blue of its app's Submit button (#276BAD; the royal one read purple, Vishal 06:00). Pastels in light, the reels' own deep grounds in dark. Scoped to the work section, so
    the hero, How I work and Contact keep their colours. Contrast on each wash: ink 13.5+, question 4.5+, muted 6.4+ */
 .kf .work{
   --w-ixigo:#FFE2CC; --m-ixigo:#4F4640; --h-ixigo:#A34400;
   --w-split:#D3E3FD; --m-split:#3D4657; --h-split:#1558C7;
   --w-twelve:#E4F2B8; --m-twelve:#434B38; --h-twelve:#1D5A3A;
-  --w-jarvis:#CAD4FF; --m-jarvis:#3F4466; --h-jarvis:#2A44C4;
+  --w-jarvis:#D2E4F6; --m-jarvis:#394857; --h-jarvis:#1F5C99;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]) .kf .work{
   --w-ixigo:#1B1E2C; --m-ixigo:#B8BCCB; --h-ixigo:#FF9A57;
   --w-split:#0F2247; --m-split:#AEC0DE; --h-split:#9EC2FF;
   --w-twelve:#0B2A1F; --m-twelve:#A9C4B3; --h-twelve:#CDE86F;
-  --w-jarvis:#15287E; --m-jarvis:#C0C9F2; --h-jarvis:#B9C6FF;
+  --w-jarvis:#0F2A48; --m-jarvis:#B3C6DB; --h-jarvis:#8CC0F2;
 }}
 :root[data-theme=dark] .kf .work{
   --w-ixigo:#1B1E2C; --m-ixigo:#B8BCCB; --h-ixigo:#FF9A57;
   --w-split:#0F2247; --m-split:#AEC0DE; --h-split:#9EC2FF;
   --w-twelve:#0B2A1F; --m-twelve:#A9C4B3; --h-twelve:#CDE86F;
-  --w-jarvis:#15287E; --m-jarvis:#C0C9F2; --h-jarvis:#B9C6FF;
+  --w-jarvis:#0F2A48; --m-jarvis:#B3C6DB; --h-jarvis:#8CC0F2;
 }
+/* The hero reel now plays the same four loops (Vishal 2026-10-11), so the words it lights take the same project colours.
+   On bg, light: 4.6, 5.3, 7.8, 6.2:1. Dark: 8.3, 9.3, 14.3, 8.9:1 */
+.kf .hero{--t-ixigo:#C04E00; --t-split:#1A62D6; --t-twelve:#1D5A3A; --t-jarvis:#22609E}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .kf .hero{--t-ixigo:#FF8A3D; --t-split:#8AB4F8; --t-twelve:#CDE86F; --t-jarvis:#7FB3EA}}
+:root[data-theme=dark] .kf .hero{--t-ixigo:#FF8A3D; --t-split:#8AB4F8; --t-twelve:#CDE86F; --t-jarvis:#7FB3EA}
