@@ -4,7 +4,7 @@
 <html><head><meta charset="utf-8">
 <style>
 @font-face{font-family:IS;src:url(fonts/serif.woff2)}
-@font-face{font-family:IS;src:local('Inter');unicode-range:U+20B9}   /* Instrument Serif has no rupee sign; Inter's upright one matches the Twelve showreel (Vishal 2026-10-11: the FreeSerif one looked wrong) */
+@font-face{font-family:IS;src:url(fonts/rupee.woff2);unicode-range:U+20B9;size-adjust:86%}   /* Instrument Serif has no rupee sign. Inter Light's, at 86% with a small gap after it, matches the Twelve reels (Vishal 2026-10-11) */
 @font-face{font-family:IN;src:url(fonts/sans.woff2);font-weight:400 700}
 @font-face{font-family:IN;src:local('Inter');unicode-range:U+20B9}
 :root{--forest:#062219;--card:#0B3227;--cream:#F2EFE4;--txt:#EFEDE3;--citrus:#CDE86F;--line:#154336;--m1:#9BB3A6;--m2:#86A194;--ink2:#4A6357}
@@ -52,6 +52,7 @@ body{font-family:IN,sans-serif;color:var(--txt);-webkit-font-smoothing:antialias
 .tall .num{font-size:116px;height:124px;letter-spacing:-2.6px}
 .tall .strike{top:68px}
 .tall .phone{left:182px;top:420px}
+.serif .rs,.num .rs{margin-right:.05em}
 </style></head>
 <body><div id="stage">
   <div class="copy">
@@ -138,5 +139,11 @@ window.render = t => {
   $('vw').style.transform = `translateY(${-(tall ? 330 : 560) * sc}px) scale(${SCALE})`;
 };
 render(0);
+</script>
+<script>
+// wrap the rupee signs in serif numbers so they can give it a little room
+{const hits = [];
+for (const el of document.querySelectorAll('.serif, .num')) { const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT); while (w.nextNode()) if (w.currentNode.data.includes('₹')) hits.push(w.currentNode); }
+for (const n of hits) { const t = document.createElement('template'); t.innerHTML = n.data.replace(/₹/g, '<span class="rs">₹</span>'); n.replaceWith(t.content); }}
 </script>
 </body></html>

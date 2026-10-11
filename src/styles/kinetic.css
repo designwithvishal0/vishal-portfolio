@@ -784,7 +784,14 @@ html.hpin .kf .p-end{margin-top:-16px}
   --w-jarvis:#0F2A48; --m-jarvis:#B3C6DB; --h-jarvis:#8CC0F2;
 }
 /* The hero reel now plays the same four loops (Vishal 2026-10-11), so the words it lights take the same project colours.
-   On bg, light: 4.6, 5.3, 7.8, 6.2:1. Dark: 8.3, 9.3, 14.3, 8.9:1 */
-.kf .hero{--t-ixigo:#C04E00; --t-split:#1A62D6; --t-twelve:#1D5A3A; --t-jarvis:#22609E}
+   On bg, light: 3.2, 5.3, 7.8, 3.5:1 (display size, so 3:1 is the bar; ixigo and JARVIS lightened, Vishal 06:16). Dark: 8.3, 9.3, 14.3, 8.9:1 */
+.kf .hero{--t-ixigo:#E8661A; --t-split:#1A62D6; --t-twelve:#1D5A3A; --t-jarvis:#4189D0}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]) .kf .hero{--t-ixigo:#FF8A3D; --t-split:#8AB4F8; --t-twelve:#CDE86F; --t-jarvis:#7FB3EA}}
 :root[data-theme=dark] .kf .hero{--t-ixigo:#FF8A3D; --t-split:#8AB4F8; --t-twelve:#CDE86F; --t-jarvis:#7FB3EA}
+/* How I work (Vishal 06:18): heading and text centred on each other, the same room above and below */
+.kf .hrow{align-items:center}
+.kf .hrow.hov{padding-block:44px}
+.kf .hrow>div{display:block}
+.kf .hrow>div>p{max-width:46ch}
+.kf .hrow p{margin-bottom:10px}
+.copyr{color:var(--muted)}
