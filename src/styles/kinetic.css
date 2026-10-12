@@ -983,5 +983,3 @@ html.calm .dock{transition:none}
   .kf .how{padding-bottom:24px}
   .kf .about{padding-top:56px}
 }
-/* phones (Vishal 2026-10-12, asked twice): no questions video band between Results and Selected work */
-@media (max-width:759px){.kf .band{display:none}}
