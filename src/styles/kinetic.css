@@ -909,3 +909,10 @@ html.hpin .kf .p-end{margin-top:-16px}
 @media (max-width:359px){.aud.two strong{font-size:16px}.rr{grid-template-columns:80px 1fr}.rn{font-size:40px}}
 @media (max-width:759px) and (prefers-reduced-motion:reduce){.dock{transition:none}}
 html.calm .dock{transition:none}
+
+/* Phones, from Vishal's preview comments 2026-10-12: the reel runs the full content width like every card below it, its play button moves to the top corner so the fourth chapter is never covered, and the questions band is dropped (the rows below already carry the four questions) */
+@media (max-width:759px){
+  .slot>.vctl{top:12px;bottom:auto}
+  .band{display:none}
+}
+@media (max-width:759px) and (orientation:portrait){.hero{--sw:100%}}
