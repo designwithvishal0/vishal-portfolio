@@ -963,7 +963,7 @@ html.calm .dock{transition:none}
 @media (max-width:759px) and (orientation:portrait){
   .hero{--hl:9.6vw;--hu:18.4vw}
   .l1 .grp,.l3>.grp{display:inline}
-  .l3{display:flex;justify-content:flex-start;align-items:last baseline;gap:0 .22em;white-space:nowrap}
+  .l3{display:flex;justify-content:flex-start;align-items:last baseline;gap:0 .22em;white-space:nowrap;margin-top:calc(var(--hl) * -.22)}
   .hm{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;margin:0}
   .bar:has(.bar-sec:not([hidden])):not(.has-sec) .who{opacity:1;pointer-events:auto}
 }
