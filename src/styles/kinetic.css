@@ -910,9 +910,43 @@ html.hpin .kf .p-end{margin-top:-16px}
 @media (max-width:759px) and (prefers-reduced-motion:reduce){.dock{transition:none}}
 html.calm .dock{transition:none}
 
-/* Phones, from Vishal's preview comments 2026-10-12: the reel runs the full content width like every card below it, its play button moves to the top corner so the fourth chapter is never covered, and the questions band is dropped (the rows below already carry the four questions) */
+/* Phones, from Vishal's preview comments 2026-10-12: the reel runs the full content width like every card below it, its play button moves to the top corner so the fourth chapter is never covered. */
 @media (max-width:759px){
   .slot>.vctl{top:12px;bottom:auto}
-  .band{display:none}
 }
 @media (max-width:759px) and (orientation:portrait){.hero{--sw:100%}}
+
+/* Phones, second round of Vishal's preview comments 2026-10-12 */
+.mw-h,.ab-more{display:none}
+@media (max-width:759px){
+  /* the top bar does not repeat the name the hero's first line already says; it comes back as the section name once you scroll */
+  .bar:has(.bar-sec:not([hidden])):not(.has-sec) .who{opacity:0;pointer-events:none}
+  /* selected work: each project fits one screen between the bar and the buttons. The problem line and the detail chip stay in the case study */
+  .row>.c{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;align-items:baseline}
+  .row>.c>*{grid-column:1/-1}
+  .row>.c>.q{grid-column:1;grid-row:1;margin-bottom:8px}
+  .row>.c>.rk{grid-column:2;grid-row:1;margin:0}
+  .tt{font-size:30px}
+  .rg{margin-top:14px;gap:14px}
+  .row .pb,.row .tx .det{display:none}
+  .row .vbox{height:clamp(220px,100svh - 450px,394px);width:auto;aspect-ratio:4/5;margin-inline:auto}
+  .row .tx .more{margin-top:4px}
+  /* more work: a heading like every other section, and less air around it */
+  .kf .mw{padding-top:56px}
+  .mw-h{display:block;margin-bottom:8px}
+  .kf .pages{padding-top:72px}
+  /* pages that sell: Profit Wala Love leads the swipe row like the rest */
+  .pages .lead{display:none}
+  .ptrack>li.pwl{display:flex}
+  /* how I work: the cards stack, each one sliding up over the last as you scroll */
+  .kf .hrow.hov{position:sticky;top:calc(var(--bar,56px) + 16px);background:var(--hv);--muted:var(--hm);box-shadow:0 -6px 18px rgba(0,0,0,.06)}
+  .kf .hrow.hov:nth-of-type(2){top:calc(var(--bar,56px) + 28px)}
+  .kf .hrow.hov:nth-of-type(3){top:calc(var(--bar,56px) + 40px)}
+  /* about: the story shows five lines and opens on a tap, so the first screen has the photo, the story and the jobs */
+  .about2 .ab-r{gap:0}
+  .about2 .jobs{margin-top:16px}
+  .about2 .ab-r .story{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:5;overflow:hidden;margin-bottom:4px}
+  .about2 .ab-r .story.open{display:block}
+  .ab-more{display:inline-flex;align-items:center;min-height:44px;padding:0;border:0;background:none;color:var(--ink);font:inherit;font-size:16px;font-weight:650;text-decoration:underline;text-underline-offset:3px;cursor:pointer;align-self:flex-start;margin-bottom:8px}
+  .ab-more[hidden]{display:none}
+}

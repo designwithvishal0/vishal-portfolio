@@ -193,6 +193,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 
   <!-- More work, in the same voice as the titles -->
   <section class="mw c" aria-label="More work" data-sec="More work">
+    {/* phones only (Vishal 2026-10-12 preview comment: "why doesn't this have any heading"); desktop keeps the plain list */}
+    <h2 class="sh mw-h">More work</h2>
     <ul>
       {more.map(m => (
         <li class="mrow reveal">
@@ -251,7 +253,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
         <div class="p-prog c" aria-hidden="true"><i></i></div>
       </div>
     </div>
-    <div class="c p-end"><p>Need a page like these?</p><a class="pill-btn primary" href={book.href}>{book.label}</a></div>
+    <div class="c p-end"><p>Need a landing page or product page like these?</p><a class="pill-btn primary" href={book.href}>{book.label}</a></div>
   </section>
 
   <!-- How I work -->
@@ -271,6 +273,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     <p class="ab-me" aria-hidden="true"><strong>Vishal Yadav</strong><span>Product designer in Gurugram</span></p>
     <div class="ab-r">
       <p class="story">From October 2023 to August 2026 I designed app and web flows at CashKaro, India’s largest cashback platform, and built its design system in Figma for product and marketing. Before that I spent a year at a design agency making social graphics for 20+ clients a month, which is why what I ship looks finished (that work is on <a class="ul" href="https://www.behance.net/design_vishaly">Behance</a>). I studied Computer Science, so I know what engineers need at handoff. I use AI to get through research and iteration faster, and the design calls stay mine.</p>
+      <button class="ab-more" type="button" aria-expanded="false" hidden>Read more</button>
       <dl class="jobs">{jobs.map(([c, r, y]) => <div><dt>{c}</dt><dd>{r}</dd><dd class="y">{y}</dd></div>)}</dl>
     </div>
     <!-- Graphic work (Vishal 2026-10-11): five pieces cropped to the work itself, each with a caption, each opening its Behance project -->
@@ -347,6 +350,12 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     const io = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? on.add(e.target) : on.delete(e.target)); show(); }, { rootMargin: '-60px 0px -70% 0px' });
     qa('[data-sec]').forEach(x => io.observe(x));
     sec.addEventListener('click', () => scrollTo({ top: 0, behavior: calm() ? 'auto' : 'smooth' })); }
+  /* phones (Vishal 2026-10-12): Profit Wala Love joins the swipe row instead of its own card, and the About story opens on a tap */
+  { const pl = q<HTMLAnchorElement>('.ptrack .pwl'), pa = q('a', pl);
+    const fit = () => { pl.toggleAttribute('aria-hidden', !phone.matches); phone.matches ? pa.removeAttribute('tabindex') : pa.setAttribute('tabindex', '-1'); };
+    fit(); phone.addEventListener('change', fit);
+    const st = q('#about .story'), more = q<HTMLButtonElement>('.ab-more'); more.hidden = false;
+    more.addEventListener('click', () => { const o = st.classList.toggle('open'); more.setAttribute('aria-expanded', String(o)); more.textContent = o ? 'Show less' : 'Read more'; }); }
 
   // ---------- Jitter: one word hesitates in weight, then settles on a spring. Seeded, so it never repeats the same way twice in a row.
   // Weight, a lift and (only while the pointer is on it) a small tilt; the box is locked so the line never shifts.
