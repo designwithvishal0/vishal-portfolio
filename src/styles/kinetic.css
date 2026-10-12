@@ -820,3 +820,65 @@ html.hpin .kf .p-end{margin-top:-16px}
 .end .foot{margin-top:112px;padding:28px 0 32px}
 .here{display:flex;align-items:center;gap:10px;margin-top:22px;font-size:15px;color:var(--muted)}
 .here i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--live);box-shadow:0 0 0 4px color-mix(in srgb,var(--live) 22%,transparent)}
+
+/* ================= Phones (mobile audit 2026-10-12, Vishal picked "Must and should").
+   Everything below lives inside max-width:759px, so desktop and tablet do not move. */
+.a11y .t-m,.m-nav{display:none}
+@media (max-width:759px){
+  /* 1. top bar: name on one line, Book a call from the first screen, Work/About/Contact move into Menu */
+  .bar-in{grid-template-columns:minmax(0,1fr) auto}
+  .bar-in>.nav{display:none}
+  .who{white-space:nowrap}
+  .bar-r{gap:8px}
+  .bar-book{visibility:visible;opacity:1;transform:none;height:40px;padding:0 14px;white-space:nowrap}
+  .bar.at-end .bar-book{visibility:hidden;opacity:0}
+  .a11y{width:auto;padding:0 14px}
+  .a11y .t-a{display:none}
+  .a11y .t-m{display:inline}
+  .m-nav{display:grid;margin:0 0 8px;border-bottom:1px solid var(--line)}
+  .m-nav a{display:flex;align-items:center;min-height:48px;font-size:20px;font-weight:650;color:var(--ink);text-decoration:none}
+  /* 3. reel chapters: only the playing project's name, every bar a 44px tap area */
+  .chap{padding:48px 12px 0;gap:4px}
+  .chap li{min-width:32px}
+  .chap button{min-height:44px;padding:20px 0 0;align-content:start}
+  .chap .cn{display:none}
+  .chap button[data-on] .cn{display:block;position:absolute;left:12px;bottom:46px;max-width:calc(100% - 64px)}
+  /* 6. results: four numbers in a two by two grid, one screen */
+  .res{padding:56px 0}
+  .rows{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 16px;margin-top:24px}
+  .rn{font-size:56px}
+  .rl{font-size:15px;margin-top:8px}
+  /* 9. selected work: text closer to its loop, less room between rows */
+  .row{padding:36px 0}
+  .rg{gap:20px;margin-top:20px}
+  .tx .det{padding-top:12px}
+  .meta{margin-bottom:10px}
+  .pb{font-size:17px;margin-bottom:10px}
+  /* 5 and 10. Pages that sell: a swipe row (script skips the pin on phones), link right under each card's text, one line buttons */
+  .ptrack .card .more{margin-top:12px}
+  .p-end{flex-wrap:wrap;gap:16px;margin-top:32px}
+  .p-end p{font-size:20px}
+  .pill-btn,.btn{white-space:nowrap}
+  /* 7. How I work: half the gaps; on touch the row fills while it crosses the middle of the screen, not on a sticky tap */
+  .kf .how{padding-top:96px}
+  .how .sh{margin-bottom:12px}
+  .kf .hrow.hov{padding-block:24px;margin-block:4px}
+  .hrow.hov:hover,.hrow.hov:focus-within{background:none}
+  .hrow.hov.on{background:var(--hv);--muted:var(--hm)}
+  /* 8. About: story at reading size, jobs as a list, graphic design as a swipe row */
+  .kf .about{padding-top:104px}
+  .about2 .story{font-size:19px;line-height:1.5}
+  .about2 .jobs{display:block;margin-top:32px}
+  .about2 .jobs div{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+  .about2 .jobs dt{font-size:18px}
+  .about2 .jobs dt{grid-column:1;grid-row:1}
+  .about2 .jobs dd:not(.y){grid-column:1;grid-row:2}
+  .about2 .jobs dd.y{grid-column:2;grid-row:1/3;align-self:center;white-space:nowrap}
+  .about2 .ab-g{margin-top:56px}
+  .about2 .gfx{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(var(--gut) * -1);padding:0 var(--gut) 8px;scroll-padding-inline:var(--gut);scrollbar-width:none}
+  .about2 .gfx li{flex:none;width:72%;scroll-snap-align:start}
+  .end{margin-top:112px}
+}
+/* the smallest phones (iPhone SE): a little less padding so the name never runs under Book a call */
+@media (max-width:359px){.bar-r{gap:6px}.bar-book,.a11y{padding:0 10px}.who{font-size:13px}}
+@media (max-width:759px) and (prefers-reduced-motion:reduce){.hrow.hov.on{transition:none}}

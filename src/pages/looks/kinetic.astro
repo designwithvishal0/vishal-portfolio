@@ -73,9 +73,11 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     <div class="bar-r">
       <!-- appears once the hero's own Book a call scrolls away, hides again at Contact (audit 2026-10-10) -->
       <a class="bar-book" href={book.href}>{book.label}</a>
-      <button class="a11y" type="button" popovertarget="a11y-menu" aria-label="Accessibility settings"><span>Accessibility</span></button>
+      <button class="a11y" type="button" popovertarget="a11y-menu"><span class="t-a">Accessibility</span><span class="t-m">Menu</span></button>
     </div>
     <div id="a11y-menu" class="a11y-menu" popover>
+      {/* phones (mobile audit 2026-10-12): the section links live here, so the bar fits name, Book a call and Menu on one line */}
+      <nav class="m-nav" aria-label="Sections"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
       <p class="a11y-h">Accessibility</p>
       <div class="a11y-row"><span id="l-night">Dark mode</span><button id="theme" class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="l-night"><i class="sun"></i><i class="moon"></i><span class="knob"></span></button></div>
       <div class="a11y-row"><span id="l-calm">Reduce motion</span><button id="calm" class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="l-calm"><span class="knob"></span></button></div>
@@ -343,9 +345,11 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   const bar = q('.bar');
   new IntersectionObserver(([e]) => bar.classList.toggle('scrolled', !e.isIntersecting)).observe(q('#sentinel'));
   // Book a call in the bar: only while the hero's button is above the screen and Contact (which has its own) is not on it
-  { let past = false, atEnd = false; const set = () => bar.classList.toggle('book-on', past && !atEnd);
+  { let past = false, atEnd = false; const set = () => { bar.classList.toggle('book-on', past && !atEnd); bar.classList.toggle('at-end', atEnd); };
     new IntersectionObserver(([e]) => { past = !e.isIntersecting && e.boundingClientRect.top < 0; set(); }).observe(q('.hero .hb-cta'));
     new IntersectionObserver(([e]) => { atEnd = e.isIntersecting; set(); }).observe(q('#contact')); }
+  // the phone menu closes once a section link is chosen
+  qa('.m-nav a').forEach(a => a.addEventListener('click', () => q('#a11y-menu').hidePopover()));
 
   // ---------- Jitter: one word hesitates in weight, then settles on a spring. Seeded, so it never repeats the same way twice in a row.
   // Weight, a lift and (only while the pointer is on it) a small tilt; the box is locked so the line never shifts.
@@ -608,7 +612,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
       want();
       return () => { root.classList.remove('scrub'); res.classList.remove('frames'); res.dataset.row = '1'; };
     });
-    mm.add('(prefers-reduced-motion: no-preference)', () => {
+    // phones get the native swipe rail instead (mobile audit 2026-10-12: a pinned track can't be swiped)
+    mm.add('(prefers-reduced-motion: no-preference) and (min-width: 760px)', () => {
       root.classList.add('hpin'); setOv();
       const tl = gsap.timeline({ scrollTrigger: { trigger: pagesSec, start: () => `top ${bar.offsetHeight}px`, end: 'bottom bottom', scrub: true, invalidateOnRefresh: true } })
         // no scrub lag here either, so Profit Wala Love's picture and its seat swap at the exact same spot in both directions
@@ -673,6 +678,9 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     // always set: this also cancels the browser's own smooth scroll to the focused element, which ignores the track
     scrollTo({ top: pst.start + x / ov * (pst.end - pst.start), behavior: 'instant' });
   });
+
+  // ---------- How I work on touch: no hover, so each row fills while it crosses the middle of the screen (mobile audit 2026-10-12)
+  if (!fine.matches) { const hio = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('on', e.isIntersecting)), { rootMargin: '-48% 0px -48% 0px' }); qa('.hrow.hov').forEach(r => hio.observe(r)); }
 
   // ---------- More work: the big preview tilts toward the pointer
   if (matchMedia('(hover: hover) and (pointer: fine)').matches) qa('.mrow').forEach(r => {
