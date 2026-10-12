@@ -47,7 +47,7 @@ const Btn = `<svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><rect x
 // How I work: a statement that links to a case study fills with that project's colour on hover. No stills (Vishal 2026-10-11: only one row had one)
 // JARVIS opens the case study built on this site; the rest still go to the live Framer pages
 const cs = (slug: string) => slug === 'staqu-jarvis' ? '/work/staqu-jarvis/' : live(slug);
-const chapters = [[0, 6.3], [6.3, 15.2], [21.5, 8.2], [29.7, 5.6]], chapterName = ['ixigo Trains', 'Split and Request', 'Twelve', 'JARVIS'];
+const chapters = [[0, 6.3], [6.3, 15.2], [21.5, 8.2], [29.7, 5.6]], phoneChapters = [[0, 6.3], [6.3, 7.8], [14.1, 8.2], [22.3, 5.6]] /* hero-phone.mp4: Split shows only its two phone moments, so no lone phone sits off centre (Vishal 2026-10-12) */, chapterName = ['ixigo Trains', 'Split and Request', 'Twelve', 'JARVIS'];
 const hk = (href: string) => { const i = work.findIndex(w => live(w.slug) === href); return i < 0 ? '' : loops[i]; };
 const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 ---
@@ -89,7 +89,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
       <button class="vctl" type="button" aria-label="Play the showreel"><Fragment set:html={Btn} /></button>
       {/* chapters: jump to any project in the reel (Vishal 2026-10-11). Starts and lengths in seconds, from tools/motion/kinetic/hero-cut.sh */}
       <ol class="chap" aria-label="Showreel chapters">{chapters.map(([t, d], i) => (
-        <li style={`--d:${d}`}><button type="button" data-t={t} aria-label={`Play ${work[i].name}`}><span class="cn">{chapterName[i]}</span><span class="tk"><i></i></span></button></li>
+        <li style={`--d:${d}`} data-dw={d} data-dp={phoneChapters[i][1]}><button type="button" data-t={t} data-tp={phoneChapters[i][0]} aria-label={`Play ${work[i].name}`}><span class="cn">{chapterName[i]}</span><span class="tk"><i></i></span></button></li>
       ))}</ol>
     </figure>
     <script is:inline>setTimeout(()=>document.querySelector('.slot').classList.add('open'),300)</script>
@@ -479,16 +479,19 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   const slot = q('.slot'), hv = q<HTMLVideoElement>('video', slot);
   const hero = add({ box: slot, v: hv, btn: q('.vctl', slot), name: 'showreel', src: () => (land.matches ? hv.dataset.wide : phone.matches ? hv.dataset.phone : hv.dataset.tall)!, thr: .3 });
   // the index beside the reel follows the project on screen (beat starts in seconds, from tools/motion/kinetic/hero-cut.sh)
-  const heroSec = q('.hero'), idx = q('.idx'), beats = { wide: [0, 6.3, 21.5, 29.7], tall: [0, 6.3, 21.5, 29.7] };
+  const heroSec = q('.hero'), idx = q('.idx'), beats = { wide: [0, 6.3, 21.5, 29.7], tall: [0, 6.3, 21.5, 29.7], phone: [0, 6.3, 14.1, 22.3] };
   const follow = () => {
     if (hv.paused) { idx.removeAttribute('data-on'); return; }
-    const b = beats[land.matches ? 'wide' : 'tall'], t = hv.currentTime + .2;
+    const b = beats[land.matches ? 'wide' : phone.matches ? 'phone' : 'tall'], t = hv.currentTime + .2;
     idx.dataset.on = heroSec.dataset.on = String(b.filter(s => t >= s).length - 1);
     heroSec.classList.add('rolling');
   };
   ['timeupdate', 'pause', 'playing'].forEach(ev => hv.addEventListener(ev, follow));
   // chapter bar: each segment fills while its project plays; a click jumps there and plays
-  const chs = [...slot.querySelectorAll<HTMLButtonElement>('.chap button')], starts = chs.map(b => +b.dataset.t!);
+  const chs = [...slot.querySelectorAll<HTMLButtonElement>('.chap button')], wideStarts = chs.map(b => +b.dataset.t!), phoneStarts = chs.map(b => +b.dataset.tp!);
+  let starts = wideStarts;
+  const pickStarts = () => { const p = !land.matches && phone.matches; starts = p ? phoneStarts : wideStarts; chs.forEach(b => { const li = b.parentElement!; li.style.setProperty('--d', p ? li.dataset.dp! : li.dataset.dw!); }); };
+  pickStarts(); [land, phone].forEach(m => m.addEventListener('change', pickStarts));
   const fill = () => {
     const t = hv.currentTime, end = hv.duration || 35.3;
     chs.forEach((b, i) => { const a = starts[i], z = starts[i + 1] ?? end; b.style.setProperty('--p', String(Math.max(0, Math.min(1, (t - a) / (z - a))))); b.toggleAttribute('data-on', !!hv.dataset.cur && t >= a && t < z); });
