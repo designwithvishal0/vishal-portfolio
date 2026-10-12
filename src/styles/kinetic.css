@@ -977,9 +977,3 @@ html.calm .dock{transition:none}
   .hero .l3 .jl{font-weight:var(--wt,760)}
   .hero .l3{margin-top:0}
 }
-/* phones (Vishal 2026-10-12): the How I work cards stay put once stacked (the reveal no longer hides them), and less air before About */
-@media (max-width:759px){
-  html.live:not(.calm) .kf .hrow.hov.reveal{opacity:1;transform:none}
-  .kf .how{padding-bottom:24px}
-  .kf .about{padding-top:56px}
-}
