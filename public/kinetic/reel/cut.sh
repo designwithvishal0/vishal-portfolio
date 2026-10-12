@@ -27,4 +27,7 @@ color=c=white:s=625x655:d=1,format=gray,geq=lum='255*min(min(X/34\\,(W-1-X)/34)\
 $FF -ss 60.5 -i "$SP" -frames:v 1 -vf scale=1280:720:flags=lanczos -q:v 3 split-scene.jpg
 $FF -ss 12 -i split-phone.mp4 -frames:v 1 -q:v 3 split-phone.jpg
 # Lighter hero reel for phones (mobile polish 2026-10-12): the same cut as hero-tall.mp4 at 720x900, about 0.8 MB instead of 1.8 MB
-$FF -i hero-tall.mp4 -vf scale=720:900:flags=lanczos -c:v libx264 -crf 27 -preset slow -movflags +faststart -an hero-phone.mp4
+# phones: the tall reel scaled down, with the Split chapter (6.3 s to 21.5 s) swapped for the Split row loop, whose tall cut keeps its margins (Vishal 2026-10-12)
+$FF -i hero-tall.mp4 -vf scale=720:900:flags=lanczos -c:v libx264 -crf 27 -preset slow -movflags +faststart -an hero-phone-base.mp4
+$FF -i hero-phone-base.mp4 -i split-phone.mp4 -filter_complex "[0:v]trim=0:6.1,setpts=PTS-STARTPTS,fps=30,format=yuv420p,tpad=stop_mode=clone:stop_duration=0.4,settb=AVTB[a];[1:v]tpad=stop_mode=clone:stop_duration=0.5,trim=0:15.6,setpts=PTS-STARTPTS,fps=30,format=yuv420p,settb=AVTB[b];[0:v]trim=21.7,setpts=PTS-STARTPTS,fps=30,format=yuv420p,tpad=start_mode=clone:start_duration=0.4,settb=AVTB[c];[a][b]xfade=transition=fade:duration=0.4:offset=6.1[ab];[ab][c]xfade=transition=fade:duration=0.4:offset=21.3[out]" -map "[out]" -an -c:v libx264 -crf 27 -preset slow -pix_fmt yuv420p -movflags +faststart hero-phone.mp4
+rm hero-phone-base.mp4

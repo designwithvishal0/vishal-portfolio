@@ -953,3 +953,9 @@ html.calm .dock{transition:none}
 /* results on phones (Vishal's pick 2026-10-12, "Keep, shorter"): each number keeps a short line in his own words; the full line stays on desktop */
 .rl-s{display:none}
 @media (max-width:759px){.rl-l{display:none}.rl-s{display:inline}.rl{font-size:16px}.rr{padding:14px 0}}
+/* phones (Vishal 2026-10-12, "people are unsure" fell to the second screen): the whole sentence reads first, then the reel. Desktop keeps the line split by the reel */
+@media (max-width:759px) and (orientation:portrait){
+  .hero{grid-template-areas:"h" "l1" "l3" "slot" "b" "s"}
+  .l3{margin-top:2px}
+  .slot{margin-top:20px}
+}
