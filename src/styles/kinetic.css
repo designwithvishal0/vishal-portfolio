@@ -986,3 +986,20 @@ html.calm .dock{transition:none}
   .kf .about{padding-top:56px}
 }
 
+/* Phones, Vishal's preview comments 2026-10-12, 14:30 */
+@media (max-width:759px){
+  /* the first card had 56px of air above its question (a desktop rule leaking in); now it matches the other three */
+  .wk-head+.row{padding-top:20px}
+  /* the loop runs the full card width. On a real iPhone the one screen cap shrank it to about 220px tall, too small to read */
+  .row .vbox{height:auto;width:100%;margin-inline:0}
+  /* View the case study is the only button while you read the work; the bottom bar steps aside */
+  html.in-work .dock{transform:translateY(calc(100% + 24px));opacity:0;pointer-events:none}
+  /* pages that sell: the cards already say what shipped and for whom, so phones keep only the offer line */
+  #pages .phead p:not(.hire){display:none}
+  .kf .pages{padding-top:48px;padding-bottom:40px}
+  .p-end{margin-top:16px}
+  #pages .ptrack{padding-bottom:4px}
+  /* the dark ending starts closer to its heading */
+  .end .ct{padding-top:56px}
+  .end .foot{margin-top:56px}
+}

@@ -345,6 +345,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   // ---------- Phones (mobile layout 2026-10-12): the bottom bar steps aside for the dark ending, which has its own buttons,
   // and the top bar names the section you are in (tap it to go back to the top)
   new IntersectionObserver(([e]) => root.classList.toggle('at-end', e.isIntersecting)).observe(q('.end'));
+  // the bottom bar steps aside while Selected work fills the middle of the screen; each card has its own View the case study (Vishal 2026-10-12, 14:29)
+  new IntersectionObserver(([e]) => root.classList.toggle('in-work', e.isIntersecting), { rootMargin: '-50% 0px -50% 0px' }).observe(q('#work'));
   { const sec = q<HTMLButtonElement>('.bar-sec'); sec.hidden = false; const on = new Set<Element>();
     const show = () => { const s = qa('[data-sec]').filter(x => on.has(x)).pop(); bar.classList.toggle('has-sec', !!s); if (s) sec.textContent = s.dataset.sec!; };
     const io = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? on.add(e.target) : on.delete(e.target)); show(); }, { rootMargin: '-60px 0px -70% 0px' });
