@@ -950,3 +950,6 @@ html.calm .dock{transition:none}
   .ab-more{display:inline-flex;align-items:center;min-height:44px;padding:0;border:0;background:none;color:var(--ink);font:inherit;font-size:16px;font-weight:650;text-decoration:underline;text-underline-offset:3px;cursor:pointer;align-self:flex-start;margin-bottom:8px}
   .ab-more[hidden]{display:none}
 }
+/* results on phones (Vishal's pick 2026-10-12, "Keep, shorter"): each number keeps a short line in his own words; the full line stays on desktop */
+.rl-s{display:none}
+@media (max-width:759px){.rl-l{display:none}.rl-s{display:inline}.rl{font-size:16px}.rr{padding:14px 0}}

@@ -131,7 +131,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
           {results.map((r, i) => (
             <div class="rr" data-r={i + 1}>
               <p class="rn"><span class="vh">{r.n}</span><span class="rc" aria-hidden="true" data-v={parseInt(r.n)}>{r.n}</span></p>
-              <p class="rl">{r.label}</p>
+              <p class="rl"><span class="rl-l">{r.label}</span><span class="rl-s">{r.short}</span></p>
             </div>
           ))}
         </div>
