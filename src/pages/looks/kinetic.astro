@@ -65,6 +65,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 <script is:inline>addEventListener('load',()=>setTimeout(()=>document.documentElement.classList.add('ready'),2500))</script>
 </head>
 <body>
+<a class="skip" href="#work">Skip to work</a>
 <div id="sentinel" aria-hidden="true"></div>
 <header class="bar">
   <div class="c bar-in">
@@ -310,7 +311,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
         <a class="pill-btn primary" href={book.href}>{book.label}</a>
         <a class="pill-btn" href={resume.href} target="_blank" rel="noopener">{resume.label}</a>
       </div>
-      <p class="cl">Email me at <button class="copy" type="button" data-copy={email} aria-label={`Copy ${email}`}>{email} <span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button>. I reply within a day.</p>
+      {/* UX pass 2026-10-12: tapping the address opens mail (what people expect on a phone); the chip beside it still copies */}
+      <p class="cl">Email me at <a class="ul" href={`mailto:${email}`}>{email}</a> <button class="copy chip" type="button" data-copy={email} aria-label="Copy email address"><span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button>. I reply within a day.</p>
       <p class="cl">Share the page or store you want fixed, and I’ll bring my top three fixes to the call.</p>
       <span class="vh" role="status" id="copied"></span>
       <p class="here"><i aria-hidden="true"></i><span id="clock">Based in Gurugram, India</span></p>

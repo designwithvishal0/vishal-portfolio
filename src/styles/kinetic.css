@@ -553,7 +553,8 @@ html.hpin .lead{position:relative;z-index:3}
 }
 
 /* ---------- how I work */
-.sh{font-size:20px;font-weight:700;font-stretch:85%;margin-bottom:28px}
+/* UX pass 2026-10-12: How I work and About get the same big heading as Selected work and Pages that sell, so a skimmer sees each section start */
+.sh{font-size:clamp(56px,6vw,88px);font-weight:760;font-stretch:82%;line-height:.92;letter-spacing:-.01em;margin-bottom:40px}
 .how{padding:0 0 96px}
 .hrow{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:32px;padding:36px 0 44px}
 .hrow h3{grid-column:1/6;font-size:56px;font-weight:700;font-stretch:80%;line-height:1;letter-spacing:-.02em;max-width:15ch}
@@ -667,6 +668,13 @@ html.hpin .kf .pages{padding-bottom:0}
 .social a{padding:10px 8px;margin-inline:-8px;min-width:24px;text-align:center;background-origin:content-box;background-clip:content-box}
 @media (max-width:759px){.foot{flex-direction:column;align-items:flex-start}}
 @media (pointer:coarse){.copy{padding-block:10px;margin-block:-10px}}
+/* UX pass 2026-10-12: the address is a mail link, the chip only copies; desktop gets the same 44px tap room as phones, look unchanged */
+.copy.chip{text-decoration:none;position:relative;vertical-align:baseline}
+.copy.chip::after,.social a::after{content:"";position:absolute;inset:50% auto auto 50%;width:max(100%,44px);height:max(100%,44px);translate:-50% -50%}
+.social a{position:relative}
+/* skip link: hidden until the first Tab */
+.skip{position:fixed;left:16px;top:-80px;z-index:100;padding:10px 16px;border-radius:999px;background:var(--ink);color:var(--bg);font-weight:600;text-decoration:none}
+.skip:focus-visible{top:12px}
 
 /* ---------- reveals, once; hidden only while the page script runs and motion is allowed */
 @media (prefers-reduced-motion:no-preference){
@@ -861,7 +869,7 @@ html.hpin .kf .p-end{margin-top:-16px}
   .pill-btn,.btn{white-space:nowrap}
   /* 7. How I work: half the gaps; on touch the row fills while it crosses the middle of the screen, not on a sticky tap */
   .kf .how{padding-top:96px}
-  .how .sh{margin-bottom:12px}
+  .sh{font-size:40px;margin-bottom:24px}
   .kf .hrow.hov{padding-block:24px;margin-block:4px}
   .hrow.hov:hover,.hrow.hov:focus-within{background:none}
   .hrow.hov.on{background:var(--hv);--muted:var(--hm)}
