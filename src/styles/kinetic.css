@@ -959,3 +959,11 @@ html.calm .dock{transition:none}
   .l3{margin-top:2px}
   .slot{margin-top:20px}
 }
+/* phones (Vishal 2026-10-12, "cut it down into two lines", header empty on the left): the sentence fills the width in two lines, the bar shows his name from the start, so the name line above the headline is kept for search and screen readers only */
+@media (max-width:759px) and (orientation:portrait){
+  .hero{--hl:9.6vw;--hu:18.4vw}
+  .l1 .grp,.l3>.grp{display:inline}
+  .l3{display:flex;justify-content:flex-start;align-items:last baseline;gap:0 .22em;white-space:nowrap}
+  .hm{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;margin:0}
+  .bar:has(.bar-sec:not([hidden])):not(.has-sec) .who{opacity:1;pointer-events:auto}
+}
