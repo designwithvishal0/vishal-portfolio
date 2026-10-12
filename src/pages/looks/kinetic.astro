@@ -225,7 +225,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
           <dl class="stats">{lead.stats.map(([n, l]) => { const s = stat(n); return (
             <div><dt>{l}</dt><dd><span class="vh">{n}</span><span class="cnt" aria-hidden="true" data-v={s.n} data-dec={s.dec} data-pre={s.pre} data-suf={s.suf}>{n}</span></dd></div>
           ); })}</dl>
-          <a class="more go" href={lead.href}>View on Dribbble <Arrow /></a>
+          <a class="more go" href={lead.href}>View the project <Arrow /></a>
         </div>
       </article>
     </div>
@@ -238,7 +238,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
             <span class="ctag"><span class="pill shipped">{lead.tag}</span></span>
             <strong>{lead.name}</strong>
             <span class="cline">{lead.line}</span>
-            <span class="more">View on Dribbble <Arrow /></span>
+            <span class="more">View the project <Arrow /></span>
           </a></li>
           {pages.map(p => (
             <li><a class="card go" href={p.href}>

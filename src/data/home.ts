@@ -128,7 +128,7 @@ export const more = [
   { img: 'reward', name: 'Unified Reward Centre', line: 'Every reward a player has earned, on one screen.', href: behance('256413187') },
   { img: 'onebanc', name: 'OneBanc', line: 'Plan the month your salary has to last.', href: live('onebanc') },
 ];
-export const lead = { img: 'pwl', name: 'Profit Wala Love, CashKaro', tag: 'Shipped, February 2026', line: "Valentine’s week campaign across app, web and social: seven days, seven ways to earn.", href: 'https://dribbble.com/shots/27168211-Valentines-Day-Landing-Page', stats: [['1,542', 'transactions'], ['₹9.89 lakh', 'GMV'], ['+51%', 'retailer commission']] };
+export const lead = { img: 'pwl', name: 'Profit Wala Love, CashKaro', tag: 'Shipped, February 2026', line: "Valentine’s week campaign across app, web and social: seven days, seven ways to earn.", href: '/work/profit-wala-love/', stats: [['1,542', 'transactions'], ['₹9.89 lakh', 'GMV'], ['+51%', 'retailer commission']] };
 // Shipped pages first, then concepts (two lens audit 2026-10-11: a client reading "Pages that sell" should meet the real results before the concepts)
 export const pages = [
   { img: 'bbb', name: 'Big Birthday Bash, EarnKaro', tag: 'Shipped, July 2026', line: 'A week long campaign landing page, plus the 777 Jackpot game with a new deal every day.', href: behance('256577531') },
