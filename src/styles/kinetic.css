@@ -839,7 +839,7 @@ html.hpin .kf .p-end{margin-top:-16px}
 @media (max-width:759px){
   .kf{--tile:color-mix(in srgb,var(--ink) 5%,var(--bg))}
   /* thumb zone: Book a call and Resume live in a bar at the bottom of the screen, so the hero no longer repeats them */
-  .dock{display:grid;grid-template-columns:1.5fr 1fr;gap:8px;position:fixed;z-index:25;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));padding:6px;border-radius:999px;
+  .dock{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:fixed;z-index:25;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));padding:6px;border-radius:999px;
     background:color-mix(in srgb,var(--bg) 72%,transparent);-webkit-backdrop-filter:blur(18px) saturate(1.8);backdrop-filter:blur(18px) saturate(1.8);box-shadow:0 0 0 1px var(--line),0 12px 32px rgba(0,0,0,.14);
     transition:transform 260ms var(--out),opacity 200ms var(--out)}
   .dock .pill-btn{min-height:48px;font-size:16px}

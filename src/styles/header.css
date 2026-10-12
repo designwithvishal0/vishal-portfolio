@@ -94,3 +94,9 @@ html.calm .sw .knob{transition:none}
   .bar:has(.bar-sec:not([hidden])) .bar-book{display:none}
 }
 @media (prefers-reduced-motion:reduce){.bar-sec,.who{transition:none}}
+/* phones (Vishal 2026-10-12): the button opens the site menu, so it looks like a menu (two lines, no outline), not a second call to action */
+@media (max-width:759px){
+  .a11y{--a11y-ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M4 9h16M4 15h16'/%3E%3C/svg%3E");
+    height:44px;padding:0 4px 0 12px;margin-right:-4px;border-color:transparent;font-size:15px;font-weight:650;flex-direction:row-reverse}
+  .a11y[aria-expanded=true]{background:var(--line);border-color:transparent;color:var(--ink)}
+}
