@@ -971,3 +971,9 @@ html.calm .dock{transition:none}
   body::after{content:"";position:fixed;z-index:24;left:0;right:0;bottom:0;height:calc(96px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--bg) 58%,transparent);opacity:0;transition:opacity 200ms var(--out);pointer-events:none}
   html.in-hero body::after{opacity:1}
 }
+/* phones (Vishal 2026-10-12, "make the headline font the same for everything"): "unsure." takes the same size, weight and width as the other words; only its colour and the shake stay */
+@media (max-width:759px) and (orientation:portrait){
+  .hero .l3 .wu{font-size:var(--hl);font-weight:760;font-stretch:82%;letter-spacing:-.01em}
+  .hero .l3 .jl{font-weight:var(--wt,760)}
+  .hero .l3{margin-top:0}
+}
