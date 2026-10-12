@@ -356,6 +356,14 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     fit(); phone.addEventListener('change', fit);
     const st = q('#about .story'), more = q<HTMLButtonElement>('.ab-more'); more.hidden = false;
     more.addEventListener('click', () => { const o = st.classList.toggle('open'); more.setAttribute('aria-expanded', String(o)); more.textContent = o ? 'Show less' : 'Read more'; }); }
+    /* the headline's second line ends where the first does, whatever width the phone's fonts render at (Vishal 2026-10-12) */
+    const hh = q('.hero'), tall = matchMedia('(max-width:759px) and (orientation:portrait)'), ws = qa('.l1 .w'), uw = q('#unsure');
+    const even = () => { hh.style.removeProperty('--hu'); if (!tall.matches || uw.dataset.busy) return;
+      const r1 = ws[ws.length - 1].getBoundingClientRect().right;
+      for (let i = 0; i < 2; i++) { const b = uw.getBoundingClientRect(); hh.style.setProperty('--hu', `${parseFloat(getComputedStyle(uw).fontSize) * (1 + (r1 - b.right) / b.width)}px`); } };
+    document.fonts.ready.then(even); tall.addEventListener('change', even); addEventListener('resize', even);
+    /* the dock fades the page out under it while the hero is on screen, so no half cut line shows through */
+    new IntersectionObserver(([e]) => document.documentElement.classList.toggle('in-hero', e.isIntersecting)).observe(q('.hb'));
 
   // ---------- Jitter: one word hesitates in weight, then settles on a spring. Seeded, so it never repeats the same way twice in a row.
   // Weight, a lift and (only while the pointer is on it) a small tilt; the box is locked so the line never shifts.

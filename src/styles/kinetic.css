@@ -967,3 +967,7 @@ html.calm .dock{transition:none}
   .hm{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;margin:0}
   .bar:has(.bar-sec:not([hidden])):not(.has-sec) .who{opacity:1;pointer-events:auto}
 }
+@media (max-width:759px){
+  body::after{content:"";position:fixed;z-index:24;left:0;right:0;bottom:0;height:calc(96px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--bg) 58%,transparent);opacity:0;transition:opacity 200ms var(--out);pointer-events:none}
+  html.in-hero body::after{opacity:1}
+}
