@@ -121,7 +121,7 @@ export const loops = ['ixigo', 'split', 'twelve', 'jarvis'];
 // Each number counts up from zero the first time it scrolls into view.
 export const results = [
   { n: '60%', label: 'conversion lift on critical flows, with my UI on the homepage modules, collections and landing pages', short: 'conversion lift on critical flows' },
-  { n: '50%', label: 'click through lift on campaign landing pages, after Hotjar and Clarity showed me where people dropped off and I rebuilt the hierarchy and CTAs', short: 'click through lift on campaign landing pages' },
+  { n: '50%', label: 'click through lift on campaign landing pages, after I fixed the hierarchy and CTAs at the exact spots Hotjar and Clarity showed people leaving', short: 'click through lift on campaign landing pages' },
   { n: '30%', label: 'faster campaign turnaround, from one design system I built in Figma for product and marketing', short: 'faster campaign turnaround, from one design system' },
 ];
 export const more = [
