@@ -3,6 +3,7 @@ import '@fontsource-variable/bricolage-grotesque/standard.css';
 import fontUrl from '@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-standard-normal.woff2?url';
 import '../../styles/kinetic.css';
 import Boot from '../../components/Boot.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
 import Arrow from '../../components/Arrow.astro';
 import { intro, work, live, email, social, contra, loops, results, more, lead, pages, how, jobs } from '../../data/home';
 
@@ -67,24 +68,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 <body>
 <a class="skip" href="#work">Skip to work</a>
 <div id="sentinel" aria-hidden="true"></div>
-<header class="bar">
-  <div class="c bar-in">
-    <span class="who">Vishal Yadav</span>
-    <nav class="nav" aria-label="Sections"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
-    <div class="bar-r">
-      <!-- appears once the hero's own Book a call scrolls away, hides again at Contact (audit 2026-10-10) -->
-      <a class="bar-book" href={book.href}>{book.label}</a>
-      <button class="a11y" type="button" popovertarget="a11y-menu"><span class="t-a">Accessibility</span><span class="t-m">Menu</span></button>
-    </div>
-    <div id="a11y-menu" class="a11y-menu" popover>
-      {/* phones (mobile audit 2026-10-12): the section links live here, so the bar fits name, Book a call and Menu on one line */}
-      <nav class="m-nav" aria-label="Sections"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
-      <p class="a11y-h">Accessibility</p>
-      <div class="a11y-row"><span id="l-night">Dark mode</span><button id="theme" class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="l-night"><i class="sun"></i><i class="moon"></i><span class="knob"></span></button></div>
-      <div class="a11y-row"><span id="l-calm">Reduce motion</span><button id="calm" class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="l-calm"><span class="knob"></span></button></div>
-    </div>
-  </div>
-</header>
+<SiteHeader />
 
 <main class="kf">
   <!-- The sentence, split open by the reel -->
@@ -350,8 +334,6 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   { let past = false, atEnd = false; const set = () => { bar.classList.toggle('book-on', past && !atEnd); bar.classList.toggle('at-end', atEnd); };
     new IntersectionObserver(([e]) => { past = !e.isIntersecting && e.boundingClientRect.top < 0; set(); }).observe(q('.hero .hb-cta'));
     new IntersectionObserver(([e]) => { atEnd = e.isIntersecting; set(); }).observe(q('#contact')); }
-  // the phone menu closes once a section link is chosen
-  qa('.m-nav a').forEach(a => a.addEventListener('click', () => q('#a11y-menu').hidePopover()));
 
   // ---------- Jitter: one word hesitates in weight, then settles on a spring. Seeded, so it never repeats the same way twice in a row.
   // Weight, a lift and (only while the pointer is on it) a small tilt; the box is locked so the line never shifts.
