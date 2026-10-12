@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "vishalyadav.vercel.app" }],
+      "destination": "/looks/kinetic",
+      "permanent": false
+    }
+  ]
+}
