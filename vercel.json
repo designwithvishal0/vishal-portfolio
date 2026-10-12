@@ -1,8 +1,18 @@
 {
+  "git": {
+    "deploymentEnabled": {
+      "claude/**": false
+    }
+  },
   "redirects": [
     {
       "source": "/",
-      "has": [{ "type": "host", "value": "vishal-(designs?|yadav|yadav-design)\\.vercel\\.app" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "vishal-(designs?|yadav|yadav-design)\\.vercel\\.app"
+        }
+      ],
       "destination": "/looks/kinetic",
       "permanent": false
     }
