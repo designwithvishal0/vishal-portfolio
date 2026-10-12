@@ -22,6 +22,8 @@ const marketing = [
   ['47011342/file/6b1f2bbe9cebc91f6d4045cc5690c848.png', 'Profit Wala Love emailer'],
   ['47011451/file/e86e33b8af27ff63f71577a36864f9f8.png', 'Profit Wala Love marketing asset'],
 ].map(([p, alt]) => [img(p), alt]);
+const video = 'https://cdn.dribbble.com/userupload/49194197/file/b5ea4872b979383b5dde81e412b95d5d.mp4';
+const poster = 'https://cdn.dribbble.com/userupload/49194197/file/still-23caa99eabf84be7b18d9bfa8b260f3b.png';
 const closing = img('49194717/file/c15bdaaea4976d7c10e63f3e02f05507.jpg');
 const stats = [...lead.stats, ['13,707', 'deal shares']];
 ---
@@ -46,7 +48,7 @@ const stats = [...lead.stats, ['13,707', 'deal shares']];
 .pw .stats dd{font-size:clamp(48px,5vw,80px)}
 .pw .stats dt{font-size:15px;color:var(--muted)}
 .pw figure{margin:0}
-.pw img{display:block;width:100%;height:auto;border-radius:24px;background:var(--line)}
+.pw img,.pw video{display:block;width:100%;height:auto;border-radius:24px;background:var(--line)}
 .pw .shot{margin:72px auto 0;max-width:960px}
 .pw h2{font-size:clamp(28px,3vw,40px);font-weight:750;letter-spacing:-.02em;margin:120px 0 8px}
 .pw h2 + p{margin-bottom:32px}
@@ -56,7 +58,7 @@ const stats = [...lead.stats, ['13,707', 'deal shares']];
 @media (max-width:759px){
   .pw{padding-top:calc(var(--bar) + 40px)}
   .pw p{font-size:17px}
-  .pw img{border-radius:16px}
+  .pw img,.pw video{border-radius:16px}
   .pw .grid{grid-template-columns:1fr;gap:16px}
   .pw .shot{margin-top:48px}
   .pw h2{margin-top:80px}
@@ -77,6 +79,10 @@ const stats = [...lead.stats, ['13,707', 'deal shares']];
       <p>Each day from Rose Day to Promise Day got its own card with an inactive and an active state. Tapping a day lifts it and swaps the deal carousel to that day's gifts. Every deal card shows the retailer, the price hook and the profit you earn. Further down, a For Her / For Him switch changes the whole product edit while the categories stay in place. The same story ran across home banners, in app placements and the emailer.</p>
       <dl class="stats">{stats.map(([n, l]) => <div><dt>{l}</dt><dd>{n}</dd></div>)}</dl>
     </div>
+
+    {/* the post's opening video, as on Dribbble: silent loop, plays on its own unless motion is reduced */}
+    <figure class="shot"><video id="pwl-film" src={video} poster={poster} muted loop playsinline controls preload="metadata" aria-label="Profit Wala Love campaign video, no sound"></video></figure>
+    <script is:inline>(()=>{const v=document.getElementById('pwl-film'),r=document.documentElement;if(matchMedia('(prefers-reduced-motion: reduce)').matches||r.classList.contains('calm'))return;v.play().catch(()=>{})})()</script>
 
     <figure class="shot"><img src={hero} alt="Profit Wala Love landing page on CashKaro, with a card for each Valentine Week day and the deal carousel for that day" width="1600" height="1200" fetchpriority="high" /></figure>
 
