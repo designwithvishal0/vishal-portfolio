@@ -118,7 +118,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   </section>
 
   <!-- Results: the shipped CashKaro proof sits right under the hero, before the concepts (Vishal approved, audit 2026-10-10). The numerals are type too -->
-  <section class="res tight" id="results" data-row="1" aria-labelledby="res-h">
+  <section class="res tight" id="results" data-sec="Results" data-row="1" aria-labelledby="res-h">
     <div class="res-in c">
       <h2 id="res-h">Shipped at CashKaro, for 25M+ users</h2>
       <p class="nda">Most of this work is under NDA, so the screens aren’t public. Ask me and I’ll walk you through it.</p>
@@ -157,12 +157,13 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   </div>
 
   <!-- Work: titles that open up -->
-  <section class="work" id="work" data-p={loops[0]} aria-labelledby="work-h">
+  <section class="work" id="work" data-sec="Selected work" data-p={loops[0]} aria-labelledby="work-h">
     {/* Approved 2026-10-11 (Apply all): this line hands the hero's "unsure" thought back before "Will I travel tonight?". Same pattern as Pages that sell */}
     <div class="c phead wk-head"><h2 id="work-h">Selected work</h2><p>Four moments when people are unsure, and what I designed for each.</p></div>
     {work.map((w, i) => (
       <article class={`row r-${loops[i]}`} id={`w-${w.slug}`} data-k={loops[i]}>
         <div class="c">
+          <p class="rk" aria-hidden="true">{String(i + 1).padStart(2, '0')} / {String(work.length).padStart(2, '0')}</p>
           <p class="q">{w.question}</p>
           <h3 class="tt"><a href={cs(w.slug)}><span class="ln">{titles[w.slug][0]}</span> <span class="ln">{titles[w.slug][1].replace(/\.$/, '')}{titles[w.slug][1].endsWith('.') && <span aria-hidden="true">.</span>}</span><span class="vh">, the {w.name} case study</span></a></h3>
           <div class="rg">
@@ -191,7 +192,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   </section>
 
   <!-- More work, in the same voice as the titles -->
-  <section class="mw c" aria-label="More work">
+  <section class="mw c" aria-label="More work" data-sec="More work">
     <ul>
       {more.map(m => (
         <li class="mrow reveal">
@@ -206,7 +207,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 
   <!-- Pages that sell: Profit Wala Love on its own row, then one track. With motion allowed the track pins under the bar and
        scrolling down moves it sideways; otherwise it is a native rail that snaps -->
-  <section class="pages" id="pages" aria-labelledby="pg-h">
+  <section class="pages" id="pages" data-sec="Pages that sell" aria-labelledby="pg-h">
     <!-- the shipped campaign gets its own row; the other pages follow on one track that the page scroll moves sideways -->
     <div class="c">
       <div class="phead"><h2 id="pg-h">Pages that sell</h2><p>Campaigns and landing pages I shipped for CashKaro, EarnKaro and CosIQ, plus product page concepts.</p>
@@ -254,7 +255,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   </section>
 
   <!-- How I work -->
-  <section class="how c" aria-labelledby="how-h">
+  <section class="how c" data-sec="How I work" aria-labelledby="how-h">
     <h2 id="how-h" class="sh">How I work</h2>
     <!-- Rows start plain; hover or keyboard focus fills each with its own colour (Vishal 2026-10-11): sky, then the colour of the case study it links to -->
     {how.map((x, i) => { const k = hk(x.href); return (
@@ -263,10 +264,11 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   </section>
 
   <!-- About -->
-  <section class="about about2 c reveal" id="about" aria-labelledby="ab-h">
+  <section class="about about2 c reveal" id="about" data-sec="About" aria-labelledby="ab-h">
     <h2 id="ab-h" class="sh">About</h2>
     {/* Stand in photo for layout (Vishal 2026-10-11: "just put it there for structure", to be replaced) */}
     <div class="ab-photo"><img src="/me/vishal-600.webp" srcset="/me/vishal-600.webp 600w, /me/vishal-1200.webp 1200w" sizes="320px" width="1200" height="1500" alt="Vishal Yadav" loading="lazy" decoding="async" /></div>
+    <p class="ab-me" aria-hidden="true"><strong>Vishal Yadav</strong><span>Product designer in Gurugram</span></p>
     <div class="ab-r">
       <p class="story">From October 2023 to August 2026 I designed app and web flows at CashKaro, India’s largest cashback platform, and built its design system in Figma for product and marketing. Before that I spent a year at a design agency making social graphics for 20+ clients a month, which is why what I ship looks finished (that work is on <a class="ul" href="https://www.behance.net/design_vishaly">Behance</a>). I studied Computer Science, so I know what engineers need at handoff. I use AI to get through research and iteration faster, and the design calls stay mine.</p>
       <dl class="jobs">{jobs.map(([c, r, y]) => <div><dt>{c}</dt><dd>{r}</dd><dd class="y">{y}</dd></div>)}</dl>
@@ -282,6 +284,9 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 
   <!-- Contact: a question that settles into a next step -->
 </main>
+
+{/* Phones (mobile layout 2026-10-12): the two actions sit where a thumb rests, on every screen until the ending, which has its own */}
+<nav class="dock" aria-label="Get in touch"><a class="pill-btn primary" href={book.href}>{book.label}</a><a class="pill-btn" href={resume.href} target="_blank" rel="noopener">{resume.label}</a></nav>
 
 {/* The ending (Vishal 2026-10-11, option A): Contact and the footer share one dark block; colour stays with the work */}
 <div class="end">
@@ -334,6 +339,14 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   { let past = false, atEnd = false; const set = () => { bar.classList.toggle('book-on', past && !atEnd); bar.classList.toggle('at-end', atEnd); };
     new IntersectionObserver(([e]) => { past = !e.isIntersecting && e.boundingClientRect.top < 0; set(); }).observe(q('.hero .hb-cta'));
     new IntersectionObserver(([e]) => { atEnd = e.isIntersecting; set(); }).observe(q('#contact')); }
+  // ---------- Phones (mobile layout 2026-10-12): the bottom bar steps aside for the dark ending, which has its own buttons,
+  // and the top bar names the section you are in (tap it to go back to the top)
+  new IntersectionObserver(([e]) => root.classList.toggle('at-end', e.isIntersecting)).observe(q('.end'));
+  { const sec = q<HTMLButtonElement>('.bar-sec'); sec.hidden = false; const on = new Set<Element>();
+    const show = () => { const s = qa('[data-sec]').filter(x => on.has(x)).pop(); bar.classList.toggle('has-sec', !!s); if (s) sec.textContent = s.dataset.sec!; };
+    const io = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? on.add(e.target) : on.delete(e.target)); show(); }, { rootMargin: '-60px 0px -70% 0px' });
+    qa('[data-sec]').forEach(x => io.observe(x));
+    sec.addEventListener('click', () => scrollTo({ top: 0, behavior: calm() ? 'auto' : 'smooth' })); }
 
   // ---------- Jitter: one word hesitates in weight, then settles on a spring. Seeded, so it never repeats the same way twice in a row.
   // Weight, a lift and (only while the pointer is on it) a small tilt; the box is locked so the line never shifts.

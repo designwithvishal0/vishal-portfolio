@@ -831,3 +831,81 @@ html.hpin .kf .p-end{margin-top:-16px}
   .chap button[data-on] .cn{display:block;position:absolute;left:12px;bottom:46px;max-width:calc(100% - 64px)}
 }
 @media (orientation:landscape) and (max-height:500px) and (max-width:759px){.hero{--hl:28px;--hu:44px;--sw:min(70vw,(100svh - 170px) * 16 / 9)}.hero .l1 .grp{display:inline}}
+
+/* ================= Phones, a layout of their own (Vishal 2026-10-12: "the mobile side should be strategically made").
+   Same words, colours, type and loops as desktop; different structure. Research and reasons: /mnt/project-files/audits/mobile-design-2026-10-12.md
+   Only inside max-width:759px (the dock is hidden everywhere else), so desktop and tablet do not move. */
+.dock,.ab-me,.rk{display:none}
+@media (max-width:759px){
+  .kf{--tile:color-mix(in srgb,var(--ink) 5%,var(--bg))}
+  /* thumb zone: Book a call and Resume live in a bar at the bottom of the screen, so the hero no longer repeats them */
+  .dock{display:grid;grid-template-columns:1.5fr 1fr;gap:8px;position:fixed;z-index:25;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));padding:6px;border-radius:999px;
+    background:color-mix(in srgb,var(--bg) 72%,transparent);-webkit-backdrop-filter:blur(18px) saturate(1.8);backdrop-filter:blur(18px) saturate(1.8);box-shadow:0 0 0 1px var(--line),0 12px 32px rgba(0,0,0,.14);
+    transition:transform 260ms var(--out),opacity 200ms var(--out)}
+  .dock .pill-btn{min-height:48px;font-size:16px}
+  html.at-end .dock{transform:translateY(calc(100% + 24px));opacity:0;pointer-events:none}
+  .hero .hb-cta{display:none}
+  .hb{padding-top:16px}
+  .hero .sup{margin-top:20px;font-size:17px;line-height:1.5}
+  /* who it's for: two big tiles side by side, like a segmented choice */
+  .intro{padding:24px 0 8px}
+  .aud.two{grid-template-columns:1fr 1fr;gap:8px}
+  .aud.two a{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:16px;min-height:104px;padding:16px;border:0;border-radius:20px;background:var(--tile)}
+  .aud.two li:last-child a{border-bottom:0}
+  .aud.two strong{font-size:18px;line-height:1.15}
+  .aud.two .arrow{margin:0}
+  /* results: one summary card, each number with its line beside it */
+  .res{padding:8px 0 0}
+  .res-in{background:var(--tile);border-radius:24px;padding:24px 20px 8px}
+  #res-h{font-size:24px}
+  .nda{font-size:15px}
+  .rows{grid-template-columns:1fr;gap:0;margin-top:16px}
+  .rr{display:grid;grid-template-columns:96px 1fr;column-gap:16px;align-items:center;padding:16px 0;border-top:1px solid var(--line)}
+  .rn{font-size:48px}
+  .rl{margin:0;font-size:15px;line-height:1.4}
+  /* selected work: one card per project, numbered, its loop first and the case study one big tap away */
+  .wk-head{padding-top:72px}
+  .row{padding:20px 0 16px;margin-bottom:10px;border-radius:24px}
+  .rk{display:block;font-size:13px;font-weight:650;letter-spacing:.04em;color:var(--mw);margin-bottom:6px;font-variant-numeric:tabular-nums}
+  .row .q{font-size:16px;margin-bottom:10px}
+  .tt{font-size:34px}
+  .rg{margin-top:18px;gap:18px}
+  .vbox{border-radius:18px}
+  .meta{font-size:13px;color:var(--mw);margin-bottom:8px}
+  .pb{font-size:17px;line-height:1.45;margin-bottom:12px}
+  .role,.tx .det{display:inline-block;margin:0 0 8px;padding:7px 12px;border-radius:999px;font-size:13px;font-weight:600;line-height:1.3;color:var(--ink);background:color-mix(in srgb,var(--ink) 7%,transparent)}
+  .tx .det{padding-top:7px}
+  .tx .more{align-self:stretch;justify-content:center;margin-top:8px;min-height:52px;border-radius:999px;background:var(--ink);color:var(--bg)}
+  .tx .more .arrow{color:inherit}
+  .row:active .vbox{transform:scale(.985)}
+  /* pages that sell: the shipped campaign as a card, the rest a swipe row that peeks, then the offer as its own card */
+  .lead{background:var(--tile);border-radius:24px;padding:12px 12px 20px;margin-bottom:24px}
+  .lthumb img{border-radius:16px}
+  .ltext{padding:0 4px}
+  .stats{flex-direction:row;gap:12px}
+  .stats>div{flex:1}
+  .p-end{display:grid;gap:14px;margin-top:24px;padding:24px 20px;border-radius:24px;background:var(--tile)}
+  .p-end .pill-btn{min-height:52px}
+  /* how I work: three numbered cards */
+  .how{counter-reset:hw}
+  .kf .hrow.hov{counter-increment:hw;margin:0 0 10px;padding:20px 20px 16px;border-radius:24px;box-shadow:inset 0 0 0 1px var(--line)}
+  .kf .hrow.hov.on{box-shadow:none}
+  .hrow h3::before{content:counter(hw,decimal-leading-zero);display:block;margin-bottom:8px;font-size:13px;font-weight:650;letter-spacing:.04em;color:var(--muted)}
+  .hrow h3{font-size:28px;margin-bottom:10px}
+  /* about: a profile header first (photo, name, where), then the story, jobs and graphic work */
+  .about2{display:grid;grid-template-columns:88px minmax(0,1fr);column-gap:16px;align-items:center}
+  .about2>.sh,.about2>.ab-r,.about2>.ab-g{grid-column:1/-1}
+  .about2 .ab-photo{grid-column:1;width:88px;height:88px;max-width:none;aspect-ratio:auto;margin:0;border-radius:50%}
+  .about2 .ab-me{grid-column:2}
+  .ab-me{display:grid;gap:2px}
+  .ab-me strong{font-size:20px;font-weight:700}
+  .ab-me span{font-size:15px;color:var(--muted)}
+  .about2 .ab-r{margin-top:24px}
+  /* the ending: two equal buttons, room for the home bar */
+  .end .cta{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .end .cta .pill-btn{min-height:52px}
+  .end .foot{padding-bottom:calc(32px + env(safe-area-inset-bottom))}
+}
+@media (max-width:359px){.aud.two strong{font-size:16px}.rr{grid-template-columns:80px 1fr}.rn{font-size:40px}}
+@media (max-width:759px) and (prefers-reduced-motion:reduce){.dock{transition:none}}
+html.calm .dock{transition:none}

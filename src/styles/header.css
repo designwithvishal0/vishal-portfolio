@@ -82,3 +82,15 @@ html.calm .sw .knob{transition:none}
 }
 /* the smallest phones (iPhone SE): a little less padding so the name never runs under Book a call */
 @media (max-width:359px){.bar-r{gap:6px}.bar-book,.a11y{padding:0 10px}.who{font-size:13px}}
+/* Phones (mobile layout 2026-10-12): the section name takes the name's place once you scroll; Book a call moves to the bottom bar on the home page */
+.bar-sec{display:none}
+@media (max-width:759px){
+  .bar-in{position:relative}
+  .bar-sec{position:absolute;left:0;top:50%;translate:0 -50%;max-width:calc(100% - 110px);display:block;padding:12px 0;border:0;background:none;color:var(--ink);font:inherit;font-size:15px;font-weight:650;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;opacity:0;pointer-events:none;transition:opacity 180ms var(--out)}
+  .bar-sec[hidden]{display:none}
+  .bar.has-sec .bar-sec{opacity:1;pointer-events:auto}
+  .bar.has-sec .who{opacity:0;pointer-events:none}
+  .who{transition:opacity 180ms var(--out)}
+  .bar:has(.bar-sec:not([hidden])) .bar-book{display:none}
+}
+@media (prefers-reduced-motion:reduce){.bar-sec,.who{transition:none}}

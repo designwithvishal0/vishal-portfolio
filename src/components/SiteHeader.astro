@@ -14,6 +14,8 @@ const nav = [['Work', '#work'], ['About', '#about'], ['Contact', '#contact']];
 <header class:list={['bar', { 'book-on': book }]}>
   <div class="bar-in">
     {home ? <a class="who" href={home}>Vishal Yadav</a> : <span class="who">Vishal Yadav</span>}
+    {/* phones (mobile layout 2026-10-12): once you scroll, the name gives way to the section you are in; tapping it goes back to the top */}
+    <button class="bar-sec" type="button" hidden>Back to top</button>
     <nav class="nav" aria-label="Sections">{nav.map(([t, h]) => <a href={home + h}>{t}</a>)}</nav>
     <div class="bar-r">
       <!-- appears once the hero's own Book a call scrolls away, hides again at Contact (audit 2026-10-10) -->
