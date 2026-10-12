@@ -2,6 +2,15 @@
 // JARVIS Alerts case study. Moved from public/ so it can use the shared site header; the page itself is unchanged.
 import SiteHeader from '../../../components/SiteHeader.astro';
 import Boot from '../../../components/Boot.astro';
+const title = 'JARVIS Alerts case study, Vishal Yadav, Product Designer';
+const description = "A false alert flow for Staqu's AI CCTV platform that makes every correction visible, so the people woken up at 3 AM can see the system learning.";
+const ld = [
+  { '@context': 'https://schema.org', '@type': 'CreativeWork', name: 'JARVIS Alerts', headline: 'Alerts worth waking up for', description,
+    author: { '@type': 'Person', name: 'Vishal Yadav' }, dateCreated: '2026-03', genre: 'B2B product design case study', image: '/work/staqu-jarvis/img/00-hero-poster.jpg' },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: '/' },
+    { '@type': 'ListItem', position: 2, name: 'JARVIS Alerts' } ] },
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -9,9 +18,13 @@ import Boot from '../../../components/Boot.astro';
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>JARVIS Alerts</title>
+<title>{title}</title>
 <Boot />
-<meta name="description" content="A false alert flow for Staqu's AI CCTV platform that makes every correction visible, so the people woken up at 3 AM can see the system learning.">
+<meta name="description" content={description}>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="article">
+<meta property="og:image" content="/work/staqu-jarvis/img/00-hero-poster.jpg"><meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json" set:html={JSON.stringify(ld)} />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap">
