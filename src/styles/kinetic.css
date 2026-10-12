@@ -882,3 +882,21 @@ html.hpin .kf .p-end{margin-top:-16px}
 /* the smallest phones (iPhone SE): a little less padding so the name never runs under Book a call */
 @media (max-width:359px){.bar-r{gap:6px}.bar-book,.a11y{padding:0 10px}.who{font-size:13px}}
 @media (max-width:759px) and (prefers-reduced-motion:reduce){.hrow.hov.on{transition:none}}
+
+/* Polish (Vishal "Yes build", 2026-10-12): thumb size tap areas, without changing how anything looks */
+@media (max-width:759px){
+  .bar-book{height:44px}
+  .more,.card .more,.lead .more{min-height:44px}
+  .social a{position:relative}
+  .social a::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:44px;translate:-50% -50%}
+}
+/* a phone held sideways: smaller headline so the reel fits on the screen */
+@media (orientation:landscape) and (max-height:500px){
+  .hero{--hl:min(4.6vw,44px);--hu:min(8.4vw,80px);--sw:min(56vw,(100svh - 120px) * 16 / 9);padding-top:12px}
+  .chap{padding:48px 12px 0;gap:4px}
+  .chap li{min-width:32px}
+  .chap button{min-height:44px;padding:20px 0 0;align-content:start}
+  .chap .cn{display:none}
+  .chap button[data-on] .cn{display:block;position:absolute;left:12px;bottom:46px;max-width:calc(100% - 64px)}
+}
+@media (orientation:landscape) and (max-height:500px) and (max-width:759px){.hero{--hl:28px;--hu:44px;--sw:min(70vw,(100svh - 170px) * 16 / 9)}.hero .l1 .grp{display:inline}}

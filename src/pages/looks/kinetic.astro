@@ -100,7 +100,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
         <source media="(orientation: portrait)" srcset="/kinetic/reel/hero-tall.jpg" width="1080" height="1350" />
         <img src="/kinetic/reel/hero-wide-lit.jpg" width="1600" height="900" alt="Showreel: ixigo Trains, Google Pay Split and Request, Twelve and Staqu JARVIS Alerts" fetchpriority="high" decoding="async" />
       </picture>
-      <video muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" data-wide="/kinetic/reel/hero-wide.mp4" data-tall="/kinetic/reel/hero-tall.mp4"></video>
+      <video muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" data-wide="/kinetic/reel/hero-wide.mp4" data-tall="/kinetic/reel/hero-tall.mp4" data-phone="/kinetic/reel/hero-phone.mp4"></video>
       <button class="vctl" type="button" aria-label="Play the showreel"><Fragment set:html={Btn} /></button>
       {/* chapters: jump to any project in the reel (Vishal 2026-10-11). Starts and lengths in seconds, from tools/motion/kinetic/hero-cut.sh */}
       <ol class="chap" aria-label="Showreel chapters">{chapters.map(([t, d], i) => (
@@ -108,8 +108,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
       ))}</ol>
     </figure>
     <script is:inline>setTimeout(()=>document.querySelector('.slot').classList.add('open'),300)</script>
-    {/* "the moment" snaps like a camera shutter on hover only (Vishal, 2026-10-10). Styles: .hv-snap in kinetic.css */}
-    <script is:inline>(()=>{const g=document.querySelector('.l1>.grp:last-child'),os=matchMedia('(prefers-reduced-motion: reduce)');g.addEventListener('pointerenter',()=>{if(os.matches||document.documentElement.classList.contains('calm')||g.classList.contains('shot'))return;g.classList.add('shot');setTimeout(()=>g.classList.remove('shot'),420)})})()</script>
+    {/* "the moment" snaps like a camera shutter on hover (Vishal, 2026-10-10); phones get one snap after the headline lands, and on a tap. Styles: .hv-snap in kinetic.css */}
+    <script is:inline>(()=>{const g=document.querySelector('.l1>.grp:last-child'),os=matchMedia('(prefers-reduced-motion: reduce)');g.addEventListener('pointerenter',()=>{if(os.matches||document.documentElement.classList.contains('calm')||g.classList.contains('shot'))return;g.classList.add('shot');setTimeout(()=>g.classList.remove('shot'),420)});if(!matchMedia('(hover: hover)').matches)setTimeout(()=>g.dispatchEvent(new PointerEvent('pointerenter')),1600)})()</script>
     <div class="l3 words" aria-hidden="true">
       <span class="grp">{hero3.map(({ w, i }) => <><span class="w"><span style={`--i:${i}`}>{w}</span></span>{' '}</>)}</span>
       <span class="w wu"><span style={`--i:${lastI}`} class="jw" id="unsure">{[...last].map((ch, j) => <span class="jl" style={`--k:${j}`}>{ch}</span>)}</span></span>
@@ -333,7 +333,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 
   const root = document.documentElement;
   const mq = (s: string) => matchMedia(s);
-  const osCalm = mq('(prefers-reduced-motion: reduce)'), land = mq('(orientation: landscape)'), desk = mq('(min-width: 1024px)');
+  const osCalm = mq('(prefers-reduced-motion: reduce)'), land = mq('(orientation: landscape)'), desk = mq('(min-width: 1024px)'), phone = mq('(max-width: 759px)');
   const bandWide = mq('(min-width: 700px)'), osDark = mq('(prefers-color-scheme: dark)'), fine = mq('(hover: hover) and (pointer: fine)');
   const calm = () => osCalm.matches || root.classList.contains('calm');
   const dark = () => root.dataset.theme ? root.dataset.theme === 'dark' : osDark.matches;
@@ -471,7 +471,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 
   // Hero slot: the reel that fits the screen's orientation, the only eager video
   const slot = q('.slot'), hv = q<HTMLVideoElement>('video', slot);
-  const hero = add({ box: slot, v: hv, btn: q('.vctl', slot), name: 'showreel', src: () => (land.matches ? hv.dataset.wide : hv.dataset.tall)!, thr: .3 });
+  const hero = add({ box: slot, v: hv, btn: q('.vctl', slot), name: 'showreel', src: () => (land.matches ? hv.dataset.wide : phone.matches ? hv.dataset.phone : hv.dataset.tall)!, thr: .3 });
   // the index beside the reel follows the project on screen (beat starts in seconds, from tools/motion/kinetic/hero-cut.sh)
   const heroSec = q('.hero'), idx = q('.idx'), beats = { wide: [0, 6.3, 21.5, 29.7], tall: [0, 6.3, 21.5, 29.7] };
   const follow = () => {

@@ -26,3 +26,5 @@ color=c=white:s=625x655:d=1,format=gray,geq=lum='255*min(min(X/34\\,(W-1-X)/34)\
 # Split posters show all four states (SP 60.5), not the empty first frame, like the ixigo "lit" posters
 $FF -ss 60.5 -i "$SP" -frames:v 1 -vf scale=1280:720:flags=lanczos -q:v 3 split-scene.jpg
 $FF -ss 12 -i split-phone.mp4 -frames:v 1 -q:v 3 split-phone.jpg
+# Lighter hero reel for phones (mobile polish 2026-10-12): the same cut as hero-tall.mp4 at 720x900, about 0.8 MB instead of 1.8 MB
+$FF -i hero-tall.mp4 -vf scale=720:900:flags=lanczos -c:v libx264 -crf 27 -preset slow -movflags +faststart -an hero-phone.mp4
