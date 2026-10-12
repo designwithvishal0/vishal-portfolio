@@ -983,5 +983,3 @@ html.calm .dock{transition:none}
   .kf .how{padding-bottom:24px}
   .kf .about{padding-top:56px}
 }
-/* phones (Vishal 2026-10-12, asked twice): no Hiring tiles under the hero; the bottom bar already carries Book a call and Resume */
-@media (max-width:759px){.kf .intro .aud{display:none}}
