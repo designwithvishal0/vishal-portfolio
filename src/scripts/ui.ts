@@ -103,7 +103,10 @@ document.querySelectorAll<HTMLElement>('.media').forEach(m => {
 // Email copies on tap, the tag says so, then resets
 const status = document.getElementById('copied');
 document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach(b => b.addEventListener('click', async () => {
-  try { await navigator.clipboard.writeText(b.dataset.copy!); } catch { location.href = `mailto:${b.dataset.copy}`; return; }
+  const text = b.dataset.copy!;
+  // in app browsers (WhatsApp, Instagram, LinkedIn) often lack the Clipboard API, so fall back to a hidden field before mail
+  const legacy = () => { const t = document.createElement('textarea'); t.value = text; t.readOnly = true; t.style.cssText = 'position:fixed;opacity:0;top:0'; document.body.append(t); t.select(); t.setSelectionRange(0, text.length); const ok = document.execCommand('copy'); t.remove(); return ok; };
+  try { await navigator.clipboard.writeText(text); } catch { if (!legacy()) { location.href = `mailto:${text}`; return; } }
   b.classList.add('done'); if (status) status.textContent = 'Email address copied';
   setTimeout(() => { b.classList.remove('done'); if (status) status.textContent = ''; }, 2000);
 }));

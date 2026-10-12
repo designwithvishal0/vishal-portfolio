@@ -983,3 +983,10 @@ html.calm .dock{transition:none}
   .kf .how{padding-bottom:24px}
   .kf .about{padding-top:56px}
 }
+
+/* Phones: the Copy chip reads as a real button (Vishal 2026-10-12: "the copy is not clickable"); desktop unchanged */
+@media (max-width:759px){
+  .end .copy.chip{vertical-align:middle}
+  .end .copy.chip .tag{font-size:14px;padding:6px 14px;border-color:currentColor}
+  .end .copy.chip.done .tag{background:var(--btn);color:var(--on-btn);border-color:var(--btn)}
+}
