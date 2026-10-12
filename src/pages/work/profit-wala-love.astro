@@ -25,7 +25,8 @@ const marketing = [
 const video = 'https://cdn.dribbble.com/userupload/49194197/file/b5ea4872b979383b5dde81e412b95d5d.mp4';
 const poster = 'https://cdn.dribbble.com/userupload/49194197/file/still-23caa99eabf84be7b18d9bfa8b260f3b.png';
 const closing = img('49194717/file/c15bdaaea4976d7c10e63f3e02f05507.jpg');
-const stats = [...lead.stats, ['13,707', 'deal shares']];
+// +51% is against a normal week (Vishal 2026-10-12)
+const stats = [...lead.stats.map(([n, l]) => [n, n === '+51%' ? 'retailer commission vs a normal week' : l]), ['13,707', 'deal shares']];
 ---
 <!doctype html>
 <html lang="en">
@@ -55,6 +56,7 @@ const stats = [...lead.stats, ['13,707', 'deal shares']];
 .pw h2{font-size:clamp(28px,3vw,40px);font-weight:750;letter-spacing:-.02em;margin:120px 0 8px}
 .pw h2 + p{margin-bottom:32px}
 .pw .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.pw .role{color:var(--ink);font-size:16px}
 .pw .src{margin:8px 0 0;font-size:15px;color:var(--muted)}
 .pw .src a{color:var(--ink)}
 .pw .back{margin-top:72px}
@@ -83,6 +85,7 @@ const stats = [...lead.stats, ['13,707', 'deal shares']];
       <h1>Profit Wala Love, Valentine Week Campaign for CashKaro</h1>
       <p>Valentine Week campaign I designed for CashKaro, India's largest cashback platform with 25M+ users. The goal: get users sharing Valentine deals and earning from every share, one day at a time.</p>
       <p>Each day from Rose Day to Promise Day got its own card with an inactive and an active state. Tapping a day lifts it and swaps the deal carousel to that day's gifts. Every deal card shows the retailer, the price hook and the profit you earn. Further down, a For Her / For Him switch changes the whole product edit while the categories stay in place. The same story ran across home banners, in app placements and the emailer.</p>
+      <p class="role"><strong>My role:</strong> Solo designer, from the day cards to the emailer. CashKaro's developers built it.</p>
       <p class="src">Also on <a class="ul" href={dribbble}>Dribbble</a></p>
     </div>
     {/* the post's opening video, beside the intro like his Contra page: silent loop, plays unless motion is reduced */}
