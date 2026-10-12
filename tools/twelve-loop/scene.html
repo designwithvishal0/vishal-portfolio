@@ -52,6 +52,14 @@ body{font-family:IN,sans-serif;color:var(--txt);-webkit-font-smoothing:antialias
 .tall .num{font-size:116px;height:124px;letter-spacing:-2.6px}
 .tall .strike{top:68px}
 .tall .phone{left:182px;top:420px}
+/* hero reel on phones (Vishal 2026-10-12): copy centred on top, the whole phone centred below it, so nothing sits only on the left */
+.ph .copy{left:40px;right:40px;width:auto;top:64px;bottom:auto;justify-content:flex-start;align-items:center}
+.ph .eb{margin-bottom:24px}
+.ph .lab,.ph .num,.ph .sub{width:100%}
+.ph .lab span,.ph .num>span,.ph .sub>span{left:0;right:0;width:fit-content;margin:0 auto}
+.ph .num{font-size:104px;height:112px;letter-spacing:-2.4px}
+.ph .strike{top:62px}
+.ph .phone{zoom:.6;left:422px;top:630px}
 .serif .rs,.num .rs{margin-right:.05em}
 </style></head>
 <body><div id="stage">
@@ -122,8 +130,9 @@ const cl = x => Math.max(0, Math.min(1, x));
 const io = x => x < .5 ? 4*x*x*x : 1 - Math.pow(-2*x + 2, 3) / 2;      // ease in out
 const out = x => 1 - Math.pow(1 - x, 4);                                 // ease out
 const seg = (t, a, b, e = io) => e(cl((t - a) / (b - a)));
-const tall = location.hash === '#tall';
+const ph = location.hash === '#phone', tall = location.hash === '#tall' || ph;
 if (tall) document.body.classList.add('tall');
+if (ph) document.body.classList.add('ph');
 const SCALE = 334 / 390;
 $('vw').style.transform = `scale(${SCALE})`;
 // one frame at time t (seconds). 0 to 9 s; the clip loops by crossfading its tail into frame 0.
@@ -134,7 +143,7 @@ window.render = t => {
   for (const [id, k] of [['la', a], ['na', a], ['sa', a]]) { const e = $(id); e.style.opacity = 1 - k; e.style.transform = `translateY(${-14 * k}px)`; }
   for (const [id, k] of [['lb', b], ['nb', b], ['sb', r]]) { const e = $(id); e.style.opacity = k; e.style.transform = `translateY(${16 * (1 - k)}px)`; }
   const p = seg(t, 3.4, 4.5, out);                                       // the phone rises from the bottom edge
-  $('ph').style.transform = `translateY(${(tall ? 520 : 700) * (1 - p)}px)`;
+  $('ph').style.transform = `translateY(${(ph ? 850 : tall ? 520 : 700) * (1 - p)}px)`;
   const sc = seg(t, 5.2, 7.8);                                           // and scrolls to the rest of the year
   $('vw').style.transform = `translateY(${-(tall ? 330 : 560) * sc}px) scale(${SCALE})`;
 };

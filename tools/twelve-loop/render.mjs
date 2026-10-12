@@ -1,4 +1,4 @@
-// Steps scene.html frame by frame and writes the loop. Usage: node render.mjs <outdir> [wide|tall]
+// Steps scene.html frame by frame and writes the loop. Usage: node render.mjs <outdir> [wide|tall|phone] (phone: the hero reel's Twelve chapter on phones, phone whole and centred)
 // Needs Playwright (Chromium) and ffmpeg. Output: twelve-scene.mp4/.jpg (1280x720) or twelve-phone.mp4/.jpg (720x900).
 // A third arg `raw` writes <name>-raw.mkv instead: lossless, full render size, no loop fade, for tools/motion/kinetic/hero-cut.sh.
 import { chromium } from '/opt/node-tools/node_modules/playwright/index.mjs';
@@ -8,15 +8,15 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
 const [, , outDir = '.', cut = 'wide', mode] = process.argv;
-const tall = cut === 'tall';
+const tall = cut === 'tall' || cut === 'phone';
 const [W, H] = tall ? [720, 900] : [1280, 720];
 const FPS = 30, T = 9.0, XF = 0.5;                       // 9 s timeline, 0.5 s crossfade back into frame 0
-const name = tall ? 'twelve-phone' : 'twelve-scene';
+const name = cut === 'phone' ? 'twelve-hero-phone' : tall ? 'twelve-phone' : 'twelve-scene';
 const tmp = mkdtempSync(join(tmpdir(), 'tw-'));
 
 const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
 const p = await b.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1.5 });
-await p.goto('file://' + resolve(import.meta.dirname, 'scene.html') + (tall ? '#tall' : ''));
+await p.goto('file://' + resolve(import.meta.dirname, 'scene.html') + (tall ? '#' + cut : ''));
 await p.evaluate(() => document.fonts.ready);
 const N = Math.round(T * FPS);
 for (let i = 0; i < N; i++) {
