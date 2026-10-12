@@ -304,8 +304,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
         <a class="pill-btn" href={resume.href} target="_blank" rel="noopener">{resume.label}</a>
       </div>
       {/* UX pass 2026-10-12: tapping the address opens mail (what people expect on a phone); the chip beside it still copies */}
-      <p class="cl">Email me at <a class="ul" href={`mailto:${email}`}>{email}</a> <button class="copy chip" type="button" data-copy={email} aria-label="Copy email address"><span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button>. I reply within a day.</p>
-      <p class="cl">Share the page or store you want fixed, and I’ll bring my top three fixes to the call.</p>
+      <p class="cl">Email me at <a class="ul" href={`mailto:${email}`}>{email}</a> <button class="copy chip" type="button" data-copy={email} aria-label="Copy email address"><span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button><br />I reply within a day.</p>
+      <p class="cl">Want a page fixed? Send me the link, and I’ll bring my top three fixes to the call.</p>
       <span class="vh" role="status" id="copied"></span>
       <p class="here"><i aria-hidden="true"></i><span id="clock">Based in Gurugram, India</span></p>
       {contra && <p class="cl">You can also hire me on <a class="ul" href={contra}>Contra</a>.</p>}
@@ -317,7 +317,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     <p class="copyr">© 2026 Vishal Yadav. All rights reserved.</p>
   </footer>
 </div>
-<script is:inline>(()=>{const c=document.getElementById('clock'),f=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit',hour12:true}),t=()=>{c.textContent='It’s '+f.format(new Date()).toUpperCase()+' in Gurugram'};t();setInterval(t,30000)})()</script>
+<script is:inline>(()=>{const c=document.getElementById('clock'),f=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit',hour12:true}),t=()=>{c.textContent='It’s '+f.format(new Date()).toUpperCase()+' in Gurugram, India'};t();setInterval(t,30000)})()</script>
 
 <script>
   import '../../scripts/ui';
