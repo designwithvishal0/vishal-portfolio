@@ -26,4 +26,4 @@ color=c=white:s=625x655:d=1,format=gray,geq=lum='255*min(min(X/34\\,(W-1-X)/34)\
 # Split posters show all four states (SP 60.5), not the empty first frame, like the ixigo "lit" posters
 $FF -ss 60.5 -i "$SP" -frames:v 1 -vf scale=1280:720:flags=lanczos -q:v 3 split-scene.jpg
 $FF -ss 12 -i split-phone.mp4 -frames:v 1 -q:v 3 split-phone.jpg
-# Phone hero reel (Vishal 2026-10-13, "on mobile, showcase the contra showreel in the mobile format"): see contra-phone.sh
+# Phone hero reel (Vishal 2026-10-13, "on mobile, showcase the contra showreel in the mobile format"): rebuilt from scratch on 2026-10-13, see tools/motion/contra-phone/render.sh
