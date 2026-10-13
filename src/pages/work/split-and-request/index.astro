@@ -251,14 +251,6 @@ body{margin-top:0}
 video::cue{font:500 18px/1.4 var(--sans);background:rgba(18,20,26,.82);color:#fff}
 .beforeafter .a{box-shadow:inset 0 0 0 1px #0B57D0}
 .beforeafter .a .k{color:#0B57D0}
-.swipe{display:none}
-@media (max-width:620px){
-  #flow figure{display:none}
-  .swipe{display:flex;gap:16px;list-style:none;margin:32px -28px 0;padding:0 28px 8px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:28px;overscroll-behavior-x:contain}
-  .swipe li{flex:0 0 260px;scroll-snap-align:start;display:grid;gap:8px;align-content:start}
-  .swipe p{font-size:17px;font-weight:600;line-height:1.3;color:var(--fg);min-height:2.6em}
-  .swipe img{width:100%;height:auto;border-radius:28px;margin-top:8px;box-shadow:0 12px 32px rgba(13,31,94,.12)}
-}
 @media (max-width:620px){article>section{padding-block:64px}.layout{margin-top:64px}.screens{gap:72px}.screens .screen h3{font-size:26px}}
 
 /* ---- audit Phase 2 and 3 ---- */
@@ -491,17 +483,20 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
 
       <section id="owes" class="lt wide">
         <div class="screens">
-          <div class="screen">
-            <figure><img class="shot phone" src="img/10a-their-board.webp" width="780" height="2124" alt="Their view of the same board" loading="lazy"></figure>
-            <div>
-              <p class="eyebrow">Flow 4 · The person who owes</p>
-              <h2>One notification, the same board</h2>
-              <p>The person who owes gets one notification and opens the same board, not a payment sheet that closes. They review their own items and pay from inside it, and the board is still there afterwards.</p>
-              <div class="locks">
+          <div class="screen owes">
+            <figure class="right"><div class="locks">
                 <div><span class="k">Lock screen · Small group</span><h3>“Your bit is ₹350”</h3><p>Kabir sees his exact share and what it was for, the cold coffee and gulab jamun. One tap opens the same board everyone else sees.</p><img src="img/10b-notification-small-group.webp" width="780" height="276" alt="Small group lock screen notification" loading="lazy"></div>
                 <div><span class="k">Lock screen · Big group</span><h3>“Tap what you had at Office Lunch”</h3><p>Fifty items and twelve people, so nobody gets a number yet. Kabir is asked to claim his own, and the message promises it takes a minute.</p><img src="img/10-notification.webp" width="780" height="276" alt="Big group lock screen notification" loading="lazy"></div>
                 <div><span class="k">Lock screen · Nudge</span><h3>“Kabir hasn’t opened the split”</h3><p>Forty minutes later he gets a nudge, not a nag. If nobody taps their items, the leftovers split evenly, so the bill never waits on one person.</p><img src="img/10c-notification-nudge.webp" width="780" height="276" alt="Nudge lock screen notification" loading="lazy"></div>
               </div>
+              <img class="shot phone" src="img/10a-their-board.webp" width="780" height="2124" alt="Their view of the same board" loading="lazy">
+            </figure>
+            
+            <div>
+              <p class="eyebrow">Flow 4 · The person who owes</p>
+              <h2>One notification, the same board</h2>
+              <p>The person who owes gets one notification and opens the same board, not a payment sheet that closes. They review their own items and pay from inside it, and the board is still there afterwards.</p>
+              
             </div>
           </div>
         </div>
@@ -996,5 +991,28 @@ blockquote em{font-style:normal;color:var(--warm)}
 @media (max-width:620px){.closing h2{white-space:normal!important;font-size:min(44px,11.4vw)!important}}
 .list>div{align-items:baseline}
 @media (max-width:620px){.funtest{padding:20px}}
+
+/* Vishal 2026-10-13: screens exactly as on Framer. Text left and centred on its screen, screen right at 320px
+   (radius 34, 1px #E7E9EE border, soft shadow), a hairline between rows, text and screen fade up 20px */
+.screens{gap:0}
+.screens .screen{grid-template-columns:minmax(0,560px) 320px;align-items:center;padding-block:60px;border-top:1px solid #E7E9EE}
+.screens .screen:first-child{border-top:0;padding-top:0}
+.screens .screen:last-child{padding-bottom:0}
+#scale .screens .screen{border-top-color:rgba(255,255,255,.1)}
+.screens .screen>div{position:static}
+.screens .shot.phone,.pop,.pair .shot.phone,.crop{width:320px;max-width:100%;border-radius:34px;border:1px solid #E7E9EE;box-shadow:0 10px 30px rgba(0,0,0,.1)}
+.screens .screen>figure.pop{width:320px}
+.crop .shot.phone{border:0;border-radius:0;box-shadow:none;width:100%}
+.pair{gap:24px}
+.screen.owes .right{display:grid;gap:40px;width:320px}
+.screen.owes .locks{margin-top:0;gap:40px}
+.screen.owes .locks img{max-width:100%}
+@media (max-width:900px){
+  .screens .screen{grid-template-columns:minmax(0,1fr);gap:28px;padding-block:44px}
+  .screens .screen>figure{order:2;justify-self:center}
+  .screens .shot.phone,.pop,.screens .screen>figure.pop,.pair .shot.phone,.crop,.pair>*{width:min(260px,100%)!important}
+  .screen.owes .right{width:100%;max-width:390px}
+  .screen.owes .right>img{width:min(260px,100%);justify-self:center}
+}
 </style>
 </html>
