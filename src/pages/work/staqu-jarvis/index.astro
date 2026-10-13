@@ -386,7 +386,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
     </nav>
     <button type="button" class="tocpill" popovertarget="tocsheet" aria-label="Contents"><span class="k">Contents</span><b>The hardest call</b><i aria-hidden="true">1 / 11</i><span class="chev" aria-hidden="true"></span></button>
     <div id="tocsheet" class="tocsheet" popover><span class="k">Contents</span></div>
-    <nav class="dock" aria-label="Contents"><button type="button" class="dkb" data-go="-1" aria-label="Previous section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="dkm"><div class="dkt"><b></b><i></i></div><div class="dks"></div></div><a class="dkn" href="#"><small>NEXT</small><span></span></a><button type="button" class="dkb" data-go="1" aria-label="Next section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></nav>
+    <div class="dockfade" aria-hidden="true"></div><nav class="dock" aria-label="Contents"><button type="button" class="dkb" data-go="-1" aria-label="Previous section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="dkm"><div class="dkt"><b></b><i></i></div><div class="dks"></div></div><a class="dkn" href="#"><small>NEXT</small><span></span></a><button type="button" class="dkb" data-go="1" aria-label="Next section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></nav>
 
     <article>
       <section id="hardest">
@@ -655,9 +655,13 @@ nav.toc.light{--fg:#0E1424;--muted:#6A7488;--line:#D3D8E3;--warm:#A35A00}
 .tocpill b{max-width:46vw}
 @media (max-width:620px){
   .facts{grid-template-columns:1fr 1fr;gap:20px 16px}
-  .stats{gap:12px}
-  .stats div{background:var(--card);border-radius:16px;padding:18px 20px}
-  .stats b{font-size:34px}
+  /* audit 2026-10-13: one compact block, a row per number, instead of three tall cards */
+  .stats{gap:0;background:var(--card);border-radius:16px;padding:4px 18px}
+  .stats div{grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:baseline;padding:14px 0}
+  .stats div+div{border-top:1px solid var(--line)}
+  .stats b{font-size:22px;line-height:1.15;white-space:nowrap;min-width:112px}
+  .stats span{font-size:15px}
+  .endsec .closing .founder a{display:inline-block;padding:13px 0;margin:-13px 0}
   #screens .screen{gap:28px}
 }
 /* 30 second version on desktop: two by two with hairlines, so every label sits on one line and each answer has room */
@@ -737,17 +741,21 @@ nav.toc{display:none!important}
 .rmore{display:none}
 @media (max-width:620px){
   .rm-hid{display:none!important}
-  .rmore{display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:10px 0;border:0;background:none;color:var(--warm);font:600 16px/1 var(--sans);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+  .rmore{display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:10px 0;min-height:44px;border:0;background:none;color:var(--warm);font:600 16px/1 var(--sans);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
   .rmore::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
   .rm-clamp{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
 }
 /* Desktop contents: a floating dock at the bottom, like a video player. Section name, n / 11, one segment per section
    (read ones fill orange, the current one fills as you read), the next section, and back and next arrows. Phones keep the top bar. */
 .dock{display:none}
+.dockfade{display:none}
 @media (min-width:1280px){
   .tocpill{display:none!important}
   .dock{display:flex;position:fixed;left:50%;bottom:24px;z-index:20;align-items:center;gap:14px;padding:10px 12px;border-radius:16px;background:rgba(8,16,38,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 0 0 1px rgba(255,255,255,.1),0 16px 40px rgba(0,0,0,.3);font:600 14px/1 var(--sans);color:#F2F1EC;opacity:0;visibility:hidden;transform:translate(-50%,16px);transition:opacity .3s ease,transform .3s ease,visibility .3s}
   .dock.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+  /* audit 2026-10-13: text slides under a soft fade of the section colour instead of colliding with the dock */
+  .dockfade{display:block;position:fixed;left:0;right:0;bottom:0;height:104px;z-index:19;pointer-events:none;background:linear-gradient(to bottom,transparent,var(--fade,#0C1631) 78%);opacity:0;transition:opacity .3s ease}
+  .dock.show~.dockfade,.dockfade.show{opacity:1}
   /* Vishal 2026-10-13: the contents bar stays on screen while scrolling down too, so first time readers see it */
   .dkb{all:unset;cursor:pointer;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.07);transition:background .2s}
   .dkb:hover{background:rgba(255,255,255,.14)}.dkb:disabled{opacity:.35;cursor:default}
@@ -787,12 +795,13 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
     rail.classList.toggle('light',!!(mid&&mid.classList.contains('lt')));
   }
   // Desktop dock
-  var dock=document.querySelector('.dock'),segs=links.map(function(a,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label',(i+1)+'. '+a.textContent);b.dataset.name=a.textContent;b.onclick=function(){go(i)};dock.querySelector('.dks').appendChild(b);return b}),
+  var dock=document.querySelector('.dock'),fade=document.querySelector('.dockfade'),bands=[].slice.call(document.querySelectorAll('article>section')),segs=links.map(function(a,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label',(i+1)+'. '+a.textContent);b.dataset.name=a.textContent;b.onclick=function(){go(i)};dock.querySelector('.dks').appendChild(b);return b}),
       dn=dock.querySelector('.dkn'),pv=dock.querySelector('[data-go="-1"]'),nx=dock.querySelector('[data-go="1"]'),dc=0;
   function go(i){i=Math.max(0,Math.min(secs.length-1,i));secs[i].scrollIntoView({behavior:document.documentElement.classList.contains('calm')||matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
   pv.onclick=function(){go(dc-1)};nx.onclick=function(){go(dc+1)};dn.onclick=function(e){e.preventDefault();go(dc+1)};
   function dtick(){
-    var r=art.getBoundingClientRect(),y=innerHeight*.35;dock.classList.toggle('show',secs[0].getBoundingClientRect().top<innerHeight*.3&&r.bottom>innerHeight*.6);
+    var r=art.getBoundingClientRect(),y=innerHeight*.35,shown=secs[0].getBoundingClientRect().top<innerHeight*.3&&r.bottom>innerHeight*.6;dock.classList.toggle('show',shown);fade.classList.toggle('show',shown);
+    if(shown){var yb=innerHeight-8,c='';bands.forEach(function(s){var q=s.getBoundingClientRect();if(q.top<=yb&&q.bottom>yb)c=getComputedStyle(s).getPropertyValue('--band').trim()});if(c)fade.style.setProperty('--fade',c)}
     dc=0;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<y)dc=i});
     segs.forEach(function(b,i){var f=i<dc?100:i>dc?0:(function(){var t=secs[i].getBoundingClientRect(),e=i<secs.length-1?secs[i+1].getBoundingClientRect().top:r.bottom;return Math.max(0,Math.min(100,(y-t.top)/(e-t.top)*100))})();b.style.setProperty('--f',f+'%');b.toggleAttribute('aria-current',i===dc)});
     dock.querySelector('.dkt b').textContent=links[dc].textContent;dock.querySelector('.dkt i').textContent=(dc+1)+' / '+links.length;
