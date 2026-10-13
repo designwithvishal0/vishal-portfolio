@@ -585,6 +585,15 @@ nav.toc.light{--fg:#0E1424;--muted:#6A7488;--line:#D3D8E3;--warm:#A35A00}
   .stats b{font-size:34px}
   #screens .screen{gap:28px}
 }
+/* 30 second version on desktop: two by two with hairlines, so every label sits on one line and each answer has room */
+@media (min-width:901px){
+  .summary{grid-template-columns:1fr 1fr;gap:0;padding:40px 44px 20px}
+  .summary h2{margin-bottom:12px}
+  .summary div{padding:26px 0 30px;gap:12px;border-top:1px solid rgba(255,255,255,.09)}
+  .summary div:nth-of-type(odd){padding-right:44px}
+  .summary div:nth-of-type(even){padding-left:44px;border-left:1px solid rgba(255,255,255,.09)}
+  .summary p{font-size:19px;line-height:1.5;color:#E6EAF2;max-width:34ch}
+}
 /* Contents bar: docked under the header on every width, one look over navy and light sections alike */
 nav.toc{display:none!important}
 .tocpill{display:flex!important;left:0;right:0;top:var(--hb,56px);bottom:auto;width:100%;max-width:none;height:44px;justify-content:center;gap:12px;padding:0 20px;border:0;border-bottom:1px solid rgba(255,255,255,.08);border-radius:0;background:rgba(12,22,49,.9);box-shadow:none;transform:translateY(-6px);font-size:14px;z-index:19}
