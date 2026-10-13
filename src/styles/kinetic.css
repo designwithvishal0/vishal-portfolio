@@ -643,6 +643,7 @@ html.hpin .kf .pages{padding-bottom:0}
 .hero.lit.rolling::before{opacity:.4}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]) .hero.lit.rolling::before{opacity:.42}}
 :root[data-theme=dark] .hero.lit.rolling::before{opacity:.42}
+@media (max-width:759px){.hero.lit::before{content:none}}
 .note{display:none}
 @media (min-width:1024px){
   .note{display:grid;grid-area:l3;justify-self:start;align-self:center;margin-top:10px;z-index:1}
