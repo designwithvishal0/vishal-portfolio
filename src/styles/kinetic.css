@@ -1066,8 +1066,3 @@ html.calm .dock{transition:none}
   html.calm .row .vbox .thumb img{object-fit:contain;object-position:50% 50%}
   @media (prefers-reduced-motion:reduce){.row .vbox{aspect-ratio:1200/1256;height:auto;width:100%}.row .vbox .thumb img{object-fit:contain;object-position:50% 50%}}
 }
-
-/* phones (Vishal 2026-10-13, "Phone hero"): the hero plays his 9:16 portfolio showreel v3 instead of the Contra reel. Switch back: point data-phone, the phone poster and preload in kinetic.astro at hero-phone.mp4/.jpg and delete this rule */
-@media (max-width:759px) and (orientation:portrait){
-  .slot,.ov{aspect-ratio:9/16;width:min(100%,calc((100svh - 280px)*.5625));justify-self:center}
-}

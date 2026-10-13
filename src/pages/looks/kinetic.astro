@@ -62,7 +62,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 <link rel="preload" as="font" type="font/woff2" href={fontUrl} crossorigin />
 <link rel="preload" as="image" href="/kinetic/reel/hero-wide-lit.jpg" media="(orientation: landscape)" />
 <link rel="preload" as="image" href="/kinetic/reel/hero-tall.jpg" media="(orientation: portrait) and (min-width: 760px)" />
-<link rel="preload" as="image" href="/kinetic/reel/hero-phone-reel.jpg" media="(orientation: portrait) and (max-width: 759px)" />
+<link rel="preload" as="image" href="/kinetic/reel/hero-phone.jpg" media="(orientation: portrait) and (max-width: 759px)" />
 <Boot />
 <script is:inline>addEventListener('load',()=>setTimeout(()=>document.documentElement.classList.add('ready'),2500))</script>
 </head>
@@ -83,11 +83,11 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     ))}</p>
     <figure class="slot" data-state="paused">
       <picture>
-        <source media="(max-width: 759px) and (orientation: portrait)" srcset="/kinetic/reel/hero-phone-reel.jpg" width="720" height="1280" />
+        <source media="(max-width: 759px) and (orientation: portrait)" srcset="/kinetic/reel/hero-phone.jpg" width="960" height="720" />
         <source media="(orientation: portrait)" srcset="/kinetic/reel/hero-tall.jpg" width="1080" height="1350" />
         <img src="/kinetic/reel/hero-wide-lit.jpg" width="1600" height="900" alt="Showreel: ixigo Trains, Google Pay Split and Request, Twelve and Staqu JARVIS Alerts" fetchpriority="high" decoding="async" />
       </picture>
-      <video muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" data-wide="/kinetic/reel/hero-wide.mp4" data-tall="/kinetic/reel/hero-tall.mp4" data-phone="/kinetic/reel/hero-phone-reel.mp4"></video>
+      <video muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" data-wide="/kinetic/reel/hero-wide.mp4" data-tall="/kinetic/reel/hero-tall.mp4" data-phone="/kinetic/reel/hero-phone.mp4"></video>
       <button class="vctl" type="button" aria-label="Play the showreel"><Fragment set:html={Btn} /></button>
       {/* phones play his Contra showreel with its sound (Vishal 2026-10-13); this switch turns it off */}
       <button class="vsnd" type="button" aria-label="Sound off" aria-pressed="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h2.5L8 3v10L4.5 10H2z" /><path class="on" d="M10.5 5.5a3.5 3.5 0 0 1 0 5M12 3.5a6 6 0 0 1 0 9" /><path class="off" d="M10.5 6l4 4m0-4-4 4" /></svg></button>
