@@ -1013,3 +1013,8 @@ html.calm .dock{transition:none}
   .slot img,.slot video{object-fit:contain}
   .hero .sup{margin-top:24px}
 }
+/* phones (Vishal 2026-10-13, "remake the full reel again for mobile"): the new phone reel is 4:5 with the whole phone in frame, so the frame keeps 4:5 and narrows on short screens instead of cropping or showing side bands */
+@media (max-width:759px) and (orientation:portrait){
+  .slot{width:min(100%,calc((100svh - 280px)*.8));height:auto;aspect-ratio:4/5;justify-self:center}
+  .slot img,.slot video{object-fit:cover}
+}

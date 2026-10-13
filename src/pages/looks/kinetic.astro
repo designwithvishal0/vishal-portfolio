@@ -47,7 +47,7 @@ const Btn = `<svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><rect x
 // How I work: a statement that links to a case study fills with that project's colour on hover. No stills (Vishal 2026-10-11: only one row had one)
 // JARVIS opens the case study built on this site; the rest still go to the live Framer pages
 const cs = (slug: string) => slug === 'staqu-jarvis' ? '/work/staqu-jarvis/' : live(slug);
-const chapters = [[0, 6.3], [6.3, 15.2], [21.5, 8.2], [29.7, 5.6]], phoneChapters = [[0, 6.3], [6.3, 7.8], [14.1, 8.2], [22.3, 5.6]] /* hero-phone.mp4: Split shows only its two phone moments, so no lone phone sits off centre (Vishal 2026-10-12) */, chapterName = ['ixigo Trains', 'Split and Request', 'Twelve', 'JARVIS'];
+const chapters = [[0, 6.3], [6.3, 15.2], [21.5, 8.2], [29.7, 5.6]], phoneChapters = [[0, 7.8], [7.8, 7.6], [15.4, 6.6], [22, 10.9]] /* hero-phone.mp4, remade from his vertical showreels (Vishal 2026-10-13): public/kinetic/reel/cut.sh */, chapterName = ['ixigo Trains', 'Split and Request', 'Twelve', 'JARVIS'];
 const hk = (href: string) => { const i = work.findIndex(w => live(w.slug) === href); return i < 0 ? '' : loops[i]; };
 const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 ---
@@ -61,7 +61,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="preload" as="font" type="font/woff2" href={fontUrl} crossorigin />
 <link rel="preload" as="image" href="/kinetic/reel/hero-wide-lit.jpg" media="(orientation: landscape)" />
-<link rel="preload" as="image" href="/kinetic/reel/hero-tall.jpg" media="(orientation: portrait)" />
+<link rel="preload" as="image" href="/kinetic/reel/hero-tall.jpg" media="(orientation: portrait) and (min-width: 760px)" />
+<link rel="preload" as="image" href="/kinetic/reel/hero-phone.jpg" media="(orientation: portrait) and (max-width: 759px)" />
 <Boot />
 <script is:inline>addEventListener('load',()=>setTimeout(()=>document.documentElement.classList.add('ready'),2500))</script>
 </head>
@@ -82,6 +83,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     ))}</p>
     <figure class="slot" data-state="paused">
       <picture>
+        <source media="(max-width: 759px) and (orientation: portrait)" srcset="/kinetic/reel/hero-phone.jpg" width="720" height="900" />
         <source media="(orientation: portrait)" srcset="/kinetic/reel/hero-tall.jpg" width="1080" height="1350" />
         <img src="/kinetic/reel/hero-wide-lit.jpg" width="1600" height="900" alt="Showreel: ixigo Trains, Google Pay Split and Request, Twelve and Staqu JARVIS Alerts" fetchpriority="high" decoding="async" />
       </picture>
