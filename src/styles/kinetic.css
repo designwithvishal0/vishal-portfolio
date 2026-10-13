@@ -471,6 +471,8 @@ html.hpin .pages{padding-bottom:40px}
 /* Pages rises into the empty band under the pinned numbers and meets them as they let go, so no blank screen sits between the two */
 /* whichever section follows the results (the questions band on Kinetic, Pages on the other looks) */
 html.scrub .res+.pages,html.scrub .res+.band{position:relative;z-index:1;margin-top:calc(var(--rgap) * -1)}
+/* desktop: the band rises over the pinned numeral, so its empty top strip is see through and never cuts the bottom of the number (Vishal 2026-10-13, the cut off "30"). The questions' ink starts 17.5% down at its highest, so nothing in the film is masked */
+html.scrub .res+.band .band-v{-webkit-mask-image:linear-gradient(transparent 14%,#000 17%);mask-image:linear-gradient(transparent 14%,#000 17%)}
 html.hpin .lead{margin-bottom:0}
 html.hpin .prun{height:calc(100svh - var(--bar) + var(--ov,0px))}
 html.hpin .p-pin{position:sticky;top:var(--bar);height:calc(100svh - var(--bar));overflow:clip;display:flex;flex-direction:column;justify-content:center}

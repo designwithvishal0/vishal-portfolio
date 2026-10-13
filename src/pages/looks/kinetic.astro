@@ -547,6 +547,13 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   // The four questions film: its theme and its shape. It opens and ends on the settled list and plays once per visit.
   const band = q('.band'), bv = q<HTMLVideoElement>('video', band);
   const bandIt = add({ box: band, v: bv, btn: q('.vctl', band), name: 'Selected work preview', src: () => `/kinetic/motion/questions-${bandWide.matches ? 'wide' : 'tall'}-${dark() ? 'dark' : 'light'}.mp4`, thr: .5, keep: true, once: true });
+  // Desktop (Vishal 2026-10-13, "the motion starts after a few seconds"): the film is fetched a screen ahead, starts once a quarter of it shows,
+  // and skips most of its still opening (the poster already shows that settled list), so the questions move almost as soon as they arrive. Phones unchanged
+  const bandDesk = () => !phone.matches;
+  const bandThr = () => { bandIt.thr = bandDesk() ? .25 : .5; };
+  bandThr(); phone.addEventListener('change', bandThr);
+  new IntersectionObserver(([e]) => { if (e.isIntersecting && bandDesk() && !calm()) { bv.preload = 'auto'; load(bandIt); } }, { rootMargin: '0px 0px 100% 0px' }).observe(band);
+  bv.addEventListener('play', () => { if (bandDesk() && bv.currentTime < 1.3) bv.currentTime = 1.3; });
   const retheme = () => { if (bv.dataset.cur) { band.classList.remove('started'); load(bandIt); sync(bandIt); } };
   new MutationObserver(retheme).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
   osDark.addEventListener('change', retheme);
