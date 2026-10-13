@@ -663,6 +663,10 @@ nav.toc.light{--fg:#0E1424;--muted:#6A7488;--line:#D3D8E3;--warm:#A35A00}
   .stats b{font-size:22px;line-height:1.15;white-space:nowrap;min-width:112px}
   .stats span{font-size:15px}
   .endsec .closing .founder a{display:inline-block;padding:13px 0;margin:-13px 0}
+  /* Vishal 2026-10-13 15:06: on phones the boxes in the navy sections are light, so they stand out instead of dark on dark */
+  #who .stats,#found .goals>div,#options .opt{--fg:#0E1424;--body:#3B4458;--muted:#5A6478;--acc:#2348C4;--line:#D3D8E3;--warm:#A35A00;background:#EEF0F5;color:var(--fg);border-color:transparent}
+  #options .opt.built{box-shadow:inset 0 0 0 2px #E8A23B}
+  #options .opt.built .tag{color:#fff}
   #screens .screen{gap:28px}
 }
 /* 30 second version on desktop: two by two with hairlines, so every label sits on one line and each answer has room */
