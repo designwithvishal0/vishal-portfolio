@@ -47,7 +47,7 @@ const Btn = `<svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><rect x
 // How I work: a statement that links to a case study fills with that project's colour on hover. No stills (Vishal 2026-10-11: only one row had one)
 // JARVIS opens the case study built on this site; the rest still go to the live Framer pages
 const cs = (slug: string) => slug === 'staqu-jarvis' ? '/work/staqu-jarvis/' : live(slug);
-const chapters = [[0, 6.3], [6.3, 15.2], [21.5, 8.2], [29.7, 5.6]], phoneChapters = [[0, 18.6], [18.6, 5.2], [23.8, 5.2], [29, 16]] /* hero-phone.mp4, his Contra showreel rebuilt for phones (Vishal 2026-10-13): tools/motion/contra-phone */, phoneName = ['Landing pages', 'Product pages', 'Store audits', 'Apps and campaigns'], chapterName = ['ixigo Trains', 'Split and Request', 'Twelve', 'JARVIS'];
+const chapters = [[0, 6.3], [6.3, 15.2], [21.5, 9.6], [31.1, 12.5]], phoneChapters = [[0, 18.6], [18.6, 5.2], [23.8, 5.2], [29, 16]] /* hero-phone.mp4, his Contra showreel rebuilt for phones (Vishal 2026-10-13): tools/motion/contra-phone */, phoneName = ['Landing pages', 'Product pages', 'Store audits', 'Apps and campaigns'], chapterName = ['ixigo Trains', 'Split and Request', 'Twelve', 'JARVIS'];
 const hk = (href: string) => { const i = work.findIndex(w => live(w.slug) === href); return i < 0 ? '' : loops[i]; };
 const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 ---
@@ -485,7 +485,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   const slot = q('.slot'), hv = q<HTMLVideoElement>('video', slot);
   const hero = add({ box: slot, v: hv, btn: q('.vctl', slot), name: 'showreel', src: () => (land.matches ? hv.dataset.wide : phone.matches ? hv.dataset.phone : hv.dataset.tall)!, thr: .3 });
   // the index beside the reel follows the project on screen (beat starts in seconds, from tools/motion/kinetic/hero-cut.sh)
-  const heroSec = q('.hero'), idx = q('.idx'), beats = { wide: [0, 6.3, 21.5, 29.7], tall: [0, 6.3, 21.5, 29.7], phone: [0, 18.6, 23.8, 29] };
+  const heroSec = q('.hero'), idx = q('.idx'), beats = { wide: [0, 6.3, 21.5, 31.1], tall: [0, 6.3, 21.5, 31.1], phone: [0, 18.6, 23.8, 29] };
   const follow = () => {
     if (hv.paused) { idx.removeAttribute('data-on'); return; }
     const b = beats[land.matches ? 'wide' : phone.matches ? 'phone' : 'tall'], t = hv.currentTime + .2;
@@ -499,7 +499,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   const pickStarts = () => { const p = !land.matches && phone.matches; starts = p ? phoneStarts : wideStarts; chs.forEach(b => { const li = b.parentElement!; li.style.setProperty('--d', p ? li.dataset.dp! : li.dataset.dw!); const nm = p ? li.dataset.np! : li.dataset.nw!; b.querySelector('.cn')!.textContent = nm; b.dataset.al ??= b.getAttribute('aria-label')!; b.setAttribute('aria-label', p ? `Play ${nm}` : b.dataset.al); }); };
   pickStarts(); [land, phone].forEach(m => m.addEventListener('change', pickStarts));
   const fill = () => {
-    const t = hv.currentTime, end = hv.duration || 35.3;
+    const t = hv.currentTime, end = hv.duration || 43.6;
     chs.forEach((b, i) => { const a = starts[i], z = starts[i + 1] ?? end; b.style.setProperty('--p', String(Math.max(0, Math.min(1, (t - a) / (z - a))))); b.toggleAttribute('data-on', !!hv.dataset.cur && t >= a && t < z); });
     if (!hv.paused) requestAnimationFrame(fill);
   };
