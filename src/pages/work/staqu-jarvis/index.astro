@@ -540,12 +540,13 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
    The closing and More work are ONE dark rounded section ("this whole is 1 section"). */
 .endsec{margin-top:120px;padding:clamp(48px,7vw,104px) clamp(24px,5vw,72px);border-radius:32px;background:#141416;color:#F2F1EC}
 .endsec .closing{margin:0;padding:0;border:0;gap:20px;font-family:'Bricolage Grotesque Variable',system-ui,sans-serif}
-.closing h2{font-family:inherit;font-size:clamp(56px,9vw,120px)!important;font-weight:800;font-stretch:75%;line-height:.92;letter-spacing:-.025em;color:#276BAD}
+.closing h2{font-family:inherit;font-size:clamp(56px,9vw,120px)!important;font-weight:800;font-stretch:75%;line-height:.92;letter-spacing:-.025em;color:#5B9BE0} /* JARVIS blue, lightened to 6.3:1 on the dark block */
 .closing>p{font-size:clamp(22px,2.4vw,30px)!important;font-weight:600;line-height:1.2;color:#A9BBE6}
 .closing .btns{margin-top:20px;gap:12px}
 .closing .btn{height:52px;padding:0 22px;font-size:16px;font-weight:650}
 .closing .btn.primary{background:#F2F1EC;color:#0C0C0E}
 .closing .btn.ghost{border-color:#6B6B72;color:#F2F1EC}
+@media (min-width:760px){.endsec .closing{text-align:center;justify-items:center}.endsec .closing .btns{justify-content:center}}
 .endsec .next{margin-top:clamp(64px,8vw,112px);padding-top:clamp(40px,5vw,64px);border-top:1px solid #2A2A30}
 @media (max-width:620px){.endsec{border-radius:24px 24px 0 0;padding:48px 28px;margin-inline:-28px;margin-bottom:-60px}.closing h2{font-size:52px!important}}
 /* Desktop spacing (Vishal 2026-10-13: "make the sections responsive"): the page grows with the window up to the home page width (1376px)
