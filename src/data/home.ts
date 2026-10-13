@@ -127,7 +127,7 @@ export const results = [
   { n: '30%', label: 'faster campaign turnaround, from one design system I built in Figma for product and marketing', short: 'faster campaign turnaround, from one design system' },
 ];
 export const more = [
-  { img: 'reward', name: 'Unified Reward Centre', line: 'Every reward a player has earned, on one screen.', href: behance('256413187') },
+  { img: 'reward', name: 'Unified Reward Centre', line: 'Every reward a player has earned, on one screen.', href: '/work/reward-centre/' },
   { img: 'onebanc', name: 'OneBanc', line: 'Plan the month your salary has to last.', href: '/work/onebanc/' },
 ];
 export const lead = { img: 'pwl', name: 'Profit Wala Love, CashKaro', tag: 'Shipped, February 2026', line: "Valentine’s week campaign across app, web and social: seven days, seven ways to earn.", href: '/work/profit-wala-love/', stats: [['1,542', 'transactions'], ['₹9.89 lakh', 'GMV'], ['+51%', 'retailer commission']] };
