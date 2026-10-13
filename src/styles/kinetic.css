@@ -1028,3 +1028,8 @@ html.calm .dock{transition:none}
 @media (max-width:699px){
   .row .vbox{aspect-ratio:9/16}
 }
+
+/* phones (Vishal 2026-10-13, "remove chapter from the hero reel", phones only): no chapter bar on the hero reel. Desktop and tablet keep it */
+@media (max-width:759px){
+  .chap{display:none}
+}
