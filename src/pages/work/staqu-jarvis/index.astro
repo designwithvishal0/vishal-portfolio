@@ -1,5 +1,4 @@
 ---
-import '@fontsource-variable/bricolage-grotesque/standard.css';
 // JARVIS Alerts case study. Moved from public/ so it can use the shared site header; the page itself is unchanged.
 import SiteHeader from '../../../components/SiteHeader.astro';
 import Boot from '../../../components/Boot.astro';
@@ -550,23 +549,13 @@ body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
 .closing .btn.ghost{border-color:rgba(201,214,238,.4);color:#F2F1EC}
 .endsec .next>.k{color:#D4E6FB}.endsec .next>h2{color:#F2F1EC}
 @media (min-width:760px){.endsec .closing{text-align:center;justify-items:center}.endsec .closing .btns{justify-content:center}.endsec .next>.k,.endsec .next>h2{text-align:center}}
-.endsec .nextgrid a{background:#0E1424;color:#F2F1EC;box-shadow:0 0 0 1px rgba(242,241,236,.12)} /* dark caption so the light thumbnail stands apart (Vishal 2026-10-13) */
+.endsec .nextgrid a{background:#1C3060;color:#F2F1EC;box-shadow:0 0 0 1px rgba(242,241,236,.14)} /* navy blue caption: darker than the thumbnail, not black (Vishal 2026-10-13) */
 .endsec .nextgrid b{color:#F2F1EC}
 .endsec .nextgrid a:hover,.endsec .nextgrid a:focus-visible{box-shadow:0 0 0 2px #6FA8E8}
 .endsec .next{margin-top:clamp(56px,7vw,96px);padding-top:0;border-top:0}
-/* Phones keep the previous solid JARVIS blue block (Vishal 2026-10-13 "In Mobile Footer use the previous one"); desktop uses the band above */
-@media (max-width:620px){
-.endsec{margin:120px -28px 0;padding:48px 28px;border-radius:24px 24px 0 0;border-top:0;background:#276BAD;color:#fff}
-.endsec .closing{gap:20px;font-family:'Bricolage Grotesque Variable',system-ui,sans-serif}
-.closing h2{font-family:inherit;font-size:52px!important;font-weight:800;font-stretch:75%;line-height:.92;letter-spacing:-.025em;color:#fff}
-.closing>p{font-size:22px!important;font-weight:600;line-height:1.2;color:#D6E6F7}
-.closing .btns{margin-top:20px}
-.closing .btn.primary{background:#fff;color:#123B66}
-.closing .btn.ghost{border-color:rgba(255,255,255,.6);color:#fff}
-.endsec .next>.k{color:#D6E6F7}.endsec .next>h2{color:#fff}
-.endsec .nextgrid a:hover,.endsec .nextgrid a:focus-visible{box-shadow:0 0 0 2px #fff}
-.endsec .next{margin-top:48px;padding-top:40px;border-top:1px solid rgba(255,255,255,.25)}
-}
+/* Phones use the same band as desktop (Vishal 2026-10-13 "make the same for Mobile"), only sized down */
+@media (max-width:620px){.endsec{margin-top:96px;padding-inline:28px}.closing h2{font-size:52px!important}}
+
 /* Desktop spacing (Vishal 2026-10-13: "make the sections responsive"): the page grows with the window up to the home page width (1376px)
    instead of a fixed 760/1080 column. On wide screens each reading section puts its eyebrow and heading on the left
    and the text on the right, so both sides of the screen are used. Phones and tablets are unchanged. */
