@@ -378,6 +378,14 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
   /* on phones the boxes in the green sections are light, so they stand out instead of dark on dark (same rule as JARVIS) */
   #constraints .pal div:not(.fail){box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
 }
+/* Vishal 2026-10-13: the top is not green (the reel itself is green). Cream from the title to the 30 second version,
+   which keeps its own dark card; the green starts at The problem and runs to the end. */
+body{background:#F5F2EA}
+.wrap>header.hero,.wrap>.facts,.wrap>.note{--fg:#0F1F0B;--body:#3D4637;--muted:#5E6658;--acc:#7A5F1F;--line:#DCD6C6;--warm:#7A5F1F;color:var(--fg)}
+.wrap>.layout{border-image:conic-gradient(#0F1F0B 0 0) fill 0//0 100vmax;padding-bottom:140px}
+.wrap>.endsec{margin-top:0}
+@media (max-width:620px){.wrap>.layout{padding-bottom:48px}}
+.reel video{box-shadow:0 16px 40px rgba(15,31,11,.14)}
 /* font samples for the typeface variable */
 .f-rob{font-family:Roboto,sans-serif}.f-sat{font-family:Satoshi,sans-serif}.f-swi{font-family:Switzer,sans-serif}.f-sta{font-family:"Stack Sans Headline",sans-serif}
 </style>
