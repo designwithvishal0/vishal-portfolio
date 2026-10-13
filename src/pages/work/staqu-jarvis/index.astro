@@ -605,6 +605,17 @@ nav.toc{display:none!important}
 .tocpill .chev{width:10px;height:10px;border-right:1.5px solid #8C99B6;border-bottom:1.5px solid #8C99B6;transform:rotate(45deg) translateY(-3px)}
 .tocpill b{max-width:52vw}
 .tocsheet{inset:calc(var(--hb,56px) + 52px) 16px auto}
+/* Desktop contents: a fixed sidebar column of its own colour, beside the story, never on top of it */
+@media (min-width:1280px){
+  .layout{display:grid;grid-template-columns:248px minmax(0,1fr);gap:0;margin-inline:calc(50% - 50vw);width:100vw}
+  article>section.wide{max-width:1080px}
+  nav.toc{display:flex!important;flex-direction:column;justify-content:center;gap:2px;position:sticky;top:0;align-self:start;height:100vh;padding:120px 28px 40px 36px;background:#081026;border-right:1px solid rgba(255,255,255,.06);z-index:2;opacity:1;visibility:visible;transform:none;left:auto;width:auto;border-radius:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;font-size:14px;--fg:#F2F4F8;--muted:#8C99B6;--line:#22305A;--warm:#E9A23B}
+  nav.toc.light{background:#081026;--fg:#F2F4F8;--muted:#8C99B6;--line:#22305A;--warm:#E9A23B;box-shadow:none;border-color:rgba(255,255,255,.06)}
+  nav.toc .k{margin-bottom:14px;font-size:11px;color:#8C99B6}
+  nav.toc a{padding:8px 0 8px 14px}
+  article{padding-inline:56px;min-width:0}
+  .tocpill{display:none!important}
+}
 html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after{transition:none}
 </style>
 <script is:inline>
