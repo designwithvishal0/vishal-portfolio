@@ -557,6 +557,8 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
 /* Contents: a rail in the left margin on wide screens, a pill that opens the list everywhere else */
 nav.toc{display:grid;position:fixed;left:28px;top:50%;width:170px;transform:translateY(-50%);z-index:20;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s;gap:2px;font-size:13px;line-height:1.3}
 nav.toc.show{opacity:1;visibility:visible}
+nav.toc{left:20px;width:188px;padding:16px 14px 14px;border-radius:16px;background:rgba(14,22,48,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 32px rgba(5,10,30,.25);transition:opacity .3s ease,visibility .3s,background-color .3s}
+nav.toc.light{background:rgba(255,255,255,.86);border-color:rgba(14,20,36,.08);box-shadow:0 12px 32px rgba(13,31,94,.10)}
 nav.toc .k{margin-bottom:8px;font-size:11px}
 nav.toc a{padding:6px 0 6px 12px;border-left:2px solid var(--line);color:var(--muted);transition:color .2s,border-color .2s}
 nav.toc a.on{color:var(--fg);border-left-color:var(--warm)}
@@ -592,7 +594,7 @@ html.calm nav.toc,html.calm .tocpill{transition:none}
   var items=links.map(function(a,i){var b=document.createElement('a');b.href=a.getAttribute('href');b.innerHTML='<span>'+String(i+1).padStart(2,'0')+'</span>'+a.textContent;b.onclick=function(){sheet.hidePopover()};sheet.appendChild(b);return b});
   var last=-1;
   function tick(){
-    var r=art.getBoundingClientRect(), on=r.top<innerHeight*.6&&r.bottom>innerHeight*.4;
+    var r=art.getBoundingClientRect(), on=secs[0].getBoundingClientRect().top<innerHeight*.3&&r.bottom>innerHeight*.4;
     rail.classList.toggle('show',on);pill.classList.toggle('show',on);
     var cur=0;secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<innerHeight*.35)cur=i});
     if(cur!==last){last=cur;links.forEach(function(a,i){a.classList.toggle('on',i===cur)});items.forEach(function(a,i){a.classList.toggle('on',i===cur)});
