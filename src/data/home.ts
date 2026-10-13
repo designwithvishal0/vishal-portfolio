@@ -134,7 +134,7 @@ export const lead = { img: 'pwl', name: 'Profit Wala Love, CashKaro', tag: 'Ship
 // Shipped pages first, then concepts (two lens audit 2026-10-11: a client reading "Pages that sell" should meet the real results before the concepts)
 export const pages = [
   { img: 'bbb', name: 'Big Birthday Bash, EarnKaro', tag: 'Shipped, July 2026', line: 'A week long campaign landing page, plus the 777 Jackpot game with a new deal every day.', href: '/work/big-birthday-bash/' },
-  { img: 'cosiq', name: 'CosIQ landing page', tag: 'Shipped, January 2026', line: 'Build your own routine.', href: behance('230420275') },
+  { img: 'cosiq', name: 'CosIQ landing page', tag: 'Shipped, January 2026', line: 'Build your own routine.', href: '/work/cosiq/' },
   { img: 'basil', name: 'Basil product page', tag: 'Concept', line: 'Sell the set, not the second product.', href: '/work/basil/' },
   { img: 'pdp', name: 'Beauty product page', tag: 'Concept', line: 'Will this shade match me?', href: '/work/beauty-pdp/' },
 ];
