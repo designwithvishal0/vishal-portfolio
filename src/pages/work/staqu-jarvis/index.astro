@@ -334,7 +334,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
     const wake=e=>{if(!chose&&!(e.target.closest&&e.target.closest('.reel .pill'))){v.muted=false}removeEventListener('pointerdown',wake,true);removeEventListener('keydown',wake,true)};
     addEventListener('pointerdown',wake,true);addEventListener('keydown',wake,true);
     ['play','pause','volumechange'].forEach(e=>v.addEventListener(e,paint));
-    if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('calm'))v.play().catch(()=>{});paint();
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('calm')){v.muted=false;v.play().catch(e=>{if(e.name==='NotAllowedError'){v.muted=true;v.play().catch(()=>{})}})}paint();
   })()</script>
 
   <section class="summary" aria-labelledby="sum">
