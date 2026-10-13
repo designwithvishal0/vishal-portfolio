@@ -184,6 +184,9 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
                   <source media="(min-width: 700px)" srcset={poster(loops[i], 'scene')} width="1280" height="720" />
                   <img src={poster(loops[i], 'phone')} width="720" height="1280" alt={posterAlt[loops[i]] ?? w.alt} loading="lazy" decoding="async" />
                 </picture>
+                {/* Reduce motion shows his designed Framer thumbnail instead of a video frame; Play still plays the loop (Vishal 2026-10-13).
+                    The wide version is the same cover with its own background carried out to 16:9 (public/kinetic/thumbs) */}
+                <picture class="thumb"><source media="(min-width: 700px)" srcset={`/kinetic/thumbs/${loops[i]}-wide.webp`} width="2233" height="1256" /><img src={`/kinetic/thumbs/${loops[i]}.webp`} width="1200" height="1256" alt={`${w.name} case study cover`} loading="lazy" decoding="async" /></picture>
                 <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-wide={clip(loops[i], 'scene')} data-tall={clip(loops[i], 'phone')}></video>
                 <a class="mlink" href={cs(w.slug)} tabindex="-1" aria-hidden="true"></a>
                 <button class="vctl" type="button" aria-label={`Play the ${w.name} preview`}><Fragment set:html={Btn} /></button>

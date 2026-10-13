@@ -11,4 +11,10 @@
     v.addEventListener('play',function(){v._auto=false});
     io.observe(v);
   });
+  // Reduce motion switched on mid page (menu switch or device setting): stop every video and show its cover again,
+  // not the frame it stopped on. Play still works after that (Vishal 2026-10-13)
+  var r=document.documentElement,os=matchMedia('(prefers-reduced-motion: reduce)');
+  var still=function(){if(!os.matches&&!r.classList.contains('calm'))return;vids.forEach(function(v){v._auto=false;if(!v.paused||v.currentTime>0){v._us=true;v.pause();v.load()}})};
+  var sw=document.getElementById('calm');if(sw)sw.addEventListener('click',function(){setTimeout(still)});
+  os.addEventListener('change',still);
 })();

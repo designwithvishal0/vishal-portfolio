@@ -295,6 +295,14 @@ html.scrub .whead{padding-bottom:0}
 .vbox img,.vbox video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .vbox video{opacity:0;transition:opacity 300ms var(--out)}
 .vbox.started video{opacity:1}
+/* Reduce motion (menu switch or the device setting): his designed cover replaces the video. Play still plays the loop over it;
+   pausing goes back to the cover (Vishal 2026-10-13). Phones size the card to the cover, so nothing is cropped or boxed */
+.vbox .thumb{display:none;position:absolute;inset:0;z-index:1}
+html.calm .vbox:not([data-state=playing]) .thumb{display:block}
+@media (prefers-reduced-motion:reduce){.vbox:not([data-state=playing]) .thumb{display:block}}
+/* any reel or film paused under Reduce motion shows its still, never a frame it stopped on */
+html.calm :is(.slot,.vbox,.band):not([data-state=playing]) video{opacity:0}
+@media (prefers-reduced-motion:reduce){:is(.slot,.vbox,.band):not([data-state=playing]) video{opacity:0}}
 .mlink{position:absolute;inset:0;z-index:2}
 .row:has(.mlink:active,.tt a:active,.more:active) .vbox{transform:scale(.985)}
 .vbox{transition:transform 120ms var(--out)}
@@ -1051,4 +1059,10 @@ html.calm .dock{transition:none}
 @media (max-width:699px){
   .row .vbox{aspect-ratio:4/5}
   .row .vbox img,.row .vbox video{object-fit:cover;object-position:50% 12%}
+}
+/* Reduce motion on phones: the card takes the cover's shape (placed last so it wins over the phone card sizes above) */
+@media (max-width:699px){
+  html.calm .row .vbox{aspect-ratio:1200/1256;height:auto;width:100%}
+  html.calm .row .vbox .thumb img{object-fit:contain;object-position:50% 50%}
+  @media (prefers-reduced-motion:reduce){.row .vbox{aspect-ratio:1200/1256;height:auto;width:100%}.row .vbox .thumb img{object-fit:contain;object-position:50% 50%}}
 }
