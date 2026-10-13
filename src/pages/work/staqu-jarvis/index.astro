@@ -316,10 +316,10 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
     <div><span class="k">Tools</span><p>FigJam, Figma</p></div>
   </div>
   <p class="note">Independent concept work. Not affiliated with Staqu. JARVIS is Staqu’s video analytics product. Camera stills, times and counts in the screens are illustrative.</p>
-  <figure class="reel" style="margin-top:32px"><video class="shot wide" src="showreel.mp4" poster="img/00-hero-poster.jpg" width="1920" height="1080" muted loop playsinline preload="metadata" aria-label="JARVIS Alerts showreel with voiceover"><track kind="captions" src="captions.vtt" srclang="en" label="English"></video>
+  <figure class="reel" style="margin-top:32px"><video class="shot wide" poster="img/00-hero-poster.jpg" width="1920" height="1080" muted loop playsinline preload="metadata" aria-label="JARVIS Alerts showreel with voiceover"><track kind="captions" src="captions.vtt" srclang="en" label="English"></video>
     <div class="pills"><button type="button" class="pill" data-act="play" aria-pressed="false"><span aria-hidden="true">▷</span> PLAY</button><button type="button" class="pill" data-act="sound" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> SOUND ON</button><button type="button" class="pill" data-act="cc" aria-pressed="false" aria-label="Captions">CC</button></div></figure>
   <script is:inline>(()=>{
-    const f=document.currentScript.previousElementSibling, v=f.querySelector('video'), [pb,sb,cb]=f.querySelectorAll('.pill'), tr=v.textTracks[0];
+    const f=document.currentScript.previousElementSibling, v=f.querySelector('video'); const tall=matchMedia('(max-width:620px)').matches; if(tall){v.poster='img/00-hero-poster-tall.jpg';v.width=1080;v.height=1920} v.src=tall?'showreel-tall.mp4':'showreel.mp4'; const [pb,sb,cb]=f.querySelectorAll('.pill'), tr=v.textTracks[0];
     tr.mode='hidden';
     cb.onclick=()=>{const on=tr.mode!=='showing';tr.mode=on?'showing':'hidden';cb.setAttribute('aria-pressed',String(on))};
     const on='<svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>';
@@ -355,6 +355,8 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
       <a href="#changed">What changed</a>
       <a href="#learned">What I learned</a>
     </nav>
+    <button type="button" class="tocpill" popovertarget="tocsheet" aria-label="Contents"><span class="k">Contents</span><b>The hardest call</b><i aria-hidden="true">1 / 11</i></button>
+    <div id="tocsheet" class="tocsheet" popover><span class="k">Contents</span></div>
 
     <article>
       <section id="hardest" class="lt">
@@ -527,7 +529,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
 <script is:inline>
 (function(){
   var bar=document.getElementById('bar');
-  var links=[].slice.call(document.querySelectorAll('nav.toc a'));
+  var links=[];
   function onScroll(){
     var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
     bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';
@@ -547,4 +549,58 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
 })();
 </script>
 
+<style is:inline>
+/* Screens as on Framer: the text stays pinned 120px from the top while its phone scrolls past */
+#screens .screen>div{position:sticky;top:120px}
+#screens .shot.phone{border:1px solid rgba(14,20,36,.1)}
+@media (max-width:900px){#screens .screen>div{position:static}#screens .screen>figure{order:2;justify-self:center}#screens .shot.phone{width:min(320px,100%)}}
+/* Contents: a rail in the left margin on wide screens, a pill that opens the list everywhere else */
+nav.toc{display:grid;position:fixed;left:28px;top:50%;width:170px;transform:translateY(-50%);z-index:20;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s;gap:2px;font-size:13px;line-height:1.3}
+nav.toc.show{opacity:1;visibility:visible}
+nav.toc .k{margin-bottom:8px;font-size:11px}
+nav.toc a{padding:6px 0 6px 12px;border-left:2px solid var(--line);color:var(--muted);transition:color .2s,border-color .2s}
+nav.toc a.on{color:var(--fg);border-left-color:var(--warm)}
+nav.toc.light{--fg:#0E1424;--muted:#6A7488;--line:#D3D8E3;--warm:#A35A00}
+.tocpill{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translate(-50%,16px);z-index:20;display:none;align-items:center;gap:10px;max-width:calc(100vw - 32px);height:46px;padding:0 18px;border-radius:100px;border:1px solid rgba(255,255,255,.16);background:rgba(12,22,49,.88);color:#E6EAF2;font:500 15px/1 var(--sans);cursor:pointer;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(5,10,30,.3);opacity:0;visibility:hidden;transition:opacity .3s ease,transform .3s var(--out),visibility .3s}
+.tocpill.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.tocpill .k{color:#8C99B6;font-size:11px}
+.tocpill b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tocpill i{font-style:normal;color:#8C99B6;font-size:13px;font-variant-numeric:tabular-nums}
+.tocsheet{position:fixed;inset:auto 16px calc(72px + env(safe-area-inset-bottom,0px));margin:0 auto;width:min(360px,calc(100vw - 32px));padding:18px 10px 10px;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:#111C3B;color:#E6EAF2;box-shadow:0 20px 50px rgba(5,10,30,.45)}
+.tocsheet:popover-open{display:grid;gap:2px}
+.tocsheet .k{padding:0 12px 8px;color:#8C99B6;font-size:11px}
+.tocsheet a{display:flex;gap:12px;padding:11px 12px;border-radius:12px;text-decoration:none;font-size:16px;color:#C9D1E2}
+.tocsheet a span{color:#5F6D8F;font-variant-numeric:tabular-nums;width:20px}
+.tocsheet a.on{background:#1C2A52;color:#fff}
+.tocsheet::backdrop{background:rgba(5,10,30,.35)}
+@media (max-width:1399px){nav.toc{display:none}.tocpill{display:inline-flex}}
+.tocpill i{white-space:nowrap}
+.tocpill b{max-width:46vw}
+@media (max-width:620px){
+  .facts{grid-template-columns:1fr 1fr;gap:20px 16px}
+  .stats{gap:12px}
+  .stats div{background:var(--card);border-radius:16px;padding:18px 20px}
+  .stats b{font-size:34px}
+  #screens .screen{gap:28px}
+}
+html.calm nav.toc,html.calm .tocpill{transition:none}
+</style>
+<script is:inline>
+(function(){
+  var rail=document.querySelector('nav.toc'), pill=document.querySelector('.tocpill'), sheet=document.getElementById('tocsheet'), art=document.querySelector('article');
+  var links=[].slice.call(rail.querySelectorAll('a')), secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  var items=links.map(function(a,i){var b=document.createElement('a');b.href=a.getAttribute('href');b.innerHTML='<span>'+String(i+1).padStart(2,'0')+'</span>'+a.textContent;b.onclick=function(){sheet.hidePopover()};sheet.appendChild(b);return b});
+  var last=-1;
+  function tick(){
+    var r=art.getBoundingClientRect(), on=r.top<innerHeight*.6&&r.bottom>innerHeight*.4;
+    rail.classList.toggle('show',on);pill.classList.toggle('show',on);
+    var cur=0;secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<innerHeight*.35)cur=i});
+    if(cur!==last){last=cur;links.forEach(function(a,i){a.classList.toggle('on',i===cur)});items.forEach(function(a,i){a.classList.toggle('on',i===cur)});
+      pill.querySelector('b').textContent=links[cur].textContent;pill.querySelector('i').textContent=(cur+1)+' / '+links.length;}
+    var mid=null;secs.forEach(function(s){if(s){var b=s.getBoundingClientRect();if(b.top<=innerHeight/2&&b.bottom>innerHeight/2)mid=s}});
+    rail.classList.toggle('light',!!(mid&&mid.classList.contains('lt')));
+  }
+  addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);tick();
+})();
+</script>
 </html>
