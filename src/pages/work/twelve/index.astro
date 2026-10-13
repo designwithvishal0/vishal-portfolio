@@ -267,13 +267,13 @@ article>section.lt+section.lt,article>section:not(.lt)+section:not(.lt){padding-
 /* desktop (Vishal 2026-10-13): the four navy sections after the 30 second version (hardest call, who, found, options) were one flat navy;
    each now sits on its own step of JARVIS indigo blue, getting lighter as the story builds, so section breaks read */
 /* phones too since 2026-10-13 15:04 (Vishal: on phones the content blended into the page navy) */
-article>section#hardest{--band:#062219;--card:#0B3227}
-article>section#who{--band:#082A1F;--card:#0F3A2C}
-article>section#claim{--band:#0B3026;--card:#124233}
+article>section#hardest{--band:#FBFAF5;--card:#F2EFE4}
+article>section#who{--band:#F2EFE4;--card:#FBFAF5}
+article>section#claim{--band:#FBFAF5;--card:#F2EFE4}
 article>section#model{--band:#0E372C;--card:#164A3A}
-article>section:is(#who,#claim,#model){padding-top:120px}
-@media (max-width:900px){article>section:is(#who,#claim,#model){padding-top:80px}}
-@media (max-width:620px){article>section:is(#who,#claim,#model){padding-top:64px}}
+article>section:is(#who,#claim,#model,#flow){padding-top:120px}
+@media (max-width:900px){article>section:is(#who,#claim,#model,#flow){padding-top:80px}}
+@media (max-width:620px){article>section:is(#who,#claim,#model,#flow){padding-top:64px}}
 /* type scale: 13 label, 16 small, 18 body, 22 lead, 32 titles, 48 sections, 68 page title */
 .facts p,.stats span,.note,.source,figcaption,.opt p,.fix p,.trade p,.trade .cost,.nextgrid span{font-size:16px}
 .list .n,.trade .n,.tag{font-size:13px}
@@ -325,11 +325,11 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
 #claim .vs{display:grid;gap:12px;margin-top:8px}
 #claim .vs>div{border-radius:16px;padding:26px 28px;display:grid;gap:10px}
 #claim .other{background:var(--card)}
-#claim .other .say{color:rgba(239,237,227,.6)}
+#claim .other .say{color:var(--muted)}
 #claim .other s{text-decoration-thickness:1.5px}
-#claim .tw{background:#F2EFE4;--acc:#46600F}
-#claim .tw .say{color:#062219}
-#claim .tw em{font-style:normal;box-shadow:inset 0 -.32em 0 #CDE86F}
+#claim .tw{background:#062219;--acc:#CDE86F}
+#claim .tw .say{color:#F2EFE4}
+#claim .tw em{font-style:normal;box-shadow:inset 0 -.12em 0 #CDE86F}
 #claim .say{font-size:clamp(28px,3.4vw,40px);line-height:1.15}
 #claim>.cl-in>p:last-child{font-size:20px}
 /* flow, IA, identity boards */
@@ -436,7 +436,7 @@ figure.board a:hover img{box-shadow:0 0 0 2px var(--acc)}
     <div class="dockfade" aria-hidden="true"></div><nav class="dock" aria-label="Contents"><button type="button" class="dkb" data-go="-1" aria-label="Previous section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="dkm"><div class="dkt"><b></b><i></i></div><div class="dks"></div></div><a class="dkn" href="#"><small>NEXT</small><span></span></a><button type="button" class="dkb" data-go="1" aria-label="Next section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></nav>
 
     <article>
-      <section id="hardest">
+      <section id="hardest" class="lt">
         <p class="eyebrow">The hardest call</p>
         <h2>Every money app plans in months. Money runs in years.</h2>
         <p>The first version of this idea led with a single “safe to spend” number. It was a good number and a weak product, because every budgeting app already shows you a number for the month.</p>
@@ -445,7 +445,7 @@ figure.board a:hover img{box-shadow:0 0 0 2px var(--acc)}
         <blockquote>The year is the engine. Today is the surface.</blockquote>
       </section>
 
-      <section id="who">
+      <section id="who" class="lt">
         <p class="eyebrow">Who this is for</p>
         <h2>Your balance is a lie</h2>
         <p>Picture someone on a salary in an Indian city, paying rent and an EMI, with a car and a kid in school. The bank says ₹84,000. Rent leaves on the 5th, the EMI on the 7th, and there’s a car insurance renewal on 22 March they’ve forgotten about.</p>
@@ -457,7 +457,7 @@ figure.board a:hover img{box-shadow:0 0 0 2px var(--acc)}
         </div>
       </section>
 
-      <section id="claim" class="wide">
+      <section id="claim" class="lt wide">
         <div class="cl-in">
           <p class="eyebrow">Same number, different claim</p>
           <div class="vs">
@@ -757,7 +757,7 @@ nav.toc.light{--fg:#062219;--muted:#5B6B62;--line:#D9D4C3;--warm:#8A5300}
   .stats span{font-size:15px}
   .endsec .closing .founder a{display:inline-block;padding:13px 0;margin:-13px 0}
   /* Vishal 2026-10-13 15:06: on phones the boxes in the navy sections are light, so they stand out instead of dark on dark */
-  #who .stats{--fg:#062219;--body:#3F554B;--muted:#5B6B62;--acc:#46600F;--line:#D9D4C3;--warm:#8A5300;background:#F2EFE4;color:var(--fg);border-color:transparent}
+  #who .stats{background:var(--card);color:var(--fg);border-color:transparent}
   #screens .screen{gap:28px}
 }
 /* 30 second version on desktop: two by two with hairlines, so every label sits on one line and each answer has room */
