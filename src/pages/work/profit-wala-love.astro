@@ -89,7 +89,7 @@ const stats = [...lead.stats.map(([n, l]) => [n, n === '+51%' ? 'retailer commis
       <p class="src">Also on <a class="ul" href={dribbble}>Dribbble</a></p>
     </div>
     {/* the post's opening video, beside the intro like his Contra page: silent loop, plays unless motion is reduced */}
-    <figure class="head-film"><video id="pwl-film" src={video} poster={poster} muted loop playsinline controls preload="metadata" aria-label="Profit Wala Love campaign video, no sound"></video></figure>
+    <figure class="head-film"><video id="pwl-film" data-inview src={video} poster={poster} muted loop playsinline controls preload="metadata" aria-label="Profit Wala Love campaign video, no sound"></video></figure>
     <script is:inline>(()=>{const v=document.getElementById('pwl-film'),r=document.documentElement;if(matchMedia('(prefers-reduced-motion: reduce)').matches||r.classList.contains('calm'))return;v.play().catch(()=>{})})()</script>
     </div>
 
@@ -134,6 +134,7 @@ const stats = [...lead.stats.map(([n, l]) => [n, n === '+51%' ? 'retailer commis
   </footer>
 </div>
 <script is:inline>(()=>{const c=document.getElementById('clock'),f=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit',hour12:true}),t=()=>{c.textContent='It’s '+f.format(new Date()).toUpperCase()+' in Gurugram'};t();setInterval(t,30000)})()</script>
+<script is:inline src="/js/inview-video.js" defer></script>
 <script>import '../../scripts/ui';</script>
 </body>
 </html>
