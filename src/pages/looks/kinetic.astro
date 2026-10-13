@@ -83,12 +83,14 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     ))}</p>
     <figure class="slot" data-state="paused">
       <picture>
-        <source media="(max-width: 759px) and (orientation: portrait)" srcset="/kinetic/reel/hero-phone.jpg" width="720" height="900" />
+        <source media="(max-width: 759px) and (orientation: portrait)" srcset="/kinetic/reel/hero-phone.jpg" width="960" height="720" />
         <source media="(orientation: portrait)" srcset="/kinetic/reel/hero-tall.jpg" width="1080" height="1350" />
         <img src="/kinetic/reel/hero-wide-lit.jpg" width="1600" height="900" alt="Showreel: ixigo Trains, Google Pay Split and Request, Twelve and Staqu JARVIS Alerts" fetchpriority="high" decoding="async" />
       </picture>
       <video muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1" data-wide="/kinetic/reel/hero-wide.mp4" data-tall="/kinetic/reel/hero-tall.mp4" data-phone="/kinetic/reel/hero-phone.mp4"></video>
       <button class="vctl" type="button" aria-label="Play the showreel"><Fragment set:html={Btn} /></button>
+      {/* phones play his Contra showreel with its sound (Vishal 2026-10-13); this switch turns it off */}
+      <button class="vsnd" type="button" aria-label="Sound off" aria-pressed="true"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6h2.5L8 3v10L4.5 10H2z" /><path class="on" d="M10.5 5.5a3.5 3.5 0 0 1 0 5M12 3.5a6 6 0 0 1 0 9" /><path class="off" d="M10.5 6l4 4m0-4-4 4" /></svg></button>
       {/* chapters: jump to any project in the reel (Vishal 2026-10-11). Starts and lengths in seconds, from tools/motion/kinetic/hero-cut.sh */}
       <ol class="chap" aria-label="Showreel chapters">{chapters.map(([t, d], i) => (
         <li style={`--d:${d}`} data-dw={d} data-dp={phoneChapters[i][1]} data-nw={chapterName[i]} data-np={phoneName[i]}><button type="button" data-t={t} data-tp={phoneChapters[i][0]} aria-label={`Play ${work[i].name}`}><span class="cn">{chapterName[i]}</span><span class="tk"><i></i></span></button></li>
@@ -484,8 +486,19 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   // Hero slot: the reel that fits the screen's orientation, the only eager video
   const slot = q('.slot'), hv = q<HTMLVideoElement>('video', slot);
   const hero = add({ box: slot, v: hv, btn: q('.vctl', slot), name: 'showreel', src: () => (land.matches ? hv.dataset.wide : phone.matches ? hv.dataset.phone : hv.dataset.tall)!, thr: .3 });
+  // Phones: his Contra showreel has sound. Browsers only allow sound after a tap or key press, so it autoplays muted,
+  // the first tap anywhere (or Play) turns sound on, and the sound switch is a choice that sticks. Wider screens stay silent.
+  const snd = q<HTMLButtonElement>('.vsnd', slot); let chose = false;
+  const onPhone = () => !land.matches && phone.matches;
+  const hear = (on: boolean) => { hv.muted = !(on && onPhone()); snd.setAttribute('aria-pressed', String(!hv.muted)); snd.setAttribute('aria-label', hv.muted ? 'Sound on' : 'Sound off'); };
+  hear(false);
+  const wake = (e: Event) => { if ((e.target as Element).closest?.('.vsnd')) return; if (!chose) hear(true); removeEventListener('pointerdown', wake, true); removeEventListener('keydown', wake, true); };
+  addEventListener('pointerdown', wake, true); addEventListener('keydown', wake, true);
+  hero.btn.addEventListener('click', () => { if (!chose && hv.paused === false) hear(true); });
+  snd.addEventListener('click', () => { chose = true; hear(hv.muted); if (!hv.muted && hv.paused) { hero.user = true; sync(hero); } });
+  [land, phone].forEach(m => m.addEventListener('change', () => hear(!hv.muted && !chose)));
   // the index beside the reel follows the project on screen (beat starts in seconds, from tools/motion/kinetic/hero-cut.sh)
-  const heroSec = q('.hero'), idx = q('.idx'), beats = { wide: [0, 6.3, 21.5, 29.7], tall: [0, 6.3, 21.5, 29.7], phone: [0, 18.6, 23.8, 29] };
+  const heroSec = q('.hero'), idx = q('.idx'), beats = { wide: [0, 6.3, 21.5, 29.7], tall: [0, 6.3, 21.5, 29.7], phone: [0, 20.5, 26.5, 31.5] };
   const follow = () => {
     if (hv.paused) { idx.removeAttribute('data-on'); return; }
     const b = beats[land.matches ? 'wide' : phone.matches ? 'phone' : 'tall'], t = hv.currentTime + .2;
