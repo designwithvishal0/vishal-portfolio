@@ -1003,3 +1003,13 @@ html.calm .dock{transition:none}
   .end .ct{padding-top:56px}
   .end .foot{margin-top:56px}
 }
+
+/* phones (Vishal 2026-10-13, picked option B for the hero): availability line on top, then the two line headline, then the reel sized to fit above the bottom bar so its chapter bars show, then the intro. Same copy, reel, colours, type and motion */
+@media (max-width:759px) and (orientation:portrait){
+  .hero{grid-template-areas:"h" "b" "l1" "l3" "slot" "s"}
+  .hb{padding-top:0;margin-bottom:14px}
+  .hero .status{display:flex;align-items:center;gap:8px;margin:0;font-size:min(3.3vw,14px);line-height:1.2;white-space:nowrap}
+  .slot{aspect-ratio:auto;height:min(calc((100vw - 32px)*1.25),calc(100svh - 280px))}
+  .slot img,.slot video{object-fit:contain}
+  .hero .sup{margin-top:24px}
+}
