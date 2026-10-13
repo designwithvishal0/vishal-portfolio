@@ -500,13 +500,15 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   hv.addEventListener('volumechange', () => { snd.setAttribute('aria-pressed', String(!hv.muted)); snd.setAttribute('aria-label', hv.muted ? 'Sound on' : 'Sound off'); });
   // the lift of the finger, not the touch down: on phones only that counts as a tap, so the browser lets the sound on and keeps the reel playing
   // (a touch down turned the sound on and the browser then stopped the reel, found 2026-10-13). If it stopped anyway, it starts again
-  const wake = (e: Event) => { if ((e.target as Element).closest?.('.vsnd')) return; if (!chose) { hear(true); if (hv.paused && hero.user === null) sync(hero); } removeEventListener('pointerup', wake, true); removeEventListener('keydown', wake, true); };
+  // when that first tap lands on the reel itself and it is the tap that brings the sound in, it only turns the sound on; the reel keeps playing (taps after it pause and play)
+  let soundTap = false;
+  const wake = (e: Event) => { if ((e.target as Element).closest?.('.vsnd')) return; if (!chose) { const was = hv.muted; hear(true); soundTap = was && !hv.muted && !hv.paused && onPhone() && !!(e.target as Element).closest?.('.slot') && !(e.target as Element).closest('button'); if (hv.paused && hero.user === null) sync(hero); } removeEventListener('pointerup', wake, true); removeEventListener('keydown', wake, true); };
   addEventListener('pointerup', wake, true); addEventListener('keydown', wake, true);
   hero.btn.addEventListener('click', () => { if (!chose && hv.paused === false) hear(true); });
   snd.addEventListener('click', () => { chose = true; hear(hv.muted); if (!hv.muted && hv.paused) { hero.user = true; sync(hero); } });
   [land, phone].forEach(m => m.addEventListener('change', () => hear(!hv.muted && !chose)));
   // phones: a tap on the reel itself pauses or plays it, like any player (Vishal 2026-10-13)
-  slot.addEventListener('click', e => { if (onPhone() && !(e.target as Element).closest('button')) hero.btn.click(); });
+  slot.addEventListener('click', e => { if (soundTap) { soundTap = false; return; } if (onPhone() && !(e.target as Element).closest('button')) hero.btn.click(); });
   // the index beside the reel follows the project on screen (beat starts in seconds, from tools/motion/kinetic/hero-cut.sh)
   const heroSec = q('.hero'), idx = q('.idx'), beats = { wide: [0, 6.3, 21.5, 29.7], tall: [0, 6.3, 21.5, 29.7], phone: [0, 20.5, 26.5, 31.5] };
   const follow = () => {
