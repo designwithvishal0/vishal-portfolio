@@ -16,7 +16,14 @@ const galleries: { key: string; cap: string; title: string; behance: string; ite
     items: [{ f: '01', alt: 'BuyKaro Eid sale banners on the home page, on laptop and phone' }] },
   { key: 'social', cap: 'Social media posts', title: 'Social Media Posts Vol-1',
     behance: '199128645/Social-Media-Posts-Vol-1',
-    items: ['01', '02', '03', '04', '05', '06'].map(f => ({ f, alt: 'Social media post' })) },
+    items: [
+      { f: '01', alt: 'Cover: Social Media Posts Vol 1, a fan of Instagram posts on a maroon background' },
+      { f: '02', alt: 'Travel and transport posts: electric scooter and motorbike launches, in English and Hindi' },
+      { f: '03', alt: 'Fashion posts: menswear shirts and suits, style quotes' },
+      { f: '04', alt: 'Dermatology posts for a skin clinic: body shaping, acne, peels, botox, fungal infections' },
+      { f: '05', alt: 'Health and wellness posts: mental health quotes, weight loss, energy and micronutrients' },
+      { f: '06', alt: 'Aviation and education posts, then a thank you card' },
+    ] },
   { key: 'realestate', cap: 'Real estate and event posters', title: 'Marketing Materials for Real Estate and Events Industry',
     behance: '199104047/Marketing-Materials-for-Real-Estate-and-Events-Industry',
     items: [{ f: '01', alt: 'Real estate flyer and Content Conclave event poster' }] },
@@ -27,10 +34,10 @@ const galleries: { key: string; cap: string; title: string; behance: string; ite
       { t: 'Mockup' }, { f: '03', alt: 'Museum of Illusions birthday party invitation poster in a mockup' }] },
   { key: 'trigo', cap: 'TriGo roll up standee', title: 'Standee Design: TriGo',
     behance: '187441931/Standee-Design-TriGo',
-    items: [{ f: '01', alt: 'TriGo roll up standee' },
+    items: [{ f: '01', alt: 'TriGo roll up standee on a city street' },
       { t: 'Original Design' }, { f: '02', alt: 'TriGo roll up standee, the flat design' },
-      { t: 'Use Case 1' }, { f: '03', alt: 'TriGo roll up standee in use' },
-      { t: 'Use Case-2' }, { f: '04', alt: 'TriGo roll up standee in use' }] },
+      { t: 'Use Case 1' }, { f: '03', alt: 'TriGo roll up standee outside a cafe' },
+      { t: 'Use Case-2' }, { f: '04', alt: 'TriGo roll up standee indoors' }] },
 ];
 
 export function getStaticPaths() {

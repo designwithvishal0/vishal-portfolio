@@ -287,8 +287,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     <!-- Graphic work (Vishal 2026-10-11): five pieces cropped to the work itself, each with a caption, each opening its Behance project -->
     <div class="ab-g">
       <div class="ab-gh"><h3>Graphic design</h3><a class="more go" href="https://www.behance.net/design_vishaly">See all on Behance <Arrow /></a></div>
-      <ul class="gfx" aria-label="Graphic work on Behance">
-        {gfx.map(([f, cap, alt, id]) => <li><a href={`https://www.behance.net/gallery/${id}`}><span class="gimg"><img src={`/graphics/${f}.webp`} alt={alt} width="800" height="600" loading="lazy" decoding="async" /></span><span class="gcap">{cap}</span></a></li>)}
+      <ul class="gfx" aria-label="Graphic work">
+        {gfx.map(([f, cap, alt, id]) => <li><a href={`/work/graphics/${f}/`}><span class="gimg"><img src={`/graphics/${f}.webp`} alt={alt} width="800" height="600" loading="lazy" decoding="async" /></span><span class="gcap">{cap}</span></a></li>)}
       </ul>
     </div>
   </section>
