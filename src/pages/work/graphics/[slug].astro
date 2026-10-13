@@ -1,0 +1,168 @@
+---
+// Graphic design galleries: each home "Graphic design" tile opens its Behance project as a page on this site.
+// Title and the gallery's own text lines are Behance word for word; images in Behance order.
+// Images live in public/work/graphics/<key>/NN.webp; width and height are read from the files at build time.
+import '@fontsource-variable/hanken-grotesk';
+import '../../../styles/tokens.css';
+import sharp from 'sharp';
+import { existsSync } from 'node:fs';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import Boot from '../../../components/Boot.astro';
+
+type Item = { t: string } | { f: string; alt: string };
+const galleries: { key: string; cap: string; title: string; behance: string; items: Item[] }[] = [
+  { key: 'eid', cap: 'BuyKaro Eid sale banners', title: 'Eid Sale Campaign Banner Design for BuyKaro',
+    behance: '215659939/Eid-Sale-Campaign-Banner-Design-for-BuyKaro',
+    items: [{ f: '01', alt: 'BuyKaro Eid sale banners on the home page, on laptop and phone' }] },
+  { key: 'social', cap: 'Social media posts', title: 'Social Media Posts Vol-1',
+    behance: '199128645/Social-Media-Posts-Vol-1',
+    items: ['01', '02', '03', '04', '05', '06'].map(f => ({ f, alt: 'Social media post' })) },
+  { key: 'realestate', cap: 'Real estate and event posters', title: 'Marketing Materials for Real Estate and Events Industry',
+    behance: '199104047/Marketing-Materials-for-Real-Estate-and-Events-Industry',
+    items: [{ f: '01', alt: 'Real estate flyer and Content Conclave event poster' }] },
+  { key: 'moi', cap: 'Museum of Illusions invites', title: 'MOI: Birthday Party Invitation Poster Design',
+    behance: '194665377/MOI-Birthday-PartyInvitation-Poster-Design',
+    items: [{ t: '1st Design:' }, { f: '01', alt: 'Museum of Illusions birthday party invitation poster, first design' },
+      { t: '2nd Design:' }, { f: '02', alt: 'Museum of Illusions birthday party invitation poster, second design' },
+      { t: 'Mockup' }, { f: '03', alt: 'Museum of Illusions birthday party invitation poster in a mockup' }] },
+  { key: 'trigo', cap: 'TriGo roll up standee', title: 'Standee Design: TriGo',
+    behance: '187441931/Standee-Design-TriGo',
+    items: [{ f: '01', alt: 'TriGo roll up standee' },
+      { t: 'Original Design' }, { f: '02', alt: 'TriGo roll up standee, the flat design' },
+      { t: 'Use Case 1' }, { f: '03', alt: 'TriGo roll up standee in use' },
+      { t: 'Use Case-2' }, { f: '04', alt: 'TriGo roll up standee in use' }] },
+];
+
+export function getStaticPaths() {
+  return ['eid', 'social', 'realestate', 'moi', 'trigo'].map(slug => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const g = galleries.find(x => x.key === slug)!;
+const others = galleries.filter(x => x.key !== slug);
+const behance = `https://www.behance.net/gallery/${g.behance}`;
+// ponytail: images missing on disk are skipped so the build passes while assets are pending
+const items = await Promise.all(g.items.map(async it => {
+  if ('t' in it) return it;
+  const file = `public/work/graphics/${g.key}/${it.f}.webp`;
+  if (!existsSync(file)) return null;
+  const { width, height } = await sharp(file).metadata();
+  return { ...it, src: `/work/graphics/${g.key}/${it.f}.webp`, width, height };
+})).then(a => a.filter(Boolean)) as ({ t: string } | { src: string; alt: string; width: number; height: number })[];
+const lead = items.find(x => 'src' in x);
+
+const title = `${g.title}, graphic design by Vishal Yadav`;
+const description = `${g.title}: graphic design by Vishal Yadav, product designer in Gurugram.`;
+const canonical = new URL(`/work/graphics/${g.key}/`, Astro.site).href;
+const ld = [
+  { '@context': 'https://schema.org', '@type': 'CreativeWork', name: g.title, description, genre: 'Graphic design',
+    author: { '@type': 'Person', name: 'Vishal Yadav' }, image: `/graphics/${g.key}.webp`, url: canonical },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: '/' },
+    { '@type': 'ListItem', position: 2, name: g.title } ] },
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>{title}</title>
+<Boot />
+<meta name="description" content={description}>
+<link rel="canonical" href={canonical}>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="article">
+<meta property="og:image" content={`/graphics/${g.key}.webp`}><meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json" set:html={JSON.stringify(ld)} />
+<style is:inline>
+/* Neutral: only the site tokens (tokens.css), light and dark. The shared header reads --line --edge --btn --on-btn --bar --gut --out. */
+:root{--line:var(--rule);--edge:var(--muted);--btn:var(--ink);--on-btn:var(--bg);--bar:56px;--gut:32px;--out:var(--ease-out)}
+@media (max-width:759px){:root{--bar:52px;--gut:16px}}
+*{box-sizing:border-box}
+html{overflow-x:clip}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--fs-body)/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:var(--r-focus)}
+header.bar .bar-book,header.bar .bar-cv{display:none} /* as on the case studies: name and menu only, Book a call sits in the closing */
+.wrap{width:min(var(--max),100% - var(--gut) * 2);margin-inline:auto}
+.top{padding:var(--s18) 0 var(--s12);display:grid;gap:var(--s4);max-width:66ch}
+.eyebrow{margin:0;font-size:var(--fs-caption);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{margin:0;font-size:clamp(34px,5vw,64px);font-weight:var(--w-head);line-height:var(--lh-head);letter-spacing:var(--track-head);text-wrap:balance}
+.gal{display:grid;gap:0;max-width:1400px;margin-inline:auto}
+.gal img{display:block;width:100%;height:auto;background:var(--card)}
+.gal .lbl{margin:var(--s10) 0 var(--s4);font-size:var(--fs-lead);font-weight:var(--w-strong)}
+.more{padding:var(--s32) 0 0;display:grid;gap:var(--s6)}
+.more h2{margin:0;font-size:var(--fs-h3);font-weight:var(--w-head);letter-spacing:var(--track-head)}
+.more ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s4)}
+.more a{display:grid;gap:var(--s3);text-decoration:none}
+.more img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r-card);background:var(--card);transition:transform var(--hover) var(--ease-out)}
+.more span{font-size:var(--fs-ui);font-weight:var(--w-strong)}
+.more a:hover img{transform:translateY(-2px)}
+.more a:hover span{text-decoration:underline;text-underline-offset:.2em}
+/* closing: the case study template's ending band, in the site's neutral dark */
+.endsec{margin-top:var(--s32);padding:clamp(72px,9vw,128px) var(--gut) clamp(64px,8vw,104px);background:var(--dark);color:var(--on-dark);border-top:1px solid var(--dark-edge)}
+.closing{display:grid;gap:18px;justify-items:center;text-align:center;max-width:var(--max);margin-inline:auto}
+.closing h2{margin:0;font-size:clamp(40px,6.4vw,88px);font-weight:800;line-height:.95;letter-spacing:-.035em;text-wrap:balance}
+.btns{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 22px;border-radius:var(--r-pill);font-size:16px;font-weight:650;text-decoration:none;transition:transform .2s ease,opacity .2s ease}
+.btn .ic{flex:none;width:16px;height:16px}
+.btn.primary{background:var(--on-dark);color:var(--dark)}
+.btn.ghost{border:1px solid var(--on-dark-muted);color:var(--on-dark)}
+.btn:hover{transform:translateY(-1px);opacity:.92}
+.closing .founder{margin:14px 0 0;font-size:17px;font-weight:500;color:var(--on-dark-soft)}
+.closing .founder a{color:var(--on-dark);font-weight:700;text-underline-offset:4px}
+.closing :focus-visible{outline-color:var(--on-dark)}
+@media (max-width:900px){.more ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){
+  .top{padding:var(--s12) 0 var(--s8)}
+  .gal{margin-inline:calc(var(--gut) * -1)}
+  .gal .lbl{padding-inline:var(--gut)}
+  .more{padding-top:var(--s18)}
+  .more ul{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(var(--gut) * -1);padding:0 var(--gut) 6px;scroll-padding-inline:var(--gut);scrollbar-width:none}
+  .more ul::-webkit-scrollbar{display:none}
+  .more li{flex:0 0 78%;scroll-snap-align:start}
+  .btns{flex-direction:column;width:100%}.btn{width:100%}
+  .closing .founder{font-size:15px;line-height:1.5;max-width:30ch;text-wrap:balance}
+  .closing .founder a{white-space:nowrap;display:inline-block;padding:13px 0;margin:-13px 0}
+}
+@media (prefers-reduced-motion:reduce){.btn,.more img{transition:none}}
+html.calm .btn,html.calm .more img{transition:none}
+</style>
+</head>
+
+<SiteHeader home="/looks/kinetic/" theme={false} book cta={false} />
+
+<main>
+  <div class="wrap">
+    <header class="top">
+      <p class="eyebrow">Graphic design</p>
+      <h1>{g.title}</h1>
+    </header>
+
+    <div class="gal">
+      {items.map(it => 'src' in it
+        ? <img src={it.src} alt={it.alt} width={it.width} height={it.height} decoding="async" loading={it === lead ? 'eager' : 'lazy'} fetchpriority={it === lead ? 'high' : undefined} />
+        : <p class="lbl">{it.t}</p>)}
+    </div>
+
+    <nav class="more" aria-label="More graphic design">
+      <h2>More graphic design</h2>
+      <ul>
+        {others.map(o => <li><a href={`/work/graphics/${o.key}/`}><img src={`/graphics/${o.key}.webp`} alt="" width="800" height="600" loading="lazy" decoding="async" /><span>{o.cap}</span></a></li>)}
+      </ul>
+    </nav>
+  </div>
+
+  <div class="endsec">
+    <footer class="closing">
+      <h2>{g.cap}</h2>
+      <div class="btns">
+        <a class="btn primary" href={behance} target="_blank" rel="noopener">View on Behance<svg class="ic" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24"><path d="M 0 7.125 L 7.125 0" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(6 10.875)"></path><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(8.25 6)"></path></svg></a>
+        <a class="btn ghost" href="/looks/kinetic/"><svg class="ic" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24"><path d="M 9.75 0 L 0 0" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(10.5 12)"></path><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(3.75 5.25)"></path></svg>Back to home</a>
+      </div>
+      <p class="founder">Building a product people need to trust? I take on freelance work. <a href="https://cal.com/designwvishal" target="_blank" rel="noopener">Book a call</a></p>
+    </footer>
+  </div>
+</main>
