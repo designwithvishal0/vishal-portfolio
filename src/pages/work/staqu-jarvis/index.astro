@@ -348,13 +348,16 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
     fb.onclick=()=>{if(fsOn())document.exitFullscreen();else if(f.requestFullscreen)f.requestFullscreen();else if(v.webkitEnterFullscreen)v.webkitEnterFullscreen()};
     document.addEventListener('fullscreenchange',()=>{const o=fsOn();fb.setAttribute('aria-label',o?'Exit full screen':'Full screen');fb.querySelector('.lb').textContent=o?'EXIT FULL SCREEN':'FULL SCREEN'});
     let chose=false;
-    pb.onclick=()=>{if(v.paused){if(!chose)v.muted=false;v.play()}else v.pause()};v.onclick=pb.onclick;v.style.cursor='pointer';
+    let blocked=false;
+    pb.onclick=()=>{if(v.paused){if(!chose)v.muted=false;v.play()}else v.pause()};
+    // If the browser blocked sound, the first tap on the video turns sound on and keeps it playing; after that a tap pauses and plays
+    v.onclick=()=>{if(blocked){blocked=false;if(!chose)v.muted=false;if(v.paused)v.play();return}pb.onclick()};v.style.cursor='pointer';
     sb.onclick=()=>{chose=true;v.muted=!v.muted;if(!v.muted&&v.paused)v.play()};
     // Sound on by default: browsers only allow sound after a tap or key press, so autoplay starts muted and the first tap anywhere turns sound on
-    const wake=e=>{if(!chose&&!(e.target.closest&&e.target.closest('.reel .pill'))){v.muted=false}removeEventListener('pointerdown',wake,true);removeEventListener('keydown',wake,true)};
+    const wake=e=>{if(!chose&&!(e.target.closest&&e.target.closest('.reel .pill'))){v.muted=false;if(e.target!==v)blocked=false}removeEventListener('pointerdown',wake,true);removeEventListener('keydown',wake,true)};
     addEventListener('pointerdown',wake,true);addEventListener('keydown',wake,true);
     ['play','pause','volumechange'].forEach(e=>v.addEventListener(e,paint));
-    if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('calm')){v.muted=false;v.play().catch(e=>{if(e.name==='NotAllowedError'){v.muted=true;v.play().catch(()=>{})}})}paint();
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('calm')){v.muted=false;v.play().catch(e=>{if(e.name==='NotAllowedError'){blocked=true;v.muted=true;v.play().catch(()=>{})}})}paint();
   })()</script>
 
   <section class="summary" aria-labelledby="sum">
