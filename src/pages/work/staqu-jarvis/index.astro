@@ -280,6 +280,8 @@ blockquote,.dek,.closing>p,.metric b,.next h2{font-size:22px}
 .nextgrid a:hover b{text-decoration:underline;text-underline-offset:.2em}
 /* prototype: a still and a way out while Figma loads */
 .protowrap{position:relative;margin:0}
+/* Desktop: the prototype fits one screen between the sticky header and the bottom dock (Vishal 2026-10-13 "going into two scrolls") */
+@media (min-width:641px){.protowrap{width:min(100%,calc((100svh - 240px) * 16 / 10));margin-inline:auto}}
 .protowait{position:absolute;inset:0;border-radius:24px;background:var(--card);display:grid;place-content:center;justify-items:center;gap:12px;text-align:center;transition:opacity .3s ease}
 .protowait img{width:120px;height:auto;border-radius:16px;opacity:.9}
 .protowait p{font-size:16px;color:var(--muted)}
