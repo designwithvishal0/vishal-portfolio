@@ -1024,3 +1024,7 @@ html.calm .dock{transition:none}
   .st-l{display:none}.st-s{display:inline}
   .hero .status .dot{margin-top:0}
 }
+/* phones (Vishal 2026-10-13, "cut the loop from the video that was made for mobile"): work loops are his vertical 9:16 showreel cuts, whole frame */
+@media (max-width:699px){
+  .row .vbox{aspect-ratio:9/16}
+}

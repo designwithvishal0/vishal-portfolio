@@ -1,18 +1,21 @@
 #!/bin/bash
-# Work card phone loops (Vishal 2026-10-13: "use the same height for all of the project videos" and "cut from the videos where the context
-# is understood"). Built from each scene cut, laid out like split-phone.mp4: the scene's own words on top, the phone below at one height (540 of 900).
+# Work card loops on phones (Vishal 2026-10-13: "cut the loop from the video that was made for mobile"): cut from his own vertical 9:16 showreels,
+# whole frame kept (his words on top, the screen below), 720x1280. DL = his ~/Downloads.
 set -e; cd "$(dirname "$0")"
-BG="[0:v]crop=240:300:0:420,scale=720:900,boxblur=30:2[bg]"
-FE="format=rgba,geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='255*min(1,min(min(X,W-X),min(Y,H-Y))/28)'"
-one(){ # src out text_crop phone_crop poster_time
-  lay "$1" "$3" "$4" -r 30 -an -c:v libx264 -crf 24 -preset slow -movflags +faststart "$2.mp4"
-  ffmpeg -v error -y -ss $5 -i "$2.mp4" -frames:v 1 -q:v 3 "$2.jpg"
-}
-lay(){ local i=$1 t=$2 ph=$3; shift 3
-  ffmpeg -v error -y -i "$i" -filter_complex "$BG;[0:v]crop=$t,scale=672:250:force_original_aspect_ratio=decrease,$FE[t];[0:v]crop=$ph,scale=-2:540,$FE[p];[bg][t]overlay=24:40[x];[x][p]overlay=(W-w)/2:330,format=yuv420p" "$@"
-}
-one ../../reel/ixigo-scene.mp4 ../../reel/ixigo-phone 540:250:70:150 320:690:756:15 6.3
-# ixigo poster: the lit still (chart failed state), laid out the same way
-lay ixigo-scene-lit.jpg 540:250:70:150 320:690:756:15 -frames:v 1 -q:v 3 ixigo-phone-lit.jpg
-one twelve-scene.mp4 twelve-phone 440:330:70:190 380:690:800:15 4.5
-one jarvis-scene.mp4 jarvis-phone 560:300:60:190 330:690:688:15 2
+DL=${DL:-/mnt/user-data/uploads/Downloads}
+enc(){ ffmpeg -v error -y "${@:1:$#-1}" -an -c:v libx264 -crf 26 -preset slow -pix_fmt yuv420p -movflags +faststart "${@: -1}"; }
+V="scale=720:1280:flags=lanczos,fps=30,setsar=1"
+# ixigo: "One hub. Six states." with the hub moving through its states
+enc -ss 46 -t 8 -i "$DL/ixigo-case-study-teaser-90s-vertical.mp4" -vf "$V,fade=in:0:9,fade=out:st=7.7:d=0.3" ../../reel/ixigo-phone.mp4
+# Split: "One split, four states."
+enc -ss 48.5 -t 14.5 -i "$DL/Split-and-Request-Final/02b-split-showreel-9x16-mobile.mp4" -vf "$V,fade=in:0:9,fade=out:st=14.2:d=0.3" split-phone.mp4
+# Twelve: "One number, every day." then "Tap the number, see why."
+enc -ss 23.5 -t 9.5 -i "$DL/01-twelve-showreel-linkedin-9x16.mp4" -vf "$V,fade=in:0:9,fade=out:st=9.2:d=0.3" twelve-phone.mp4
+# JARVIS: the 3:14 AM flood ("90 to 99%... And the real one gets missed."), then the flag and "Same car. No alert."
+J="$DL/Staqu-Final/LinkedIn/01-staqu-showreel-linkedin-9x16.mp4"
+enc -ss 5 -t 6.5 -i "$J" -ss 33 -t 7 -i "$J" -filter_complex "[0:v]$V[a];[1:v]$V[b];[a][b]xfade=transition=fade:duration=0.4:offset=6.1,fade=in:0:9,fade=out:st=12.8:d=0.3" jarvis-phone.mp4
+ffmpeg -v error -y -ss 6.5 -i ../../reel/ixigo-phone.mp4 -frames:v 1 -q:v 3 ixigo-phone-lit.jpg
+ffmpeg -v error -y -ss 6.5 -i ../../reel/ixigo-phone.mp4 -frames:v 1 -q:v 3 ../../reel/ixigo-phone.jpg
+ffmpeg -v error -y -ss 12 -i split-phone.mp4 -frames:v 1 -q:v 3 split-phone.jpg
+ffmpeg -v error -y -ss 4 -i twelve-phone.mp4 -frames:v 1 -q:v 3 twelve-phone.jpg
+ffmpeg -v error -y -ss 3 -i jarvis-phone.mp4 -frames:v 1 -q:v 3 jarvis-phone.jpg

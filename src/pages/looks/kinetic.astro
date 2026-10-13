@@ -180,7 +180,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
               <div class="vbox" style={`--gr:${grounds[i]}`} data-state="paused">
                 <picture>
                   <source media="(min-width: 700px)" srcset={poster(loops[i], 'scene')} width="1280" height="720" />
-                  <img src={poster(loops[i], 'phone')} width="720" height="900" alt={posterAlt[loops[i]] ?? w.alt} loading="lazy" decoding="async" />
+                  <img src={poster(loops[i], 'phone')} width="720" height="1280" alt={posterAlt[loops[i]] ?? w.alt} loading="lazy" decoding="async" />
                 </picture>
                 <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-wide={clip(loops[i], 'scene')} data-tall={clip(loops[i], 'phone')}></video>
                 <a class="mlink" href={cs(w.slug)} tabindex="-1" aria-hidden="true"></a>
