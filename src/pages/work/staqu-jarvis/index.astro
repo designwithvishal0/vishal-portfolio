@@ -328,7 +328,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
     const paint=()=>{pb.innerHTML=v.paused?ip+'<span class="lb">PLAY</span>':ia+'<span class="lb">PAUSE</span>';pb.setAttribute('aria-label',v.paused?'Play':'Pause');pb.setAttribute('aria-pressed',String(!v.paused));
       sb.innerHTML=v.muted?off+'<span class="lb">SOUND ON</span>':on+'<span class="lb">SOUND OFF</span>';sb.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');sb.setAttribute('aria-pressed',String(!v.muted));};
     let chose=false;
-    pb.onclick=()=>{if(v.paused){if(!chose)v.muted=false;v.play()}else v.pause()};
+    pb.onclick=()=>{if(v.paused){if(!chose)v.muted=false;v.play()}else v.pause()};v.onclick=pb.onclick;v.style.cursor='pointer';
     sb.onclick=()=>{chose=true;v.muted=!v.muted;if(!v.muted&&v.paused)v.play()};
     // Sound on by default: browsers only allow sound after a tap or key press, so autoplay starts muted and the first tap anywhere turns sound on
     const wake=e=>{if(!chose&&!(e.target.closest&&e.target.closest('.reel .pill'))){v.muted=false}removeEventListener('pointerdown',wake,true);removeEventListener('keydown',wake,true)};
