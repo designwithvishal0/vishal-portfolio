@@ -264,13 +264,13 @@ article>section.lt+section.lt,article>section:not(.lt)+section:not(.lt){padding-
 /* desktop (Vishal 2026-10-13): the four navy sections after the 30 second version (hardest call, who, found, options) were one flat navy;
    each now sits on its own step of JARVIS indigo blue, getting lighter as the story builds, so section breaks read */
 /* phones too since 2026-10-13 15:04 (Vishal: on phones the content blended into the page navy) */
-article>section#overview{--band:#111219;--card:#1B1C25}
-article>section#problem{--band:#16151B;--card:#211F26}
-article>section#research{--band:#1B1819;--card:#272224}
+article>section#overview{--band:#FFFDFA;--card:#F6EEE6}
+article>section#problem{--band:#F6EEE6;--card:#FFFDFA}
+article>section#research{--band:#FFFDFA;--card:#F6EEE6}
 article>section#reframe{--band:#211B19;--card:#2E2522}
-article>section:is(#problem,#research,#reframe){padding-top:120px}
-@media (max-width:900px){article>section:is(#problem,#research,#reframe){padding-top:80px}}
-@media (max-width:620px){article>section:is(#problem,#research,#reframe){padding-top:64px}}
+article>section:is(#problem,#research,#reframe,#system){padding-top:120px}
+@media (max-width:900px){article>section:is(#problem,#research,#reframe,#system){padding-top:80px}}
+@media (max-width:620px){article>section:is(#problem,#research,#reframe,#system){padding-top:64px}}
 /* type scale: 13 label, 16 small, 18 body, 22 lead, 32 titles, 48 sections, 68 page title */
 .facts p,.stats span,.note,.source,figcaption,.opt p,.fix p,.trade p,.trade .cost,.nextgrid span{font-size:16px}
 .list .n,.trade .n,.tag{font-size:13px}
@@ -409,7 +409,7 @@ figcaption{text-align:center}
     <div class="dockfade" aria-hidden="true"></div><nav class="dock" aria-label="Contents"><button type="button" class="dkb" data-go="-1" aria-label="Previous section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="dkm"><div class="dkt"><b></b><i></i></div><div class="dks"></div></div><a class="dkn" href="#"><small>NEXT</small><span></span></a><button type="button" class="dkb" data-go="1" aria-label="Next section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></nav>
 
     <article>
-      <section id="overview">
+      <section id="overview" class="lt">
         <p class="eyebrow">Overview</p>
         <h2>What this is</h2>
         <p>ixigo is one of India’s largest travel apps, used by crores of people to book trains. It helps you brilliantly right up to payment. After that, during the hours when a waitlist decides whether you travel at all, it goes quiet. I rebuilt that stretch of the experience as a system rather than a screen.</p>
@@ -420,7 +420,7 @@ figcaption{text-align:center}
         </div>
       </section>
 
-      <section id="problem" class="wide">
+      <section id="problem" class="lt wide">
         <div class="screen">
           <figure><div class="pm"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/00-before.webp" width="512" height="3109" alt="The current ixigo post booking screen, before the redesign" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div><figcaption>Before · the current screen</figcaption></figure>
           <div>
@@ -435,7 +435,7 @@ figcaption{text-align:center}
         </div>
       </section>
 
-      <section id="research">
+      <section id="research" class="lt">
         <p class="eyebrow">What the research showed</p>
         <h2>The detail that settled the direction</h2>
         <p>There is an entire industry of apps built for one job: predicting whether your train ticket will confirm. ConfirmTkt, RailYatri, RailMitra, and more. Millions of downloads between them. They exist because people do not trust the raw status the official app gives them. Someone has already booked their ticket, and they still go somewhere else to find out what it means.</p>
@@ -752,7 +752,7 @@ nav.toc.light{--fg:#0E1424;--muted:#6A7488;--line:#D3D8E3;--warm:#A35A00}
   .stats span{font-size:15px}
   .endsec .closing .founder a{display:inline-block;padding:13px 0;margin:-13px 0}
   /* Vishal 2026-10-13 15:06: on phones the boxes in the navy sections are light, so they stand out instead of dark on dark */
-  #research .stats,#overview .goals>div{--fg:#1A140F;--body:#4A4038;--muted:#6B5F55;--acc:#A34400;--line:#E6D7C9;--warm:#A34400;background:#FBF6F1;color:var(--fg);border-color:transparent}
+  #research .stats,#overview .goals>div{background:var(--card);color:var(--fg);border-color:transparent}
   .screen{gap:28px}
 }
 /* 30 second version on desktop: two by two with hairlines, so every label sits on one line and each answer has room */
@@ -953,6 +953,7 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 }
 @media (max-width:900px){.screen>figure{justify-self:center}}
 .screen figure figcaption{margin-top:16px}
+#problem .pm .shot.phone{width:100%;border-radius:0}
 </style>
 <script is:inline src="/js/inview-video.js" defer></script>
 </html>
