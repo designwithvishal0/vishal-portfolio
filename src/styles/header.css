@@ -115,3 +115,13 @@ html.calm .sw .knob{transition:none}
 .calm .bar-cv{transition:none}
 @media (prefers-reduced-motion:reduce){.bar-cv{transition:none}}
 @media (max-width:759px){.bar-cv{display:none}}
+/* desktop (Vishal 2026-10-13, "Accessibility cannot look like Resume"): Book a call and Resume are the calls to action, so Accessibility steps back
+   to a quiet utility: no outline, lighter text, set apart by a hairline once the two buttons are showing */
+@media (min-width:760px){
+  .bar:not(.cta-off) .a11y{position:relative;border-color:transparent;padding:0 10px;font-weight:500;color:var(--muted);margin-left:4px}
+  .bar:not(.cta-off) .a11y::before{color:var(--ink)}
+  @media (hover:hover){.bar:not(.cta-off) .a11y:hover{background:var(--line);color:var(--ink)}}
+  .bar:not(.cta-off) .a11y[aria-expanded=true]{background:var(--line);border-color:transparent;color:var(--ink)}
+  .bar:not(.cta-off) .a11y::after{content:"";position:absolute;left:-6px;top:9px;bottom:9px;width:1px;background:var(--edge);opacity:0;transition:opacity 180ms var(--out)}
+  .bar.book-on:not(.cta-off) .a11y::after{opacity:1}
+}
