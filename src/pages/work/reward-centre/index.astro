@@ -1,0 +1,1046 @@
+---
+// Unified Reward Centre, ported word for word from Vishal's ten Behance boards onto the JARVIS template (via the OneBanc copy).
+// De branded concept: never name the gaming company or app. Colours come from the boards: near black, gold is value,
+// white is action, coral is time (under 24 hours) only. Light pattern per the 2026-10-13 standard: dark top, light story,
+// one dark band (Structure, the key decision), light after.
+import SiteHeader from '../../../components/SiteHeader.astro';
+import Boot from '../../../components/Boot.astro';
+const title = 'Unified Reward Centre case study, Vishal Yadav, Product Designer';
+const description = 'A reward centre concept for a gaming app. Rewards from every source in one place, sorted by what the player can do with them right now.';
+const ld = [
+  { '@context': 'https://schema.org', '@type': 'CreativeWork', name: 'Unified Reward Centre', headline: 'Every reward. One place.', description,
+    author: { '@type': 'Person', name: 'Vishal Yadav' }, dateCreated: '2026', genre: 'Product design case study', image: '/work/reward-centre/img/og.jpg' },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: '/' },
+    { '@type': 'ListItem', position: 2, name: 'Unified Reward Centre' } ] },
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>{title}</title>
+<Boot />
+<meta name="description" content={description}>
+<link rel="canonical" href="/work/reward-centre/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="article">
+<meta property="og:image" content="/work/reward-centre/img/og.jpg"><meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json" set:html={JSON.stringify(ld)} />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap">
+<style is:inline>
+<style is:inline>
+/* Layout: text column of ~66ch beside a sticky contents rail on desktop; one column on phones.
+   Single dark theme by choice: the calmer navy agreed for JARVIS. */
+:root{
+  --bg:#0A0A0C; --card:#121216; --fg:#E9E9EE; --muted:#9A9AA5; --line:#24242C;
+  --warm:#FFC24B; --cool:#FFC24B;
+  --sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  color-scheme:dark;
+  /* tokens the shared site header reads */
+  --ink:var(--fg); --edge:#5A5A66; --btn:var(--fg); --on-btn:var(--bg);
+  --bar:56px; --gut:32px; --max:1376px; --out:cubic-bezier(.23,1,.32,1);
+}
+@media (max-width:759px){:root{--bar:52px;--gut:16px}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html.calm{scroll-behavior:auto}
+body{background:var(--bg);color:var(--fg);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;padding-inline:20px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cool);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{text-wrap:balance;margin:0;font-weight:600;letter-spacing:-.015em}
+p{margin:0}
+.mono,.eyebrow,.k{font-family:var(--mono)}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:inline-block;margin-right:6px}
+.k{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:inline-block;margin-right:6px}
+
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:10;padding-top:env(safe-area-inset-top,0px)}
+.progress i{display:block;height:100%;width:0;background:var(--warm)}
+
+.wrap{max-width:1120px;margin:0 auto;padding-block:56px 96px}
+.top{display:flex;justify-content:space-between;gap:16px;font-size:14px;color:var(--muted);padding-bottom:56px}
+.top a{text-decoration:none}.top a:hover{color:var(--fg)}
+
+header.hero{max-width:66ch;display:grid;gap:20px}
+h1{font-size:clamp(40px,7vw,68px);line-height:1.02;letter-spacing:-.03em}
+.hook{font-size:clamp(22px,3vw,30px);font-weight:500;letter-spacing:-.015em;color:var(--warm);margin-top:-8px}
+.dek{font-size:clamp(19px,2.2vw,22px);line-height:1.5;color:var(--fg)}
+.alertline{font-family:var(--mono);font-size:13px;color:var(--warm);display:flex;gap:10px;align-items:center}
+.alertline::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--warm)}
+
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:40px;padding-block:24px;border-block:1px solid var(--line)}
+.facts div{display:grid;gap:6px;min-width:0}
+.facts p{font-size:15px;line-height:1.45}
+.note{margin-top:16px;font-size:14px;color:var(--muted);max-width:72ch}
+
+.summary{margin-top:48px;background:var(--card);border-radius:14px;padding:28px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+.summary h2{grid-column:1/-1;font-size:14px;font-family:var(--mono);font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:inline-block;margin-right:6px}
+.summary div{display:grid;gap:8px;align-content:start;min-width:0}
+.summary p{font-size:15.5px;line-height:1.5}
+
+.layout{display:grid;grid-template-columns:200px minmax(0,1fr);gap:64px;margin-top:80px}
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 32px);align-self:start;display:grid;gap:4px;font-size:14px}
+nav.toc .k{margin-bottom:10px}
+nav.toc a{text-decoration:none;color:var(--muted);padding:5px 0 5px 14px;border-left:1px solid var(--line)}
+nav.toc a:hover{color:var(--fg)}
+nav.toc a.on{color:var(--fg);border-left-color:var(--warm)}
+
+article{display:grid;gap:104px;min-width:0}
+section{display:grid;gap:22px;max-width:66ch;scroll-margin-top:32px}
+section.wide{max-width:none}
+section h2{font-size:clamp(28px,3.6vw,38px);line-height:1.12}
+section p{color:#C9C9D1}
+section p strong{color:var(--fg);font-weight:600}
+
+blockquote{margin:8px 0 0;padding:4px 0 4px 20px;border-left:2px solid var(--warm);font-size:22px;line-height:1.4;color:var(--fg);font-weight:500;letter-spacing:-.01em}
+
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-top:8px}
+.stats div{display:grid;gap:6px;align-content:start}
+.stats b{font-size:32px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stats span{font-size:15px;color:var(--muted);line-height:1.45}
+.source{font-size:13px;color:var(--muted)}
+
+.list{display:grid;gap:28px;counter-reset:n}
+.list > div{display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 12px}
+.list .n{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:4px}
+.list h3{font-size:20px}
+.list p{grid-column:2}
+
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.goals div{background:var(--card);border-radius:12px;padding:20px;display:grid;gap:8px}
+.goals p{color:var(--fg)}
+
+.options{display:grid;gap:12px}
+.opt{border:1px solid var(--line);border-radius:12px;padding:20px 22px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 20px}
+.opt h3{font-size:18px}
+.opt p{grid-column:1/-1;font-size:16px}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:3px 8px;border-radius:4px;align-self:start;color:var(--muted);border:1px solid var(--line)}
+.opt.built{border-color:var(--warm)}
+.opt.built .tag{color:var(--bg);background:var(--warm);border-color:var(--warm)}
+
+figure{margin:0;display:grid;gap:10px}
+.slot{background:var(--card);border:1px dashed var(--line);border-radius:12px;display:grid;place-items:center;text-align:center;padding:20px;color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.04em;max-width:100%}
+.slot.flow{aspect-ratio:3/2}
+.shot{display:block;max-width:100%;height:auto;border-radius:16px}
+.shot.wide{width:100%}
+.shot.phone{width:100%;max-width:300px;border-radius:32px;border:1px solid var(--line)}
+.slot.phone{aspect-ratio:412/917;border-radius:28px;width:100%;max-width:300px}
+figcaption{font-size:14px;color:var(--muted)}
+
+.screen{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:40px;align-items:start;max-width:880px}
+.screen > div{display:grid;gap:14px;min-width:0}
+.screen h3{font-size:24px;line-height:1.2}
+.screens{display:grid;gap:72px}
+
+.fixes{display:grid;gap:0;border-top:1px solid var(--line)}
+.fix{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:24px;padding-block:22px;border-bottom:1px solid var(--line)}
+.fix h3{font-size:18px;line-height:1.35}
+.fix p{font-size:16px}
+
+.trades{display:grid;gap:0;border-top:1px solid var(--line)}
+.trade{display:grid;grid-template-columns:28px minmax(0,1fr) minmax(0,1fr);gap:8px 20px;padding-block:20px;border-bottom:1px solid var(--line)}
+.trade .n{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:3px}
+.trade h3{font-size:17px;margin-bottom:6px}
+.trade p{font-size:15.5px}
+.trade .cost{color:var(--warm);font-size:15.5px}
+.trade .cost .k{display:block;margin-bottom:4px}
+
+.beforeafter{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.beforeafter div{border-radius:12px;padding:22px;display:grid;gap:10px;align-content:start}
+.beforeafter .b{border:1px solid var(--line)}
+.beforeafter .a{background:var(--card);box-shadow:inset 0 0 0 1px var(--cool)}
+.beforeafter .a .k{color:var(--cool)}
+.metric{display:grid;gap:6px;padding:22px 0 4px;border-top:1px solid var(--line)}
+.metric b{font-size:clamp(24px,3vw,30px);font-weight:600;letter-spacing:-.02em;color:var(--warm)}
+.measures{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.measures div{display:grid;gap:8px}
+
+.closing{margin-top:120px;padding-top:48px;border-top:1px solid var(--line);display:grid;gap:18px}
+.closing h2{font-size:clamp(32px,5vw,48px);letter-spacing:-.025em}
+.closing > p{color:var(--muted);font-size:19px}
+.btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:54px;padding:0 24px;border-radius:100px;font-weight:600;font-size:18px;line-height:1.3;text-decoration:none;transition:transform .2s ease,opacity .2s ease}
+.btn .ic{flex:none;width:16px;height:16px}
+.btn.primary{background:#FFC24B;color:var(--bg)}
+.btn.ghost{border:1px solid #ffffff47;color:var(--fg)}
+.btn:hover{transform:translateY(-1px);opacity:.92}
+@media (max-width:620px){.btns{flex-direction:column}.btn{width:100%}}
+
+.next{margin-top:64px;display:grid;gap:14px}
+.nextgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.nextgrid a{background:var(--card);border-radius:12px;padding:20px;display:grid;gap:8px;text-decoration:none;align-content:start}
+.nextgrid a:hover{box-shadow:inset 0 0 0 1px var(--line)}
+.nextgrid b{font-size:18px;font-weight:600;letter-spacing:-.01em}
+.nextgrid span{font-size:14px;color:var(--muted)}
+
+@media (max-width:900px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:0}
+  nav.toc{display:none}
+  .summary{grid-template-columns:1fr 1fr}
+  .screen{grid-template-columns:minmax(0,1fr);gap:20px}
+  .slot.phone{max-width:240px}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  .wrap{padding-block:32px 64px}
+  .top{padding-bottom:40px}
+  .facts,.summary,.goals,.beforeafter,.measures,.nextgrid{grid-template-columns:minmax(0,1fr)}
+  .facts{gap:18px}
+  .stats{grid-template-columns:minmax(0,1fr)}
+  .fix{grid-template-columns:minmax(0,1fr);gap:8px}
+  .trade{grid-template-columns:28px minmax(0,1fr)}
+  .trade .cost{grid-column:2}
+  article{gap:80px}
+  .summary{padding:22px}
+}
+</style>
+<style is:inline>.proto{display:block;width:100%;aspect-ratio:16/10;border:0;border-radius:24px;background:var(--card)}@media (max-width:640px){.proto{aspect-ratio:9/16}}video.shot{background:var(--card)}
+.reel{position:relative}
+.pills{position:absolute;right:16px;bottom:16px;display:flex;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:100px;border:1px solid rgba(255,255,255,.22);background:rgba(10,10,12,.78);color:#fff;font:600 12px/1 var(--sans);letter-spacing:.08em;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.pill:hover{background:rgba(30,30,36,.9)}
+.pill:focus-visible{outline:2px solid #FFC24B;outline-offset:2px}
+@media (max-width:620px){.pills{right:10px;bottom:10px}.pill{height:32px;padding:0 11px;font-size:11px}}
+.up{opacity:0;transform:translateY(20px);transition:opacity .4s ease,transform .4s ease;transition-delay:var(--d,0ms)}
+.up.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.up{opacity:1;transform:none;transition:none}}
+html.calm .up{opacity:1;transform:none;transition:none}
+</style>
+<style is:inline>
+/* Matched to the live Framer JARVIS page (measured 2026-10-09): Albert Sans, full width bands that swap
+   navy and light, one 760px reading column, the screens as text left and a 360px phone right. */
+:root{--sans:"Albert Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:var(--sans);
+  --bg:#0A0A0C;--card:#121216;--fg:#E9E9EE;--body:#E9E9EE;--muted:#9A9AA5;--acc:#FFC24B;--warm:#FFC24B;--line:#24242C;--band:#0A0A0C}
+.lt{--fg:#0A0A0C;--body:#45454F;--muted:#62626C;--acc:#8A5A00;--card:#F5F3EE;--line:#E3E1DA;--band:#FFFDFA;--warm:#8A5A00}
+html{overflow-x:clip}
+.eyebrow,.k{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.14em;color:var(--acc)}
+.wrap{max-width:1080px}
+.layout{display:block;margin-top:96px}
+nav.toc{display:none}
+article{gap:0}
+article>section{padding-block:120px;max-width:760px;margin-inline:auto;color:var(--fg);border-image:conic-gradient(var(--band) 0 0) fill 0//0 100vmax}
+article>section.wide{max-width:1080px}
+section h2{font-size:clamp(32px,4vw,48px);font-weight:700;line-height:1.08;letter-spacing:-.02em;color:var(--fg)}
+section h3{color:var(--fg)}
+section p{color:var(--body);font-size:18px;line-height:1.6}
+.stats b{color:var(--acc)}
+.scr .screens{gap:120px;margin-top:56px}
+.scr .screen{grid-template-columns:minmax(0,640px) 360px;justify-content:space-between;gap:48px;max-width:none;align-items:start}
+.scr .screen>figure{order:2;margin:0}
+.scr .screen h3{font-size:32px;line-height:1.2;letter-spacing:-.01em}
+.lt :focus-visible{outline-color:#8A5A00}
+@media (max-width:900px){article>section{padding-block:80px}.scr .screen{grid-template-columns:minmax(0,1fr);gap:24px}.scr .screen>figure{order:0}}
+article>section{width:100%}
+/* site top bar, same as the home page; no theme toggle because this case study keeps its own fixed look */
+.wrap{padding-top:40px}
+.bar{margin-inline:calc(50% - 50vw)}
+/* Vishal 2026-10-13: header keeps the frosted blur, same as the home page (the solid navy try is undone) */
+/* Vishal 2026-10-13: header looks exactly like the home page header (its dark look, since this page is dark), with no navy tint.
+   Same frosted blur; a touch more opaque than home so the navy page behind doesn't tint it blue. */
+header.bar{--bg:#0C0C0E;--ink:#F2F1EC;--muted:#A7A7AE;--edge:#6B6B72;--line:#232328;--btn:#F2F1EC;--on-btn:#0C0C0E}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){header.bar{background:color-mix(in srgb,#0C0C0E 90%,transparent)}}
+header.bar .bar-book,header.bar .bar-cv{display:none} /* Vishal 2026-10-13: header is just name and menu; Book a call sits in the closing */
+body{margin-top:0}
+.progress{z-index:30}
+.summary{max-width:1080px;margin-inline:auto}
+.summary h2{font-size:13px;font-family:var(--sans);font-weight:600;letter-spacing:.14em;color:var(--acc)}
+.summary p{font-size:16px}
+.pill[aria-pressed=true][data-act=cc]{background:#fff;color:#0A0A0C}
+video::cue{font:500 18px/1.4 var(--sans);background:rgba(10,10,12,.82);color:#fff}
+.beforeafter .a{box-shadow:inset 0 0 0 1px #8A5A00}
+.beforeafter .a .k{color:#8A5A00}
+.swipe{display:none}
+@media (max-width:620px){
+  #flow figure{display:none}
+  .swipe{display:flex;gap:16px;list-style:none;margin:32px -28px 0;padding:0 28px 8px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:28px;overscroll-behavior-x:contain}
+  .swipe li{flex:0 0 260px;scroll-snap-align:start;display:grid;gap:8px;align-content:start}
+  .swipe p{font-size:17px;font-weight:600;line-height:1.3;color:var(--fg);min-height:2.6em}
+  .swipe img{width:100%;height:auto;border-radius:28px;margin-top:8px;box-shadow:0 12px 32px rgba(10,10,12,.12)}
+}
+@media (max-width:620px){article>section{padding-block:64px}.layout{margin-top:64px}.scr .screens{gap:72px}.scr .screen h3{font-size:26px}}
+
+/* ---- audit Phase 2 and 3 ---- */
+/* one break between two bands of the same colour, not two */
+/* desktop (Vishal 2026-10-13): the four navy sections after the 30 second version (hardest call, who, found, options) were one flat navy;
+   each now sits on its own step of Reward Centre gold, getting lighter as the story builds, so section breaks read */
+/* phones too since 2026-10-13 15:04 (Vishal: on phones the content blended into the page navy) */
+/* type scale: 13 label, 16 small, 18 body, 22 lead, 32 titles, 48 sections, 68 page title */
+.facts p,.stats span,.note,.source,figcaption,.opt p,.fix p,.trade p,.trade .cost,.nextgrid span{font-size:16px}
+.list .n,.trade .n,.tag{font-size:13px}
+.opt h3,.fix h3,.trade h3,.list h3,.nextgrid b{font-size:18px}
+blockquote,.dek,.closing>p,.metric b,.next h2{font-size:22px}
+.closing h2,.stats b{font-size:32px}
+@media (min-width:621px){.closing h2{font-size:48px}}
+/* what I'd change: each pair on its own card, Problem in amber */
+.fixes{border-top:0;gap:12px}
+.fix{background:var(--card);border:0;border-radius:16px;padding:24px 28px}
+.fix>div{display:grid;gap:6px;align-content:start}
+.k.pr{color:var(--warm)}
+/* the closing line reads as the point, not a footnote */
+.closing>p{font-weight:600;color:var(--acc)}
+/* more work: a picture and a clear hover */
+.nextgrid a{padding:0;overflow:hidden;gap:0;transition:transform .2s ease,box-shadow .2s ease}
+.nextgrid img{display:block;width:100%;height:auto;aspect-ratio:800/837;object-fit:cover}
+.nextgrid b{padding:16px 20px 20px;line-height:1.35}
+.nextgrid a:hover,.nextgrid a:focus-visible{transform:translateY(-2px);box-shadow:0 0 0 1px var(--acc)}
+.nextgrid a:hover b{text-decoration:underline;text-underline-offset:.2em}
+/* prototype: a still and a way out while Figma loads */
+.protowrap{position:relative;margin:0}
+/* Desktop: the prototype fits one screen between the sticky header and the bottom dock (Vishal 2026-10-13 "going into two scrolls") */
+@media (min-width:641px){.protowrap{width:min(100%,calc((100svh - 120px) * 16 / 10));margin-inline:auto}}
+.protowait{position:absolute;inset:0;border-radius:24px;background:var(--card);display:grid;place-content:center;justify-items:center;gap:12px;text-align:center;transition:opacity .3s ease}
+.protowait img{width:120px;height:auto;border-radius:16px;opacity:.9}
+.protowait p{font-size:16px;color:var(--muted)}
+.protowait a{font-size:16px;font-weight:600;color:var(--fg);padding:10px 4px}
+.protowrap.ready .protowait{opacity:0;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.nextgrid a,.protowait{transition:none}}
+html.calm .nextgrid a,html.calm .protowait{transition:none}
+@media (max-width:620px){
+  .opt{grid-template-columns:minmax(0,1fr)}
+  .opt .tag{order:-1;justify-self:start}
+  .fix{padding:20px}
+}
+</style>
+</style>
+
+<style is:inline>
+/* Reward Centre only. Dark top (hero, facts, 30 second version) in the boards' near black; story sections light;
+   Structure is the one dark band. Gold is value, coral is time and nothing else. On light, gold text uses a deeper gold ink (5.4:1). */
+body{background:#0A0A0C}
+.wrap>.facts{grid-template-columns:repeat(4,minmax(0,1fr))}
+.facts div{align-content:start}
+.k.time,.time{color:#FF6A55}
+.lt .k.time,.lt .time{color:#B83A26}
+article>section{padding-top:120px}
+@media (max-width:900px){article>section{padding-top:80px}}
+@media (max-width:620px){article>section{padding-top:64px}}
+/* two neutral steps, alternating */
+article>section#problem{--band:#FFFDFA;--card:#F5F3EE}
+article>section#structure{--band:#0A0A0C;--card:#141419}
+article>section#userflow{--band:#FFFDFA;--card:#F5F3EE}
+article>section#wireframes{--band:#F5F3EE;--card:#FFFDFA}
+article>section#hifi{--band:#FFFDFA;--card:#F5F3EE}
+article>section#rationale{--band:#F5F3EE;--card:#FFFDFA}
+article>section#system{--band:#FFFDFA;--card:#F5F3EE}
+article>section#metrics{--band:#F5F3EE;--card:#FFFDFA}
+article>section#learned{--band:#FFFDFA;--card:#F5F3EE}
+
+.lede{font-size:22px!important;line-height:1.5!important;color:var(--body);max-width:66ch}
+.k.sub{display:block;margin-top:48px}
+.intro{display:grid;gap:22px;max-width:66ch}
+.cards{display:grid;gap:16px;grid-template-columns:repeat(var(--n,3),minmax(0,1fr))}
+.cards>div{background:var(--card);border-radius:16px;padding:24px;display:grid;gap:10px;align-content:start;min-width:0}
+.cards h3{font-size:20px;line-height:1.3}
+.cards h3.g{color:var(--acc)}
+.cards p{font-size:16px;line-height:1.55}
+.cards .num{font-size:28px;font-weight:800;line-height:1;color:var(--acc);font-variant-numeric:tabular-nums}
+.cards .lbl{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.cards .hit{color:var(--acc);font-weight:600}
+.cards .hl{color:var(--fg);font-weight:500}
+.under{background:var(--card);border-radius:16px;padding:28px;display:grid;gap:14px}
+.under .big{font-size:22px;line-height:1.45;color:var(--fg);font-weight:500}
+.qs{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.qs li{display:flex;gap:12px;align-items:baseline;font-size:19px;font-weight:600;color:var(--fg)}
+.qs li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--acc);transform:translateY(-2px)}
+.plist{display:grid;gap:14px}
+.plist>div{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:baseline}
+.plist .n{font-size:20px;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums}
+.plist p{color:var(--fg)}
+/* Structure: the five buckets and how a reward moves */
+.bk>div{gap:6px}
+.bk .id{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.dot{width:10px;height:10px;border-radius:50%;background:#7C7C88;flex:none}
+.dot.w{background:#E9E9EE}.dot.c{background:#FF6A55}.dot.m{background:#C9C9D1}
+.bk .act{font-size:15px;font-weight:600;color:var(--muted)}
+.bk .act.w{color:#E9E9EE}.bk .act.c{color:#FF6A55}
+.moves{display:grid;gap:14px}
+.moves>div{display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px;align-items:center}
+.moves b{font-size:17px;font-weight:600;color:var(--fg)}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:0;padding:0;list-style:none}
+.chain li{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:100px;box-shadow:inset 0 0 0 1px #2E2E38;background:#141419;font-size:15px;font-weight:500;color:#E9E9EE}
+.chain li{position:relative}
+.chain li+li{margin-left:18px}
+.chain li+li::before{content:"→";position:absolute;left:-20px;color:#7C7C88}
+.goldline{color:var(--acc)!important;font-size:19px!important;font-weight:500}
+/* flat visuals and dark cards inside light sections */
+.darkcard{background:#0A0A0C;border-radius:20px;padding:clamp(16px,3vw,32px);margin:0}
+.darkcard img{display:block;width:100%;height:auto}
+.wf{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;align-items:start;margin:0;padding:0;list-style:none}
+.wf li{display:grid;gap:12px;min-width:0}
+.wf b{font-size:17px;font-weight:600;color:var(--fg)}
+.wf img{display:block;width:100%;height:auto;border-radius:10px;box-shadow:0 0 0 1px var(--line),0 12px 30px rgba(10,10,12,.08)}
+.hf{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(20px,3vw,40px);margin:0;padding:0;list-style:none}
+.hf li{display:grid;gap:6px;align-content:start;min-width:0}
+.hf b{font-size:19px;font-weight:600;color:var(--fg)}
+.hf span{font-size:15px;color:var(--muted);margin-bottom:12px}
+.proto-note{background:var(--card);border-radius:16px;padding:24px 28px;display:grid;gap:10px;margin-top:56px;max-width:880px}
+.proto-note h3{font-size:20px;color:var(--acc)}
+.trades{border-top:0;gap:18px}
+.trades>div{display:grid;gap:4px}
+.trades h4{margin:0;font-size:17px;font-weight:700;color:var(--acc);letter-spacing:-.005em}
+.tbl{width:100%;border-collapse:collapse;font-size:16px;line-height:1.45;background:var(--card);border-radius:16px;overflow:hidden}
+.tbl th{text-align:left;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:18px 16px 14px 20px}
+.tbl td{padding:16px 16px 16px 20px;border-top:1px solid var(--line);color:var(--body);vertical-align:top}
+.tbl td:first-child{color:var(--fg);font-weight:600}
+.tag{font-size:13px;font-weight:600;letter-spacing:.02em;padding:4px 10px;border-radius:100px;border:1px solid var(--line);color:var(--fg);justify-self:end}
+.met>div{grid-template-columns:minmax(0,1fr) auto}
+.met>div>:not(.mid,.tag){grid-column:1/-1}
+.met .mid{font-size:15px;font-weight:700;color:var(--muted)}
+.guard{margin-top:16px;border-radius:16px;padding:24px 28px;box-shadow:inset 0 0 0 2px var(--acc);display:grid;gap:10px;background:var(--card)}
+.guard p{font-size:19px;color:var(--fg)}
+@media (max-width:1100px){.cards{--n:2!important}.bk,.met{--n:3!important}}
+@media (max-width:900px){.wf,.hf{grid-template-columns:repeat(2,minmax(0,1fr))}.moves>div{grid-template-columns:minmax(0,1fr);gap:8px}}
+@media (max-width:620px){
+  .cards{--n:1!important}
+  .lede{font-size:19px!important}
+  .under{padding:22px}.under .big{font-size:19px}
+  .chain li{height:34px;padding:0 12px;font-size:14px}
+  /* the flow is a wide picture: on phones it scrolls sideways inside its card instead of shrinking to unreadable */
+  .darkcard.flowpic{overflow-x:auto;margin-inline:-8px}.darkcard.flowpic img{width:760px;max-width:none}
+  .wf,.hf{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-28px;padding:0 28px 8px;scroll-padding-inline:28px;gap:16px}
+  .wf li{flex:0 0 72%;scroll-snap-align:start}
+  .hf li{flex:0 0 70%;scroll-snap-align:start}
+  .tbl,.tbl tbody,.tbl tr,.tbl td{display:block}.tbl thead{display:none}
+  .tbl tr{padding:14px 18px;border-top:1px solid var(--line)}.tbl tr:first-child{border-top:0}.tbl td{border:0;padding:2px 0}
+  .tbl td[data-l]::before{content:attr(data-l) ": ";font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+}
+</style>
+</head>
+
+
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
+
+<SiteHeader home="/looks/kinetic/" theme={false} book cta={false} />
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Product design · Concept for a gaming app</p>
+    <h1>Unified Reward Centre</h1>
+    <p class="hook">Every reward. One place.</p>
+    <p class="dek">A reward centre concept for a gaming app. Rewards from every source in one place, sorted by what the player can do with them right now.</p>
+  </header>
+
+  <div class="facts">
+    <div><span class="k">Role</span><p>Product (UI/UX) Designer</p></div>
+    <div><span class="k">Year</span><p>2026</p></div>
+    <div><span class="k">Prototype</span><p>Built and prototyped in Figma</p></div>
+    <div><span class="k">Scope</span><p>Four screens, one card component in six states, a token based system, and a working prototype.</p></div>
+  </div>
+  <p class="note">Solo project. I owned the problem framing, information architecture, flows, UI, design system and prototype.</p>
+  <figure class="reel" style="margin-top:32px"><video data-inview class="shot wide" poster="img/00-hero-poster.jpg" width="1920" height="1080" muted loop playsinline preload="metadata" aria-label="Unified Reward Centre showreel"></video>
+    <div class="pills"><button type="button" class="pill" data-act="play" aria-pressed="false" aria-label="Play"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg><span class="lb">PLAY</span></button><button type="button" class="pill fs" data-act="fs" aria-label="Full screen"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/></svg><span class="lb">FULL SCREEN</span></button></div></figure>
+  <script is:inline>(()=>{
+    // This reel has no sound, so it only needs Play and Full screen. Same look and behaviour as the JARVIS reel otherwise.
+    const f=document.currentScript.previousElementSibling, v=f.querySelector('video'); const tall=matchMedia('(max-width:620px)').matches; if(tall){v.poster='img/00-hero-poster-tall.jpg';v.width=1080;v.height=1920} v.src=tall?'showreel-tall.mp4':'showreel.mp4'; const pb=f.querySelector('[data-act=play]');
+    const ip='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg>', ia='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><rect x="6" y="4.5" width="4.2" height="15" rx="1.4" fill="currentColor"/><rect x="13.8" y="4.5" width="4.2" height="15" rx="1.4" fill="currentColor"/></svg>';
+    const paint=()=>{pb.innerHTML=v.paused?ip+'<span class="lb">PLAY</span>':ia+'<span class="lb">PAUSE</span>';pb.setAttribute('aria-label',v.paused?'Play':'Pause');pb.setAttribute('aria-pressed',String(!v.paused))};
+    const fb=f.querySelector('.fs'),fsOn=()=>document.fullscreenElement===f;
+    fb.onclick=()=>{if(fsOn())document.exitFullscreen();else if(f.requestFullscreen)f.requestFullscreen();else if(v.webkitEnterFullscreen)v.webkitEnterFullscreen()};
+    document.addEventListener('fullscreenchange',()=>{const o=fsOn();fb.setAttribute('aria-label',o?'Exit full screen':'Full screen');fb.querySelector('.lb').textContent=o?'EXIT FULL SCREEN':'FULL SCREEN'});
+    pb.onclick=()=>{if(v.paused)v.play();else v.pause()};
+    v.onclick=()=>pb.onclick();v.style.cursor='pointer';
+    ['play','pause'].forEach(e=>v.addEventListener(e,paint));
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('calm'))v.play().catch(()=>{});paint();
+  })()</script>
+
+  <section class="summary" aria-labelledby="sum">
+    <h2 id="sum">The 30 second version</h2>
+    <div><span class="k">Problem</span><p>Eleven reward sources, each surfaced by the system that produced it. The player never gets one place to see what is his.</p></div>
+    <div><span class="k">Decision</span><p>Five buckets ordered by what the player can act on answer those questions in the order he asks them.</p></div>
+    <div><span class="k">The one metric that matters</span><p>Claim rate. Rewards claimed out of rewards made claimable.</p></div>
+    <div><span class="k">What I learned</span><p>On a rewards screen, a number and its bar disagreeing is the fastest way to lose a player’s trust.</p></div>
+  </section>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Contents">
+      <span class="k">Contents</span>
+      <a href="#problem">Problem understanding</a>
+      <a href="#structure">Structure</a>
+      <a href="#userflow">User flow</a>
+      <a href="#wireframes">Wireframes</a>
+      <a href="#hifi">High fidelity</a>
+      <a href="#rationale">Design rationale</a>
+      <a href="#system">System</a>
+      <a href="#metrics">Success metrics</a>
+      <a href="#learned">What I learned</a>
+    </nav>
+    <button type="button" class="tocpill" popovertarget="tocsheet" aria-label="Contents"><span class="k">Contents</span><b>Problem understanding</b><i aria-hidden="true">1 / 9</i><span class="chev" aria-hidden="true"></span></button>
+    <div id="tocsheet" class="tocsheet" popover><span class="k">Contents</span></div>
+    <div class="dockfade" aria-hidden="true"></div><nav class="dock" aria-label="Contents"><button type="button" class="dkb" data-go="-1" aria-label="Previous section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="dkm"><div class="dkt"><b></b><i></i></div><div class="dks"></div></div><a class="dkn" href="#"><small>NEXT</small><span></span></a><button type="button" class="dkb" data-go="1" aria-label="Next section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></nav>
+
+    <article>
+      <section id="problem" class="lt wide">
+        <div class="intro">
+          <p class="eyebrow">01 · Problem understanding</p>
+          <h2>Rewards are everywhere and nowhere</h2>
+          <p class="lede">Eleven reward sources, each surfaced by the system that produced it. The player never gets one place to see what is his.</p>
+        </div>
+        <div class="cards" style="--n:2;margin-top:48px;background:none">
+          <div style="background:none;padding:0">
+            <span class="k">The problems as stated</span>
+            <div class="plist">
+              <div><span class="n">01</span><p>Players miss rewards they are eligible for.</p></div>
+              <div><span class="n">02</span><p>Some rewards stay unclaimed even after they are earned.</p></div>
+              <div><span class="n">03</span><p>Players do not understand what they are working towards.</p></div>
+              <div><span class="n">04</span><p>The experience feels fragmented.</p></div>
+            </div>
+          </div>
+          <div style="background:none;padding:0">
+            <span class="k">What sits underneath</span>
+            <div class="under">
+              <p class="big">All four come from one decision. Rewards are organised by the system that generated them, not by what the player can do about them.</p>
+              <p>The player never asks what the mission system gave him. He asks four questions, and no screen answers any of them.</p>
+              <ul class="qs"><li>What do I have</li><li>What can I take right now</li><li>What am I close to</li><li>What could I start</li></ul>
+            </div>
+          </div>
+        </div>
+        <div class="cards" style="--n:3;margin-top:48px">
+          <div><span class="lbl">What I saw in the market</span><p>I looked at reward and loyalty screens across banking, travel, food and casual games. Almost every one still organises by source or by tab, or shrinks every programme into an icon grid. The grid looks tidy and rebuilds the eleven doors in a smaller space.</p><p class="hl">Games get two things right that I kept. The action on each row changes with its state, Claim or Go. And time is loud, a live countdown instead of a quiet date.</p></div>
+          <div><span class="lbl">Primary user</span><h3>The active mobile player</h3><p>Opens most days, plays short sessions, earns across several sources at once without tracking any of them. Not disengaged, uninformed. He would claim more if he knew what was waiting.</p></div>
+          <div><span class="lbl">Secondary user</span><h3>The returning player</h3><p>Back after a gap. Needs to see what survived, what expired, and what is worth starting again. The reason History shows expired rewards instead of hiding them.</p></div>
+        </div>
+        <span class="k sub">How I ranked the five jobs</span>
+        <div class="cards" style="--n:5">
+          <div><span class="num">1</span><h3>Claim with minimal effort</h3><p>Unclaimed value is the only problem that costs the player something real. Every claimable reward is on the first screen with its button on the card.</p></div>
+          <div><span class="num">2</span><h3>Discover what is available</h3><p>A reward nobody sees is the same as no reward. Ready, Expiring and Available are all visible in one scroll.</p></div>
+          <div><span class="num">3</span><h3>Understand progress</h3><p>Steps as counts and a percentage, one next step line, a Progress screen grouped by when things end.</p></div>
+          <div><span class="num">4</span><h3>Stay motivated</h3><p>The consequence of the three above, plus one deliberate moment at claim. Not decoration on top.</p></div>
+          <div><span class="num">5</span><h3>Track history</h3><p>Lowest frequency job, so it gets its own screen and one row on Home rather than permanent space.</p></div>
+        </div>
+        <span class="k sub">Assumptions</span>
+        <div class="cards" style="--n:4">
+          <div><h3 class="g">One currency</h3><p>Reward points, plus occasional grants like entries or items. A single balance at the top means something.</p></div>
+          <div><h3 class="g">Every reward has a state</h3><p>Most also carry an expiry. State decides what the player can do, expiry decides how soon.</p></div>
+          <div><h3 class="g">New types keep arriving</h3><p>The structure has to absorb the twelfth and thirteenth reward type without a redesign.</p></div>
+          <div><h3 class="g">Two ways in</h3><p>A Rewards tab and notifications. The rest of the app stays untouched, per the constraint.</p></div>
+        </div>
+      </section>
+
+      <section id="structure" class="wide">
+        <div class="intro">
+          <p class="eyebrow">02 · Structure</p>
+          <h2>Five buckets, ordered by what the player can do</h2>
+          <p class="lede">Every one of the eleven sources becomes a card inside these five. The source turns into a label on the card, not a place the player has to go.</p>
+        </div>
+        <div class="cards bk" style="--n:5;margin-top:48px">
+          <div><span class="id"><i class="dot w"></i>01</span><h3>Ready to claim</h3><p>What can I take right now</p><span class="act w">Act now, no effort</span></div>
+          <div><span class="id"><i class="dot c"></i>02</span><h3>Expiring soon</h3><p>What am I about to lose</p><span class="act c">Act now, time bound</span></div>
+          <div><span class="id"><i class="dot m"></i>03</span><h3>In progress</h3><p>What am I close to</p><span class="act" style="color:#C9C9D1">Keep going</span></div>
+          <div><span class="id"><i class="dot"></i>04</span><h3>Available</h3><p>What could I start</p><span class="act">Choose</span></div>
+          <div><span class="id"><i class="dot"></i>05</span><h3>History</h3><p>What already happened</p><span class="act">Look back</span></div>
+        </div>
+        <span class="k sub">A reward moves between buckets as its state changes</span>
+        <div class="moves">
+          <div><b>Daily login</b><ol class="chain"><li><i class="dot"></i>Available</li><li><i class="dot w"></i>Ready to claim</li><li><i class="dot"></i>History</li></ol></div>
+          <div><b>Weekly mission</b><ol class="chain"><li><i class="dot"></i>Available</li><li><i class="dot m"></i>In progress</li><li><i class="dot w"></i>Ready to claim</li><li><i class="dot"></i>History</li></ol></div>
+          <div><b>Tournament reward</b><ol class="chain"><li><i class="dot w"></i>Ready to claim</li><li><i class="dot c"></i>Expiring soon</li><li><i class="dot"></i>History</li></ol></div>
+        </div>
+        <span class="k sub">Five rules that hold across all four screens</span>
+        <div class="cards" style="--n:5">
+          <div><span class="num">01</span><h3>One reward, one bucket</h3><p>If a reward fits two, the more urgent one wins. Expiring soon, then Ready, then In progress, then Available.</p></div>
+          <div><span class="num">02</span><h3>Expiring means under 24 hours</h3><p>Ready or unfinished. The card keeps its own button, Claim or Go, and gains a live countdown.</p></div>
+          <div><span class="num">03</span><h3>Home shows three per bucket</h3><p>Ready expands in place with Show more and Claim all. In progress and Available continue on Progress. History continues on History.</p></div>
+          <div><span class="num">04</span><h3>Body opens, button acts</h3><p>Tapping a card always opens Detail. The button always does what the state allows. Same on every screen.</p></div>
+          <div><span class="num">05</span><h3>No dead ends</h3><p>Detail always offers Start, Continue or Claim. Claiming returns to Home with the next nearest reward already showing.</p></div>
+        </div>
+        <p class="goldline" style="margin-top:24px;max-width:80ch">The same reward shows the same numbers everywhere. Play 5 hands is 3 of 5 hands at 60 percent on Home, on Progress and on Detail, and every claimed reward in History has already left Home.</p>
+        <span class="k sub">How the four screens divide the work</span>
+        <div class="cards" style="--n:4">
+          <div><h3 class="g">Home</h3><p>All five buckets in one scroll, three per bucket, in the order above. The answer screen.</p></div>
+          <div><h3 class="g">Reward Detail</h3><p>Opens from any card, from any screen. Exact steps left, expiry, and a button that always does something.</p></div>
+          <div><h3 class="g">Progress</h3><p>Everything not yet claimable, grouped by today, this week and long term. In progress first, then available.</p></div>
+          <div><h3 class="g">History</h3><p>Expands History. Claimed and expired, with a running balance.</p></div>
+        </div>
+      </section>
+
+      <section id="userflow" class="lt wide">
+        <div class="intro">
+          <p class="eyebrow">03 · User flow</p>
+          <h2>Every path ends in a claim or a return to Home</h2>
+          <p class="lede">Two ways to claim. Inline from the card for simple grants, through Detail for anything with conditions.</p>
+        </div>
+        <figure class="darkcard flowpic" style="margin-top:40px" tabindex="0" aria-label="User flow diagram, scrolls sideways on small screens"><img src="img/03-flow.webp" width="1600" height="833" loading="lazy" alt="User flow. Entry: Rewards tab, Home widget or profile, and Reward notification all lead to Home (balance, next step, all five buckets). From Home the player goes to Claim from the card (simple grants, one tap), Reward Detail (card body, or the next step line), Progress (see all, or the tier track) or History (history row, or the balance). Progress opens Detail with Tap a row; History opens it read only. Claim from the card and Claim on Detail both lead to Claim success: balance counts up and the nearest reward surfaces so there is no dead end, then back to Home. An Expiry notification lands on the reward itself and returns to Home, nothing to dismiss."></figure>
+        <div class="cards" style="--n:3;margin-top:24px">
+          <div><h3>Back always returns to Home</h3><p>Home is the only hub. No screen links sideways except into Detail.</p></div>
+          <div><h3>Detail is reachable from three screens</h3><p>Home, Progress and History all open the same Detail, read only from History.</p></div>
+          <div><h3>Expiry skips the hub</h3><p>A reward about to expire opens straight on itself. Saving a tap is the point of the notification.</p></div>
+        </div>
+      </section>
+
+      <section id="wireframes" class="lt wide">
+        <div class="intro">
+          <p class="eyebrow">04 · Wireframes</p>
+          <h2>Structure before surface</h2>
+          <p class="lede">Four screens at full scroll length. Blue numbers are entry points, matched in the Entered from box under each screen. Purple boxes are structural decisions. The high fidelity that follows changes the surface, not the structure.</p>
+        </div>
+        <ul class="wf" style="margin-top:40px">
+          <li><b>Home</b><img src="img/04-wf-home.webp" width="560" height="1926" loading="lazy" alt="Home wireframe in greyscale: balance 12,480 with Silver tier, Ready to claim with Claim all, Expiring soon, In progress, Available and a History row, with purple notes on the structural decisions"></li>
+          <li><b>Reward Detail</b><img src="img/04-wf-detail.webp" width="560" height="1414" loading="lazy" alt="Reward Detail wireframe for Play 5 hands: +500 points, What's left with three of five hands done, expiry Ends Sunday 28 Sep, terms, and a Continue playing button"></li>
+          <li><b>Progress</b><img src="img/04-wf-progress.webp" width="560" height="2130" loading="lazy" alt="Progress wireframe: 5 in progress, 2 available, 2,600 points in play, chips for Today, This week and Long term, a seven day streak, and sections for today, this week and long term"></li>
+          <li><b>History</b><img src="img/04-wf-history.webp" width="560" height="1474" loading="lazy" alt="History wireframe: lifetime claimed, 48 rewards claimed, 6 expired, filter chips, and claimed and expired rewards grouped by day with the balance after each day"></li>
+        </ul>
+      </section>
+
+      <section id="hifi" class="lt wide">
+        <div class="intro">
+          <p class="eyebrow">05 · High fidelity</p>
+          <h2>The four screens</h2>
+          <p class="lede">Same structure as the wireframes, surfaced. One card component in six states renders every reward on every screen. Gold is value, white is action, coral is time, and each reward type carries its own tinted icon.</p>
+        </div>
+        <ul class="hf" style="margin-top:48px">
+          <li><b>Home</b><span>All five buckets in one scroll</span><div class="iph"><div class="sc" tabindex="0" aria-label="Home screen, scrolls inside the frame"><img src="img/05-home.webp" width="560" height="2782" loading="lazy" alt="Home screen: balance 12,480 points at Silver, 1,520 points to Gold, Ready to claim with three cards and Claim all, a Referral bonus expiring in 04:12:57 with a coral edge, In progress, Available and History"></div></div></li>
+          <li><b>Reward Detail</b><span>Exact steps left, always one action</span><div class="iph"><div class="sc" tabindex="0" aria-label="Reward Detail screen, scrolls inside the frame"><img src="img/05-detail.webp" width="560" height="1492" loading="lazy" alt="Reward Detail for Play 5 hands: +500 points, in progress, What's left 3 of 5 hands at 60 percent, ends Sunday 28 Sep, and a Continue playing button"></div></div></li>
+          <li><b>Progress</b><span>Today, this week, long term</span><div class="iph"><div class="sc" tabindex="0" aria-label="Progress screen, scrolls inside the frame"><img src="img/05-progress.webp" width="560" height="2582" loading="lazy" alt="Progress screen: 5 in progress, 2 available, 2,600 points in play, a daily streak on day 4 of 7, then this week's missions with bars and the long term Silver to Gold track"></div></div></li>
+          <li><b>History</b><span>Claimed and expired, running balance</span><div class="iph"><div class="sc" tabindex="0" aria-label="History screen, scrolls inside the frame"><img src="img/05-history.webp" width="560" height="1737" loading="lazy" alt="History screen: lifetime claimed 48,920 points, claimed rewards by day with the balance after each day, and an expired Friday promo with its value struck through"></div></div></li>
+        </ul>
+        <div class="proto-note">
+          <h3>The prototype</h3>
+          <p>Claim swaps the card to its claimed state in place, which is the moment this screen exists for. Home links out to Detail, Progress and History, and every screen returns to Home. I scoped the concept to four screens, so only Play 5 hands opens a Detail page; in the product every card opens its own.</p>
+        </div>
+      </section>
+
+      <section id="rationale" class="lt wide">
+        <div class="intro">
+          <p class="eyebrow">06 · Design rationale</p>
+          <h2>Why it is built this way</h2>
+        </div>
+        <div class="cards" style="--n:2;margin-top:40px">
+          <div><h3>Why this structure</h3><p>The eleven sources were organised around the systems that produced them. Players think in four questions instead. Five buckets ordered by what the player can act on answer those questions in the order he asks them.</p><p>None of the reward screens I looked at order by state. They order by source or by tab. That makes this the move that separates the screen, not a safe default.</p></div>
+          <div><h3>How it reduces complexity</h3><p>One destination replaces eleven. One card component renders every reward type, so the pattern is learned once and read everywhere.</p><p>Section order never changes, and Expiring soon only appears when something is genuinely at risk. The screen stays predictable without going stale.</p></div>
+          <div><h3>How the player knows what is next</h3><p>A single next step line under the balance names one action. In progress shows remaining steps as steps, three of five hands, not a percentage.</p><p>Claiming never ends in a dead end. The balance counts up and the nearest reward surfaces. Available is ranked by value against effort, so choosing is not research.</p></div>
+          <div><h3>Trade offs</h3>
+            <div class="trades">
+              <div><h4>Clarity over decoration</h4><p>One moment celebrates, the claim. Everything else stays still, because celebration that fires constantly stops registering within a week.</p></div>
+              <div><h4>Detail on its own screen</h4><p>One extra tap on conditional rewards, in exchange for a Home that stays scannable.</p></div>
+              <div><h4>Expired stays visible</h4><p>It looks worse in a screenshot. It is the honest answer, and the strongest reason to open the screen tomorrow.</p></div>
+              <div><h4>Available lives in Progress</h4><p>Stays inside the four screen scope, without a fifth screen just for discovery.</p></div>
+              <div><h4>Sections, not tabs, on Progress</h4><p>Tabs would hide two thirds of what the player is working towards. The chips jump between horizons instead of filtering them.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="system" class="lt wide">
+        <div class="intro">
+          <p class="eyebrow">07 · System</p>
+          <h2>One reward object, six states, one card</h2>
+          <p class="lede">Every reward the product will ever have is the same object. What changes is its state, and the state decides which card it becomes, which bucket it sits in, and what its button says.</p>
+        </div>
+        <span class="k sub">What a reward is, in plain language</span>
+        <div class="cards" style="--n:6">
+          <div><h3 class="g">Type</h3><p>Daily login, mission, tournament, cashback, referral, milestone, promo. Decides the glyph and its tint.</p></div>
+          <div><h3 class="g">Source</h3><p>Where it came from. Becomes the small label on the card, never a separate destination.</p></div>
+          <div><h3 class="g">State</h3><p>Available, in progress, ready, expiring, claimed, expired. Decides the bucket, the card and the button.</p></div>
+          <div><h3 class="g">Value</h3><p>Points, an item or an entry. Set in Unbounded, gold, the hero of the card.</p></div>
+          <div><h3 class="g">Progress</h3><p>Optional. 3 of 5, 640 of 1,000. Drives the bar and the percentage.</p></div>
+          <div><h3 class="g">Expiry</h3><p>Optional. Under 24 hours it switches the card to Expiring and starts the countdown.</p></div>
+        </div>
+        <span class="k sub">State decides everything on the card</span>
+        <table class="tbl">
+          <thead><tr><th scope="col">State</th><th scope="col">Bucket on Home</th><th scope="col">Button</th><th scope="col">What is loud</th><th scope="col">Colour</th></tr></thead>
+          <tbody>
+            <tr><td>Available</td><td data-l="Bucket on Home">Available</td><td data-l="Button">Start</td><td data-l="What is loud">Value</td><td data-l="Colour">Outline only</td></tr>
+            <tr><td>In progress</td><td data-l="Bucket on Home">In progress</td><td data-l="Button">Go</td><td data-l="What is loud">Bar and what you will earn</td><td data-l="Colour">White bar, gold value</td></tr>
+            <tr><td>Ready</td><td data-l="Bucket on Home">Ready to claim</td><td data-l="Button">Claim</td><td data-l="What is loud">Value, lit</td><td data-l="Colour">White button, gold bloom</td></tr>
+            <tr><td>Expiring</td><td data-l="Bucket on Home">Expiring soon</td><td data-l="Button">Claim or Go</td><td data-l="What is loud">Countdown</td><td data-l="Colour">Coral edge and pill</td></tr>
+            <tr><td>Claimed</td><td data-l="Bucket on Home">History</td><td data-l="Button">None</td><td data-l="What is loud">Value and Claimed</td><td data-l="Colour">Gold, single line</td></tr>
+            <tr><td>Expired</td><td data-l="Bucket on Home">History</td><td data-l="Button">None</td><td data-l="What is loud">Struck value</td><td data-l="Colour">Grey, single line</td></tr>
+          </tbody>
+        </table>
+        <span class="k sub">Stress test, a reward type that does not exist yet</span>
+        <div class="cards" style="--n:2">
+          <div><h3>Season Pass, a 30 day ladder of 20 tiers, each tier paying out separately</h3><p>Type: season. Source: Season Pass. Value per tier. Progress: tier 6 of 20. Expiry: end of season. One glyph and one tint token added. Each tier is a card. Unlocked tiers sit in Ready to claim, the next one in In progress, the rest in Available. Nothing on the four screens changes.</p></div>
+          <div><h3>Physical prize, a headset shipped to your door</h3><p>Type: item. Value: the item. Claim opens an address step on Detail instead of counting the balance up. The card, the bucket and the button are unchanged. Only Detail grows a step, which it already knows how to do.</p></div>
+        </div>
+        <span class="k sub">Foundations in this file</span>
+        <div class="cards" style="--n:4">
+          <div><h3 class="g">54 semantic colour tokens</h3><p>Aliased to 58 primitives. Four families: surface, text, value and action, status. Plus tier metals, type tints and success. 25 typography tokens on top.</p></div>
+          <div><h3 class="g">107 text styles</h3><p>Unbounded for numbers only, Albert Sans for everything else. Eleven semantic roles on top of the size scales.</p></div>
+          <div><h3 class="g">3 component sets</h3><p>Reward Card in six states, Progress bar in seven percent variants, Reward Icon with eleven glyphs on an instance swap.</p></div>
+          <div><h3 class="g">1 rule for colour</h3><p>Gold is value, white is action, coral is time, accents live in a 36px tile or a chip and nowhere else.</p></div>
+        </div>
+      </section>
+
+      <section id="metrics" class="lt wide">
+        <div class="intro">
+          <p class="eyebrow">08 · Success metrics</p>
+          <h2>How I would know it worked</h2>
+          <p class="lede">Five numbers. Each one maps back to a problem named on board 01.</p>
+        </div>
+        <div class="cards met" style="--n:5;margin-top:40px">
+          <div><span class="mid">01</span><span class="tag">↑ Up</span><h3>Claim rate</h3><p>Rewards claimed out of rewards made claimable.</p><p class="hit">Answers unclaimed rewards directly.</p></div>
+          <div><span class="mid">02</span><span class="tag">↓ Down</span><h3>Expiry rate</h3><p>Share of rewards that expire unclaimed.</p><p class="hit">The honest counterweight to claim rate.</p></div>
+          <div><span class="mid">03</span><span class="tag">↓ Down</span><h3>Taps to claim</h3><p>From opening the Reward Centre to a claim.</p><p class="hit">Two taps for a simple grant is the target.</p></div>
+          <div><span class="mid">04</span><span class="tag">↑ Up</span><h3>Completion rate</h3><p>Started rewards that get finished.</p><p class="hit">Tests whether players know what they are working towards.</p></div>
+          <div><span class="mid">05</span><span class="tag">↑ Up</span><h3>D7 retention</h3><p>Players who claimed at least once, against those who never did.</p><p class="hit">Whether the screen changes behaviour or only reports it.</p></div>
+        </div>
+        <div class="guard"><span class="k">Guardrail I would watch</span><p>Claim rate rising while session length drops. That would mean players open the centre, claim and leave, which is the opposite of motivation.</p></div>
+        <span class="k sub">Notes</span>
+        <div class="cards" style="--n:3">
+          <div><p>Scoped to mobile and four screens, with the rest of the app left untouched.</p></div>
+          <div><p>Wireframes are greyscale on purpose, so structure is judged before colour.</p></div>
+          <div><p>Reward names, values and times are illustrative, chosen to be believable rather than exact.</p></div>
+        </div>
+      </section>
+
+      <section id="learned" class="lt wide">
+        <div class="intro">
+          <p class="eyebrow">09 · What I learned</p>
+          <h2>Where the first answer was wrong</h2>
+          <p class="lede">Four decisions that changed during the build, and why. Then what I would test first with real players.</p>
+        </div>
+        <span class="k sub">Decisions that changed</span>
+        <div class="cards" style="--n:2">
+          <div><span class="num">01</span><h3>Sort by what you can do, not where it came from</h3><p>The obvious structure was a tab per reward source: login, missions, tournaments, referrals. I rejected it because the next reward type the product adds would need a new tab. Sorted by state, ready, expiring, in progress and available, a new type simply arrives as a card.</p></div>
+          <div><span class="num">02</span><h3>Gold was doing two jobs</h3><p>In the first pass, in progress and claimed rewards both sat on gold, so a half finished mission looked like points already earned. I split the meanings: gold is value, white is action, coral is time. Because every colour was a token, moving action from green to white took four token changes, not a screen edit.</p></div>
+          <div><span class="num">03</span><h3>A bar that disagreed with its number</h3><p>Every progress bar rendered at 62 percent, whatever its label said, because width was set by resizing and instances overrode it. I rebuilt the bar as a component that fills by layout instead. On a rewards screen, a number and its bar disagreeing is the fastest way to lose a player’s trust.</p></div>
+          <div><span class="num">04</span><h3>A summary that contradicted the screen</h3><p>Points in play read 2,300 while the cards directly under it added up to 2,600, and the counts beside it were off too. Now every summary number gets checked against the cards it summarises before I call a screen done.</p></div>
+        </div>
+        <span class="k sub">What I would test first</span>
+        <div class="cards" style="--n:3">
+          <div><span class="num">A</span><h3>Time to first claim</h3><p>From opening the Reward Centre to the first claim. The clearest read on whether leading with Ready to claim actually works.</p></div>
+          <div><span class="num">B</span><h3>Is coral read as today</h3><p>Show the Expiring card with its countdown hidden and ask what it means. If players do not read coral as act today, the rule needs a word, not just a colour.</p></div>
+          <div><span class="num">C</span><h3>Rewards lost to expiry</h3><p>The share of rewards that expire unclaimed, before and after. It is the loss players feel most, and History now makes it visible.</p></div>
+        </div>
+      </section>
+    </article>
+  </div>
+
+  <div class="endsec">
+  <footer class="closing">
+    <h2>Unified Reward Centre</h2>
+    <p>Every reward. One place.</p>
+    <div class="btns">
+      <a class="btn primary" href="https://www.behance.net/gallery/256413187/Unified-Reward-Centre-Mobile-Product-Design" target="_blank" rel="noopener">View on Behance<svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill-opacity="0" fill="currentColor" height="9.75px" transform="translate(8.25 6)" width="9.75px"></path><path d="M 0 7.125 L 7.125 0" fill="transparent" height="7.125px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(6 10.875)" width="7.125px"></path><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill="transparent" height="9.75px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(8.25 6)" width="9.75px"></path></svg></a>
+      <a class="btn ghost" href="/looks/kinetic/"><svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill-opacity="0" fill="currentColor" height="13.5px" transform="translate(3.75 5.25)" width="6.75px"></path><path d="M 9.75 0 L 0 0" fill="transparent" height="1px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(10.5 12)" width="9.75px"></path><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill="transparent" height="13.5px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(3.75 5.25)" width="6.75px"></path></svg>Back to home</a>
+    </div>
+    <p class="founder">Building a product people need to trust? I take on freelance work. <a href="https://cal.com/designwvishal" target="_blank" rel="noopener">Book a call</a></p>
+  </footer>
+
+  <nav class="next" aria-label="More work">
+    <span class="k">More work</span>
+    <h2>Check out more work</h2>
+    <div class="nextgrid">
+      <a href="/work/twelve/"><img src="img/more-twelve.webp" width="800" height="837" alt="" loading="lazy"><b>Twelve · Plans in years, not months</b></a>
+      <a href="/work/ixigo-trains/"><img src="img/more-ixigo.webp" width="800" height="837" alt="" loading="lazy"><b>ixigo Trains · The four hours nobody designs for</b></a>
+      <a href="/work/split-and-request/"><img src="img/more-split.webp" width="800" height="837" alt="" loading="lazy"><b>Google Pay Split and Request</b></a>
+    </div>
+  </nav>
+  </div>
+</div>
+
+<style is:inline>
+/* Closing (Vishal 2026-10-13): same words, order and layout as before; only the look changes.
+   Closing and More work are ONE section. No boxed card (dark, navy and blue boxes all read as a slab dropped on the page):
+   a full width ending band that grows out of the page navy into Reward Centre gold light, in the page's own font. */
+body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
+.endsec{position:relative;margin:140px calc(50% - 50vw) 0;padding:clamp(72px,9vw,128px) calc((100vw - min(100vw - 56px,1376px)) / 2 + clamp(24px,4.5vw,88px)) clamp(64px,8vw,104px);background:radial-gradient(70% 55% at 50% 0%,rgba(255,194,75,.16),rgba(255,194,75,0) 70%),linear-gradient(180deg,#0A0A0C 0%,#0A0A0C 55%,#17140C 100%);border-top:1px solid rgba(255,194,75,.35);color:#E9E9EE}
+.endsec .closing{margin:0;padding:0;border:0;gap:18px}
+.closing h2{font-family:var(--sans);font-size:clamp(56px,8.4vw,116px)!important;font-weight:800;line-height:.95;letter-spacing:-.035em;color:#FFE3A6} /* very light Reward Centre gold, 14:1 on navy (Vishal 2026-10-13) */
+.closing>p{font-size:clamp(20px,2.2vw,28px)!important;font-weight:500;line-height:1.3;color:#CFCFD8}
+.closing .btns{margin-top:22px;gap:12px}
+.closing .btn{height:52px;padding:0 22px;font-size:16px;font-weight:650}
+.closing .btn.primary{background:#F2F1EC;color:#0A0A0C}
+.closing .btn.ghost{border-color:rgba(214,220,207,.4);color:#F2F1EC}
+.endsec .next>.k{color:#FFE3A6}.endsec .next>h2{color:#F2F1EC}
+/* centred on every screen size, phones too (Vishal 2026-10-13) */
+.endsec .closing{text-align:center;justify-items:center}.endsec .closing .btns{justify-content:center}.endsec .next>.k,.endsec .next>h2{text-align:center}
+.endsec .nextgrid a{background:#17171D;color:#F2F1EC;box-shadow:0 0 0 1px rgba(242,241,236,.14)} /* navy blue caption: darker than the thumbnail, not black (Vishal 2026-10-13) */
+.endsec .nextgrid b{color:#F2F1EC}
+.endsec .nextgrid a:hover,.endsec .nextgrid a:focus-visible{box-shadow:0 0 0 2px #FFC24B}
+/* audit 2026-10-13: on phones More work is one swipe row (next card peeks in) instead of three full screens of cards */
+@media (max-width:620px){.endsec .nextgrid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-28px;padding:0 28px 6px;scroll-padding-inline:28px;scrollbar-width:none}.endsec .nextgrid::-webkit-scrollbar{display:none}.endsec .nextgrid a{flex:0 0 87%;scroll-snap-align:start}}
+.endsec .closing .founder{margin-top:14px;font-size:17px!important;font-weight:500;color:#CFCFD8}.endsec .closing .founder a{color:#F2F1EC;font-weight:700;text-underline-offset:4px}
+@media (max-width:620px){.endsec .closing .founder{font-size:15px!important;line-height:1.5;max-width:30ch;margin-left:auto;margin-right:auto;text-wrap:balance}.endsec .closing .founder a{white-space:nowrap}}
+.endsec .next{margin-top:clamp(56px,7vw,96px);padding-top:0;border-top:0}
+/* Phones use the same band as desktop (Vishal 2026-10-13 "make the same for Mobile"), only sized down */
+@media (max-width:620px){.endsec{margin-top:48px;padding-inline:28px}.closing h2{font-size:min(52px,11.4vw)!important;white-space:nowrap}}
+
+/* Desktop spacing (Vishal 2026-10-13: "make the sections responsive"): the page grows with the window up to the home page width (1376px)
+   instead of a fixed 760/1080 column. On wide screens each reading section puts its eyebrow and heading on the left
+   and the text on the right, so both sides of the screen are used. Phones and tablets are unchanged. */
+@media (min-width:901px){
+  .wrap,.summary,article>section.wide{max-width:1376px}
+  .wrap{padding-inline:clamp(24px,4.5vw,88px)} /* more side margin on desktop (Vishal 2026-10-13 "going too wide") */
+}
+@media (min-width:1100px){
+  article>section:not(.wide){max-width:none;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(48px,6vw,120px);row-gap:0}
+  article>section:not(.wide)>*{grid-column:2;min-width:0}
+  article>section:not(.wide)>:is(.eyebrow,h2){grid-column:1;grid-row:1/span 60;align-self:start}
+  article>section:not(.wide)>h2{padding-top:36px}
+  article>section:not(.wide)>:not(.eyebrow,h2)~:not(.eyebrow,h2){margin-top:22px}
+}
+</style>
+
+<script is:inline>
+(function(){
+  var bar=document.getElementById('bar');
+  var links=[];
+  function onScroll(){
+    var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';
+    var cur=null;
+    links.forEach(function(a){var s=document.querySelector(a.getAttribute('href'));if(s&&s.getBoundingClientRect().top<160)cur=a;});
+    links.forEach(function(a){a.classList.toggle('on',a===cur)});
+  }
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+<script is:inline>
+(function(){
+  // As on the Framer page: each section's content fades up 20px as it comes into view
+  if(!('IntersectionObserver' in window))return;
+  var groups=[].slice.call(document.querySelectorAll('article>section, .scr .screen'));
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -10% 0px'});
+  groups.forEach(function(g){[].slice.call(g.children).forEach(function(el,i){if(el.classList.contains('screens'))return;el.classList.add('up');el.style.setProperty('--d',i*60+'ms');io.observe(el)})});
+})();
+</script>
+
+<style is:inline>
+/* Screens as on Framer: the text stays pinned 120px from the top while its phone scrolls past */
+.scr .screen>div{position:sticky;top:120px}
+@media (max-width:900px){.scr .screen>div{position:static}.scr .screen>figure{order:2;justify-self:center;width:min(300px,100%)}}
+/* Contents: a rail in the left margin on wide screens, a pill that opens the list everywhere else */
+nav.toc{display:grid;position:fixed;left:28px;top:50%;width:170px;transform:translateY(-50%);z-index:20;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s;gap:2px;font-size:13px;line-height:1.3}
+nav.toc.show{opacity:1;visibility:visible}
+nav.toc{left:20px;width:188px;padding:16px 14px 14px;border-radius:16px;background:rgba(14,14,18,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 32px rgba(0,0,0,.25);transition:opacity .3s ease,visibility .3s,background-color .3s}
+nav.toc.light{background:rgba(255,255,255,.86);border-color:rgba(10,10,12,.08);box-shadow:0 12px 32px rgba(10,10,12,.10)}
+nav.toc .k{margin-bottom:8px;font-size:11px}
+nav.toc a{padding:6px 0 6px 12px;border-left:2px solid var(--line);color:var(--muted);transition:color .2s,border-color .2s}
+nav.toc a.on{color:var(--fg);border-left-color:var(--warm)}
+nav.toc.light{--fg:#0A0A0C;--muted:#62626C;--line:#E3E1DA;--warm:#8A5A00}
+.tocpill{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translate(-50%,16px);z-index:20;display:none;align-items:center;gap:10px;max-width:calc(100vw - 32px);height:46px;padding:0 18px;border-radius:100px;border:1px solid rgba(255,255,255,.16);background:rgba(10,10,12,.88);color:#E9E9EE;font:500 15px/1 var(--sans);cursor:pointer;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;visibility:hidden;transition:opacity .3s ease,transform .3s var(--out),visibility .3s}
+.tocpill.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.tocpill .k{color:#9A9AA5;font-size:11px}
+.tocpill b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tocpill i{font-style:normal;color:#9A9AA5;font-size:13px;font-variant-numeric:tabular-nums}
+.tocsheet{position:fixed;inset:auto 16px calc(72px + env(safe-area-inset-bottom,0px));margin:0 auto;width:min(360px,calc(100vw - 32px));padding:18px 10px 10px;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:#141419;color:#E9E9EE;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.tocsheet:popover-open{display:grid;gap:2px}
+.tocsheet .k{padding:0 12px 8px;color:#9A9AA5;font-size:11px}
+.tocsheet a{display:flex;gap:12px;padding:11px 12px;border-radius:12px;text-decoration:none;font-size:16px;color:#C9C9D1}
+.tocsheet a span{color:#6E6E78;font-variant-numeric:tabular-nums;width:20px}
+.tocsheet a.on{background:#24242C;color:#fff}
+.tocsheet::backdrop{background:rgba(0,0,0,.35)}
+@media (max-width:1399px){nav.toc{display:none}.tocpill{display:inline-flex}}
+.tocpill i{white-space:nowrap}
+.tocpill b{max-width:46vw}
+@media (max-width:620px){
+  .facts{grid-template-columns:1fr 1fr;gap:20px 16px}
+  /* audit 2026-10-13: one compact block, a row per number, instead of three tall cards */
+  .stats{gap:0;background:var(--card);border-radius:16px;padding:4px 18px}
+  .stats div{grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:baseline;padding:14px 0}
+  .stats div+div{border-top:1px solid var(--line)}
+  .stats b{font-size:22px;line-height:1.15;white-space:nowrap;min-width:112px}
+  .stats span{font-size:15px}
+  .endsec .closing .founder a{display:inline-block;padding:13px 0;margin:-13px 0}
+  /* Vishal 2026-10-13 15:06: on phones the boxes in the navy sections are light, so they stand out instead of dark on dark */
+  .scr .screen{gap:28px}
+}
+/* 30 second version on desktop: two by two with hairlines, so every label sits on one line and each answer has room */
+@media (min-width:901px){
+  .summary{grid-template-columns:1fr 1fr;gap:0;padding:40px 44px 20px}
+  .summary h2{margin-bottom:12px}
+  .summary div{padding:26px 0 30px;gap:12px;border-top:1px solid rgba(255,255,255,.09)}
+  .summary div:nth-of-type(odd){padding-right:44px}
+  .summary div:nth-of-type(even){padding-left:44px;border-left:1px solid rgba(255,255,255,.09)}
+  .summary p{font-size:19px;line-height:1.5;color:#E9E9EE;max-width:46ch}
+}
+/* Phones: the prototype box is exactly the shape of the app screen (412 by 917 in Figma), with Figma's own bars hidden, so nothing is cut */
+@media (max-width:640px){.proto{aspect-ratio:412/917;width:min(100%,340px,calc((100svh - 200px) * 412 / 917));margin-inline:auto;border-radius:28px}.protowrap{display:flex;justify-content:center}.protowait{width:min(100%,340px,calc((100svh - 200px) * 412 / 917));left:50%;transform:translateX(-50%);border-radius:28px}}
+/* Phones: the header slides away while reading down and comes back the moment you scroll up; the contents bar moves up with it */
+@media (max-width:759px){
+  header.bar{transition:transform .28s var(--out,ease)}
+  html.hdr-hide header.bar{transform:translateY(calc(-100% - 16px))}
+  .tocpill{transition:opacity .3s ease,transform .3s ease,visibility .3s,top .28s ease}
+  html.hdr-hide .tocpill{top:env(safe-area-inset-top,0px)}
+  html.hdr-hide .tocsheet{inset:calc(env(safe-area-inset-top,0px) + 52px) 16px auto}
+}
+/* Reel controls: labelled pills on desktop (icon plus PLAY, SOUND ON); icon only round buttons on phones, bottom right */
+.pill{height:44px;padding:0 16px;gap:8px;justify-content:center;border-radius:22px;border:0;box-shadow:0 0 0 1px rgba(242,241,236,.28);background:rgba(12,12,14,.72);color:#F2F1EC;font:700 12px/1 var(--sans);letter-spacing:.02em}
+.pill:hover{background:rgba(12,12,14,.85)}
+@media (max-width:620px){.pills{right:10px;bottom:10px;gap:6px}.pill{width:40px;height:40px;padding:0;border-radius:50%}.pill .lb{display:none}}
+/* desktop (Vishal 2026-10-13): icons only; on hover or keyboard focus the button stretches and shows its label inside; full screen is desktop only */
+@media (min-width:621px){.pill{width:auto;min-width:44px;padding:0 13px;gap:0;border-radius:22px;transition:gap .2s var(--out,ease),padding .2s var(--out,ease)}.pill .lb{display:inline-block;max-width:0;overflow:hidden;white-space:nowrap;opacity:0;transition:max-width .25s var(--out,ease),opacity .2s}.pill:hover,.pill:focus-visible{gap:8px;padding:0 16px}.pill:hover .lb,.pill:focus-visible .lb{max-width:160px;opacity:1}}
+@media (max-width:620px){.pill.fs{display:none}}
+.reel:fullscreen{display:flex;align-items:center;justify-content:center;background:#000;margin:0!important}.reel:fullscreen video{width:100%;height:100%;max-height:none;object-fit:contain;border-radius:0}
+/* Contents bar: docked under the header on every width, one look over navy and light sections alike */
+nav.toc{display:none!important}
+.tocpill{display:flex!important;left:0;right:0;top:var(--hb,56px);bottom:auto;width:100%;max-width:none;height:44px;justify-content:center;gap:12px;padding:0 20px;border:0;border-bottom:1px solid rgba(255,255,255,.08);border-radius:0;background:rgba(10,10,12,.9);box-shadow:none;transform:translateY(-6px);font-size:14px;z-index:19}
+.tocpill.show{transform:none}
+.tocpill .chev{width:10px;height:10px;border-right:1.5px solid #9A9AA5;border-bottom:1.5px solid #9A9AA5;transform:rotate(45deg) translateY(-3px)}
+.tocpill b{max-width:52vw}
+.tocsheet{inset:calc(var(--hb,56px) + 52px) 16px auto}
+.tid{display:none}
+/* Desktop first fold (Vishal 2026-10-13, "like this?" with the Profit Wala Love top): text left, reel right, like the Contra style tops.
+   Facts, the concept note and everything after stay full width below. Phones keep their own order (below). */
+@media (min-width:1000px){
+  .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);column-gap:clamp(40px,4vw,72px)}
+  .wrap>*{grid-column:1/-1}
+  .wrap>.facts{grid-template-columns:repeat(3,minmax(0,max-content));justify-content:space-between;column-gap:56px} /* Role and Scope stay on one line (Vishal 2026-10-13) */
+  .wrap>.summary{width:100%} /* auto side margins would shrink it to its text inside the grid */
+  .wrap>header.hero{grid-column:1;grid-row:1;align-self:center;max-width:none}
+  .wrap>.reel{grid-column:2;grid-row:1;align-self:center;margin-top:0!important}
+}
+/* Phone first fold: title, hook and a shorter intro, then the reel straight away. Facts and the concept note follow the reel. */
+@media (max-width:620px){
+  .wrap{display:flex;flex-direction:column}
+  .wrap>*{order:5}
+  .wrap>header.hero{order:1;gap:14px}
+  .wrap>.reel{order:2;margin-top:28px!important}
+  .wrap>.facts{order:3;margin-top:32px}
+  .wrap>.note{order:4}
+  .hero .dek{font-size:18px;line-height:1.5;color:var(--muted)}
+  .hero h1{line-height:1.05}
+  .facts div{align-content:start}
+}
+/* Phones: the prototype keeps its full app screen size, and the page keeps scrolling over it. A cover passes scrolls through to the page;
+   tapping it hands touches to the prototype, and "Done" (or scrolling it out of view) gives them back. */
+.protogo,.protodone{display:none}
+@media (max-width:640px){
+  #try{padding-bottom:48px}
+  .protowrap{flex-direction:column;align-items:flex-start;gap:12px;min-width:0;max-width:100%}
+  .protowrap:not(.live) .proto{pointer-events:none}
+  .protogo{display:flex;position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(100%,340px,calc((100svh - 200px) * 412 / 917));aspect-ratio:412/917;border:0;border-radius:28px;background:linear-gradient(180deg,transparent 60%,rgba(10,10,12,.55));align-items:flex-end;justify-content:center;padding-bottom:22px;cursor:pointer;font:inherit}
+  .protogo span{padding:12px 18px;border-radius:999px;background:#F2F1EC;color:#0A0A0C;font-size:15px;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+  .protowrap.live .protogo{display:none}
+  /* Once tapped, the prototype opens as a full screen overlay showing the whole app frame, nothing cut (Vishal 2026-10-13) */
+  .protowrap.live{position:fixed;inset:0;z-index:1000;max-width:none;margin:0;padding:16px 16px calc(16px + env(safe-area-inset-bottom));background:rgba(6,6,8,.94);flex-direction:column;align-items:center;justify-content:center;gap:16px}
+  .protowrap.live .proto{width:min(100%,calc((100dvh - 110px) * 412 / 917));height:auto;aspect-ratio:412/917;max-width:none;flex:none;margin:0}
+  html:has(.protowrap.live){overflow:hidden}
+  .protowrap.live .protodone{display:inline-flex;position:static;align-self:center;transform:none;white-space:nowrap;padding:12px 18px;border:0;border-radius:999px;background:#0A0A0C;box-shadow:0 0 0 1px rgba(242,241,236,.3),0 6px 18px rgba(0,0,0,.3);color:#F2F1EC;font:600 15px/1 var(--sans);cursor:pointer}
+}
+/* Phones: long sections show the heading, the first paragraph and the visuals; the rest opens in place with Read more. No words are cut. */
+.rmore{display:none}
+@media (max-width:620px){
+  .rm-hid{display:none!important}
+  .rmore{display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:10px 0;min-height:44px;border:0;background:none;color:var(--warm);font:600 16px/1 var(--sans);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+  .rmore::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
+  .rm-clamp{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
+}
+/* Desktop contents: a floating dock at the bottom, like a video player. Section name, n / 11, one segment per section
+   (read ones fill orange, the current one fills as you read), the next section, and back and next arrows. Phones keep the top bar. */
+.dock{display:none}
+.dockfade{display:none}
+@media (min-width:1280px){
+  .tocpill{display:none!important}
+  .dock{display:flex;position:fixed;left:50%;bottom:24px;z-index:20;align-items:center;gap:14px;padding:10px 12px;border-radius:16px;background:rgba(10,10,12,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 0 0 1px rgba(255,255,255,.1),0 16px 40px rgba(0,0,0,.3);font:600 14px/1 var(--sans);color:#F2F1EC;opacity:0;visibility:hidden;transform:translate(-50%,16px);transition:opacity .3s ease,transform .3s ease,visibility .3s}
+  .dock.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+  /* audit 2026-10-13: text slides under a soft fade of the section colour instead of colliding with the dock */
+  .dockfade{display:block;position:fixed;left:0;right:0;bottom:0;height:104px;z-index:19;pointer-events:none;background:linear-gradient(to bottom,transparent,var(--fade,#0A0A0C) 78%);opacity:0;transition:opacity .3s ease}
+  .dock.show~.dockfade,.dockfade.show{opacity:1}
+  /* Vishal 2026-10-13: the contents bar stays on screen while scrolling down too, so first time readers see it */
+  .dkb{all:unset;cursor:pointer;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.07);transition:background .2s}
+  .dkb:hover{background:rgba(255,255,255,.14)}.dkb:disabled{opacity:.35;cursor:default}
+  .dkb:focus-visible,.dkn:focus-visible,.dks button:focus-visible{outline:2px solid #FFC24B;outline-offset:2px}
+  .dkm{display:flex;flex-direction:column;gap:9px;width:420px}
+  .dkt{display:flex;justify-content:space-between;gap:12px}.dkt i{font-style:normal;color:#9A9AA5;font-variant-numeric:tabular-nums}
+  .dks{display:flex;gap:4px}
+  .dks button{all:unset;cursor:pointer;flex:1;height:14px;display:flex;align-items:center}
+  .dks button::before{content:"";flex:1;height:4px;border-radius:2px;background:linear-gradient(90deg,#FFC24B var(--f,0%),rgba(242,241,236,.18) var(--f,0%))}
+  .dks button:hover::before{background:linear-gradient(90deg,#FFC24B var(--f,0%),rgba(242,241,236,.36) var(--f,0%))}
+  .dkn{display:flex;flex-direction:column;gap:4px;min-width:118px;padding-left:14px;border-left:1px solid rgba(255,255,255,.12);color:#F2F1EC;text-decoration:none}
+  .dkn small{font-size:10px;letter-spacing:.12em;color:#9A9AA5}
+  .dkn.end{visibility:hidden}
+  /* hover a segment to see which section it is (Vishal 2026-10-13) */
+  .dks button{position:relative}
+  .dks button::after{content:attr(data-name);position:absolute;left:50%;bottom:calc(100% + 34px);transform:translate(-50%,4px);white-space:nowrap;padding:8px 12px;border-radius:10px;background:#F2F1EC;color:#0A0A0C;font:600 13px/1 var(--sans);box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease}
+  .dks button:hover::after,.dks button:focus-visible::after{opacity:1;transform:translate(-50%,0)}
+}
+html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{transition:none}
+</style>
+<script is:inline>
+(function(){
+  var rail=document.querySelector('nav.toc'), pill=document.querySelector('.tocpill'), sheet=document.getElementById('tocsheet'), art=document.querySelector('article');
+  var links=[].slice.call(rail.querySelectorAll('a')), secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  var items=links.map(function(a,i){var b=document.createElement('a');b.href=a.getAttribute('href');b.innerHTML='<span>'+String(i+1).padStart(2,'0')+'</span>'+a.textContent;b.onclick=function(){sheet.hidePopover()};sheet.appendChild(b);return b});
+  var last=-1;
+  function tick(){
+    var r=art.getBoundingClientRect(), on=secs[0].getBoundingClientRect().top<innerHeight*.3&&r.bottom>innerHeight*.4;
+    rail.classList.toggle('show',on);pill.classList.toggle('show',on);
+    var hd=document.querySelector('header.bar');if(hd&&!document.documentElement.classList.contains('hdr-hide')&&!hd.style.transform){var hb=hd.getBoundingClientRect().bottom;if(hb>20)document.documentElement.style.setProperty('--hb',hb+'px')}
+    rail.style.setProperty('--p',Math.min(100,Math.max(0,(-r.top+innerHeight*.3)/(r.height)*100))+'%');
+    pill.style.setProperty('--p',Math.min(100,Math.max(0,(-r.top+innerHeight*.3)/(r.height)*100))+'%');
+    var cur=0;secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<innerHeight*.35)cur=i});
+    if(cur!==last){last=cur;links.forEach(function(a,i){a.classList.toggle('on',i===cur)});items.forEach(function(a,i){a.classList.toggle('on',i===cur)});
+      pill.querySelector('b').textContent=links[cur].textContent;pill.querySelector('i').textContent=(cur+1)+' / '+links.length;}
+    var mid=null;secs.forEach(function(s){if(s){var b=s.getBoundingClientRect();if(b.top<=innerHeight/2&&b.bottom>innerHeight/2)mid=s}});
+    rail.classList.toggle('light',!!(mid&&mid.classList.contains('lt')));
+  }
+  // Desktop dock
+  var dock=document.querySelector('.dock'),fade=document.querySelector('.dockfade'),bands=[].slice.call(document.querySelectorAll('article>section')),segs=links.map(function(a,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label',(i+1)+'. '+a.textContent);b.dataset.name=a.textContent;b.onclick=function(){go(i)};dock.querySelector('.dks').appendChild(b);return b}),
+      dn=dock.querySelector('.dkn'),pv=dock.querySelector('[data-go="-1"]'),nx=dock.querySelector('[data-go="1"]'),dc=0;
+  function go(i){i=Math.max(0,Math.min(secs.length-1,i));secs[i].scrollIntoView({behavior:document.documentElement.classList.contains('calm')||matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
+  pv.onclick=function(){go(dc-1)};nx.onclick=function(){go(dc+1)};dn.onclick=function(e){e.preventDefault();go(dc+1)};
+  function dtick(){
+    var r=art.getBoundingClientRect(),y=innerHeight*.35,shown=secs[0].getBoundingClientRect().top<innerHeight*.3&&r.bottom>innerHeight*.6;dock.classList.toggle('show',shown);fade.classList.toggle('show',shown);
+    if(shown){var yb=innerHeight-8,c='';bands.forEach(function(s){var q=s.getBoundingClientRect();if(q.top<=yb&&q.bottom>yb)c=getComputedStyle(s).getPropertyValue('--band').trim()});if(c)fade.style.setProperty('--fade',c)}
+    dc=0;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<y)dc=i});
+    segs.forEach(function(b,i){var f=i<dc?100:i>dc?0:(function(){var t=secs[i].getBoundingClientRect(),e=i<secs.length-1?secs[i+1].getBoundingClientRect().top:r.bottom;return Math.max(0,Math.min(100,(y-t.top)/(e-t.top)*100))})();b.style.setProperty('--f',f+'%');b.toggleAttribute('aria-current',i===dc)});
+    dock.querySelector('.dkt b').textContent=links[dc].textContent;dock.querySelector('.dkt i').textContent=(dc+1)+' / '+links.length;
+    var n=links[dc+1];dn.classList.toggle('end',!n);if(n){dn.href=n.getAttribute('href');dn.querySelector('span').textContent=n.textContent}
+    pv.disabled=dc===0;nx.disabled=dc===links.length-1;
+  }
+  addEventListener('scroll',dtick,{passive:true});addEventListener('resize',dtick);dtick();
+  addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);tick();
+})();
+</script>
+<script is:inline>
+(function(){
+  var mq=matchMedia('(max-width:759px)'),root=document.documentElement,last=scrollY,hd=document.querySelector('header.bar');
+  addEventListener('scroll',function(){
+    var y=scrollY,d=y-last;
+    if(!mq.matches||y<120||(hd&&hd.contains(document.activeElement))){root.classList.remove('hdr-hide');last=y;return}
+    if(d>6){root.classList.add('hdr-hide');last=y}else if(d<-6){root.classList.remove('hdr-hide');last=y}
+  },{passive:true});
+})();
+</script>
+<script is:inline>
+(function(){
+  if(!matchMedia('(max-width:620px)').matches)return;
+  function btn(before,open){var b=document.createElement('button');b.type='button';b.className='rmore';b.textContent='Read more';b.setAttribute('aria-expanded','false');b.onclick=function(){open();b.remove()};before.parentNode.insertBefore(b,before);return b}
+  // Section body: keep the first paragraph, fold the rest of the paragraphs and quotes
+  document.querySelectorAll('article>section').forEach(function(sec){
+    var body=[].filter.call(sec.children,function(e){return (e.tagName==='P'&&!e.classList.contains('eyebrow'))||e.tagName==='BLOCKQUOTE'});
+    var rest=body.slice(1), words=rest.reduce(function(n,e){return n+e.textContent.split(/\s+/).length},0);
+    if(!rest.length||words<30)return;
+    rest.forEach(function(e){e.classList.add('rm-hid')});
+    btn(rest[0],function(){rest.forEach(function(e){e.classList.remove('rm-hid')})});
+  });
+  // Long single paragraphs beside the screens: show four lines, then Read more
+  document.querySelectorAll('.screen>div>p').forEach(function(p){
+    p.classList.add('rm-clamp');if(p.scrollHeight<=p.clientHeight+2){p.classList.remove('rm-clamp');return}
+    var b=btn(p,function(){p.classList.remove('rm-clamp')});p.after(b);
+  });
+})();
+</script>
+<script is:inline src="/js/inview-video.js" defer></script>
+<style is:inline>
+/* Vishal 2026-10-13 16:02: every screen sits in an iPhone frame one fold tall, and you scroll the screen inside the frame yourself */
+.iph{position:relative;width:100%;padding:9px;border-radius:50px;background:#121311;box-shadow:inset 0 0 0 1.5px #3B3D38,0 0 0 1px rgba(10,10,12,.2),0 24px 50px rgba(10,10,12,.18)}
+.iph::before,.iph::after{content:"";position:absolute;width:3px;border-radius:2px;background:#2B2D29}
+.iph::before{left:-3px;top:19%;height:9%}
+.iph::after{right:-3px;top:25%;height:13%}
+.iph .sc{aspect-ratio:402/874;border-radius:41px;overflow-y:auto;overscroll-behavior-y:auto;scrollbar-width:none;background:#fff}
+.iph .sc::-webkit-scrollbar{display:none}
+.iph .sc img{display:block;width:100%;height:auto}
+.iph .sc:focus-visible{outline:3px solid #8A5A00;outline-offset:4px}
+@media (min-width:901px){.scr .screen{grid-template-columns:minmax(0,640px) 320px}.scr .screen>figure{width:320px}}
+@media (min-width:621px){.arc3{grid-template-columns:repeat(3,minmax(0,300px));justify-content:center;column-gap:clamp(24px,5vw,72px)}}
+</style>
+</html>
+<style is:inline>
+/* Reward Centre: the screens are dark, so the phone glass is near black, not white */
+.iph .sc{background:#0A0A0C}
+.iph .sc:focus-visible{outline-color:#8A5A00}
+@media (min-width:621px){.hf .iph{max-width:300px}}
+@media (min-width:1000px){.wrap>.facts{grid-template-columns:minmax(0,1fr) minmax(0,.5fr) minmax(0,1fr) minmax(0,1.6fr);justify-content:stretch}}
+@media (max-width:620px){.wrap>.facts>div:last-child{grid-column:1/-1}.closing h2{white-space:normal!important;font-size:min(44px,11vw)!important}}
+</style>
+</html>
