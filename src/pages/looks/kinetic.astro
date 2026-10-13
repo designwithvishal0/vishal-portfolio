@@ -466,7 +466,9 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
     const ratio = seen(it.box);
     if (it.once && ratio === 0) it.done = false;   // a play once film may run again after it has left the screen
     const run = it.user === null ? ratio >= it.thr - .01 && !calm() && !it.done : !!it.user && ratio > 0;
-    if (run) { load(it); it.v.play().catch(() => { if (it.v.paused && it.user === null) { it.box.dataset.state = 'paused'; say(it, false); } }); }
+    const stop = () => { if (it.v.paused && it.user === null) { it.box.dataset.state = 'paused'; say(it, false); } };
+    // a video asked to start with sound that the browser blocks retries muted (the phone hero, Vishal 2026-10-13)
+    if (run) { load(it); it.v.play().catch(() => { if (it.v.muted) return stop(); it.v.muted = true; it.v.dispatchEvent(new Event('volumechange')); it.v.play().catch(stop); }); }
     else if (!it.v.paused) it.v.pause();
     it.box.dataset.state = run ? 'playing' : 'paused';
     say(it, run);
@@ -486,12 +488,13 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   // Hero slot: the reel that fits the screen's orientation, the only eager video
   const slot = q('.slot'), hv = q<HTMLVideoElement>('video', slot);
   const hero = add({ box: slot, v: hv, btn: q('.vctl', slot), name: 'showreel', src: () => (land.matches ? hv.dataset.wide : phone.matches ? hv.dataset.phone : hv.dataset.tall)!, thr: .3 });
-  // Phones: his Contra showreel has sound. Browsers only allow sound after a tap or key press, so it autoplays muted,
-  // the first tap anywhere (or Play) turns sound on, and the sound switch is a choice that sticks. Wider screens stay silent.
+  // Phones: his Contra showreel starts by itself with its sound (Vishal 2026-10-13). If the browser blocks sound before a tap,
+  // it plays muted and the first tap anywhere (or Play) turns sound on. The sound switch is a choice that sticks. Wider screens stay silent.
   const snd = q<HTMLButtonElement>('.vsnd', slot); let chose = false;
   const onPhone = () => !land.matches && phone.matches;
   const hear = (on: boolean) => { hv.muted = !(on && onPhone()); snd.setAttribute('aria-pressed', String(!hv.muted)); snd.setAttribute('aria-label', hv.muted ? 'Sound on' : 'Sound off'); };
-  hear(false);
+  hear(true);
+  hv.addEventListener('volumechange', () => { snd.setAttribute('aria-pressed', String(!hv.muted)); snd.setAttribute('aria-label', hv.muted ? 'Sound on' : 'Sound off'); });
   const wake = (e: Event) => { if ((e.target as Element).closest?.('.vsnd')) return; if (!chose) hear(true); removeEventListener('pointerdown', wake, true); removeEventListener('keydown', wake, true); };
   addEventListener('pointerdown', wake, true); addEventListener('keydown', wake, true);
   hero.btn.addEventListener('click', () => { if (!chose && hv.paused === false) hear(true); });
