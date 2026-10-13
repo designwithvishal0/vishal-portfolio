@@ -498,8 +498,10 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   const hear = (on: boolean) => { hv.muted = !(on && onPhone()); snd.setAttribute('aria-pressed', String(!hv.muted)); snd.setAttribute('aria-label', hv.muted ? 'Sound on' : 'Sound off'); };
   hear(true);
   hv.addEventListener('volumechange', () => { snd.setAttribute('aria-pressed', String(!hv.muted)); snd.setAttribute('aria-label', hv.muted ? 'Sound on' : 'Sound off'); });
-  const wake = (e: Event) => { if ((e.target as Element).closest?.('.vsnd')) return; if (!chose) hear(true); removeEventListener('pointerdown', wake, true); removeEventListener('keydown', wake, true); };
-  addEventListener('pointerdown', wake, true); addEventListener('keydown', wake, true);
+  // the lift of the finger, not the touch down: on phones only that counts as a tap, so the browser lets the sound on and keeps the reel playing
+  // (a touch down turned the sound on and the browser then stopped the reel, found 2026-10-13). If it stopped anyway, it starts again
+  const wake = (e: Event) => { if ((e.target as Element).closest?.('.vsnd')) return; if (!chose) { hear(true); if (hv.paused && hero.user === null) sync(hero); } removeEventListener('pointerup', wake, true); removeEventListener('keydown', wake, true); };
+  addEventListener('pointerup', wake, true); addEventListener('keydown', wake, true);
   hero.btn.addEventListener('click', () => { if (!chose && hv.paused === false) hear(true); });
   snd.addEventListener('click', () => { chose = true; hear(hv.muted); if (!hv.muted && hv.paused) { hero.user = true; sync(hero); } });
   [land, phone].forEach(m => m.addEventListener('change', () => hear(!hv.muted && !chose)));
