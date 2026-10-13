@@ -1066,3 +1066,10 @@ html.calm .dock{transition:none}
   html.calm .row .vbox .thumb img{object-fit:contain;object-position:50% 50%}
   @media (prefers-reduced-motion:reduce){.row .vbox{aspect-ratio:1200/1256;height:auto;width:100%}.row .vbox .thumb img{object-fit:contain;object-position:50% 50%}}
 }
+
+/* phones (Vishal 2026-10-13 13:31, showreel v4 in the phone hero): the reel's headlines sit at the top of the frame, so its two buttons move to the bottom right corner, where the reel only shows its timer */
+@media (max-width:759px) and (orientation:portrait){
+  .slot>.vctl,.slot>.vsnd{top:auto;bottom:8px}
+  .slot>.vctl{right:8px}
+  .slot>.vsnd{right:60px}
+}
