@@ -259,13 +259,13 @@ article>section.lt+section.lt,article>section:not(.lt)+section:not(.lt){padding-
 /* desktop (Vishal 2026-10-13): the four navy sections after the 30 second version (hardest call, who, found, options) were one flat navy;
    each now sits on its own step of JARVIS indigo blue, getting lighter as the story builds, so section breaks read */
 /* phones too since 2026-10-13 15:04 (Vishal: on phones the content blended into the page navy) */
-article>section#problem{--band:#14171F;--card:#1F232D}
-article>section#found{--band:#161B27;--card:#232A3A}
+article>section#problem{--band:#FFFFFF;--card:#F3F6FC}
+article>section#found{--band:#F3F6FC;--card:#FFFFFF}
 article>section#hardest{--band:#18202F;--card:#283246}
 article>section#scale{--band:#18202F;--card:#283246}
-article>section:is(#found,#hardest){padding-top:120px}
-@media (max-width:900px){article>section:is(#found,#hardest){padding-top:80px}}
-@media (max-width:620px){article>section:is(#found,#hardest){padding-top:64px}}
+article>section:is(#found,#hardest,#system){padding-top:120px}
+@media (max-width:900px){article>section:is(#found,#hardest,#system){padding-top:80px}}
+@media (max-width:620px){article>section:is(#found,#hardest,#system){padding-top:64px}}
 /* type scale: 13 label, 16 small, 18 body, 22 lead, 32 titles, 48 sections, 68 page title */
 .facts p,.stats span,.note,.source,figcaption,.opt p,.fix p,.trade p,.trade .cost,.nextgrid span{font-size:16px}
 .list .n,.trade .n,.tag{font-size:13px}
@@ -381,14 +381,14 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
     <div class="dockfade" aria-hidden="true"></div><nav class="dock" aria-label="Contents"><button type="button" class="dkb" data-go="-1" aria-label="Previous section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="dkm"><div class="dkt"><b></b><i></i></div><div class="dks"></div></div><a class="dkn" href="#"><small>NEXT</small><span></span></a><button type="button" class="dkb" data-go="1" aria-label="Next section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></nav>
 
     <article>
-      <section id="problem">
+      <section id="problem" class="lt">
         <p class="eyebrow">The problem</p>
         <h2>The app opens only when money has to move</h2>
         <p>People aged 21 to 30 in India split dinners, trips and flat bills with the same three to twelve friends. For them, Google Pay opens only when money has to move. A nicer split screen improves that moment but never creates a second one, and retention needs a second moment.</p>
         <p>Groups already exist, three taps deep behind a chat menu, and an active group never shows up on Home. The split is a total and a rule: evenly, by amounts, by shares or by percentages. No items, no who had what.</p>
       </section>
 
-      <section id="found">
+      <section id="found" class="lt">
         <p class="eyebrow">What I found</p>
         <div class="stats">
           <div><b>50 million</b><span>installs Tez drove with scratch cards, which faded once the rewards thinned</span></div>
@@ -732,7 +732,7 @@ nav.toc.light{--fg:#0E1424;--muted:#6A7488;--line:#DCE3EF;--warm:#0B57D0}
   .stats span{font-size:15px}
   .endsec .closing .founder a{display:inline-block;padding:13px 0;margin:-13px 0}
   /* Vishal 2026-10-13 15:06: on phones the boxes in the navy sections are light, so they stand out instead of dark on dark */
-  #found .stats{--fg:#0E1424;--body:#3B4458;--muted:#5A6478;--acc:#0B57D0;--line:#DCE3EF;--warm:#0B57D0;background:#F3F6FC;color:var(--fg);border-color:transparent}
+  #found .stats{background:var(--card);color:var(--fg);border-color:transparent}
   .screens .screen{gap:28px}
 }
 /* 30 second version on desktop: two by two with hairlines, so every label sits on one line and each answer has room */
