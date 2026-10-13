@@ -462,8 +462,8 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
         <p class="eyebrow">Try it</p>
         <h2>Flag a false alert yourself</h2>
         <p>Tap “Tell us if not” under an alert to start.</p>
-        <figure class="protowrap"><iframe class="proto" title="JARVIS Alerts Figma prototype" loading="lazy" allowfullscreen src="https://www.figma.com/embed?embed_host=share&amp;url=https%3A%2F%2Fwww.figma.com%2Fproto%2FNEbmc8cqnHE2l7J1zSV3ER%2FStaqu-Assignment%3Fnode-id%3D1-2%26starting-point-node-id%3D1%253A2%26scaling%3Dscale-down%26content-scaling%3Dfixed"></iframe><div class="protowait"><img src="img/01-alert-feed.webp" width="412" height="917" alt="" loading="lazy"><p>Loading the prototype</p><a href="https://www.figma.com/proto/NEbmc8cqnHE2l7J1zSV3ER/Staqu-Assignment?node-id=1-2&amp;starting-point-node-id=1%3A2" target="_blank" rel="noopener">Open in Figma</a></div></figure>
-        <script is:inline>(()=>{const f=document.currentScript.previousElementSibling,fr=f.querySelector('iframe');if(matchMedia('(max-width:640px)').matches){fr.src=fr.src.replace('scaling%3Dscale-down','scaling%3Dcontain')+'%26hide-ui%3D1'}f.querySelector('iframe').addEventListener('load',()=>f.classList.add('ready'))})()</script>
+        <figure class="protowrap"><iframe class="proto" title="JARVIS Alerts Figma prototype" loading="lazy" allowfullscreen src="https://www.figma.com/embed?embed_host=share&amp;url=https%3A%2F%2Fwww.figma.com%2Fproto%2FNEbmc8cqnHE2l7J1zSV3ER%2FStaqu-Assignment%3Fnode-id%3D1-2%26starting-point-node-id%3D1%253A2%26scaling%3Dscale-down%26content-scaling%3Dfixed"></iframe><div class="protowait"><img src="img/01-alert-feed.webp" width="412" height="917" alt="" loading="lazy"><p>Loading the prototype</p><a href="https://www.figma.com/proto/NEbmc8cqnHE2l7J1zSV3ER/Staqu-Assignment?node-id=1-2&amp;starting-point-node-id=1%3A2" target="_blank" rel="noopener">Open in Figma</a></div><button type="button" class="protogo"><span>Tap to try the prototype</span></button><button type="button" class="protodone">Done, back to scrolling</button></figure>
+        <script is:inline>(()=>{const f=document.currentScript.previousElementSibling,fr=f.querySelector('iframe');if(matchMedia('(max-width:640px)').matches){fr.src=fr.src.replace('scaling%3Dscale-down','scaling%3Dcontain')+'%26hide-ui%3D1'}f.querySelector('iframe').addEventListener('load',()=>f.classList.add('ready'));const live=on=>f.classList.toggle('live',on);f.querySelector('.protogo').onclick=()=>live(true);f.querySelector('.protodone').onclick=()=>live(false);new IntersectionObserver(es=>{if(!es[0].isIntersecting)live(false)}).observe(f)})()</script>
       </section>
 
       <section id="change">
@@ -634,6 +634,20 @@ nav.toc{display:none!important}
   .hero .dek{font-size:18px;line-height:1.5;color:var(--muted)}
   .hero h1{line-height:1.05}
   .facts div{align-content:start}
+}
+/* Phones: the prototype fits one screen, and the page keeps scrolling over it. A cover passes scrolls through to the page;
+   tapping it hands touches to the prototype, and "Done" (or scrolling it out of view) gives them back. */
+.protogo,.protodone{display:none}
+@media (max-width:640px){
+  #try{scroll-margin-top:60px;padding-block:28px 48px}
+  .proto{height:min(calc(100svh - 300px),757px);width:auto;max-width:100%}
+  .protowait{width:auto;aspect-ratio:412/917;height:100%}
+  .protowrap{flex-direction:column;align-items:center;gap:12px}
+  .protowrap:not(.live) .proto{pointer-events:none}
+  .protogo{display:flex;position:absolute;top:0;left:50%;transform:translateX(-50%);height:min(calc(100svh - 300px),757px);aspect-ratio:412/917;max-width:100%;border:0;border-radius:28px;background:linear-gradient(180deg,transparent 60%,rgba(8,16,38,.55));align-items:flex-end;justify-content:center;padding-bottom:22px;cursor:pointer;font:inherit}
+  .protogo span{padding:12px 18px;border-radius:999px;background:#F2F1EC;color:#0E1424;font-size:15px;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+  .protowrap.live .protogo{display:none}
+  .protowrap.live .protodone{display:inline-flex;position:absolute;left:50%;bottom:-22px;transform:translateX(-50%);white-space:nowrap;padding:12px 18px;border:0;border-radius:999px;background:#0E1424;box-shadow:0 0 0 1px rgba(242,241,236,.3),0 6px 18px rgba(0,0,0,.3);color:#F2F1EC;font:600 15px/1 var(--sans);cursor:pointer}
 }
 /* Desktop contents: a floating dock at the bottom, like a video player. Section name, n / 11, one segment per section
    (read ones fill orange, the current one fills as you read), the next section, and back and next arrows. Phones keep the top bar. */
