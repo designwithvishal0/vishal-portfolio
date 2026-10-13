@@ -506,9 +506,9 @@ body{background:#F5F2EA}
           <p>I left out a rewards screen because nothing OneBanc publishes says they run one, and designing an invented feature would undo the honesty of the rest. Settings went into Card, through their real product instead of a generic list.</p>
         </div>
         <div class="arc3">
-          <div class="iph"><div class="sc"><img src="img/08-home.webp" width="804" height="2370" alt="OneBanc Home screen" loading="lazy"></div></div>
-          <div class="iph"><div class="sc"><img src="img/09-money.webp" width="804" height="2770" alt="OneBanc Money screen" loading="lazy"></div></div>
-          <div class="iph"><div class="sc"><img src="img/10-card.webp" width="804" height="3418" alt="OneBanc Card screen" loading="lazy"></div></div>
+          <div class="iph"><div class="sc" tabindex="0"><img src="img/08-home.webp" width="804" height="2370" alt="OneBanc Home screen" loading="lazy"></div></div>
+          <div class="iph"><div class="sc" tabindex="0"><img src="img/09-money.webp" width="804" height="2770" alt="OneBanc Money screen" loading="lazy"></div></div>
+          <div class="iph"><div class="sc" tabindex="0"><img src="img/10-card.webp" width="804" height="3418" alt="OneBanc Card screen" loading="lazy"></div></div>
         </div>
       </section>
 
@@ -520,7 +520,7 @@ body{background:#F5F2EA}
         </div>
         <div class="screens">
           <div class="screen">
-            <figure><div class="iph tall"><div class="sc"><img src="img/08-home.webp" width="804" height="2370" alt="OneBanc Home screen showing ₹1,42,070 left this cycle" loading="lazy"></div></div></figure>
+            <figure><div class="iph tall"><div class="sc" tabindex="0"><img src="img/08-home.webp" width="804" height="2370" alt="OneBanc Home screen showing ₹1,42,070 left this cycle" loading="lazy"></div></div></figure>
             <div class="blks">
               <div class="blk"><span class="k">01 · Where you stand</span><h3>₹1,42,070 left this cycle</h3><p>Day 12 of 30, with 18 days to the next salary. The label says Left this cycle because a balance is a number any bank shows. This one is bounded by time, which is the only thing OneBanc knows that Google Pay and Paytm do not.</p></div>
               <div class="blk"><span class="k">02 · What is already spoken for</span><h3>Committed before payday</h3><p>Rent and the home loan EMI, ₹18,400 together, with rent flagged Due in 2 days. This block is what makes the number above it honest. Safe to spend daily is ₹6,870 because it is what is left, minus what is committed, divided by the days to go.</p></div>
@@ -540,7 +540,7 @@ body{background:#F5F2EA}
         </div>
         <div class="screens">
           <div class="screen">
-            <figure><div class="iph tall"><div class="sc"><img src="img/09-money.webp" width="804" height="2770" alt="OneBanc Money screen showing where ₹42,180 went" loading="lazy"></div></div></figure>
+            <figure><div class="iph tall"><div class="sc" tabindex="0"><img src="img/09-money.webp" width="804" height="2770" alt="OneBanc Money screen showing where ₹42,180 went" loading="lazy"></div></div></figure>
             <div class="blks">
               <div class="blk"><span class="k">01 · Total</span><h3>A judgement, not a receipt</h3><p>Salary credited ₹1,84,250 on 1 July, spent so far ₹42,180, over a five month chart with a dashed average line. The line underneath is the screen: ₹3,240 above your 5 month average. At this pace, ₹1,05,450 by 31 July.</p></div>
               <div class="blk"><span class="k">02 · By method</span><h3>₹28,400 on the card, ₹13,780 on UPI</h3><p>The same ₹42,180 cut by how you paid. The card figure is the exact number the Card screen shows in its spend meter.</p></div>
@@ -559,7 +559,7 @@ body{background:#F5F2EA}
         </div>
         <div class="screens">
           <div class="screen">
-            <figure><div class="iph tall"><div class="sc"><img src="img/10-card.webp" width="804" height="3418" alt="OneBanc Card screen with the card showing last four digits only" loading="lazy"></div></div></figure>
+            <figure><div class="iph tall"><div class="sc" tabindex="0"><img src="img/10-card.webp" width="804" height="3418" alt="OneBanc Card screen with the card showing last four digits only" loading="lazy"></div></div></figure>
             <div class="blks">
               <div class="blk"><span class="k">01 · The card</span><h3>Last four only</h3><p>•• •••• 4021 and a name. Printing sixteen fake digits on the screen built to celebrate a numberless card would undo the whole idea.</p></div>
               <div class="blk"><span class="k">02 · Reveal</span><h3>Number, CVV and expiry live only here</h3><p>Every card app treats reveal as a convenience. Here it is the reason the card exists, so it gets a real button. Reveal, because it names what happens. View is what you do to a list.</p></div>
@@ -970,25 +970,16 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 </script>
 <script is:inline src="/js/inview-video.js" defer></script>
 <style is:inline>
-/* Vishal 2026-10-13: the screens sit in an iPhone frame. The long screens scroll inside the frame as the page scrolls past */
-@property --p{syntax:'<number>';inherits:true;initial-value:0}
-.iph{position:relative;width:100%;padding:9px;border-radius:54px;background:#121311;box-shadow:inset 0 0 0 1.5px #3B3D38,0 0 0 1px rgba(15,31,11,.2),0 24px 50px rgba(15,31,11,.18)}
+/* Vishal 2026-10-13 16:02: every screen sits in an iPhone frame one fold tall, and you scroll the screen inside the frame yourself */
+.iph{position:relative;width:100%;padding:9px;border-radius:50px;background:#121311;box-shadow:inset 0 0 0 1.5px #3B3D38,0 0 0 1px rgba(15,31,11,.2),0 24px 50px rgba(15,31,11,.18)}
 .iph::before,.iph::after{content:"";position:absolute;width:3px;border-radius:2px;background:#2B2D29}
 .iph::before{left:-3px;top:19%;height:9%}
 .iph::after{right:-3px;top:25%;height:13%}
-.iph .sc{container-type:size;aspect-ratio:402/874;border-radius:45px;overflow:hidden;background:#fff}
-.iph .sc img{display:block;width:100%;height:auto;translate:0 calc(var(--p) * (100cqh - 100%))}
-@media (min-width:901px){.scr .screen>figure{width:360px;max-width:100%}}
-@media (prefers-reduced-motion:reduce){.iph.tall .sc{overflow-y:auto}.iph.tall .sc img{translate:none}}
-html.calm .iph.tall .sc{overflow-y:auto}html.calm .iph.tall .sc img{translate:none}
+.iph .sc{aspect-ratio:402/874;border-radius:41px;overflow-y:auto;overscroll-behavior-y:auto;scrollbar-width:none;background:#fff}
+.iph .sc::-webkit-scrollbar{display:none}
+.iph .sc img{display:block;width:100%;height:auto}
+.iph .sc:focus-visible{outline:3px solid #7A5F1F;outline-offset:4px}
+@media (min-width:901px){.scr .screen{grid-template-columns:minmax(0,640px) 320px}.scr .screen>figure{width:320px}}
+@media (min-width:621px){.arc3{grid-template-columns:repeat(3,minmax(0,300px));justify-content:center;column-gap:clamp(24px,5vw,72px)}}
 </style>
-<script is:inline>
-(function(){
-  var fs=[].slice.call(document.querySelectorAll('.iph.tall'));
-  var mq=matchMedia('(max-width:900px)');
-  // Desktop follows the whole screen block (its text is beside the phone); phones follow the phone itself, which sits under its text
-  function tick(){var vh=innerHeight;fs.forEach(function(f){var r=(mq.matches?f:f.closest('.screen')).getBoundingClientRect();var p=mq.matches?(vh*.9-r.top)/(r.height+vh*.2):(vh*.75-r.top)/r.height;f.style.setProperty('--p',Math.max(0,Math.min(1,p)).toFixed(4))})}
-  addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);tick();
-})();
-</script>
 </html>

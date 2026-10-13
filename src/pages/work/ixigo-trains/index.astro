@@ -422,7 +422,7 @@ figcaption{text-align:center}
 
       <section id="problem" class="wide">
         <div class="screen">
-          <figure><img class="shot phone" src="img/00-before.webp" width="512" height="3109" alt="The current ixigo post booking screen, before the redesign" loading="lazy"><figcaption>Before · the current screen</figcaption></figure>
+          <figure><div class="pm"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/00-before.webp" width="512" height="3109" alt="The current ixigo post booking screen, before the redesign" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div><figcaption>Before · the current screen</figcaption></figure>
           <div>
             <p class="eyebrow">The problem</p>
             <h2>It starts at 5:40 PM</h2>
@@ -465,7 +465,7 @@ figcaption{text-align:center}
         <figure class="flowfig"><img class="shot wide" src="img/00-flow.webp" width="1680" height="2040" alt="Flow diagram of the post booking system, from waiting through every outcome after the chart" loading="lazy"></figure>
         <div class="screens">
           <div class="screen">
-            <figure><img class="shot phone" src="img/01-waiting.webp" width="720" height="3183" alt="Waiting state: the odds, a countdown to the chart and a backup plan" loading="lazy"></figure>
+            <figure><div class="pm"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/01-waiting.webp" width="720" height="3183" alt="Waiting state: the odds, a countdown to the chart and a backup plan" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
             <div><span class="k">01 · Waiting · Waitlisted and RAC, before the chart</span><h3>The wait</h3>
               <p>The hardest screen, because nothing is happening yet and that is exactly the problem. Three things went in.</p>
               <p><strong>Honest odds per passenger.</strong> Leela is RAC 5, near certain, green. Vishal is waitlist 24 at 70 percent, blue, moving. Both show movement, because a number that visibly changes tells you the app is watching for you.</p>
@@ -475,13 +475,13 @@ figcaption{text-align:center}
             </div>
           </div>
           <div class="screen">
-            <figure><img class="shot phone" src="img/01a-lock.webp" width="720" height="1588" alt="Lock backup sheet: pick a plan B while the waitlist is still uncertain" loading="lazy"></figure>
+            <figure><div class="pm one"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/01a-lock.webp" width="720" height="1588" alt="Lock backup sheet: pick a plan B while the waitlist is still uncertain" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
             <div><span class="k">01a</span><h3>The lock, and what it actually costs</h3>
               <p>Asking someone to commit to a backup while they are still hoping is a big ask, so the sheet leads with Nothing is charged now. Here is exactly what you are locking. Three plain lines follow: one Sleeper seat held on the 12138 for both passengers, triggers only if the chart does not confirm you at 5:40 PM, pay only if it triggers. Then the escape hatch, you can change or cancel the backup any time before the chart prepares. Every objection answered before it is raised.</p>
             </div>
           </div>
           <div class="screen">
-            <figure><img class="shot phone" src="img/02-confirmed.webp" width="720" height="2729" alt="Confirmed state: berths assigned for both passengers, with the arrival alarm" loading="lazy"></figure>
+            <figure><div class="pm"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/02-confirmed.webp" width="720" height="2729" alt="Confirmed state: berths assigned for both passengers, with the arrival alarm" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
             <div><span class="k">02 · Confirmed · Chart cleared, berths allotted</span><h3>The good outcome still needs a screen</h3>
               <p>Most redesigns treat success as the state that needs no work. It does. The moment the chart clears, the passenger’s question changes completely, from will I travel to where exactly do I stand on the platform.</p>
               <p>So the screen changes what it emphasises. The odds and the countdown disappear entirely, because they are now answered. The berth becomes the largest thing on each passenger row, S6-34 lower and S6-37 middle, because that is the one piece of information a confirmed passenger is actually looking for. Under it, boarding at New Delhi, Platform 8, departs 9:40 PM, boarding opens 9:10 PM.</p>
@@ -489,14 +489,14 @@ figcaption{text-align:center}
               <p>This is what one hub, many states really means. Nothing moved to a different page. The same surface stopped answering a question that no longer exists and started answering the next one.</p>
             </div>
           </div>
-          <div class="screen">
-            <figure><img class="shot phone" src="img/03-delay.webp" width="720" height="3426" alt="Delay state: running 40 minutes late, with the new platform and coach position" loading="lazy"></figure>
+          <div class="screen flip">
+            <figure><div class="pm"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/03-delay.webp" width="720" height="3426" alt="Delay state: running 40 minutes late, with the new platform and coach position" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
             <div><span class="k">03 · Delay and platform · Running late, platform moved</span><h3>The day itself</h3>
               <p>The train is confirmed, running 40 minutes late, and the platform has moved from 8 to 12. Most apps flash a red banner and stop. This screen gives the three things you actually need standing in a station: the new platform, where your coach stops on it, and the revised arrival. Then the choices, with one clearly recommended. Not a menu.</p>
             </div>
           </div>
           <div class="screen">
-            <figure><img class="shot phone" src="img/03a-boarding.webp" width="720" height="1588" alt="Boarding check: the moment the train leaves, asking if you are on board" loading="lazy"></figure>
+            <figure><div class="pm one"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/03a-boarding.webp" width="720" height="1588" alt="Boarding check: the moment the train leaves, asking if you are on board" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
             <div><span class="k">03a · Boarding check · The train has just departed</span><h3>The moment the train leaves</h3>
               <p>Missing your train is the worst failure in Indian rail travel, and no app catches it. So the moment 12472 actually departs, not the scheduled time, the live departure, a gentle check appears. Are you on board?</p>
               <p>Yes opens the live journey. No does not hand you a helpline number. It opens the same rescue engine the failed chart uses.</p>
@@ -505,7 +505,7 @@ figcaption{text-align:center}
             </div>
           </div>
           <div class="screen">
-            <figure><img class="shot phone" src="img/04-onboard.webp" width="720" height="2871" alt="On board tracker: progress station by station and a wake up alarm before arrival" loading="lazy"></figure>
+            <figure><div class="pm"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/04-onboard.webp" width="720" height="2871" alt="On board tracker: progress station by station and a wake up alarm before arrival" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
             <div><span class="k">04 · On board tracker · Travelling, train on time</span><h3>Eight hours of nothing to do</h3>
               <p>The passenger said yes. Now they are on a train for eight hours overnight, and the only question left is when do I need to be awake.</p>
               <p>The screen becomes a station by station progress line. Departed New Delhi on time at 9:40 PM, currently near Mathura Junction, next stop Agra around 11:10 PM, then Agra Cantt, then arrives Nagda around 5:50 AM tomorrow. Under it, one commitment: we will wake you 30 minutes before your stop.</p>
@@ -513,7 +513,7 @@ figcaption{text-align:center}
             </div>
           </div>
           <div class="screen">
-            <figure><img class="shot phone" src="img/05-missed.webp" width="720" height="3364" alt="Missed train rescue: the next trains and buses you can still take, ranked" loading="lazy"></figure>
+            <figure><div class="pm"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/05-missed.webp" width="720" height="3364" alt="Missed train rescue: the next trains and buses you can still take, ranked" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
             <div><span class="k">05 · Missed train rescue · The train left without you</span><h3>They said no</h3>
               <p>The screen says it plainly. You missed the Swaraj Express. No softening, no apology copy. Then it immediately does something useful, because the situation is not actually hopeless and most people do not know that.</p>
               <p>The train is near Ghaziabad. It reaches Agra at 11:10 PM, tagged Catchable. Your ticket is valid till Agra. You have about 1h 20m to get there, and if you board there your original ticket still works. That is the recommended option, and it is recommended because it costs nothing.</p>
@@ -521,8 +521,8 @@ figcaption{text-align:center}
               <blockquote>Missing a train is stressful. We will help you get moving.</blockquote>
             </div>
           </div>
-          <div class="screen">
-            <figure><img class="shot phone" src="img/06-chart-failed.webp" width="720" height="3231" alt="Chart failed state: the waitlist did not clear, refund started and backup options shown" loading="lazy"></figure>
+          <div class="screen flip">
+            <figure><div class="pm"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/06-chart-failed.webp" width="720" height="3231" alt="Chart failed state: the waitlist did not clear, refund started and backup options shown" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
             <div><span class="k">06 · Chart failed rescue · The waitlist did not clear</span><h3>The chart did not clear</h3>
               <p>The failure state most redesigns skip. The screen says it plainly, no softening. Then, immediately, the refund is already moving. And under that, three ranked ways to still reach Nagda tonight, starting with the seat that was held four hours ago, one tap to take it.</p>
               <blockquote>That is why the backup exists. If you pre committed a plan B while things were still uncertain, the failure stops being a scramble and becomes a handoff.</blockquote>
@@ -533,8 +533,8 @@ figcaption{text-align:center}
       </section>
 
       <section id="addon" class="lt wide">
-        <div class="screen">
-          <figure><img class="shot phone" src="img/07-home-strip.webp" width="720" height="1584" alt="ixigo home with the live trip strip pinned at the top" loading="lazy"></figure>
+        <div class="screen flip">
+          <figure><div class="pm"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/07-home-strip.webp" width="720" height="1584" alt="ixigo home with the live trip strip pinned at the top" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
           <div>
             <p class="eyebrow">Add on</p>
             <h2>Making the hub find the user</h2>
@@ -935,5 +935,24 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
   });
 })();
 </script>
+<style is:inline>
+/* Vishal 2026-10-13 16:01: screens sit in the same phone mockup as on Framer (280 wide, 8px bezel, island) and scroll inside it */
+.pm{position:relative;width:280px;max-width:100%;padding:8px;border-radius:36px;background:#12141A;box-sizing:border-box}
+.pm-scr{height:591px;border-radius:27px;overflow:hidden auto;scrollbar-width:none;overscroll-behavior:auto;background:#000}
+.pm-scr::-webkit-scrollbar{display:none}
+.pm-scr:focus-visible{outline:2px solid var(--warm);outline-offset:4px}
+.pm.one{border-radius:30px}.pm.one .pm-scr{height:580px;overflow:hidden}
+.pm-isl{position:absolute;top:20px;left:50%;width:86px;height:24px;margin-left:-43px;border-radius:500px;background:#12141A;pointer-events:none}
+.screen .pm .shot.phone{display:block;width:100%;height:auto;max-width:none;border:0;border-radius:0;box-shadow:none}
+.screen{align-items:center}
+.screen>div{position:static}
+@media (min-width:901px){
+  .screen{grid-template-columns:minmax(0,640px) 280px}
+  .screen.flip{grid-template-columns:280px minmax(0,640px);justify-content:start;gap:80px}
+  .screen.flip>figure{order:0}
+}
+@media (max-width:900px){.screen>figure{justify-self:center}}
+.screen figure figcaption{margin-top:16px}
+</style>
 <script is:inline src="/js/inview-video.js" defer></script>
 </html>
