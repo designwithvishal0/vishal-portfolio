@@ -237,6 +237,10 @@ article>section{width:100%}
 .wrap{padding-top:40px}
 .bar{margin-inline:calc(50% - 50vw)}
 /* Vishal 2026-10-13: header keeps the frosted blur, same as the home page (the solid navy try is undone) */
+/* Vishal 2026-10-13: header looks exactly like the home page header (its dark look, since this page is dark), with no navy tint.
+   Same frosted blur; a touch more opaque than home so the navy page behind doesn't tint it blue. */
+header.bar{--bg:#0C0C0E;--ink:#F2F1EC;--muted:#A7A7AE;--edge:#6B6B72;--line:#232328;--btn:#F2F1EC;--on-btn:#0C0C0E}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){header.bar{background:color-mix(in srgb,#0C0C0E 90%,transparent)}}
 header.bar .bar-book{display:none} /* Vishal 2026-10-13: header is just name and menu; Book a call sits in the closing */
 body{margin-top:0}
 .progress{z-index:30}
@@ -260,6 +264,15 @@ video::cue{font:500 18px/1.4 var(--sans);background:rgba(12,22,49,.82);color:#ff
 /* ---- audit Phase 2 and 3 ---- */
 /* one break between two bands of the same colour, not two */
 article>section.lt+section.lt,article>section:not(.lt)+section:not(.lt){padding-top:0}
+/* desktop (Vishal 2026-10-13): the four navy sections after the 30 second version (hardest call, who, found, options) were one flat navy;
+   each now sits on its own step of JARVIS indigo blue, getting lighter as the story builds, so section breaks read */
+@media (min-width:621px){
+  article>section#hardest{--band:#0F1A3A;--card:#1A2850}
+  article>section#who{--band:#132045;--card:#1E2E5A}
+  article>section#found{--band:#17274F;--card:#223566}
+  article>section#options{--band:#1C2E5C;--card:#273D72}
+  article>section:is(#who,#found,#options){padding-top:120px}
+}
 /* type scale: 13 label, 16 small, 18 body, 22 lead, 32 titles, 48 sections, 68 page title */
 .facts p,.stats span,.note,.source,figcaption,.opt p,.fix p,.trade p,.trade .cost,.nextgrid span{font-size:16px}
 .list .n,.trade .n,.tag{font-size:13px}
@@ -652,10 +665,6 @@ nav.toc.light{--fg:#0E1424;--muted:#6A7488;--line:#D3D8E3;--warm:#A35A00}
   .summary div:nth-of-type(even){padding-left:44px;border-left:1px solid rgba(255,255,255,.09)}
   .summary p{font-size:19px;line-height:1.5;color:#E6EAF2;max-width:46ch}
 }
-/* desktop (Vishal 2026-10-13): the four 30 second blocks were one flat navy; each now sits on its own step of JARVIS blue, getting lighter left to right */
-@media (min-width:621px){.summary{background:none;padding:0;gap:12px}.summary>div,.summary>div:nth-of-type(n){padding:28px 32px 30px;border:0;border-radius:14px;gap:10px}.summary h2{margin-bottom:4px}
-.summary>div:nth-of-type(1){background:#15244A}.summary>div:nth-of-type(2){background:#1A2F5F}.summary>div:nth-of-type(3){background:#1F3B76}.summary>div:nth-of-type(4){background:#25488C}
-.summary>div .k{color:#BFD3F2}}
 /* Phones: the prototype box is exactly the shape of the app screen (412 by 917 in Figma), with Figma's own bars hidden, so nothing is cut */
 @media (max-width:640px){.proto{aspect-ratio:412/917;width:min(100%,340px,calc((100svh - 200px) * 412 / 917));margin-inline:auto;border-radius:28px}.protowrap{display:flex;justify-content:center}.protowait{width:min(100%,340px,calc((100svh - 200px) * 412 / 917));left:50%;transform:translateX(-50%);border-radius:28px}}
 /* Phones: the header slides away while reading down and comes back the moment you scroll up; the contents bar moves up with it */
