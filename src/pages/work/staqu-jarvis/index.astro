@@ -236,8 +236,7 @@ article>section{width:100%}
 /* site top bar, same as the home page; no theme toggle because this case study keeps its own fixed look */
 .wrap{padding-top:40px}
 .bar{margin-inline:calc(50% - 50vw)}
-/* audit 2026-10-13: the frosted header went muddy grey over light sections; on this page it stays solid navy */
-header.bar{background:#0C1631;-webkit-backdrop-filter:none;backdrop-filter:none}
+/* Vishal 2026-10-13: header keeps the frosted blur, same as the home page (the solid navy try is undone) */
 header.bar .bar-book{display:none} /* Vishal 2026-10-13: header is just name and menu; Book a call sits in the closing */
 body{margin-top:0}
 .progress{z-index:30}
@@ -653,6 +652,10 @@ nav.toc.light{--fg:#0E1424;--muted:#6A7488;--line:#D3D8E3;--warm:#A35A00}
   .summary div:nth-of-type(even){padding-left:44px;border-left:1px solid rgba(255,255,255,.09)}
   .summary p{font-size:19px;line-height:1.5;color:#E6EAF2;max-width:46ch}
 }
+/* desktop (Vishal 2026-10-13): the four 30 second blocks were one flat navy; each now sits on its own step of JARVIS blue, getting lighter left to right */
+@media (min-width:621px){.summary{background:none;padding:0;gap:12px}.summary>div,.summary>div:nth-of-type(n){padding:28px 32px 30px;border:0;border-radius:14px;gap:10px}.summary h2{margin-bottom:4px}
+.summary>div:nth-of-type(1){background:#15244A}.summary>div:nth-of-type(2){background:#1A2F5F}.summary>div:nth-of-type(3){background:#1F3B76}.summary>div:nth-of-type(4){background:#25488C}
+.summary>div .k{color:#BFD3F2}}
 /* Phones: the prototype box is exactly the shape of the app screen (412 by 917 in Figma), with Figma's own bars hidden, so nothing is cut */
 @media (max-width:640px){.proto{aspect-ratio:412/917;width:min(100%,340px,calc((100svh - 200px) * 412 / 917));margin-inline:auto;border-radius:28px}.protowrap{display:flex;justify-content:center}.protowait{width:min(100%,340px,calc((100svh - 200px) * 412 / 917));left:50%;transform:translateX(-50%);border-radius:28px}}
 /* Phones: the header slides away while reading down and comes back the moment you scroll up; the contents bar moves up with it */
