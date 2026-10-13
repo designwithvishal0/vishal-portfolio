@@ -347,6 +347,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
 
   <div class="layout">
     <nav class="toc" aria-label="Contents">
+      <div class="tid" aria-hidden="true"><b>JARVIS Alerts</b><span>Solo · 1 day, March 2026<br>Independent B2B concept</span><i></i></div>
       <span class="k">Contents</span>
       <a href="#hardest">The hardest call</a>
       <a href="#who">Who it’s for</a>
@@ -620,6 +621,7 @@ nav.toc{display:none!important}
 .tocpill .chev{width:10px;height:10px;border-right:1.5px solid #8C99B6;border-bottom:1.5px solid #8C99B6;transform:rotate(45deg) translateY(-3px)}
 .tocpill b{max-width:52vw}
 .tocsheet{inset:calc(var(--hb,56px) + 52px) 16px auto}
+.tid{display:none}
 /* Desktop contents: a fixed sidebar column of its own colour, beside the story, never on top of it */
 @media (min-width:1280px){
   .layout{display:grid;grid-template-columns:248px minmax(0,1fr);gap:0;margin-inline:calc(50% - 50vw);width:100vw}
@@ -629,6 +631,12 @@ nav.toc{display:none!important}
   nav.toc .k{margin-bottom:14px;font-size:11px;color:#8C99B6}
   nav.toc a{padding:8px 0 8px 14px}
   article{padding-inline:56px;min-width:0}
+  nav.toc{justify-content:flex-start!important;padding-top:104px!important}
+  nav.toc .tid{display:grid;gap:8px;padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid rgba(255,255,255,.08)}
+  nav.toc .tid b{font-size:20px;font-weight:700;color:#F2F4F8;letter-spacing:-.01em}
+  nav.toc .tid span{font-size:13px;line-height:1.5;color:#8C99B6}
+  nav.toc .tid i{display:block;height:3px;border-radius:3px;background:#22305A;margin-top:10px;overflow:hidden}
+  nav.toc .tid i::before{content:"";display:block;height:100%;width:var(--p,0%);background:#E9A23B}
   .tocpill{display:none!important}
 }
 html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after{transition:none}
@@ -643,6 +651,7 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after{transition:none}
     var r=art.getBoundingClientRect(), on=secs[0].getBoundingClientRect().top<innerHeight*.3&&r.bottom>innerHeight*.4;
     rail.classList.toggle('show',on);pill.classList.toggle('show',on);
     var hd=document.querySelector('header.bar');if(hd&&!document.documentElement.classList.contains('hdr-hide')&&!hd.style.transform){var hb=hd.getBoundingClientRect().bottom;if(hb>20)document.documentElement.style.setProperty('--hb',hb+'px')}
+    rail.style.setProperty('--p',Math.min(100,Math.max(0,(-r.top+innerHeight*.3)/(r.height)*100))+'%');
     pill.style.setProperty('--p',Math.min(100,Math.max(0,(-r.top+innerHeight*.3)/(r.height)*100))+'%');
     var cur=0;secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<innerHeight*.35)cur=i});
     if(cur!==last){last=cur;links.forEach(function(a,i){a.classList.toggle('on',i===cur)});items.forEach(function(a,i){a.classList.toggle('on',i===cur)});
