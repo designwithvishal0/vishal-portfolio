@@ -635,19 +635,25 @@ nav.toc{display:none!important}
   .hero h1{line-height:1.05}
   .facts div{align-content:start}
 }
-/* Phones: the prototype fits one screen, and the page keeps scrolling over it. A cover passes scrolls through to the page;
+/* Phones: the prototype keeps its full app screen size, and the page keeps scrolling over it. A cover passes scrolls through to the page;
    tapping it hands touches to the prototype, and "Done" (or scrolling it out of view) gives them back. */
 .protogo,.protodone{display:none}
 @media (max-width:640px){
-  #try{scroll-margin-top:60px;padding-block:28px 48px}
-  .proto{height:min(calc(100svh - 300px),757px);width:auto;max-width:100%}
-  .protowait{width:auto;aspect-ratio:412/917;height:100%}
+  #try{padding-bottom:48px}
   .protowrap{flex-direction:column;align-items:center;gap:12px}
   .protowrap:not(.live) .proto{pointer-events:none}
-  .protogo{display:flex;position:absolute;top:0;left:50%;transform:translateX(-50%);height:min(calc(100svh - 300px),757px);aspect-ratio:412/917;max-width:100%;border:0;border-radius:28px;background:linear-gradient(180deg,transparent 60%,rgba(8,16,38,.55));align-items:flex-end;justify-content:center;padding-bottom:22px;cursor:pointer;font:inherit}
+  .protogo{display:flex;position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(100%,340px);aspect-ratio:412/917;border:0;border-radius:28px;background:linear-gradient(180deg,transparent 60%,rgba(8,16,38,.55));align-items:flex-end;justify-content:center;padding-bottom:22px;cursor:pointer;font:inherit}
   .protogo span{padding:12px 18px;border-radius:999px;background:#F2F1EC;color:#0E1424;font-size:15px;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,.25)}
   .protowrap.live .protogo{display:none}
   .protowrap.live .protodone{display:inline-flex;position:absolute;left:50%;bottom:-22px;transform:translateX(-50%);white-space:nowrap;padding:12px 18px;border:0;border-radius:999px;background:#0E1424;box-shadow:0 0 0 1px rgba(242,241,236,.3),0 6px 18px rgba(0,0,0,.3);color:#F2F1EC;font:600 15px/1 var(--sans);cursor:pointer}
+}
+/* Phones: long sections show the heading, the first paragraph and the visuals; the rest opens in place with Read more. No words are cut. */
+.rmore{display:none}
+@media (max-width:620px){
+  .rm-hid{display:none!important}
+  .rmore{display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:10px 0;border:0;background:none;color:var(--warm);font:600 16px/1 var(--sans);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+  .rmore::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
+  .rm-clamp{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
 }
 /* Desktop contents: a floating dock at the bottom, like a video player. Section name, n / 11, one segment per section
    (read ones fill orange, the current one fills as you read), the next section, and back and next arrows. Phones keep the top bar. */
@@ -714,6 +720,25 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
     if(!mq.matches||y<120||(hd&&hd.contains(document.activeElement))){root.classList.remove('hdr-hide');last=y;return}
     if(d>6){root.classList.add('hdr-hide');last=y}else if(d<-6){root.classList.remove('hdr-hide');last=y}
   },{passive:true});
+})();
+</script>
+<script is:inline>
+(function(){
+  if(!matchMedia('(max-width:620px)').matches)return;
+  function btn(before,open){var b=document.createElement('button');b.type='button';b.className='rmore';b.textContent='Read more';b.setAttribute('aria-expanded','false');b.onclick=function(){open();b.remove()};before.parentNode.insertBefore(b,before);return b}
+  // Section body: keep the first paragraph, fold the rest of the paragraphs and quotes
+  document.querySelectorAll('article>section').forEach(function(sec){
+    var body=[].filter.call(sec.children,function(e){return (e.tagName==='P'&&!e.classList.contains('eyebrow'))||e.tagName==='BLOCKQUOTE'});
+    var rest=body.slice(1), words=rest.reduce(function(n,e){return n+e.textContent.split(/\s+/).length},0);
+    if(!rest.length||words<30)return;
+    rest.forEach(function(e){e.classList.add('rm-hid')});
+    btn(rest[0],function(){rest.forEach(function(e){e.classList.remove('rm-hid')})});
+  });
+  // Long single paragraphs beside the screens: show four lines, then Read more
+  document.querySelectorAll('.screen>div>p').forEach(function(p){
+    p.classList.add('rm-clamp');if(p.scrollHeight<=p.clientHeight+2){p.classList.remove('rm-clamp');return}
+    var b=btn(p,function(){p.classList.remove('rm-clamp')});p.after(b);
+  });
 })();
 </script>
 <script is:inline src="/js/inview-video.js" defer></script>
