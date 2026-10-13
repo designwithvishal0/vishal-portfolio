@@ -325,8 +325,8 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
     const on='<svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>';
     const off=sb.innerHTML.split('</svg>')[0]+'</svg>';
     const ip='<svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>', ia='<svg aria-hidden="true" viewBox="0 0 24 24" width="16" height="16"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg>';
-    const paint=()=>{pb.innerHTML=v.paused?ip:ia;pb.setAttribute('aria-label',v.paused?'Play':'Pause');pb.setAttribute('aria-pressed',String(!v.paused));
-      sb.innerHTML=v.muted?off:on;sb.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');sb.setAttribute('aria-pressed',String(!v.muted));};
+    const paint=()=>{pb.innerHTML=v.paused?ip+'<span class="lb">PLAY</span>':ia+'<span class="lb">PAUSE</span>';pb.setAttribute('aria-label',v.paused?'Play':'Pause');pb.setAttribute('aria-pressed',String(!v.paused));
+      sb.innerHTML=v.muted?off+'<span class="lb">SOUND ON</span>':on+'<span class="lb">SOUND OFF</span>';sb.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');sb.setAttribute('aria-pressed',String(!v.muted));};
     let chose=false;
     pb.onclick=()=>{if(v.paused){if(!chose)v.muted=false;v.play()}else v.pause()};
     sb.onclick=()=>{chose=true;v.muted=!v.muted;if(!v.muted&&v.paused)v.play()};
@@ -610,10 +610,10 @@ nav.toc.light{--fg:#0E1424;--muted:#6A7488;--line:#D3D8E3;--warm:#A35A00}
   html.hdr-hide .tocpill{top:env(safe-area-inset-top,0px)}
   html.hdr-hide .tocsheet{inset:calc(env(safe-area-inset-top,0px) + 52px) 16px auto}
 }
-/* Reel controls: icon only round buttons like the home page; on phones they sit at the top of the video where the reel has empty space */
-.pill{width:44px;height:44px;padding:0;justify-content:center;border-radius:50%;border:0;box-shadow:0 0 0 1px rgba(242,241,236,.28);background:rgba(12,12,14,.72);color:#F2F1EC;font:700 12px/1 var(--sans);letter-spacing:.02em}
+/* Reel controls: labelled pills on desktop (icon plus PLAY, SOUND ON); icon only round buttons on phones, at the top of the video where the reel has empty space */
+.pill{height:44px;padding:0 16px;gap:8px;justify-content:center;border-radius:22px;border:0;box-shadow:0 0 0 1px rgba(242,241,236,.28);background:rgba(12,12,14,.72);color:#F2F1EC;font:700 12px/1 var(--sans);letter-spacing:.02em}
 .pill:hover{background:rgba(12,12,14,.85)}
-@media (max-width:620px){.pills{top:12px;bottom:auto;right:12px}.pill{width:44px;height:44px;padding:0;font-size:12px}}
+@media (max-width:620px){.pills{top:12px;bottom:auto;right:12px}.pill{width:44px;height:44px;padding:0;border-radius:50%;font-size:12px}.pill .lb{display:none}}
 /* Contents bar: docked under the header on every width, one look over navy and light sections alike */
 nav.toc{display:none!important}
 .tocpill{display:flex!important;left:0;right:0;top:var(--hb,56px);bottom:auto;width:100%;max-width:none;height:44px;justify-content:center;gap:12px;padding:0 20px;border:0;border-bottom:1px solid rgba(255,255,255,.08);border-radius:0;background:rgba(12,22,49,.9);box-shadow:none;transform:translateY(-6px);font-size:14px;z-index:19}
