@@ -848,7 +848,7 @@ html.hpin .kf .p-end{margin-top:-16px}
 /* ================= Phones, a layout of their own (Vishal 2026-10-12: "the mobile side should be strategically made").
    Same words, colours, type and loops as desktop; different structure. Research and reasons: /mnt/project-files/audits/mobile-design-2026-10-12.md
    Only inside max-width:759px (the dock is hidden everywhere else), so desktop and tablet do not move. */
-.dock,.ab-me,.rk{display:none}
+.dock,.ab-me,.rk,.dock-cs{display:none}
 @media (max-width:759px){
   .kf{--tile:color-mix(in srgb,var(--ink) 5%,var(--bg))}
   /* thumb zone: Book a call and Resume live in a bar at the bottom of the screen, so the hero no longer repeats them */
@@ -1006,7 +1006,6 @@ html.calm .dock{transition:none}
   /* the loop runs the full card width. On a real iPhone the one screen cap shrank it to about 220px tall, too small to read */
   .row .vbox{height:auto;width:100%;margin-inline:0}
   /* View the case study is the only button while you read the work; the bottom bar steps aside */
-  html.in-work .dock{transform:translateY(calc(100% + 24px));opacity:0;pointer-events:none}
   /* pages that sell: the cards already say what shipped and for whom, so phones keep only the offer line */
   #pages .phead p:not(.hire){display:none}
   .kf .pages{padding-top:48px;padding-bottom:40px}
@@ -1077,4 +1076,17 @@ html.calm .dock{transition:none}
   .slot>.vctl,.slot>.vsnd{top:auto;bottom:8px}
   .slot>.vctl{right:8px}
   .slot>.vsnd{right:60px}
+}
+
+/* phones (Vishal 2026-10-13, 18:03, "instead of hiding the CTA, change the CTA to View Case study"): in Selected work the bottom bar stays and shows one View Case study button for the card on screen; the cards drop their own button; the loops show the whole 9:16 cut */
+@media (max-width:759px){
+  html.in-work:not(.at-end) .dock{grid-template-columns:1fr}
+  html.in-work:not(.at-end) .dock .pill-btn:not(.dock-cs){display:none}
+  html.in-work:not(.at-end) .dock .dock-cs{display:inline-flex}
+  .tx .more{display:none}
+}
+@media (max-width:699px){
+  .row .vbox{aspect-ratio:9/16}
+  .row .vbox img,.row .vbox video{object-position:50% 50%}
+  html.calm .row .vbox{aspect-ratio:1200/1256}
 }

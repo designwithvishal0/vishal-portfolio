@@ -297,7 +297,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
 </main>
 
 {/* Phones (mobile layout 2026-10-12): the two actions sit where a thumb rests, on every screen until the ending, which has its own */}
-<nav class="dock" aria-label="Get in touch"><a class="pill-btn primary" href={book.href}>{book.label}</a><a class="pill-btn" href={resume.href} target="_blank" rel="noopener">{resume.label}</a></nav>
+<nav class="dock" aria-label="Get in touch"><a class="pill-btn primary" href={book.href}>{book.label}</a><a class="pill-btn" href={resume.href} target="_blank" rel="noopener">{resume.label}</a><a class="pill-btn primary dock-cs" href={cs(work[0].slug)} aria-label={`View the ${work[0].name} case study`}>View Case study</a></nav>
 
 {/* The ending (Vishal 2026-10-11, option A): Contact and the footer share one dark block; colour stays with the work */}
 <div class="end">
@@ -355,6 +355,10 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   new IntersectionObserver(([e]) => root.classList.toggle('at-end', e.isIntersecting)).observe(q('.end'));
   // the bottom bar steps aside while Selected work fills the middle of the screen; each card has its own View the case study (Vishal 2026-10-12, 14:29)
   new IntersectionObserver(([e]) => root.classList.toggle('in-work', e.isIntersecting), { rootMargin: '-50% 0px -50% 0px' }).observe(q('#work'));
+  // phones (Vishal 2026-10-13, 18:03): in Selected work the bottom bar turns into one View Case study button for the card in the middle of the screen; the cards lose their own buttons
+  { const go = q<HTMLAnchorElement>('.dock-cs');
+    const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; const a = q<HTMLAnchorElement>('.tt a', e.target as HTMLElement); go.href = a.href; go.setAttribute('aria-label', `View the ${(e.target as HTMLElement).querySelector('.meta')!.textContent!.split(' · ')[0]} case study`); }), { rootMargin: '-50% 0px -50% 0px' });
+    qa('#work .row').forEach(r => io.observe(r)); }
   { const sec = q<HTMLButtonElement>('.bar-sec'); sec.hidden = false; const on = new Set<Element>();
     const show = () => { const s = qa('[data-sec]').filter(x => on.has(x)).pop(); bar.classList.toggle('has-sec', !!s); if (s) sec.textContent = s.dataset.sec!; };
     const io = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? on.add(e.target) : on.delete(e.target)); show(); }, { rootMargin: '-60px 0px -70% 0px' });
