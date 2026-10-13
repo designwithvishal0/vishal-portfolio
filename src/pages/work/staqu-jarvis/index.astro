@@ -661,6 +661,14 @@ nav.toc{display:none!important}
 .tocpill b{max-width:52vw}
 .tocsheet{inset:calc(var(--hb,56px) + 52px) 16px auto}
 .tid{display:none}
+/* Desktop first fold (Vishal 2026-10-13, "like this?" with the Profit Wala Love top): text left, reel right, like the Contra style tops.
+   Facts, the concept note and everything after stay full width below. Phones keep their own order (below). */
+@media (min-width:1000px){
+  .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);column-gap:clamp(40px,4vw,72px)}
+  .wrap>*{grid-column:1/-1}
+  .wrap>header.hero{grid-column:1;grid-row:1;align-self:center;max-width:none}
+  .wrap>.reel{grid-column:2;grid-row:1;align-self:center;margin-top:0!important}
+}
 /* Phone first fold: title, hook and a shorter intro, then the reel straight away. Facts and the concept note follow the reel. */
 @media (max-width:620px){
   .wrap{display:flex;flex-direction:column}
