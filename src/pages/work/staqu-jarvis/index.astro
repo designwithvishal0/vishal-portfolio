@@ -316,7 +316,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
     <div><span class="k">Tools</span><p>FigJam, Figma</p></div>
   </div>
   <p class="note">Independent concept work. Not affiliated with Staqu. JARVIS is Staqu’s video analytics product. Camera stills, times and counts in the screens are illustrative.</p>
-  <figure class="reel" style="margin-top:32px"><video class="shot wide" poster="img/00-hero-poster.jpg" width="1920" height="1080" muted loop playsinline preload="metadata" aria-label="JARVIS Alerts showreel with voiceover"><track kind="captions" src="captions.vtt" srclang="en" label="English"></video>
+  <figure class="reel" style="margin-top:32px"><video data-inview class="shot wide" poster="img/00-hero-poster.jpg" width="1920" height="1080" muted loop playsinline preload="metadata" aria-label="JARVIS Alerts showreel with voiceover"><track kind="captions" src="captions.vtt" srclang="en" label="English"></video>
     <div class="pills"><button type="button" class="pill" data-act="play" aria-pressed="false"><span aria-hidden="true">▷</span> PLAY</button><button type="button" class="pill" data-act="sound" aria-pressed="false"><svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> SOUND ON</button><button type="button" class="pill" data-act="cc" aria-pressed="false" aria-label="Captions">CC</button></div></figure>
   <script is:inline>(()=>{
     const f=document.currentScript.previousElementSibling, v=f.querySelector('video'); const tall=matchMedia('(max-width:620px)').matches; if(tall){v.poster='img/00-hero-poster-tall.jpg';v.width=1080;v.height=1920} v.src=tall?'showreel-tall.mp4':'showreel.mp4'; const [pb,sb,cb]=f.querySelectorAll('.pill'), tr=v.textTracks[0];
@@ -658,4 +658,5 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after{transition:none}
   },{passive:true});
 })();
 </script>
+<script is:inline src="/js/inview-video.js" defer></script>
 </html>
