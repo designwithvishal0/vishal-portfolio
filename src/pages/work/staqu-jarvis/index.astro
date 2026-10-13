@@ -1,8 +1,8 @@
 ---
 // JARVIS Alerts case study. Moved from public/ so it can use the shared site header; the page itself is unchanged.
+import '@fontsource-variable/bricolage-grotesque/standard.css';
 import SiteHeader from '../../../components/SiteHeader.astro';
 import Boot from '../../../components/Boot.astro';
-import SiteEnd from '../../../components/SiteEnd.astro';
 const title = 'JARVIS Alerts case study, Vishal Yadav, Product Designer';
 const description = "A false alert flow for Staqu's AI CCTV platform that makes every correction visible, so the people woken up at 3 AM can see the system learning.";
 const ld = [
@@ -514,6 +514,15 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
     </article>
   </div>
 
+  <footer class="closing">
+    <h2>JARVIS Alerts</h2>
+    <p>Every correction, visible.</p>
+    <div class="btns">
+      <a class="btn primary" href="https://www.figma.com/design/NEbmc8cqnHE2l7J1zSV3ER" target="_blank" rel="noopener">View the Figma file<svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill-opacity="0" fill="currentColor" height="9.75px" transform="translate(8.25 6)" width="9.75px"></path><path d="M 0 7.125 L 7.125 0" fill="transparent" height="7.125px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(6 10.875)" width="7.125px"></path><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill="transparent" height="9.75px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(8.25 6)" width="9.75px"></path></svg></a>
+      <a class="btn ghost" href="/looks/kinetic/"><svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill-opacity="0" fill="currentColor" height="13.5px" transform="translate(3.75 5.25)" width="6.75px"></path><path d="M 9.75 0 L 0 0" fill="transparent" height="1px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(10.5 12)" width="9.75px"></path><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill="transparent" height="13.5px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(3.75 5.25)" width="6.75px"></path></svg>Back to home</a>
+    </div>
+  </footer>
+
   <nav class="next" aria-label="More work">
     <span class="k">More work</span>
     <h2>Check out more work</h2>
@@ -524,12 +533,20 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
     </div>
   </nav>
 </div>
-<SiteEnd />
 <style is:inline>
+/* Closing (Vishal 2026-10-13): same words, order and layout as before; only the look follows the home page ending:
+   dark rounded block, big condensed Bricolage heading, pill buttons. */
+.closing{margin-top:120px;padding:clamp(48px,7vw,104px) clamp(24px,5vw,72px);border:0;border-radius:32px;background:#141416;color:#F2F1EC;gap:20px;font-family:'Bricolage Grotesque Variable',system-ui,sans-serif}
+.closing h2{font-family:inherit;font-size:clamp(56px,9vw,120px)!important;font-weight:800;font-stretch:75%;line-height:.92;letter-spacing:-.025em;color:#F2F1EC}
+.closing>p{font-size:clamp(22px,2.4vw,30px)!important;font-weight:600;line-height:1.2;color:#A9BBE6}
+.closing .btns{margin-top:20px;gap:12px}
+.closing .btn{height:52px;padding:0 22px;font-size:16px;font-weight:650}
+.closing .btn.primary{background:#F2F1EC;color:#0C0C0E}
+.closing .btn.ghost{border-color:#6B6B72;color:#F2F1EC}
+@media (max-width:620px){.closing{border-radius:24px;padding:48px 20px}.closing h2{font-size:52px!important}}
 /* Desktop spacing (Vishal 2026-10-13: "make the sections responsive"): the page grows with the window up to the home page width (1376px)
    instead of a fixed 760/1080 column. On wide screens each reading section puts its eyebrow and heading on the left
    and the text on the right, so both sides of the screen are used. Phones and tablets are unchanged. */
-:root{--page-pad:28px} /* body padding 20px plus the browser default 8px margin */
 @media (min-width:901px){
   .wrap,.summary,article>section.wide{max-width:1376px}
 }
@@ -683,6 +700,10 @@ nav.toc{display:none!important}
   .dkn{display:flex;flex-direction:column;gap:4px;min-width:118px;padding-left:14px;border-left:1px solid rgba(255,255,255,.12);color:#F2F1EC;text-decoration:none}
   .dkn small{font-size:10px;letter-spacing:.12em;color:#8F9BB8}
   .dkn.end{visibility:hidden}
+  /* hover a segment to see which section it is (Vishal 2026-10-13) */
+  .dks button{position:relative}
+  .dks button::after{content:attr(data-name);position:absolute;left:50%;bottom:calc(100% + 34px);transform:translate(-50%,4px);white-space:nowrap;padding:8px 12px;border-radius:10px;background:#F2F1EC;color:#0E1424;font:600 13px/1 var(--sans);box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease}
+  .dks button:hover::after,.dks button:focus-visible::after{opacity:1;transform:translate(-50%,0)}
 }
 html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{transition:none}
 </style>
@@ -705,7 +726,7 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
     rail.classList.toggle('light',!!(mid&&mid.classList.contains('lt')));
   }
   // Desktop dock
-  var dock=document.querySelector('.dock'),segs=links.map(function(a,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label',(i+1)+'. '+a.textContent);b.onclick=function(){go(i)};dock.querySelector('.dks').appendChild(b);return b}),
+  var dock=document.querySelector('.dock'),segs=links.map(function(a,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label',(i+1)+'. '+a.textContent);b.dataset.name=a.textContent;b.onclick=function(){go(i)};dock.querySelector('.dks').appendChild(b);return b}),
       dn=dock.querySelector('.dkn'),pv=dock.querySelector('[data-go="-1"]'),nx=dock.querySelector('[data-go="1"]'),dc=0;
   function go(i){i=Math.max(0,Math.min(secs.length-1,i));secs[i].scrollIntoView({behavior:document.documentElement.classList.contains('calm')||matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
   pv.onclick=function(){go(dc-1)};nx.onclick=function(){go(dc+1)};dn.onclick=function(e){e.preventDefault();go(dc+1)};
