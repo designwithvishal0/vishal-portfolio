@@ -102,7 +102,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
       <span class="w wu"><span style={`--i:${lastI}`} class="jw" id="unsure">{[...last].map((ch, j) => <span class="jl" style={`--k:${j}`}>{ch}</span>)}</span></span>
     </div>
     <div class="hb">
-      <p class="status"><span class="dot" aria-hidden="true"></span>{intro.availability}</p>
+      <p class="status"><span class="dot" aria-hidden="true"></span><span class="st-l">{intro.availability}</span><span class="st-s">{intro.availabilityShort}</span></p>
       <div class="hb-cta">
         <a class="pill-btn primary" href={book.href}>{book.label}</a>
         <a class="pill-btn" href={resume.href} target="_blank" rel="noopener">{resume.label}</a>

@@ -1018,3 +1018,9 @@ html.calm .dock{transition:none}
   .slot{width:min(100%,calc((100svh - 280px)*.8));height:auto;aspect-ratio:4/5;justify-self:center}
   .slot img,.slot video{object-fit:cover}
 }
+/* phones (Vishal 2026-10-13 Vercel comment on the availability line, "fix the alignment, shorten it"): the dot sits on the text's centre line, and phones read the short line */
+.st-s{display:none}
+@media (max-width:759px){
+  .st-l{display:none}.st-s{display:inline}
+  .hero .status .dot{margin-top:0}
+}

@@ -7,6 +7,8 @@ export const intro = {
   supporting:
     'Product designer in Gurugram, with 4.5 years in design and 2+ in core UI/UX. At CashKaro I watched where people dropped off in session recordings, then designed for that moment. My recent concepts take on fintech and B2B.',
   availability: 'Open to product design roles and freelance projects',
+  // phones (Vishal 2026-10-13 Vercel comment, "this line is very long. Shorten it.")
+  availabilityShort: 'Open to full time and freelance work',
   links: [
     { label: 'Resume', href: '/Vishal_Yadav_Resume.pdf' },
     { label: 'Book a call', href: 'https://cal.com/designwvishal' },
