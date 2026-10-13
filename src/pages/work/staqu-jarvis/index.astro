@@ -2,6 +2,7 @@
 // JARVIS Alerts case study. Moved from public/ so it can use the shared site header; the page itself is unchanged.
 import SiteHeader from '../../../components/SiteHeader.astro';
 import Boot from '../../../components/Boot.astro';
+import SiteEnd from '../../../components/SiteEnd.astro';
 const title = 'JARVIS Alerts case study, Vishal Yadav, Product Designer';
 const description = "A false alert flow for Staqu's AI CCTV platform that makes every correction visible, so the people woken up at 3 AM can see the system learning.";
 const ld = [
@@ -532,6 +533,23 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
     </div>
   </nav>
 </div>
+<SiteEnd />
+<style is:inline>
+/* Desktop spacing (Vishal 2026-10-13: "make the sections responsive"): the page grows with the window up to the home page width (1376px)
+   instead of a fixed 760/1080 column. On wide screens each reading section puts its eyebrow and heading on the left
+   and the text on the right, so both sides of the screen are used. Phones and tablets are unchanged. */
+:root{--page-pad:28px} /* body padding 20px plus the browser default 8px margin */
+@media (min-width:901px){
+  .wrap,.summary,article>section.wide{max-width:1376px}
+}
+@media (min-width:1100px){
+  article>section:not(.wide){max-width:none;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(48px,6vw,120px);row-gap:0}
+  article>section:not(.wide)>*{grid-column:2;min-width:0}
+  article>section:not(.wide)>:is(.eyebrow,h2){grid-column:1;grid-row:1/span 60;align-self:start}
+  article>section:not(.wide)>h2{padding-top:36px}
+  article>section:not(.wide)>:not(.eyebrow,h2)~:not(.eyebrow,h2){margin-top:22px}
+}
+</style>
 
 <script is:inline>
 (function(){
