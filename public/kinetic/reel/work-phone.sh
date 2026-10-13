@@ -17,5 +17,5 @@ enc -ss 5 -t 6.5 -i "$J" -ss 33 -t 7 -i "$J" -filter_complex "[0:v]$V[a];[1:v]$V
 ffmpeg -v error -y -ss 6.5 -i ../../reel/ixigo-phone.mp4 -frames:v 1 -q:v 3 ixigo-phone-lit.jpg
 ffmpeg -v error -y -ss 6.5 -i ../../reel/ixigo-phone.mp4 -frames:v 1 -q:v 3 ../../reel/ixigo-phone.jpg
 ffmpeg -v error -y -ss 12 -i split-phone.mp4 -frames:v 1 -q:v 3 split-phone.jpg
-ffmpeg -v error -y -ss 4 -i twelve-phone.mp4 -frames:v 1 -q:v 3 twelve-phone.jpg
+ffmpeg -v error -y -ss 2.2 -i twelve-phone.mp4 -frames:v 1 -q:v 3 twelve-phone.jpg
 ffmpeg -v error -y -ss 3 -i jarvis-phone.mp4 -frames:v 1 -q:v 3 jarvis-phone.jpg

@@ -1047,3 +1047,8 @@ html.calm .dock{transition:none}
   [data-novid]>.vsnd{display:none}
 }
 @media (max-width:759px) and (orientation:portrait){.slot{cursor:pointer}}
+/* phones (Vishal 2026-10-13, "the video loop height is so much... scroll two times just to see the CTA"): work card loops show the top 4:5 of the vertical cut (his words and the phone), so title, loop and button fit one screen */
+@media (max-width:699px){
+  .row .vbox{aspect-ratio:4/5}
+  .row .vbox img,.row .vbox video{object-fit:cover;object-position:50% 12%}
+}
