@@ -363,6 +363,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
     </nav>
     <button type="button" class="tocpill" popovertarget="tocsheet" aria-label="Contents"><span class="k">Contents</span><b>The hardest call</b><i aria-hidden="true">1 / 11</i><span class="chev" aria-hidden="true"></span></button>
     <div id="tocsheet" class="tocsheet" popover><span class="k">Contents</span></div>
+    <nav class="dock" aria-label="Contents"><button type="button" class="dkb" data-go="-1" aria-label="Previous section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="dkm"><div class="dkt"><b></b><i></i></div><div class="dks"></div></div><a class="dkn" href="#"><small>NEXT</small><span></span></a><button type="button" class="dkb" data-go="1" aria-label="Next section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></nav>
 
     <article>
       <section id="hardest" class="lt">
@@ -622,24 +623,27 @@ nav.toc{display:none!important}
 .tocpill b{max-width:52vw}
 .tocsheet{inset:calc(var(--hb,56px) + 52px) 16px auto}
 .tid{display:none}
-/* Desktop contents: a fixed sidebar column of its own colour, beside the story, never on top of it */
+/* Desktop contents: a floating dock at the bottom, like a video player. Section name, n / 11, one segment per section
+   (read ones fill orange, the current one fills as you read), the next section, and back and next arrows. Phones keep the top bar. */
+.dock{display:none}
 @media (min-width:1280px){
-  .layout{display:grid;grid-template-columns:248px minmax(0,1fr);gap:0;margin-inline:calc(50% - 50vw);width:100vw}
-  article>section.wide{max-width:1080px}
-  nav.toc{display:flex!important;flex-direction:column;justify-content:center;gap:2px;position:sticky;top:0;align-self:start;height:100vh;padding:120px 28px 40px 36px;background:#081026;border-right:1px solid rgba(255,255,255,.06);z-index:2;opacity:1;visibility:visible;transform:none;left:auto;width:auto;border-radius:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;font-size:14px;--fg:#F2F4F8;--muted:#8C99B6;--line:#22305A;--warm:#E9A23B}
-  nav.toc.light{background:#081026;--fg:#F2F4F8;--muted:#8C99B6;--line:#22305A;--warm:#E9A23B;box-shadow:none;border-color:rgba(255,255,255,.06)}
-  nav.toc .k{margin-bottom:14px;font-size:11px;color:#8C99B6}
-  nav.toc a{padding:8px 0 8px 14px}
-  article{padding-inline:56px;min-width:0}
-  nav.toc{justify-content:flex-start!important;padding-top:104px!important}
-  nav.toc .tid{display:grid;gap:8px;padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid rgba(255,255,255,.08)}
-  nav.toc .tid b{font-size:20px;font-weight:700;color:#F2F4F8;letter-spacing:-.01em}
-  nav.toc .tid span{font-size:13px;line-height:1.5;color:#8C99B6}
-  nav.toc .tid i{display:block;height:3px;border-radius:3px;background:#22305A;margin-top:10px;overflow:hidden}
-  nav.toc .tid i::before{content:"";display:block;height:100%;width:var(--p,0%);background:#E9A23B}
   .tocpill{display:none!important}
+  .dock{display:flex;position:fixed;left:50%;bottom:24px;z-index:20;align-items:center;gap:14px;padding:10px 12px;border-radius:16px;background:rgba(8,16,38,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 0 0 1px rgba(255,255,255,.1),0 16px 40px rgba(0,0,0,.3);font:600 14px/1 var(--sans);color:#F2F1EC;opacity:0;visibility:hidden;transform:translate(-50%,16px);transition:opacity .3s ease,transform .3s ease,visibility .3s}
+  .dock.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+  .dkb{all:unset;cursor:pointer;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.07);transition:background .2s}
+  .dkb:hover{background:rgba(255,255,255,.14)}.dkb:disabled{opacity:.35;cursor:default}
+  .dkb:focus-visible,.dkn:focus-visible,.dks button:focus-visible{outline:2px solid #E9A23B;outline-offset:2px}
+  .dkm{display:flex;flex-direction:column;gap:9px;width:420px}
+  .dkt{display:flex;justify-content:space-between;gap:12px}.dkt i{font-style:normal;color:#8F9BB8;font-variant-numeric:tabular-nums}
+  .dks{display:flex;gap:4px}
+  .dks button{all:unset;cursor:pointer;flex:1;height:14px;display:flex;align-items:center}
+  .dks button::before{content:"";flex:1;height:4px;border-radius:2px;background:linear-gradient(90deg,#E9A23B var(--f,0%),rgba(242,241,236,.18) var(--f,0%))}
+  .dks button:hover::before{background:linear-gradient(90deg,#E9A23B var(--f,0%),rgba(242,241,236,.36) var(--f,0%))}
+  .dkn{display:flex;flex-direction:column;gap:4px;min-width:118px;padding-left:14px;border-left:1px solid rgba(255,255,255,.12);color:#F2F1EC;text-decoration:none}
+  .dkn small{font-size:10px;letter-spacing:.12em;color:#8F9BB8}
+  .dkn.end{visibility:hidden}
 }
-html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after{transition:none}
+html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{transition:none}
 </style>
 <script is:inline>
 (function(){
@@ -659,6 +663,20 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after{transition:none}
     var mid=null;secs.forEach(function(s){if(s){var b=s.getBoundingClientRect();if(b.top<=innerHeight/2&&b.bottom>innerHeight/2)mid=s}});
     rail.classList.toggle('light',!!(mid&&mid.classList.contains('lt')));
   }
+  // Desktop dock
+  var dock=document.querySelector('.dock'),segs=links.map(function(a,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label',(i+1)+'. '+a.textContent);b.onclick=function(){go(i)};dock.querySelector('.dks').appendChild(b);return b}),
+      dn=dock.querySelector('.dkn'),pv=dock.querySelector('[data-go="-1"]'),nx=dock.querySelector('[data-go="1"]'),dc=0;
+  function go(i){i=Math.max(0,Math.min(secs.length-1,i));secs[i].scrollIntoView({behavior:document.documentElement.classList.contains('calm')||matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
+  pv.onclick=function(){go(dc-1)};nx.onclick=function(){go(dc+1)};dn.onclick=function(e){e.preventDefault();go(dc+1)};
+  function dtick(){
+    var r=art.getBoundingClientRect(),y=innerHeight*.35;dock.classList.toggle('show',secs[0].getBoundingClientRect().top<innerHeight*.3&&r.bottom>innerHeight*.6);
+    dc=0;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<y)dc=i});
+    segs.forEach(function(b,i){var f=i<dc?100:i>dc?0:(function(){var t=secs[i].getBoundingClientRect(),e=i<secs.length-1?secs[i+1].getBoundingClientRect().top:r.bottom;return Math.max(0,Math.min(100,(y-t.top)/(e-t.top)*100))})();b.style.setProperty('--f',f+'%');b.toggleAttribute('aria-current',i===dc)});
+    dock.querySelector('.dkt b').textContent=links[dc].textContent;dock.querySelector('.dkt i').textContent=(dc+1)+' / '+links.length;
+    var n=links[dc+1];dn.classList.toggle('end',!n);if(n){dn.href=n.getAttribute('href');dn.querySelector('span').textContent=n.textContent}
+    pv.disabled=dc===0;nx.disabled=dc===links.length-1;
+  }
+  addEventListener('scroll',dtick,{passive:true});addEventListener('resize',dtick);dtick();
   addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);tick();
 })();
 </script>
