@@ -46,7 +46,7 @@ const lastI = wi;
 const Btn = `<svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12" rx="1" /><rect x="8.5" y="1" width="3.5" height="12" rx="1" /></svg><svg class="i-play" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.8.8 0 0 0 1.2.7l9-5.4a.8.8 0 0 0 0-1.4l-9-5.4A.8.8 0 0 0 3 1.6z" /></svg>`;
 // How I work: a statement that links to a case study fills with that project's colour on hover. No stills (Vishal 2026-10-11: only one row had one)
 // JARVIS opens the case study built on this site; the rest still go to the live Framer pages
-const cs = (slug: string) => slug === 'staqu-jarvis' ? '/work/staqu-jarvis/' : live(slug);
+const cs = (slug: string) => ['staqu-jarvis', 'split-and-request'].includes(slug) ? `/work/${slug}/` : live(slug);
 const chapters = [[0, 6.3], [6.3, 15.2], [21.5, 8.2], [29.7, 5.6]], phoneChapters = [[0, 12], [12, 6], [18, 6], [24, 24]] /* hero-phone-v4.mp4, his 4:3 portfolio showreel v4 (Vishal 2026-10-13 13:31 "Add it on mobile"; source /mnt/project-files/showreel). Contra reel for phones stays at hero-phone.mp4 */, phoneName = ['ixigo Trains', 'Split and Request', 'Twelve', 'JARVIS'], chapterName = ['ixigo Trains', 'Split and Request', 'Twelve', 'JARVIS'];
 const hk = (href: string) => { const i = work.findIndex(w => live(w.slug) === href); return i < 0 ? '' : loops[i]; };
 const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
