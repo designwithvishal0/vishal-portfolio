@@ -500,6 +500,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   hero.btn.addEventListener('click', () => { if (!chose && hv.paused === false) hear(true); });
   snd.addEventListener('click', () => { chose = true; hear(hv.muted); if (!hv.muted && hv.paused) { hero.user = true; sync(hero); } });
   [land, phone].forEach(m => m.addEventListener('change', () => hear(!hv.muted && !chose)));
+  // phones: a tap on the reel itself pauses or plays it, like any player (Vishal 2026-10-13)
+  slot.addEventListener('click', e => { if (onPhone() && !(e.target as Element).closest('button')) hero.btn.click(); });
   // the index beside the reel follows the project on screen (beat starts in seconds, from tools/motion/kinetic/hero-cut.sh)
   const heroSec = q('.hero'), idx = q('.idx'), beats = { wide: [0, 6.3, 21.5, 29.7], tall: [0, 6.3, 21.5, 29.7], phone: [0, 20.5, 26.5, 31.5] };
   const follow = () => {
