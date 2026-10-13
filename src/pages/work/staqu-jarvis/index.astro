@@ -274,7 +274,7 @@ blockquote,.dek,.closing>p,.metric b,.next h2{font-size:22px}
 .closing>p{font-weight:600;color:var(--acc)}
 /* more work: a picture and a clear hover */
 .nextgrid a{padding:0;overflow:hidden;gap:0;transition:transform .2s ease,box-shadow .2s ease}
-.nextgrid img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.nextgrid img{display:block;width:100%;height:auto;aspect-ratio:800/837;object-fit:cover}
 .nextgrid b{padding:16px 20px 20px;line-height:1.35}
 .nextgrid a:hover,.nextgrid a:focus-visible{transform:translateY(-2px);box-shadow:0 0 0 1px var(--acc)}
 .nextgrid a:hover b{text-decoration:underline;text-underline-offset:.2em}
@@ -326,8 +326,12 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
     const off=sb.innerHTML.split('</svg>')[0]+'</svg>';
     const paint=()=>{pb.innerHTML=v.paused?'<span aria-hidden="true">▷</span> PLAY':'<span aria-hidden="true">❙❙</span> PAUSE';pb.setAttribute('aria-pressed',String(!v.paused));
       sb.innerHTML=v.muted?off+' SOUND ON':on+' SOUND OFF';sb.setAttribute('aria-pressed',String(!v.muted));};
-    pb.onclick=()=>{v.paused?v.play():v.pause()};
-    sb.onclick=()=>{v.muted=!v.muted;if(!v.muted&&v.paused)v.play()};
+    let chose=false;
+    pb.onclick=()=>{if(v.paused){if(!chose)v.muted=false;v.play()}else v.pause()};
+    sb.onclick=()=>{chose=true;v.muted=!v.muted;if(!v.muted&&v.paused)v.play()};
+    // Sound on by default: browsers only allow sound after a tap or key press, so autoplay starts muted and the first tap anywhere turns sound on
+    const wake=e=>{if(!chose&&!(e.target.closest&&e.target.closest('.reel .pill'))){v.muted=false}removeEventListener('pointerdown',wake,true);removeEventListener('keydown',wake,true)};
+    addEventListener('pointerdown',wake,true);addEventListener('keydown',wake,true);
     ['play','pause','volumechange'].forEach(e=>v.addEventListener(e,paint));
     if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('calm'))v.play().catch(()=>{});paint();
   })()</script>
@@ -519,9 +523,9 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
     <span class="k">More work</span>
     <h2>Check out more work</h2>
     <div class="nextgrid">
-      <a href="https://designwvishal.framer.website/work/ixigo-trains"><img src="/kinetic/reel/ixigo-scene-lit.jpg" width="1280" height="720" alt="" loading="lazy"><b>ixigo Trains · The four hours nobody designs for</b></a>
-      <a href="https://designwvishal.framer.website/work/twelve"><img src="/reel/twelve-scene.jpg" width="1280" height="720" alt="" loading="lazy"><b>Twelve · Plans in years, not months</b></a>
-      <a href="https://designwvishal.framer.website/work/split-and-request"><img src="/reel/split-scene.jpg" width="1280" height="720" alt="" loading="lazy"><b>Google Pay Split and Request</b></a>
+      <a href="https://designwvishal.framer.website/work/ixigo-trains"><img src="img/more-ixigo.webp" width="800" height="837" alt="" loading="lazy"><b>ixigo Trains · The four hours nobody designs for</b></a>
+      <a href="https://designwvishal.framer.website/work/twelve"><img src="img/more-twelve.webp" width="800" height="837" alt="" loading="lazy"><b>Twelve · Plans in years, not months</b></a>
+      <a href="https://designwvishal.framer.website/work/split-and-request"><img src="img/more-split.webp" width="800" height="837" alt="" loading="lazy"><b>Google Pay Split and Request</b></a>
     </div>
   </nav>
 </div>
@@ -584,6 +588,15 @@ nav.toc.light{--fg:#0E1424;--muted:#6A7488;--line:#D3D8E3;--warm:#A35A00}
   .stats div{background:var(--card);border-radius:16px;padding:18px 20px}
   .stats b{font-size:34px}
   #screens .screen{gap:28px}
+}
+/* 30 second version on desktop: two by two with hairlines, so every label sits on one line and each answer has room */
+@media (min-width:901px){
+  .summary{grid-template-columns:1fr 1fr;gap:0;padding:40px 44px 20px}
+  .summary h2{margin-bottom:12px}
+  .summary div{padding:26px 0 30px;gap:12px;border-top:1px solid rgba(255,255,255,.09)}
+  .summary div:nth-of-type(odd){padding-right:44px}
+  .summary div:nth-of-type(even){padding-left:44px;border-left:1px solid rgba(255,255,255,.09)}
+  .summary p{font-size:19px;line-height:1.5;color:#E6EAF2;max-width:34ch}
 }
 /* Contents bar: docked under the header on every width, one look over navy and light sections alike */
 nav.toc{display:none!important}
