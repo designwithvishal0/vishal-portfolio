@@ -270,10 +270,12 @@ article>section.lt+section.lt,article>section:not(.lt)+section:not(.lt){padding-
 /* desktop (Vishal 2026-10-13): the four navy sections after the 30 second version (hardest call, who, found, options) were one flat navy;
    each now sits on its own step of OneBanc green, getting lighter as the story builds, so section breaks read */
 /* phones too since 2026-10-13 15:04 (Vishal: on phones the content blended into the page navy) */
-article>section#problem{--band:#10220C;--card:#1A2E15}
-article>section#who{--band:#132810;--card:#1F3519}
-article>section#ruledout{--band:#172E13;--card:#243C1E}
-article>section#constraints{--band:#1B3417;--card:#2A4423}
+/* Vishal 2026-10-13 16:06: the opening is no longer a run of dark sections. Problem, Who and Constraints are light and alternate;
+   What I ruled out (It knows when you got paid) stays the one dark band, like the reframe on his Framer pages */
+article>section#problem{--band:#FBF9F4;--card:#EFE9DC}
+article>section#who{--band:#EFE9DC;--card:#FBF9F4}
+article>section#ruledout{--band:#10220C;--card:#1A2E15}
+article>section#constraints{--band:#FBF9F4;--card:#EFE9DC}
 article>section:is(#who,#ruledout,#constraints){padding-top:120px}
 @media (max-width:900px){article>section:is(#who,#ruledout,#constraints){padding-top:80px}}
 @media (max-width:620px){article>section:is(#who,#ruledout,#constraints){padding-top:64px}}
@@ -374,7 +376,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
   .sums div{padding:18px}
   .blk h3{font-size:21px}
   /* on phones the boxes in the green sections are light, so they stand out instead of dark on dark (same rule as JARVIS) */
-  #constraints .pal div:not(.fail){box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+  #constraints .pal div:not(.fail){box-shadow:inset 0 0 0 1px rgba(15,31,11,.12)}
 }
 /* Vishal 2026-10-13: the top is not green (the reel itself is green). Cream from the title to the 30 second version,
    which keeps its own dark card; the green starts at The problem and runs to the end. */
@@ -457,14 +459,14 @@ body{background:#F5F2EA}
     <div class="dockfade" aria-hidden="true"></div><nav class="dock" aria-label="Contents"><button type="button" class="dkb" data-go="-1" aria-label="Previous section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="dkm"><div class="dkt"><b></b><i></i></div><div class="dks"></div></div><a class="dkn" href="#"><small>NEXT</small><span></span></a><button type="button" class="dkb" data-go="1" aria-label="Next section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></nav>
 
     <article>
-      <section id="problem">
+      <section id="problem" class="lt">
         <p class="eyebrow">The problem</p>
         <h2>Day 3 and day 24 are the same balance</h2>
         <p>On day 3 of the month you order lunch without looking at the price. On day 24 you open your bank app twice before ordering the same lunch. Nothing changed about the money. What changed is you stopped being able to tell if you were fine.</p>
         <p>A balance cannot answer that. It tells you what is there today and nothing about how long it has to last.</p>
       </section>
 
-      <section id="who">
+      <section id="who" class="lt">
         <p class="eyebrow">Who had the problem</p>
         <h2>Someone paid once a month, on a fixed date</h2>
         <p>The user is me. I have been paid a fixed salary once a month for four and a half years, and I still check my balance twice in the last week before ordering food.</p>
@@ -480,7 +482,7 @@ body{background:#F5F2EA}
         <p>Your employer put the salary there. That date is the edge a balance never has. Once the app knows the start and end of your month, every number on the screen can be about the month.</p>
       </section>
 
-      <section id="constraints">
+      <section id="constraints" class="lt">
         <p class="eyebrow">The constraints</p>
         <h2>No app, no guidelines</h2>
         <p>I could not get into the app. It is onboarded through HR, and I am not on a OneBanc payroll. There were no brand guidelines either.</p>
@@ -786,7 +788,7 @@ nav.toc.light{--fg:#0F1F0B;--muted:#646C5E;--line:#DCD6C6;--warm:#7A5F1F}
   .stats span{font-size:15px}
   .endsec .closing .founder a{display:inline-block;padding:13px 0;margin:-13px 0}
   /* Vishal 2026-10-13 15:06: on phones the boxes in the navy sections are light, so they stand out instead of dark on dark */
-  #who .stats,#found .goals>div,#options .opt{--fg:#0F1F0B;--body:#3D4637;--muted:#5E6658;--acc:#7A5F1F;--line:#DCD6C6;--warm:#7A5F1F;background:#F5F2EA;color:var(--fg);border-color:transparent}
+  #who .stats,#found .goals>div,#options .opt{--fg:#0F1F0B;--body:#3D4637;--muted:#5E6658;--acc:#7A5F1F;--line:#DCD6C6;--warm:#7A5F1F;background:var(--card);color:var(--fg);border-color:transparent}
   #options .opt.built{box-shadow:inset 0 0 0 2px #EEC97E}
   #options .opt.built .tag{color:#fff}
   .scr .screen{gap:28px}
