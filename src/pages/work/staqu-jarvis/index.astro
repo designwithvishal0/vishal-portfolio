@@ -623,6 +623,18 @@ nav.toc{display:none!important}
 .tocpill b{max-width:52vw}
 .tocsheet{inset:calc(var(--hb,56px) + 52px) 16px auto}
 .tid{display:none}
+/* Phone first fold: title, hook and a shorter intro, then the reel straight away. Facts and the concept note follow the reel. */
+@media (max-width:620px){
+  .wrap{display:flex;flex-direction:column}
+  .wrap>*{order:5}
+  .wrap>header.hero{order:1;gap:14px}
+  .wrap>.reel{order:2;margin-top:28px!important}
+  .wrap>.facts{order:3;margin-top:32px}
+  .wrap>.note{order:4}
+  .hero .dek{font-size:18px;line-height:1.5;color:var(--muted)}
+  .hero h1{line-height:1.05}
+  .facts div{align-content:start}
+}
 /* Desktop contents: a floating dock at the bottom, like a video player. Section name, n / 11, one segment per section
    (read ones fill orange, the current one fills as you read), the next section, and back and next arrows. Phones keep the top bar. */
 .dock{display:none}
