@@ -10,7 +10,7 @@
       "has": [
         {
           "type": "host",
-          "value": "vishal-(designs?|yadav|yadav-design)(-preview)?\\.vercel\\.app"
+          "value": "vishal-(designs?|yadav|yadav-design|preview)(-preview)?\\.vercel\\.app"
         }
       ],
       "destination": "/looks/kinetic",
