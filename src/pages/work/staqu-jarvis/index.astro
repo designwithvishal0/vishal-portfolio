@@ -266,13 +266,14 @@ video::cue{font:500 18px/1.4 var(--sans);background:rgba(12,22,49,.82);color:#ff
 article>section.lt+section.lt,article>section:not(.lt)+section:not(.lt){padding-top:0}
 /* desktop (Vishal 2026-10-13): the four navy sections after the 30 second version (hardest call, who, found, options) were one flat navy;
    each now sits on its own step of JARVIS indigo blue, getting lighter as the story builds, so section breaks read */
-@media (min-width:621px){
-  article>section#hardest{--band:#0F1A3A;--card:#1A2850}
-  article>section#who{--band:#132045;--card:#1E2E5A}
-  article>section#found{--band:#17274F;--card:#223566}
-  article>section#options{--band:#1C2E5C;--card:#273D72}
-  article>section:is(#who,#found,#options){padding-top:120px}
-}
+/* phones too since 2026-10-13 15:04 (Vishal: on phones the content blended into the page navy) */
+article>section#hardest{--band:#0F1A3A;--card:#1A2850}
+article>section#who{--band:#132045;--card:#1E2E5A}
+article>section#found{--band:#17274F;--card:#223566}
+article>section#options{--band:#1C2E5C;--card:#273D72}
+article>section:is(#who,#found,#options){padding-top:120px}
+@media (max-width:900px){article>section:is(#who,#found,#options){padding-top:80px}}
+@media (max-width:620px){article>section:is(#who,#found,#options){padding-top:64px}}
 /* type scale: 13 label, 16 small, 18 body, 22 lead, 32 titles, 48 sections, 68 page title */
 .facts p,.stats span,.note,.source,figcaption,.opt p,.fix p,.trade p,.trade .cost,.nextgrid span{font-size:16px}
 .list .n,.trade .n,.tag{font-size:13px}
