@@ -100,3 +100,10 @@ html.calm .sw .knob{transition:none}
     height:44px;padding:0 4px 0 12px;margin-right:-4px;border-color:transparent;font-size:15px;font-weight:650;flex-direction:row-reverse}
   .a11y[aria-expanded=true]{background:var(--line);border-color:transparent;color:var(--ink)}
 }
+/* phones (Vishal 2026-10-13): Book a call had no room around it; a slimmer pill with clear space to Menu, tap area stays 44px */
+@media (max-width:759px){
+  .bar-r{gap:18px}
+  .bar-book{position:relative;height:34px;padding:0 14px;font-size:14px}
+  .bar-book::after{content:"";position:absolute;inset:-5px -4px}
+}
+@media (max-width:359px){.bar-r{gap:10px}}
