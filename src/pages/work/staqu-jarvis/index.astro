@@ -355,7 +355,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
       <a href="#changed">What changed</a>
       <a href="#learned">What I learned</a>
     </nav>
-    <button type="button" class="tocpill" popovertarget="tocsheet" aria-label="Contents"><span class="k">Contents</span><b>The hardest call</b><i aria-hidden="true">1 / 11</i></button>
+    <button type="button" class="tocpill" popovertarget="tocsheet" aria-label="Contents"><span class="k">Contents</span><b>The hardest call</b><i aria-hidden="true">1 / 11</i><span class="chev" aria-hidden="true"></span></button>
     <div id="tocsheet" class="tocsheet" popover><span class="k">Contents</span></div>
 
     <article>
@@ -585,7 +585,14 @@ nav.toc.light{--fg:#0E1424;--muted:#6A7488;--line:#D3D8E3;--warm:#A35A00}
   .stats b{font-size:34px}
   #screens .screen{gap:28px}
 }
-html.calm nav.toc,html.calm .tocpill{transition:none}
+/* Contents bar: docked under the header on every width, one look over navy and light sections alike */
+nav.toc{display:none!important}
+.tocpill{display:flex!important;left:0;right:0;top:var(--hb,56px);bottom:auto;width:100%;max-width:none;height:44px;justify-content:center;gap:12px;padding:0 20px;border:0;border-bottom:1px solid rgba(255,255,255,.08);border-radius:0;background:rgba(12,22,49,.9);box-shadow:none;transform:translateY(-6px);font-size:14px;z-index:19}
+.tocpill.show{transform:none}
+.tocpill .chev{width:10px;height:10px;border-right:1.5px solid #8C99B6;border-bottom:1.5px solid #8C99B6;transform:rotate(45deg) translateY(-3px)}
+.tocpill b{max-width:52vw}
+.tocsheet{inset:calc(var(--hb,56px) + 52px) 16px auto}
+html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after{transition:none}
 </style>
 <script is:inline>
 (function(){
@@ -596,6 +603,8 @@ html.calm nav.toc,html.calm .tocpill{transition:none}
   function tick(){
     var r=art.getBoundingClientRect(), on=secs[0].getBoundingClientRect().top<innerHeight*.3&&r.bottom>innerHeight*.4;
     rail.classList.toggle('show',on);pill.classList.toggle('show',on);
+    var hd=document.querySelector('header.bar');if(hd)document.documentElement.style.setProperty('--hb',Math.max(0,hd.getBoundingClientRect().bottom)+'px');
+    pill.style.setProperty('--p',Math.min(100,Math.max(0,(-r.top+innerHeight*.3)/(r.height)*100))+'%');
     var cur=0;secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<innerHeight*.35)cur=i});
     if(cur!==last){last=cur;links.forEach(function(a,i){a.classList.toggle('on',i===cur)});items.forEach(function(a,i){a.classList.toggle('on',i===cur)});
       pill.querySelector('b').textContent=links[cur].textContent;pill.querySelector('i').textContent=(cur+1)+' / '+links.length;}
