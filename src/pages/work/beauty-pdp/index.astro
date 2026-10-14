@@ -1051,3 +1051,14 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 <script is:inline src="/js/pin-frames.js" defer></script>
 <script is:inline src="/js/pin-screen.js" defer></script>
 </html>
+
+<style is:inline>
+/* Phones (Vishal 04:31): project details as one row per fact, label left and value right, as on Split and Twelve, instead of squeezed or uneven columns */
+@media (max-width:620px){
+  .wrap>.facts{grid-template-columns:minmax(0,1fr)!important;gap:0;padding-block:4px}
+  .wrap>.facts>div{grid-column:auto!important;display:grid;grid-template-columns:104px minmax(0,1fr);gap:12px;align-items:baseline;padding-block:14px}
+  .wrap>.facts>div+div{border-top:1px solid var(--line)}
+  .wrap>.facts>div>:not(.k){font-size:16px;line-height:1.45;text-wrap:pretty}
+  .wrap>.facts .k{margin:0}
+}
+</style>
