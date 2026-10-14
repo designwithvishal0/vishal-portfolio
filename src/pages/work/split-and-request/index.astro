@@ -1056,6 +1056,14 @@ figure:has(>.flowfs){position:relative}
   .livechaps button[aria-pressed="true"]{background:#F2F1EC;color:#0B57D0}
   .pwrap.live .pframe{width:min(100%,calc((100dvh - 170px) * 340 / 700))}
 }
+/* Prototype frame (Vishal 04:10): the slim iPhone frame used on the other case studies. The Split screens are light, so the frame stays dark. */
+.pwrap:not(.fs) .pframe{padding:5px;border-radius:46px;background:#0B0B0B;box-shadow:0 0 0 1.5px #C4C1B9,0 0 0 2.5px #8F8C85,0 24px 50px rgba(11,40,90,.16)}
+.pwrap:not(.fs) .pembed{border-radius:41px}
+.pwrap:not(.fs) .pwait{inset:5px;border-radius:41px}
+.pwrap:not(.fs) .pframe::before{content:"";position:absolute;top:16px;left:50%;width:86px;height:25px;margin-left:-43px;border-radius:99px;background:#0B0B0B;pointer-events:none;z-index:2}
+.pwrap:not(.fs):not(.live)::before,.pwrap:not(.fs):not(.live)::after{content:"";position:absolute;width:3px;border-radius:2px;background:#ABA8A0;pointer-events:none}
+.pwrap:not(.fs):not(.live)::before{left:-4.5px;top:19%;height:9%}
+.pwrap:not(.fs):not(.live)::after{right:-4.5px;top:25%;height:9%}
 </style>
 <script is:inline>(()=>{const d=document.querySelector('.flowdlg'),b=document.querySelector('.flowfs');if(!d||!b)return;const pan=d.querySelector('.flowpan'),a=b.previousElementSibling;
 const open=e=>{if(e)e.preventDefault();d.classList.remove('zoom');d.showModal();document.documentElement.style.overflow='hidden'};
