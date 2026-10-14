@@ -1064,6 +1064,8 @@ figure:has(>.flowfs){position:relative}
 .pwrap:not(.fs):not(.live)::before,.pwrap:not(.fs):not(.live)::after{content:"";position:absolute;width:3px;border-radius:2px;background:#ABA8A0;pointer-events:none}
 .pwrap:not(.fs):not(.live)::before{left:-4.5px;top:19%;height:9%}
 .pwrap:not(.fs):not(.live)::after{right:-4.5px;top:25%;height:9%}
+/* Phones only (Vishal 04:27, same as ixigo): hero heading bolder at the same size, hook line set tight under it */
+@media (max-width:640px){header.hero h1{font-weight:700}header.hero .hook{line-height:1.2}}
 </style>
 <script is:inline>(()=>{const d=document.querySelector('.flowdlg'),b=document.querySelector('.flowfs');if(!d||!b)return;const pan=d.querySelector('.flowpan'),a=b.previousElementSibling;
 const open=e=>{if(e)e.preventDefault();d.classList.remove('zoom');d.showModal();document.documentElement.style.overflow='hidden'};
