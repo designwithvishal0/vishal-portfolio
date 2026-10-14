@@ -11,14 +11,15 @@ interface Props { home?: string; theme?: boolean; book?: boolean }
 const { home = '', theme = true, book = false } = Astro.props;
 const bookLink = intro.links.find(l => l.label === 'Book a call')!;
 const cvLink = intro.links.find(l => l.label === 'Resume')!;
-const nav = [['Work', '#work'], ['About', '#about'], ['Contact', '#contact']];
+// Work (Vishal 2026-10-14): on home it jumps to the case studies; on every other page it opens the full list at /work/
+const nav = [['Work', home ? '/work/' : '#work'], ['About', home + '#about'], ['Contact', home + '#contact']];
 ---
 <header class:list={['bar', { 'book-on': book }]}>
   <div class="bar-in">
     {home ? <a class="who" href={home}>Vishal Yadav</a> : <span class="who">Vishal Yadav</span>}
     {/* phones (mobile layout 2026-10-12): once you scroll, the name gives way to the section you are in; tapping it goes back to the top */}
     <button class="bar-sec" type="button" hidden>Back to top</button>
-    <nav class="nav" aria-label="Sections">{nav.map(([t, h]) => <a href={home + h}>{t}</a>)}</nav>
+    <nav class="nav" aria-label="Sections">{nav.map(([t, h]) => <a href={h}>{t}</a>)}</nav>
     <div class="bar-r">
       <!-- appears once the hero's own Book a call scrolls away, hides again at Contact (audit 2026-10-10) -->
       <a class="bar-book" href={bookLink.href}>{bookLink.label}</a>
@@ -28,7 +29,7 @@ const nav = [['Work', '#work'], ['About', '#about'], ['Contact', '#contact']];
     </div>
     <div id="a11y-menu" class="a11y-menu" popover>
       {/* phones (mobile audit 2026-10-12): the section links live here, so the bar fits name, Book a call and Menu on one line */}
-      <nav class="m-nav" aria-label="Sections">{nav.map(([t, h]) => <a href={home + h}>{t}</a>)}</nav>
+      <nav class="m-nav" aria-label="Sections">{nav.map(([t, h]) => <a href={h}>{t}</a>)}</nav>
       <p class="a11y-h">Accessibility</p>
       {theme && <div class="a11y-row"><span id="l-night">Dark mode</span><button id="theme" class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="l-night"><i class="sun"></i><i class="moon"></i><span class="knob"></span></button></div>}
       <div class="a11y-row"><span id="l-calm">Reduce motion</span><button id="calm" class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="l-calm"><span class="knob"></span></button></div>

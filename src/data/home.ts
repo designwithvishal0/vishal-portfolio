@@ -149,3 +149,11 @@ export const jobs = [
   ['EKarma India', 'UI/UX Design Trainee', '2021 to 2022'],
 ];
 
+// Graphic design pages (/work/graphics/<key>/), for the /work list. Captions and alt text as on the home tiles.
+export const graphics = [
+  { key: 'eid', cap: 'BuyKaro Eid sale banners', alt: 'BuyKaro Eid sale banners on the home page, on laptop and phone' },
+  { key: 'social', cap: 'Social media posts', alt: 'Social media posts for fashion and motorbike brands' },
+  { key: 'realestate', cap: 'Real estate and event posters', alt: 'Real estate flyer and Content Conclave event poster' },
+  { key: 'moi', cap: 'Museum of Illusions invites', alt: 'Birthday party invitation posters for Museum of Illusions' },
+  { key: 'trigo', cap: 'TriGo roll up standee', alt: 'TriGo roll up standee' },
+];
