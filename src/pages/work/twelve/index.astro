@@ -813,6 +813,11 @@ nav.toc{display:none!important}
   .hero .dek{font-size:18px;line-height:1.5;color:var(--muted)}
   .hero h1{line-height:1.05}
   .facts div{align-content:start}
+  /* Vishal 04:31: project details on phones as one row per fact, label left and value right, so the long Role line no longer leaves a lopsided gap */
+  .wrap>.facts{grid-template-columns:minmax(0,1fr);gap:0;padding-block:4px}
+  .wrap>.facts div{grid-template-columns:88px minmax(0,1fr);gap:12px;align-items:baseline;padding-block:14px}
+  .wrap>.facts div+div{border-top:1px solid var(--line)}
+  .wrap>.facts p{font-size:16px;line-height:1.45}
 }
 /* Phones: the prototype keeps its full app screen size, and the page keeps scrolling over it. A cover passes scrolls through to the page;
    tapping it hands touches to the prototype, and "Done" (or scrolling it out of view) gives them back. */
