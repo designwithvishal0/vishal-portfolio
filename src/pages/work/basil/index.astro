@@ -225,7 +225,7 @@ nav.toc{display:none}
 article{gap:0}
 article>section{padding-block:120px;max-width:760px;margin-inline:auto;color:var(--fg);border-image:conic-gradient(var(--band) 0 0) fill 0//0 100vmax}
 article>section.wide{max-width:1080px}
-section h2{font-size:clamp(32px,4vw,48px);font-weight:700;line-height:1.08;letter-spacing:-.02em;color:var(--fg)}
+section h2{font-size:clamp(32px,4vw,48px);font-weight:600;line-height:1.08;letter-spacing:-.02em;color:var(--fg)}
 section h3{color:var(--fg)}
 section p{color:var(--body);font-size:18px;line-height:1.6}
 .stats b{color:var(--acc)}
@@ -635,10 +635,13 @@ section h3{font-size:20px;line-height:1.3;letter-spacing:-.01em}
           <p class="eyebrow">The solution · Mobile, full length</p>
           <h2>On a phone the set lands before the tap, and a sticky bar keeps it in view.</h2>
         </div>
-        <div class="mob">
-          <figure><div class="iph"><div class="sc" tabindex="0" aria-label="Scroll the screen"><img src="img/05-mobile-1.webp" width="772" height="1842" alt="Mobile product page: gallery, title, price, the vibe picker and the start of Make it a Pixie Dash set" loading="lazy"></div></div><figcaption><h3>The print, then the set</h3><p>Choose your Vibe is followed straight away by Make it a Pixie Dash set. Today the kit sits below Add to cart, the trust row and the offers box.</p></figcaption></figure>
-          <figure><div class="iph"><div class="sc" tabindex="0" aria-label="Scroll the screen"><img src="img/05-mobile-2.webp" width="772" height="1842" alt="Mobile set builder with the bottle ticked: 5% off unlocked, add the bag to make it 10%, and Add 2 to cart for ₹3,228" loading="lazy"></div></div><figcaption><h3>5% unlocked, the gap in rupees</h3><p>With the bottle ticked, the line switches from the next reward to the gap between 5% and 10%: save ₹640 instead of ₹170.</p></figcaption></figure>
-          <figure><div class="iph"><div class="sc" tabindex="0" aria-label="Scroll the screen"><img src="img/05-mobile-3.webp" width="773" height="1842" alt="Mobile compartment diagram with the Pickle Dip card, reviews, and the sticky set bar reading 2 of 3 in your set with Add 2 for ₹3,228" loading="lazy"></div></div><figcaption><h3>The dip, and the sticky set bar</h3><p>The ₹149 dip sits by the compartments. Once the set scrolls away, a bar holds the count, the next saving and the button.</p></figcaption></figure>
+        <div class="mobstory">
+          <div class="ms-phone" aria-hidden="true"><div class="iph"><div class="sc"><img data-i="0" class="on" src="img/05-mobile-1.webp" width="772" height="1842" alt="Mobile product page: gallery, title, price, the vibe picker and the start of Make it a Pixie Dash set"><img data-i="1" src="img/05-mobile-2.webp" width="772" height="1842" alt="Mobile set builder with the bottle ticked: 5% off unlocked, add the bag to make it 10%, and Add 2 to cart for ₹3,228"><img data-i="2" src="img/05-mobile-3.webp" width="773" height="1842" alt="Mobile compartment diagram with the Pickle Dip card, reviews, and the sticky set bar reading 2 of 3 in your set with Add 2 for ₹3,228"></div></div></div>
+          <ol class="ms-steps">
+            <li data-i="0"><span class="n">01</span><h3>The print, then the set</h3><p>Choose your Vibe is followed straight away by Make it a Pixie Dash set. Today the kit sits below Add to cart, the trust row and the offers box.</p><div class="iph"><div class="sc" tabindex="0" aria-label="Scroll the screen"><img src="img/05-mobile-1.webp" width="772" height="1842" alt="Mobile product page: gallery, title, price, the vibe picker and the start of Make it a Pixie Dash set" loading="lazy"></div></div></li>
+            <li data-i="1"><span class="n">02</span><h3>5% unlocked, the gap in rupees</h3><p>With the bottle ticked, the line switches from the next reward to the gap between 5% and 10%: save ₹640 instead of ₹170.</p><div class="iph"><div class="sc" tabindex="0" aria-label="Scroll the screen"><img src="img/05-mobile-2.webp" width="772" height="1842" alt="Mobile set builder with the bottle ticked: 5% off unlocked, add the bag to make it 10%, and Add 2 to cart for ₹3,228" loading="lazy"></div></div></li>
+            <li data-i="2"><span class="n">03</span><h3>The dip, and the sticky set bar</h3><p>The ₹149 dip sits by the compartments. Once the set scrolls away, a bar holds the count, the next saving and the button.</p><div class="iph"><div class="sc" tabindex="0" aria-label="Scroll the screen"><img src="img/05-mobile-3.webp" width="773" height="1842" alt="Mobile compartment diagram with the Pickle Dip card, reviews, and the sticky set bar reading 2 of 3 in your set with Add 2 for ₹3,228" loading="lazy"></div></div></li>
+          </ol>
         </div>
       </section>
 
@@ -1034,6 +1037,57 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 @media (min-width:901px){.scr .screen{grid-template-columns:minmax(0,640px) 320px}.scr .screen>figure{width:320px}}
 @media (min-width:621px){.arc3{grid-template-columns:repeat(3,minmax(0,300px));justify-content:center;column-gap:clamp(24px,5vw,72px)}}
 </style>
+
+<style is:inline>
+/* Vishal 2026-10-14 02:28 ("too old"): Mobile, full length is now a scroll story. On desktop one phone stays put beside three numbered steps;
+   the step in view lights up, its screen fades in, and the page scroll runs that screen top to bottom inside the frame.
+   On phones each step keeps its own phone, one swipe row as before. */
+.mobstory{margin-top:56px}
+.ms-steps{list-style:none;margin:0;padding:0;counter-reset:none}
+.ms-steps li{display:grid;gap:10px;align-content:start}
+.ms-steps .n{font-size:14px;font-weight:600;letter-spacing:.14em;color:var(--acc)}
+.ms-steps h3{font-size:clamp(24px,2.4vw,32px);line-height:1.15;font-weight:600;letter-spacing:-.015em;color:var(--fg);margin:0}
+.ms-steps p{font-size:18px;line-height:1.6;color:var(--body);margin:0;max-width:44ch}
+@media (min-width:901px){
+  .mobstory{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);column-gap:clamp(56px,8vw,140px);align-items:start;max-width:1040px;margin-inline:auto}
+  .ms-phone{position:sticky;top:calc(var(--bar) + max(24px,(100vh - var(--bar) - 740px)/2))}
+  .ms-phone .sc{position:relative;overflow:hidden}
+  .ms-phone .sc img{position:absolute;inset:0 0 auto;width:100%;height:auto;opacity:0;transition:opacity .45s var(--out)}
+  .ms-phone .sc img.on{opacity:1}
+  .ms-steps li{min-height:78vh;align-content:center;padding-block:40px;opacity:.32;transition:opacity .4s var(--out)}
+  .ms-steps li.on{opacity:1}
+  .ms-steps li:first-child{min-height:60vh;align-content:start;padding-top:120px}
+  .ms-steps li>.iph{display:none}
+}
+@media (max-width:900px){
+  .ms-phone{display:none}
+  .ms-steps{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-28px;padding:0 28px 8px;scroll-padding-inline:28px;gap:20px;overscroll-behavior-x:contain;scrollbar-width:none}
+  .ms-steps::-webkit-scrollbar{display:none}
+  .ms-steps li{flex:0 0 min(78%,320px);scroll-snap-align:start}
+  .ms-steps li>.iph{order:-1;margin-bottom:14px}
+  .ms-steps h3{font-size:22px}.ms-steps p{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){.ms-phone .sc img,.ms-steps li{transition:none}}
+</style>
+<script is:inline>
+(()=>{
+  const box=document.querySelector('.mobstory');if(!box)return;
+  const steps=[...box.querySelectorAll('.ms-steps li')],sc=box.querySelector('.ms-phone .sc'),imgs=[...sc.querySelectorAll('img')];
+  const wide=matchMedia('(min-width:901px)');let cur=-1;
+  const tick=()=>{
+    if(!wide.matches)return;
+    const mid=innerHeight/2;let i=0;
+    steps.forEach((li,k)=>{if(li.getBoundingClientRect().top<mid)i=k});
+    if(i!==cur){cur=i;steps.forEach((li,k)=>li.classList.toggle('on',k===i));imgs.forEach((im,k)=>im.classList.toggle('on',k===i))}
+    // the page scroll runs the active screen from top to bottom while its step crosses the middle of the window
+    const r=steps[i].getBoundingClientRect(),img=imgs[i];
+    const p=Math.min(1,Math.max(0,(mid-r.top)/r.height));
+    const room=Math.max(0,img.offsetHeight-sc.clientHeight);
+    img.style.transform=`translateY(${-p*room}px)`;
+  };
+  addEventListener('scroll',()=>requestAnimationFrame(tick),{passive:true});addEventListener('resize',tick);wide.addEventListener('change',tick);tick();
+})();
+</script>
 <script is:inline src="/js/pin-frames.js" defer></script>
 <script is:inline src="/js/pin-screen.js" defer></script>
 </html>
