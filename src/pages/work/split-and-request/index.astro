@@ -27,7 +27,7 @@ const ld = [
 <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400..700&display=swap">
 <style is:inline>
 /* Layout: text column of ~66ch beside a sticky contents rail on desktop; one column on phones.
    Single dark theme by choice: the calmer navy agreed for JARVIS. */
@@ -208,9 +208,9 @@ figcaption{font-size:14px;color:var(--muted)}
 html.calm .up{opacity:1;transform:none;transition:none}
 </style>
 <style is:inline>
-/* Matched to the live Framer JARVIS page (measured 2026-10-09): Albert Sans, full width bands that swap
+/* Matched to the live Framer JARVIS page (measured 2026-10-09): full width bands that swap
    navy and light, one 760px reading column, the screens as text left and a 360px phone right. */
-:root{--sans:"Albert Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:var(--sans);
+:root{--sans:"Google Sans Flex","Google Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:var(--sans);
   --bg:#12141A;--card:#1E2129;--fg:#E6EAF2;--body:#E6EAF2;--muted:#9AA0AB;--acc:#A8C7FA;--warm:#8AB4F8;--line:#2C313B;--band:#12141A}
 .lt{--fg:#0E1424;--body:#3B4458;--muted:#5A6478;--acc:#0B57D0;--card:#E8F0FE;--line:#DCE3EF;--band:#F3F6FC;--warm:#0B57D0}
 html{overflow-x:clip}
@@ -1000,5 +1000,12 @@ blockquote em{font-style:normal;color:var(--warm)}
   .screen.owes .right{width:100%;max-width:390px}
   .screen.owes .right>img{width:min(260px,100%);justify-self:center}
 }
+
+/* Product type (Vishal 2026-10-14): the Split screens are set in Google Sans, so the page is too, at Google's
+   lighter weights. The shared header keeps its own font. */
+h1,h2,h3,h4,section h2,.stats b,.metric b,.nextgrid b{font-weight:500}
+section h2{letter-spacing:-.01em}
+h1{letter-spacing:-.02em}
+.closing h2{font-weight:500;letter-spacing:-.025em}
 </style>
 </html>
