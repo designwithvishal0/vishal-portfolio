@@ -1080,6 +1080,20 @@ article>section#flow{padding-top:clamp(64px,8vw,120px)}
 .flowdlg.tall.zoom .flowpan img{width:min(960px,200%)}
 /* The whole user flow fits one screen when opened (Vishal 04:48); double click still zooms in to read it */
 .flowdlg:not(.tall):not(.zoom) .flowpan img{width:auto;max-width:calc(100% - 48px);max-height:calc(100dvh - 120px)}
+
+/* Vishal 2026-10-14 (04:50): desktop screens laid out like the StackYou JARVIS screens (text 640px at the top and sticky,
+   phone 360px on the right, no hairlines). Phones: screens centred in their row, text stays left. */
+@media (min-width:901px){
+  .screens .screen{grid-template-columns:minmax(0,640px) 360px;justify-content:space-between;align-items:start;gap:48px;padding-block:72px;border-top:0}
+  .screens .screen>div{position:sticky;top:120px}
+  .screens .shot.phone,.pop,.pair .shot.phone,.crop{width:360px;border-radius:40px;border:1px solid rgba(14,20,36,.1);box-shadow:0 16px 40px rgba(13,31,94,.12)}
+  .screens .screen>figure.pop{width:360px}
+  #scale .screens .screen{border-top:0}
+}
+@media (max-width:900px){
+  .screens .screen>figure{width:100%;text-align:center}
+  .screens .screen>figure>img{display:block;margin-inline:auto}
+}
 </style>
 <script is:inline>(()=>{const d=document.querySelector('.flowdlg'),b=document.querySelector('.flowfs');if(!d||!b)return;const pan=d.querySelector('.flowpan'),a=b.previousElementSibling;
 const open=e=>{if(e)e.preventDefault();d.classList.remove('zoom');d.showModal();document.documentElement.style.overflow='hidden'};
