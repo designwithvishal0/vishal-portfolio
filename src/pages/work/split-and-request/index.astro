@@ -1066,6 +1066,12 @@ figure:has(>.flowfs){position:relative}
 .pwrap:not(.fs):not(.live)::after{right:-4.5px;top:25%;height:9%}
 /* Phones only (Vishal 04:27, same as ixigo): hero heading bolder at the same size, hook line set tight under it */
 @media (max-width:640px){header.hero h1{font-weight:700}header.hero .hook{line-height:1.2}}
+/* Phones (Vishal 04:31): project details as one row each, label left and value right, instead of three squeezed columns */
+@media (max-width:620px){
+  .wrap>.facts{grid-template-columns:minmax(0,1fr);gap:0;padding-block:4px}
+  .wrap>.facts div{grid-template-columns:72px minmax(0,1fr);gap:16px;align-items:baseline;padding-block:14px}
+  .wrap>.facts div+div{border-top:1px solid var(--line)}
+}
 </style>
 <script is:inline>(()=>{const d=document.querySelector('.flowdlg'),b=document.querySelector('.flowfs');if(!d||!b)return;const pan=d.querySelector('.flowpan'),a=b.previousElementSibling;
 const open=e=>{if(e)e.preventDefault();d.classList.remove('zoom');d.showModal();document.documentElement.style.overflow='hidden'};
