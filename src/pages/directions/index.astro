@@ -1,0 +1,29 @@
+---
+const dirs = [
+  { href: '/directions/a', name: 'A. Index', note: 'Work as a tabular index, like a departure board. Dense, exact, built for the 30 second scan.' },
+  { href: '/directions/b', name: 'B. Quiet', note: 'The positioning line is the hero. Big images, lots of air, one blue accent.' },
+  { href: '/directions/b2', name: 'B2. Quiet, with motion (new)', note: 'B rebuilt from research on 16 top portfolios: priority sized work, a live ixigo moment under the hero, one motion system.' },
+  { href: '/directions/c', name: 'C. The unsure moment', note: 'Every project leads with the question its user was asking. New copy, needs your yes.' },
+];
+---
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Phase 2 visual directions</title>
+<style>
+  body{font:17px/1.45 system-ui,sans-serif;max-width:40rem;margin:4rem auto;padding:0 1.25rem;color:#1d1d1f;background:#fff}
+  a{color:inherit;font-weight:600;text-underline-offset:3px}
+  li{margin:0 0 1.25rem}
+  p{margin:.25rem 0 0;color:#555}
+  @media (prefers-color-scheme:dark){body{background:#111316;color:#eee}p{color:#aaa}}
+</style>
+</head>
+<body>
+<h1>Pick one direction</h1>
+<p>Each page shows the same approved copy: the home intro, the four project rows and the ixigo case study header.</p>
+<ol style="padding:0;list-style:none;margin-top:2rem">
+  {dirs.map(d => <li><a href={d.href}>{d.name}</a><p>{d.note}</p></li>)}
+</ol>
+</body>
+</html>

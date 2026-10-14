@@ -1,0 +1,20 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Kinetic K1 questions renderer</title>
+<style>
+  @font-face {
+    font-family: Bric;
+    src: url('../../../node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-standard-normal.woff2') format('woff2-variations');
+    font-weight: 200 800;
+    font-stretch: 75% 100%;
+  }
+  html, body { margin: 0; overflow: hidden; }
+  #stage { position: relative; overflow: hidden; font-family: Bric; font-optical-sizing: auto; }
+  .q { position: absolute; left: 0; top: 0; white-space: pre; line-height: 1.15; will-change: transform; }
+  .q span { display: inline-block; white-space: pre; transform-origin: 50% 60%; }
+  .b { position: absolute; left: 0; top: 0; width: 10px; height: 10px; }
+  #m { position: absolute; visibility: hidden; white-space: pre; font-family: Bric; line-height: 1.15; }
+</style>
+<div id="stage"></div>
+<span id="m"></span>
+<script src="questions.js"></script>

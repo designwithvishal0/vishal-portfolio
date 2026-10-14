@@ -1,0 +1,450 @@
+/* Film. A monochrome shell (a screening room in dark, a daylight screening in light) whose only colour comes from
+   his reels and the four chapter stages. Contrast notes are against the ground each pair sits on. */
+:root{
+  --bg:#F6F7F9;      /* page ground */
+  --sur:#E4E7EC;     /* screen surround, hero and end screen */
+  --ink:#0E1014;     /* text, playhead, focus. 18.6:1 on bg */
+  --muted:#4C505A;   /* 7.5:1 on bg, 6.3:1 on sur */
+  --line:#D3D6DC;    /* hairlines, decorative only */
+  --edge:#7E838E;    /* pill and secondary button edges, 3.6:1 on bg */
+  --btn:#0E1014; --on-btn:#F6F7F9;
+  --live:#1F8A55;
+  --st-ixigo:#F6D7C2; --st-split:#CADDF6; --st-twelve:#D4E5C0; --st-jarvis:#CCD1F5;
+  --st-ink:#121318;  /* 14:1 or more on every stage */
+  --st-muted:#474B55;/* 6.7:1 or more on every stage */
+  --frame-line:rgba(18,19,24,.16);
+  --G:max(var(--g),(100% - var(--wrap)) / 2 + var(--g)); /* page gutter: 104px at 1440 */
+  /* the project chip in the caption band: deeper versions of the stage hues, so they show on the surround */
+  --chip-ixigo:#6E5FA0; --chip-split:#3E5784; --chip-twelve:#2F6B55; --chip-jarvis:#3442A0;
+  --theme-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z'/%3E%3C/svg%3E");
+  --sans:'Instrument Sans Variable',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --bar:56px; --wrap:1280px; --g:24px;
+  --ease:cubic-bezier(.2,.8,.2,1); --ease-out:cubic-bezier(.23,1,.32,1);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --bg:#0D0E11; --sur:#060708; --ink:#ECEAE4; --muted:#A1A3AB; --line:#24272D; --edge:#6A6E78;
+  --btn:#ECEAE4; --on-btn:#0D0E11; --live:#4CC38A;
+  --st-ixigo:#0B0C10; --st-split:#121722; --st-twelve:#0D241C; --st-jarvis:#0B1233;
+  --st-ink:#EFEDE7; --st-muted:#ABADB5; --frame-line:rgba(239,237,231,.14);
+  --chip-ixigo:#9C8DD6; --chip-split:#7E98C9; --chip-twelve:#6FB096; --chip-jarvis:#8290E6;
+  --theme-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4.6'/%3E%3Cg stroke='%23000' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M12 1.8v2.4M12 19.8v2.4M1.8 12h2.4M19.8 12h2.4M4.8 4.8l1.7 1.7M17.5 17.5l1.7 1.7M4.8 19.2l1.7-1.7M17.5 6.5l1.7-1.7'/%3E%3C/g%3E%3C/svg%3E");
+  color-scheme:dark;
+}}
+:root[data-theme=dark]{
+  --bg:#0D0E11; --sur:#060708; --ink:#ECEAE4; --muted:#A1A3AB; --line:#24272D; --edge:#6A6E78;
+  --btn:#ECEAE4; --on-btn:#0D0E11; --live:#4CC38A;
+  --st-ixigo:#0B0C10; --st-split:#121722; --st-twelve:#0D241C; --st-jarvis:#0B1233;
+  --st-ink:#EFEDE7; --st-muted:#ABADB5; --frame-line:rgba(239,237,231,.14);
+  --chip-ixigo:#9C8DD6; --chip-split:#7E98C9; --chip-twelve:#6FB096; --chip-jarvis:#8290E6;
+  --theme-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4.6'/%3E%3Cg stroke='%23000' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M12 1.8v2.4M12 19.8v2.4M1.8 12h2.4M19.8 12h2.4M4.8 4.8l1.7 1.7M17.5 17.5l1.7 1.7M4.8 19.2l1.7-1.7M17.5 6.5l1.7-1.7'/%3E%3C/g%3E%3C/svg%3E");
+  color-scheme:dark;
+}
+@media (max-width:640px){:root{--bar:52px;--g:16px}}
+
+*{box-sizing:border-box}
+html{scroll-padding-top:var(--bar);-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html:not(.calm){scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--sans);font-stretch:100%;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;overflow-x:clip}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{text-wrap:pretty}
+a{color:inherit}
+a,button{-webkit-tap-highlight-color:transparent}
+img,video,svg{display:block}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.mono{font-family:var(--mono);font-size:13px;line-height:1.4;font-weight:400}
+#sentinel{position:absolute;top:0;left:0;width:1px;height:8px;pointer-events:none}
+@media (max-width:640px){body{font-size:16px}}
+
+/* copied from components.css: text link underline, arrow */
+.ul{text-decoration:none;background:linear-gradient(color-mix(in srgb,currentColor 32%,transparent),color-mix(in srgb,currentColor 32%,transparent)) no-repeat 0 100%/100% 1px,linear-gradient(currentColor,currentColor) no-repeat 100% 100%/0 1px;transition:background-size 180ms var(--ease-out)}
+.ul:hover,.ul:focus-visible{background-size:100% 1px,100% 1px;background-position:0 100%,0 100%}
+.arrow{flex:none;width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.arrow .stem{opacity:0;transition:opacity 180ms var(--ease-out)}
+.arrow .tip{transition:transform 180ms var(--ease-out)}
+.go:focus-visible .arrow .stem{opacity:1}
+.go:focus-visible .arrow .tip{transform:translateX(3px)}
+@media (hover:hover) and (pointer:fine){.go:hover .arrow .stem{opacity:1}.go:hover .arrow .tip{transform:translateX(3px)}}
+@media (hover:none),(pointer:coarse){.arrow .stem{opacity:1}.arrow .tip{transform:translateX(3px)}}
+.more{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;text-decoration:none}
+
+/* buttons and pills */
+.btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 24px;border-radius:999px;font:600 16px/1 var(--sans);text-decoration:none;color:var(--ink);background:transparent;border:1px solid var(--edge);cursor:pointer;transition:transform 120ms var(--ease-out),background-color 180ms var(--ease-out),border-color 180ms var(--ease-out)}
+.btn.primary{background:var(--btn);border-color:var(--btn);color:var(--on-btn)}
+@media (hover:hover) and (pointer:fine){
+  .btn:hover{border-color:var(--ink)}
+  .btn.primary:hover{background:color-mix(in oklab,var(--btn) 84%,var(--bg))}
+}
+.btn:active{transform:scale(.97)}
+.pill{display:inline-block;border:1px solid var(--edge);border-radius:999px;padding:1px 10px;font-size:13px;line-height:1.5;white-space:nowrap}
+.pill.shipped{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+
+/* video control: one dark round button in both themes, because it always sits on moving footage */
+.vctl{position:absolute;z-index:4;right:12px;bottom:12px;width:44px;height:44px;padding:0;border:0;border-radius:50%;display:grid;place-items:center;color:#ECEAE4;background:rgba(6,7,8,.72);box-shadow:0 0 0 1px rgba(236,234,228,.24);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);cursor:pointer;transition:transform 120ms var(--ease-out)}
+.vctl:active{transform:scale(.92)}
+.vctl svg{grid-area:1/1;width:14px;height:14px;fill:currentColor}
+.vctl:focus-visible{outline:2px solid #ECEAE4;outline-offset:2px;box-shadow:0 0 0 5px #060708}
+[data-novid]>.vctl{display:none}
+[data-state=playing]>.vctl .i-play,[data-state=paused]>.vctl .i-pause{opacity:0}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:20;height:var(--bar);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:0 max(var(--g),(100% - var(--wrap)) / 2 + var(--g));background:var(--bg);font-size:15px}
+.bar::after{content:"";position:absolute;left:0;right:0;top:100%;height:1px;background:var(--line);opacity:0;transition:opacity 150ms linear;pointer-events:none}
+.bar.scrolled::after{opacity:1}
+.who{justify-self:start;font-weight:600;text-decoration:none;padding:8px 0}
+.bar nav{display:flex;gap:32px}
+.bar nav a{font-weight:500;text-decoration:none;text-underline-offset:.25em;text-decoration-thickness:1px;padding:8px 0}
+@media (hover:hover) and (pointer:fine){.bar nav a:hover,.who:hover{text-decoration-line:underline}}
+#theme,#calm{font:500 14px/1 var(--sans);color:var(--ink);background:none;border:1px solid var(--edge);border-radius:999px;height:36px;padding:0 16px;cursor:pointer;white-space:nowrap;transition:background-color 180ms var(--ease-out),color 180ms var(--ease-out),border-color 180ms var(--ease-out),transform 120ms var(--ease-out)}
+#theme{justify-self:end}
+#theme:active,#calm:active{transform:scale(.96)}
+@media (hover:hover) and (pointer:fine){#theme:hover,#calm:hover{border-color:var(--ink)}}
+@media (max-width:640px){
+  .bar{font-size:14px;gap:8px;grid-template-columns:auto 1fr auto}
+  .bar nav{gap:18px;justify-self:center}
+  #theme{width:40px;height:40px;padding:0;font-size:0;display:grid;place-items:center}
+  #theme::before{content:"";width:18px;height:18px;background:currentColor;-webkit-mask:var(--theme-icon) center/contain no-repeat;mask:var(--theme-icon) center/contain no-repeat}
+}
+
+/* hero: the screen. Phone first: the tall reel full bleed */
+.sur{--picw:100%;background:var(--sur)}
+.pic{position:relative;width:var(--picw);aspect-ratio:4/5;margin:0 auto;background:var(--sur)}
+.pic img,.pic video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pic video{opacity:0;transition:opacity 300ms linear}
+.pic.started video{opacity:1}
+.pic .vctl{right:12px;bottom:12px}
+.ph{position:absolute;left:0;right:0;top:100%;height:2px;z-index:2;pointer-events:none}
+.ph i{display:block;height:100%;background:var(--ink);transform:scaleX(0);transform-origin:0 50%}
+.cap{width:var(--picw);margin:0 auto;padding:12px var(--g) 18px;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"now now" "who book" "pos pos" "av av";align-items:center;column-gap:12px}
+.now{grid-area:now;display:flex;justify-content:space-between;align-items:center;height:24px;font-size:12px;color:var(--muted);transition:opacity 160ms linear}
+.now.fade{opacity:0}
+.now-l{display:inline-flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none;text-underline-offset:.3em;min-height:24px}
+@media (hover:hover) and (pointer:fine){.now-l:hover{text-decoration-line:underline}}
+.sq{width:6px;height:6px;background:var(--chip-ixigo)}
+.now[data-k=split] .sq{background:var(--chip-split)}
+.now[data-k=twelve] .sq{background:var(--chip-twelve)}
+.now[data-k=jarvis] .sq{background:var(--chip-jarvis)}
+.speaker{grid-area:who;font-size:12px;color:var(--muted);margin:12px 0}
+.book{grid-area:book;height:40px;padding:0 18px;font-size:15px}
+.cap .avail{grid-area:av;margin:12px 0 0;font-size:14px}
+.pos{grid-area:pos;margin:2px 0 0;font-size:31px;line-height:1.08;font-weight:600;font-stretch:80%;letter-spacing:-.005em}
+.words .w{display:inline-block}
+.bk{display:block}
+@media (min-width:701px){.bk{display:none}}
+@media (min-width:701px) and (orientation:portrait){
+  .sur{--picw:min(100% - 48px,(100svh - 260px) * .8)}
+  .cap{padding-inline:0}
+}
+/* landscape: the cut at true 16:9, sized so the caption band always ends inside the first screen */
+@media (min-aspect-ratio:1/1){
+  .sur{--ph:clamp(240px,100svh - var(--bar) - 210px,700px);--picw:min(var(--ph) * 16 / 9,100vw - 64px)}
+  .pic{aspect-ratio:16/9}
+  .pic .vctl{right:16px;bottom:16px}
+  .cap{padding:10px 0 20px;grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"now now now" "who av book" "pos pos pos";column-gap:20px}
+  .speaker{font-size:13px;margin:14px 0}
+  .cap .avail{margin:0;font-size:15px}
+  .pos{font-size:clamp(28px,var(--picw) / 19.5,60px);line-height:1.04;letter-spacing:-.012em}
+}
+/* the caption rises word by word, like live subtitles */
+@keyframes cap{from{opacity:0;transform:translateY(6px)}}
+@media (prefers-reduced-motion:no-preference){
+  html:not(.calm) .pos .w{animation:cap 380ms var(--ease) both;animation-delay:calc(250ms + var(--i) * 60ms)}
+  html.js:not(.calm) .q:not(.go) .w{opacity:0}
+  html.js:not(.calm) .q.go .w{animation:cap 380ms var(--ease) both;animation-delay:calc(var(--i) * 60ms)}
+}
+
+.avail{display:flex;align-items:center;gap:10px;color:var(--muted)}
+.dot{position:relative;flex:none;width:7px;height:7px;border-radius:50%;background:var(--live)}
+@keyframes ping{from{transform:scale(1);opacity:.55}to{transform:scale(3);opacity:0}}
+@media (prefers-reduced-motion:no-preference){html:not(.calm) .dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--live);animation:ping 2.4s var(--ease-out) infinite}}
+
+/* start here: one strip of three audience links under the screen */
+.aud{max-width:var(--wrap);margin:0 auto;padding:28px var(--g) 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.aud a{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;padding:14px 0 0;border-top:1px solid var(--line);text-decoration:none;font-size:15px;transition:border-color 180ms var(--ease-out)}
+.aud strong{font-weight:600}
+.aud .act{color:var(--muted)}
+.aud .arrow{color:var(--muted);align-self:center}
+@media (hover:hover) and (pointer:fine){.aud a:hover{border-color:var(--ink)}.aud a:hover .act{color:var(--ink)}}
+
+/* section heads */
+.head{max-width:var(--wrap);margin:0 auto;padding:0 var(--g)}
+.work .head{position:relative;display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-top:128px;padding-bottom:20px}
+.work .head::after{content:"";position:absolute;left:var(--g);right:var(--g);bottom:0;height:1px;background:var(--line)}
+.work .head .mono,.p-head p{color:var(--muted)}
+.work h2,.p-head h2,.how h2{font-size:40px;line-height:1.08;font-weight:600;font-stretch:85%;letter-spacing:-.01em}
+
+/* chapters. Default (phones, tablets, and the calm layout at 1024+): one band per project in its stage colour */
+.chapters{position:relative;margin-top:32px}
+.ch{scroll-margin-top:var(--bar)}
+.stage{display:none}
+.ch{--band:var(--st-ixigo);background:var(--band);color:var(--st-ink);padding:0 var(--g) 48px}
+.ch-split{--band:var(--st-split)}
+.ch-twelve{--band:var(--st-twelve)}
+.ch-jarvis{--band:var(--st-jarvis)}
+.ch :focus-visible{outline-color:var(--st-ink)}
+.ch-head{position:sticky;top:var(--bar);z-index:3;height:36px;display:flex;align-items:center;margin:0 calc(var(--g) * -1);padding:0 var(--g);background:var(--band);font-size:12px;color:var(--st-muted)}
+.ch-media{position:relative;width:100%;max-width:448px;aspect-ratio:4/5;margin-top:6px;border-radius:16px;overflow:hidden;background:var(--ground);box-shadow:0 0 0 1px var(--frame-line)}
+.ch-media img,.ch-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.ch-media video{opacity:0;transition:opacity 300ms linear}
+.ch-media.started video{opacity:1}
+.mlink{position:absolute;inset:0;z-index:2}
+.ch-text{padding-top:22px;max-width:560px}
+.meta{margin:0 0 10px;font-size:12px;color:var(--st-muted)}
+.m-name{display:none}
+.ch h3{font-size:30px;line-height:1.08;font-weight:600;font-stretch:80%;letter-spacing:-.01em;margin:0 0 14px}
+.ch h3 a{text-decoration:none;text-underline-offset:.12em;text-decoration-thickness:2px}
+.prob{margin:0 0 14px;font-size:16px;line-height:1.5}
+.role{margin:0 0 2px;font-size:15px;color:var(--st-muted)}
+.proof{margin:0 0 18px;font-size:15px;font-weight:600}
+.ch .more{min-height:24px}
+@media (hover:hover) and (pointer:fine){
+  .ch:has(.mlink:hover,h3 a:hover,.more:hover) h3 a,.frame:has(.flink:hover)~* h3 a{text-decoration-line:underline}
+  .ch:has(.mlink:hover,h3 a:hover,.more:hover) .arrow .stem{opacity:1}
+  .ch:has(.mlink:hover,h3 a:hover,.more:hover) .arrow .tip{transform:translateX(3px)}
+}
+.ch:has(h3 a:focus-visible) .more .arrow .stem{opacity:1}
+@media (min-width:700px) and (max-width:1023px){
+  .ch{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);column-gap:32px;align-items:center}
+  .ch-head{grid-column:1/-1}
+  .ch-text{padding-top:0}
+}
+@media (min-width:1024px){
+  .ch{display:grid;grid-template-columns:minmax(0,520px) minmax(0,440px);justify-content:space-between;column-gap:6vw;align-items:center;padding:96px var(--G)}
+  .ch-head{display:none}
+  .ch-media{order:2;margin:0;border-radius:14px}
+  .ch-text{order:1;padding:0}
+  .m-name{display:inline}
+  .meta{font-size:13px;margin-bottom:14px}
+  .ch h3{font-size:48px;line-height:1.04;margin-bottom:18px}
+  .prob{font-size:18px;line-height:1.5;margin-bottom:18px}
+  .ch .more{margin-top:6px}
+}
+/* 1024+ with motion: one sticky stage under four chapters of text. The text scrolls at native speed past the still reel */
+@media (min-width:1024px) and (prefers-reduced-motion:no-preference){
+  html.js:not(.calm) .chapters{display:grid;grid-template-columns:100%;timeline-scope:--c0,--c1,--c2,--c3}
+  html.js:not(.calm) .stage{display:block;grid-row:1/5;grid-column:1;align-self:start;position:sticky;top:var(--bar);height:calc(100svh - var(--bar));background:var(--stage);color:var(--st-ink);transition:background-color 700ms var(--ease)}
+  html.js:not(.calm) .ch{grid-column:1;display:block;min-height:calc(160svh - var(--bar));padding:0 0 0 var(--G);background:none;position:relative;z-index:1;pointer-events:none}
+  html.js:not(.calm) .ch:nth-of-type(1){grid-row:1;view-timeline-name:--c0}
+  html.js:not(.calm) .ch:nth-of-type(2){grid-row:2;view-timeline-name:--c1}
+  html.js:not(.calm) .ch:nth-of-type(3){grid-row:3;view-timeline-name:--c2}
+  html.js:not(.calm) .ch:nth-of-type(4){grid-row:4;view-timeline-name:--c3}
+  html.js:not(.calm) .ch-media{display:none}
+  /* the text holds beside the reel for a while, then the next chapter pushes it out */
+  html.js:not(.calm) .ch-text{position:sticky;top:var(--bar);height:calc(100svh - var(--bar));display:flex;flex-direction:column;justify-content:center;width:min(38vw,520px);padding:0}
+  html.js:not(.calm) .ch-text>*{pointer-events:auto}
+}
+.stage{--stage:var(--st-ixigo)}
+.stage[data-ch=split]{--stage:var(--st-split)}
+.stage[data-ch=twelve]{--stage:var(--st-twelve)}
+.stage[data-ch=jarvis]{--stage:var(--st-jarvis)}
+.stage :focus-visible{outline-color:var(--st-ink)}
+/* the phone cut on a frame of its own ground, right of the text, on the page gutter */
+.frame{--fh:min(100svh - var(--bar) - 136px,720px);position:absolute;right:var(--G);top:calc(50% + 14px);height:var(--fh);aspect-ratio:4/5;transform:translateY(-50%);border-radius:14px;box-shadow:0 0 0 1px var(--frame-line)}
+.sv{position:absolute;inset:0;border-radius:14px;overflow:hidden;background:var(--ground);visibility:hidden;clip-path:inset(0 50% 0 50% round 14px)}
+.sv img,.sv video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.sv video{opacity:0;transition:opacity 300ms linear}
+.sv.started video{opacity:1}
+.sv.on{visibility:visible;clip-path:inset(0 0 0 0 round 14px);z-index:2;transition:clip-path 520ms var(--ease)}
+.sv.was{visibility:visible;clip-path:inset(0 0 0 0 round 14px);z-index:1}
+.flink{position:absolute;inset:0;z-index:3;border-radius:14px}
+.frame .vctl{right:14px;bottom:14px}
+.ind{position:absolute;right:var(--G);width:calc(var(--fh) * .8);--fh:min(100svh - var(--bar) - 136px,720px);top:calc(50% + 14px - var(--fh) / 2 - 40px);display:flex;align-items:center;gap:14px;color:var(--st-muted)}
+.ind-name{color:var(--st-ink)}
+.ticks{display:flex;gap:6px}
+.ticks a{position:relative;display:block;width:28px;height:24px}
+.ticks a::before,.ticks i{content:"";position:absolute;left:0;right:0;top:11px;height:2px}
+.ticks a::before{background:color-mix(in srgb,var(--st-muted) 75%,transparent)}
+.ticks i{background:var(--st-ink);transform:scaleX(0);transform-origin:0 50%}
+.ticks a[aria-current] i,.ticks a[data-past] i{transform:none}
+@keyframes tick{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@supports (animation-timeline:view()){
+  .ticks i{animation:tick linear both;animation-timeline:var(--tl);animation-range:entry 50% exit 50%}
+}
+
+/* more work */
+.morework{max-width:var(--wrap);margin:0 auto;padding:56px var(--g) 0;display:grid;grid-template-columns:1fr 1fr;gap:24px;list-style:none}
+.mw{display:grid;grid-template-columns:96px minmax(0,1fr) auto auto;align-items:center;gap:20px;padding-top:20px;border-top:1px solid var(--line);text-decoration:none;transition:border-color 180ms var(--ease-out)}
+.mw img{width:96px;height:96px;border-radius:12px;object-fit:cover;object-position:50% 0}
+.mwt strong{display:block;font-size:22px;line-height:1.2;font-weight:600;font-stretch:90%}
+.mwt span{display:block;font-size:15px;color:var(--muted);margin-top:2px}
+@media (hover:hover) and (pointer:fine){.mw:hover{border-color:var(--ink)}}
+
+/* results: the loudest type after the reel */
+.results{max-width:var(--wrap);margin:0 auto;padding:120px var(--g) 0}
+.results h2{font-size:32px;line-height:1.1;font-weight:600;font-stretch:85%;letter-spacing:-.005em}
+.r-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:36px}
+.r{border-top:1px solid var(--line);padding-top:20px}
+.r-stat{margin:0;font-size:clamp(112px,15vw,224px);line-height:.9;font-weight:700;font-stretch:75%;letter-spacing:-.025em;white-space:nowrap}
+.r-label{margin:18px 0 0;font-size:16px;line-height:1.45;max-width:30ch;color:var(--muted)}
+
+/* pages that sell. Default: a native rail with snap */
+.pages{padding-top:120px;--th:min(397px,calc((100vw - 32px) * .82 * 1004 / 960))}
+.p-head{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 var(--g) 28px}
+.p-head p{margin:8px 0 0;font-size:17px}
+.track{position:relative;list-style:none;margin:0;display:flex;align-items:flex-start;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 16px 16px;scroll-padding:0 16px;scrollbar-width:thin}
+.track>li{flex:none;width:82vw;scroll-snap-align:start}
+.thumb{display:block;border-radius:14px;overflow:hidden;background:var(--sur)}
+.thumb img{width:100%;height:auto;aspect-ratio:960/1004;object-fit:cover}
+.page{display:flex;flex-direction:column;text-decoration:none}
+.ptag{display:block;min-height:26px;margin:16px 0 8px}
+.page h3,.lead-c h3{font-size:22px;line-height:1.2;font-weight:600;font-stretch:90%}
+.pline{display:block;margin:6px 0 12px;font-size:15px;color:var(--muted)}
+@media (hover:hover) and (pointer:fine){.page:hover h3{text-decoration:underline;text-underline-offset:.15em;text-decoration-thickness:1px}}
+.lead-c{display:grid;grid-template-columns:1fr;gap:16px}
+.lt .pill{margin-bottom:10px}
+.lt p{margin:6px 0 16px;font-size:15px;color:var(--muted)}
+.pstats{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:4px 18px;margin:0}
+.pstats div{display:flex;flex-direction:column-reverse}
+.pstats dd{margin:0;font-size:26px;line-height:1.1;font-weight:700;font-stretch:80%;white-space:nowrap}
+.pstats dt{font-size:14px;color:var(--muted)}
+.pend{display:none}
+.p-prog{display:none}
+.freelance{max-width:var(--wrap);margin:0 auto;padding:20px var(--g) 0;font-size:16px}
+@media (min-width:700px){
+  .track{padding-inline:max(var(--g),(100% - var(--wrap)) / 2 + var(--g));scroll-padding-inline:max(var(--g),(100% - var(--wrap)) / 2 + var(--g));gap:24px}
+  .track>li{width:calc(var(--th) * .956)}
+  .pages{--th:clamp(260px,100svh - 400px,397px)}
+  .track>li.lead{width:calc(var(--th) * 1.16 * .956 + 320px)}
+  .lead-c{grid-template-columns:calc(var(--th) * 1.16 * .956) minmax(0,1fr);gap:28px;align-items:start}
+  .lt{padding-top:4px}
+  .lead-c h3{font-size:28px;line-height:1.12}
+  .pstats{grid-template-columns:1fr;gap:16px;margin-top:8px}
+  .pstats dd{font-size:44px;line-height:1}
+}
+/* 1024+ with motion: the track moves past a sticky view as you scroll; the sticky element does the holding */
+@media (min-width:1024px) and (prefers-reduced-motion:no-preference){
+  html.js:not(.calm) .pages{height:calc(100svh - var(--bar) + var(--ov,0px));padding-top:0;margin-top:120px}
+  html.js:not(.calm) .p-sticky{position:sticky;top:var(--bar);height:calc(100svh - var(--bar));overflow:clip;display:flex;flex-direction:column;justify-content:center}
+  html.js:not(.calm) .track{width:max-content;overflow:visible;scroll-snap-type:none;gap:24px}
+  html.js:not(.calm) .pend{display:flex}
+  html.js:not(.calm) .p-prog{display:block}
+  html.js:not(.calm) .freelance{display:none}
+}
+.pend{flex-direction:column;justify-content:flex-end;gap:14px;width:calc(var(--th) * .956);height:calc(var(--th) * 1.16);padding:28px;border-radius:14px;background:var(--sur)}
+.pend p{margin:0;font-size:32px;line-height:1.08;font-weight:600;font-stretch:85%}
+.pend a{align-self:flex-start;font-weight:600}
+.p-prog{position:relative;height:2px;margin:28px max(var(--g),(100% - var(--wrap)) / 2 + var(--g)) 0;background:var(--line)}
+.p-prog i{position:absolute;inset:0;background:var(--ink);transform:scaleX(0);transform-origin:0 50%}
+
+/* how I work */
+.how{max-width:var(--wrap);margin:0 auto;padding:128px var(--g) 0}
+.how-items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:40px}
+.hi{padding-top:24px;box-shadow:inset 0 2px 0 var(--ink)}
+.hi h3{font-size:clamp(28px,2.6vw,36px);line-height:1.06;font-weight:600;font-stretch:80%;letter-spacing:-.01em}
+.hi p{margin:10px 0 14px;font-size:16px;line-height:1.55}
+.hi .more{min-height:24px}
+
+/* about, as end credits */
+.about{max-width:var(--wrap);margin:0 auto;padding:144px var(--g) 0;text-align:center}
+.about h2{font-size:13px;color:var(--muted)}
+.lead-p{max-width:680px;margin:20px auto 0;font-size:24px;line-height:1.4;font-weight:500;font-stretch:90%}
+.story{max-width:680px;margin:20px auto 0;font-size:18px;line-height:1.6;color:var(--muted)}
+.cast{list-style:none;margin:64px 0 0;padding:0;display:grid;gap:14px}
+.cast li{display:grid;grid-template-columns:1fr 1fr;column-gap:32px;align-items:baseline;font-size:17px}
+.c-role{text-align:right;color:var(--muted)}
+.c-co{text-align:left}
+.c-co strong{font-weight:600}
+.c-yr{margin-left:8px;color:var(--muted)}
+
+/* contact: the closing question on the screen surround */
+.contact{padding:144px var(--g) 0}
+.sur2{max-width:1392px;margin:0 auto;background:var(--sur);border-radius:24px;padding:56px 32px;text-align:center}
+.q{margin:0 auto;font-size:clamp(36px,4.6vw,64px);line-height:1.02;font-weight:600;font-stretch:80%;letter-spacing:-.01em}
+.cta{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:28px}
+.mail{margin:24px 0 0;font-size:17px}
+.elsewhere{margin:8px 0 0;font-size:15px;color:var(--muted)}
+.copy{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;display:inline-flex;align-items:baseline;gap:8px;font-weight:600;min-height:24px}
+.copy .tag{display:inline-grid;font-size:13px;font-weight:600;border:1px solid var(--edge);border-radius:999px;padding:0 9px;color:var(--muted);transition:background-color 180ms var(--ease-out),color 180ms var(--ease-out),border-color 180ms var(--ease-out)}
+.copy .tag>span{grid-area:1/1;text-align:center;transition:opacity 180ms var(--ease-out)}
+.copy .tag .t-done,.copy.done .tag .t-copy{opacity:0}
+.copy.done .tag .t-done{opacity:1}
+@media (hover:hover) and (pointer:fine){.copy:hover .tag{border-color:var(--ink);color:var(--ink)}}
+.copy.done .tag{background:var(--ink);border-color:var(--ink);color:var(--sur)}
+
+/* footer */
+.foot{max-width:var(--wrap);margin:96px auto 0;padding:0 var(--g) 48px}
+.foot::before{content:"";display:block;height:1px;background:var(--line);margin-bottom:24px}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px}
+.foot::before{flex-basis:100%;margin-bottom:8px}
+.social{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:13px}
+.social a{padding:6px 8px;margin-inline:-8px;background-origin:content-box;background-clip:content-box}
+#calm[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+
+/* reveals enter once (ui.ts adds .on). Hidden only when motion is allowed and the page script is running */
+@media (prefers-reduced-motion:no-preference){
+  html.js:not(.calm) .reveal{opacity:0;transform:translateY(16px)}
+  html.js:not(.calm) .reveal.on{opacity:1;transform:none;transition:opacity 500ms var(--ease-out) var(--d,0ms),transform 500ms var(--ease-out) var(--d,0ms)}
+}
+html.ready .pos .w,html.ready:not(.live) .reveal,html.ready:not(.live) .q .w{opacity:1!important;transform:none!important;animation:none!important}
+
+/* theme change spreads from the switch (ui.ts) */
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+
+/* the calm design: same intent, nothing moves on its own. Final frames instead of films */
+@media (prefers-reduced-motion:reduce){
+  .now{transition:none}
+}
+html.calm .now{transition:none}
+@media (min-width:1024px){
+  @media (prefers-reduced-motion:reduce){.track{padding-bottom:20px;scrollbar-width:auto}}
+  html.calm .track{padding-bottom:20px;scrollbar-width:auto}
+}
+
+/* phones and small tablets */
+@media (max-width:759px){
+  .aud{grid-template-columns:1fr;gap:0;padding-top:20px}
+  .aud a{justify-content:space-between;flex-wrap:nowrap;display:grid;grid-template-columns:1fr auto;grid-template-areas:"l r" "a r";min-height:56px;padding:9px 0;row-gap:0;font-size:14px}
+  .aud strong{grid-area:l;font-size:16px}
+  .aud .act{grid-area:a}
+  .aud .arrow{grid-area:r}
+  .aud a:last-child{border-bottom:1px solid var(--line)}
+  .work .head{padding-top:96px}
+  .work h2,.p-head h2,.how h2{font-size:28px}
+  .chapters{margin-top:24px}
+  .morework{grid-template-columns:1fr;gap:0;padding-top:40px}
+  .mw{grid-template-columns:56px minmax(0,1fr) auto;gap:14px;padding:14px 0;min-height:72px}
+  .mw img{width:56px;height:56px;border-radius:10px}
+  .mw .pill{display:none}
+  .mwt strong{font-size:17px}
+  .mwt span{font-size:14px}
+  .results{padding-top:96px}
+  .results h2{font-size:24px}
+  .r-grid{grid-template-columns:1fr;gap:0;margin-top:24px}
+  .r{padding:18px 0 22px}
+  .r-stat{font-size:120px}
+  .r-label{margin-top:10px}
+  .pages{padding-top:96px}
+  .p-head p{font-size:16px}
+  .how{padding-top:96px}
+  .how-items{grid-template-columns:1fr;gap:28px}
+  .about{padding-top:104px;text-align:left}
+  .lead-p{font-size:19px;margin-top:14px}
+  .story{font-size:16px;margin-top:14px}
+  .cast{margin-top:36px;gap:18px}
+  .cast li{display:flex;flex-direction:column;font-size:16px}
+  .c-co{display:contents}
+  .c-co strong{order:-1}
+  .c-role{text-align:left;color:var(--ink)}
+  .c-yr{margin:2px 0 0;font-size:12px}
+  .contact{padding:104px 12px 0}
+  .sur2{border-radius:18px;padding:40px 0;overflow:hidden;text-align:left}
+  .q{margin:0 16px;font-size:36px;max-width:none}
+  .cta{justify-content:flex-start;margin:24px 16px 0}
+  .mail,.elsewhere{margin-inline:16px}
+  .mail{font-size:16px;margin-top:24px}
+  .foot{margin-top:72px}
+  .foot{flex-direction:column;align-items:flex-start}
+}
+
+/* touch: comfortable targets */
+@media (pointer:coarse){
+  .bar nav a,.who,.now-l,.ch .more,.hi .more,.social a{min-height:44px;display:inline-flex;align-items:center}
+  .now{height:44px}
+  .book{height:44px}
+  #calm,#theme{height:44px;min-width:44px}
+}
+
+/* light theme: a hairline on the screen's top edge so a white reel never melts into the top bar */
+.pic::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--frame-line);z-index:1;pointer-events:none}

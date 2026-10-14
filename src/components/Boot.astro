@@ -1,0 +1,4 @@
+---
+// Runs before paint: saved theme and motion choices, so nothing flashes.
+---
+<script is:inline>(()=>{const r=document.documentElement;r.classList.add('js');try{const t=localStorage.getItem('theme');if(t)r.dataset.theme=t;if(localStorage.getItem('calm')==='1')r.classList.add('calm')}catch(e){}})()</script>

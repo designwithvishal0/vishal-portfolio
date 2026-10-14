@@ -1,14 +1,227 @@
 ---
+import '@fontsource-variable/hanken-grotesk';
+import '../styles/components.css';
+import Boot from '../components/Boot.astro';
+import Arrow from '../components/Arrow.astro';
+import { intro, work, live, email, social, loops, results, more, lead, pages, how, jobs } from '../data/home';
+
+// Approved home copy, Phase 1 doc. Layout is direction B2 on the design system.
+const title = 'Vishal Yadav, Product Designer in Gurugram';
+const description = 'Vishal Yadav is a product (UI/UX) designer in Gurugram. Case studies in travel, fintech, ecommerce and B2B, plus shipped campaign work for CashKaro.';
+
+const sizes = ['wide', 'half', 'half', 'wide'];
+// The resume button shows once the site copy of the CV exists.
+const words = intro.positioning.split(' ');
+const ctas = intro.links.filter(l => l.href !== '#').reverse();
+
+const person = {
+  '@context': 'https://schema.org', '@type': 'Person', name: 'Vishal Yadav', jobTitle: 'Product Designer',
+  description, email: `mailto:${email}`,
+  address: { '@type': 'PostalAddress', addressLocality: 'Gurugram', addressCountry: 'IN' },
+  alumniOf: 'Guru Jambheshwar University of Science and Technology',
+  sameAs: social.map(s => s[1]),
+};
 ---
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Vishal Yadav, Product Designer in Gurugram</title>
-  </head>
-  <body>
-    <h1>Vishal Yadav, product designer</h1>
-    <p>I design for the moment people are unsure.</p>
-  </body>
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json" set:html={JSON.stringify(person)} />
+<Boot />
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="top-l">
+      <h1>{intro.name}</h1>
+      <span class="status"><span class="dot" aria-hidden="true"></span>{intro.availability}</span>
+    </div>
+    <nav class="topnav" aria-label="Sections"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+    <button id="theme" type="button">Dark mode</button>
+  </header>
+
+  <main>
+  <section class="hero">
+    <p class="pos words"><span class="vh">{intro.positioning}</span>{words.map((w, i) => <><span class="w" aria-hidden="true"><span style={`--i:${i}`}>{w}</span></span>{i < words.length - 1 && ' '}</>)}</p>
+    <p class="sup enter" style="--d:260ms">{intro.supporting}</p>
+    <ul class="aud enter" style="--d:320ms" aria-label="Start here">
+      <li><a class="go" href="#work"><strong>Hiring a product designer</strong> <span>See the case studies</span><Arrow /></a></li>
+      <li><a class="go" href="#results"><strong>Recruiting</strong> <span>The 30 second version</span><Arrow /></a></li>
+      <li><a class="go" href="#pages"><strong>Founder</strong> <span>Need a page that sells</span><Arrow /></a></li>
+    </ul>
+    <div class="cta enter" style="--d:380ms">
+      {ctas.map((l, i) => <a class={`btn${i ? '' : ' primary'}`} href={l.href}>{l.label}</a>)}
+    </div>
+  </section>
+
+  <section class="results" id="results" aria-labelledby="r-h">
+    <h2 id="r-h">Shipped at CashKaro, for 25M+ users</h2>
+    <div class="r-grid">
+      {results.map(r => <div><div class="r-num" data-n={parseInt(r.n)}>{r.n}</div><div class="r-label">{r.label}</div></div>)}
+    </div>
+  </section>
+
+  <div class="sec-head" id="work"><h2>Selected work</h2><span>4 case studies</span></div>
+  <section class="work" aria-label="Selected work">
+    {work.map((w, i) => (
+      <article class={`tile reveal ${sizes[i]}`}>
+        <div class="media" data-state="paused">
+          <a class="mlink" href={live(w.slug)} tabindex="-1" aria-hidden="true"></a>
+          <img src={`/loops/${loops[i]}.jpg`} alt={w.alt} width="1200" height="900" loading={i ? 'lazy' : 'eager'} decoding="async" />
+          <video muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"><source src={`/loops/${loops[i]}.mp4`} type="video/mp4" /><source src={`/loops/${loops[i]}.webm`} type="video/webm" /></video>
+          <button class="vctl" type="button" data-name={w.name} aria-label={`Play the ${w.name} preview`}>
+            <svg class="i-pause" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="1" width="3.5" height="12" rx="1" /><rect x="8.5" y="1" width="3.5" height="12" rx="1" /></svg>
+            <svg class="i-play" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.6v10.8a.8.8 0 0 0 1.2.7l9-5.4a.8.8 0 0 0 0-1.4l-9-5.4A.8.8 0 0 0 3 1.6z" /></svg>
+          </button>
+        </div>
+        <div class="meta"><span class="pname">{w.name}</span><span class="pill">{w.type.includes('B2B') ? 'B2B concept' : 'Concept'}</span><span>{w.year}</span></div>
+        <h3><a href={live(w.slug)}>{w.headline}<span class="vh">, the {w.name} case study</span></a></h3>
+        <p>{w.problem}</p>
+        <p class="scope"><span>{w.role}</span><span>{w.detail}</span></p>
+        <a class="more" href={live(w.slug)} tabindex="-1" aria-hidden="true">View the case study <Arrow /></a>
+      </article>
+    ))}
+  </section>
+  <ul class="morework reveal" aria-label="More work">
+    {more.map(m => (
+      <li><a class="mw go" href={m.href}>
+        <img src={`/pages/${m.img}.webp`} alt="" width="56" height="56" loading="lazy" decoding="async" />
+        <span class="mwt"><strong>{m.name}</strong><span>{m.line}</span></span>
+        <span class="pill">Concept</span><Arrow />
+      </a></li>
+    ))}
+  </ul>
+
+  <div class="sec-head" id="pages"><h2>Pages that sell</h2><span>Campaigns, landing pages and product pages for commerce brands.</span></div>
+  <section class="pages" aria-label="Pages that sell">
+    <article class="page lead reveal">
+      <div class="thumb"><img src={`/pages/${lead.img}.webp`} alt={`${lead.name}, preview`} width="960" height="1004" loading="lazy" decoding="async" /></div>
+      <div class="ptext">
+        <span class="ptag"><span class="pill shipped">{lead.tag}</span></span>
+        <h3>{lead.name}</h3>
+        <p>{lead.line}</p>
+        <dl class="pstats">{lead.stats.map(([n, l]) => <div><dt>{l}</dt><dd>{n}</dd></div>)}</dl>
+      </div>
+    </article>
+    <ul class="rail">
+      {pages.map(p => (
+        <li class="reveal"><a class="page go" href={p.href}>
+          <div class="thumb"><img src={`/pages/${p.img}.webp`} alt={`${p.name}, preview`} width="960" height="1004" loading="lazy" decoding="async" /></div>
+          <span class="ptag">{p.tag && <span class={`pill${p.tag.startsWith('Shipped') ? ' shipped' : ''}`}>{p.tag}</span>}</span>
+          <h3>{p.name}</h3>
+          <p>{p.line}</p>
+          <span class="more">View on Behance <Arrow /></span>
+        </a></li>
+      ))}
+    </ul>
+  </section>
+  <p class="freelance reveal">Need a page that sells? <a class="ul" href="#contact">See how I work with founders</a></p>
+
+  <div class="sec-head"><h2>How I work</h2></div>
+  <section class="how" aria-label="How I work">
+    {how.map(x => <div class="reveal"><h3>{x.h}</h3><p>{x.p}</p><a class="more go" href={x.href}>{x.link} <Arrow /></a></div>)}
+  </section>
+
+  <div class="sec-head" id="about"><h2>About</h2></div>
+  <section class="about reveal" aria-label="About">
+    <p class="lead-p">From October 2023 to August 2026 I designed app and web flows at CashKaro, India’s largest cashback platform, and built, in Figma, the design system its campaigns run on. Before that I was a graphic designer at an agency, which is why what I ship looks finished (that work lives in <a class="ul" href="https://www.behance.net/design_vishaly">the archive</a>). I studied Computer Science, so I know what engineers need at handoff, and I use AI to move faster through research and iteration while the design calls stay mine.</p>
+    <dl class="jobs">{jobs.map(([c, r, y]) => <div><dt>{c}</dt><dd>{r}</dd><dd class="y">{y}</dd></div>)}</dl>
+  </section>
+
+  <section class="contact reveal" id="contact" aria-labelledby="c-h">
+    <h2 id="c-h">Hiring, or need a page that sells?</h2>
+    <p>Email me at <button class="copy" type="button" data-copy={email}>{email} <span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button> or book a call. I reply within a day.</p>
+    <span class="vh" role="status" id="copied"></span>
+    <div class="cta">
+      <a class="btn primary" href="https://cal.com/designwvishal">Book a call</a>
+      <a class="btn" href={`mailto:${email}`}>Email</a>
+    </div>
+    <p class="elsewhere">You can also find me on <a class="ul" href={social[0][1]}>LinkedIn</a> and <a class="ul" href={social[1][1]}>Behance</a>.</p>
+  </section>
+  </main>
+
+  <footer>
+    <nav aria-label="Elsewhere" class="social">{social.map(([l, h]) => <a class="ul" href={h}>{l}</a>)}</nav>
+    <span class="toggles"><button id="calm" type="button" aria-pressed="false">Reduce motion</button></span>
+  </footer>
+</div>
+<script>import '../scripts/ui';</script>
+</body>
 </html>
+
+<style>
+  .morework{list-style:none;margin:0 0 var(--s32);padding:0;display:grid;gap:12px}
+  @media (min-width:760px){.morework{grid-template-columns:1fr 1fr;gap:32px}}
+  .mw{display:flex;align-items:center;gap:16px;padding:12px 0;border-top:1px solid var(--rule);text-decoration:none;min-height:80px}
+  .mw img{flex:none;width:56px;height:56px;border-radius:12px;object-fit:cover;object-position:50% 0;background:var(--card)}
+  .mwt{flex:1;display:flex;flex-direction:column;min-width:0}
+  .mwt strong{font-weight:var(--w-strong)}
+  .mwt span{color:var(--muted);font-size:var(--fs-meta)}
+
+  .pages{display:grid;gap:72px}
+  .page{display:block;text-decoration:none}
+  .page.lead{display:grid;grid-template-columns:7fr 5fr;gap:48px;align-items:center}
+  .thumb{background:var(--card);border-radius:var(--r-card);overflow:hidden;aspect-ratio:1;border:1px solid var(--rule);transition:border-color var(--hover) var(--ease-out)}
+  .thumb img{width:100%;height:100%;object-fit:cover;object-position:50% 0;display:block;transition:transform var(--section) var(--ease-out)}
+  .ptag{display:flex;align-items:center;min-height:28px;margin-top:18px}
+  .lead .ptag{margin-top:0}
+  .page h3{font-size:var(--fs-ui);font-weight:var(--w-strong);color:var(--muted);margin:10px 0 4px}
+  .page p{margin:0;font-size:var(--fs-sup);font-weight:var(--w-head);line-height:var(--lh-head);letter-spacing:var(--track-head)}
+  .lead p{font-size:var(--fs-h3)}
+  .pstats{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:16px 40px;margin:28px 0 0;padding:20px 0 0;border-top:1px solid var(--rule)}
+  .pstats div{display:flex;flex-direction:column-reverse}
+  .pstats dt{font-size:var(--fs-meta);color:var(--muted)}
+  .pstats dd{margin:0;font-size:var(--fs-h3);font-weight:var(--w-head);letter-spacing:var(--track-stat);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .page .more{margin-top:14px}
+  @media (hover:hover) and (pointer:fine){a.page:hover .thumb{border-color:var(--ink)}a.page:hover .thumb img{transform:scale(1.03)}}
+  .rail{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+  .rail li{min-width:0}
+  @media (max-width:900px){.page.lead{grid-template-columns:1fr 1fr;gap:32px}.rail{grid-template-columns:1fr 1fr;gap:48px 24px}}
+  @media (max-width:560px){
+    .page.lead{grid-template-columns:1fr;gap:20px}
+    .pstats{gap:16px 24px}
+    .rail{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:78%;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(var(--gutter) * -1);padding:0 var(--gutter) 8px;scroll-padding:0 var(--gutter);scrollbar-width:none}
+    .rail::-webkit-scrollbar{display:none}
+    .rail li{scroll-snap-align:start}
+  }
+  .freelance{margin:72px 0 var(--s32);font-size:var(--fs-sup)}
+  .freelance a{font-weight:var(--w-strong)}
+
+  .how{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;padding:0 0 var(--s32)}
+  .how div{display:flex;flex-direction:column;align-items:flex-start}
+  .how h3{font-size:var(--fs-h3);line-height:var(--lh-head);letter-spacing:var(--track-head);font-weight:var(--w-head);margin:0 0 12px}
+  .how p{margin:0 0 20px;color:var(--muted);max-width:34ch}
+  .how .more{margin-top:auto}
+
+  .about{display:grid;grid-template-columns:1.4fr 1fr;gap:56px;padding:0 0 var(--s32)}
+  .lead-p{font-size:var(--fs-lead);margin:0;max-width:var(--measure)}
+  .jobs{margin:0;display:grid;gap:20px;align-content:start}
+  .jobs div{padding-top:16px;border-top:1px solid var(--rule)}
+  .jobs dt{font-weight:var(--w-strong)}
+  .jobs dd{margin:0;color:var(--muted)}
+
+  .contact{border-top:1px solid var(--rule);padding:72px 0 var(--s32)}
+  .contact h2{font-size:var(--fs-h1);line-height:1.02;letter-spacing:-.035em;font-weight:var(--w-head);margin:0 0 24px;max-width:16ch}
+  .contact p{font-size:var(--fs-sup);margin:0 0 32px;max-width:56ch}
+  .contact .elsewhere{font-size:var(--fs-ui);color:var(--muted);margin:32px 0 0}
+  .elsewhere a{color:var(--ink)}
+
+  .social{display:flex;flex-wrap:wrap;gap:0 20px}
+  .social a{color:var(--ink);padding:9px 0;background-origin:content-box;background-clip:content-box}
+  .toggles{display:flex;gap:var(--s2);flex-wrap:wrap}
+
+  @media (max-width:760px){
+    .how{grid-template-columns:1fr;gap:48px;padding-bottom:var(--s18)}
+    .about{grid-template-columns:1fr;gap:40px;padding-bottom:var(--s18)}
+    .morework,.freelance{margin-bottom:var(--s18)}
+    .pages{gap:56px}
+    .contact{padding:56px 0 var(--s18)}
+  }
+  @media (pointer:coarse){.social a{padding:11px 0}footer button{min-height:44px}}
+</style>

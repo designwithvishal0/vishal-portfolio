@@ -1,0 +1,7 @@
+---
+// A line that rises in word by word on load. Screen readers get the sentence once.
+interface Props { text: string; tag?: string; class?: string }
+const { text, tag: Tag = 'p', class: cls = '' } = Astro.props;
+const words = text.split(' ');
+---
+<Tag class={`words ${cls}`}><span class="vh">{text}</span>{words.map((w, i) => <><span class="w" aria-hidden="true"><span style={`--i:${i}`}>{w}</span></span>{i < words.length - 1 && ' '}</>)}</Tag>

@@ -1,0 +1,38 @@
+---
+// The one site header, used on every page (Vishal 2026-10-12). Markup moved from looks/kinetic.astro unchanged.
+// home: where Work, About and Contact live ('' on the home page itself).
+// theme: false on pages that only come in one theme, so the menu does not offer a switch that does nothing there.
+// book: true shows Book a call from the start; the home page shows it only once its hero button scrolls away.
+import '@fontsource-variable/bricolage-grotesque/standard.css';
+import '../styles/header.css';
+import { intro } from '../data/home';
+interface Props { home?: string; theme?: boolean; book?: boolean }
+const { home = '', theme = true, book = false } = Astro.props;
+const bookLink = intro.links.find(l => l.label === 'Book a call')!;
+const nav = [['Work', '#work'], ['About', '#about'], ['Contact', '#contact']];
+---
+<header class:list={['bar', { 'book-on': book }]}>
+  <div class="bar-in">
+    {home ? <a class="who" href={home}>Vishal Yadav</a> : <span class="who">Vishal Yadav</span>}
+    {/* phones (mobile layout 2026-10-12): once you scroll, the name gives way to the section you are in; tapping it goes back to the top */}
+    <button class="bar-sec" type="button" hidden>Back to top</button>
+    <nav class="nav" aria-label="Sections">{nav.map(([t, h]) => <a href={home + h}>{t}</a>)}</nav>
+    <div class="bar-r">
+      <!-- appears once the hero's own Book a call scrolls away, hides again at Contact (audit 2026-10-10) -->
+      <a class="bar-book" href={bookLink.href}>{bookLink.label}</a>
+      <button class="a11y" type="button" popovertarget="a11y-menu"><span class="t-a">Accessibility</span><span class="t-m">Menu</span></button>
+    </div>
+    <div id="a11y-menu" class="a11y-menu" popover>
+      {/* phones (mobile audit 2026-10-12): the section links live here, so the bar fits name, Book a call and Menu on one line */}
+      <nav class="m-nav" aria-label="Sections">{nav.map(([t, h]) => <a href={home + h}>{t}</a>)}</nav>
+      <p class="a11y-h">Accessibility</p>
+      {theme && <div class="a11y-row"><span id="l-night">Dark mode</span><button id="theme" class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="l-night"><i class="sun"></i><i class="moon"></i><span class="knob"></span></button></div>}
+      <div class="a11y-row"><span id="l-calm">Reduce motion</span><button id="calm" class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="l-calm"><span class="knob"></span></button></div>
+    </div>
+  </div>
+</header>
+<script>
+  import '../scripts/ui';
+  // the phone menu closes once a section link is chosen
+  document.querySelectorAll('.m-nav a').forEach(a => a.addEventListener('click', () => document.getElementById('a11y-menu')?.hidePopover()));
+</script>
