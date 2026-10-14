@@ -28,7 +28,7 @@ const ld = [
 <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@500;600;700&family=Stack+Sans+Text:wght@400;500;600;700&display=swap">
 <!-- the four typeface modes in the design system section, each loaded only for the characters it shows -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Stack+Sans+Headline:wght@700&display=swap&text=%E2%82%B91%2C42070">
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@700&f[]=switzer@700&display=swap">
@@ -214,7 +214,7 @@ html.calm .up{opacity:1;transform:none;transition:none}
 <style is:inline>
 /* Matched to the live Framer JARVIS page (measured 2026-10-09): Albert Sans, full width bands that swap
    navy and light, one 760px reading column, the screens as text left and a 360px phone right. */
-:root{--sans:"Albert Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:var(--sans);
+:root{--sans:"Stack Sans Text",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:var(--sans);
   --bg:#0F1F0B;--card:#1A2E15;--fg:#EEF0EA;--body:#EEF0EA;--muted:#A2AD9C;--acc:#EEC97E;--warm:#EEC97E;--line:#2C4227;--band:#0F1F0B}
 .lt{--fg:#0F1F0B;--body:#3D4637;--muted:#5E6658;--acc:#7A5F1F;--card:#E9E4D6;--line:#DCD6C6;--band:#F5F2EA;--warm:#7A5F1F}
 html{overflow-x:clip}
@@ -972,4 +972,13 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 @media (min-width:621px){.arc3{grid-template-columns:repeat(3,minmax(0,300px));justify-content:center;column-gap:clamp(24px,5vw,72px)}}
 </style>
 <script is:inline src="/js/pin-screen.js" defer></script>
+<style is:inline>
+/* Vishal 2026-10-14 02:28: each case study uses the type of its own design. OneBanc's active typeface is Stack Sans:
+   Headline for display sizes, Text for reading sizes, the same split the design system uses. Max weight is 700. */
+:root{--head:"Stack Sans Headline",var(--sans)}
+h1,h2,h3,.ratio b,.stats b,.closing h2{font-family:var(--head)}
+.summary h2,.eyebrow,.k{font-family:var(--sans)}
+.ratio b,.closing h2{font-weight:700}
+h1,section h2,section h3{font-weight:600;letter-spacing:-.01em}
+</style>
 </html>
