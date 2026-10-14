@@ -546,6 +546,7 @@ figcaption{text-align:center}
       </section>
 
       <section id="try" class="lt wide">
+        <div class="trygrid"><div class="trytext">
         <p class="eyebrow">Try it</p>
         <h2>Live prototype</h2>
         <p>The full flow is clickable, from the waitlist wait through to both failure states.</p>
@@ -558,10 +559,12 @@ figcaption{text-align:center}
           <button type="button" data-node="492:958" aria-pressed="false"><span>06</span>Chart failed rescue</button>
           <button type="button" data-node="494:3" aria-pressed="false"><span>07</span>Home live trip strip</button>
         </div>
-        <figure class="protowrap"><iframe class="proto" title="ixigo Trains post booking Figma prototype" loading="lazy" allowfullscreen></iframe><div class="protowait"><img src="img/01a-lock.webp" width="720" height="1588" alt="" loading="lazy"><p>Loading the prototype</p><a href="https://www.figma.com/proto/lFQ3Jb6yElZlap677wWAiR/ixigo-Trains---Post-Booking-Redesign?node-id=492-3&amp;starting-point-node-id=492%3A3" target="_blank" rel="noopener">Open in Figma</a></div><button type="button" class="protogo"><span>Tap to try the prototype</span></button><button type="button" class="protodone">Close prototype</button></figure>
         <p class="protolink">Prototype not loading? <a href="https://www.figma.com/proto/lFQ3Jb6yElZlap677wWAiR/ixigo-Trains---Post-Booking-Redesign?node-id=492-3&amp;p=f&amp;viewport=291%2C121%2C0.14&amp;scaling=scale-down-width&amp;content-scaling=fixed&amp;starting-point-node-id=492%3A3&amp;show-proto-sidebar=1&amp;page-id=0%3A1" target="_blank" rel="noopener">Open it in a new tab</a></p>
-        <script is:inline>(()=>{const s=document.currentScript.parentElement,f=s.querySelector('.protowrap'),fr=f.querySelector('iframe'),phone=matchMedia('(max-width:640px)').matches;
-          const src=n=>{const u='https://www.figma.com/proto/lFQ3Jb6yElZlap677wWAiR/ixigo-Trains---Post-Booking-Redesign?node-id='+n.replace(':','-')+'&starting-point-node-id='+n+'&scaling='+(phone?'contain':'scale-down')+'&content-scaling=fixed'+(phone?'&hide-ui=1':'');return 'https://www.figma.com/embed?embed_host=share&url='+encodeURIComponent(u)};
+        </div>
+        <figure class="protowrap"><iframe class="proto" title="ixigo Trains post booking Figma prototype" loading="lazy" allowfullscreen></iframe><div class="protowait"><img src="img/01a-lock.webp" width="720" height="1588" alt="" loading="lazy"><p>Loading the prototype</p><a href="https://www.figma.com/proto/lFQ3Jb6yElZlap677wWAiR/ixigo-Trains---Post-Booking-Redesign?node-id=492-3&amp;starting-point-node-id=492%3A3" target="_blank" rel="noopener">Open in Figma</a></div><button type="button" class="protogo"><span>Tap to try the prototype</span></button><button type="button" class="protodone">Close prototype</button></figure>
+        </div>
+        <script is:inline>(()=>{const s=document.currentScript.parentElement,f=s.querySelector('.protowrap'),fr=f.querySelector('iframe'),phone=matchMedia('(max-width:640px)').matches,wide=matchMedia('(min-width:901px)').matches;
+          const src=n=>{const u='https://www.figma.com/proto/lFQ3Jb6yElZlap677wWAiR/ixigo-Trains---Post-Booking-Redesign?node-id='+n.replace(':','-')+'&starting-point-node-id='+n+'&scaling='+(phone||wide?'contain':'scale-down')+'&content-scaling=fixed'+(phone||wide?'&hide-ui=1':'');return 'https://www.figma.com/embed?embed_host=share&url='+encodeURIComponent(u)};
           fr.src=src('492:3');
           s.querySelectorAll('.chaps button').forEach(b=>b.onclick=()=>{s.querySelectorAll('.chaps button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));f.classList.remove('ready');fr.src=src(b.dataset.node);if(phone&&!f.classList.contains('live'))f.querySelector('.protogo').click()});
           fr.addEventListener('load',()=>f.classList.add('ready'));let ph,y;const live=on=>{if(on===f.classList.contains('live'))return;if(on){y=scrollY;ph=document.createElement('div');ph.style.height=f.offsetHeight+'px';f.before(ph)}f.classList.toggle('live',on);if(on){f.querySelector('.protodone').focus({preventScroll:true});requestAnimationFrame(()=>scrollTo(0,y))}else{ph.remove();scrollTo(0,y)}};f.querySelector('.protogo').onclick=()=>live(true);f.querySelector('.protodone').onclick=()=>{live(false);f.querySelector('.protogo').focus({preventScroll:true})};addEventListener('keydown',e=>{if(e.key==='Escape'&&f.classList.contains('live'))live(false)})})()</script>
@@ -969,6 +972,16 @@ body{background:#FFFDFA}
 .endsec .nextgrid b{color:#1A140F}
 .endsec .nextgrid a:hover,.endsec .nextgrid a:focus-visible{box-shadow:0 0 0 2px #1A140F}
 .endsec a:focus-visible{outline-color:#1A140F}
+/* Vishal 2026-10-14 02:14: on desktop the flows sit in one list on the left and the prototype phone on the right, as on Framer */
+#try .trygrid,#try .trytext{display:grid;gap:22px;min-width:0}
+@media (max-width:900px){#try .trytext{display:contents}#try .protolink{order:1}}
+@media (min-width:901px){
+  #try .trygrid{grid-template-columns:minmax(0,560px) auto;justify-content:center;column-gap:clamp(64px,9vw,140px);align-items:center}
+  #try .chaps{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;gap:10px}
+  #try .protowrap{width:auto;margin:0}
+  #try .proto{aspect-ratio:412/917;height:min(760px,calc(100svh - 210px));width:auto;border-radius:28px}
+  #try .protowait{border-radius:28px}
+}
 </style>
 <script is:inline src="/js/pin-screen.js" defer></script>
 <script is:inline src="/js/inview-video.js" defer></script>
