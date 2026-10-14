@@ -92,7 +92,6 @@ html{overflow-x:clip}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--fs-body)/1.6 var(--sans);-webkit-font-smoothing:antialiased}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:var(--r-focus)}
-header.bar .bar-book,header.bar .bar-cv{display:none} /* as on the case studies: name and menu only, Book a call sits in the closing */
 .wrap{width:min(var(--max),100% - var(--gut) * 2);margin-inline:auto}
 .top{padding:var(--s18) 0 var(--s12);display:grid;gap:var(--s4);max-width:66ch}
 .eyebrow{margin:0;font-size:var(--fs-caption);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
@@ -139,7 +138,7 @@ html.calm .btn,html.calm .more img{transition:none}
 </style>
 </head>
 
-<SiteHeader home="/looks/kinetic/" theme={false} book cta={false} />
+<SiteHeader home="/looks/kinetic/" theme={false} book />
 
 <main>
   <div class="wrap">

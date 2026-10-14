@@ -244,7 +244,6 @@ article>section{width:100%}
    Same frosted blur; a touch more opaque than home so the navy page behind doesn't tint it blue. */
 header.bar{--bg:#0C0C0E;--ink:#F2F1EC;--muted:#A7A7AE;--edge:#6B6B72;--line:#232328;--btn:#F2F1EC;--on-btn:#0C0C0E}
 @supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){header.bar{background:color-mix(in srgb,#0C0C0E 90%,transparent)}}
-header.bar .bar-book,header.bar .bar-cv{display:none} /* Vishal 2026-10-13: header is just name and menu; Book a call sits in the closing */
 body{margin-top:0}
 .progress{z-index:30}
 .summary{max-width:1080px;margin-inline:auto}
@@ -394,7 +393,7 @@ body{background:#F5F2EA}
 
 <div class="progress" aria-hidden="true"><i id="bar"></i></div>
 
-<SiteHeader home="/looks/kinetic/" theme={false} book cta={false} />
+<SiteHeader home="/looks/kinetic/" theme={false} book />
 
 <div class="wrap">
 
