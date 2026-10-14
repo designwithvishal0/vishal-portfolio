@@ -241,9 +241,9 @@ article>section{width:100%}
 /* Vishal 2026-10-13: header keeps the frosted blur, same as the home page (the solid navy try is undone) */
 /* Vishal 2026-10-13: header looks exactly like the home page header (its dark look, since this page is dark), with no navy tint.
    Same frosted blur; a touch more opaque than home so the navy page behind doesn't tint it blue. */
-/* Vishal 2026-10-14 ("Match the top"): this page opens light, so the header uses the home page's light look; dark topped case studies keep the dark bar */
-header.bar{--bg:#FAFAF8;--ink:#0B0B0C;--muted:#55565C;--edge:#76777D;--line:#E2E2DE;--btn:#0B0B0C;--on-btn:#FAFAF8}
-@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){header.bar{background:color-mix(in srgb,#FAFAF8 90%,transparent)}}
+/* Vishal 2026-10-14 02:29: Basil's reel is light, so the top stays dark and the header keeps the dark bar */
+header.bar{--bg:#0C0C0E;--ink:#F2F1EC;--muted:#A7A7AE;--edge:#6B6B72;--line:#232328;--btn:#F2F1EC;--on-btn:#0C0C0E}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){header.bar{background:color-mix(in srgb,#0C0C0E 90%,transparent)}}
 body{margin-top:0}
 .progress{z-index:30}
 .summary{max-width:1080px;margin-inline:auto}
@@ -1018,17 +1018,6 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
   });
 })();
 </script>
-<style is:inline>
-/* Vishal 2026-10-14 01:48: the reel is made of dark screens, so the top is light and the dark reel stands out against it */
-body{background:#F9F9EC}
-.wrap>header.hero,.wrap>.facts,.wrap>.note,.wrap>.summary,.wrap>.reel{--fg:#1A332E;--body:#46524E;--muted:#5F6B67;--acc:#A6480C;--card:#F3F4E3;--line:#E3E5D3;--band:#F9F9EC;--warm:#A6480C;color:var(--fg)}
-.wrap>header.hero p,.wrap>.facts p,.wrap>.summary p{color:var(--body)}
-.wrap>.note{color:var(--muted)!important}
-.wrap>header.hero .hook,.wrap>header.hero .eyebrow{color:var(--acc)}
-.wrap>.summary{background:#F3F4E3!important;box-shadow:0 0 0 1px var(--line)}
-.wrap>.summary div{border-color:var(--line)!important}
-.wrap>.reel video{box-shadow:0 24px 60px rgba(26,51,46,.2)}
-</style>
 <script is:inline src="/js/inview-video.js" defer></script>
 <style is:inline>
 /* Vishal 2026-10-13 16:02: every screen sits in an iPhone frame one fold tall, and you scroll the screen inside the frame yourself */
