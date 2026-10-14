@@ -1,0 +1,11 @@
+/* Footer parallax trial (Vishal 2026-10-14 02:15, ixigo first): as the closing band comes up, its content rises
+   from underneath the page edge, more slowly than the page, so the ending feels like it was waiting below.
+   CSS scroll driven animation only: browsers without it, Reduce Motion and the site's Calm mode get the plain footer.
+   Any case study can use it by linking this file; it targets .endsec > .closing. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    html:not(.calm) .endsec{overflow:clip}
+    html:not(.calm) .endsec>.closing{animation:footer-rise linear both;animation-timeline:view();animation-range:entry 0% cover 45%}
+  }
+}
+@keyframes footer-rise{from{transform:translateY(-55%);opacity:.25}to{transform:none;opacity:1}}

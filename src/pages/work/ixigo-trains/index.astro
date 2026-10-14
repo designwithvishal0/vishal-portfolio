@@ -962,14 +962,16 @@ body{background:#FFFDFA}
 .hook{color:#E86400}
 @media (max-width:620px){.hook{font-size:24px;text-wrap:balance}}
 .progress i{background:#FC790D}
-.endsec{background:#FC790D;border-top:0;color:#1A140F}
+/* Closing (his 02:21: orange band not liked): light warm band, dark text; ixigo orange stays only on the main button */
+.endsec{background:#F6EEE6;border-top:1px solid #E6D7C9;color:#1A140F;margin-top:0!important}
 .closing h2{color:#1A140F}
-.closing>p,.endsec .closing .founder{color:#2A1A0E}
+.closing>p,.endsec .closing .founder{color:#4A4038}
 .endsec .closing .founder a{color:#1A140F}
-.closing .btn.primary{background:#1A140F;color:#FFFDFA}
-.closing .btn.ghost{border-color:rgba(26,20,15,.45);color:#1A140F}
-.endsec .next>.k,.endsec .next>h2{color:#1A140F}
-.endsec .nextgrid a{background:#FFFDFA;color:#1A140F;box-shadow:0 1px 0 rgba(26,20,15,.08)}
+.closing .btn.primary{background:#FC790D;color:#1A140F}
+.closing .btn.primary:hover{background:#FF8A2A}
+.closing .btn.ghost{border-color:rgba(26,20,15,.3);color:#1A140F}
+.endsec .next>.k{color:#A34400}.endsec .next>h2{color:#1A140F}
+.endsec .nextgrid a{background:#FFFDFA;color:#1A140F;box-shadow:0 1px 2px rgba(40,20,5,.06),0 0 0 1px #E6D7C9}
 .endsec .nextgrid b{color:#1A140F}
 .endsec .nextgrid a:hover,.endsec .nextgrid a:focus-visible{box-shadow:0 0 0 2px #1A140F}
 .endsec a:focus-visible{outline-color:#1A140F}
@@ -984,6 +986,7 @@ body{background:#FFFDFA}
   #try .protowait{border-radius:28px}
 }
 </style>
+<link rel="stylesheet" href="/js/footer-parallax.css">
 <script is:inline src="/js/pin-screen.js" defer></script>
 <script is:inline src="/js/inview-video.js" defer></script>
 </html>
