@@ -31,7 +31,7 @@ const ld = [
 <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap">
 <style is:inline>
 /* Layout: text column of ~66ch beside a sticky contents rail on desktop; one column on phones.
    Single dark theme by choice: the calmer navy agreed for JARVIS. */
@@ -214,7 +214,8 @@ html.calm .up{opacity:1;transform:none;transition:none}
 <style is:inline>
 /* Matched to the live Framer JARVIS page (measured 2026-10-09): Albert Sans, full width bands that swap
    navy and light, one 760px reading column, the screens as text left and a 360px phone right. */
-:root{--sans:"Albert Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:var(--sans);
+/* Vishal 2026-10-14 02:28: the page uses the font of the design itself, as JARVIS does; loaded up to 700 so headings stay light rather than heavy */
+:root{--sans:"Figtree",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:var(--sans);
   --bg:#0F3C1F;--card:#1C472B;--fg:#F3F3F1;--body:#F3F3F1;--muted:#AFC2B3;--acc:#E9C46B;--warm:#E9C46B;--line:#2B5638;--band:#0F3C1F}
 .lt{--fg:#121C14;--body:#5A615A;--muted:#5E655E;--acc:#176B33;--card:#FFFFFF;--line:#DEE0DA;--band:#F3F3F1;--warm:#176B33}
 html{overflow-x:clip}
