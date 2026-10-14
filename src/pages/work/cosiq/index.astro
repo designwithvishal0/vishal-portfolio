@@ -651,13 +651,10 @@ nav.toc.light{--fg:#1C0918;--muted:#6E5A67;--line:#EED9E5;--warm:#B0006A}
 }
 /* Phones: the prototype box is exactly the shape of the app screen (412 by 917 in Figma), with Figma's own bars hidden, so nothing is cut */
 @media (max-width:640px){.proto{aspect-ratio:412/917;width:min(100%,340px,calc((100svh - 200px) * 412 / 917));margin-inline:auto;border-radius:28px}.protowrap{display:flex;justify-content:center}.protowait{width:min(100%,340px,calc((100svh - 200px) * 412 / 917));left:50%;transform:translateX(-50%);border-radius:28px}}
-/* Phones: the header slides away while reading down and comes back the moment you scroll up; the contents bar moves up with it */
+/* Phones: the header stays put while reading, same as the home page (Vishal 2026-10-14, one universal header) */
 @media (max-width:759px){
   header.bar{transition:transform .28s var(--out,ease)}
-  html.hdr-hide header.bar{transform:translateY(calc(-100% - 16px))}
   .tocpill{transition:opacity .3s ease,transform .3s ease,visibility .3s,top .28s ease}
-  html.hdr-hide .tocpill{top:env(safe-area-inset-top,0px)}
-  html.hdr-hide .tocsheet{inset:calc(env(safe-area-inset-top,0px) + 52px) 16px auto}
 }
 /* Reel controls: labelled pills on desktop (icon plus PLAY, SOUND ON); icon only round buttons on phones, bottom right */
 .pill{height:44px;padding:0 16px;gap:8px;justify-content:center;border-radius:22px;border:0;box-shadow:0 0 0 1px rgba(242,241,236,.28);background:rgba(12,12,14,.72);color:#F2F1EC;font:700 12px/1 var(--sans);letter-spacing:.02em}
@@ -786,16 +783,6 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
   }
   addEventListener('scroll',dtick,{passive:true});addEventListener('resize',dtick);dtick();
   addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);tick();
-})();
-</script>
-<script is:inline>
-(function(){
-  var mq=matchMedia('(max-width:759px)'),root=document.documentElement,last=scrollY,hd=document.querySelector('header.bar');
-  addEventListener('scroll',function(){
-    var y=scrollY,d=y-last;
-    if(!mq.matches||y<120||(hd&&hd.contains(document.activeElement))){root.classList.remove('hdr-hide');last=y;return}
-    if(d>6){root.classList.add('hdr-hide');last=y}else if(d<-6){root.classList.remove('hdr-hide');last=y}
-  },{passive:true});
 })();
 </script>
 <script is:inline>
