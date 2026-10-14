@@ -87,6 +87,8 @@ const ld = [
 /* Neutral: only the site tokens (tokens.css), light and dark. The shared header reads --line --edge --btn --on-btn --bar --gut --out. */
 :root{--line:var(--rule);--edge:var(--muted);--btn:var(--ink);--on-btn:var(--bg);--bar:56px;--gut:32px;--out:var(--ease-out)}
 @media (max-width:759px){:root{--bar:52px;--gut:16px}}
+/* One header on every page (Vishal 2026-10-14): the bar spans the same 1376px as the home page and case studies, while the gallery keeps its own width */
+header.bar{--max:1376px}
 *{box-sizing:border-box}
 html{overflow-x:clip}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--fs-body)/1.6 var(--sans);-webkit-font-smoothing:antialiased}
