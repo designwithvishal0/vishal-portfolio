@@ -1033,10 +1033,11 @@ h1,h2{letter-spacing:-.025em}
   #try .protowrap:not(.fs) .protowait{inset:0 auto auto 50%;transform:translateX(-50%);height:min(860px,calc(100svh - 180px));aspect-ratio:412/917}
   .protowrap.fs .protofsx{display:grid;place-items:center;position:fixed;top:20px;right:20px;z-index:2;width:44px;height:44px;border:0;border-radius:50%;background:rgba(13,15,23,.86);color:#F2F1EC;box-shadow:0 0 0 1px rgba(255,255,255,.2);cursor:pointer}
   html:has(.protowrap.fs){overflow:hidden}
-  /* Real iPhone frame around the prototype, same slim frame as the screens above (his 04:05) */
-  #try .protowrap:not(.fs) .proto{box-sizing:border-box;border:9px solid #12141A;border-radius:48px;background:#000;box-shadow:0 0 0 1px rgba(0,0,0,.06),0 24px 60px rgba(40,20,5,.18)}
-  #try .protowrap:not(.fs) .protowait{border-radius:48px;border:9px solid #12141A;box-sizing:border-box}
-  #try .protowrap:not(.fs)::after{content:"";position:absolute;top:21px;left:50%;width:92px;height:27px;margin-left:-46px;border-radius:99px;background:#12141A;pointer-events:none;z-index:2}
+  /* Real iPhone frame around the prototype: the same slim iPhone 16 Pro frame as the other case studies (his 04:05, slimmer at 04:08) */
+  #try .protowrap:not(.fs) .proto{box-sizing:border-box;border:5px solid #0B0B0B;border-radius:46px;background:#0B0B0B;box-shadow:0 0 0 1.5px #C4C1B9,0 0 0 2.5px #8F8C85,0 24px 50px rgba(60,30,10,.16)}
+  #try .protowrap:not(.fs) .protowait{border-radius:46px;border:5px solid #0B0B0B;box-sizing:border-box}
+  #try .protowrap:not(.fs)::after{content:"";position:absolute;top:16px;left:50%;width:86px;height:25px;margin-left:-43px;border-radius:99px;background:#0B0B0B;pointer-events:none;z-index:2}
+  #try .protowrap:not(.fs)::before{content:"";position:absolute;left:calc(50% - min(860px,calc(100svh - 180px)) * 206 / 917 - 4.5px);top:calc(min(860px,calc(100svh - 180px)) * .19);width:3px;height:calc(min(860px,calc(100svh - 180px)) * .09);border-radius:2px;background:#ABA8A0;box-shadow:calc(min(860px,calc(100svh - 180px)) * 412 / 917 + 6px) calc(min(860px,calc(100svh - 180px)) * .06) 0 0 #ABA8A0}
 }
 </style>
 <script is:inline>(()=>{const d=document.querySelector('.flowdlg'),b=document.querySelector('.flowfs');if(!d||!b)return;const pan=d.querySelector('.flowpan');
