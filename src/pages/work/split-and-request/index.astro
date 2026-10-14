@@ -415,7 +415,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
           <dialog class="flowdlg" aria-label="User flow, full screen"><button type="button" class="flowx" aria-label="Close full screen"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button><div class="flowpan"><img src="img/00-user-flow.webp" width="5000" height="3722" alt="Split and Request user flow: five flows around one split" loading="lazy"></div><p class="flowhint">Pinch or double tap to zoom</p></dialog>
           <figcaption>Green paths are the happy route, red paths are the fallback. Every box is a screen in the Figma file.</figcaption>
         </figure>
-        <p><a class="tl" href="https://www.figma.com/board/5lCaixaqTJpvqKOogiZjYD/GPay-Split-%E2%80%94-User-Flow--all-five-journeys-" target="_blank" rel="noopener">See the Full Flow</a></p>
+        <p><a class="tl" href="https://www.figma.com/board/5lCaixaqTJpvqKOogiZjYD/GPay-Split-%E2%80%94-User-Flow--all-five-journeys-" target="_blank" rel="noopener">See the flow in Figma</a></p>
       </section>
 
       <section id="flow" class="lt wide">
@@ -555,7 +555,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
           let cur='217:191';
           bs.forEach(b=>b.onclick=()=>{bs.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));w.classList.remove('ready');cur=b.dataset.n;fr.src=w.classList.contains('fs')?fsrc(cur):src(cur);op.href='https://www.figma.com/proto/lC9pdClUznIhehVGRnLVMb/'+q(cur)});
           const fs=on=>{if(on===w.classList.contains('fs'))return;w.classList.remove('ready');w.classList.toggle('fs',on);fr.src=on?fsrc(cur):src(cur);(on?w.querySelector('.protofsx'):s.querySelector('.protofs')).focus({preventScroll:true})};
-          s.querySelector('.protofs').onclick=()=>fs(true);w.querySelector('.protofsx').onclick=()=>fs(false);addEventListener('keydown',e=>{if(e.key==='Escape'&&w.classList.contains('fs'))fs(false)});
+          s.querySelector('.protofs').onclick=()=>fs(true);op.addEventListener('click',e=>{if(matchMedia('(min-width:901px)').matches){e.preventDefault();fs(true)}});w.querySelector('.protofsx').onclick=()=>fs(false);addEventListener('keydown',e=>{if(e.key==='Escape'&&w.classList.contains('fs'))fs(false)});
           /* Phones: the flows ride along inside the open prototype, so switching needs no Close first (Vishal 03:53, as on ixigo) */
           const lc=document.createElement('div');lc.className='livechaps';lc.setAttribute('role','group');lc.setAttribute('aria-label','Switch flow');
           bs.forEach(o=>{const c=o.cloneNode(true);c.onclick=()=>{o.click();sync();c.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'})};lc.append(c)});
@@ -1072,10 +1072,20 @@ figure:has(>.flowfs){position:relative}
   .wrap>.facts div{grid-template-columns:72px minmax(0,1fr);gap:16px;align-items:baseline;padding-block:14px}
   .wrap>.facts div+div{border-top:1px solid var(--line)}
 }
+/* Flow 1 starts a new band (white after the pale blue flow map), so it gets its own top space instead of the merged 0 (Vishal 04:40) */
+article>section#flow{padding-top:clamp(64px,8vw,120px)}
+/* Full screen opens in this tab everywhere; tall phone screens open at a readable width and scroll (Vishal 04:41) */
+.flowdlg.tall .flowpan{place-items:start center}
+.flowdlg.tall .flowpan img{width:min(480px,100%)}
+.flowdlg.tall.zoom .flowpan img{width:min(960px,200%)}
 </style>
 <script is:inline>(()=>{const d=document.querySelector('.flowdlg'),b=document.querySelector('.flowfs');if(!d||!b)return;const pan=d.querySelector('.flowpan'),a=b.previousElementSibling;
 const open=e=>{if(e)e.preventDefault();d.classList.remove('zoom');d.showModal();document.documentElement.style.overflow='hidden'};
-b.onclick=()=>open();a.addEventListener('click',e=>{if(matchMedia('(max-width:900px)').matches)open(e)});
+const di=pan.querySelector('img'),hint=d.querySelector('.flowhint'),fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+const show=(src,alt,w,h)=>{di.src=src;di.alt=alt;di.width=w;di.height=h;d.classList.toggle('tall',h>w*1.3);hint.textContent=fine?'Double click to zoom, Esc to close':'Pinch or double tap to zoom'};
+b.onclick=()=>{show(a.getAttribute('href'),a.querySelector('img').alt,5000,3722);open()};
+/* Every Full screen on the page opens here, in this tab, on desktop and phones (Vishal 04:41) */
+document.querySelectorAll('a.zoom').forEach(z=>{z.removeAttribute('target');z.addEventListener('click',e=>{const i=z.querySelector('img');show(z.getAttribute('href'),i.alt,+i.getAttribute('width'),+i.getAttribute('height'));open(e)})});
 d.addEventListener('close',()=>{document.documentElement.style.overflow=''});d.querySelector('.flowx').onclick=()=>d.close();
 let t=0;pan.addEventListener('click',e=>{const n=Date.now();if(n-t<320){const r=pan.getBoundingClientRect(),fx=(e.clientX-r.left+pan.scrollLeft)/pan.scrollWidth,fy=(e.clientY-r.top+pan.scrollTop)/pan.scrollHeight;d.classList.toggle('zoom');pan.scrollLeft=fx*pan.scrollWidth-r.width/2;pan.scrollTop=fy*pan.scrollHeight-r.height/2;t=0}else t=n});
 pan.addEventListener('dblclick',e=>e.preventDefault())})();</script>
