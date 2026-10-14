@@ -1078,6 +1078,8 @@ article>section#flow{padding-top:clamp(64px,8vw,120px)}
 .flowdlg.tall .flowpan{place-items:start center}
 .flowdlg.tall .flowpan img{width:min(480px,100%)}
 .flowdlg.tall.zoom .flowpan img{width:min(960px,200%)}
+/* The whole user flow fits one screen when opened (Vishal 04:48); double click still zooms in to read it */
+.flowdlg:not(.tall):not(.zoom) .flowpan img{width:auto;max-width:calc(100% - 48px);max-height:calc(100dvh - 120px)}
 </style>
 <script is:inline>(()=>{const d=document.querySelector('.flowdlg'),b=document.querySelector('.flowfs');if(!d||!b)return;const pan=d.querySelector('.flowpan'),a=b.previousElementSibling;
 const open=e=>{if(e)e.preventDefault();d.classList.remove('zoom');d.showModal();document.documentElement.style.overflow='hidden'};
