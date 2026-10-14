@@ -947,5 +947,29 @@ body{background:#FFFDFA}
 .wrap>header.hero,.wrap>.facts,.wrap>.summary,.progress{--fg:#1A140F;--body:#4A4038;--muted:#6B5F55;--acc:#A34400;--warm:#A34400;--line:#E6D7C9;--card:#F6EEE6;color:var(--fg)}
 .wrap>.reel video{box-shadow:0 24px 60px rgba(40,20,5,.18)}
 </style>
+<style is:inline>
+/* Vishal 2026-10-14 02:11: the 30 second version kept its dark page text (#E6EAF2) and white hairlines after the top went light, so it read empty */
+@media (min-width:901px){
+  .wrap>.summary p{color:var(--body)}
+  .wrap>.summary div{border-top-color:var(--line)}
+  .wrap>.summary div:nth-of-type(even){border-left-color:var(--line)}
+}
+/* Real ixigo orange (#FC790D), used twice: the hook line (deepened just enough to pass large text contrast) and the closing band */
+.hook{color:#E86400}
+@media (max-width:620px){.hook{font-size:24px;text-wrap:balance}}
+.progress i{background:#FC790D}
+.endsec{background:#FC790D;border-top:0;color:#1A140F}
+.closing h2{color:#1A140F}
+.closing>p,.endsec .closing .founder{color:#2A1A0E}
+.endsec .closing .founder a{color:#1A140F}
+.closing .btn.primary{background:#1A140F;color:#FFFDFA}
+.closing .btn.ghost{border-color:rgba(26,20,15,.45);color:#1A140F}
+.endsec .next>.k,.endsec .next>h2{color:#1A140F}
+.endsec .nextgrid a{background:#FFFDFA;color:#1A140F;box-shadow:0 1px 0 rgba(26,20,15,.08)}
+.endsec .nextgrid b{color:#1A140F}
+.endsec .nextgrid a:hover,.endsec .nextgrid a:focus-visible{box-shadow:0 0 0 2px #1A140F}
+.endsec a:focus-visible{outline-color:#1A140F}
+</style>
+<script is:inline src="/js/pin-screen.js" defer></script>
 <script is:inline src="/js/inview-video.js" defer></script>
 </html>
