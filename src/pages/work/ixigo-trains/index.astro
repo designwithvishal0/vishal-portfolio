@@ -28,7 +28,7 @@ const ld = [
 <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <style is:inline>
 /* Layout: text column of ~66ch beside a sticky contents rail on desktop; one column on phones.
    Single dark theme by choice: the calmer navy agreed for JARVIS. */
@@ -211,7 +211,7 @@ html.calm .up{opacity:1;transform:none;transition:none}
 <style is:inline>
 /* Matched to the live Framer JARVIS page (measured 2026-10-09): Albert Sans, full width bands that swap
    navy and light, one 760px reading column, the screens as text left and a 360px phone right. */
-:root{--sans:"Albert Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:var(--sans);
+:root{--sans:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:var(--sans);
   --bg:#0D0F17;--card:#181B26;--fg:#ECEAE6;--body:#E3E1DC;--muted:#A3A2AC;--acc:#FFB27A;--warm:#FF8A3D;--line:#2B2D39;--band:#0D0F17}
 .lt{--fg:#1A140F;--body:#4A4038;--muted:#6B5F55;--acc:#A34400;--card:#F3E8DE;--line:#E6D7C9;--band:#FBF6F1;--warm:#A34400}
 html{overflow-x:clip}
@@ -958,17 +958,17 @@ body{background:#FFFDFA}
   .wrap>.summary div{border-top-color:var(--line)}
   .wrap>.summary div:nth-of-type(even){border-left-color:var(--line)}
 }
-/* Real ixigo orange (#FC790D), used twice: the hook line (deepened just enough to pass large text contrast) and the closing band */
+/* Real ixigo orange (#FF6200), used twice: the hook line (deepened just enough to pass large text contrast) and the closing band */
 .hook{color:#E86400}
 @media (max-width:620px){.hook{font-size:24px;text-wrap:balance}}
-.progress i{background:#FC790D}
+.progress i{background:#FF6200}
 /* Closing (his 02:21: orange band not liked): light warm band, dark text; ixigo orange stays only on the main button */
 .endsec{background:#F6EEE6;border-top:1px solid #E6D7C9;color:#1A140F;margin-top:0!important}
 .closing h2{color:#1A140F}
 .closing>p,.endsec .closing .founder{color:#4A4038}
 .endsec .closing .founder a{color:#1A140F}
-.closing .btn.primary{background:#FC790D;color:#1A140F}
-.closing .btn.primary:hover{background:#FF8A2A}
+.closing .btn.primary{background:#FF6200;color:#1A140F}
+.closing .btn.primary:hover{background:#FF7A26}
 .closing .btn.ghost{border-color:rgba(26,20,15,.3);color:#1A140F}
 .endsec .next>.k{color:#A34400}.endsec .next>h2{color:#1A140F}
 .endsec .nextgrid a{background:#FFFDFA;color:#1A140F;box-shadow:0 1px 2px rgba(40,20,5,.06),0 0 0 1px #E6D7C9}
@@ -985,6 +985,11 @@ body{background:#FFFDFA}
   #try .proto{aspect-ratio:412/917;height:min(760px,calc(100svh - 210px));width:auto;border-radius:28px}
   #try .protowait{border-radius:28px}
 }
+/* Vishal 2026-10-14 02:28: case studies use the product's own type. The ixigo screens are set only in Inter (his Figma), and its orange is #FF6200.
+   Inter runs wider and darker than Albert Sans, so the heaviest weights drop one step to stay crisp, not heavy. */
+.big{font-weight:700}
+.closing h2{font-weight:700;letter-spacing:-.04em}
+h1,h2{letter-spacing:-.025em}
 </style>
 <link rel="stylesheet" href="/js/footer-parallax.css">
 <script is:inline src="/js/pin-screen.js" defer></script>
