@@ -765,6 +765,7 @@ nav.toc.light{--fg:#0E1424;--muted:#6A7488;--line:#D3D8E3;--warm:#A35A00}
 .tocpill b{max-width:46vw}
 @media (max-width:620px){
   .facts{grid-template-columns:1fr 1fr;gap:20px 16px}
+  .facts p{text-wrap:balance}  /* his 04:32: no lonely single word on the last line */
   /* audit 2026-10-13: one compact block, a row per number, instead of three tall cards */
   .stats{gap:0;background:var(--card);border-radius:16px;padding:4px 18px}
   .stats div{grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:baseline;padding:14px 0}
