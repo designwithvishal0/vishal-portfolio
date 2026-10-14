@@ -27,7 +27,7 @@ const ld = [
 <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800&family=Instrument+Serif&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap">
 <style is:inline>
 /* Layout: text column of ~66ch beside a sticky contents rail on desktop; one column on phones.
    Single dark theme by choice: the calmer navy agreed for JARVIS. */
@@ -959,6 +959,14 @@ body{background:#F2EFE4}
 .wrap>header.hero,.wrap>.facts,.wrap>.note{--fg:#062219;--body:#3F554B;--muted:#5B6B62;--acc:#46600F;--line:#D9D4C3;--warm:#8A5300;color:var(--fg)}
 .wrap>header.hero .hook{color:#46600F}
 .reel video{box-shadow:0 24px 50px rgba(6,34,25,.22)}
+</style>
+<style is:inline>
+/* Vishal 2026-10-14: each case study uses its product's own type. Twelve is Instrument Serif for titles and figures, Instrument Sans for everything else (Twelve-Final build notes) */
+:root{--sans:"Instrument Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap>header.hero h1,article>section h2:not(#sum),.closing h2,article blockquote{font-family:"Instrument Serif",serif!important;font-weight:400!important;letter-spacing:-.01em!important}
+.closing h2{line-height:.98}
+.wrap>header.hero h1{font-size:clamp(48px,7vw,80px)!important;line-height:1!important}
+article blockquote,article blockquote p{font-size:clamp(22px,2.4vw,30px)!important;line-height:1.2!important}
 </style>
 <script is:inline src="/js/pin-screen.js" defer></script>
 </html>
