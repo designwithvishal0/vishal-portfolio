@@ -982,5 +982,13 @@ h1,h2,h3,.ratio b,.stats b,.closing h2{font-family:var(--head)}
 h1,section h2,section h3{font-weight:600;letter-spacing:-.01em}
 /* Phones only (Vishal 04:24, same as ixigo): hero heading one step bolder, same size */
 @media (max-width:640px){header.hero h1{font-weight:700}}
+/* Phones (Vishal 04:31): project details as one row each, label left and value right, same as Split and Twelve */
+@media (max-width:620px){
+  .wrap>.facts{grid-template-columns:minmax(0,1fr);gap:0;padding-block:4px}
+  .wrap>.facts>div:first-child{grid-column:auto}
+  .wrap>.facts div{grid-template-columns:72px minmax(0,1fr);gap:16px;align-items:baseline;padding-block:14px}
+  .wrap>.facts div+div{border-top:1px solid var(--line)}
+  .wrap>.facts p{text-wrap:balance}
+}
 </style>
 </html>
