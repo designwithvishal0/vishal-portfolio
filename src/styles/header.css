@@ -114,7 +114,8 @@ html.calm .sw .knob{transition:none}
 @media (hover:hover){.bar-cv:hover{background:var(--line)}}
 .calm .bar-cv{transition:none}
 @media (prefers-reduced-motion:reduce){.bar-cv{transition:none}}
-@media (max-width:759px){.bar-cv{display:none}}
+/* Vishal 2026-10-14 02:52 ("Remove all CTAs from the header that are on mobile"): on phones the header carries no buttons, only the name and Menu; Book a call and Resume live in the page itself */
+@media (max-width:759px){.bar-cv,.bar-book{display:none}}
 /* desktop (Vishal 2026-10-13, "Accessibility cannot look like Resume"): Book a call and Resume are the calls to action, so Accessibility steps back
    to a quiet utility: no outline, lighter text, set apart by a hairline once the two buttons are showing */
 @media (min-width:760px){
