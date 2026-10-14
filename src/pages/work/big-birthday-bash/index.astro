@@ -926,5 +926,16 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
   });
 })();
 </script>
+<style is:inline>
+/* Vishal 2026-10-14 01:48: the reel is made of dark screens, so the top is light and the dark reel stands out against it */
+body{background:#F3F3F1}
+.wrap>header.hero,.wrap>.facts,.wrap>.note,.wrap>.summary,.wrap>.reel{--fg:#121C14;--body:#5A615A;--muted:#5E655E;--acc:#176B33;--card:#FFFFFF;--line:#DEE0DA;--band:#F3F3F1;--warm:#176B33;color:var(--fg)}
+.wrap>header.hero p,.wrap>.facts p,.wrap>.summary p{color:var(--body)}
+.wrap>.note{color:var(--muted)!important}
+.wrap>header.hero .hook,.wrap>header.hero .eyebrow{color:var(--acc)}
+.wrap>.summary{background:#FFFFFF!important;box-shadow:0 0 0 1px var(--line)}
+.wrap>.summary div{border-color:var(--line)!important}
+.wrap>.reel video{box-shadow:0 24px 60px rgba(15,60,31,.2)}
+</style>
 <script is:inline src="/js/inview-video.js" defer></script>
 </html>

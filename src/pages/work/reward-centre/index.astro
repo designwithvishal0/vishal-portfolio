@@ -1020,6 +1020,17 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
   });
 })();
 </script>
+<style is:inline>
+/* Vishal 2026-10-14 01:48: the reel is made of dark screens, so the top is light and the dark reel stands out against it */
+body{background:#FFFDFA}
+.wrap>header.hero,.wrap>.facts,.wrap>.note,.wrap>.summary,.wrap>.reel{--fg:#0A0A0C;--body:#45454F;--muted:#62626C;--acc:#8A5A00;--card:#F5F3EE;--line:#E3E1DA;--band:#FFFDFA;--warm:#8A5A00;color:var(--fg)}
+.wrap>header.hero p,.wrap>.facts p,.wrap>.summary p{color:var(--body)}
+.wrap>.note{color:var(--muted)!important}
+.wrap>header.hero .hook,.wrap>header.hero .eyebrow{color:var(--acc)}
+.wrap>.summary{background:#F5F3EE!important;box-shadow:0 0 0 1px var(--line)}
+.wrap>.summary div{border-color:var(--line)!important}
+.wrap>.reel video{box-shadow:0 24px 60px rgba(20,20,24,.18)}
+</style>
 <script is:inline src="/js/inview-video.js" defer></script>
 <style is:inline>
 /* Vishal 2026-10-13 16:02: every screen sits in an iPhone frame one fold tall, and you scroll the screen inside the frame yourself */
