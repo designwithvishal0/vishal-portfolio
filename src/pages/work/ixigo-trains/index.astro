@@ -955,5 +955,11 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 .screen figure figcaption{margin-top:16px}
 #problem .pm .shot.phone{width:100%;border-radius:0}
 </style>
+<style is:inline>
+/* Vishal 2026-10-14 01:48: the teaser is made of dark screens, so the top is light and the dark reel stands out against it */
+body{background:#FFFDFA}
+.wrap>header.hero,.wrap>.facts,.wrap>.summary,.progress{--fg:#1A140F;--body:#4A4038;--muted:#6B5F55;--acc:#A34400;--warm:#A34400;--line:#E6D7C9;--card:#F6EEE6;color:var(--fg)}
+.wrap>.reel video{box-shadow:0 24px 60px rgba(40,20,5,.18)}
+</style>
 <script is:inline src="/js/inview-video.js" defer></script>
 </html>
