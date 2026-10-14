@@ -300,6 +300,14 @@ blockquote,.dek,.closing>p,.metric b,.next h2{font-size:22px}
 .protowait p{font-size:16px;color:var(--muted)}
 .protowait a{font-size:16px;font-weight:600;color:var(--fg);padding:10px 4px}
 .protowrap.ready .protowait{opacity:0;pointer-events:none}
+/* Switching flows (his 04:17): only a loader and the words, no lock image or link */
+.protowrap.loadingflow .protowait{opacity:1;background:transparent;pointer-events:none}
+.protowrap.loadingflow .protowait img,.protowrap.loadingflow .protowait a{display:none}
+.protowrap.loadingflow .protowait p{color:#F2F1EC;font-size:15px;font-weight:600;display:flex;align-items:center;gap:10px}
+.protowrap.loadingflow .protowait p::before{content:"";width:18px;height:18px;border-radius:50%;border:2px solid rgba(242,241,236,.25);border-top-color:#F2F1EC;animation:flowspin .8s linear infinite}
+@keyframes flowspin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.protowrap.loadingflow .protowait p::before{animation-duration:2.4s}}
+
 @media (prefers-reduced-motion:reduce){.nextgrid a,.protowait{transition:none}}
 html.calm .nextgrid a,html.calm .protowait{transition:none}
 @media (max-width:620px){
@@ -569,8 +577,8 @@ figcaption{text-align:center}
         <script is:inline>(()=>{const s=document.currentScript.parentElement,f=s.querySelector('.protowrap'),fr=f.querySelector('iframe'),phone=matchMedia('(max-width:640px)').matches,wide=matchMedia('(min-width:901px)').matches;
           const src=n=>{const u='https://www.figma.com/proto/lFQ3Jb6yElZlap677wWAiR/ixigo-Trains---Post-Booking-Redesign?node-id='+n.replace(':','-')+'&starting-point-node-id='+n+'&scaling='+(wide?'scale-down-width':phone?'contain':'scale-down')+'&content-scaling=fixed'+(phone||wide?'&hide-ui=1':'');return 'https://www.figma.com/embed?embed_host=share&url='+encodeURIComponent(u)};
           let cur='492:3';fr.src=src(cur);
-          s.querySelectorAll('.chaps button').forEach(b=>b.onclick=()=>{s.querySelectorAll('.chaps button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));cur=b.dataset.node;fr.src=f.classList.contains('fs')?fsrc(cur):src(cur);if(phone&&!f.classList.contains('live'))f.querySelector('.protogo').click()});
-          fr.addEventListener('load',()=>f.classList.add('ready'));let ph,y;const live=on=>{if(on===f.classList.contains('live'))return;if(on){y=scrollY;ph=document.createElement('div');ph.style.height=f.offsetHeight+'px';f.before(ph)}f.classList.toggle('live',on);if(on){f.querySelector('.protodone').focus({preventScroll:true});requestAnimationFrame(()=>scrollTo(0,y))}else{ph.remove();scrollTo(0,y)}};f.querySelector('.protogo').onclick=()=>live(true);f.querySelector('.protodone').onclick=()=>{live(false);f.querySelector('.protogo').focus({preventScroll:true})};addEventListener('keydown',e=>{if(e.key==='Escape'&&f.classList.contains('live'))live(false)});
+          s.querySelectorAll('.chaps button').forEach(b=>b.onclick=()=>{s.querySelectorAll('.chaps button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));cur=b.dataset.node;f.classList.add('loadingflow');fr.src=f.classList.contains('fs')?fsrc(cur):src(cur);if(phone&&!f.classList.contains('live'))f.querySelector('.protogo').click()});
+          fr.addEventListener('load',()=>{f.classList.add('ready');f.classList.remove('loadingflow')});let ph,y;const live=on=>{if(on===f.classList.contains('live'))return;if(on){y=scrollY;ph=document.createElement('div');ph.style.height=f.offsetHeight+'px';f.before(ph)}f.classList.toggle('live',on);if(on){f.querySelector('.protodone').focus({preventScroll:true});requestAnimationFrame(()=>scrollTo(0,y))}else{ph.remove();scrollTo(0,y)}};f.querySelector('.protogo').onclick=()=>live(true);f.querySelector('.protodone').onclick=()=>{live(false);f.querySelector('.protogo').focus({preventScroll:true})};addEventListener('keydown',e=>{if(e.key==='Escape'&&f.classList.contains('live'))live(false)});
           /* Phones: the flows ride along inside the open prototype, so switching needs no Close first (his 03:50) */
           const lc=document.createElement('div');lc.className='livechaps';lc.setAttribute('role','group');lc.setAttribute('aria-label','Switch flow');
           const orig=[...s.querySelectorAll('.chaps button')];orig.forEach(o=>{const c=o.cloneNode(true);c.onclick=()=>{o.click();sync();c.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'})};lc.append(c)});
