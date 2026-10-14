@@ -962,12 +962,16 @@ body{background:#FFFDFA}
 .hook{color:#E86400}
 @media (max-width:620px){.hook{font-size:24px;text-wrap:balance}}
 .progress i{background:#FF6200}
-/* Closing (his 02:31): back to the first dark closing he liked, with the glow in real ixigo orange #FF6200 instead of the muted brown one */
-.endsec{background:radial-gradient(70% 60% at 50% 0%,rgba(255,98,0,.62),rgba(255,98,0,0) 70%),linear-gradient(180deg,#0D0F17 0%,#140D0A 60%,#1E0E05 100%);border-top:1px solid rgba(255,98,0,.55);margin-top:0!important}
-.closing .btn.primary{background:#FF6200;color:#1A140F}
-.closing .btn.primary:hover{background:#FF7A26}
-.endsec .next>.k{color:#FF8A3D}
-.endsec .nextgrid a:hover,.endsec .nextgrid a:focus-visible{box-shadow:0 0 0 2px #FF6200}
+/* Closing (his 02:31 and 02:41): the first dark closing, with a softer ixigo orange glow (#FF6200 at low strength),
+   the original light Figma button, and brighter text so every line reads clearly over the glow. No parallax. */
+.endsec{background:radial-gradient(60% 50% at 50% 0%,rgba(255,98,0,.34),rgba(255,98,0,0) 72%),linear-gradient(180deg,#0D0F17 0%,#120E0C 60%,#170F0A 100%);border-top:1px solid rgba(255,98,0,.3);margin-top:0!important}
+.closing h2{color:#FFF4EC}
+.closing>p,.endsec .closing .founder{color:#F1E6DD}
+.endsec .closing .founder a{color:#FFFFFF}
+.closing .btn.primary{background:#F2F1EC;color:#0D0F17}
+.closing .btn.ghost{border-color:rgba(241,230,221,.5);color:#F2F1EC}
+.endsec .next>.k{color:#F1E6DD}.endsec .next>h2{color:#FFF4EC}
+.endsec .nextgrid a{background:#1E1814}
 /* Vishal 2026-10-14 02:14: on desktop the flows sit in one list on the left and the prototype phone on the right, as on Framer */
 #try .trygrid,#try .trytext{display:grid;gap:22px;min-width:0}
 @media (max-width:900px){#try .trytext{display:contents}#try .protolink{order:1}}
@@ -984,7 +988,6 @@ body{background:#FFFDFA}
 .closing h2{font-weight:700;letter-spacing:-.04em}
 h1,h2{letter-spacing:-.025em}
 </style>
-<link rel="stylesheet" href="/js/footer-parallax.css">
 <script is:inline src="/js/pin-screen.js" defer></script>
 <script is:inline src="/js/inview-video.js" defer></script>
 </html>
