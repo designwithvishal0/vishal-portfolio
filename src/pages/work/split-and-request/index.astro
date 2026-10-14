@@ -411,7 +411,8 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
           <p>Flow 1 is a small group, item by item. Flow 2 is a big group where twelve people claim in parallel. Flow 3 is a bill with no receipt. Flow 4 is the person who owes. Flow 5 is the whole notification loop. Every path ends in the same place: a reason to come back.</p>
         </div>
         <figure>
-          <a class="zoom" href="img/00-user-flow.webp" target="_blank" rel="noopener" aria-label="Open the user flow full size"><img class="shot wide" src="img/00-user-flow.webp" width="5000" height="3722" alt="Split and Request user flow: five flows around one split" loading="lazy"><span class="zi" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span></a>
+          <a class="zoom" href="img/00-user-flow.webp" target="_blank" rel="noopener" aria-label="Open the user flow full size"><img class="shot wide" src="img/00-user-flow.webp" width="5000" height="3722" alt="Split and Request user flow: five flows around one split" loading="lazy"><span class="zi" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span></a><button type="button" class="flowfs" aria-label="Open the user flow full screen"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>Full screen</button>
+          <dialog class="flowdlg" aria-label="User flow, full screen"><button type="button" class="flowx" aria-label="Close full screen"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button><div class="flowpan"><img src="img/00-user-flow.webp" width="5000" height="3722" alt="Split and Request user flow: five flows around one split" loading="lazy"></div><p class="flowhint">Pinch or double tap to zoom</p></dialog>
           <figcaption>Green paths are the happy route, red paths are the fallback. Every box is a screen in the Figma file.</figcaption>
         </figure>
         <p><a class="tl" href="https://www.figma.com/board/5lCaixaqTJpvqKOogiZjYD/GPay-Split-%E2%80%94-User-Flow--all-five-journeys-" target="_blank" rel="noopener">See the Full Flow</a></p>
@@ -537,17 +538,28 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
             <button type="button" data-n="217:4193" aria-pressed="false">Flow 4b · The person who owes, big group</button>
             <button type="button" data-n="217:4542" aria-pressed="false">Flow 4c · When nobody claims</button>
             <button type="button" data-n="217:4315" aria-pressed="false">Flow 5 · Notification loop, reference</button>
+            <button type="button" class="protofs"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>Open full screen, with zoom</button>
           </div>
           <div class="trycol">
-            <figure class="pwrap"><div class="pframe"><iframe class="pembed" title="Google Pay Split and Request Figma prototype" loading="lazy" allowfullscreen src="https://embed.figma.com/proto/lC9pdClUznIhehVGRnLVMb/?node-id=217:191&amp;starting-point-node-id=217:191&amp;scaling=scale-down-width&amp;content-scaling=fixed&amp;hide-ui=1&amp;embed-host=share"></iframe><div class="pwait"><img src="img/01-bill-in.webp" width="780" height="1720" alt="" loading="lazy"><p>Loading the prototype</p></div></div><button type="button" class="pgo"><span>Tap to try the prototype</span></button><button type="button" class="pdone">Close prototype</button></figure>
+            <figure class="pwrap"><div class="pframe"><iframe class="pembed" title="Google Pay Split and Request Figma prototype" loading="lazy" allowfullscreen src="https://embed.figma.com/proto/lC9pdClUznIhehVGRnLVMb/?node-id=217:191&amp;starting-point-node-id=217:191&amp;scaling=scale-down-width&amp;content-scaling=fixed&amp;hide-ui=1&amp;embed-host=share"></iframe><div class="pwait"><img src="img/01-bill-in.webp" width="780" height="1720" alt="" loading="lazy"><p>Loading the prototype</p></div></div><button type="button" class="pgo"><span>Tap to try the prototype</span></button><button type="button" class="pdone">Close prototype</button><button type="button" class="protofsx" aria-label="Close full screen"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></figure>
             <a class="btn popen" href="https://www.figma.com/proto/lC9pdClUznIhehVGRnLVMb/?node-id=217:191&amp;starting-point-node-id=217:191&amp;scaling=scale-down-width&amp;content-scaling=fixed" target="_blank" rel="noopener">Open the prototype</a>
           </div>
         </div>
         <script is:inline>(()=>{
-          const s=document.currentScript.previousElementSibling,fr=s.querySelector('iframe'),w=s.querySelector('.pwrap'),op=s.querySelector('.popen'),bs=[...s.querySelectorAll('.flows button')];
+          const s=document.currentScript.previousElementSibling,fr=s.querySelector('iframe'),w=s.querySelector('.pwrap'),op=s.querySelector('.popen'),bs=[...s.querySelectorAll('.flows button[data-n]')];
           const q=n=>'?node-id='+n+'&starting-point-node-id='+n+'&scaling=scale-down-width&content-scaling=fixed';
           fr.addEventListener('load',()=>w.classList.add('ready'));
-          bs.forEach(b=>b.onclick=()=>{bs.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));w.classList.remove('ready');fr.src='https://embed.figma.com/proto/lC9pdClUznIhehVGRnLVMb/'+q(b.dataset.n)+'&hide-ui=1&embed-host=share';op.href='https://www.figma.com/proto/lC9pdClUznIhehVGRnLVMb/'+q(b.dataset.n)});
+          const src=n=>'https://embed.figma.com/proto/lC9pdClUznIhehVGRnLVMb/'+q(n)+'&hide-ui=1&embed-host=share';
+          /* Desktop full screen (Vishal 03:53, as on ixigo): the prototype at its real size with Figma's own zoom controls */
+          const fsrc=n=>'https://www.figma.com/embed?embed_host=share&url='+encodeURIComponent('https://www.figma.com/proto/lC9pdClUznIhehVGRnLVMb/'+q(n));
+          let cur='217:191';
+          bs.forEach(b=>b.onclick=()=>{bs.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));w.classList.remove('ready');cur=b.dataset.n;fr.src=w.classList.contains('fs')?fsrc(cur):src(cur);op.href='https://www.figma.com/proto/lC9pdClUznIhehVGRnLVMb/'+q(cur)});
+          const fs=on=>{if(on===w.classList.contains('fs'))return;w.classList.remove('ready');w.classList.toggle('fs',on);fr.src=on?fsrc(cur):src(cur);(on?w.querySelector('.protofsx'):s.querySelector('.protofs')).focus({preventScroll:true})};
+          s.querySelector('.protofs').onclick=()=>fs(true);w.querySelector('.protofsx').onclick=()=>fs(false);addEventListener('keydown',e=>{if(e.key==='Escape'&&w.classList.contains('fs'))fs(false)});
+          /* Phones: the flows ride along inside the open prototype, so switching needs no Close first (Vishal 03:53, as on ixigo) */
+          const lc=document.createElement('div');lc.className='livechaps';lc.setAttribute('role','group');lc.setAttribute('aria-label','Switch flow');
+          bs.forEach(o=>{const c=o.cloneNode(true);c.onclick=()=>{o.click();sync();c.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'})};lc.append(c)});
+          const sync=()=>bs.forEach((o,i)=>lc.children[i].setAttribute('aria-pressed',o.getAttribute('aria-pressed')));w.prepend(lc);
           // Phones: the page keeps scrolling over the prototype until it is tapped; then it opens full screen with a Close button
           let ph,y;const live=on=>{if(on===w.classList.contains('live'))return;if(on){y=scrollY;ph=document.createElement('div');ph.style.height=w.offsetHeight+'px';w.before(ph)}w.classList.toggle('live',on);if(on){w.querySelector('.pdone').focus({preventScroll:true});requestAnimationFrame(()=>scrollTo(0,y))}else{ph.remove();scrollTo(0,y)}};
           w.querySelector('.pgo').onclick=()=>live(true);w.querySelector('.pdone').onclick=()=>{live(false);w.querySelector('.pgo').focus({preventScroll:true})};addEventListener('keydown',e=>{if(e.key==='Escape'&&w.classList.contains('live'))live(false)});
@@ -1007,5 +1019,48 @@ h1,h2,h3,h4,section h2,.stats b,.metric b,.nextgrid b{font-weight:500}
 section h2{letter-spacing:-.01em}
 h1{letter-spacing:-.02em}
 .closing h2{font-weight:500;letter-spacing:-.025em}
+
+/* User flow full screen on phones (Vishal 03:53, as on ixigo): pinch and double tap zoom */
+.flowfs{display:none}
+@media (max-width:900px){.flowfs{display:inline-flex;position:absolute;right:10px;top:10px;align-items:center;gap:6px;padding:9px 12px;border:0;border-radius:999px;background:rgba(13,15,23,.86);color:#F2F1EC;font:500 13px/1 var(--sans);box-shadow:0 6px 18px rgba(0,0,0,.25)}.zi{display:none}}
+figure:has(>.flowfs){position:relative}
+.flowdlg{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#0D0F17}
+.flowdlg::backdrop{background:#0D0F17}
+.flowpan{position:absolute;inset:0;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom;display:grid;place-items:center}
+.flowpan img{display:block;width:100%;height:auto;max-width:none;transition:width .2s ease}
+.flowdlg.zoom .flowpan{place-items:start}.flowdlg.zoom .flowpan img{width:260%}
+.flowx{position:fixed;top:max(12px,env(safe-area-inset-top));right:12px;z-index:2;width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:50%;background:rgba(13,15,23,.86);color:#F2F1EC;box-shadow:0 0 0 1px rgba(255,255,255,.18)}
+.flowhint{position:fixed;left:50%;transform:translateX(-50%);bottom:max(14px,env(safe-area-inset-bottom));margin:0;padding:9px 14px;border-radius:999px;background:rgba(13,15,23,.86);color:#F2F1EC;font:500 13px/1 var(--sans);white-space:nowrap;pointer-events:none}
+/* Desktop prototype: bigger, plus full screen with zoom (Vishal 03:53, as on ixigo) */
+.flows button.protofs,.protofsx{display:none}
+@media (min-width:901px){
+  .tryit{grid-template-columns:minmax(0,1fr) auto}
+  .pframe{height:min(860px,calc(100svh - 180px));width:auto;aspect-ratio:340/700}
+  .flows button.protofs{display:inline-flex;justify-self:start;min-height:0;box-shadow:none;align-items:center;gap:8px;margin-top:8px;padding:13px 18px;border:0;border-radius:999px;background:#0E1424;color:#fff;font:500 14px/1 var(--sans);cursor:pointer}
+  .flows button.protofs:hover{background:#0B57D0;box-shadow:none}
+  .flows button.protofs:focus-visible{outline:2px solid #0B57D0;outline-offset:3px}
+  .pwrap.fs{position:fixed;inset:0;z-index:1000;margin:0;padding:24px;background:#0D0F17;display:flex;justify-content:center;align-items:center}
+  .pwrap.fs .pframe{width:min(1280px,100%);height:calc(100dvh - 48px);aspect-ratio:auto;padding:0;border-radius:16px;background:transparent}
+  .pwrap.fs .pembed{border-radius:16px}
+  .pwrap.fs .pwait{display:none}
+  .pwrap.fs .protofsx{display:grid;place-items:center;position:fixed;top:20px;right:20px;z-index:2;width:44px;height:44px;border:0;border-radius:50%;background:rgba(13,15,23,.86);color:#F2F1EC;box-shadow:0 0 0 1px rgba(255,255,255,.2);cursor:pointer}
+  html:has(.pwrap.fs){overflow:hidden}
+}
+/* Phones: flow chips inside the open prototype, solid backdrop (Vishal 03:53, as on ixigo) */
+.livechaps{display:none}
+@media (max-width:640px){
+  .pwrap.live{background:#0D0F17}
+  .pwrap.live .livechaps{display:flex;gap:8px;width:100%;overflow-x:auto;scrollbar-width:none;padding:2px 2px 4px;flex:none;scroll-snap-type:x proximity;-webkit-mask-image:linear-gradient(90deg,transparent,#000 16px,#000 calc(100% - 16px),transparent);mask-image:linear-gradient(90deg,transparent,#000 16px,#000 calc(100% - 16px),transparent)}
+  .livechaps::-webkit-scrollbar{display:none}
+  .livechaps button{all:unset;box-sizing:border-box;flex:none;scroll-snap-align:center;padding:10px 14px;border-radius:999px;background:rgba(242,241,236,.12);color:#F2F1EC;font:500 14px/1 var(--sans);white-space:nowrap;cursor:pointer}
+  .livechaps button[aria-pressed="true"]{background:#F2F1EC;color:#0B57D0}
+  .pwrap.live .pframe{width:min(100%,calc((100dvh - 170px) * 340 / 700))}
+}
 </style>
+<script is:inline>(()=>{const d=document.querySelector('.flowdlg'),b=document.querySelector('.flowfs');if(!d||!b)return;const pan=d.querySelector('.flowpan'),a=b.previousElementSibling;
+const open=e=>{if(e)e.preventDefault();d.classList.remove('zoom');d.showModal();document.documentElement.style.overflow='hidden'};
+b.onclick=()=>open();a.addEventListener('click',e=>{if(matchMedia('(max-width:900px)').matches)open(e)});
+d.addEventListener('close',()=>{document.documentElement.style.overflow=''});d.querySelector('.flowx').onclick=()=>d.close();
+let t=0;pan.addEventListener('click',e=>{const n=Date.now();if(n-t<320){const r=pan.getBoundingClientRect(),fx=(e.clientX-r.left+pan.scrollLeft)/pan.scrollWidth,fy=(e.clientY-r.top+pan.scrollTop)/pan.scrollHeight;d.classList.toggle('zoom');pan.scrollLeft=fx*pan.scrollWidth-r.width/2;pan.scrollTop=fy*pan.scrollHeight-r.height/2;t=0}else t=n});
+pan.addEventListener('dblclick',e=>e.preventDefault())})();</script>
 </html>
