@@ -966,4 +966,11 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
   addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);tick();
 })();
 </script>
+<style is:inline>
+/* Vishal 2026-10-14: the reel is dark forest, so the top is cream to let it stand out. The 30 second version keeps its own forest card */
+body{background:#F2EFE4}
+.wrap>header.hero,.wrap>.facts,.wrap>.note{--fg:#062219;--body:#3F554B;--muted:#5B6B62;--acc:#46600F;--line:#D9D4C3;--warm:#8A5300;color:var(--fg)}
+.wrap>header.hero .hook{color:#46600F}
+.reel video{box-shadow:0 24px 50px rgba(6,34,25,.22)}
+</style>
 </html>
