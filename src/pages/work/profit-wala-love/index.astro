@@ -32,7 +32,7 @@ const ld = [
 <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sansita:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sansita:wght@400;700&display=swap">
 <style is:inline>
 /* Layout: text column of ~66ch beside a sticky contents rail on desktop; one column on phones.
    Single dark theme by choice: the calmer navy agreed for JARVIS. */
@@ -796,6 +796,10 @@ figure.cut.dark img{border-radius:20px;background:#1E1E1E;width:100%;max-width:6
 .closing .btn.primary{color:#1F0A0B}
 </style>
 <script is:inline src="/js/inview-video.js" defer></script>
+<style is:inline>
+/* Phones only (Vishal 04:29, the ixigo hero pattern): hero heading bold (700) at the same size; a two line hook sits tight under it. Desktop unchanged. */
+@media (max-width:640px){header.hero h1{font-weight:700}.hook{line-height:1.2}}
+</style>
 <script is:inline src="/js/pin-frames.js" defer></script>
 <script is:inline src="/js/pin-screen.js" defer></script>
 </html>

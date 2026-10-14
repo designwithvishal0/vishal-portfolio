@@ -1044,6 +1044,10 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 @media (min-width:901px){.scr .screen{grid-template-columns:minmax(0,640px) 320px}.scr .screen>figure{width:320px}}
 @media (min-width:621px){.arc3{grid-template-columns:repeat(3,minmax(0,300px));justify-content:center;column-gap:clamp(24px,5vw,72px)}}
 </style>
+<style is:inline>
+/* Phones only (Vishal 04:29, the ixigo hero pattern): hero heading bold (700) at the same size; a two line hook sits tight under it. Desktop unchanged. */
+@media (max-width:640px){header.hero h1{font-weight:700}}
+</style>
 <script is:inline src="/js/pin-frames.js" defer></script>
 <script is:inline src="/js/pin-screen.js" defer></script>
 </html>
