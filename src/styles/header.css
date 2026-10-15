@@ -133,3 +133,8 @@ html.calm .sw .knob{transition:none}
   .bar .a11y::after{content:"";position:absolute;left:-6px;top:9px;bottom:9px;width:1px;background:var(--edge);opacity:0;transition:opacity 180ms var(--out)}
   .bar.book-on .a11y::after{opacity:1}
 }
+
+/* skip link, every page (moved from kinetic.css, design audit 2026-10-15) */
+.skip{position:fixed;left:16px;top:-80px;z-index:100;padding:10px 16px;border-radius:999px;background:#0B0B0C;color:#FAFAF8;font:600 15px/1.2 'Bricolage Grotesque Variable',system-ui,sans-serif;text-decoration:none}
+.skip:focus-visible{top:12px}
+#content:focus{outline:none}

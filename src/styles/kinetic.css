@@ -624,8 +624,6 @@ html.hpin .kf .pages{padding-bottom:0}
 .copy.chip::after,.social a::after{content:"";position:absolute;inset:50% auto auto 50%;width:max(100%,44px);height:max(100%,44px);translate:-50% -50%}
 .social a{position:relative}
 /* skip link: hidden until the first Tab */
-.skip{position:fixed;left:16px;top:-80px;z-index:100;padding:10px 16px;border-radius:999px;background:var(--ink);color:var(--bg);font-weight:600;text-decoration:none}
-.skip:focus-visible{top:12px}
 
 /* ---------- reveals, once; hidden only while the page script runs and motion is allowed */
 @media (prefers-reduced-motion:no-preference){
@@ -1090,3 +1088,10 @@ html.calm .dock{transition:none}
   .row .vbox img,.row .vbox video{object-position:50% 50%}
   html.calm .row .vbox{aspect-ratio:1200/1256}
 }
+
+/* Design audit 2026-10-15 (Vishal: "All three"): one gap between sections from Selected work down.
+   Hero to results keep their own gaps because the scroll motion there sets them. Each value is the delta to the measured gap. */
+@media (min-width:760px){.work{margin-top:64px}.mw{margin-top:-58px}.pages{margin-top:-16px}.how{margin-top:-104px}.about{margin-top:-52px}}
+@media (max-width:759px){.mw{margin-top:-18px}.pages{margin-top:24px}.how{margin-top:-88px}.about{margin-top:-34px}}
+/* How I work on desktop: the text runs to the right edge instead of stopping at 60ch and leaving the last 300px empty (design audit 2026-10-15) */
+@media (min-width:1024px){.kf .hrow>div{grid-column:7/13}.kf .hrow>div>p{max-width:none}}

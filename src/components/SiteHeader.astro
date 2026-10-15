@@ -14,6 +14,7 @@ const cvLink = intro.links.find(l => l.label === 'Resume')!;
 // Work (Vishal 2026-10-14): on home it jumps to the case studies; on every other page it opens the full list at /work/
 const nav = [['Work', home ? '/work/' : '#work'], ['About', home + '#about'], ['Contact', home + '#contact']];
 ---
+{home && <a class="skip" href="#content">Skip to content</a>}
 <header class:list={['bar', { 'book-on': book, 'bar-light': !theme }]}>
   <div class="bar-in">
     {home ? <a class="who" href={home}>Vishal Yadav</a> : <span class="who">Vishal Yadav</span>}
@@ -36,6 +37,8 @@ const nav = [['Work', home ? '/work/' : '#work'], ['About', home + '#about'], ['
     </div>
   </div>
 </header>
+{/* design audit 2026-10-15: keyboard users land here past the header; home has its own Skip to work */}
+{home && <span id="content" tabindex="-1"></span>}
 <script>
   import '../scripts/ui';
   // the phone menu closes once a section link is chosen
