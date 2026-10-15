@@ -10,5 +10,5 @@
   background:linear-gradient(var(--iph-btn),var(--iph-btn)) 0 0/3px 60% no-repeat,linear-gradient(var(--iph-btn),var(--iph-btn)) 100% 100%/3px 60% no-repeat}
 /* Dynamic Island */
 .iph::after{content:"";position:absolute;top:16px;left:50%;width:min(86px,26%);height:25px;transform:translateX(-50%);border-radius:99px;background:var(--iph-isl);pointer-events:none;z-index:2}
-/* Screens captured without a status bar (they start mid page) skip the island so it never hides the design: .iph.noisl */
+/* Skip the drawn island when the screen image has none to spare: screens that start mid page (it would hide the design) and screens that already show their own island (it would double up): .iph.noisl */
 .iph.noisl::after{display:none}
