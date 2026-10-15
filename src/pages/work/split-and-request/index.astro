@@ -971,7 +971,7 @@ blockquote em{font-style:normal;color:var(--warm)}
 @media (max-width:900px){.tryit{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:640px){
   .flows button{font-size:16px}
-  .pframe{width:min(340px,100%);height:auto;aspect-ratio:340/700}
+  .pframe{width:min(340px,100%,calc((100svh - 200px) * 340 / 700));height:auto;aspect-ratio:340/700}
   .pwrap{width:min(340px,100%)}
   .pwrap:not(.live) .pembed{pointer-events:none}
   .pgo{display:flex;position:absolute;inset:0;border:0;border-radius:44px;background:linear-gradient(180deg,transparent 60%,rgba(8,16,38,.55));align-items:flex-end;justify-content:center;padding-bottom:28px;cursor:pointer;font:inherit}
