@@ -1,0 +1,23 @@
+/* Closing buttons on every case study (Vishal 2026-10-15: "I like the closing section CTA's ... apply this same style in all of case studies", desktop and phones).
+   Taken from the Twelve closing. Each icon sits in its own circle flush to the button's inner edge and nudges on hover.
+   Buttons hug their words; phones stack them centred. Never stretch them full width and never force equal widths (both rejected).
+   Each page sets --cta-ink on .btns to the primary button's text colour; the primary circle is that colour, with the icon in the button's own cream. */
+footer.closing .btns{gap:14px!important}
+footer.closing .btns .btn{height:58px!important;width:auto!important;min-width:0!important;gap:14px!important;transition:transform .5s cubic-bezier(.32,.72,0,1),background-color .5s cubic-bezier(.32,.72,0,1),border-color .5s cubic-bezier(.32,.72,0,1)}
+footer.closing .btns .btn:active{transform:scale(.98)}
+footer.closing .btns .btn.primary{padding:0 7px 0 26px!important}
+footer.closing .btns .btn.ghost{padding:0 26px 0 7px!important}
+footer.closing .btns .btn .ic{box-sizing:content-box;width:16px;height:16px;flex:none;padding:14px;border-radius:50%;transition:transform .6s cubic-bezier(.32,.72,0,1)}
+footer.closing .btns .btn.primary .ic{background:var(--cta-ink,#111);color:var(--cta-on,#F2F1EC)}
+footer.closing .btns .btn.ghost .ic{background:color-mix(in srgb,currentColor 12%,transparent)}
+footer.closing .btns .btn.primary:hover .ic{transform:translate(2px,-2px) scale(1.05)}
+footer.closing .btns .btn.ghost:hover .ic{transform:translateX(-3px) scale(1.05)}
+@media (prefers-reduced-motion:reduce){footer.closing .btns .btn,footer.closing .btns .btn .ic{transition:none}}
+html.calm footer.closing .btns .btn,html.calm footer.closing .btns .btn .ic{transition:none}
+@media (max-width:620px){
+  footer.closing .btns{flex-direction:column!important;align-items:center!important;gap:12px!important}
+  footer.closing .btns .btn{height:54px!important;gap:12px!important}
+  footer.closing .btns .btn.primary{padding:0 6px 0 22px!important}
+  footer.closing .btns .btn.ghost{padding:0 22px 0 6px!important}
+  footer.closing .btns .btn .ic{padding:13px}
+}
