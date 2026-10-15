@@ -14,7 +14,7 @@ const cvLink = intro.links.find(l => l.label === 'Resume')!;
 // Work (Vishal 2026-10-14): on home it jumps to the case studies; on every other page it opens the full list at /work/
 const nav = [['Work', home ? '/work/' : '#work'], ['About', home + '#about'], ['Contact', home + '#contact']];
 ---
-<header class:list={['bar', { 'book-on': book }]}>
+<header class:list={['bar', { 'book-on': book, 'bar-light': !theme }]}>
   <div class="bar-in">
     {home ? <a class="who" href={home}>Vishal Yadav</a> : <span class="who">Vishal Yadav</span>}
     {/* phones (mobile layout 2026-10-12): once you scroll, the name gives way to the section you are in; tapping it goes back to the top */}
@@ -40,4 +40,15 @@ const nav = [['Work', home ? '/work/' : '#work'], ['About', home + '#about'], ['
   import '../scripts/ui';
   // the phone menu closes once a section link is chosen
   document.querySelectorAll('.m-nav a').forEach(a => a.addEventListener('click', () => document.getElementById('a11y-menu')?.hidePopover()));
+</script>
+<script is:inline>
+/* not fixed (Vishal 2026-10-15): hide while scrolling down, show on any scroll up, always shown near the top or while a header control has focus. One copy for every page and size. */
+(function(){
+  var root=document.documentElement,last=scrollY,hd=document.querySelector('header.bar');
+  addEventListener('scroll',function(){
+    var y=scrollY,d=y-last;
+    if(y<120||(hd&&hd.contains(document.activeElement))){root.classList.remove('hdr-hide');last=y;return}
+    if(d>6){root.classList.add('hdr-hide');last=y}else if(d<-6){root.classList.remove('hdr-hide');last=y}
+  },{passive:true});
+})();
 </script>

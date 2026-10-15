@@ -58,7 +58,7 @@ a{color:inherit}
 /* group selector: stays under the header while you scroll, the group in view is filled */
 .jump{position:sticky;top:var(--bar);z-index:5;margin:0 calc(var(--gut) * -1);padding:var(--s6) var(--gut) var(--s3);background:var(--bg)}
 /* same frosted glass as the header bar above it, so the two read as one */
-@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.jump{background:color-mix(in srgb,var(--bg) 62%,transparent);backdrop-filter:blur(18px) saturate(1.8);-webkit-backdrop-filter:blur(18px) saturate(1.8)}}
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.jump{background:color-mix(in srgb,var(--bg) 96%,transparent);backdrop-filter:blur(18px) saturate(1.8);-webkit-backdrop-filter:blur(18px) saturate(1.8)}}
 @media (prefers-reduced-transparency:reduce){.jump{background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none}}
 .jump ul{display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none}
 .jump ul::-webkit-scrollbar{display:none}
@@ -126,8 +126,8 @@ img{display:block;width:100%;height:auto;background:var(--card)}
 }
 @media (prefers-reduced-motion:reduce){.btn,.cs img,.gfx img{transition:none}}
 html.calm .btn,html.calm .cs img,html.calm .gfx img{transition:none}
-/* Phones (Vishal 2026-10-15): the header slides away while reading down and comes back the moment you scroll up */
-@media (max-width:759px){header.bar{transition:transform .28s var(--out,ease)}html.hdr-hide header.bar{transform:translateY(calc(-100% - 16px))}.jump{transition:transform .28s var(--out,ease)}html.hdr-hide .jump{transform:translateY(calc(var(--bar) * -1))}}
+/* the group row slides up with the header when it hides (Vishal 2026-10-15) */
+.jump{transition:transform .28s var(--out,ease)}html.hdr-hide .jump{transform:translateY(calc(var(--bar) * -1))}
 </style>
 </head>
 
@@ -214,14 +214,4 @@ html.calm .btn,html.calm .cs img,html.calm .gfx img{transition:none}
     if (a.left < r.left) row.scrollLeft -= r.left - a.left; else if (a.right > r.right) row.scrollLeft += a.right - r.right;
   };
   addEventListener('scroll', set, { passive: true }); set();
-</script>
-<script is:inline>
-(function(){
-  var mq=matchMedia('(max-width:759px)'),root=document.documentElement,last=scrollY,hd=document.querySelector('header.bar');
-  addEventListener('scroll',function(){
-    var y=scrollY,d=y-last;
-    if(!mq.matches||y<120||(hd&&hd.contains(document.activeElement))){root.classList.remove('hdr-hide');last=y;return}
-    if(d>6){root.classList.add('hdr-hide');last=y}else if(d<-6){root.classList.remove('hdr-hide');last=y}
-  },{passive:true});
-})();
 </script>

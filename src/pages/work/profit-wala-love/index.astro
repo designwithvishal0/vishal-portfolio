@@ -200,8 +200,6 @@ figcaption{font-size:14px;color:var(--muted)}
   article{gap:80px}
   .summary{padding:22px}
 }
-/* Phones (Vishal 2026-10-15): the header slides away while reading down and comes back the moment you scroll up */
-@media (max-width:759px){header.bar{transition:transform .28s var(--out,ease)}html.hdr-hide header.bar{transform:translateY(calc(-100% - 16px))}}
 </style>
 <style is:inline>.proto{display:block;width:100%;aspect-ratio:16/10;border:0;border-radius:24px;background:var(--card)}@media (max-width:640px){.proto{aspect-ratio:9/16}}video.shot{background:var(--card)}
 .reel{position:relative}
@@ -247,8 +245,6 @@ article>section{width:100%}
 /* Vishal 2026-10-13: header keeps the frosted blur, same as the home page (the solid navy try is undone) */
 /* Vishal 2026-10-13: header looks exactly like the home page header (its dark look, since this page is dark), with no navy tint.
    Same frosted blur; a touch more opaque than home so the navy page behind doesn't tint it blue. */
-header.bar{--bg:#0C0C0E;--ink:#F2F1EC;--muted:#A7A7AE;--edge:#6B6B72;--line:#232328;--btn:#F2F1EC;--on-btn:#0C0C0E}
-@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){header.bar{background:color-mix(in srgb,#0C0C0E 90%,transparent)}}
 body{margin-top:0}
 .progress{z-index:30}
 .summary{max-width:1080px;margin-inline:auto}
@@ -579,9 +575,8 @@ nav.toc.light{--fg:#1F0A0B;--muted:#6E5555;--line:#F1D8D8;--warm:#B31919}
 }
 /* Phones: the prototype box is exactly the shape of the app screen (412 by 917 in Figma), with Figma's own bars hidden, so nothing is cut */
 @media (max-width:640px){.proto{aspect-ratio:412/917;width:min(100%,340px,calc((100svh - 200px) * 412 / 917));margin-inline:auto;border-radius:28px}.protowrap{display:flex;justify-content:center}.protowait{width:min(100%,340px,calc((100svh - 200px) * 412 / 917));left:50%;transform:translateX(-50%);border-radius:28px}}
-/* Phones: the header stays put while reading, same as the home page (Vishal 2026-10-14, one universal header) */
+/* Phones: the contents bar moves up with the header when it hides */
 @media (max-width:759px){
-  header.bar{transition:transform .28s var(--out,ease)}
   .tocpill{transition:opacity .3s ease,transform .3s ease,visibility .3s,top .28s ease}
 }
 /* Reel controls: labelled pills on desktop (icon plus PLAY, SOUND ON); icon only round buttons on phones, bottom right */
@@ -750,8 +745,6 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 h1,section h2,.closing h2,.stats.big b{font-family:var(--disp);font-weight:400;letter-spacing:-.005em}
 h1{line-height:1.05}
 body{background:#FFF8F7}
-header.bar{--bg:#FAFAF8;--ink:#0B0B0C;--muted:#55565C;--edge:#76777D;--line:#E2E2DE;--btn:#0B0B0C;--on-btn:#FAFAF8}
-@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){header.bar{background:color-mix(in srgb,#FAFAF8 90%,transparent)}}
 .wrap>header.hero,.wrap>.facts,.wrap>.summary,.progress{--fg:#2A0F0F;--body:#4D3838;--muted:#6E5555;--acc:#B31919;--warm:#B31919;--line:#F1D8D8;--card:#FCEDEC;color:var(--fg)}
 .hook{color:#B31919}
 .progress i{background:#B31919}
@@ -816,13 +809,3 @@ figure.cut.dark img{border-radius:20px;background:#1E1E1E;width:100%;max-width:6
   .wrap>.facts .k{margin:0}
 }
 </style>
-<script is:inline>
-(function(){
-  var mq=matchMedia('(max-width:759px)'),root=document.documentElement,last=scrollY,hd=document.querySelector('header.bar');
-  addEventListener('scroll',function(){
-    var y=scrollY,d=y-last;
-    if(!mq.matches||y<120||(hd&&hd.contains(document.activeElement))){root.classList.remove('hdr-hide');last=y;return}
-    if(d>6){root.classList.add('hdr-hide');last=y}else if(d<-6){root.classList.remove('hdr-hide');last=y}
-  },{passive:true});
-})();
-</script>

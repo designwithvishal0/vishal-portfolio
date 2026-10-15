@@ -2,10 +2,14 @@
    Moved here from kinetic.css unchanged. Pages supply the tokens: --bg --ink --muted --edge --line --btn --on-btn --bar --gut --max --out. */
 /* ---------- top bar */
 html{scroll-padding-top:var(--bar)}
-.bar{font-family:'Bricolage Grotesque Variable',system-ui,sans-serif;font-stretch:100%;color:var(--ink);position:sticky;top:0;z-index:30;height:var(--bar);background:var(--bg);border-bottom:1px solid transparent;transition:border-color 200ms var(--out)}
-/* frosted glass: the page shows through, blurred, as it scrolls under the bar; solid where blur isn't supported or less transparency is asked for */
+.bar{font-family:'Bricolage Grotesque Variable',system-ui,sans-serif;font-stretch:100%;color:var(--ink);position:sticky;top:0;z-index:30;height:var(--bar);background:var(--bg);border-bottom:1px solid transparent;transition:border-color 200ms var(--out),transform .28s var(--out)}
+/* one look on every page (Vishal 2026-10-15, "make the header the same across all pages"): pages with a single theme get the home page's light tokens, so no case study paints its own solid, dark or tinted bar. Home keeps following its light and dark mode. */
+.bar-light{--bg:#FAFAF8;--ink:#0B0B0C;--muted:#55565C;--edge:#76777D;--line:#E2E2DE;--btn:#0B0B0C;--on-btn:#FAFAF8}
+/* not fixed (Vishal 2026-10-15): on every page and size the bar slides away while you read down and comes back the moment you scroll up. SiteHeader.astro sets hdr-hide. */
+html.hdr-hide .bar{transform:translateY(calc(-100% - 16px))}
+/* frosted glass at 96% (Vishal 2026-10-15): enough cover that the bar reads as the same light bar over light and dark sections alike, with only a soft blur of what passes under; the page shows through, blurred, as it scrolls under the bar; solid where blur isn't supported or less transparency is asked for */
 @supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-  .bar{background:color-mix(in srgb,var(--bg) 62%,transparent);backdrop-filter:blur(18px) saturate(1.8);-webkit-backdrop-filter:blur(18px) saturate(1.8)}
+  .bar{background:color-mix(in srgb,var(--bg) 96%,transparent);backdrop-filter:blur(18px) saturate(1.8);-webkit-backdrop-filter:blur(18px) saturate(1.8)}
 }
 @media (prefers-reduced-transparency:reduce){.bar{background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none}}
 .bar.scrolled{border-bottom-color:var(--line)}
