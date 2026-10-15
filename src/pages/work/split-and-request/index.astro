@@ -1099,9 +1099,9 @@ article>section#flow{padding-top:clamp(64px,8vw,120px)}
 
 /* Vishal 2026-10-14 (04:57): sections after another light section had no top padding, so the prototype, Decisions,
    Assumptions and What changed headings sat flush against the band above. Restore the normal section space on those four. */
-article>section:is(#try,#decisions,#assumptions,#changed){padding-top:120px}
-@media (max-width:900px){article>section:is(#try,#decisions,#assumptions,#changed){padding-top:80px}}
-@media (max-width:620px){article>section:is(#try,#decisions,#assumptions,#changed){padding-top:64px}}
+article>section:is(#receipt,#groups,#try,#decisions,#assumptions,#changed){padding-top:120px}
+@media (max-width:900px){article>section:is(#receipt,#groups,#try,#decisions,#assumptions,#changed){padding-top:80px}}
+@media (max-width:620px){article>section:is(#receipt,#groups,#try,#decisions,#assumptions,#changed){padding-top:64px}article>section#try{padding-bottom:64px}}
 
 /* Vishal 2026-10-14 (05:07): on phones the prototype flows sit as one horizontal row that scrolls sideways,
    not a vertical stack. Each flow is a pill that keeps its label on one line. */
