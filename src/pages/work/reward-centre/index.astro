@@ -25,6 +25,7 @@ const ld = [
 <Boot />
 <meta name="description" content={description}>
 <link rel="canonical" href="/work/reward-centre/">
+<link rel="stylesheet" href="/css/iphone.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="article">
 <meta property="og:image" content="/work/reward-centre/img/og.jpg"><meta name="twitter:card" content="summary_large_image">
@@ -595,10 +596,10 @@ article>section#learned{--band:#FFFDFA;--card:#F5F3EE}
           <p class="lede">Same structure as the wireframes, surfaced. One card component in six states renders every reward on every screen. Gold is value, white is action, coral is time, and each reward type carries its own tinted icon.</p>
         </div>
         <ul class="hf" style="margin-top:48px">
-          <li><b>Home</b><span>All five buckets in one scroll</span><div class="iph"><div class="sc" tabindex="0" aria-label="Home screen, scrolls inside the frame"><img src="img/05-home.webp" width="560" height="2782" loading="lazy" alt="Home screen: balance 12,480 points at Silver, 1,520 points to Gold, Ready to claim with three cards and Claim all, a Referral bonus expiring in 04:12:57 with a coral edge, In progress, Available and History"></div></div></li>
-          <li><b>Reward Detail</b><span>Exact steps left, always one action</span><div class="iph"><div class="sc" tabindex="0" aria-label="Reward Detail screen, scrolls inside the frame"><img src="img/05-detail.webp" width="560" height="1492" loading="lazy" alt="Reward Detail for Play 5 hands: +500 points, in progress, What's left 3 of 5 hands at 60 percent, ends Sunday 28 Sep, and a Continue playing button"></div></div></li>
-          <li><b>Progress</b><span>Today, this week, long term</span><div class="iph"><div class="sc" tabindex="0" aria-label="Progress screen, scrolls inside the frame"><img src="img/05-progress.webp" width="560" height="2582" loading="lazy" alt="Progress screen: 5 in progress, 2 available, 2,600 points in play, a daily streak on day 4 of 7, then this week's missions with bars and the long term Silver to Gold track"></div></div></li>
-          <li><b>History</b><span>Claimed and expired, running balance</span><div class="iph"><div class="sc" tabindex="0" aria-label="History screen, scrolls inside the frame"><img src="img/05-history.webp" width="560" height="1737" loading="lazy" alt="History screen: lifetime claimed 48,920 points, claimed rewards by day with the balance after each day, and an expired Friday promo with its value struck through"></div></div></li>
+          <li><b>Home</b><span>All five buckets in one scroll</span><div class="iph lt"><div class="sc" tabindex="0" aria-label="Home screen, scrolls inside the frame"><img src="img/05-home.webp" width="560" height="2782" loading="lazy" alt="Home screen: balance 12,480 points at Silver, 1,520 points to Gold, Ready to claim with three cards and Claim all, a Referral bonus expiring in 04:12:57 with a coral edge, In progress, Available and History"></div></div></li>
+          <li><b>Reward Detail</b><span>Exact steps left, always one action</span><div class="iph lt"><div class="sc" tabindex="0" aria-label="Reward Detail screen, scrolls inside the frame"><img src="img/05-detail.webp" width="560" height="1492" loading="lazy" alt="Reward Detail for Play 5 hands: +500 points, in progress, What's left 3 of 5 hands at 60 percent, ends Sunday 28 Sep, and a Continue playing button"></div></div></li>
+          <li><b>Progress</b><span>Today, this week, long term</span><div class="iph lt"><div class="sc" tabindex="0" aria-label="Progress screen, scrolls inside the frame"><img src="img/05-progress.webp" width="560" height="2582" loading="lazy" alt="Progress screen: 5 in progress, 2 available, 2,600 points in play, a daily streak on day 4 of 7, then this week's missions with bars and the long term Silver to Gold track"></div></div></li>
+          <li><b>History</b><span>Claimed and expired, running balance</span><div class="iph lt"><div class="sc" tabindex="0" aria-label="History screen, scrolls inside the frame"><img src="img/05-history.webp" width="560" height="1737" loading="lazy" alt="History screen: lifetime claimed 48,920 points, claimed rewards by day with the balance after each day, and an expired Friday promo with its value struck through"></div></div></li>
         </ul>
         <div class="proto-note">
           <h3>The prototype</h3>
@@ -1037,11 +1038,8 @@ body{background:#FFFDFA}
 <style is:inline>
 /* Vishal 2026-10-13 16:02: every screen sits in an iPhone frame one fold tall, and you scroll the screen inside the frame yourself */
 /* Vishal 2026-10-14 02:33: the screens are dark, so a black phone vanished into them; natural titanium body, thin black glass edge around the screen */
-.iph{position:relative;width:100%;padding:8px;border-radius:50px;background:linear-gradient(150deg,#ECEAE5 0%,#C9C6BF 45%,#E2E0DA 70%,#B5B2AB 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),0 0 0 1px #A7A49D,0 24px 50px rgba(10,10,12,.2)}
-.iph .sc{box-shadow:0 0 0 4px #0B0B0B}
-.iph::before,.iph::after{content:"";position:absolute;width:3px;border-radius:2px;background:#B3B0A9}
-.iph::before{left:-3px;top:19%;height:9%}
-.iph::after{right:-3px;top:25%;height:13%}
+/* Frame itself: /css/iphone.css, the one Split frame on every case study, light because the screens are dark (Vishal 2026-10-15) */
+.iph{width:100%}
 .iph .sc{aspect-ratio:402/874;border-radius:41px;overflow-y:auto;overscroll-behavior-y:auto;scrollbar-width:none;background:#fff}
 .iph .sc::-webkit-scrollbar{display:none}
 .iph .sc img{display:block;width:100%;height:auto}

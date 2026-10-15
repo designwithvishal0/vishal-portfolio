@@ -26,6 +26,7 @@ const ld = [
 <Boot />
 <meta name="description" content={description}>
 <link rel="canonical" href={new URL('/work/profit-wala-love/', Astro.site)}>
+<link rel="stylesheet" href="/css/iphone.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="article">
 <meta property="og:image" content="/work/profit-wala-love/img/05-desk-banner.webp"><meta name="twitter:card" content="summary_large_image">
@@ -410,7 +411,7 @@ article>section:first-child{padding-top:120px}
         <p class="eyebrow dv">Desktop</p>
         <div class="lap"><div class="sc" tabindex="0" aria-label="Scroll the screen"><img src="img/02-desktop-lp.webp" width="1440" height="2760" alt="The Profit Wala Love landing page on desktop: the Profit Wala Love logo, a heart shaped card for each day from Rose Day to Promise Day, the deal carousel for the chosen day, and Shop by Recipient with the For Her and For Him switch" loading="lazy"></div></div>
         <p class="eyebrow dv">Mobile</p>
-        <div class="stage"><div class="iph"><div class="sc" tabindex="0" aria-label="Scroll the screen"><img src="img/01-mobile-lp.webp" width="360" height="1529" alt="The Profit Wala Love landing page on a phone, from the day cards and deal carousel down to Shop by Recipient" loading="lazy"></div></div></div>
+        <div class="stage"><div class="iph lt"><div class="sc" tabindex="0" aria-label="Scroll the screen"><img src="img/01-mobile-lp.webp" width="360" height="1529" alt="The Profit Wala Love landing page on a phone, from the day cards and deal carousel down to Shop by Recipient" loading="lazy"></div></div></div>
       </section>
 
       <section id="assets" class="lt">
@@ -733,10 +734,8 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 </script>
 <style is:inline>
 /* Vishal 2026-10-13 16:02: every screen sits in an iPhone frame one fold tall, and you scroll the screen inside the frame yourself */
-.iph{position:relative;width:100%;padding:9px;border-radius:50px;background:#121311;box-shadow:inset 0 0 0 1.5px #3B3D38,0 0 0 1px rgba(31,10,11,.2),0 24px 50px rgba(31,10,11,.18)}
-.iph::before,.iph::after{content:"";position:absolute;width:3px;border-radius:2px;background:#2B2D29}
-.iph::before{left:-3px;top:19%;height:9%}
-.iph::after{right:-3px;top:25%;height:13%}
+/* Frame itself: /css/iphone.css, the one Split frame on every case study (Vishal 2026-10-15) */
+.iph{width:100%}
 .iph .sc{aspect-ratio:402/874;border-radius:41px;overflow-y:auto;overscroll-behavior-y:auto;scrollbar-width:none;background:#fff}
 .iph .sc::-webkit-scrollbar{display:none}
 .iph .sc img{display:block;width:100%;height:auto}
@@ -778,8 +777,7 @@ header.bar{--bg:#FAFAF8;--ink:#0B0B0C;--muted:#55565C;--edge:#76777D;--line:#E2E
 .lap .sc::-webkit-scrollbar{display:none}
 .lap .sc img{display:block;width:100%;height:auto}
 .stage{display:flex;justify-content:center;padding:clamp(32px,4vw,64px);border-radius:28px;background:#FCEDEC}
-.stage .iph{width:min(390px,100%);background:linear-gradient(150deg,#ECEAE5 0%,#C9C6BF 45%,#E2E0DA 70%,#B5B2AB 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.7),0 0 0 1px #A7A49D,0 24px 50px rgba(131,26,26,.2)}
-.stage .iph::before,.stage .iph::after{background:#B3B0A9}
+.stage .iph{width:min(390px,100%)}
 .stage .iph .sc{background:#831A1A}
 #page .screen{display:block;max-width:none;width:100%}
 .stage .screen{display:flex;justify-content:center}
