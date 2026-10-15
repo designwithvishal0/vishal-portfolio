@@ -1119,8 +1119,8 @@ article>section:is(#receipt,#groups,#try,#decisions,#assumptions,#changed){paddi
 .endsec .closing h2 .nw{white-space:nowrap}
 @media (max-width:620px){.endsec .closing h2{font-size:min(40px,10.2vw)!important;white-space:normal!important}}
 
-/* Vishal 2026-10-15 (14:21): on desktop the prototype has one full screen button (under the flows). "Open the prototype" under the phone is hidden on desktop only; phones keep it. */
-@media (min-width:901px){.tryit .popen{display:none}}
+/* Vishal 2026-10-15 (14:21, 14:23): "Open the prototype" under the phone is removed on every screen size. The desktop full screen button under the flows stays. */
+.tryit .popen{display:none}
 </style>
 <script is:inline>(()=>{const d=document.querySelector('.flowdlg'),b=document.querySelector('.flowfs');if(!d||!b)return;const pan=d.querySelector('.flowpan'),a=b.previousElementSibling;
 const open=e=>{if(e)e.preventDefault();d.classList.remove('zoom');d.showModal();document.documentElement.style.overflow='hidden'};
