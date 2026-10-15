@@ -295,7 +295,7 @@ blockquote,.dek,.closing>p,.metric b,.next h2{font-size:22px}
 /* Desktop: the prototype fits one screen between the sticky header and the bottom dock (Vishal 2026-10-13 "going into two scrolls") */
 @media (min-width:641px){.protowrap{width:min(100%,calc((100svh - 120px) * 16 / 10));margin-inline:auto}}
 .protowait{position:absolute;inset:0;border-radius:24px;background:var(--card);display:grid;place-content:center;justify-items:center;gap:12px;text-align:center;transition:opacity .3s ease}
-.protowait img{width:120px;height:auto;border-radius:16px;opacity:.9}
+.protowait img{width:min(200px,50%);height:auto;border-radius:20px;box-shadow:0 18px 40px rgba(0,0,0,.18)}
 .protowait p{font-size:16px;color:var(--muted)}
 .protowait a{font-size:16px;font-weight:600;color:var(--fg);padding:10px 4px}
 .protowrap.ready .protowait{opacity:0;pointer-events:none}
@@ -339,7 +339,7 @@ article>section#learned{--band:#FFFDFA;--card:#F5F3EE}
 .cards h3{font-size:20px;line-height:1.3}
 .cards h3.g{color:var(--acc)}
 .cards p{font-size:16px;line-height:1.55}
-.cards .num{font-size:28px;font-weight:800;line-height:1;color:var(--acc);font-variant-numeric:tabular-nums}
+.cards .num{font-size:28px;font-weight:700;line-height:1;color:var(--acc);font-variant-numeric:tabular-nums}
 .cards .lbl{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .cards .hit{color:var(--acc);font-weight:600}
 .cards .hl{color:var(--fg);font-weight:500}
@@ -350,7 +350,7 @@ article>section#learned{--band:#FFFDFA;--card:#F5F3EE}
 .qs li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--acc);transform:translateY(-2px)}
 .plist{display:grid;gap:14px}
 .plist>div{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:baseline}
-.plist .n{font-size:20px;font-weight:800;color:var(--acc);font-variant-numeric:tabular-nums}
+.plist .n{font-size:20px;font-weight:700;color:var(--acc);font-variant-numeric:tabular-nums}
 .plist p{color:var(--fg)}
 /* Structure: the five buckets and how a reward moves */
 .bk>div{gap:6px}
@@ -378,7 +378,7 @@ article>section#learned{--band:#FFFDFA;--card:#F5F3EE}
 .hf{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(20px,3vw,40px);margin:0;padding:0;list-style:none}
 .hf li{display:grid;gap:6px;align-content:start;min-width:0}
 .hf b{font-size:19px;font-weight:600;color:var(--fg)}
-.hf span{font-size:15px;color:var(--muted);margin-bottom:12px}
+.hf span{font-size:16px;color:var(--muted);margin-bottom:12px}
 .proto-note{background:var(--card);border-radius:16px;padding:24px 28px;display:grid;gap:10px;margin-top:56px;max-width:880px}
 .proto-note h3{font-size:20px;color:var(--acc)}
 .trades{border-top:0;gap:18px}
@@ -514,13 +514,13 @@ article>section#learned{--band:#FFFDFA;--card:#F5F3EE}
           <div><span class="num">4</span><h3>Stay motivated</h3><p>The consequence of the three above, plus one deliberate moment at claim. Not decoration on top.</p></div>
           <div><span class="num">5</span><h3>Track history</h3><p>Lowest frequency job, so it gets its own screen and one row on Home rather than permanent space.</p></div>
         </div>
-        <span class="k sub">Assumptions</span>
+        <details class="fold"><summary><span class="k sub">Assumptions</span></summary>
         <div class="cards" style="--n:4">
           <div><h3 class="g">One currency</h3><p>Reward points, plus occasional grants like entries or items. A single balance at the top means something.</p></div>
           <div><h3 class="g">Every reward has a state</h3><p>Most also carry an expiry. State decides what the player can do, expiry decides how soon.</p></div>
           <div><h3 class="g">New types keep arriving</h3><p>The structure has to absorb the twelfth and thirteenth reward type without a redesign.</p></div>
           <div><h3 class="g">Two ways in</h3><p>A Rewards tab and notifications. The rest of the app stays untouched, per the constraint.</p></div>
-        </div>
+        </div></details>
       </section>
 
       <section id="structure" class="wide">
@@ -604,7 +604,7 @@ article>section#learned{--band:#FFFDFA;--card:#F5F3EE}
           <h3>The prototype</h3>
           <p>Claim swaps the card to its claimed state in place, which is the moment this screen exists for. Home links out to Detail, Progress and History, and every screen returns to Home. I scoped the concept to four screens, so only Play 5 hands opens a Detail page; in the product every card opens its own.</p>
         </div>
-        <figure class="protowrap" style="margin-top:40px"><iframe class="proto" title="Unified Reward Centre Figma prototype" loading="lazy" allowfullscreen src="https://www.figma.com/embed?embed_host=share&amp;url=https%3A%2F%2Fwww.figma.com%2Fproto%2FLqPzEwyFiliPAkHO5d0i2n%2FUnified-Reward-Centre%3Fnode-id%3D99-6354%26starting-point-node-id%3D99%253A6354%26scaling%3Dscale-down%26content-scaling%3Dfixed"></iframe><div class="protowait"><img src="img/05-home.webp" width="560" height="2782" alt="" loading="lazy" style="height:240px;object-fit:cover;object-position:top"><p>Loading the prototype</p><a href="https://www.figma.com/proto/LqPzEwyFiliPAkHO5d0i2n/Unified-Reward-Centre?node-id=99-6354&amp;starting-point-node-id=99%3A6354" target="_blank" rel="noopener">Open in Figma</a></div><button type="button" class="protogo"><span>Tap to try the prototype</span></button><button type="button" class="protodone">Close prototype</button></figure>
+        <figure class="protowrap" id="prototype" style="margin-top:40px;scroll-margin-top:96px"><iframe class="proto" title="Unified Reward Centre Figma prototype" loading="lazy" allowfullscreen src="https://www.figma.com/embed?embed_host=share&amp;url=https%3A%2F%2Fwww.figma.com%2Fproto%2FLqPzEwyFiliPAkHO5d0i2n%2FUnified-Reward-Centre%3Fnode-id%3D99-6354%26starting-point-node-id%3D99%253A6354%26scaling%3Dscale-down%26content-scaling%3Dfixed"></iframe><div class="protowait"><img src="img/05-home.webp" width="560" height="2782" alt="" loading="lazy" style="height:240px;object-fit:cover;object-position:top"><p>Loading the prototype</p><a href="https://www.figma.com/proto/LqPzEwyFiliPAkHO5d0i2n/Unified-Reward-Centre?node-id=99-6354&amp;starting-point-node-id=99%3A6354" target="_blank" rel="noopener">Open in Figma</a></div><button type="button" class="protogo"><span>Tap to try the prototype</span></button><button type="button" class="protodone">Close prototype</button></figure>
         <script is:inline>(()=>{const f=document.currentScript.previousElementSibling,fr=f.querySelector('iframe');if(matchMedia('(max-width:640px)').matches){fr.src=fr.src.replace('scaling%3Dscale-down','scaling%3Dcontain')+'%26hide-ui%3D1'}f.querySelector('iframe').addEventListener('load',()=>f.classList.add('ready'));let ph,y;const live=on=>{if(on===f.classList.contains('live'))return;if(on){y=scrollY;ph=document.createElement('div');ph.style.height=f.offsetHeight+'px';f.before(ph)}f.classList.toggle('live',on);if(on){f.querySelector('.protodone').focus({preventScroll:true});requestAnimationFrame(()=>scrollTo(0,y))}else{ph.remove();scrollTo(0,y)}};f.querySelector('.protogo').onclick=()=>live(true);f.querySelector('.protodone').onclick=()=>{live(false);f.querySelector('.protogo').focus({preventScroll:true})};addEventListener('keydown',e=>{if(e.key==='Escape'&&f.classList.contains('live'))live(false)})})()</script>
       </section>
 
@@ -661,13 +661,13 @@ article>section#learned{--band:#FFFDFA;--card:#F5F3EE}
           <div><h3>Season Pass, a 30 day ladder of 20 tiers, each tier paying out separately</h3><p>Type: season. Source: Season Pass. Value per tier. Progress: tier 6 of 20. Expiry: end of season. One glyph and one tint token added. Each tier is a card. Unlocked tiers sit in Ready to claim, the next one in In progress, the rest in Available. Nothing on the four screens changes.</p></div>
           <div><h3>Physical prize, a headset shipped to your door</h3><p>Type: item. Value: the item. Claim opens an address step on Detail instead of counting the balance up. The card, the bucket and the button are unchanged. Only Detail grows a step, which it already knows how to do.</p></div>
         </div>
-        <span class="k sub">Foundations in this file</span>
+        <details class="fold"><summary><span class="k sub">Foundations in this file</span></summary>
         <div class="cards" style="--n:4">
           <div><h3 class="g">54 semantic colour tokens</h3><p>Aliased to 58 primitives. Four families: surface, text, value and action, status. Plus tier metals, type tints and success. 25 typography tokens on top.</p></div>
           <div><h3 class="g">107 text styles</h3><p>Unbounded for numbers only, Albert Sans for everything else. Eleven semantic roles on top of the size scales.</p></div>
           <div><h3 class="g">3 component sets</h3><p>Reward Card in six states, Progress bar in seven percent variants, Reward Icon with eleven glyphs on an instance swap.</p></div>
           <div><h3 class="g">1 rule for colour</h3><p>Gold is value, white is action, coral is time, accents live in a 36px tile or a chip and nowhere else.</p></div>
-        </div>
+        </div></details>
       </section>
 
       <section id="metrics" class="lt wide">
@@ -684,12 +684,12 @@ article>section#learned{--band:#FFFDFA;--card:#F5F3EE}
           <div><span class="mid">05</span><span class="tag">↑ Up</span><h3>D7 retention</h3><p>Players who claimed at least once, against those who never did.</p><p class="hit">Whether the screen changes behaviour or only reports it.</p></div>
         </div>
         <div class="guard"><span class="k">Guardrail I would watch</span><p>Claim rate rising while session length drops. That would mean players open the centre, claim and leave, which is the opposite of motivation.</p></div>
-        <span class="k sub">Notes</span>
+        <details class="fold"><summary><span class="k sub">Notes</span></summary>
         <div class="cards" style="--n:3">
           <div><p>Scoped to mobile and four screens, with the rest of the app left untouched.</p></div>
           <div><p>Wireframes are greyscale on purpose, so structure is judged before colour.</p></div>
           <div><p>Reward names, values and times are illustrative, chosen to be believable rather than exact.</p></div>
-        </div>
+        </div></details>
       </section>
 
       <section id="learned" class="lt wide">
@@ -720,7 +720,7 @@ article>section#learned{--band:#FFFDFA;--card:#F5F3EE}
     <h2>Unified Reward Centre</h2>
     <p>Every reward. One place.</p>
     <div class="btns" style="--cta-ink:#0A0A0C">
-      <a class="btn primary" href="https://www.behance.net/gallery/256413187/Unified-Reward-Centre-Mobile-Product-Design" target="_blank" rel="noopener">View on Behance<svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill-opacity="0" fill="currentColor" height="9.75px" transform="translate(8.25 6)" width="9.75px"></path><path d="M 0 7.125 L 7.125 0" fill="transparent" height="7.125px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(6 10.875)" width="7.125px"></path><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill="transparent" height="9.75px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(8.25 6)" width="9.75px"></path></svg></a>
+      <a class="btn primary" href="#prototype">Open the prototype<svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill-opacity="0" fill="currentColor" height="9.75px" transform="translate(8.25 6)" width="9.75px"></path><path d="M 0 7.125 L 7.125 0" fill="transparent" height="7.125px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(6 10.875)" width="7.125px"></path><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill="transparent" height="9.75px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(8.25 6)" width="9.75px"></path></svg></a>
       <a class="btn ghost" href="/looks/kinetic/"><svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill-opacity="0" fill="currentColor" height="13.5px" transform="translate(3.75 5.25)" width="6.75px"></path><path d="M 9.75 0 L 0 0" fill="transparent" height="1px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(10.5 12)" width="9.75px"></path><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill="transparent" height="13.5px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(3.75 5.25)" width="6.75px"></path></svg>Back to home</a>
     </div>
     <p class="founder">Building a product people need to trust? I take on freelance work. <a href="https://cal.com/designwvishal" target="_blank" rel="noopener">Book a call</a></p>
@@ -947,7 +947,7 @@ nav.toc{display:none!important}
   .dkm{display:flex;flex-direction:column;gap:9px;width:420px}
   .dkt{display:flex;justify-content:space-between;gap:12px}.dkt i{font-style:normal;color:#9A9AA5;font-variant-numeric:tabular-nums}
   .dks{display:flex;gap:4px}
-  .dks button{all:unset;cursor:pointer;flex:1;height:14px;display:flex;align-items:center}
+  .dks button{all:unset;cursor:pointer;flex:1;height:24px;display:flex;align-items:center}
   .dks button::before{content:"";flex:1;height:4px;border-radius:2px;background:linear-gradient(90deg,#FFC24B var(--f,0%),rgba(242,241,236,.18) var(--f,0%))}
   .dks button:hover::before{background:linear-gradient(90deg,#FFC24B var(--f,0%),rgba(242,241,236,.36) var(--f,0%))}
   .dkn{display:flex;flex-direction:column;gap:4px;min-width:118px;padding-left:14px;border-left:1px solid rgba(255,255,255,.12);color:#F2F1EC;text-decoration:none}
@@ -955,7 +955,7 @@ nav.toc{display:none!important}
   .dkn.end{visibility:hidden}
   /* hover a segment to see which section it is (Vishal 2026-10-13) */
   .dks button{position:relative}
-  .dks button::after{content:attr(data-name);position:absolute;left:50%;bottom:calc(100% + 34px);transform:translate(-50%,4px);white-space:nowrap;padding:8px 12px;border-radius:10px;background:#F2F1EC;color:#0A0A0C;font:600 13px/1 var(--sans);box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease}
+  .dks button::after{content:attr(data-name);position:absolute;left:50%;bottom:calc(100% + 29px);transform:translate(-50%,4px);white-space:nowrap;padding:8px 12px;border-radius:10px;background:#F2F1EC;color:#0A0A0C;font:600 13px/1 var(--sans);box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease}
   .dks button:hover::after,.dks button:focus-visible::after{opacity:1;transform:translate(-50%,0)}
 }
 html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{transition:none}
@@ -1072,3 +1072,14 @@ addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true
 addEventListener('touchmove',function(e){if(!root.classList.contains('toclock'))return;var dy=e.touches[0].clientY-ty;if(!s.contains(e.target)||(dy>0&&s.scrollTop<=0)||(dy<0&&s.scrollTop+s.clientHeight>=s.scrollHeight-1))e.preventDefault()},{passive:false});})();</script>
 
 <script is:inline src="/js/flowdlg.js" defer></script>
+<style is:inline>
+/* Audit 2026-10-15: the lowest value blocks (assumptions, notes, file foundations) fold behind their own label, so the page reads shorter. Nothing is cut. */
+details.fold{margin-top:40px}
+details.fold>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;min-height:44px}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary .k,details.fold>summary h3{margin:0!important}
+details.fold>summary::after{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-3px) rotate(45deg);transition:transform .2s ease;opacity:.7}
+details.fold[open]>summary::after{transform:translateY(2px) rotate(225deg)}
+details.fold>summary:focus-visible{outline:2px solid currentColor;outline-offset:4px;border-radius:6px}
+details.fold>div{margin-top:16px!important}
+</style>
