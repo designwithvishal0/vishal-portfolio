@@ -472,6 +472,8 @@ body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
 .endsec .nextgrid a{background:#4A1617;color:#F2F1EC;box-shadow:0 0 0 1px rgba(242,241,236,.14)} /* navy blue caption: darker than the thumbnail, not black (Vishal 2026-10-13) */
 .endsec .nextgrid b{color:#F2F1EC}
 .endsec .nextgrid a:hover,.endsec .nextgrid a:focus-visible{box-shadow:0 0 0 2px #FE9393}
+/* phones (Vishal 2026-10-15): a tap leaves no coloured stroke on the More work cards; desktop keeps its hover stroke */
+@media (max-width:759px){.endsec .nextgrid a:hover{box-shadow:0 0 0 1px rgba(242,241,236,.14)}}
 /* audit 2026-10-13: on phones More work is one swipe row (next card peeks in) instead of three full screens of cards */
 @media (max-width:620px){.endsec .nextgrid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-28px;padding:0 28px 6px;scroll-padding-inline:28px;scrollbar-width:none}.endsec .nextgrid::-webkit-scrollbar{display:none}.endsec .nextgrid a{flex:0 0 87%;scroll-snap-align:start}}
 .endsec .closing .founder{margin-top:14px;font-size:17px!important;font-weight:500;color:#F0DADA}.endsec .closing .founder a{color:#F2F1EC;font-weight:700;text-underline-offset:4px}
