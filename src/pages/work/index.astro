@@ -126,6 +126,8 @@ img{display:block;width:100%;height:auto;background:var(--card)}
 }
 @media (prefers-reduced-motion:reduce){.btn,.cs img,.gfx img{transition:none}}
 html.calm .btn,html.calm .cs img,html.calm .gfx img{transition:none}
+/* Phones (Vishal 2026-10-15): the header slides away while reading down and comes back the moment you scroll up */
+@media (max-width:759px){header.bar{transition:transform .28s var(--out,ease)}html.hdr-hide header.bar{transform:translateY(calc(-100% - 16px))}.jump{transition:transform .28s var(--out,ease)}html.hdr-hide .jump{transform:translateY(calc(var(--bar) * -1))}}
 </style>
 </head>
 
@@ -207,7 +209,19 @@ html.calm .btn,html.calm .cs img,html.calm .gfx img{transition:none}
     let i = 0;
     secs.forEach((s, k) => { if (s.getBoundingClientRect().top < y) i = k; });
     links.forEach((a, k) => k === i ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current'));
-    links[i].scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    // keep the filled chip in view by scrolling only the chip row sideways; scrollIntoView also nudged the page up, which brought the phone header back
+    const row = links[i].closest('ul')!, a = links[i].getBoundingClientRect(), r = row.getBoundingClientRect();
+    if (a.left < r.left) row.scrollLeft -= r.left - a.left; else if (a.right > r.right) row.scrollLeft += a.right - r.right;
   };
   addEventListener('scroll', set, { passive: true }); set();
+</script>
+<script is:inline>
+(function(){
+  var mq=matchMedia('(max-width:759px)'),root=document.documentElement,last=scrollY,hd=document.querySelector('header.bar');
+  addEventListener('scroll',function(){
+    var y=scrollY,d=y-last;
+    if(!mq.matches||y<120||(hd&&hd.contains(document.activeElement))){root.classList.remove('hdr-hide');last=y;return}
+    if(d>6){root.classList.add('hdr-hide');last=y}else if(d<-6){root.classList.remove('hdr-hide');last=y}
+  },{passive:true});
+})();
 </script>

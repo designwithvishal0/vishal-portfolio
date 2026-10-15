@@ -199,6 +199,8 @@ figcaption{font-size:14px;color:var(--muted)}
   article{gap:80px}
   .summary{padding:22px}
 }
+/* Phones (Vishal 2026-10-15): the header slides away while reading down and comes back the moment you scroll up */
+@media (max-width:759px){header.bar{transition:transform .28s var(--out,ease)}html.hdr-hide header.bar{transform:translateY(calc(-100% - 16px))}}
 </style>
 <style is:inline>.proto{display:block;width:100%;aspect-ratio:16/10;border:0;border-radius:24px;background:var(--card)}@media (max-width:640px){.proto{aspect-ratio:9/16}}video.shot{background:var(--card)}
 .reel{position:relative}
@@ -816,3 +818,13 @@ figure.cut.dark img{border-radius:20px;background:#1E1E1E;width:100%;max-width:6
   .wrap>.facts .k{margin:0}
 }
 </style>
+<script is:inline>
+(function(){
+  var mq=matchMedia('(max-width:759px)'),root=document.documentElement,last=scrollY,hd=document.querySelector('header.bar');
+  addEventListener('scroll',function(){
+    var y=scrollY,d=y-last;
+    if(!mq.matches||y<120||(hd&&hd.contains(document.activeElement))){root.classList.remove('hdr-hide');last=y;return}
+    if(d>6){root.classList.add('hdr-hide');last=y}else if(d<-6){root.classList.remove('hdr-hide');last=y}
+  },{passive:true});
+})();
+</script>
