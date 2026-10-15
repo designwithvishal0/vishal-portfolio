@@ -604,6 +604,8 @@ article>section#learned{--band:#FFFDFA;--card:#F5F3EE}
           <h3>The prototype</h3>
           <p>Claim swaps the card to its claimed state in place, which is the moment this screen exists for. Home links out to Detail, Progress and History, and every screen returns to Home. I scoped the concept to four screens, so only Play 5 hands opens a Detail page; in the product every card opens its own.</p>
         </div>
+        <figure class="protowrap" style="margin-top:40px"><iframe class="proto" title="Unified Reward Centre Figma prototype" loading="lazy" allowfullscreen src="https://www.figma.com/embed?embed_host=share&amp;url=https%3A%2F%2Fwww.figma.com%2Fproto%2FLqPzEwyFiliPAkHO5d0i2n%2FUnified-Reward-Centre%3Fnode-id%3D99-6354%26starting-point-node-id%3D99%253A6354%26scaling%3Dscale-down%26content-scaling%3Dfixed"></iframe><div class="protowait"><img src="img/05-home.webp" width="560" height="2782" alt="" loading="lazy" style="height:240px;object-fit:cover;object-position:top"><p>Loading the prototype</p><a href="https://www.figma.com/proto/LqPzEwyFiliPAkHO5d0i2n/Unified-Reward-Centre?node-id=99-6354&amp;starting-point-node-id=99%3A6354" target="_blank" rel="noopener">Open in Figma</a></div><button type="button" class="protogo"><span>Tap to try the prototype</span></button><button type="button" class="protodone">Close prototype</button></figure>
+        <script is:inline>(()=>{const f=document.currentScript.previousElementSibling,fr=f.querySelector('iframe');if(matchMedia('(max-width:640px)').matches){fr.src=fr.src.replace('scaling%3Dscale-down','scaling%3Dcontain')+'%26hide-ui%3D1'}f.querySelector('iframe').addEventListener('load',()=>f.classList.add('ready'));let ph,y;const live=on=>{if(on===f.classList.contains('live'))return;if(on){y=scrollY;ph=document.createElement('div');ph.style.height=f.offsetHeight+'px';f.before(ph)}f.classList.toggle('live',on);if(on){f.querySelector('.protodone').focus({preventScroll:true});requestAnimationFrame(()=>scrollTo(0,y))}else{ph.remove();scrollTo(0,y)}};f.querySelector('.protogo').onclick=()=>live(true);f.querySelector('.protodone').onclick=()=>{live(false);f.querySelector('.protogo').focus({preventScroll:true})};addEventListener('keydown',e=>{if(e.key==='Escape'&&f.classList.contains('live'))live(false)})})()</script>
       </section>
 
       <section id="rationale" class="lt wide">
@@ -741,9 +743,10 @@ article>section#learned{--band:#FFFDFA;--card:#F5F3EE}
    Closing and More work are ONE section. No boxed card (dark, navy and blue boxes all read as a slab dropped on the page):
    a full width ending band that grows out of the page navy into Reward Centre gold light, in the page's own font. */
 body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
-.endsec{position:relative;margin:140px calc(50% - 50vw) 0;padding:clamp(72px,9vw,128px) calc((100vw - min(100vw - 56px,1376px)) / 2 + clamp(24px,4.5vw,88px)) clamp(64px,8vw,104px);background:radial-gradient(60% 60% at 50% 0%,rgba(255,194,75,.32),rgba(255,194,75,.08) 45%,rgba(255,194,75,0) 72%),linear-gradient(180deg,#14110A 0%,#0C0B09 55%,#1C170C 100%) /* Vishal 02:33: the glow was too faint to see; now as present as Basil's */;border-top:1px solid rgba(255,194,75,.35);color:#E9E9EE}
+.endsec{position:relative;margin:140px calc(50% - 50vw) 0;padding:clamp(72px,9vw,128px) calc((100vw - min(100vw - 56px,1376px)) / 2 + clamp(24px,4.5vw,88px)) clamp(64px,8vw,104px);background:radial-gradient(70% 55% at 50% 0%,rgba(255,194,75,.42),rgba(255,194,75,0) 70%),linear-gradient(180deg,#14110A 0%,#0C0B09 55%,#1C170C 100%) /* Vishal 02:33: the glow was too faint to see; now as present as Basil's */;border-top:1px solid rgba(255,194,75,.35);color:#E9E9EE}
 .endsec .closing{margin:0;padding:0;border:0;gap:18px}
-.closing h2{font-family:var(--sans);font-size:clamp(56px,8.4vw,116px)!important;font-weight:800;line-height:.95;letter-spacing:-.035em;color:#FFE3A6} /* very light Reward Centre gold, 14:1 on navy (Vishal 2026-10-13) */
+.closing h2{font-family:var(--sans);font-size:clamp(56px,8.4vw,116px)!important;font-weight:800;line-height:.95;letter-spacing:-.035em;color:#FFE3A6}
+.endsec .closing h2{font-weight:500;letter-spacing:-.025em} /* lighter, like Split, Twelve and OneBanc (Vishal 2026-10-15 16:36) */ /* very light Reward Centre gold, 14:1 on navy (Vishal 2026-10-13) */
 .closing>p{font-size:clamp(20px,2.2vw,28px)!important;font-weight:500;line-height:1.3;color:#CFCFD8}
 .closing .btns{margin-top:22px;gap:12px}
 .closing .btn{height:52px;padding:0 22px;font-size:16px;font-weight:650}
@@ -1067,3 +1070,5 @@ body{background:#FFFDFA}
 function lock(e){root.classList.toggle('toclock',e.newState==='open'&&mq.matches)}s.addEventListener('beforetoggle',lock);s.addEventListener('toggle',lock);
 addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true});
 addEventListener('touchmove',function(e){if(!root.classList.contains('toclock'))return;var dy=e.touches[0].clientY-ty;if(!s.contains(e.target)||(dy>0&&s.scrollTop<=0)||(dy<0&&s.scrollTop+s.clientHeight>=s.scrollHeight-1))e.preventDefault()},{passive:false});})();</script>
+
+<script is:inline src="/js/flowdlg.js" defer></script>
