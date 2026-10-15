@@ -21,3 +21,5 @@ html.calm footer.closing .btns .btn,html.calm footer.closing .btns .btn .ic{tran
   footer.closing .btns .btn.ghost{padding:0 22px 0 6px!important}
   footer.closing .btns .btn .ic{padding:13px}
 }
+footer.closing .founder{margin-top:40px!important;padding-top:28px;border-top:1px solid color-mix(in srgb,currentColor 15%,transparent);width:min(640px,100%);margin-inline:auto}
+@media (max-width:620px){footer.closing .founder{margin-top:28px!important;padding-top:22px}}
