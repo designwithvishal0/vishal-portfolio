@@ -26,6 +26,7 @@ const ld = [
 <meta name="description" content={description}>
 <link rel="canonical" href="/work/reward-centre/">
 <link rel="stylesheet" href="/css/iphone.css">
+<link rel="stylesheet" href="/css/closing-cta.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="article">
 <meta property="og:image" content="/work/reward-centre/img/og.jpg"><meta name="twitter:card" content="summary_large_image">
@@ -716,7 +717,7 @@ article>section#learned{--band:#FFFDFA;--card:#F5F3EE}
   <footer class="closing">
     <h2>Unified Reward Centre</h2>
     <p>Every reward. One place.</p>
-    <div class="btns">
+    <div class="btns" style="--cta-ink:#0A0A0C">
       <a class="btn primary" href="https://www.behance.net/gallery/256413187/Unified-Reward-Centre-Mobile-Product-Design" target="_blank" rel="noopener">View on Behance<svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill-opacity="0" fill="currentColor" height="9.75px" transform="translate(8.25 6)" width="9.75px"></path><path d="M 0 7.125 L 7.125 0" fill="transparent" height="7.125px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(6 10.875)" width="7.125px"></path><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill="transparent" height="9.75px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(8.25 6)" width="9.75px"></path></svg></a>
       <a class="btn ghost" href="/looks/kinetic/"><svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill-opacity="0" fill="currentColor" height="13.5px" transform="translate(3.75 5.25)" width="6.75px"></path><path d="M 9.75 0 L 0 0" fill="transparent" height="1px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(10.5 12)" width="9.75px"></path><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill="transparent" height="13.5px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(3.75 5.25)" width="6.75px"></path></svg>Back to home</a>
     </div>
@@ -876,6 +877,8 @@ nav.toc{display:none!important}
 .tocpill .chev{width:10px;height:10px;border-right:1.5px solid #9A9AA5;border-bottom:1.5px solid #9A9AA5;transform:rotate(45deg) translateY(-3px)}
 .tocpill b{max-width:52vw}
 .tocsheet{inset:calc(var(--hb,56px) + 52px) 16px auto}
+/* phones (Vishal 2026-10-15): the open Contents list scrolls on its own; the page behind stays still */
+@media (max-width:759px){.tocsheet{max-height:calc(100dvh - var(--hb,56px) - 68px - env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain}html.hdr-hide .tocsheet{max-height:calc(100dvh - env(safe-area-inset-top,0px) - 68px - env(safe-area-inset-bottom,0px))}html.toclock{overflow:hidden}}
 .tid{display:none}
 /* Desktop first fold (Vishal 2026-10-13, "like this?" with the Profit Wala Love top): text left, reel right, like the Contra style tops.
    Facts, the concept note and everything after stay full width below. Phones keep their own order (below). */
@@ -1059,3 +1062,8 @@ body{background:#FFFDFA}
   .wrap>.facts .k{margin:0}
 }
 </style>
+
+<script is:inline>(function(){var s=document.getElementById('tocsheet'),mq=matchMedia('(max-width:759px)'),root=document.documentElement,ty=0;if(!s)return;
+function lock(e){root.classList.toggle('toclock',e.newState==='open'&&mq.matches)}s.addEventListener('beforetoggle',lock);s.addEventListener('toggle',lock);
+addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true});
+addEventListener('touchmove',function(e){if(!root.classList.contains('toclock'))return;var dy=e.touches[0].clientY-ty;if(!s.contains(e.target)||(dy>0&&s.scrollTop<=0)||(dy<0&&s.scrollTop+s.clientHeight>=s.scrollHeight-1))e.preventDefault()},{passive:false});})();</script>

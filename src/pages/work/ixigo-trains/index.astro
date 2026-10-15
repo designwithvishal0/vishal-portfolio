@@ -18,6 +18,7 @@ const ld = [
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/closing-cta.css">
 <meta name="robots" content="noindex">
 <title>{title}</title>
 <Boot />
@@ -647,7 +648,7 @@ figcaption{text-align:center}
   <footer class="closing">
     <h2>ixigo Trains</h2>
     <p>If people stop compulsively checking, the app has started doing the worrying for them.</p>
-    <div class="btns">
+    <div class="btns" style="--cta-ink:#0D0F17">
       <a class="btn primary" href="https://www.figma.com/design/lFQ3Jb6yElZlap677wWAiR/ixigo-Trains---Post-Booking-Redesign" target="_blank" rel="noopener">View the Figma file<svg class="ic" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.25 6H18v9.75M6 18 18 6"/></svg></a>
       <a class="btn ghost" href="/looks/kinetic/"><svg class="ic" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 5.25 3.75 12l6.75 6.75M4 12h16.25"/></svg>Back to home</a>
     </div>
@@ -809,6 +810,8 @@ nav.toc{display:none!important}
 .tocpill .chev{width:10px;height:10px;border-right:1.5px solid #8C99B6;border-bottom:1.5px solid #8C99B6;transform:rotate(45deg) translateY(-3px)}
 .tocpill b{max-width:52vw}
 .tocsheet{inset:calc(var(--hb,56px) + 52px) 16px auto}
+/* phones (Vishal 2026-10-15): the open Contents list scrolls on its own; the page behind stays still */
+@media (max-width:759px){.tocsheet{max-height:calc(100dvh - var(--hb,56px) - 68px - env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain}html.hdr-hide .tocsheet{max-height:calc(100dvh - env(safe-area-inset-top,0px) - 68px - env(safe-area-inset-bottom,0px))}html.toclock{overflow:hidden}}
 .tid{display:none}
 /* Desktop first fold (Vishal 2026-10-13, "like this?" with the Profit Wala Love top): text left, reel right, like the Contra style tops.
    Facts, the concept note and everything after stay full width below. Phones keep their own order (below). */
@@ -1060,3 +1063,8 @@ pan.addEventListener('dblclick',e=>e.preventDefault())})();</script>
 <script is:inline src="/js/pin-screen.js" defer></script>
 <script is:inline src="/js/inview-video.js" defer></script>
 </html>
+
+<script is:inline>(function(){var s=document.getElementById('tocsheet'),mq=matchMedia('(max-width:759px)'),root=document.documentElement,ty=0;if(!s)return;
+function lock(e){root.classList.toggle('toclock',e.newState==='open'&&mq.matches)}s.addEventListener('beforetoggle',lock);s.addEventListener('toggle',lock);
+addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true});
+addEventListener('touchmove',function(e){if(!root.classList.contains('toclock'))return;var dy=e.touches[0].clientY-ty;if(!s.contains(e.target)||(dy>0&&s.scrollTop<=0)||(dy<0&&s.scrollTop+s.clientHeight>=s.scrollHeight-1))e.preventDefault()},{passive:false});})();</script>
