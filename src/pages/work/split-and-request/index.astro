@@ -1108,8 +1108,6 @@ article>section:is(#receipt,#groups,#try,#decisions,#assumptions,#changed){paddi
 @media (max-width:640px){
   .flows{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding-bottom:6px;scrollbar-width:none}
   .flows::-webkit-scrollbar{display:none}
-  .tryit{gap:16px}
-  .tryit .flows{margin-inline:-28px;padding-inline:28px;scroll-padding-inline:28px}
   .flows button{flex:0 0 auto;white-space:nowrap;scroll-snap-align:start;min-height:44px;padding:11px 16px;border-radius:999px;font-size:15px}
 }
 
@@ -1123,6 +1121,11 @@ article>section:is(#receipt,#groups,#try,#decisions,#assumptions,#changed){paddi
 
 /* Vishal 2026-10-15 (14:21, 14:23): "Open the prototype" under the phone is removed on every screen size. The desktop full screen button under the flows stays. */
 .tryit .popen{display:none}
+/* Vishal 2026-10-15 (14:37): light screen, so the phone frame on phones is fully dark, no silver rim or buttons */
+@media (max-width:640px){
+  .pwrap:not(.fs) .pframe{box-shadow:0 0 0 1.5px #2B2E35,0 0 0 2.5px #1A1C21,0 24px 50px rgba(11,40,90,.16)}
+  .pwrap:not(.fs):not(.live)::before,.pwrap:not(.fs):not(.live)::after{background:#2B2E35}
+}
 </style>
 <script is:inline>(()=>{const d=document.querySelector('.flowdlg'),b=document.querySelector('.flowfs');if(!d||!b)return;const pan=d.querySelector('.flowpan'),a=b.previousElementSibling;
 const open=e=>{if(e)e.preventDefault();d.classList.remove('zoom');d.showModal();document.documentElement.style.overflow='hidden'};
