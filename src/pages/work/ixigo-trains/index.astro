@@ -22,7 +22,6 @@ const ld = [
 <title>{title}</title>
 <Boot />
 <meta name="description" content={description}>
-<link rel="stylesheet" href="/css/iphone.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="article">
 <meta property="og:image" content="/work/ixigo-trains/img/og.jpg"><meta name="twitter:card" content="summary_large_image">
@@ -431,7 +430,7 @@ figcaption{text-align:center}
 
       <section id="problem" class="lt wide">
         <div class="screen">
-          <figure><div class="iph pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/00-before.webp" width="512" height="3109" alt="The current ixigo post booking screen, before the redesign" loading="lazy"></div></div><figcaption>Before · the current screen</figcaption></figure>
+          <figure><div class="pm"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/00-before.webp" width="512" height="3109" alt="The current ixigo post booking screen, before the redesign" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div><figcaption>Before · the current screen</figcaption></figure>
           <div>
             <p class="eyebrow">The problem</p>
             <h2>It starts at 5:40 PM</h2>
@@ -475,7 +474,7 @@ figcaption{text-align:center}
         <dialog class="flowdlg" aria-label="Flow diagram, full screen"><button type="button" class="flowx" aria-label="Close full screen"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button><div class="flowpan"><img src="img/00-flow.webp" width="1680" height="2040" alt="Flow diagram of the post booking system, from waiting through every outcome after the chart"></div><p class="flowhint">Pinch or double tap to zoom</p></dialog>
         <div class="screens">
           <div class="screen">
-            <figure><div class="iph pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/01-waiting.webp" width="720" height="3183" alt="Waiting state: the odds, a countdown to the chart and a backup plan" loading="lazy"></div></div></figure>
+            <figure><div class="pm"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/01-waiting.webp" width="720" height="3183" alt="Waiting state: the odds, a countdown to the chart and a backup plan" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
             <div><span class="k">01 · Waiting · Waitlisted and RAC, before the chart</span><h3>The wait</h3>
               <p>The hardest screen, because nothing is happening yet and that is exactly the problem. Three things went in.</p>
               <p><strong>Honest odds per passenger.</strong> Leela is RAC 5, near certain, green. Vishal is waitlist 24 at 70 percent, blue, moving. Both show movement, because a number that visibly changes tells you the app is watching for you.</p>
@@ -485,13 +484,13 @@ figcaption{text-align:center}
             </div>
           </div>
           <div class="screen">
-            <figure><div class="iph pm one"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/01a-lock.webp" width="720" height="1588" alt="Lock backup sheet: pick a plan B while the waitlist is still uncertain" loading="lazy"></div></div></figure>
+            <figure><div class="pm one"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/01a-lock.webp" width="720" height="1588" alt="Lock backup sheet: pick a plan B while the waitlist is still uncertain" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
             <div><span class="k">01a</span><h3>The lock, and what it actually costs</h3>
               <p>Asking someone to commit to a backup while they are still hoping is a big ask, so the sheet leads with Nothing is charged now. Here is exactly what you are locking. Three plain lines follow: one Sleeper seat held on the 12138 for both passengers, triggers only if the chart does not confirm you at 5:40 PM, pay only if it triggers. Then the escape hatch, you can change or cancel the backup any time before the chart prepares. Every objection answered before it is raised.</p>
             </div>
           </div>
           <div class="screen">
-            <figure><div class="iph pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/02-confirmed.webp" width="720" height="2729" alt="Confirmed state: berths assigned for both passengers, with the arrival alarm" loading="lazy"></div></div></figure>
+            <figure><div class="pm"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/02-confirmed.webp" width="720" height="2729" alt="Confirmed state: berths assigned for both passengers, with the arrival alarm" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
             <div><span class="k">02 · Confirmed · Chart cleared, berths allotted</span><h3>The good outcome still needs a screen</h3>
               <p>Most redesigns treat success as the state that needs no work. It does. The moment the chart clears, the passenger’s question changes completely, from will I travel to where exactly do I stand on the platform.</p>
               <p>So the screen changes what it emphasises. The odds and the countdown disappear entirely, because they are now answered. The berth becomes the largest thing on each passenger row, S6-34 lower and S6-37 middle, because that is the one piece of information a confirmed passenger is actually looking for. Under it, boarding at New Delhi, Platform 8, departs 9:40 PM, boarding opens 9:10 PM.</p>
@@ -500,13 +499,13 @@ figcaption{text-align:center}
             </div>
           </div>
           <div class="screen flip">
-            <figure><div class="iph pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/03-delay.webp" width="720" height="3426" alt="Delay state: running 40 minutes late, with the new platform and coach position" loading="lazy"></div></div></figure>
+            <figure><div class="pm"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/03-delay.webp" width="720" height="3426" alt="Delay state: running 40 minutes late, with the new platform and coach position" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
             <div><span class="k">03 · Delay and platform · Running late, platform moved</span><h3>The day itself</h3>
               <p>The train is confirmed, running 40 minutes late, and the platform has moved from 8 to 12. Most apps flash a red banner and stop. This screen gives the three things you actually need standing in a station: the new platform, where your coach stops on it, and the revised arrival. Then the choices, with one clearly recommended. Not a menu.</p>
             </div>
           </div>
           <div class="screen">
-            <figure><div class="iph pm one"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/03a-boarding.webp" width="720" height="1588" alt="Boarding check: the moment the train leaves, asking if you are on board" loading="lazy"></div></div></figure>
+            <figure><div class="pm one"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/03a-boarding.webp" width="720" height="1588" alt="Boarding check: the moment the train leaves, asking if you are on board" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
             <div><span class="k">03a · Boarding check · The train has just departed</span><h3>The moment the train leaves</h3>
               <p>Missing your train is the worst failure in Indian rail travel, and no app catches it. So the moment 12472 actually departs, not the scheduled time, the live departure, a gentle check appears. Are you on board?</p>
               <p>Yes opens the live journey. No does not hand you a helpline number. It opens the same rescue engine the failed chart uses.</p>
@@ -515,7 +514,7 @@ figcaption{text-align:center}
             </div>
           </div>
           <div class="screen">
-            <figure><div class="iph pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/04-onboard.webp" width="720" height="2871" alt="On board tracker: progress station by station and a wake up alarm before arrival" loading="lazy"></div></div></figure>
+            <figure><div class="pm"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/04-onboard.webp" width="720" height="2871" alt="On board tracker: progress station by station and a wake up alarm before arrival" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
             <div><span class="k">04 · On board tracker · Travelling, train on time</span><h3>Eight hours of nothing to do</h3>
               <p>The passenger said yes. Now they are on a train for eight hours overnight, and the only question left is when do I need to be awake.</p>
               <p>The screen becomes a station by station progress line. Departed New Delhi on time at 9:40 PM, currently near Mathura Junction, next stop Agra around 11:10 PM, then Agra Cantt, then arrives Nagda around 5:50 AM tomorrow. Under it, one commitment: we will wake you 30 minutes before your stop.</p>
@@ -523,7 +522,7 @@ figcaption{text-align:center}
             </div>
           </div>
           <div class="screen">
-            <figure><div class="iph pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/05-missed.webp" width="720" height="3364" alt="Missed train rescue: the next trains and buses you can still take, ranked" loading="lazy"></div></div></figure>
+            <figure><div class="pm"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/05-missed.webp" width="720" height="3364" alt="Missed train rescue: the next trains and buses you can still take, ranked" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
             <div><span class="k">05 · Missed train rescue · The train left without you</span><h3>They said no</h3>
               <p>The screen says it plainly. You missed the Swaraj Express. No softening, no apology copy. Then it immediately does something useful, because the situation is not actually hopeless and most people do not know that.</p>
               <p>The train is near Ghaziabad. It reaches Agra at 11:10 PM, tagged Catchable. Your ticket is valid till Agra. You have about 1h 20m to get there, and if you board there your original ticket still works. That is the recommended option, and it is recommended because it costs nothing.</p>
@@ -532,7 +531,7 @@ figcaption{text-align:center}
             </div>
           </div>
           <div class="screen flip">
-            <figure><div class="iph pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/06-chart-failed.webp" width="720" height="3231" alt="Chart failed state: the waitlist did not clear, refund started and backup options shown" loading="lazy"></div></div></figure>
+            <figure><div class="pm"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/06-chart-failed.webp" width="720" height="3231" alt="Chart failed state: the waitlist did not clear, refund started and backup options shown" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
             <div><span class="k">06 · Chart failed rescue · The waitlist did not clear</span><h3>The chart did not clear</h3>
               <p>The failure state most redesigns skip. The screen says it plainly, no softening. Then, immediately, the refund is already moving. And under that, three ranked ways to still reach Nagda tonight, starting with the seat that was held four hours ago, one tap to take it.</p>
               <blockquote>That is why the backup exists. If you pre committed a plan B while things were still uncertain, the failure stops being a scramble and becomes a handoff.</blockquote>
@@ -544,7 +543,7 @@ figcaption{text-align:center}
 
       <section id="addon" class="lt wide">
         <div class="screen flip">
-          <figure><div class="iph pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/07-home-strip.webp" width="720" height="1584" alt="ixigo home with the live trip strip pinned at the top" loading="lazy"></div></div></figure>
+          <figure><div class="pm"><div class="pm-scr" tabindex="0" aria-label="Scroll the screen"><img class="shot phone" src="img/07-home-strip.webp" width="720" height="1584" alt="ixigo home with the live trip strip pinned at the top" loading="lazy"></div><span class="pm-isl" aria-hidden="true"></span></div></figure>
           <div>
             <p class="eyebrow">Add on</p>
             <h2>Making the hub find the user</h2>
@@ -961,12 +960,13 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 })();
 </script>
 <style is:inline>
-/* Vishal 2026-10-13 16:01: screens sit in a 280 wide phone and scroll inside it. The frame itself is /css/iphone.css, the one Split frame on every case study (Vishal 2026-10-15) */
-.pm{width:280px;max-width:100%}
-.pm-scr{height:597px;overflow:hidden auto;scrollbar-width:none;overscroll-behavior:auto;background:#000}
+/* Vishal 2026-10-13 16:01: screens sit in the same phone mockup as on Framer (280 wide, 8px bezel, island) and scroll inside it */
+.pm{position:relative;width:280px;max-width:100%;padding:8px;border-radius:36px;background:#12141A;box-sizing:border-box}
+.pm-scr{height:591px;border-radius:27px;overflow:hidden auto;scrollbar-width:none;overscroll-behavior:auto;background:#000}
 .pm-scr::-webkit-scrollbar{display:none}
 .pm-scr:focus-visible{outline:2px solid var(--warm);outline-offset:4px}
-.pm.one .pm-scr{height:586px;overflow:hidden}
+.pm.one{border-radius:30px}.pm.one .pm-scr{height:580px;overflow:hidden}
+.pm-isl{position:absolute;top:20px;left:50%;width:86px;height:24px;margin-left:-43px;border-radius:500px;background:#12141A;pointer-events:none}
 .screen .pm .shot.phone{display:block;width:100%;height:auto;max-width:none;border:0;border-radius:0;box-shadow:none}
 .screen{align-items:center}
 .screen>div{position:static}
@@ -1060,10 +1060,10 @@ h1,h2{letter-spacing:-.025em}
   .protowrap.fs .protofsx{display:grid;place-items:center;position:fixed;top:20px;right:20px;z-index:2;width:44px;height:44px;border:0;border-radius:50%;background:rgba(13,15,23,.86);color:#F2F1EC;box-shadow:0 0 0 1px rgba(255,255,255,.2);cursor:pointer}
   html:has(.protowrap.fs){overflow:hidden}
   /* Real iPhone frame around the prototype: the same slim iPhone 16 Pro frame as the other case studies (his 04:05, slimmer at 04:08) */
-  #try .protowrap:not(.fs) .proto{box-sizing:border-box;border:5px solid #0B0B0B;border-radius:46px;background:#0B0B0B;box-shadow:0 0 0 1.5px #2B2E35,0 0 0 2.5px #1A1C21,0 24px 50px rgba(60,30,10,.16)}
+  #try .protowrap:not(.fs) .proto{box-sizing:border-box;border:5px solid #0B0B0B;border-radius:46px;background:#0B0B0B;box-shadow:0 0 0 1.5px #C4C1B9,0 0 0 2.5px #8F8C85,0 24px 50px rgba(60,30,10,.16)}
   #try .protowrap:not(.fs) .protowait{border-radius:46px;border:5px solid #0B0B0B;box-sizing:border-box}
   #try .protowrap:not(.fs)::after{content:"";position:absolute;top:16px;left:50%;width:86px;height:25px;margin-left:-43px;border-radius:99px;background:#0B0B0B;pointer-events:none;z-index:2}
-  #try .protowrap:not(.fs)::before{content:"";position:absolute;left:calc(50% - min(860px,calc(100svh - 180px)) * 206 / 917 - 4.5px);top:calc(min(860px,calc(100svh - 180px)) * .19);width:3px;height:calc(min(860px,calc(100svh - 180px)) * .09);border-radius:2px;background:#2B2E35;box-shadow:calc(min(860px,calc(100svh - 180px)) * 412 / 917 + 6px) calc(min(860px,calc(100svh - 180px)) * .06) 0 0 #2B2E35}
+  #try .protowrap:not(.fs)::before{content:"";position:absolute;left:calc(50% - min(860px,calc(100svh - 180px)) * 206 / 917 - 4.5px);top:calc(min(860px,calc(100svh - 180px)) * .19);width:3px;height:calc(min(860px,calc(100svh - 180px)) * .09);border-radius:2px;background:#ABA8A0;box-shadow:calc(min(860px,calc(100svh - 180px)) * 412 / 917 + 6px) calc(min(860px,calc(100svh - 180px)) * .06) 0 0 #ABA8A0}
 }
 </style>
 <script is:inline>(()=>{const d=document.querySelector('.flowdlg'),b=document.querySelector('.flowfs');if(!d||!b)return;const pan=d.querySelector('.flowpan');
