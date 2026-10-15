@@ -119,7 +119,10 @@ html.calm .sw .knob{transition:none}
 /* desktop (Vishal 2026-10-13, "Accessibility cannot look like Resume"): Book a call and Resume are the calls to action, so Accessibility steps back
    to a quiet utility: no outline, lighter text, set apart by a hairline once the two buttons are showing */
 @media (min-width:760px){
-  .bar .a11y{position:relative;border-color:transparent;padding:0 10px;font-weight:500;color:var(--muted);margin-left:4px}
+  .bar-r{gap:10px}
+  /* spacing (Vishal 2026-10-15, "Fix the spacing in all headers"): the hairline sits exactly midway, 16px from Resume and 16px from the icon,
+     and the word Accessibility ends on the content edge, mirroring where the name starts */
+  .bar .a11y{position:relative;border-color:transparent;padding:0 10px;font-weight:500;color:var(--muted);margin-left:12px;margin-right:-10px}
   .bar .a11y::before{color:var(--ink)}
   @media (hover:hover){.bar .a11y:hover{background:var(--line);color:var(--ink)}}
   .bar .a11y[aria-expanded=true]{background:var(--line);border-color:transparent;color:var(--ink)}
