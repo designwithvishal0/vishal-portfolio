@@ -5,7 +5,8 @@ import '@fontsource-variable/hanken-grotesk';
 import '../../styles/tokens.css';
 import SiteHeader from '../../components/SiteHeader.astro';
 import Boot from '../../components/Boot.astro';
-import { work, loops, lead, more, pages, graphics, intro } from '../../data/home';
+import { work, loops, lead, more, pages, graphics, intro, email, social, contra } from '../../data/home';
+import '@fontsource-variable/bricolage-grotesque/standard.css';
 
 const title = 'Work by Vishal Yadav, product designer';
 const description = 'Every project by Vishal Yadav, product designer in Gurugram: four case studies, shipped campaign pages for CashKaro and EarnKaro, product concepts and graphic design.';
@@ -56,10 +57,8 @@ a{color:inherit}
 .wrap{width:min(var(--max),100% - var(--gut) * 2);margin-inline:auto}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 /* group selector: stays under the header while you scroll, the group in view is filled */
-.jump{position:sticky;top:var(--bar);z-index:5;margin:0 calc(var(--gut) * -1);padding:var(--s6) var(--gut) var(--s3);background:var(--bg)}
+.jump{margin:0 calc(var(--gut) * -1);padding:var(--s6) var(--gut) var(--s3);background:var(--bg)}
 /* same frosted glass as the header bar above it, so the two read as one */
-@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.jump{background:color-mix(in srgb,var(--bg) 96%,transparent);backdrop-filter:blur(18px) saturate(1.8);-webkit-backdrop-filter:blur(18px) saturate(1.8)}}
-@media (prefers-reduced-transparency:reduce){.jump{background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none}}
 .jump ul{display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none}
 .jump ul::-webkit-scrollbar{display:none}
 .jump a{display:inline-flex;align-items:center;min-height:40px;padding:0 16px;border:1px solid var(--rule);border-radius:var(--r-pill);font-size:var(--fs-meta);font-weight:600;white-space:nowrap;text-decoration:none;transition:border-color var(--hover) var(--ease-out),background-color var(--hover) var(--ease-out),color var(--hover) var(--ease-out)}
@@ -100,16 +99,35 @@ img{display:block;width:100%;height:auto;background:var(--card)}
 .gfx span{font-size:var(--fs-small);font-weight:var(--w-strong);line-height:1.35}
 .gfx a:hover img{transform:translateY(-2px)}
 .gfx a:hover span{text-decoration:underline;text-underline-offset:.2em}
-/* closing: the graphics pages' ending band, home closing copy */
-.endsec{margin-top:var(--s32);padding:clamp(72px,9vw,128px) var(--gut) clamp(64px,8vw,104px);background:var(--dark);color:var(--on-dark);border-top:1px solid var(--dark-edge)}
-.closing{display:grid;gap:18px;justify-items:center;text-align:center;max-width:var(--max);margin-inline:auto}
-.closing h2{margin:0;font-size:clamp(40px,6.4vw,88px);font-weight:800;line-height:.95;letter-spacing:-.035em;text-wrap:balance}
-.btns{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:22px}
-.btn{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 22px;border-radius:var(--r-pill);font-size:16px;font-weight:650;text-decoration:none;transition:transform .2s ease,opacity .2s ease}
-.btn.primary{background:var(--on-dark);color:var(--dark)}
-.btn.ghost{border:1px solid var(--on-dark-muted);color:var(--on-dark)}
-.btn:hover{transform:translateY(-1px);opacity:.92}
-.closing :focus-visible{outline-color:var(--on-dark)}
+/* ending: the homepage's closing block and footer (Vishal 2026-10-15: same footer as home, nothing new) */
+.end{--bg:#141416;--ink:#F2F1EC;--muted:#A7A7AE;--edge:#6B6B72;--line:#2A2A30;--btn:#F2F1EC;--on-btn:#0C0C0E;--live:#4CC38A;margin:var(--s32) 16px 16px;border-radius:32px;background:var(--bg);color:var(--ink);color-scheme:dark;font-family:'Bricolage Grotesque Variable',sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .end{--bg:#18181B;box-shadow:inset 0 0 0 1px #26262B}}
+:root[data-theme=dark] .end{--bg:#18181B;box-shadow:inset 0 0 0 1px #26262B}
+.end .c{width:min(1376px,100% - 64px);margin-inline:auto}
+.end .ct{padding:104px 0 0}
+.end h2{margin:0 0 40px;font-size:clamp(56px,9vw,136px);font-weight:800;font-stretch:75%;line-height:.92;letter-spacing:-.025em;max-width:12ch}
+@media (min-width:1000px){.end .ct .c{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:32px;align-items:end}.end h2{grid-column:1/8;margin:0}.end .ct-r{grid-column:8/13;padding-bottom:8px}}
+.end .cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:28px}
+.end .pill-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 22px;border-radius:999px;font-size:15px;font-weight:650;line-height:1;white-space:nowrap;text-decoration:none;color:var(--ink);border:1px solid var(--edge);transition:transform 120ms var(--ease-out),background-color 200ms var(--ease-out)}
+.end .pill-btn.primary{background:var(--btn);color:var(--on-btn);border-color:var(--btn)}
+.end .pill-btn:active{transform:scale(.97)}
+@media (hover:hover){.end .pill-btn:hover{background:color-mix(in oklab,var(--ink) 7%,transparent)}.end .pill-btn.primary:hover{background:color-mix(in oklab,var(--btn) 84%,var(--bg))}}
+.end .ul{color:inherit;text-decoration:none;background:linear-gradient(color-mix(in srgb,currentColor 32%,transparent),color-mix(in srgb,currentColor 32%,transparent)) no-repeat 0 100%/100% 1px,linear-gradient(currentColor,currentColor) no-repeat 100% 100%/0 1px;transition:background-size 200ms var(--ease-out)}
+.end .ul:hover,.end .ul:focus-visible{background-size:100% 1px,100% 1px;background-position:0 100%,0 100%}
+.end .cl{font-size:18px;margin:10px 0 0;max-width:60ch}
+.end .copy{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;display:inline-flex;align-items:baseline;gap:8px;min-height:24px;position:relative;vertical-align:baseline}
+.end .copy::after,.end .social a::after{content:"";position:absolute;inset:50% auto auto 50%;width:max(100%,44px);height:max(100%,44px);translate:-50% -50%}
+.end .copy .tag{font-size:12px;font-weight:600;border:1px solid var(--edge);border-radius:999px;padding:0 8px}
+.end .copy .t-done,.end .copy.done .t-copy{display:none}
+.end .copy.done .t-done{display:inline}
+.end .here{display:flex;align-items:center;gap:10px;margin:22px 0 0;font-size:15px;color:var(--muted)}
+.end .here i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--live);box-shadow:0 0 0 4px color-mix(in srgb,var(--live) 22%,transparent)}
+.end .foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-top:112px;padding:28px 0 32px;border-top:1px solid var(--line);font-size:15px}
+.end .social{display:flex;flex-wrap:wrap;gap:8px 24px}
+.end .social a{position:relative;padding:10px 8px;margin-inline:-8px;background-origin:content-box;background-clip:content-box}
+.end .copyr{margin:0;color:var(--muted)}
+.end :focus-visible{outline-color:var(--ink)}
+@media (max-width:759px){.end{margin:64px 8px 8px;border-radius:24px}.end .c{width:calc(100% - 32px)}.end .ct{padding-top:56px}.end h2{font-size:52px;margin-bottom:28px}.end .cl{font-size:16px}.end .cta{display:grid;grid-template-columns:1fr 1fr;gap:8px}.end .cta .pill-btn{min-height:52px}.end .foot{flex-direction:column;align-items:flex-start;margin-top:56px;padding-bottom:calc(32px + env(safe-area-inset-bottom))}}
 @media (max-width:1000px){.gfx{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:759px){
   .jump{padding-top:var(--s4)}
@@ -126,8 +144,6 @@ img{display:block;width:100%;height:auto;background:var(--card)}
 }
 @media (prefers-reduced-motion:reduce){.btn,.cs img,.gfx img{transition:none}}
 html.calm .btn,html.calm .cs img,html.calm .gfx img{transition:none}
-/* the group row slides up with the header when it hides (Vishal 2026-10-15) */
-.jump{transition:transform .28s var(--out,ease)}html.hdr-hide .jump{transform:translateY(calc(var(--bar) * -1))}
 </style>
 </head>
 
@@ -190,16 +206,30 @@ html.calm .btn,html.calm .cs img,html.calm .gfx img{transition:none}
     </section>
   </div>
 
-  <div class="endsec">
-    <footer class="closing">
-      <h2>Hiring, or need a page that sells?</h2>
-      <div class="btns">
-        <a class="btn primary" href={book.href} target="_blank" rel="noopener">{book.label}</a>
-        <a class="btn ghost" href={resume.href} target="_blank" rel="noopener">{resume.label}</a>
+  <div class="end">
+    <section class="ct" aria-labelledby="c-h">
+      <div class="c">
+        <h2 id="c-h">Hiring, or need a page that sells?</h2>
+        <div class="ct-r">
+          <div class="cta">
+            <a class="pill-btn primary" href={book.href}>{book.label}</a>
+            <a class="pill-btn" href={resume.href} target="_blank" rel="noopener">{resume.label}</a>
+          </div>
+          <p class="cl">Email me at <a class="ul" href={`mailto:${email}`}>{email}</a> <button class="copy" type="button" data-copy={email} aria-label="Copy email address"><span class="tag" aria-hidden="true"><span class="t-copy">Copy</span><span class="t-done">Copied</span></span></button><br />I reply within a day.</p>
+          <p class="cl">Want a page fixed? Send me the link, and I’ll bring my top three fixes to the call.</p>
+          <span class="sr" role="status" id="copied"></span>
+          <p class="here"><i aria-hidden="true"></i><span id="clock">Based in Gurugram, India</span></p>
+          {contra && <p class="cl">You can also hire me on <a class="ul" href={contra}>Contra</a>.</p>}
+        </div>
       </div>
+    </section>
+    <footer class="foot c">
+      <nav aria-label="Elsewhere" class="social">{social.map(([l, h]) => <a class="ul" href={h}>{l}</a>)}</nav>
+      <p class="copyr">© 2026 Vishal Yadav. All rights reserved.</p>
     </footer>
   </div>
 </main>
+<script is:inline>(()=>{const c=document.getElementById('clock'),f=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit',hour12:true}),t=()=>{c.textContent='It’s '+f.format(new Date()).toUpperCase()+' in Gurugram, India'};t();setInterval(t,30000);const st=document.getElementById('copied');document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{const x=b.dataset.copy;try{await navigator.clipboard.writeText(x)}catch{location.href='mailto:'+x;return}b.classList.add('done');st.textContent='Email address copied';setTimeout(()=>{b.classList.remove('done');st.textContent=''},2000)}))})()</script>
 <script>
   // the selector fills the group whose heading was last scrolled past
   const links = [...document.querySelectorAll<HTMLAnchorElement>('.jump a')];
