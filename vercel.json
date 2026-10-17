@@ -6,14 +6,23 @@
   },
   "redirects": [
     {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "vishal-(designs?|yadav|yadav-design|preview)(-preview)?\\.vercel\\.app"
-        }
-      ],
-      "destination": "/looks/kinetic",
+      "source": "/looks",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/looks/:path*",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/directions",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/directions/:path*",
+      "destination": "/",
       "permanent": false
     }
   ]
