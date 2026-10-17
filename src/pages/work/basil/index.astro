@@ -441,6 +441,12 @@ section h3{font-size:20px;line-height:1.3;letter-spacing:-.01em}
   #learned .list>div{grid-template-columns:56px minmax(0,1fr)}
   #learned .list .n{font-size:22px}
 }
+/* Vishal 17 Oct: the reel mixes cream and dark green scenes, and its dark scenes melted into the dark top. The top is now white:
+   dark scenes read as a card on it, and cream scenes still separate from pure white. Story and dark band below are unchanged. */
+body{background:#fff}
+.wrap>header.hero,.wrap>.facts,.wrap>.note,.wrap>.summary{--fg:#1A332E;--body:#46524E;--muted:#5F6B67;--acc:#5E7A0A;--card:#F3F4E3;--line:#E3E5D3;--warm:#5E7A0A;color:var(--fg)}
+.wrap>.summary p{color:var(--body)}.wrap>.summary div{border-color:var(--line)!important}
+.wrap>.reel video{box-shadow:0 0 0 1px rgba(26,51,46,.08),0 24px 48px rgba(26,51,46,.12)}
 </style>
 
 </head>
