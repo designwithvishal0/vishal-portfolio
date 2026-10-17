@@ -102,7 +102,7 @@ h1{margin:0;font-size:clamp(34px,5vw,64px);font-weight:var(--w-head);line-height
 .gal{display:grid;gap:0;max-width:1400px;margin-inline:auto}
 .gal img{display:block;width:100%;height:auto;background:var(--card)}
 .gal .lbl{margin:var(--s10) 0 var(--s4);font-size:var(--fs-lead);font-weight:var(--w-strong)}
-.more{padding:var(--s32) 0 0;display:grid;gap:var(--s6)}
+.more{padding:var(--s32) 0 clamp(40px,4vw,56px);display:grid;gap:var(--s6)}
 .more h2{margin:0;font-size:var(--fs-h3);font-weight:var(--w-head);letter-spacing:var(--track-head)}
 .more ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s4)}
 .more a{display:grid;gap:var(--s3);text-decoration:none}
@@ -111,7 +111,7 @@ h1{margin:0;font-size:clamp(34px,5vw,64px);font-weight:var(--w-head);line-height
 .more a:hover img{transform:translateY(-2px)}
 .more a:hover span{text-decoration:underline;text-underline-offset:.2em}
 /* closing: the case study template's ending band, in the site's neutral dark */
-.endsec{margin-top:var(--s32);padding:clamp(72px,9vw,128px) var(--gut) clamp(64px,8vw,104px);background:var(--dark);color:var(--on-dark);border-top:1px solid var(--dark-edge)}
+.endsec{margin-top:0;padding:clamp(72px,9vw,128px) var(--gut) clamp(64px,8vw,104px);background:var(--dark);color:var(--on-dark);border-top:1px solid var(--dark-edge)}
 .closing{display:grid;gap:18px;justify-items:center;text-align:center;max-width:var(--max);margin-inline:auto}
 .closing h2{margin:0;font-size:clamp(40px,6.4vw,88px);font-weight:800;line-height:.95;letter-spacing:-.035em;text-wrap:balance}
 .btns{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:22px}

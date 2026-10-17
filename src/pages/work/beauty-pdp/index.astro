@@ -1067,6 +1067,8 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 }
 /* Vishal 17 Oct: no empty light band above the closing; the last section's own padding is the gap, as on Twelve */
 .endsec{margin-top:0!important}
+/* Vishal 17 Oct 13:47: less light space above the closing; the room now sits inside the dark closing */
+article>section.lt:last-child{padding-bottom:clamp(40px,4vw,56px)!important}
 </style>
 
 <script is:inline>(function(){var s=document.getElementById('tocsheet'),mq=matchMedia('(max-width:759px)'),root=document.documentElement,ty=0;if(!s)return;

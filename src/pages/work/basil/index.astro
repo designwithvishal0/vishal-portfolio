@@ -1134,4 +1134,6 @@ details.fold>div{margin-top:16px!important}
 @media (min-width:760px){details.fold>summary{pointer-events:none;cursor:default}details.fold>summary::after{display:none}}
 /* Vishal 17 Oct: no empty light band above the closing; the last section's own padding is the gap, as on Twelve */
 .endsec{margin-top:0!important}
+/* Vishal 17 Oct 13:47: less light space above the closing; the room now sits inside the dark closing */
+article>section.lt:last-child{padding-bottom:clamp(40px,4vw,56px)!important}
 </style>
