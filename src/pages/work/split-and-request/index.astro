@@ -541,7 +541,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
           </div>
           <div class="trycol">
             <figure class="pwrap"><div class="pframe"><iframe class="pembed" title="Google Pay Split and Request Figma prototype" loading="lazy" allowfullscreen src="https://embed.figma.com/proto/lC9pdClUznIhehVGRnLVMb/?node-id=217:191&amp;starting-point-node-id=217:191&amp;scaling=scale-down-width&amp;content-scaling=fixed&amp;hide-ui=1&amp;embed-host=share"></iframe><div class="pwait"><img src="img/01-bill-in.webp" width="780" height="1720" alt="" loading="lazy"><p>Loading the prototype</p></div></div><button type="button" class="pgo"><span>Tap to try the prototype</span></button><button type="button" class="pdone">Close prototype</button><button type="button" class="protofsx" aria-label="Close full screen"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></figure>
-            <a class="btn popen" href="https://www.figma.com/proto/lC9pdClUznIhehVGRnLVMb/?node-id=217:191&amp;starting-point-node-id=217:191&amp;scaling=scale-down-width&amp;content-scaling=fixed" target="_blank" rel="noopener">Open the prototype</a>
+            <p class="protolink">Prototype not loading? <a class="popen" href="https://www.figma.com/proto/lC9pdClUznIhehVGRnLVMb/?node-id=217:191&amp;starting-point-node-id=217:191&amp;scaling=scale-down-width&amp;content-scaling=fixed" target="_blank" rel="noopener">Open it in a new tab</a></p>
           </div>
         </div>
         <script is:inline>(()=>{
@@ -1123,13 +1123,15 @@ article>section:is(#receipt,#groups,#try,#decisions,#assumptions,#changed){paddi
 .endsec .closing h2 .nw{white-space:nowrap}
 @media (max-width:620px){.endsec .closing h2{font-size:min(40px,10.2vw)!important;white-space:normal!important}}
 
-/* Vishal 2026-10-15 (14:21, 14:23): "Open the prototype" under the phone is removed on every screen size. The desktop full screen button under the flows stays. */
-.tryit .popen{display:none}
+/* Vishal 2026-10-15 (14:21, 14:23): the big "Open the prototype" button under the phone is gone; since 2026-10-16 it is the quiet "Prototype not loading?" line instead. */
+.tryit .popen{display:inline}
 /* Vishal 2026-10-15 (14:37): light screen, so the phone frame on phones is fully dark, no silver rim or buttons */
 @media (max-width:640px){
   .pwrap:not(.fs) .pframe{box-shadow:0 0 0 1.5px #2B2E35,0 0 0 2.5px #1A1C21,0 24px 50px rgba(11,40,90,.16)}
   .pwrap:not(.fs):not(.live)::before,.pwrap:not(.fs):not(.live)::after{background:#2B2E35}
 }
+/* Vishal 2026-10-16: "Prototype not loading? Open it in a new tab" under every prototype, as on his Framer site */
+.protolink{margin:16px auto 0;text-align:center;font-size:16px;line-height:1.5;color:var(--muted)}.protolink a{font-weight:600;color:var(--fg);text-underline-offset:3px}
 </style>
 <script is:inline>(()=>{const d=document.querySelector('.flowdlg'),b=document.querySelector('.flowfs');if(!d||!b)return;const pan=d.querySelector('.flowpan'),a=b.previousElementSibling;
 const open=e=>{if(e)e.preventDefault();d.classList.remove('zoom');d.showModal();document.documentElement.style.overflow='hidden'};

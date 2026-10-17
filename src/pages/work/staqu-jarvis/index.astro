@@ -486,6 +486,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
         <p>Tap “Tell us if not” under an alert to start.</p>
         <figure class="protowrap"><iframe class="proto" title="JARVIS Alerts Figma prototype" loading="lazy" allowfullscreen src="https://www.figma.com/embed?embed_host=share&amp;url=https%3A%2F%2Fwww.figma.com%2Fproto%2FNEbmc8cqnHE2l7J1zSV3ER%2FStaqu-Assignment%3Fnode-id%3D1-2%26starting-point-node-id%3D1%253A2%26scaling%3Dscale-down%26content-scaling%3Dfixed"></iframe><div class="protowait"><img src="img/01-alert-feed.webp" width="412" height="917" alt="" loading="lazy"><p>Loading the prototype</p><a href="https://www.figma.com/proto/NEbmc8cqnHE2l7J1zSV3ER/Staqu-Assignment?node-id=1-2&amp;starting-point-node-id=1%3A2" target="_blank" rel="noopener">Open in Figma</a></div><button type="button" class="protogo"><span>Tap to try the prototype</span></button><button type="button" class="protodone">Close prototype</button></figure>
         <script is:inline>(()=>{const f=document.currentScript.previousElementSibling,fr=f.querySelector('iframe');if(matchMedia('(max-width:640px)').matches){fr.src=fr.src.replace('scaling%3Dscale-down','scaling%3Dcontain')+'%26hide-ui%3D1'}f.querySelector('iframe').addEventListener('load',()=>f.classList.add('ready'));let ph,y;const live=on=>{if(on===f.classList.contains('live'))return;if(on){y=scrollY;ph=document.createElement('div');ph.style.height=f.offsetHeight+'px';f.before(ph)}f.classList.toggle('live',on);if(on){f.querySelector('.protodone').focus({preventScroll:true});requestAnimationFrame(()=>scrollTo(0,y))}else{ph.remove();scrollTo(0,y)}};f.querySelector('.protogo').onclick=()=>live(true);f.querySelector('.protodone').onclick=()=>{live(false);f.querySelector('.protogo').focus({preventScroll:true})};addEventListener('keydown',e=>{if(e.key==='Escape'&&f.classList.contains('live'))live(false)})})()</script>
+        <p class="protolink">Prototype not loading? <a href="https://www.figma.com/proto/NEbmc8cqnHE2l7J1zSV3ER/Staqu-Assignment?node-id=1-2&amp;starting-point-node-id=1%3A2" target="_blank" rel="noopener">Open it in a new tab</a></p>
       </section>
 
       <section id="change" class="lt">
@@ -780,6 +781,8 @@ nav.toc{display:none!important}
   .dks button:hover::after,.dks button:focus-visible::after{opacity:1;transform:translate(-50%,0)}
 }
 html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{transition:none}
+/* Vishal 2026-10-16: "Prototype not loading? Open it in a new tab" under every prototype, as on his Framer site */
+.protolink{margin:16px auto 0;text-align:center;font-size:16px;line-height:1.5;color:var(--muted)}.protolink a{font-weight:600;color:var(--fg);text-underline-offset:3px}
 </style>
 <script is:inline>
 (function(){
