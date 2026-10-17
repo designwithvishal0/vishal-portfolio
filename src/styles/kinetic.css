@@ -1093,5 +1093,3 @@ html.calm .dock{transition:none}
    Hero to results keep their own gaps because the scroll motion there sets them. Each value is the delta to the measured gap. */
 @media (min-width:760px){.work{margin-top:64px}.mw{margin-top:-58px}.pages{margin-top:-16px}.how{margin-top:-104px}.about{margin-top:-52px}}
 @media (max-width:759px){.mw{margin-top:-18px}.pages{margin-top:24px}.how{margin-top:-88px}.about{margin-top:-34px}}
-/* How I work on desktop: the text runs to the right edge instead of stopping at 60ch and leaving the last 300px empty (design audit 2026-10-15) */
-@media (min-width:1024px){.kf .hrow>div{grid-column:7/13}.kf .hrow>div>p{max-width:none}}
