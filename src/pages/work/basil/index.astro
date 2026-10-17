@@ -1126,4 +1126,6 @@ details.fold>summary:focus-visible{outline:2px solid currentColor;outline-offset
 details.fold>div{margin-top:16px!important}
 /* Folds only on phones (his 17 Oct): desktop shows everything, the label is a plain heading */
 @media (min-width:760px){details.fold>summary{pointer-events:none;cursor:default}details.fold>summary::after{display:none}}
+/* Vishal 17 Oct: no empty light band above the closing; the last section's own padding is the gap, as on Twelve */
+.endsec{margin-top:0!important}
 </style>
