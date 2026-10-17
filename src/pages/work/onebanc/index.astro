@@ -522,7 +522,7 @@ body{background:#F5F2EA}
         </div>
         <div class="screens">
           <div class="screen">
-            <figure><div class="iph tall noisl pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img src="img/08-home.webp" width="804" height="2370" alt="OneBanc Home screen showing ₹1,42,070 left this cycle" loading="lazy"></div></div></figure>
+            <figure><img class="scrimg" src="img/08-home.webp" width="804" height="2370" alt="OneBanc Home screen showing ₹1,42,070 left this cycle" loading="lazy"></figure>
             <div class="blks">
               <div class="blk"><span class="k">01 · Where you stand</span><h3>₹1,42,070 left this cycle</h3><p>Day 12 of 30, with 18 days to the next salary. The label says Left this cycle because a balance is a number any bank shows. This one is bounded by time, which is the only thing OneBanc knows that Google Pay and Paytm do not.</p></div>
               <div class="blk"><span class="k">02 · What is already spoken for</span><h3>Committed before payday</h3><p>Rent and the home loan EMI, ₹18,400 together, with rent flagged Due in 2 days. This block is what makes the number above it honest. Safe to spend daily is ₹6,870 because it is what is left, minus what is committed, divided by the days to go.</p></div>
@@ -542,7 +542,7 @@ body{background:#F5F2EA}
         </div>
         <div class="screens">
           <div class="screen">
-            <figure><div class="iph tall noisl pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img src="img/09-money.webp" width="804" height="2770" alt="OneBanc Money screen showing where ₹42,180 went" loading="lazy"></div></div></figure>
+            <figure><img class="scrimg" src="img/09-money.webp" width="804" height="2770" alt="OneBanc Money screen showing where ₹42,180 went" loading="lazy"></figure>
             <div class="blks">
               <div class="blk"><span class="k">01 · Total</span><h3>A judgement, not a receipt</h3><p>Salary credited ₹1,84,250 on 1 July, spent so far ₹42,180, over a five month chart with a dashed average line. The line underneath is the screen: ₹3,240 above your 5 month average. At this pace, ₹1,05,450 by 31 July.</p></div>
               <div class="blk"><span class="k">02 · By method</span><h3>₹28,400 on the card, ₹13,780 on UPI</h3><p>The same ₹42,180 cut by how you paid. The card figure is the exact number the Card screen shows in its spend meter.</p></div>
@@ -561,7 +561,7 @@ body{background:#F5F2EA}
         </div>
         <div class="screens">
           <div class="screen">
-            <figure><div class="iph tall noisl pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img src="img/10-card.webp" width="804" height="3418" alt="OneBanc Card screen with the card showing last four digits only" loading="lazy"></div></div></figure>
+            <figure><img class="scrimg" src="img/10-card.webp" width="804" height="3418" alt="OneBanc Card screen with the card showing last four digits only" loading="lazy"></figure>
             <div class="blks">
               <div class="blk"><span class="k">01 · The card</span><h3>Last four only</h3><p>•• •••• 4021 and a name. Printing sixteen fake digits on the screen built to celebrate a numberless card would undo the whole idea.</p></div>
               <div class="blk"><span class="k">02 · Reveal</span><h3>Number, CVV and expiry live only here</h3><p>Every card app treats reveal as a convenience. Here it is the reason the card exists, so it gets a real button. Reveal, because it names what happens. View is what you do to a list.</p></div>
@@ -977,9 +977,11 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 @media (min-width:901px){.scr .screen{grid-template-columns:minmax(0,640px) 320px}.scr .screen>figure{width:320px}}
 @media (min-width:621px){.arc3{grid-template-columns:repeat(3,minmax(0,300px));justify-content:center;column-gap:clamp(24px,5vw,72px)}}
 /* Vishal 2026-10-17 "the scrolling behaviour": on a laptop window the four notes stacked taller than the window, so the row never pinned and the phone screen never scrolled (Twelve and ixigo pin every row). Two columns of notes keep each row shorter than the phone, so it pins like the others */
-@media (min-width:1100px){.scr .screen{grid-template-columns:minmax(0,1fr) 320px;column-gap:64px}.scr .blks{grid-template-columns:1fr 1fr;column-gap:40px;row-gap:36px;align-content:center;min-height:684px}.scr .blk{align-content:start}}
+/* Vishal 2026-10-17 (picked "Like Split"): the three screens work like Split's. The whole tall screen, no phone frame, scrolls past with the page while its notes stay pinned on the left (as on his Framer OneBanc page). Notes in two columns on desktop so the pinned block fits a laptop window */
+.scr .screen>figure>.scrimg{display:block;width:100%;height:auto;border-radius:40px;border:1px solid #DCD6C6;box-shadow:0 16px 40px rgba(15,31,11,.12);background:#fff}
+@media (min-width:901px){.scr .screen{grid-template-columns:minmax(0,1fr) 360px;column-gap:64px}.scr .screen>figure{width:360px}.scr .screen>div{position:sticky;top:120px}}
+@media (min-width:1100px){.scr .blks{grid-template-columns:1fr 1fr;column-gap:40px;row-gap:36px}.scr .blk{align-content:start}}
 </style>
-<script is:inline src="/js/pin-screen.js" defer></script>
 <style is:inline>
 /* Vishal 2026-10-17, same as Twelve's closing: a slow staggered rise as it comes into view */
 html.js .endsec .closing>*{transition:opacity 1s cubic-bezier(.32,.72,0,1),transform 1s cubic-bezier(.32,.72,0,1)}
@@ -990,7 +992,7 @@ html.calm .endsec .closing>*{opacity:1!important;transform:none!important;transi
 </style>
 <script is:inline>(()=>{const e=document.querySelector('.endsec');if(!e)return;if(!('IntersectionObserver'in window)){e.classList.add('in');return}const o=new IntersectionObserver(r=>{if(r[0].isIntersecting){e.classList.add('in');o.disconnect()}},{threshold:.15});o.observe(e)})();</script>
 <script is:inline>/* Vishal 2026-10-17, same rule as Twelve (2026-10-15): no pale fade over the phone screens. The dock fade switches off while any phone sits at the bottom of the window */
-(()=>{const f=document.querySelector('.dockfade'),ph=[...document.querySelectorAll('.iph')];if(!f||!ph.length)return;const u=()=>{const h=innerHeight;f.style.visibility=ph.some(e=>{const r=e.getBoundingClientRect();return r.width&&r.top<h-8&&r.bottom>h-104})?'hidden':''};addEventListener('scroll',u,{passive:true});addEventListener('resize',u);u()})();</script>
+(()=>{const f=document.querySelector('.dockfade'),ph=[...document.querySelectorAll('.iph,.scr .scrimg')];if(!f||!ph.length)return;const u=()=>{const h=innerHeight;f.style.visibility=ph.some(e=>{const r=e.getBoundingClientRect();return r.width&&r.top<h-8&&r.bottom>h-104})?'hidden':''};addEventListener('scroll',u,{passive:true});addEventListener('resize',u);u()})();</script>
 <script is:inline src="/js/flowdlg.js" defer></script>
 <style is:inline>
 /* Vishal 2026-10-14 02:28: each case study uses the type of its own design. OneBanc's active typeface is Stack Sans:
