@@ -11,7 +11,7 @@
       "permanent": false
     },
     {
-      "source": "/looks/:path*",
+      "source": "/looks/(.*)",
       "destination": "/",
       "permanent": false
     },
@@ -21,7 +21,7 @@
       "permanent": false
     },
     {
-      "source": "/directions/:path*",
+      "source": "/directions/(.*)",
       "destination": "/",
       "permanent": false
     }
