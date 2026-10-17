@@ -260,7 +260,6 @@ article>section.lt+section.lt,article>section:not(.lt)+section:not(.lt){padding-
 article>section#problem{--band:#FFFFFF;--card:#F3F6FC}
 article>section#found{--band:#F3F6FC;--card:#FFFFFF}
 article>section#hardest{--band:#18202F;--card:#283246}
-article>section#scale{--band:#18202F;--card:#283246}
 article>section:is(#found,#hardest,#system){padding-top:120px}
 @media (max-width:900px){article>section:is(#found,#hardest,#system){padding-top:80px}}
 @media (max-width:620px){article>section:is(#found,#hardest,#system){padding-top:64px}}
@@ -467,7 +466,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
         </div>
       </section>
 
-      <section id="scale" class="wide">
+      <section id="scale" class="lt wide">
         <div class="screens">
           <div class="screen">
             <figure><img class="shot phone" src="img/09-claiming-live.webp" width="780" height="1884" alt="Big group: everyone claims live" loading="lazy"></figure>
@@ -937,7 +936,7 @@ blockquote em{font-style:normal;color:var(--warm)}
 /* screens inside dark and single screen sections */
 #scale .screens,#owes .screens,#receipt .screens{margin-top:0}
 .screens .screen h2{font-size:clamp(32px,4vw,48px)}
-#scale .shot.phone{border-color:rgba(255,255,255,.1)}
+
 .locks{display:grid;gap:28px;margin-top:20px}
 .locks>div{display:grid;gap:10px}
 .locks h3{font-size:22px!important}
@@ -1002,7 +1001,7 @@ p>.tl:only-child{position:relative}p>.tl:only-child::after{content:"";position:a
 .screens .screen{grid-template-columns:minmax(0,560px) 320px;align-items:center;padding-block:60px;border-top:1px solid #E7E9EE}
 .screens .screen:first-child{border-top:0;padding-top:0}
 .screens .screen:last-child{padding-bottom:0}
-#scale .screens .screen{border-top-color:rgba(255,255,255,.1)}
+
 .screens .screen>div{position:static}
 .screens .shot.phone,.pop,.pair .shot.phone,.crop{width:320px;max-width:100%;border-radius:34px;border:1px solid #E7E9EE;box-shadow:0 10px 30px rgba(0,0,0,.1)}
 .screens .screen>figure.pop{width:320px}
