@@ -974,6 +974,8 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 .iph .sc:focus-visible{outline:3px solid #7A5F1F;outline-offset:4px}
 @media (min-width:901px){.scr .screen{grid-template-columns:minmax(0,640px) 320px}.scr .screen>figure{width:320px}}
 @media (min-width:621px){.arc3{grid-template-columns:repeat(3,minmax(0,300px));justify-content:center;column-gap:clamp(24px,5vw,72px)}}
+/* Vishal 2026-10-17 "the scrolling behaviour": on a laptop window the four notes stacked taller than the window, so the row never pinned and the phone screen never scrolled (Twelve and ixigo pin every row). Two columns of notes keep each row shorter than the phone, so it pins like the others */
+@media (min-width:1100px){.scr .screen{grid-template-columns:minmax(0,1fr) 320px;column-gap:64px}.scr .blks{grid-template-columns:1fr 1fr;column-gap:40px;row-gap:36px;align-content:center;min-height:684px}.scr .blk{align-content:start}}
 </style>
 <script is:inline src="/js/pin-screen.js" defer></script>
 <script is:inline src="/js/flowdlg.js" defer></script>
