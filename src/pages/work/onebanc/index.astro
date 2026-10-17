@@ -652,6 +652,7 @@ body{background:#F5F2EA}
 
       <section id="learned">
         <p class="eyebrow">What I learned</p>
+        <h2>Their own words were enough to design from</h2>
         <p>Without access to the product, the only evidence I had was the company’s own words and its own files. That turned out to be enough to design from, as long as I refused to invent anything they had not claimed.</p>
         <p>The other lesson came from my own numbers. A screen can look finished and still disagree with the screen next to it. Checking the arithmetic across all three caught more problems than any visual review did.</p>
         <p class="k sub">Still open</p>
@@ -975,6 +976,7 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 @media (min-width:621px){.arc3{grid-template-columns:repeat(3,minmax(0,300px));justify-content:center;column-gap:clamp(24px,5vw,72px)}}
 </style>
 <script is:inline src="/js/pin-screen.js" defer></script>
+<script is:inline src="/js/flowdlg.js" defer></script>
 <style is:inline>
 /* Vishal 2026-10-14 02:28: each case study uses the type of its own design. OneBanc's active typeface is Stack Sans:
    Headline for display sizes, Text for reading sizes, the same split the design system uses. Max weight is 700. */
@@ -985,6 +987,9 @@ h1,h2,h3,.ratio b,.stats b,.closing h2{font-family:var(--head)}
 h1,section h2,section h3{font-weight:600;letter-spacing:-.01em}
 /* Phones only (Vishal 04:24, same as ixigo): hero heading one step bolder, same size */
 @media (max-width:640px){header.hero h1{font-weight:700}}
+/* Vishal 2026-10-17 "fix what is broken": Book a call never splits across two lines (Stack Sans runs wider than Twelve's type) */
+.founder a{white-space:nowrap}
+@media (min-width:901px){footer.closing .founder{width:fit-content;min-width:min(640px,100%);white-space:nowrap}}
 /* Phones (Vishal 04:31): project details as one row each, label left and value right, same as Split and Twelve */
 @media (max-width:620px){
   .wrap>.facts{grid-template-columns:minmax(0,1fr);gap:0;padding-block:4px}
