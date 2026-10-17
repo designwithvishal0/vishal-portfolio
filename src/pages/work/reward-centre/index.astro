@@ -514,7 +514,7 @@ article>section#learned{--band:#FFFDFA;--card:#F5F3EE}
           <div><span class="num">4</span><h3>Stay motivated</h3><p>The consequence of the three above, plus one deliberate moment at claim. Not decoration on top.</p></div>
           <div><span class="num">5</span><h3>Track history</h3><p>Lowest frequency job, so it gets its own screen and one row on Home rather than permanent space.</p></div>
         </div>
-        <details class="fold"><summary><span class="k sub">Assumptions</span></summary>
+        <details class="fold" open><summary><span class="k sub">Assumptions</span></summary>
         <div class="cards" style="--n:4">
           <div><h3 class="g">One currency</h3><p>Reward points, plus occasional grants like entries or items. A single balance at the top means something.</p></div>
           <div><h3 class="g">Every reward has a state</h3><p>Most also carry an expiry. State decides what the player can do, expiry decides how soon.</p></div>
@@ -662,7 +662,7 @@ article>section#learned{--band:#FFFDFA;--card:#F5F3EE}
           <div><h3>Season Pass, a 30 day ladder of 20 tiers, each tier paying out separately</h3><p>Type: season. Source: Season Pass. Value per tier. Progress: tier 6 of 20. Expiry: end of season. One glyph and one tint token added. Each tier is a card. Unlocked tiers sit in Ready to claim, the next one in In progress, the rest in Available. Nothing on the four screens changes.</p></div>
           <div><h3>Physical prize, a headset shipped to your door</h3><p>Type: item. Value: the item. Claim opens an address step on Detail instead of counting the balance up. The card, the bucket and the button are unchanged. Only Detail grows a step, which it already knows how to do.</p></div>
         </div>
-        <details class="fold"><summary><span class="k sub">Foundations in this file</span></summary>
+        <details class="fold" open><summary><span class="k sub">Foundations in this file</span></summary>
         <div class="cards" style="--n:4">
           <div><h3 class="g">54 semantic colour tokens</h3><p>Aliased to 58 primitives. Four families: surface, text, value and action, status. Plus tier metals, type tints and success. 25 typography tokens on top.</p></div>
           <div><h3 class="g">107 text styles</h3><p>Unbounded for numbers only, Albert Sans for everything else. Eleven semantic roles on top of the size scales.</p></div>
@@ -685,7 +685,7 @@ article>section#learned{--band:#FFFDFA;--card:#F5F3EE}
           <div><span class="mid">05</span><span class="tag">↑ Up</span><h3>D7 retention</h3><p>Players who claimed at least once, against those who never did.</p><p class="hit">Whether the screen changes behaviour or only reports it.</p></div>
         </div>
         <div class="guard"><span class="k">Guardrail I would watch</span><p>Claim rate rising while session length drops. That would mean players open the centre, claim and leave, which is the opposite of motivation.</p></div>
-        <details class="fold"><summary><span class="k sub">Notes</span></summary>
+        <details class="fold" open><summary><span class="k sub">Notes</span></summary>
         <div class="cards" style="--n:3">
           <div><p>Scoped to mobile and four screens, with the rest of the app left untouched.</p></div>
           <div><p>Wireframes are greyscale on purpose, so structure is judged before colour.</p></div>
@@ -1073,6 +1073,7 @@ addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true
 addEventListener('touchmove',function(e){if(!root.classList.contains('toclock'))return;var dy=e.touches[0].clientY-ty;if(!s.contains(e.target)||(dy>0&&s.scrollTop<=0)||(dy<0&&s.scrollTop+s.clientHeight>=s.scrollHeight-1))e.preventDefault()},{passive:false});})();</script>
 
 <script is:inline src="/js/flowdlg.js" defer></script>
+<script is:inline id="fold-phone">if(matchMedia("(max-width:759px)").matches)document.querySelectorAll("details.fold").forEach(d=>d.open=false);document.querySelectorAll("details.fold>summary").forEach(s=>s.addEventListener("click",e=>{if(!matchMedia("(max-width:759px)").matches)e.preventDefault()}))</script>
 <style is:inline>
 /* Audit 2026-10-15: the lowest value blocks (assumptions, notes, file foundations) fold behind their own label, so the page reads shorter. Nothing is cut. */
 details.fold{margin-top:40px}
@@ -1083,6 +1084,8 @@ details.fold>summary::after{content:"";width:8px;height:8px;border-right:2px sol
 details.fold[open]>summary::after{transform:translateY(2px) rotate(225deg)}
 details.fold>summary:focus-visible{outline:2px solid currentColor;outline-offset:4px;border-radius:6px}
 details.fold>div{margin-top:16px!important}
+/* Folds only on phones (his 17 Oct): desktop shows everything, the label is a plain heading */
+@media (min-width:760px){details.fold>summary{pointer-events:none;cursor:default}details.fold>summary::after{display:none}}
 /* Vishal 2026-10-16: "Prototype not loading? Open it in a new tab" under every prototype, as on his Framer site */
 .protolink{margin:16px auto 0;text-align:center;font-size:16px;line-height:1.5;color:var(--muted)}.protolink a{font-weight:600;color:var(--fg);text-underline-offset:3px}
 </style>
