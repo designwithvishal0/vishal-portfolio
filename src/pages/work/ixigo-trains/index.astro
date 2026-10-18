@@ -21,6 +21,7 @@ const ld = [
 <link rel="stylesheet" href="/css/closing-cta.css">
 <meta name="robots" content="noindex">
 <title>{title}</title>
+<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href}>
 <Boot />
 <meta name="description" content={description}>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
