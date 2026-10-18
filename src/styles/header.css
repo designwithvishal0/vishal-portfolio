@@ -16,6 +16,8 @@ html.hdr-hide .bar{transform:translateY(calc(-100% - 16px))}
 .bar-in{width:min(var(--max),100% - var(--gut) * 2);margin-inline:auto;height:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
 .who{font-size:15px;font-weight:600}
 a.who{text-decoration:none;text-underline-offset:.25em;text-decoration-thickness:1px}
+/* Vishal 2026-10-18 "apply all": the name is a 44px tall tap target without looking any different */
+a.who{position:relative}a.who::after{content:"";position:absolute;left:-8px;right:-8px;top:50%;height:44px;transform:translateY(-50%)}
 @media (hover:hover) and (pointer:fine){a.who:hover{text-decoration-line:underline}}
 .nav{display:flex;gap:32px;font-size:15px;font-weight:500}
 .nav a{text-decoration:none;padding:12px 0;text-underline-offset:.25em;text-decoration-thickness:1px}

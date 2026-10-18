@@ -1087,3 +1087,15 @@ html.calm .endsec .closing>*{opacity:1!important;transform:none!important;transi
 <script is:inline>(()=>{const e=document.querySelector('.endsec');if(!e)return;if(!('IntersectionObserver'in window)){e.classList.add('in');return}const o=new IntersectionObserver(r=>{if(r[0].isIntersecting){e.classList.add('in');o.disconnect()}},{threshold:.15});o.observe(e)})();</script>
 <script is:inline>/* Vishal 2026-10-15 on Twelve: no pale fade over the phone screens. The dock fade switches off while any phone or laptop frame sits at the bottom of the window */
 (()=>{const f=document.querySelector('.dockfade'),ph=[...document.querySelectorAll('.iph,.lap,.screen,.shot.phone')];if(!f||!ph.length)return;const u=()=>{const h=innerHeight;f.style.visibility=ph.some(e=>{const r=e.getBoundingClientRect();return r.width&&r.top<h-8&&r.bottom>h-104})?'hidden':''};addEventListener('scroll',u,{passive:true});addEventListener('resize',u);u()})();</script>
+
+<style is:inline>/* Vishal 2026-10-18 "apply all": hero headline at most two lines on desktop */
+@media (min-width:901px){header.hero h1{font-size:clamp(40px,4.4vw,60px)}}</style>
+
+<style is:inline>/* Vishal 2026-10-18 "apply all": one-off text sizes and corner roundings snapped to the shared steps (13, 16, 18 px text; 12, 16 px corners) */
+.doubts span{font-size:16px}
+.car p{font-size:18px}
+.count{font-size:13px}
+.costs h3{font-size:18px}
+.costs .cost{border-radius:12px}
+.nums span{font-size:16px}
+.beforeafter p{font-size:18px}</style>

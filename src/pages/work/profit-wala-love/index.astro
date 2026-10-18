@@ -349,8 +349,8 @@ article>section:first-child{padding-top:120px}
 <div class="wrap">
 
   <header class="hero">
-    <p class="eyebrow">Profit Wala Love · Valentine Week campaign</p>
-    <h1>Profit Wala Love, Valentine Week Campaign for CashKaro</h1>
+    <p class="eyebrow">Campaign design · CashKaro</p>
+    <h1>Profit Wala Love <span class="h1s">Valentine Week campaign for CashKaro</span></h1>
     <p class="hook">Share Love. Share Deals. Earn Profit.</p>
     <p class="dek">Valentine Week campaign I designed for CashKaro, India’s largest cashback platform with 25M+ users.</p>
   </header>
@@ -366,8 +366,8 @@ article>section:first-child{padding-top:120px}
   <section class="summary" aria-labelledby="sum">
     <h2 id="sum">The 30 second version</h2>
     <div><span class="k">Goal</span><p>Get users sharing Valentine deals and earning from every share, one day at a time.</p></div>
-    <div><span class="k">My role</span><p>Solo designer, from the day cards to the emailer. CashKaro’s developers built it.</p></div>
-    <div><span class="k">Decision</span><p>Each day from Rose Day to Promise Day got its own card with an inactive and an active state.</p></div>
+    <div><span class="k">My role</span><p>Solo. I designed every surface; CashKaro’s developers shipped it.</p></div>
+    <div><span class="k">Decision</span><p>One card per day, Rose Day to Promise Day, lit only on its own day.</p></div>
     <div><span class="k">Result</span><p>1,542 transactions, ₹9.89 lakh GMV and 13,707 deal shares, with retailer commission up 51% vs a normal week.</p></div>
   </section>
 
@@ -833,3 +833,12 @@ html.calm .endsec .closing>*{opacity:1!important;transform:none!important;transi
 <script is:inline>(()=>{const e=document.querySelector('.endsec');if(!e)return;if(!('IntersectionObserver'in window)){e.classList.add('in');return}const o=new IntersectionObserver(r=>{if(r[0].isIntersecting){e.classList.add('in');o.disconnect()}},{threshold:.15});o.observe(e)})();</script>
 <script is:inline>/* Vishal 2026-10-15 on Twelve: no pale fade over the phone screens. The dock fade switches off while any phone or laptop frame sits at the bottom of the window */
 (()=>{const f=document.querySelector('.dockfade'),ph=[...document.querySelectorAll('.iph,.lap,.screen,.shot.phone')];if(!f||!ph.length)return;const u=()=>{const h=innerHeight;f.style.visibility=ph.some(e=>{const r=e.getBoundingClientRect();return r.width&&r.top<h-8&&r.bottom>h-104})?'hidden':''};addEventListener('scroll',u,{passive:true});addEventListener('resize',u);u()})();</script>
+
+<style is:inline>/* Vishal 2026-10-18 "apply all": hero headline at most two lines on desktop; the name big, what it is as a smaller second line in the same H1 */
+h1 .h1s{display:block;font-weight:400!important;font-size:.5em;line-height:1.2;letter-spacing:-.01em;margin-top:.2em;opacity:.85}</style>
+
+<style is:inline>/* Vishal 2026-10-18 "apply all": one-off text sizes and corner roundings snapped to the shared steps (13, 16, 18 px text; 12, 16 px corners) */
+.stats.big span{font-size:18px}</style>
+
+<style is:inline>/* Vishal 2026-10-18 "apply all": two rows that end level. Banners side by side, then in app and emailer side by side; columns sized to each picture's shape so the heights match */
+@media (min-width:761px){.mk{grid-template-columns:514fr 162fr 521fr}.mk .b1{grid-column:1;grid-row:1}.mk .b2{grid-column:2/4;grid-row:1}.mk .b3{grid-column:1/3;grid-row:2}.mk .b4{grid-column:3;grid-row:2}.mk .b3 img{max-width:none}}</style>

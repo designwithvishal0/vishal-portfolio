@@ -723,10 +723,10 @@ body{background:#fff}
           <h2>Most of the work was deciding what not to add.</h2>
         </div>
         <div class="list">
-          <div><span class="n">01</span><h3>The incentive existed. It just was not doing its job.</h3><p>Before designing a new discount, check whether the one already being paid for is visible at the moment of decision. Here the fix was placement and framing, not money.</p></div>
-          <div><span class="n">02</span><h3>The easiest upsell was the wrong one to lead with.</h3><p>The ₹149 dip is the cheapest add on, and it looks like the easy win. It cannot unlock the offer, so putting it in the set would have made the bar feel like it lied. It moved to where its real question gets asked, with the exception stated.</p></div>
-          <div><span class="n">03</span><h3>Removing things is part of the design.</h3><p>The offers box, the old kit block and the looping timer all came out. One place that fully explains the deal beats three places that each explain half of it.</p></div>
-          <div><span class="n">04</span><h3>Edge cases are where the trust is kept.</h3><p>Sold out prints, items already in the cart, name printed boxes that cannot be returned. A naive version double counts or overpromises in each one, so I designed them before calling the main state done.</p></div>
+          <div><h3>The incentive existed. It just was not doing its job.</h3><p>Before designing a new discount, check whether the one already being paid for is visible at the moment of decision. Here the fix was placement and framing, not money.</p></div>
+          <div><h3>The easiest upsell was the wrong one to lead with.</h3><p>The ₹149 dip is the cheapest add on, and it looks like the easy win. It cannot unlock the offer, so putting it in the set would have made the bar feel like it lied. It moved to where its real question gets asked, with the exception stated.</p></div>
+          <div><h3>Removing things is part of the design.</h3><p>The offers box, the old kit block and the looping timer all came out. One place that fully explains the deal beats three places that each explain half of it.</p></div>
+          <div><h3>Edge cases are where the trust is kept.</h3><p>Sold out prints, items already in the cart, name printed boxes that cannot be returned. A naive version double counts or overpromises in each one, so I designed them before calling the main state done.</p></div>
           <div class="nx"><span class="n">Next</span><h3>One for each kid.</h3><p>A second box in another print, for families with siblings. Parked on purpose, and the first thing I would test once the set is live.</p></div>
         </div>
       </section>
@@ -1157,3 +1157,18 @@ html.calm .endsec .closing>*{opacity:1!important;transform:none!important;transi
 
 <style is:inline>/* typography: keep the What I learned paragraphs at a readable line length (about 75 characters) */
 .list>div p{max-width:68ch}</style>
+
+<style is:inline>/* Vishal 2026-10-18 "apply all": the lessons are not steps, so no numbers; "Next" sits as a small label above its heading */
+#learned .list>div{grid-template-columns:minmax(0,1fr)!important}#learned .list h3,#learned .list p,#learned .list .n{grid-column:1!important}#learned .list .nx .n{padding-top:0;font-size:16px}</style>
+
+<style is:inline>/* Vishal 2026-10-18 "apply all": one-off text sizes and corner roundings snapped to the shared steps (13, 16, 18 px text; 12, 16 px corners) */
+.bbox li{border-radius:12px}
+.set img{border-radius:12px}
+.set figcaption span{font-size:13px}
+.beh > div{border-radius:12px}
+.dsk .finds .n{font-size:16px}
+.ms-steps .n{font-size:13px}
+.states img{border-radius:12px}
+.states figcaption{font-size:16px}
+@media (max-width: 620px){.set{border-radius:16px}}
+@media (max-width: 620px){.states figcaption{font-size:13px}}</style>

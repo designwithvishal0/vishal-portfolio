@@ -1032,3 +1032,11 @@ h1,section h2,section h3{font-weight:600;letter-spacing:-.01em}
 function lock(e){root.classList.toggle('toclock',e.newState==='open'&&mq.matches)}s.addEventListener('beforetoggle',lock);s.addEventListener('toggle',lock);
 addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true});
 addEventListener('touchmove',function(e){if(!root.classList.contains('toclock'))return;var dy=e.touches[0].clientY-ty;if(!s.contains(e.target)||(dy>0&&s.scrollTop<=0)||(dy<0&&s.scrollTop+s.clientHeight>=s.scrollHeight-1))e.preventDefault()},{passive:false});})();</script>
+
+<style is:inline>/* Vishal 2026-10-18 "apply all": one-off text sizes and corner roundings snapped to the shared steps (13, 16, 18 px text; 12, 16 px corners) */
+.pal div{border-radius:12px}
+.pal span{font-size:13px}
+.pal .fail span{font-size:16px}
+.fonts div{border-radius:12px}
+.fonts span{font-size:13px}
+.ba figcaption{font-size:18px}</style>
