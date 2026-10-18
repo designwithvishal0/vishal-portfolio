@@ -5,7 +5,7 @@ import '@fontsource-variable/hanken-grotesk';
 import '../../styles/tokens.css';
 import SiteHeader from '../../components/SiteHeader.astro';
 import Boot from '../../components/Boot.astro';
-import { work, loops, lead, more, pages, graphics, intro, email, social, contra } from '../../data/home';
+import { work, loops, lead, more, pages, graphics, intro, email, social, contra, updated } from '../../data/home';
 import '@fontsource-variable/bricolage-grotesque/standard.css';
 
 const title = 'Work by Vishal Yadav, product designer';
@@ -226,6 +226,7 @@ html.calm .btn,html.calm .cs img,html.calm .gfx img{transition:none}
     <footer class="foot c">
       <nav aria-label="Elsewhere" class="social">{social.map(([l, h]) => <a class="ul" href={h}>{l}</a>)}</nav>
       <p class="copyr">© 2026 Vishal Yadav. All rights reserved.</p>
+      <p class="copyr colo">Designed and coded by me in Astro. Claude helped me write the code faster; every design decision is mine. Updated {updated}.</p>
     </footer>
   </div>
 </main>

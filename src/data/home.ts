@@ -157,3 +157,5 @@ export const graphics = [
   { key: 'moi', cap: 'Museum of Illusions invites', alt: 'Birthday party invitation posters for Museum of Illusions' },
   { key: 'trigo', cap: 'TriGo roll up standee', alt: 'TriGo roll up standee' },
 ];
+// footer colophon (Vishal 2026-10-18, from the portfolio collection review): month of the last build, so it updates on every push
+export const updated = new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' });
