@@ -3,3 +3,5 @@ Allow: /
 Disallow: /system
 Disallow: /directions/
 Disallow: /looks/
+
+Sitemap: https://vishal-designs.vercel.app/sitemap.xml
