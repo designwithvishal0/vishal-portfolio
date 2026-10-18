@@ -1137,3 +1137,20 @@ details.fold>div{margin-top:16px!important}
 /* Vishal 17 Oct 13:47: less light space above the closing; the room now sits inside the dark closing */
 article>section.lt:last-child{padding-bottom:clamp(40px,4vw,56px)!important}
 </style>
+
+<style is:inline>
+/* Vishal 2026-10-18, same as Twelve and OneBanc: the closing rises in slowly as it comes into view */
+html.js .endsec .closing>*{transition:opacity 1s cubic-bezier(.32,.72,0,1),transform 1s cubic-bezier(.32,.72,0,1)}
+html.js .endsec:not(.in) .closing>*{opacity:0;transform:translateY(28px)}
+.endsec .closing>:nth-child(2){transition-delay:.08s}.endsec .closing>:nth-child(3){transition-delay:.16s}.endsec .closing>:nth-child(4){transition-delay:.24s}
+@media (prefers-reduced-motion:reduce){html.js .endsec .closing>*{opacity:1!important;transform:none!important;transition:none}}
+html.calm .endsec .closing>*{opacity:1!important;transform:none!important;transition:none}
+/* Vishal 2026-10-17 on OneBanc: "Book a call" never splits across lines; on desktop the freelance line stays on one line */
+.founder a{white-space:nowrap}
+@media (min-width:901px){footer.closing .founder{width:fit-content;min-width:min(640px,100%);white-space:nowrap}}
+/* Poppins runs wider than the other case study fonts, so on phones the line gets a little more room to sit on three lines like the rest */
+@media (max-width:620px){.endsec .closing .founder{max-width:34ch}}
+</style>
+<script is:inline>(()=>{const e=document.querySelector('.endsec');if(!e)return;if(!('IntersectionObserver'in window)){e.classList.add('in');return}const o=new IntersectionObserver(r=>{if(r[0].isIntersecting){e.classList.add('in');o.disconnect()}},{threshold:.15});o.observe(e)})();</script>
+<script is:inline>/* Vishal 2026-10-15 on Twelve: no pale fade over the phone screens. The dock fade switches off while any phone or laptop frame sits at the bottom of the window */
+(()=>{const f=document.querySelector('.dockfade'),ph=[...document.querySelectorAll('.iph,.lap,.screen,.shot.phone')];if(!f||!ph.length)return;const u=()=>{const h=innerHeight;f.style.visibility=ph.some(e=>{const r=e.getBoundingClientRect();return r.width&&r.top<h-8&&r.bottom>h-104})?'hidden':''};addEventListener('scroll',u,{passive:true});addEventListener('resize',u);u()})();</script>
