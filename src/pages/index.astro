@@ -323,7 +323,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
   <footer class="foot c">
     <nav aria-label="Elsewhere" class="social">{social.map(([l, h]) => <a class="ul" href={h}>{l}</a>)}</nav>
     <p class="copyr">© 2026 Vishal Yadav. All rights reserved.</p>
-    <p class="copyr colo">Designed and coded by me in Astro. Claude helped me write the code faster; every design decision is mine. Updated {updated}.</p>
+    <p class="copyr colo">Designed and coded by me in Astro, with Claude as my coding partner. Updated {updated}.</p>
   </footer>
 </div>
 <script is:inline>(()=>{const c=document.getElementById('clock'),f=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit',hour12:true}),t=()=>{c.textContent='It’s '+f.format(new Date()).toUpperCase()+' in Gurugram, India'};t();setInterval(t,30000)})()</script>
