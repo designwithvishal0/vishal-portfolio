@@ -82,21 +82,24 @@ img{display:block;width:100%;height:auto;background:var(--card)}
 .cs a:hover img{transform:translateY(-2px)}
 .cs a:hover .go{text-decoration-color:currentColor}
 /* the rest: compact rows, small page preview beside the text */
-.rows li + li{border-top:1px solid var(--rule)}
-.rows a{display:grid;grid-template-columns:200px minmax(0,1fr) auto;gap:var(--s6);align-items:center;padding:var(--s4) 0;text-decoration:none}
-.rows img{aspect-ratio:4/3;object-fit:cover;object-position:top;border-radius:12px}
-.rows .t{display:grid;gap:var(--s1)}
+/* Shipped, More product work, Concept pages (Vishal 2026-10-19): full thumbnails, never cropped, each card ends on View the case study */
+.rows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s10) var(--s8)}
+.rows a{display:grid;gap:var(--s4);align-content:start;text-decoration:none}
+.rows img{width:100%;height:auto;border-radius:var(--r-card);transition:transform var(--hover) var(--ease-out)}
+.rows .t{display:grid;gap:var(--s2);justify-items:start}
 .rows .name{margin:0;font-size:var(--fs-lead);font-weight:var(--w-strong);line-height:1.3}
 .rows .line{margin:0;color:var(--muted);line-height:var(--lh-body)}
-.rows .stats{margin:var(--s1) 0 0;display:flex;flex-wrap:wrap;gap:var(--s1) var(--s4);font-size:var(--fs-meta);color:var(--muted)}
+.rows .stats{margin:0;display:flex;flex-wrap:wrap;gap:var(--s1) var(--s4);font-size:var(--fs-meta);color:var(--muted)}
 .rows .stats b{color:var(--ink);font-weight:var(--w-strong)}
 .tag{font-size:var(--fs-caption);font-weight:600;color:var(--muted);white-space:nowrap}
-.rows a:hover .name{text-decoration:underline;text-underline-offset:.2em}
+.rows .go{margin-top:var(--s1);font-size:var(--fs-ui);font-weight:var(--w-strong);text-decoration:underline;text-underline-offset:.25em;text-decoration-color:var(--rule);transition:text-decoration-color var(--hover)}
+.rows a:hover img{transform:translateY(-2px)}
+.rows a:hover .go{text-decoration-color:currentColor}
 /* graphic design: small tiles */
 .gfx{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--s4)}
 .gfx a{display:grid;gap:var(--s3);text-decoration:none}
-.gfx img{aspect-ratio:4/3;object-fit:cover;border-radius:12px;transition:transform var(--hover) var(--ease-out)}
-.gfx span{font-size:var(--fs-small);font-weight:var(--w-strong);line-height:1.35}
+.gfx img{aspect-ratio:4/3;object-fit:cover;border-radius:10px;transition:transform var(--hover) var(--ease-out)}
+.gfx span{font-size:var(--fs-caption);font-weight:500;color:var(--muted);line-height:1.35}
 .gfx a:hover img{transform:translateY(-2px)}
 .gfx a:hover span{text-decoration:underline;text-underline-offset:.2em}
 /* ending: the homepage's closing block and footer (Vishal 2026-10-15: same footer as home, nothing new) */
@@ -128,18 +131,16 @@ img{display:block;width:100%;height:auto;background:var(--card)}
 .end .copyr{margin:0;color:var(--muted)}
 .end :focus-visible{outline-color:var(--ink)}
 @media (max-width:759px){.end{margin:64px 8px 8px;border-radius:24px}.end .c{width:calc(100% - 32px)}.end .ct{padding-top:56px}.end h2{font-size:52px;margin-bottom:28px}.end .cl{font-size:16px}.end .cta{display:grid;grid-template-columns:1fr 1fr;gap:8px}.end .cta .pill-btn{min-height:52px}.end .foot{flex-direction:column;align-items:flex-start;margin-top:56px;padding-bottom:calc(32px + env(safe-area-inset-bottom))}}
-@media (max-width:1000px){.gfx{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:1000px){.gfx{grid-template-columns:repeat(3,minmax(0,1fr))}.rows{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:759px){
   .jump{padding-top:var(--s4)}
   section{padding-top:var(--s10)}
   .cs{gap:var(--s8)}
   .cs a{grid-template-columns:1fr;gap:var(--s4)}
-  .rows a{grid-template-columns:104px minmax(0,1fr);gap:var(--s4);align-items:start}
-  .rows img{border-radius:10px}
-  .rows .name{font-size:var(--fs-ui)}
-  .rows .line{font-size:var(--fs-small)}
-  .rows .tag{grid-column:2;margin-top:-8px}
-  .gfx{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s4) var(--s3)}
+  .rows{grid-template-columns:1fr;gap:var(--s12)}
+  .gfx{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3)}
+  .gfx span{font-size:var(--fs-caption)}
+  .gfx img{border-radius:8px}
   .btns{flex-direction:column;width:100%}.btn{width:100%}
 }
 @media (prefers-reduced-motion:reduce){.btn,.cs img,.gfx img{transition:none}}
@@ -190,8 +191,9 @@ html.calm .btn,html.calm .cs img,html.calm .gfx img{transition:none}
                 <p class="name">{p.name}</p>
                 <p class="line">{p.line}</p>
                 {'stats' in p && <p class="stats">{(p as typeof lead).stats.map(([n, l]) => <span><b>{n}</b> {l}</span>)}</p>}
+                {p.tag && p.tag !== 'Concept' && <span class="tag">{p.tag}</span>}
+                <span class="go">View the case study</span>
               </div>
-              {p.tag && <span class="tag">{p.tag}</span>}
             </a></li>
           ))}
         </ul>
