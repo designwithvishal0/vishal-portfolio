@@ -370,20 +370,26 @@ article>section:first-child{padding-top:120px}
     <div><span class="k">Role</span><p>Solo designer</p></div>
     <div><span class="k">Format</span><p>Landing page, banners, in app, emailer</p></div>
   </div>
-  <figure class="reel" style="margin-top:32px"><video data-inview class="shot wide" id="pwl-film" poster="img/reel-poster.webp" width="1200" height="900" muted loop playsinline preload="metadata" aria-label="Profit Wala Love campaign film, no sound"></video>
-    <div class="pills"><button type="button" class="pill" data-act="play" aria-pressed="false" aria-label="Play"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg><span class="lb">PLAY</span></button><button type="button" class="pill fs" data-act="fs" aria-label="Full screen"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/></svg><span class="lb">FULL SCREEN</span></button></div></figure>
+  <figure class="reel" style="margin-top:32px"><video data-inview class="shot wide" id="pwl-film" poster="img/reel-poster.webp" width="1200" height="900" muted loop playsinline preload="metadata" aria-label="Profit Wala Love campaign film with music"></video>
+    <div class="pills"><button type="button" class="pill" data-act="play" aria-pressed="false" aria-label="Play"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg><span class="lb">PLAY</span></button><button type="button" class="pill" data-act="sound" aria-pressed="false" aria-label="Turn sound on"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6A2 2 0 0 1 5 8.2H3a1 1 0 0 0-1 1v5.6a1 1 0 0 0 1 1h2a2 2 0 0 1 1.4.6l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg><span class="lb">SOUND ON</span></button><button type="button" class="pill fs" data-act="fs" aria-label="Full screen"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/></svg><span class="lb">FULL SCREEN</span></button></div></figure>
   <script is:inline>(()=>{
-    // This reel has no sound, so it only needs Play and Full screen. Same look and behaviour as the JARVIS reel otherwise.
-    const f=document.currentScript.previousElementSibling, v=f.querySelector('video'); const tall=matchMedia('(max-width:620px)').matches; if(tall){v.poster='img/reel-poster-tall.webp';v.width=1080;v.height=1920} v.src=tall?'showreel-tall.mp4':'showreel.mp4'; const pb=f.querySelector('[data-act=play]');
+    // Same look and behaviour as the JARVIS reel: autoplay with sound if the browser allows it, else muted until the first tap
+    const f=document.currentScript.previousElementSibling, v=f.querySelector('video'); const tall=matchMedia('(max-width:620px)').matches; if(tall){v.poster='img/reel-poster-tall.webp';v.width=1080;v.height=1920} v.src=tall?'showreel-tall.mp4':'showreel.mp4'; const pb=f.querySelector('[data-act=play]'), sb=f.querySelector('[data-act=sound]');
+    const on='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6A2 2 0 0 1 5 8.2H3a1 1 0 0 0-1 1v5.6a1 1 0 0 0 1 1h2a2 2 0 0 1 1.4.6l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M16 9a5 5 0 0 1 0 6M19.4 18.4a9 9 0 0 0 0-12.8"/></svg>', off=sb.querySelector('svg').outerHTML;
     const ip='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg>', ia='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><rect x="6" y="4.5" width="4.2" height="15" rx="1.4" fill="currentColor"/><rect x="13.8" y="4.5" width="4.2" height="15" rx="1.4" fill="currentColor"/></svg>';
-    const paint=()=>{pb.innerHTML=v.paused?ip+'<span class="lb">PLAY</span>':ia+'<span class="lb">PAUSE</span>';pb.setAttribute('aria-label',v.paused?'Play':'Pause');pb.setAttribute('aria-pressed',String(!v.paused))};
+    const paint=()=>{pb.innerHTML=v.paused?ip+'<span class="lb">PLAY</span>':ia+'<span class="lb">PAUSE</span>';pb.setAttribute('aria-label',v.paused?'Play':'Pause');pb.setAttribute('aria-pressed',String(!v.paused));
+      sb.innerHTML=v.muted?off+'<span class="lb">SOUND ON</span>':on+'<span class="lb">SOUND OFF</span>';sb.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');sb.setAttribute('aria-pressed',String(!v.muted))};
     const fb=f.querySelector('.fs'),fsOn=()=>document.fullscreenElement===f;
     fb.onclick=()=>{if(fsOn())document.exitFullscreen();else if(f.requestFullscreen)f.requestFullscreen();else if(v.webkitEnterFullscreen)v.webkitEnterFullscreen()};
     document.addEventListener('fullscreenchange',()=>{const o=fsOn();fb.setAttribute('aria-label',o?'Exit full screen':'Full screen');fb.querySelector('.lb').textContent=o?'EXIT FULL SCREEN':'FULL SCREEN'});
-    pb.onclick=()=>{if(v.paused)v.play();else v.pause()};
-    v.onclick=()=>pb.onclick();v.style.cursor='pointer';
-    ['play','pause'].forEach(e=>v.addEventListener(e,paint));
-    if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('calm'))v.play().catch(()=>{});paint();
+    let chose=false, blocked=false;
+    pb.onclick=()=>{if(v.paused){if(!chose)v.muted=false;v.play()}else v.pause()};
+    v.onclick=()=>{if(blocked){blocked=false;if(!chose)v.muted=false;if(v.paused)v.play();return}pb.onclick()};v.style.cursor='pointer';
+    sb.onclick=()=>{chose=true;v.muted=!v.muted;if(!v.muted&&v.paused)v.play()};
+    const wake=e=>{if(!chose&&!(e.target.closest&&e.target.closest('.reel .pill'))){v.muted=false;if(e.target!==v)blocked=false}removeEventListener('pointerdown',wake,true);removeEventListener('keydown',wake,true)};
+    addEventListener('pointerdown',wake,true);addEventListener('keydown',wake,true);
+    ['play','pause','volumechange'].forEach(e=>v.addEventListener(e,paint));
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('calm')){v.muted=false;v.play().catch(e=>{if(e.name==='NotAllowedError'){blocked=true;v.muted=true;v.play().catch(()=>{})}})}paint();
   })()</script>
 
 
