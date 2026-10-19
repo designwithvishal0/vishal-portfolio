@@ -933,7 +933,7 @@ html.calm .dock{transition:none}
 @media (max-width:759px) and (orientation:portrait){.hero{--sw:100%}}
 
 /* Phones, second round of Vishal's preview comments 2026-10-12 */
-.mw-h,.ab-more{display:none}
+.mw-h,.ab-more,.mw-go{display:none}
 @media (max-width:759px){
   /* the top bar does not repeat the name the hero's first line already says; it comes back as the section name once you scroll */
   .bar:has(.bar-sec:not([hidden])):not(.has-sec) .who{opacity:0;pointer-events:none}
@@ -950,6 +950,8 @@ html.calm .dock{transition:none}
   /* more work: a heading like every other section, and less air around it */
   .kf .mw{padding-top:56px}
   .mw-h{display:block;margin-bottom:8px}
+  .mrow .pill{display:none}
+  .mrow .mw-go{display:inline-flex;grid-area:pill;justify-self:start;margin-top:4px}
   .kf .pages{padding-top:72px}
   /* pages that sell: Profit Wala Love leads the swipe row like the rest */
   .pages .lead{display:none}

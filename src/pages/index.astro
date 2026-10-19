@@ -211,6 +211,8 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
           <h3><a href={m.href}>{m.name}</a></h3>
           <p class="mline">{m.line}</p>
           <span class="pill">Concept</span>
+          {/* phones show where the row goes instead of the Concept label (Vishal 2026-10-19) */}
+          <span class="more mw-go" aria-hidden="true">View the case study <Arrow /></span>
         </li>
       ))}
     </ul>
@@ -255,7 +257,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
               <span class="ctag">{p.tag && <span class={`pill${p.tag.startsWith('Shipped') ? ' shipped' : ''}`}>{p.tag}</span>}</span>
               <strong>{p.name}</strong>
               <span class="cline">{p.line}</span>
-              <span class="more">View on Behance <Arrow /></span>
+              <span class="more">View the project <Arrow /></span>
             </a></li>
           ))}
         </ul>
