@@ -928,7 +928,6 @@ html.calm .pwday img,html.calm .pwdeal,html.calm .pwknob,html.calm .pwtog span,h
   fit();new ResizeObserver(fit).observe(box);
   const smooth=()=>matchMedia('(prefers-reduced-motion: reduce)').matches||document.documentElement.classList.contains('calm')?'auto':'smooth';
   const days=[...p.querySelectorAll('.pwday')],strip=p.querySelector('.pwdays'),car=p.querySelector('.pwdeals'),deals=[...car.children];
-  if(mob.matches){
   let day=0,cur=1,sx=null,moved=0;
   /* Vishal 19 Oct 13:24: the deals never change the day; each day's three cards loop, the middle one starts centred, smaller cards either side */
   const lay=jump=>deals.forEach((e,i)=>{const on=Math.floor(i/3)===day;e.hidden=!on;if(!on){delete e.dataset.o;return}
@@ -942,17 +941,6 @@ html.calm .pwday img,html.calm .pwdeal,html.calm .pwknob,html.calm .pwtog span,h
   car.addEventListener('pointercancel',()=>{sx=null});
   days.forEach((b,i)=>b.onclick=()=>setDay(i));
   deals.forEach(e=>e.onclick=()=>{if(moved){moved=0;return}const o=+e.dataset.o;if(o)step(o)});
-  }else{
-  let day=0,cur=1,lock=0;
-  const setDay=d=>{if(d===day)return;day=d;days.forEach((b,i)=>{b.classList.toggle('on',i===d);b.setAttribute('aria-pressed',i===d)});const b=days[d];strip.scrollTo({left:b.offsetLeft-(360-110)/2,behavior:smooth()})};
-  const center=i=>deals[i].offsetLeft+126-180;
-  const go=i=>{lock=Date.now();car.scrollTo({left:center(i),behavior:smooth()});mark(i)};
-  const mark=i=>{cur=i;deals.forEach((e,j)=>e.classList.toggle('on',j===i))};
-  car.scrollLeft=center(1);
-  car.addEventListener('scroll',()=>{const c=car.scrollLeft+180;let b=0,m=1e9;deals.forEach((e,j)=>{const x=Math.abs(e.offsetLeft+126-c);if(x<m){m=x;b=j}});if(Date.now()-lock<700)return;if(b!==cur)mark(b);setDay(Math.floor(b/3))},{passive:true});
-  days.forEach((b,i)=>b.onclick=()=>{setDay(i);go(i*3+1)});
-  deals.forEach((e,i)=>e.onclick=()=>{if(i!==cur){setDay(Math.floor(i/3));go(i)}});
-  }
   const tog=p.querySelector('.pwtog'),cats=[...p.querySelectorAll('.pwcat')],fl=[...p.querySelectorAll('.pwflash img')],flr=p.querySelector('.pwflash');
   let who='her',cat=0;
   const paint=()=>{cats.forEach((b,i)=>{b.classList.toggle('on',i===cat);b.setAttribute('aria-pressed',i===cat)});
@@ -1024,8 +1012,8 @@ article>section>figure.cut.pwbig{display:block!important}
 
 <style is:inline>
 /* Desktop phone (Vishal 19 Oct 13:20): smaller, sized to the window so it pins and the screen scrolls first; full screen shows the framed, working prototype */
-.stage{--pw:max(260px,min(320px,calc((100svh - 216px) / 2.143)))}
-.stage .iph{width:var(--pw)}
+@media (min-width:761px){.stage{--pw:max(260px,min(320px,calc((100svh - 216px) / 2.143)))}.stage .iph{width:var(--pw)}}
+.stage:fullscreen .iph{width:var(--pw)}
 .pwfs{position:absolute;top:-52px;right:0;width:40px;height:40px;display:grid;place-items:center;border:0;border-radius:50%;background:#831A1A;color:#FFE9E9;cursor:pointer}
 .pwfs:hover{background:#6B1C25}.pwfs:focus-visible{outline:2px solid #831A1A;outline-offset:3px}
 .stage:fullscreen{--pw:min(440px,calc((100vh - 64px) / 2.143));align-items:center;padding:32px;border-radius:0;background:#1F0A0B}
@@ -1039,11 +1027,9 @@ b.addEventListener('click',()=>document.fullscreenElement?document.exitFullscree
 document.addEventListener('fullscreenchange',()=>b.setAttribute('aria-label',document.fullscreenElement===st?'Exit full screen':'Open the prototype full screen'))})();
 </script>
 <style is:inline>
-/* Deal cards loop within the chosen day, phones only (Vishal 19 Oct 13:24, 13:25 desktop stays the swipe carousel) */
-@media (max-width:760px){
+/* Deal cards loop within the chosen day, desktop and phones (Vishal 19 Oct 13:24, 13:27) */
 .pwdeals{display:block;overflow:hidden;height:259px;padding:0;touch-action:pan-y;user-select:none;-webkit-user-select:none}
 .pwdeal{position:absolute;left:54px;top:29px;width:252px;height:193px;margin:0;transition:transform .35s ease}
 .pwdeal[hidden]{display:none}
 .iph .sc .pwdeal img{-webkit-user-drag:none;pointer-events:none}
-}
 </style>
