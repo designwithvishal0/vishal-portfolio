@@ -690,7 +690,8 @@ body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
 /* Metropolis is wider than Figtree: keep the closing title on one line on phones */
 @media (max-width:620px){.closing h2{font-size:clamp(34px,10.4vw,56px)!important}}
 /* What I learned (Vishal 19 Oct "seems off"): heading left, its line right, level with the heading */
-@media (min-width:1100px){#learned>p:not(.eyebrow){padding-top:44px;font-size:20px;line-height:1.55;max-width:46ch}}
+/* 19 Oct 14:33: one column, heading on two lines, its line right under it, so nothing floats on the right */
+@media (min-width:1100px){article>section#learned{display:block}#learned>.eyebrow{display:block;margin:0 0 14px}#learned h2{max-width:26ch;margin-top:0;padding-top:0}#learned>p:not(.eyebrow){margin-top:20px;font-size:20px;line-height:1.55;max-width:56ch}}
 </style>
 
 <script is:inline>
