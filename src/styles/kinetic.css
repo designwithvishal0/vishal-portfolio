@@ -951,7 +951,7 @@ html.calm .dock{transition:none}
   .kf .mw{padding-top:56px}
   .mw-h{display:block;margin-bottom:8px}
   .mrow .pill{display:none}
-  .mrow .mw-go{display:inline-flex;grid-area:pill;justify-self:start;margin-top:4px}
+  .mrow .mw-go{display:inline-flex;grid-area:pill;justify-self:start;min-height:0;margin-top:6px}
   .kf .pages{padding-top:72px}
   /* pages that sell: Profit Wala Love leads the swipe row like the rest */
   .pages .lead{display:none}
