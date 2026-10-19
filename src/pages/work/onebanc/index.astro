@@ -369,7 +369,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
 @media (max-width:620px){
   .pal{grid-template-columns:1fr 1fr}
   .arc3{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-28px;padding:0 28px 8px;scroll-padding-inline:28px;gap:14px}
-  .arc3 .iph{flex:0 0 64%;scroll-snap-align:start}
+  .arc3 .iph{flex:0 0 80%;scroll-snap-align:start}
   .ba{grid-template-columns:minmax(0,1fr)}
   .tbl,.tbl tbody,.tbl tr,.tbl td{display:block}.tbl thead{display:none}
   .tbl tr{padding:14px 0;border-top:1px solid var(--line)}.tbl td{border:0;padding:2px 0}
@@ -981,7 +981,7 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 .iph .sc img{display:block;width:100%;height:auto}
 .iph .sc:focus-visible{outline:3px solid #7A5F1F;outline-offset:4px}
 @media (min-width:901px){.scr .screen{grid-template-columns:minmax(0,640px) 320px}.scr .screen>figure{width:320px}}
-@media (min-width:621px){.arc3{grid-template-columns:repeat(3,minmax(0,300px));justify-content:center;column-gap:clamp(24px,5vw,72px)}}
+@media (min-width:621px){.arc3{grid-template-columns:repeat(3,minmax(0,384px));justify-content:center;column-gap:clamp(24px,4vw,56px)}}
 /* Vishal 2026-10-17 "the scrolling behaviour": on a laptop window the four notes stacked taller than the window, so the row never pinned and the phone screen never scrolled (Twelve and ixigo pin every row). Two columns of notes keep each row shorter than the phone, so it pins like the others */
 /* Vishal 2026-10-17 (picked "Like Split"): the three screens work like Split's. The whole tall screen, no phone frame, scrolls past with the page while its notes stay pinned on the left (as on his Framer OneBanc page). Notes in two columns on desktop so the pinned block fits a laptop window */
 .scr .screen>figure>.scrimg{display:block;width:100%;height:auto;border-radius:40px;border:1px solid #DCD6C6;box-shadow:0 16px 40px rgba(15,31,11,.12);background:#fff}
@@ -1071,6 +1071,8 @@ html.steps .scr .blk.on{opacity:1;transform:none}
 }
 .foundline{max-width:none}
 .pcol{display:grid;gap:22px}
+/* Vishal 2026-10-19: on phones Screens 1 to 3 had too much text; each point keeps its label and headline, the paragraph is hidden */
+@media (max-width:620px){.scr .blk>p{display:none}.scr .blks{gap:20px}.scr .blk{gap:6px}}
 /* arc: the nav bar stays on the frame's bottom edge while the screen scrolls under it, as on Reward Centre */
 .iph>.navfix{position:absolute;left:5px;right:5px;bottom:5px;background-repeat:no-repeat;background-size:100% auto;background-position:bottom;border-radius:0 0 41px 41px;pointer-events:none}
 .iph:has(.navfix)>.fsb{bottom:auto;top:20px;right:20px}
