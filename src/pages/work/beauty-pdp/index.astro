@@ -639,8 +639,8 @@ article>section.lt,article>section#matcher{padding-top:120px}
           <h2>Why the two desktop pages look different</h2>
         </div>
         <div class="laps">
-          <figure><div class="lap"><div class="sc" tabindex="0"><img src="img/03-desktop-beauty-full-page.webp" width="1600" height="5409" alt="The full foundation product page on desktop" loading="lazy"></div></div></figure>
-          <figure><div class="lap"><div class="sc" tabindex="0"><img src="img/04-desktop-fashion-full-page.webp" width="1600" height="4151" alt="The full dress product page on desktop" loading="lazy"></div></div></figure>
+          <figure><div class="lap"><div class="sc" tabindex="0"><img src="img/03-desktop-beauty-full-page.webp" width="1600" height="5409" alt="The full foundation product page on desktop" loading="lazy"></div></div><figcaption>Foundation: a rail beside one big photo</figcaption></figure>
+          <figure><div class="lap"><div class="sc" tabindex="0"><img src="img/04-desktop-fashion-full-page.webp" width="1600" height="4151" alt="The full dress product page on desktop" loading="lazy"></div></div><figcaption>Dress: a grid of every angle</figcaption></figure>
         </div>
         <div style="display:grid;gap:22px;max-width:66ch;margin-top:40px">
           <p>Because the photos do different jobs. Beauty photos are reference: a bottle, a claims graphic, a shade chart. You pick one to look at, so it is a rail beside one big stage. Fashion photos are evidence: front, back, side. Fit reads across angles, so it is a grid that shows them together.</p>
@@ -1054,6 +1054,8 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 <script is:inline src="/js/pin-frames.js" defer></script>
 <script is:inline src="/js/flowdlg.js" defer></script>
 <script is:inline src="/js/pin-screen.js" defer></script>
+<script is:inline>/* Beauty PDP desktop pages side by side: both frames stay pinned until the longer page has scrolled (Vishal 19 Oct) */
+addEventListener('DOMContentLoaded',()=>{const sync=()=>{const w=[...document.querySelectorAll('.laps>.pin-wrap')].filter(e=>e.style.height);if(w.length<2)return;const m=Math.max(...w.map(e=>parseFloat(e.style.height)));w.forEach(e=>e.style.height=m+'px')};sync();addEventListener('load',sync);addEventListener('resize',()=>setTimeout(sync,60))});</script>
 </html>
 
 <style is:inline>
@@ -1113,4 +1115,17 @@ body{background:#E80070}
 .wrap>header.hero,.wrap>.facts,.wrap>.note,.wrap>.summary,.wrap>figure.reel{--fg:#FFFFFF;--body:#FFFFFF;--muted:rgba(255,255,255,.92);--acc:#FFE0EE;--warm:#FFE0EE;--line:rgba(255,255,255,.34);--card:#C8005F;color:var(--fg)}
 .wrap>.note .nlab{border-color:rgba(255,255,255,.6);color:#fff}
 .wrap>figure.reel .shot{box-shadow:0 24px 60px rgba(90,0,40,.35)}
+
+/* Vishal 19 Oct "Desktop... looks off": the two desktop pages side by side in landscape screens, not two narrow frames stacked on the left */
+@media (min-width:900px){.laps{grid-template-columns:1fr 1fr;gap:32px}.lap .sc{height:auto;aspect-ratio:16/10}}
+.laps figure{min-width:0}
+.laps .screen{grid-template-columns:minmax(0,1fr)!important;max-width:none!important;gap:12px!important}
+.laps .lap.pm{width:auto!important;max-width:none!important;grid-template-columns:minmax(0,1fr)!important}
+.laps .lap .pm-scr{width:auto!important}
+/* Trade offs "seems very off": one flat card per decision, its cost under a thin rule instead of a cream box inside a grey box */
+.costs{gap:16px}
+.costs div{grid-template-rows:auto auto 1fr auto;padding:24px 24px 22px}
+.costs .cost{background:none;border-radius:0;padding:14px 0 0;margin-top:6px;border-top:1px solid var(--line);color:var(--body)}
+.costs .cost .k{color:var(--acc)}
+.costs .n{color:var(--acc)}
 </style>
