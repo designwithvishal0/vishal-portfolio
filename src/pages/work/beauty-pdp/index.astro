@@ -486,254 +486,41 @@ article>section.lt,article>section#matcher{padding-top:120px}
     if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('calm')){v.muted=false;v.play().catch(e=>{if(e.name==='NotAllowedError'){blocked=true;v.muted=true;v.play().catch(()=>{})}})}paint();
   })()</script>
 
-  <section class="summary" aria-labelledby="sum">
-    <h2 id="sum">The 30 second version</h2>
-    <div><span class="k">Problem</span><p>Each buyer has one question that stops the sale: the shade for a foundation, the size for a dress.</p></div>
-    <div><span class="k">Decision</span><p>The proof for that question sits right where it comes up, never in a tab further down.</p></div>
-    <div><span class="k">The one metric that matters</span><p>Wrong shade reports. If the matcher works, that line falls.</p></div>
-    <div><span class="k">What I learned</span><p>Now, before I copy a pattern, I ask what it quietly depends on.</p></div>
-  </section>
 
   <div class="layout">
     <nav class="toc" aria-label="Contents">
       <div class="tid" aria-hidden="true"><b>Beauty and fashion product page</b><span>Self initiated · 2026</span><i></i></div>
       <span class="k">Contents</span>
       <a href="#rule">The one rule</a>
-      <a href="#who">Who this is for</a>
-      <a href="#try">Try it yourself</a>
       <a href="#stores">What stores already had</a>
-      <a href="#page">The full page</a>
+      <a href="#page">Stop by stop</a>
+      <a href="#try">Try it yourself</a>
       <a href="#matcher">Shade matcher</a>
       <a href="#fashion">Fashion</a>
       <a href="#desktop">Desktop</a>
       <a href="#edges">Edge cases</a>
-      <a href="#wrong">What I got wrong first</a>
       <a href="#trades">Trade offs</a>
-      <a href="#system">Under the hood</a>
-      <a href="#changed">What changed</a>
-      <a href="#breaks">Where this breaks</a>
-      <a href="#learned">What I learned</a>
+      <a href="#twoways">Two ways to buy</a>
     </nav>
-    <button type="button" class="tocpill" popovertarget="tocsheet" aria-label="Contents"><span class="k">Contents</span><b>The one rule</b><i aria-hidden="true">1 / 15</i><span class="chev" aria-hidden="true"></span></button>
+    <button type="button" class="tocpill" popovertarget="tocsheet" aria-label="Contents"><span class="k">Contents</span><b>The one rule</b><i aria-hidden="true">1 / 10</i><span class="chev" aria-hidden="true"></span></button>
     <div id="tocsheet" class="tocsheet" popover><span class="k">Contents</span></div>
     <div class="dockfade" aria-hidden="true"></div><nav class="dock" aria-label="Contents"><button type="button" class="dkb" data-go="-1" aria-label="Previous section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="dkm"><div class="dkt"><b></b><i></i></div><div class="dks"></div></div><a class="dkn" href="#"><small>NEXT</small><span></span></a><button type="button" class="dkb" data-go="1" aria-label="Next section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></nav>
 
     <article>
-      <section id="rule" class="lt">
-        <p class="eyebrow">The hardest call</p>
-        <h2>Put the answer next to the doubt</h2>
-        <p>Every product page has the same sections: photos, price, options, delivery, reviews. The order is where they differ, and almost every store orders them by what the store wants to say.</p>
-        <p>I ordered mine by what the buyer is unsure about. A foundation buyer has one doubt: will this shade match me? A dress buyer has one doubt: will this size fit me? Everything on both pages follows from putting the evidence for that one doubt exactly where it is felt, and keeping everything else quiet until the choice is made.</p>
-        <p>That rule decided the fold, the order of sections, what became a tool, what became a single sentence, and most of the edge cases.</p>
-        <blockquote class="pq">The answer goes <u>next to the doubt</u>, not in a tab after it.</blockquote>
+      <section id="rule" class="bh wide"><h2 class="vh">The one rule</h2><img src="img/bh-rule.webp" width="1310" height="1041" alt="Put the answer next to the doubt. Two shoppers, two doubts that stop the sale: will this shade match me, and will this size fit me." loading="lazy" decoding="async"></section>
+      <section id="stores" class="bh wide"><h2 class="vh">What stores already had</h2><img src="img/bh-stores.webp" width="1310" height="1222" alt="Every store built the right tool, then hid it. Six Indian stores audited, each with a shade finder or size help placed away from the doubt." loading="lazy" decoding="async"></section>
+      <section id="page" class="bh wide"><h2 class="vh">Stop by stop</h2><img src="img/bh-page.webp" width="1310" height="2721" alt="What this page does that others do not, stop by stop: the matcher on the photo, a price you do not have to calculate, the decision before the button, delivery after the choice, reviews about your shade, and pairings for the shade you pick." loading="lazy" decoding="async"></section>
+      <section id="try" class="bhproto wide lt" aria-labelledby="try-h">
+        <h2 id="try-h">Try the phone page yourself</h2>
+        <p>The prototype from my Figma file. Scroll the page, tap Find my shade, and the buy bar stays put.</p>
+        <div class="iph noisl"><div class="fg"><iframe src="https://embed.figma.com/proto/Pwe7AzXT42dYgkLY90nwVY/PDP-%E2%80%94-Vishal-Yadav?node-id=80-2&starting-point-node-id=80%3A2&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&footer=false&embed-host=share" title="Prototype of the foundation product page on a phone, from Figma" loading="lazy" allowfullscreen></iframe></div></div>
       </section>
-
-      <section id="who" class="lt sf">
-        <p class="eyebrow">Who this is for</p>
-        <h2>Two buyers, two doubts that stop the sale</h2>
-        <div class="doubts">
-          <div><span>Buying a foundation from a brand she has never worn</span><b>Will this shade match me?</b></div>
-          <div><span>Buying a dress from a brand he has never bought</span><b>Will this size fit me?</b></div>
-        </div>
-        <p>Both are shopping on a phone, from a product they cannot touch. For the foundation buyer the cost of a wrong guess is total, because foundation is sealed for hygiene and cannot be sent back. For the dress buyer the cost is a return trip and a week of waiting.</p>
-        <div class="stats">
-          <div><b>1st</b><span>shade mismatch is the top reason complexion products come back</span></div>
-          <div><b>38%</b><span>of mobile product pages are even decent (Baymard benchmark of 344 ecommerce sites)</span></div>
-          <div><b>0 of 6</b><span>Indian stores whose shade selector said depth or undertone</span></div>
-        </div>
-        <p class="source">The six stores are Nykaa, Tira, Amazon India, Flipkart, Myntra and Ajio, checked firsthand on desktop and mobile web, with the same foundation wherever possible.</p>
-      </section>
-
-      <section id="try" class="lt">
-        <p class="eyebrow">Try it yourself</p>
-        <h2>Is 290 warm or cool?</h2>
-        <p>That is the full label one major beauty store gives a shade. Just “290”.</p>
-        <div class="qt">
-          <span class="sw" aria-hidden="true"></span><b>290</b>
-          <div class="two"><button type="button">Warm</button><button type="button">Cool</button></div>
-          <div class="ans" aria-live="polite" hidden>Nobody can tell. That is the problem.</div>
-        </div>
-        <script is:inline>(()=>{const q=document.currentScript.previousElementSibling,a=q.querySelector('.ans');q.querySelectorAll('button').forEach(b=>b.onclick=()=>{a.hidden=false})})()</script>
-        <p>One store ran three naming systems inside the same row of shades. On my page every shade says three things: a number, a name and where it sits. 230 Natural Buff, medium, warm. Ordered light to deep.</p>
-        <img class="colimg" src="img/12-stop-beauty-shade.webp" width="780" height="620" alt="The shade row on the product page: named shades from light to deep, with 230 Natural Buff, medium, warm selected" loading="lazy">
-      </section>
-
-      <section id="stores" class="lt sf">
-        <p class="eyebrow">Six stores, twelve surfaces</p>
-        <h2>Every store built the right tool, then hid it</h2>
-        <p>The surprise was not what was missing. Almost everything a buyer needs already exists somewhere. It is just never where the buyer is standing.</p>
-        <div class="sos">
-          <div><h3>Ajio built a chart of how a size actually fits. It is in the app only. Two words on web.</h3><p><b>So I:</b> put fit as one honest sentence directly above the size buttons.</p></div>
-          <div><h3>Tira built a shade finder. It disappears on desktop.</h3><p><b>So I:</b> put the matcher on the photo on mobile and beside the shades on desktop, always within reach of the choice.</p></div>
-          <div><h3>Nykaa built virtual try on. It is an unlabelled thumbnail with no words on the page.</h3><p><b>So I:</b> gave the matcher a name, a pink pill and one job: Find my shade.</p></div>
-        </div>
-        <p class="source">I also tested three behaviours instead of just looking at them: adding to bag with no shade picked, how sold out shades render, and whether ratings carry over to the category grid.</p>
-      </section>
-
-      <section id="page" class="lt wide">
-        <div style="display:grid;gap:22px;max-width:66ch">
-          <p class="eyebrow">The page</p>
-          <h2>Here is the whole product page, top to bottom</h2>
-          <p>Read it the way a buyer moves through it: discover, evaluate, select, purchase. At every stop the one rule shows up in a different form.</p>
-        </div>
-        <div class="walk">
-          <figure><div class="iph"><div class="fg"><iframe src="https://embed.figma.com/proto/Pwe7AzXT42dYgkLY90nwVY/PDP-%E2%80%94-Vishal-Yadav?node-id=80-2&starting-point-node-id=80%3A2&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&footer=false&embed-host=share" title="Prototype of the foundation product page on a phone, from Figma" loading="lazy" allowfullscreen></iframe></div></div><figcaption>The prototype from my Figma file. Scroll and tap inside the phone.</figcaption></figure>
-          <div class="stops">
-            <div class="stop"><span class="k">Discover · The photo</span><h3>The matcher sits on the photo</h3><img src="img/10-stop-beauty-photo.webp" width="780" height="1240" alt="The product photo with a pink Find my shade pill and the selected shade named in the top corner" loading="lazy"><span class="k">This page</span><p>Find my shade is a pink pill on the photo, where the doubt starts. The selected shade is named in the top corner.</p><span class="k">Other pages</span><p class="other">Try on hides as an unlabelled thumbnail.</p></div>
-            <div class="stop"><span class="k">Evaluate · Price and offer</span><h3>A price you do not have to calculate</h3><img src="img/11-stop-beauty-price.webp" width="780" height="560" alt="The price block: ₹441 with Buy at ₹375 with NEW15 worked out underneath" loading="lazy"><span class="k">This page</span><p>Buy at ₹375 with NEW15, worked out and sitting right under the ₹441 price. It comes before the shades, because if the price rules the product out, choosing a shade was wasted effort.</p><span class="k">Other pages</span><p class="other">A row of coupon codes. The maths is yours.</p></div>
-            <div class="stop"><span class="k">Select · Shade</span><h3>The decision comes before the button</h3><img src="img/12-stop-beauty-shade.webp" width="780" height="620" alt="Named shades from light to deep, followed by the note that shades cannot be returned" loading="lazy"><span class="k">This page</span><p>Named shades, light to deep, then the one fact that matters: shades cannot be returned. It is the last thing between the shades and the buy bar.</p><span class="k">Other pages</span><p class="other">“290”. “Shade 128”. Add to Bag sits 97 pixels above the shade row.</p></div>
-            <div class="stop"><span class="k">Purchase · Getting it to you</span><h3>Delivery waits until after the choice</h3><img src="img/13-stop-beauty-delivery.webp" width="780" height="580" alt="The delivery block with pincode, cash on delivery and a delivery date" loading="lazy"><span class="k">This page</span><p>Pincode, cash on delivery and a real date, placed after the buy decision. An empty pincode box between “I want this” and Buy is homework, and it makes everyone pay for a problem a few people have.</p></div>
-            <div class="stop"><span class="k">Evaluate · Reviews</span><h3>Reviews about your shade, not the bottle</h3><img src="img/14-stop-beauty-reviews.webp" width="780" height="1440" alt="Reviews with a Did 230 Natural Buff match block showing 64% matched, 23% slightly off and 13% wrong shade" loading="lazy"><span class="k">This page</span><p>“Did 230 Natural Buff match?” with 64% matched, 23% slightly off and 13% wrong shade. Reviews filter to shades near yours, and each one says what the person bought and what they moved to.</p><span class="k">Other pages</span><p class="other">One star average for every shade. 43% of sites show no rating breakdown at all.</p></div>
-            <div class="stop"><span class="k">Purchase · Pairings</span><h3>Goes with the shade you pick</h3><img src="img/15-stop-beauty-pairings.webp" width="780" height="620" alt="A row of primer, compact and setting products picked for the chosen shade" loading="lazy"><span class="k">This page</span><p>Primer, compact and setting products picked for the shade you chose, not a generic bestseller row.</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="matcher" class="wide">
-        <div style="display:grid;gap:22px;max-width:66ch">
-          <p class="eyebrow">Inside the shade step</p>
-          <h2>Two questions. Three honest answers. No promises.</h2>
-          <p>It does not ask for a selfie. It asks two things anyone can answer, and tells you how to answer them.</p>
-        </div>
-        <div class="mtry">
-          <div class="mtxt">
-            <p class="eyebrow">Try it on the phone</p>
-            <ol class="msteps"><li><b>Find my shade</b><p>Find my shade is on the photo, right where you are already looking.</p></li><li><b>Depth</b><p>How deep is your skin? Look at your jaw in daylight, not your hand. Hands run darker.</p></li><li><b>Undertone</b><p>Which way do you lean? Hold gold, then silver, against your face.</p></li><li><b>Three shades</b><p>Three shades, closest first, each with how often it actually matched. And it says plainly that nothing here is a guarantee.</p></li><li><b>Applied</b><p>The page remembers: “Matched to medium, warm”, with a Redo if you change your mind.</p></li></ol>
-            <div class="why"><span class="k">Why three and not one</span><p>A single answer would sound confident. Three with real match rates is honest about how fuzzy skin tone is, and still narrows twenty one shades to a choice you can make.</p></div>
-          </div>
-          <figure class="mph"><div class="iph lt noisl"><div class="fg"><iframe src="https://embed.figma.com/proto/Pwe7AzXT42dYgkLY90nwVY/PDP-%E2%80%94-Vishal-Yadav?node-id=462-3528&starting-point-node-id=462%3A3528&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&footer=false&embed-host=share" title="Shade matcher prototype from Figma: tap Find my shade" loading="lazy" allowfullscreen></iframe></div></div><figcaption>Live prototype from my Figma file. Tap Find my shade on the photo.</figcaption></figure>
-        </div>
-        <h3 class="h3x">On a laptop it changes shape, not just size</h3>
-        <p style="max-width:66ch">The bottom sheet becomes a side panel, so the product stays fully in view while you answer. You close it with Escape or a click outside instead of a swipe.</p>
-        <div class="two-up">
-          <img class="flat" src="img/25-matcher-desktop-depth.webp" width="1600" height="1000" alt="Desktop shade matcher as a side panel, asking for skin depth" loading="lazy">
-          <img class="flat" src="img/26-matcher-desktop-result.webp" width="1600" height="1000" alt="Desktop shade matcher side panel showing three matched shades" loading="lazy">
-        </div>
-        <img class="flat" src="img/27-matcher-desktop-applied.webp" width="1600" height="1000" alt="Desktop product page after matching, with the matched shade applied" loading="lazy">
-      </section>
-
-      <section id="fashion" class="lt wide">
-        <div style="display:grid;gap:22px;max-width:66ch">
-          <p class="eyebrow">The second category</p>
-          <h2>A dress does not need a tool. It needs one honest sentence.</h2>
-          <p>You know your size. What you do not know is whether this brand’s M is anyone else’s M. So fashion gets a sentence instead of a matcher, placed above the size buttons so it changes your pick before you make it.</p>
-          <blockquote class="warnq">Sangria’s M runs a size small. 23% of buyers exchanged for the next size up.</blockquote>
-          <p>It blames the brand, not your body.</p>
-        </div>
-        <div class="walk">
-          <figure><div class="iph"><div class="fg"><iframe src="https://embed.figma.com/proto/Pwe7AzXT42dYgkLY90nwVY/PDP-%E2%80%94-Vishal-Yadav?node-id=139-372&starting-point-node-id=139%3A372&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&footer=false&embed-host=share" title="Prototype of the dress product page on a phone, from Figma" loading="lazy" allowfullscreen></iframe></div></div><figcaption>The prototype from my Figma file. Scroll and tap inside the phone.</figcaption></figure>
-          <div class="stops">
-            <div class="stop"><span class="k">Discover · The photo</span><h3>Fit help on the photo</h3><img src="img/16-stop-fashion-photo.webp" width="780" height="1240" alt="The dress photo with Model wears M, 5 foot 7 in the corner and a Size button on the photo" loading="lazy"><span class="k">This page</span><p>“Model wears M, 5′7″” in the corner, and a Size button on the photo itself.</p><span class="k">Other pages</span><p class="other">Fit data on the app only. Two words on web.</p></div>
-            <div class="stop"><span class="k">Select · Size</span><h3>The sentence that changes your pick</h3><img src="img/17-stop-fashion-size.webp" width="780" height="400" alt="The fit sentence Sangria’s M runs a size small above the size buttons" loading="lazy"><span class="k">This page</span><p>Sangria’s M runs a size small, sitting directly above the sizes.</p><span class="k">Other pages</span><p class="other">Pick a size with nothing to go on.</p></div>
-            <div class="stop"><span class="k">Purchase · Returns</span><h3>Same slot, opposite meaning</h3><img src="img/18-stop-fashion-returns.webp" width="780" height="760" alt="The returns block: free 7 day returns and one free exchange" loading="lazy"><span class="k">This page</span><p>Free 7 day returns and one free exchange. On foundation this part of the page warns. On a dress it reassures, because the risk is opposite.</p></div>
-            <div class="stop"><span class="k">Evaluate · Reviews</span><h3>Did size M fit?</h3><img src="img/19-stop-fashion-reviews.webp" width="780" height="1660" alt="Dress reviews showing 64% true to size and 23% ran small" loading="lazy"><span class="k">This page</span><p>64% true to size, 23% ran small, filtered to people near your size and height.</p></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="desktop" class="lt sf wide">
-        <div style="display:grid;gap:22px;max-width:66ch">
-          <p class="eyebrow">Desktop</p>
-          <h2>Why the two desktop pages look different</h2>
-        </div>
-        <div class="laps">
-          <figure><div class="lap"><div class="sc" tabindex="0"><img src="img/03-desktop-beauty-full-page.webp" width="1600" height="5409" alt="The full foundation product page on desktop" loading="lazy"></div></div><figcaption>Foundation: a rail beside one big photo</figcaption></figure>
-          <figure><div class="lap"><div class="sc" tabindex="0"><img src="img/04-desktop-fashion-full-page.webp" width="1600" height="4151" alt="The full dress product page on desktop" loading="lazy"></div></div><figcaption>Dress: a grid of every angle</figcaption></figure>
-        </div>
-        <p class="dtry"><button type="button" class="dgo">Try the foundation page on desktop, with the shade matcher</button></p>
-        <dialog class="ddlg" aria-label="Desktop prototype of the foundation page"><button type="button" class="dx" aria-label="Close the prototype"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button><div class="dscr"><div class="fg"><iframe src="https://embed.figma.com/proto/Pwe7AzXT42dYgkLY90nwVY/PDP-%E2%80%94-Vishal-Yadav?node-id=176-707&starting-point-node-id=176%3A707&scaling=scale-down&content-scaling=fixed&hide-ui=1&footer=false&embed-host=share" title="Prototype of the foundation product page on desktop, from Figma" loading="lazy" allowfullscreen></iframe></div></div></dialog>
-        <div style="display:grid;gap:22px;max-width:66ch;margin-top:40px">
-          <p>Because the photos do different jobs. Beauty photos are reference: a bottle, a claims graphic, a shade chart. You pick one to look at, so it is a rail beside one big stage. Fashion photos are evidence: front, back, side. Fit reads across angles, so it is a grid that shows them together.</p>
-          <p>There is a second reason. A grid scrolls. The beauty buy column is tall, so a scrolling gallery would drag the shade choice out of view. The fashion column is short. The gallery is decided by its neighbour, not by taste.</p>
-        </div>
-        <div class="two-up" style="margin-top:32px">
-          <figure><img class="flat" src="img/05-desktop-beauty-fold.webp" width="1600" height="1000" alt="Desktop foundation page fold with a thumbnail rail beside one large photo" loading="lazy"><figcaption>Reference: pick one to look at</figcaption></figure>
-          <figure><img class="flat" src="img/06-desktop-fashion-fold.webp" width="1600" height="1000" alt="Desktop dress page fold with a grid of front, back and side photos" loading="lazy"><figcaption>Evidence: compare them all</figcaption></figure>
-        </div>
-      </section>
-
-      <section id="edges" class="lt wide">
-        <div style="display:grid;gap:22px;max-width:66ch">
-          <p class="eyebrow">Seven edge cases</p>
-          <h2>Bad news, said once, with a way out</h2>
-          <p>Every state follows the same three rules. Say what is true. Do not pad it. Leave one useful thing to do.</p>
-        </div>
-        <ul class="edges">
-          <li><img src="img/30-edge-sold-out.webp" width="780" height="1688" alt="Sold out state with the badge above the name and a Notify me button" loading="lazy"><h3>When it is gone</h3><p>The badge sits above the name, because stock is about the product, not the photo. The button becomes Notify me, and promises one message.</p></li>
-          <li><img src="img/31-edge-size-gone.webp" width="780" height="1688" alt="Size gone state with M struck and outlined and XL dimmed" loading="lazy"><h3>When your size is gone</h3><p>M is struck and outlined because it was your pick. XL is just dimmed. The fit sentence becomes the way out: L is the closest fit.</p></li>
-          <li><img src="img/32-edge-no-reviews.webp" width="780" height="1688" alt="No reviews yet state" loading="lazy"><h3>When nobody has bought it yet</h3><p>It says so and stops. No borrowed rating from other shades to look busy.</p></li>
-          <li><img src="img/33-edge-cannot-deliver.webp" width="780" height="1688" alt="Cannot deliver state with the pincode kept in the box" loading="lazy"><h3>When we cannot reach you</h3><p>Your pincode stays in the box so you can see what went wrong. One action left: tell me when you deliver here.</p></li>
-          <li><img src="img/34-edge-21-shades.webp" width="780" height="1688" alt="Twenty one shades with a depth filter and See all 21 shades" loading="lazy"><h3>When there are 21 shades</h3><p>A depth filter appears, and See all 21 shades comes back, because now something actually overflows.</p></li>
-        </ul>
-        <div class="two-up" style="margin-top:40px">
-          <figure><img class="flat" src="img/35-edge-sold-out-desktop.webp" width="1600" height="1000" alt="Sold out state on desktop" loading="lazy"><figcaption>On desktop, four things change instead of one.</figcaption></figure>
-          <figure><img class="flat" src="img/36-edge-21-shades-desktop.webp" width="1600" height="1000" alt="Twenty one shades on desktop wrapping into rows" loading="lazy"><figcaption>Twenty one shades wrap into rows instead of scrolling four at a time.</figcaption></figure>
-        </div>
-      </section>
-
-      <section id="wrong" class="lt sf">
-        <p class="eyebrow">What I got wrong first</p>
-        <h2>Four things I built, then cut</h2>
-        <div class="cuts">
-          <div><h3>A buy rail pinned to the side</h3><p>It repeated the product, price and button from the very first pixel and squeezed the photo to 460px on a 1440 screen. Now a bar slides in only after the page’s own buttons scroll away.</p></div>
-          <div><h3>A shade dropdown</h3><p>Copied from a store with fifty shades, where it makes sense. With six shades all visible, mine opened a list of exactly what was already on screen.</p></div>
-          <div><h3>A borrowed rating</h3><p>The empty review state quoted 4.4 from the other shades. Reviews belong to the product, not the shade. I had invented a number, so it went.</p></div>
-          <div><h3>Three helpful paragraphs</h3><p>A note explaining the matcher, one explaining the gallery, a box explaining delivery. All three deleted. If a control needs a paragraph, the control is wrong.</p></div>
-        </div>
-      </section>
-
-      <section id="trades" class="lt wide">
-        <div style="display:grid;gap:22px;max-width:66ch">
-          <p class="eyebrow">Trade offs</p>
-          <h2>What each decision cost</h2>
-        </div>
-        <div class="costs">
-          <div><span class="n">01</span><h3>The no returns warning sits right before Buy</h3><p class="cost"><span class="k">What it cost</span>The last thing you read before paying is a warning. Some impulse buys will die there.</p></div>
-          <div><span class="n">02</span><h3>Delivery waits until after the buttons</h3><p class="cost"><span class="k">What it cost</span>Someone in an unserved pincode finds out one step later.</p></div>
-          <div><span class="n">03</span><h3>Three shades, not one</h3><p class="cost"><span class="k">What it cost</span>The matcher hands you a shortlist instead of deciding for you.</p></div>
-          <div><span class="n">04</span><h3>A tool for beauty, a sentence for fashion</h3><p class="cost"><span class="k">What it cost</span>The two pages look less alike, and someone skimming may call it inconsistent.</p></div>
-          <div><span class="n">05</span><h3>Defaults stated out loud</h3><p>230 and M are preselected because they sell most, and the page says so.</p><p class="cost"><span class="k">What it cost</span>One more line in the busiest part of the page.</p></div>
-          <div><span class="n">06</span><h3>Pink means commit, nowhere else</h3><p>Buy, the real price, the match bars and the shade you bought. Never a heading.</p><p class="cost"><span class="k">What it cost</span>A quieter page that leans on type for structure.</p></div>
-        </div>
-      </section>
-
-      <section id="system" class="lt sf">
-        <p class="eyebrow">Under the hood</p>
-        <h2>Built from parts, not drawn twice</h2>
-        <div class="nums">
-          <div><b>21</b><span>colour tokens</span></div>
-          <div><b>19</b><span>text styles</span></div>
-          <div><b>17</b><span>component sets</span></div>
-          <div><b>0</b><span>unbound fills on the main screens</span></div>
-        </div>
-        <p>Spacing tokens switch between mobile and desktop modes, and components adapt through device variants instead of stretching a phone part to laptop width. Four full pages, nine matcher states and seven edge cases, all built from the same parts.</p>
-      </section>
-
-      <section id="changed" class="lt">
-        <p class="eyebrow">What changed</p>
-        <h2>The same foundation, bought two ways</h2>
-        <div class="beforeafter">
-          <div class="b"><span class="k">Before (a typical store)</span><p>Six circles with numbers. One quietly preselected. The returns rule buried in the policy. Coupon maths left to you. The shade gets checked when the box arrives. ₹441, and a coin toss.</p></div>
-          <div class="a"><span class="k">After (this page)</span><p>Find my shade on the photo. Two questions, three matches with real match rates. Every shade named with depth and undertone. ₹375, already worked out. No returns stated before Buy. ₹375, and a reason to trust it.</p></div>
-        </div>
-        <p>The number I would measure is the share of buyers who report the wrong shade, the Wrong shade line in the “Did it match?” block under reviews. In the worked example it is 13% for 230 Natural Buff. Returns cannot measure this, because there are no returns, so it gets measured where buyers actually report it. If the matcher works, that line falls. For fashion, the matching number is the size exchange rate on brands that carry a fit sentence.</p>
-        <div class="bigm"><b>Wrong shade reports</b><span class="k">The one metric that matters</span></div>
-      </section>
-
-      <section id="breaks" class="lt sf">
-        <p class="eyebrow">Stated plainly</p>
-        <h2>Where this breaks</h2>
-        <p>If wrong shade reports do not fall, the two questions are a nice story and nothing more. Nothing in this project proves they work. Only real purchase data can.</p>
-        <p>“Runs small” from four exchanges is noise dressed as data. The fit sentence should only appear once there are enough exchanges to mean something, and that threshold needs real numbers to set.</p>
-        <p>And one of my own placements should move. Once a pincode is known, delivery stops being homework and becomes a fact. Then it belongs above the buttons.</p>
-      </section>
-
-      <section id="learned" class="lt">
-        <p class="eyebrow">What I learned</p>
-        <h2>Where a fact sits changes what it says</h2>
-        <p>I went in thinking hierarchy meant ranking things by importance. The no returns warning taught me it is really about neighbours. The same five words read as trivia beside the shades and as a condition of sale right before Buy.</p>
-        <p>The second lesson came from copying. Almost every pattern I borrowed was right for the store I took it from and wrong for mine. Amazon’s delivery placement assumes it already knows where you live. A shade dropdown assumes fifty shades. Now, before I copy a pattern, I ask what it quietly depends on.</p>
-      </section>
+      <section id="matcher" class="bh wide"><h2 class="vh">Shade matcher</h2><img src="img/bh-matcher.webp" width="1310" height="1664" alt="Two questions, three honest answers, no promises. The shade matcher asks skin depth and undertone, then shows three shades with real match rates." loading="lazy" decoding="async"></section>
+      <section id="fashion" class="bh wide"><h2 class="vh">Fashion</h2><img src="img/bh-fashion.webp" width="1310" height="1932" alt="A dress does not need a tool, it needs one honest sentence: Sangria’s M runs a size small, 23% of buyers exchanged for the next size up, placed above the size buttons." loading="lazy" decoding="async"></section>
+      <section id="desktop" class="bh wide"><h2 class="vh">Desktop</h2><img src="img/bh-desktop.webp" width="1310" height="4008" alt="Why the two desktop pages look different: beauty photos sit in a rail beside one big photo, fashion photos sit in a grid of every angle." loading="lazy" decoding="async"></section>
+      <section id="edges" class="bh wide"><h2 class="vh">Edge cases</h2><img src="img/bh-edges.webp" width="1310" height="1359" alt="Bad news, said once, with a way out: sold out, size gone, no reviews yet, cannot deliver, and twenty one shades." loading="lazy" decoding="async"></section>
+      <section id="trades" class="bh wide"><h2 class="vh">Trade offs</h2><img src="img/bh-trades.webp" width="1310" height="1235" alt="Four things I built, then cut, and what each decision cost." loading="lazy" decoding="async"></section>
+      <section id="twoways" class="bh wide"><h2 class="vh">Two ways to buy</h2><img src="img/bh-twoways.webp" width="1310" height="1191" alt="The same foundation, bought two ways: the usual page against this page." loading="lazy" decoding="async"></section>
     </article>
   </div>
 
@@ -1188,4 +975,12 @@ html:has(.ddlg[open]){overflow:hidden}
 .mph .iph{width:min(340px,calc((100svh - 170px) * 402 / 874))}
 .mph figcaption{text-align:center;font-size:15px;color:var(--muted);max-width:30ch}
 @media (max-width:900px){.mtry{grid-template-columns:minmax(0,1fr);gap:40px}.mph{position:static}.mph .iph{width:min(300px,100%)}}
+/* Behance stop by stop (his 14:45: below the header, show it exactly as on Behance) */
+article>section.bh{--band:#FFFFFF;padding:0!important;margin:0;max-width:none!important;display:block}
+article>section.bh img{display:block;width:100%;height:auto;max-width:1310px;margin:0 auto}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+article>section#try.bhproto{--band:#F7F7F7;max-width:none!important;display:grid;justify-items:center;text-align:center;gap:16px;padding:88px 24px!important;color:#141414}
+.bhproto h2{font-size:clamp(28px,3vw,40px);line-height:1.15;letter-spacing:-.01em;margin:0}
+.bhproto p{max-width:48ch;margin:0;color:#4A4A4A!important;font-size:17px}
+.bhproto .iph{width:min(340px,calc((100svh - 220px) * 402 / 874));margin-top:16px}
 </style>
