@@ -1050,6 +1050,14 @@ body{background:#FFFDFA}
 .iph>.navfix{position:absolute;left:5px;right:5px;bottom:5px;background-repeat:no-repeat;background-size:100% auto;background-position:bottom;border-radius:0 0 41px 41px;pointer-events:none}
 .iph .sc:focus-visible{outline-color:#8A5A00}
 @media (min-width:621px){.hf .iph{max-width:300px}}
+/* Vishal 2026-10-19, phones: every phone in the High fidelity row starts at the same height whatever the caption length,
+   and the Full screen icon sits just above the phone's top right corner, off the screen */
+@media (max-width:759px){
+  .hf{gap:20px}
+  .hf li{grid-template-rows:auto 1fr auto}
+  .hf .iph{margin-top:34px}
+  .hf .iph:has(.navfix)>.fsb{top:-40px;right:0}
+}
 @media (min-width:1000px){.wrap>.facts{grid-template-columns:minmax(0,1fr) minmax(0,.5fr) minmax(0,1fr) minmax(0,1.6fr);justify-content:stretch}}
 @media (max-width:620px){.wrap>.facts>div:last-child{grid-column:1/-1}.closing h2{white-space:normal!important;font-size:min(44px,11vw)!important}}
 </style>
@@ -1135,4 +1143,7 @@ document.querySelectorAll(".protowrap").forEach(w=>{const f=w.querySelector(".pr
   .chain li+li{margin-left:0;margin-top:26px}
   .chain li+li::before{content:"↓";left:22px;top:-24px;line-height:22px}
 }</style>
-<style is:inline>/* video buttons: at least a 44px touch area, look unchanged */.pills .pill{position:relative}.pills .pill::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}</style>
+<style is:inline>/* video buttons: at least a 44px touch area, look unchanged */.pills .pill{position:relative}.pills .pill::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}
+/* Vishal 2026-10-19, phones default: "Prototype not loading?" on line 1, the whole "Open it in a new tab" link on line 2, never split */
+@media (max-width:759px){.protolink a{display:block!important;white-space:nowrap}}
+</style>

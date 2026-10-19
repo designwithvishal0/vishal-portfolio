@@ -34,7 +34,9 @@ a.zoom-in{position:relative;display:block}
 .fsb::after{content:"";position:absolute;inset:-5px;border-radius:inherit}
 .fsb.sm{width:32px;height:32px;padding:0;justify-content:center}.fsb.sm .lb{display:none!important}.fsb.sm::after{inset:-6px}
 /* on a phone or laptop frame the control sits at the bottom corner, clear of the status bar and camera */
-.iph>.fsb,.lap>.fsb,.pm>.fsb,.screen>.fsb{top:auto;bottom:14px;right:14px}`;
+.iph>.fsb,.lap>.fsb,.pm>.fsb,.screen>.fsb{top:auto;bottom:14px;right:14px}
+/* Vishal 2026-10-19: on phones a framed screen gets only the small round icon, so no pill sits over the screen */
+@media (max-width:759px){.iph>.fsb,.lap>.fsb,.pm>.fsb,.screen>.fsb{width:32px;height:32px;padding:0;justify-content:center}.iph>.fsb .lb,.lap>.fsb .lb,.pm>.fsb .lb,.screen>.fsb .lb{display:none!important}.iph>.fsb::after,.lap>.fsb::after,.pm>.fsb::after,.screen>.fsb::after{inset:-6px}}`;
   document.head.append(st);
   const d=document.createElement('dialog');d.className='flowdlg';d.setAttribute('aria-label','Full screen');
   d.innerHTML='<button type="button" class="flowx" aria-label="Close full screen"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button><div class="flowpan"><img alt=""></div><p class="flowhint"></p>';
