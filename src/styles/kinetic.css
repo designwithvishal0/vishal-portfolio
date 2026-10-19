@@ -1101,3 +1101,8 @@ html.calm .dock{transition:none}
 /* Re-audit 2026-10-17 (Vishal: "do all of it"): on phones the top of Home now uses the same 72px gap too.
    Phones have no scroll motion here, so this is safe: Start here buttons to the CashKaro card, and the card to the questions video. */
 @media (max-width:759px){.res{padding-top:64px}.band{margin-top:72px}}
+
+/* Phones (Vishal 2026-10-19): More work thumbnails stay in their column whatever motion setting is on (Reduce Motion and calm used to lift OneBanc's over Reward Centre's) */
+@media (max-width:759px){
+  .mw .mrow .mthumb{position:static!important;top:auto!important;bottom:auto!important;translate:none!important;width:104px!important;height:auto!important;aspect-ratio:960/1004!important;border-radius:12px;box-shadow:none!important;opacity:1!important;transform:none!important;animation:none!important}
+}
