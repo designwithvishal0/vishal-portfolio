@@ -605,10 +605,10 @@ article>section.lt,article>section#matcher{padding-top:120px}
         <p class="count" aria-hidden="true"><span>1</span> of 5</p>
         <script is:inline>(()=>{const c=document.currentScript.previousElementSibling,ul=c.previousElementSibling,n=c.querySelector('span'),li=[...ul.children];ul.addEventListener('scroll',()=>{const x=ul.scrollLeft+8;let i=0;li.forEach((l,j)=>{if(l.offsetLeft-ul.offsetLeft<=x)i=j});if(ul.scrollLeft+ul.clientWidth>=ul.scrollWidth-4)i=li.length-1;n.textContent=i+1},{passive:true})})()</script>
         <div class="why"><span class="k">Why three and not one</span><p>A single answer would sound confident. Three with real match rates is honest about how fuzzy skin tone is, and still narrows twenty one shades to a choice you can make.</p></div>
-        <div class="ptry">
+        <figure class="ptry">
           <div class="ptxt"><p class="eyebrow">Prototype</p><h3 class="h3x" style="margin:0">Try the shade matcher yourself</h3><p>This is the flow from my Figma file, coded. Tap Find my shade on the photo, answer the two questions and use the shade it picks.</p><p class="phint" aria-live="polite">Start with Find my shade on the photo.</p></div>
           <div class="iph lt noisl pnat" data-proto="m"><div class="sc"><div class="pg pg-m"><i class="t1"></i><div class="bn" hidden><div><b>Matched to medium, warm</b><span>230 Natural Buff selected. Two near matches kept below.</span></div><button type="button" class="redo">Redo</button></div><i class="t2"></i><button type="button" class="hs" aria-label="Find my shade"></button></div></div><div class="ov"></div></div>
-        </div>
+        </figure>
         <h3 class="h3x">On a laptop it changes shape, not just size</h3>
         <p style="max-width:66ch">The bottom sheet becomes a side panel, so the product stays fully in view while you answer. You close it with Escape or a click outside instead of a swipe.</p>
         <div class="two-up">
@@ -1271,4 +1271,7 @@ html.calm .ov .pane,html.calm .ov .dim{transition:none}
 .dscr>.sc{position:absolute;inset:0}
 .dscr>.ov{inset:0}
 html:has(.ddlg[open]){overflow:hidden}
+.ptry.screen{grid-template-columns:minmax(0,1fr) auto!important;max-width:none!important;gap:clamp(32px,6vw,96px)!important;align-items:center!important}
+.ptry .iph.pm{max-width:none!important}
+@media (max-width:900px){.ptry.screen{grid-template-columns:minmax(0,1fr)!important;justify-items:center}}
 </style>
