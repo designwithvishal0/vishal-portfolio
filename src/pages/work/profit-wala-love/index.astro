@@ -928,31 +928,16 @@ html.calm .pwday img,html.calm .pwdeal,html.calm .pwknob,html.calm .pwtog span,h
   fit();new ResizeObserver(fit).observe(box);
   const smooth=()=>matchMedia('(prefers-reduced-motion: reduce)').matches||document.documentElement.classList.contains('calm')?'auto':'smooth';
   const days=[...p.querySelectorAll('.pwday')],strip=p.querySelector('.pwdays'),car=p.querySelector('.pwdeals'),deals=[...car.children];
-  if(mob.matches){
-  let day=0,cur=1,sx=null,moved=0;
-  /* Vishal 19 Oct 13:24: the deals never change the day; each day's three cards loop, the middle one starts centred, smaller cards either side */
-  const lay=jump=>deals.forEach((e,i)=>{const on=Math.floor(i/3)===day;e.hidden=!on;if(!on){delete e.dataset.o;return}
-    const o=((i%3)-cur+4)%3-1,was=e.dataset.o;e.style.transition=jump||(was!==undefined&&Math.abs(was-o)>1)?'none':'';
-    e.dataset.o=o;e.style.transform='translateX('+o*243+'px)'+(o?' scale(.82)':'');e.style.zIndex=o?1:2;e.classList.toggle('on',!o)});
-  const step=n=>{cur=(cur+n+3)%3;lay()};
-  const setDay=d=>{if(d===day)return;day=d;cur=1;lay(true);days.forEach((b,i)=>{b.classList.toggle('on',i===d);b.setAttribute('aria-pressed',i===d)});const b=days[d];strip.scrollTo({left:b.offsetLeft-(360-110)/2,behavior:smooth()})};
-  lay(true);
-  car.addEventListener('pointerdown',e=>{sx=e.clientX;moved=0});
-  car.addEventListener('pointerup',e=>{if(sx===null)return;const dx=e.clientX-sx;sx=null;if(Math.abs(dx)>24){moved=1;step(dx<0?1:-1)}});
-  car.addEventListener('pointercancel',()=>{sx=null});
-  days.forEach((b,i)=>b.onclick=()=>setDay(i));
-  deals.forEach(e=>e.onclick=()=>{if(moved){moved=0;return}const o=+e.dataset.o;if(o)step(o)});
-  }else{
   let day=0,cur=1,lock=0;
   const setDay=d=>{if(d===day)return;day=d;days.forEach((b,i)=>{b.classList.toggle('on',i===d);b.setAttribute('aria-pressed',i===d)});const b=days[d];strip.scrollTo({left:b.offsetLeft-(360-110)/2,behavior:smooth()})};
   const center=i=>deals[i].offsetLeft+126-180;
   const go=i=>{lock=Date.now();car.scrollTo({left:center(i),behavior:smooth()});mark(i)};
   const mark=i=>{cur=i;deals.forEach((e,j)=>e.classList.toggle('on',j===i))};
-  car.scrollLeft=center(1);
+  /* start on the second card, centred, not the small first one (Vishal 19 Oct 13:31); repeat after load as desktop lays out late */
+  const start=()=>{lock=Date.now();car.scrollLeft=center(1);mark(1)};start();addEventListener('load',start,{once:true});
   car.addEventListener('scroll',()=>{const c=car.scrollLeft+180;let b=0,m=1e9;deals.forEach((e,j)=>{const x=Math.abs(e.offsetLeft+126-c);if(x<m){m=x;b=j}});if(Date.now()-lock<700)return;if(b!==cur)mark(b);setDay(Math.floor(b/3))},{passive:true});
   days.forEach((b,i)=>b.onclick=()=>{setDay(i);go(i*3+1)});
   deals.forEach((e,i)=>e.onclick=()=>{if(i!==cur){setDay(Math.floor(i/3));go(i)}});
-  }
   const tog=p.querySelector('.pwtog'),cats=[...p.querySelectorAll('.pwcat')],fl=[...p.querySelectorAll('.pwflash img')],flr=p.querySelector('.pwflash');
   let who='her',cat=0;
   const paint=()=>{cats.forEach((b,i)=>{b.classList.toggle('on',i===cat);b.setAttribute('aria-pressed',i===cat)});
@@ -1037,15 +1022,6 @@ article>section>figure.cut.pwbig{display:block!important}
 b.addEventListener('click',()=>document.fullscreenElement?document.exitFullscreen():st.requestFullscreen());
 document.addEventListener('fullscreenchange',()=>b.setAttribute('aria-label',document.fullscreenElement===st?'Exit full screen':'Open the prototype full screen'))})();
 </script>
-<style is:inline>
-/* Deal cards loop within the chosen day, phones only (Vishal 19 Oct 13:24, 13:27; 13:25 desktop stays the swipe carousel) */
-@media (max-width:760px){
-.pwdeals{display:block;overflow:hidden;height:259px;padding:0;touch-action:pan-y;user-select:none;-webkit-user-select:none}
-.pwdeal{position:absolute;left:54px;top:29px;width:252px;height:193px;margin:0;transition:transform .35s ease}
-.pwdeal[hidden]{display:none}
-.iph .sc .pwdeal img{-webkit-user-drag:none;pointer-events:none}
-}
-</style>
 <style is:inline>
 /* Breathing space between assets (Vishal 19 Oct 13:29), desktop and phones */
 figure.cut.pwbig>:is(img,span):not(:first-child){margin-top:48px}
