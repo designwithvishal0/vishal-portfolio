@@ -938,9 +938,8 @@ html.calm .pwday img,html.calm .pwdeal,html.calm .pwknob,html.calm .pwtog span,h
   days.forEach((b,i)=>b.onclick=()=>{setDay(i);go(i*3+1)});
   deals.forEach((e,i)=>e.onclick=()=>{if(i!==cur){setDay(Math.floor(i/3));go(i)}});
   const tog=p.querySelector('.pwtog'),cats=[...p.querySelectorAll('.pwcat')],fl=[...p.querySelectorAll('.pwflash img')],flr=p.querySelector('.pwflash');
-  const names={her:['Apparel','Gifting','Skincare','Fragrance'],him:['Apparel','Gifting','Accessories','Fragrance']};
   let who='her',cat=0;
-  const paint=()=>{cats.forEach((b,i)=>{b.classList.toggle('on',i===cat);b.setAttribute('aria-pressed',i===cat);b.querySelector('span').textContent=names[who][i];b.querySelector('img').src=P+'cat-'+(who==='her'?i+1:i+5)+'.webp'});
+  const paint=()=>{cats.forEach((b,i)=>{b.classList.toggle('on',i===cat);b.setAttribute('aria-pressed',i===cat)});
     fl.forEach((im,i)=>{im.src=P+who+'-'+String(cat*4+i+1).padStart(2,'0')+'.webp';im.alt=''});flr.scrollTo({left:0})};
   tog.querySelectorAll('button').forEach(b=>b.onclick=()=>{who=b.className;tog.classList.toggle('him',who==='him');tog.querySelector('.her').setAttribute('aria-pressed',who==='her');tog.querySelector('.him').setAttribute('aria-pressed',who==='him');paint()});
   cats.forEach((b,i)=>b.onclick=()=>{cat=i;paint()});
