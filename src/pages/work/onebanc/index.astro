@@ -365,7 +365,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
 .ba .clip img{border-radius:0;height:100%;object-fit:cover;object-position:top}
 .measure-k{margin-top:40px}
 .k.sub{margin-top:40px;display:block}
-@media (max-width:900px){.fonts{grid-template-columns:1fr 1fr}.scr .blks{gap:28px}}
+@media (max-width:900px){.fonts{grid-template-columns:repeat(2,minmax(0,1fr))}.scr .blks{gap:28px}}
 @media (max-width:620px){
   .pal{grid-template-columns:1fr 1fr}
   .arc3{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-28px;padding:52px 28px 28px;scroll-padding-inline:28px;gap:24px}
@@ -1072,6 +1072,8 @@ html.steps .scr .blk.on{opacity:1;transform:none}
 .foundline{max-width:none}
 .pcol{display:grid;gap:22px}
 /* Vishal 2026-10-19: on phones Screens 1 to 3 had too much text; each point keeps its label and headline, the paragraph is hidden */
+/* the font samples load Satoshi and Switzer from Fontshare, which run wider than the fallback; on phones they pushed the page wider than the screen (Vishal 2026-10-19). Smaller sample on phones so all four fit */
+@media (max-width:620px){.fonts div{padding:16px}.fonts b{font-size:19px;white-space:nowrap;overflow:hidden;text-overflow:clip}}
 /* the page never slides sideways on phones, whatever pokes past the edge */
 html,body{overflow-x:clip}
 @media (max-width:620px){.scr .blk>p{display:none}.scr .blks{gap:20px}.scr .blk{gap:6px}}
