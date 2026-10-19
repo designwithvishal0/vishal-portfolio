@@ -595,19 +595,13 @@ article>section.lt,article>section#matcher{padding-top:120px}
           <h2>Two questions. Three honest answers. No promises.</h2>
           <p>It does not ask for a selfie. It asks two things anyone can answer, and tells you how to answer them.</p>
         </div>
-        <ul class="car" aria-label="Shade matcher, five steps">
-          <li><div class="iph"><div class="sc"><img src="img/20-matcher-1-closed.webp" width="780" height="1688" alt="The product photo with the Find my shade pill" loading="lazy"></div></div><p>Find my shade is on the photo, right where you are already looking.</p></li>
-          <li><div class="iph"><div class="sc"><img src="img/21-matcher-2-depth.webp" width="780" height="1688" alt="Matcher step asking how deep your skin is" loading="lazy"></div></div><p>How deep is your skin? Look at your jaw in daylight, not your hand. Hands run darker.</p></li>
-          <li><div class="iph"><div class="sc"><img src="img/22-matcher-3-undertone.webp" width="780" height="1688" alt="Matcher step asking which way your undertone leans" loading="lazy"></div></div><p>Which way do you lean? Hold gold, then silver, against your face.</p></li>
-          <li><div class="iph"><div class="sc"><img src="img/23-matcher-4-result.webp" width="780" height="1688" alt="Matcher result with three shades, closest first, each with its match rate" loading="lazy"></div></div><p>Three shades, closest first, each with how often it actually matched. And it says plainly that nothing here is a guarantee.</p></li>
-          <li><div class="iph"><div class="sc"><img src="img/24-matcher-5-applied.webp" width="780" height="1688" alt="The product page after matching, showing Matched to medium, warm with a Redo link" loading="lazy"></div></div><p>The page remembers: “Matched to medium, warm”, with a Redo if you change your mind.</p></li>
-        </ul>
-        <p class="count" aria-hidden="true"><span>1</span> of 5</p>
-        <script is:inline>(()=>{const c=document.currentScript.previousElementSibling,ul=c.previousElementSibling,n=c.querySelector('span'),li=[...ul.children];ul.addEventListener('scroll',()=>{const x=ul.scrollLeft+8;let i=0;li.forEach((l,j)=>{if(l.offsetLeft-ul.offsetLeft<=x)i=j});if(ul.scrollLeft+ul.clientWidth>=ul.scrollWidth-4)i=li.length-1;n.textContent=i+1},{passive:true})})()</script>
-        <div class="why"><span class="k">Why three and not one</span><p>A single answer would sound confident. Three with real match rates is honest about how fuzzy skin tone is, and still narrows twenty one shades to a choice you can make.</p></div>
-        <div class="ptry">
-          <div class="ptxt"><p class="eyebrow">Prototype</p><h3 class="h3x" style="margin:0">Try the shade matcher yourself</h3><p>This is the prototype from my Figma file. Tap Find my shade on the photo, answer the two questions and use the shade it picks.</p></div>
-          <div class="iph lt noisl"><div class="fg"><iframe src="https://embed.figma.com/proto/Pwe7AzXT42dYgkLY90nwVY/PDP-%E2%80%94-Vishal-Yadav?node-id=80-2&starting-point-node-id=80%3A2&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&footer=false&embed-host=share" title="Prototype of the shade matcher on a phone, from Figma" loading="lazy" allowfullscreen></iframe></div></div>
+        <div class="mtry">
+          <div class="mtxt">
+            <p class="eyebrow">Try it on the phone</p>
+            <ol class="msteps"><li><b>Find my shade</b><p>Find my shade is on the photo, right where you are already looking.</p></li><li><b>Depth</b><p>How deep is your skin? Look at your jaw in daylight, not your hand. Hands run darker.</p></li><li><b>Undertone</b><p>Which way do you lean? Hold gold, then silver, against your face.</p></li><li><b>Three shades</b><p>Three shades, closest first, each with how often it actually matched. And it says plainly that nothing here is a guarantee.</p></li><li><b>Applied</b><p>The page remembers: “Matched to medium, warm”, with a Redo if you change your mind.</p></li></ol>
+            <div class="why"><span class="k">Why three and not one</span><p>A single answer would sound confident. Three with real match rates is honest about how fuzzy skin tone is, and still narrows twenty one shades to a choice you can make.</p></div>
+          </div>
+          <figure class="mph"><div class="iph lt noisl"><div class="fg"><iframe src="https://embed.figma.com/proto/Pwe7AzXT42dYgkLY90nwVY/PDP-%E2%80%94-Vishal-Yadav?node-id=462-3528&starting-point-node-id=462%3A3528&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&footer=false&embed-host=share" title="Shade matcher prototype from Figma: tap Find my shade" loading="lazy" allowfullscreen></iframe></div></div><figcaption>Live prototype from my Figma file. Tap Find my shade on the photo.</figcaption></figure>
         </div>
         <h3 class="h3x">On a laptop it changes shape, not just size</h3>
         <p style="max-width:66ch">The bottom sheet becomes a side panel, so the product stays fully in view while you answer. You close it with Escape or a click outside instead of a swipe.</p>
@@ -1180,4 +1174,18 @@ html:has(.ddlg[open]){overflow:hidden}
 #matcher .car li{flex-basis:min(250px,calc((100svh - 300px) * 390 / 844));gap:12px}
 #matcher .car p{font-size:16px}
 @media (max-width:620px){#matcher .car li{flex-basis:min(220px,calc((100svh - 330px) * 390 / 844))}}
+/* Shade matcher: five steps beside one live prototype (his 14:36, replaces the image carousel and the second embed) */
+.mtry{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(32px,6vw,96px);align-items:start;margin:40px 0 88px}
+.mtxt{display:grid;gap:28px;max-width:56ch}
+.msteps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:m}
+.msteps li{counter-increment:m;display:grid;grid-template-columns:36px minmax(0,1fr);column-gap:16px;row-gap:4px;padding:16px 0;border-top:1px solid var(--line)}
+.msteps li:last-child{border-bottom:1px solid var(--line)}
+.msteps li::before{content:counter(m);grid-row:1/3;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--acc);color:#141414;font:600 15px/1 var(--sans)}
+.msteps b{font-weight:600;font-size:18px;color:var(--fg)}
+.msteps p{font-size:16px;line-height:1.5;color:var(--body);margin:0}
+.mtxt .why{margin:0}
+.mph{position:sticky;top:96px;margin:0;display:grid;gap:12px;justify-items:center}
+.mph .iph{width:min(340px,calc((100svh - 170px) * 402 / 874))}
+.mph figcaption{text-align:center;font-size:15px;color:var(--muted);max-width:30ch}
+@media (max-width:900px){.mtry{grid-template-columns:minmax(0,1fr);gap:40px}.mph{position:static}.mph .iph{width:min(300px,100%)}}
 </style>
