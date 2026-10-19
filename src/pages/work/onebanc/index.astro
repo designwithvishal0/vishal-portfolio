@@ -1096,3 +1096,8 @@ if(!rows.length)return;document.documentElement.classList.add('steps');
 const u=()=>{const h=innerHeight;rows.forEach(r=>{const g=r.f.getBoundingClientRect(),span=Math.max(240,g.height-h+200),t=Math.min(1,Math.max(0,(200-g.top)/span));const n=Math.max(1,Math.ceil(t*r.b.length+.001));r.b.forEach((b,i)=>b.classList.toggle('on',i<n))})};
 addEventListener('scroll',u,{passive:true});addEventListener('resize',u);u()})();
 </script>
+
+<style is:inline>
+/* Universal (Vishal 19 Oct 13:09): project names in the footer are never white; a light tint of the page colour, like OneBanc */
+.endsec .nextgrid b{color:#F3DFB2!important}
+</style>

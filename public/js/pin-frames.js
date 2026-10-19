@@ -4,7 +4,7 @@
 (()=>{
   const sideways=el=>{for(let p=el.parentElement;p&&p!==document.body;p=p.parentElement){const o=getComputedStyle(p).overflowX;if(o==='auto'||o==='scroll')return true}return false};
   document.querySelectorAll('.iph>.sc,.lap>.sc').forEach(s=>{
-    const f=s.parentElement;if(f.closest('li,.ms-phone')||sideways(f))return;
+    const f=s.parentElement;if(f.closest('li,.ms-phone')||sideways(f)||(f.closest('[data-pin="desktop"]')&&matchMedia('(max-width:760px)').matches))return;
     let row=f.closest('figure');
     if(!row){row=document.createElement('div');f.before(row);row.append(f)}
     row.classList.add('screen');f.classList.add('pm');s.classList.add('pm-scr');
