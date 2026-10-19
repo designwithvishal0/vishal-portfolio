@@ -1128,5 +1128,11 @@ document.querySelectorAll(".protowrap").forEach(w=>{const f=w.querySelector(".pr
 .guard p{font-size:18px}
 @media (max-width: 620px){.lede{font-size:18px!important}}
 @media (max-width: 620px){.under .big{font-size:18px}}
-@media (max-width: 620px){.chain li{font-size:13px}}</style>
+@media (max-width: 620px){.chain li{font-size:13px}}
+/* Phones (Vishal 2026-10-19): each bucket flow stacks top to bottom with a down arrow, so no arrow is left alone at the start of a line */
+@media (max-width:759px){
+  .chain{flex-direction:column;align-items:flex-start;gap:0}
+  .chain li+li{margin-left:0;margin-top:26px}
+  .chain li+li::before{content:"↓";left:22px;top:-24px;line-height:22px}
+}</style>
 <style is:inline>/* video buttons: at least a 44px touch area, look unchanged */.pills .pill{position:relative}.pills .pill::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}</style>
