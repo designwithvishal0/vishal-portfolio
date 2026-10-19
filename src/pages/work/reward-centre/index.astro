@@ -804,8 +804,8 @@ body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
   // As on the Framer page: each section's content fades up 20px as it comes into view
   if(!('IntersectionObserver' in window))return;
   var groups=[].slice.call(document.querySelectorAll('article>section, .scr .screen'));
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -10% 0px'});
-  groups.forEach(function(g){[].slice.call(g.children).forEach(function(el,i){if(el.classList.contains('screens'))return;el.classList.add('up');el.style.setProperty('--d',i*60+'ms');io.observe(el)})});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px 15% 0px'});
+  groups.forEach(function(g){[].slice.call(g.children).forEach(function(el,i){if(el.classList.contains('screens'))return;el.classList.add('up');el.style.setProperty('--d',Math.min(i,3)*60+'ms');io.observe(el)})});
 })();
 </script>
 
@@ -1146,4 +1146,20 @@ document.querySelectorAll(".protowrap").forEach(w=>{const f=w.querySelector(".pr
 <style is:inline>/* video buttons: at least a 44px touch area, look unchanged */.pills .pill{position:relative}.pills .pill::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}
 /* Vishal 2026-10-19, phones default: "Prototype not loading?" on line 1, the whole "Open it in a new tab" link on line 2, never split */
 @media (max-width:759px){.protolink a{display:block!important;white-space:nowrap}}
+
+/* Vishal 2026-10-19, desktop comments: no lopsided text with an empty right side, like Split.
+   Section intros: eyebrow and title on the left, the paragraph on the right. */
+@media (min-width:1000px){
+  .intro{max-width:none;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(48px,6vw,104px);align-items:start}
+  .intro>.eyebrow,.intro>h2{grid-column:1}
+  .intro>.lede{grid-column:2;grid-row:1/span 2;max-width:none;margin-top:28px}
+  /* the prototype note sits at the prototype's own width, title left and text right, no box */
+  .proto-note{background:none;padding:0;border-radius:0;max-width:none;width:min(100%,calc((100svh - 120px) * 16 / 10));margin-inline:auto;grid-template-columns:minmax(0,4fr) minmax(0,8fr);column-gap:48px;align-items:baseline}
+}
+@media (min-width:760px){
+  .wrap>p.note{max-width:none}
+  .goldline{max-width:none!important}
+  .tbl th{padding:22px 24px 16px 28px}
+  .tbl td{padding:20px 24px 20px 28px}
+}
 </style>
