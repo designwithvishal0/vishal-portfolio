@@ -1024,7 +1024,6 @@ article>section>figure.cut.pwbig{display:block!important}
 
 <style is:inline>
 /* Desktop phone (Vishal 19 Oct 13:20): smaller, sized to the window so it pins and the screen scrolls first; full screen shows the framed, working prototype */
-@media (min-width:761px){.stage{--pw:max(260px,min(320px,calc((100svh - 216px) / 2.143)))}.stage .iph{width:var(--pw)}}
 .stage:fullscreen .iph{width:var(--pw)}
 .pwfs{position:absolute;top:-52px;right:0;width:40px;height:40px;display:grid;place-items:center;border:0;border-radius:50%;background:#831A1A;color:#FFE9E9;cursor:pointer}
 .pwfs:hover{background:#6B1C25}.pwfs:focus-visible{outline:2px solid #831A1A;outline-offset:3px}
@@ -1046,4 +1045,10 @@ document.addEventListener('fullscreenchange',()=>b.setAttribute('aria-label',doc
 .pwdeal[hidden]{display:none}
 .iph .sc .pwdeal img{-webkit-user-drag:none;pointer-events:none}
 }
+</style>
+<style is:inline>
+/* Breathing space between assets (Vishal 19 Oct 13:29), desktop and phones */
+figure.cut.pwbig>:is(img,span):not(:first-child){margin-top:48px}
+.mk{row-gap:56px;column-gap:40px}
+@media (max-width:760px){figure.cut.pwbig>:is(img,span):not(:first-child){margin-top:28px}.mk{row-gap:40px}}
 </style>
