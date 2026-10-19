@@ -603,6 +603,8 @@ nav.toc.light{--fg:#1F0A0B;--muted:#6E5555;--line:#F1D8D8;--warm:#B31919}
 /* Phones: the contents bar moves up with the header when it hides */
 @media (max-width:759px){
   .tocpill{transition:opacity .3s ease,transform .3s ease,visibility .3s,top .28s ease}
+  html.hdr-hide .tocpill{top:env(safe-area-inset-top,0px)}
+  html.hdr-hide .tocsheet{inset:calc(env(safe-area-inset-top,0px) + 52px) 16px auto}
 }
 /* Reel controls: labelled pills on desktop (icon plus PLAY, SOUND ON); icon only round buttons on phones, bottom right */
 .pill{height:44px;padding:0 16px;gap:8px;justify-content:center;border-radius:22px;border:0;box-shadow:0 0 0 1px rgba(242,241,236,.28);background:rgba(12,12,14,.72);color:#F2F1EC;font:700 12px/1 var(--sans);letter-spacing:.02em}
@@ -927,8 +929,7 @@ html.calm .pwday img,html.calm .pwdeal,html.calm .pwknob,html.calm .pwtog span,h
   const smooth=()=>matchMedia('(prefers-reduced-motion: reduce)').matches||document.documentElement.classList.contains('calm')?'auto':'smooth';
   const days=[...p.querySelectorAll('.pwday')],strip=p.querySelector('.pwdays'),car=p.querySelector('.pwdeals'),deals=[...car.children];
   let day=0,cur=1,lock=0;
-  const show=d=>deals.forEach((e,i)=>{const on=Math.floor(i/3)===d;e.classList.toggle('show',on);e.classList.toggle('last',on&&i%3===2)});show(0);
-  const setDay=d=>{if(d===day)return;day=d;show(d);days.forEach((b,i)=>{b.classList.toggle('on',i===d);b.setAttribute('aria-pressed',i===d)});const b=days[d];strip.scrollTo({left:b.offsetLeft-(360-110)/2,behavior:smooth()})};
+  const setDay=d=>{if(d===day)return;day=d;days.forEach((b,i)=>{b.classList.toggle('on',i===d);b.setAttribute('aria-pressed',i===d)});const b=days[d];strip.scrollTo({left:b.offsetLeft-(360-110)/2,behavior:smooth()})};
   const center=i=>deals[i].offsetLeft+126-180;
   const go=i=>{lock=Date.now();car.scrollTo({left:center(i),behavior:smooth()});mark(i)};
   const mark=i=>{cur=i;deals.forEach((e,j)=>e.classList.toggle('on',j===i))};
@@ -992,12 +993,7 @@ article>section>figure.cut.pwbig{display:block!important}
   .pwbox{background:#8E1520}
   .pwp{height:1760px;background:#FEF5F6;position:absolute;left:0;top:0}
   .iph .sc .pwbg{inset:-2px auto auto 0}
-  .pwdeals{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:22px 16px 0;overflow:visible;scroll-snap-type:none}
-  .pwdeals::after,.pwflash::after{display:none}
-  .pwdeal{display:none;flex:none;width:auto;height:auto;aspect-ratio:252/193;margin:0;transform:none!important}
-  .pwdeal.show{display:block}
-  .pwdeal.last{grid-column:1/-1;justify-self:center;width:calc(50% - 5px)}
-  .iph .sc .pwdeal img{left:-13.1%;top:-15.03%;width:126.2%;height:134.2%}
+  .pwflash::after{display:none}
   .pwflash{display:grid;grid-template-columns:1fr 1fr;gap:14px;overflow:visible}
   .iph .sc .pwflash img{width:100%;height:auto;aspect-ratio:157/284}
   :root{--disp:"Metropolis",ui-sans-serif,system-ui,sans-serif}
