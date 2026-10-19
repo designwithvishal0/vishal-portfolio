@@ -981,3 +981,14 @@ figure.cut.pwbig img+img,figure.cut.pwbig span+span{margin-top:16px}
 article>section>figure.cut.pwbig{display:block!important}
 </style>
 
+<style is:inline>
+/* Results in Metropolis: numbers ExtraBold, labels Bold, one light panel on the red band (Vishal 19 Oct 13:05) */
+#results{--band:#4A0B12}
+#results .stats.big{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;background:#FFF5F4;border-radius:20px;padding:0;overflow:hidden}
+#results .stats.big div{padding:32px 28px 30px;gap:10px;border:0;align-content:start}
+#results .stats.big div+div{border-left:1px solid #F1D8D8}
+#results .stats.big b{font-family:Metropolis,sans-serif;font-weight:800;font-size:clamp(30px,3.1vw,48px);line-height:1;letter-spacing:-.035em;color:#B31919;white-space:nowrap;min-width:0}
+#results .stats.big span{font-family:Metropolis,sans-serif;font-weight:700;font-size:16px;line-height:1.4;color:#2A0F0F;max-width:22ch;text-wrap:balance}
+@media (max-width:900px){#results .stats.big{grid-template-columns:1fr 1fr}#results .stats.big div:nth-child(3){border-left:0}#results .stats.big div:nth-child(n+3){border-top:1px solid #F1D8D8}}
+@media (max-width:620px){#results .stats.big div{grid-template-columns:none;padding:20px 16px;gap:8px}#results .stats.big b{font-size:min(26px,6.6vw)}#results .stats.big span{font-size:14px}}
+</style>
