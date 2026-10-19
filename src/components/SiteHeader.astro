@@ -7,8 +7,8 @@ import '@fontsource-variable/bricolage-grotesque/standard.css';
 import '../styles/header.css';
 import { intro } from '../data/home';
 // One header on every page, case studies included (Vishal 2026-10-14: "keep the header universal across all").
-interface Props { home?: string; theme?: boolean; book?: boolean }
-const { home = '', theme = true, book = false } = Astro.props;
+interface Props { home?: string; theme?: boolean; book?: boolean; calm?: boolean }
+const { home = '', theme = true, book = false, calm = true } = Astro.props;
 const bookLink = intro.links.find(l => l.label === 'Book a call')!;
 const cvLink = intro.links.find(l => l.label === 'Resume')!;
 // Work (Vishal 2026-10-14): on home it jumps to the case studies; on every other page it opens the full list at /work/
@@ -33,7 +33,7 @@ const nav = [['Work', home ? '/work/' : '#work'], ['About', home + '#about'], ['
       <nav class="m-nav" aria-label="Sections">{nav.map(([t, h]) => <a href={h}>{t}</a>)}</nav>
       <p class="a11y-h">Accessibility</p>
       {theme && <div class="a11y-row"><span id="l-night">Dark mode</span><button id="theme" class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="l-night"><i class="sun"></i><i class="moon"></i><span class="knob"></span></button></div>}
-      <div class="a11y-row"><span id="l-calm">Reduce motion</span><button id="calm" class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="l-calm"><span class="knob"></span></button></div>
+      {calm && <div class="a11y-row"><span id="l-calm">Reduce motion</span><button id="calm" class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="l-calm"><span class="knob"></span></button></div>}
     </div>
   </div>
 </header>
