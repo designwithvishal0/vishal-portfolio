@@ -411,7 +411,7 @@ body{background:#F5F2EA}
     <div><span class="k">Year</span><p>2026</p></div>
     <div><span class="k">Scope</span><p>3 screens, 1 design system, 4 typefaces</p></div>
   </div>
-  <p class="note">Self initiated concept. Not affiliated with or endorsed by OneBanc. Built without access to the live app. Amounts and names are illustrative.</p>
+  <p class="note"><span class="nlab">Self initiated concept</span>Not affiliated with or endorsed by OneBanc. Built without access to the live app. Amounts and names are illustrative.</p>
   <figure class="reel" style="margin-top:32px"><video data-inview class="shot wide" poster="img/00-hero-poster.jpg" width="1920" height="1080" muted loop playsinline preload="metadata" aria-label="OneBanc showreel"></video>
     <div class="pills"><button type="button" class="pill" data-act="play" aria-pressed="false" aria-label="Play"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg><span class="lb">PLAY</span></button><button type="button" class="pill fs" data-act="fs" aria-label="Full screen"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/></svg><span class="lb">FULL SCREEN</span></button></div></figure>
   <script is:inline>(()=>{
@@ -509,66 +509,69 @@ body{background:#F5F2EA}
           <p>I left out a rewards screen because nothing OneBanc publishes says they run one, and designing an invented feature would undo the honesty of the rest. Settings went into Card, through their real product instead of a generic list.</p>
         </div>
         <div class="arc3">
-          <div class="iph noisl"><div class="sc" tabindex="0"><img src="img/08-home.webp" width="804" height="2370" alt="OneBanc Home screen" loading="lazy"></div></div>
-          <div class="iph noisl"><div class="sc" tabindex="0"><img src="img/09-money.webp" width="804" height="2770" alt="OneBanc Money screen" loading="lazy"></div></div>
-          <div class="iph noisl"><div class="sc" tabindex="0"><img src="img/10-card.webp" width="804" height="3418" alt="OneBanc Card screen" loading="lazy"></div></div>
+          <div class="iph noisl"><div class="sc" tabindex="0"><img src="img/08-home.webp" width="804" height="2370" alt="OneBanc Home screen" loading="lazy"></div><div class="navfix" aria-hidden="true" style="aspect-ratio:804/265;background-image:url(img/08-home.webp)"></div></div>
+          <div class="iph noisl"><div class="sc" tabindex="0"><img src="img/09-money.webp" width="804" height="2770" alt="OneBanc Money screen" loading="lazy"></div><div class="navfix" aria-hidden="true" style="aspect-ratio:804/253;background-image:url(img/09-money.webp)"></div></div>
+          <div class="iph noisl"><div class="sc" tabindex="0"><img src="img/10-card.webp" width="804" height="3418" alt="OneBanc Card screen" loading="lazy"></div><div class="navfix" aria-hidden="true" style="aspect-ratio:804/230;background-image:url(img/10-card.webp)"></div></div>
         </div>
       </section>
 
       <section id="home" class="lt wide scr">
-        <div style="display:grid;gap:22px;max-width:66ch">
+        
+        <div class="screens">
+          <div class="screen">
+            <figure><img class="scrimg" src="img/08-home.webp" width="804" height="2370" alt="OneBanc Home screen showing ₹1,42,070 left this cycle" loading="lazy"></figure>
+            <div class="scol"><div class="sintro">
           <p class="eyebrow">Screen 1 · Home</p>
           <h2>Left this cycle, not a balance</h2>
           <p>Home is built around the salary cycle. Every block answers the question the block above it raised.</p>
         </div>
-        <div class="screens">
-          <div class="screen">
-            <figure><img class="scrimg" src="img/08-home.webp" width="804" height="2370" alt="OneBanc Home screen showing ₹1,42,070 left this cycle" loading="lazy"></figure>
             <div class="blks">
               <div class="blk"><span class="k">01 · Where you stand</span><h3>₹1,42,070 left this cycle</h3><p>Day 12 of 30, with 18 days to the next salary. The label says Left this cycle because a balance is a number any bank shows. This one is bounded by time, which is the only thing OneBanc knows that Google Pay and Paytm do not.</p></div>
               <div class="blk"><span class="k">02 · What is already spoken for</span><h3>Committed before payday</h3><p>Rent and the home loan EMI, ₹18,400 together, with rent flagged Due in 2 days. This block is what makes the number above it honest. Safe to spend daily is ₹6,870 because it is what is left, minus what is committed, divided by the days to go.</p></div>
               <div class="blk"><span class="k">03 · What just happened</span><h3>Today, in three rows</h3><p>Swiggy, Blinkit, Rapido, with times running backwards through the day so it reads as a real Tuesday. Three rows and View all. A fourth row would be filler.</p></div>
               <div class="blk"><span class="k">04 · What you are leaving on the table</span><h3>3 benefits unused</h3><p>Employer linked benefits are the thing no other app in the set can offer, so they close the screen with the only gold border on it. Unused, because available is a state and unused is a loss.</p></div>
-            </div>
+            </div></div>
           </div>
         </div>
         <p class="aside">Google Pay’s home has nine sections. Paytm’s has twelve. OneBanc has four destinations, so Home has five blocks.</p>
       </section>
 
       <section id="money" class="lt wide scr">
-        <div style="display:grid;gap:22px;max-width:66ch">
+        
+        <div class="screens">
+          <div class="screen">
+            <figure><img class="scrimg" src="img/09-money.webp" width="804" height="2770" alt="OneBanc Money screen showing where ₹42,180 went" loading="lazy"></figure>
+            <div class="scol"><div class="sintro">
           <p class="eyebrow">Screen 2 · Money</p>
           <h2>Where ₹42,180 went</h2>
           <p>One number cut four ways, each a narrower slice of the block above it.</p>
         </div>
-        <div class="screens">
-          <div class="screen">
-            <figure><img class="scrimg" src="img/09-money.webp" width="804" height="2770" alt="OneBanc Money screen showing where ₹42,180 went" loading="lazy"></figure>
             <div class="blks">
               <div class="blk"><span class="k">01 · Total</span><h3>A judgement, not a receipt</h3><p>Salary credited ₹1,84,250 on 1 July, spent so far ₹42,180, over a five month chart with a dashed average line. The line underneath is the screen: ₹3,240 above your 5 month average. At this pace, ₹1,05,450 by 31 July.</p></div>
               <div class="blk"><span class="k">02 · By method</span><h3>₹28,400 on the card, ₹13,780 on UPI</h3><p>The same ₹42,180 cut by how you paid. The card figure is the exact number the Card screen shows in its spend meter.</p></div>
               <div class="blk"><span class="k">03 · By type</span><h3>Only the outlier gets gold</h3><p>Dining, Travel, Bills, Shopping and Other. Five rows that add up to ₹42,180 and 100 percent. Dining is the biggest, so it is the only gold bar. Colour means something or it means nothing.</p></div>
               <div class="blk"><span class="k">04 · By merchant</span><h3>18 orders says more than 32 percent</h3><p>IndiGo, Swiggy, Amazon, with counts. The counts describe behaviour without the screen having to claim anything about it.</p></div>
-            </div>
+            </div></div>
           </div>
         </div>
       </section>
 
       <section id="card" class="lt wide scr">
-        <div style="display:grid;gap:22px;max-width:66ch">
+        
+        <div class="screens">
+          <div class="screen">
+            <figure><img class="scrimg" src="img/10-card.webp" width="804" height="3418" alt="OneBanc Card screen with the card showing last four digits only" loading="lazy"></figure>
+            <div class="scol"><div class="sintro">
           <p class="eyebrow">Screen 3 · Card</p>
           <h2>A card with nothing printed on it</h2>
           <p>OneBanc’s card has no number on the plastic. Their FAQ says it on purpose. So the screen is built around the one place those details live.</p>
         </div>
-        <div class="screens">
-          <div class="screen">
-            <figure><img class="scrimg" src="img/10-card.webp" width="804" height="3418" alt="OneBanc Card screen with the card showing last four digits only" loading="lazy"></figure>
             <div class="blks">
               <div class="blk"><span class="k">01 · The card</span><h3>Last four only</h3><p>•• •••• 4021 and a name. Printing sixteen fake digits on the screen built to celebrate a numberless card would undo the whole idea.</p></div>
               <div class="blk"><span class="k">02 · Reveal</span><h3>Number, CVV and expiry live only here</h3><p>Every card app treats reveal as a convenience. Here it is the reason the card exists, so it gets a real button. Reveal, because it names what happens. View is what you do to a list.</p></div>
               <div class="blk"><span class="k">03 · Card spend</span><h3>₹28,400 of ₹75,000</h3><p>38 percent, resetting in 18 days, the same clock as Home’s next salary. Four of the reference card apps use this meter, so I kept the pattern and dropped everything credit about it. A debit card on a salary account has no bill and no due date.</p></div>
               <div class="blk"><span class="k">04 · Controls and the emergency</span><h3>Freeze is a tile, report is a decision</h3><p>Controls, Statements, Limits and Freeze sit as tiles, because freezing is routine and reversible. Report lost or stolen sits at the bottom with its consequence spelled out: Blocks the card permanently.</p></div>
-            </div>
+            </div></div>
           </div>
         </div>
       </section>
@@ -595,7 +598,7 @@ body{background:#F5F2EA}
           <div><b class="f-sta">₹1,42,070</b><span>Stack Sans</span></div>
         </div>
         <img class="found" src="img/11-foundations.webp" width="1600" height="3427" alt="OneBanc Foundations page: colour tokens, type scale, spacing and the typeface variable" loading="lazy">
-        <p style="margin-top:20px;max-width:66ch">Eleven colour tokens, one type scale, Material Symbols Rounded icons, and components shared across all three screens.</p>
+        <p class="foundline" style="margin-top:20px">Eleven colour tokens, one type scale, Material Symbols Rounded icons, and components shared across all three screens.</p>
       </section>
 
       <section id="copy" class="lt">
@@ -1040,4 +1043,44 @@ addEventListener('touchmove',function(e){if(!root.classList.contains('toclock'))
 .fonts div{border-radius:12px}
 .fonts span{font-size:13px}
 .ba figcaption{font-size:18px}</style>
-<style is:inline>/* video buttons: at least a 44px touch area, look unchanged */.pills .pill{position:relative}.pills .pill::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}</style>
+<style is:inline>/* video buttons: at least a 44px touch area, look unchanged */.pills .pill{position:relative}.pills .pill::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}
+/* Vishal 2026-10-19, desktop comments */
+/* the screen sections: "Screen N" and its title sit at the top of the text column beside the screen, and scroll with it */
+.scr .screens{margin-top:0}
+.scol{display:grid;gap:28px;align-content:start;min-width:0}
+.sintro{display:grid;gap:16px}
+.sintro>p:not(.eyebrow){max-width:60ch}
+.scr .screen>div.scol{position:static}
+@media (min-width:901px){.scr .screen>div.scol{position:sticky;top:80px}}
+/* blocks 1 to 4 appear one after another as the screen beside them scrolls */
+html.steps .scr .blk{opacity:.0;transform:translateY(14px);transition:opacity .35s ease,transform .35s ease}
+html.steps .scr .blk.on{opacity:1;transform:none}
+/* the left titles no longer slide down while their section scrolls; the text beside them is short */
+@media (min-width:1100px){article>section:not(.wide)>.lhead{position:static}}
+/* wide sections: eyebrow and title left, paragraph right, like Split */
+@media (min-width:1000px){
+  article>section.wide:not(.scr)>div:first-child{max-width:none!important;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(48px,6vw,120px);row-gap:16px;grid-auto-flow:row dense;align-items:start}
+  article>section.wide:not(.scr)>div:first-child>.eyebrow{grid-column:1;grid-row:1}
+  article>section.wide:not(.scr)>div:first-child>h2{grid-column:1;grid-row:2/span 6}
+  article>section.wide:not(.scr)>div:first-child>p:not(.eyebrow){grid-column:2}
+  article>section.wide:not(.scr)>div:first-child>p:not(.eyebrow):nth-of-type(2){margin-top:30px}
+}
+.foundline{max-width:none}
+/* arc: the nav bar stays on the frame's bottom edge while the screen scrolls under it, as on Reward Centre */
+.iph>.navfix{position:absolute;left:5px;right:5px;bottom:5px;background-repeat:no-repeat;background-size:100% auto;background-position:bottom;border-radius:0 0 41px 41px;pointer-events:none}
+.iph:has(.navfix)>.fsb{bottom:auto;top:20px;right:20px}
+/* top of the page: a little more room around the concept line */
+.wrap>p.note{margin-top:28px;max-width:none}
+.wrap>.summary{margin-top:56px}
+
+/* Vishal 2026-10-19 (all case studies): the concept line under the facts opens with a small label, not body text */
+.note .nlab{display:inline-flex;align-items:center;vertical-align:1px;margin-right:12px;padding:4px 10px;border:1px solid currentColor;border-radius:999px;font-size:11px;line-height:1;font-weight:600;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+</style>
+<script is:inline>
+/* Vishal 2026-10-19: on desktop the four blocks beside each long screen appear 1, 2, 3, 4 as the screen scrolls */
+(()=>{if(!matchMedia('(min-width:901px)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches||document.documentElement.classList.contains('calm'))return;
+const rows=[...document.querySelectorAll('.scr .screen')].map(sc=>({f:sc.querySelector('figure'),b:[...sc.querySelectorAll('.blk')]})).filter(r=>r.f&&r.b.length);
+if(!rows.length)return;document.documentElement.classList.add('steps');
+const u=()=>{const h=innerHeight;rows.forEach(r=>{const g=r.f.getBoundingClientRect(),span=Math.max(240,g.height-h+200),t=Math.min(1,Math.max(0,(200-g.top)/span));const n=Math.max(1,Math.ceil(t*r.b.length+.001));r.b.forEach((b,i)=>b.classList.toggle('on',i<n))})};
+addEventListener('scroll',u,{passive:true});addEventListener('resize',u);u()})();
+</script>

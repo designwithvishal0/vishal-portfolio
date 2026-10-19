@@ -433,7 +433,7 @@ article>section#learned{--band:#FFFDFA;--card:#F5F3EE}
     <div><span class="k">Prototype</span><p>Built and prototyped in Figma</p></div>
     <div><span class="k">Scope</span><p>Four screens, one card component in six states, a token based system, and a working prototype.</p></div>
   </div>
-  <p class="note">Solo project. I owned the problem framing, information architecture, flows, UI, design system and prototype.</p>
+  <p class="note"><span class="nlab">Solo project</span>I owned the problem framing, information architecture, flows, UI, design system and prototype.</p>
   <figure class="reel" style="margin-top:32px"><video data-inview class="shot wide" poster="img/00-hero-poster.jpg" width="1920" height="1080" muted loop playsinline preload="metadata" aria-label="Unified Reward Centre showreel"></video>
     <div class="pills"><button type="button" class="pill" data-act="play" aria-pressed="false" aria-label="Play"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg><span class="lb">PLAY</span></button><button type="button" class="pill fs" data-act="fs" aria-label="Full screen"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/></svg><span class="lb">FULL SCREEN</span></button></div></figure>
   <script is:inline>(()=>{
@@ -1162,4 +1162,7 @@ document.querySelectorAll(".protowrap").forEach(w=>{const f=w.querySelector(".pr
   .tbl th{padding:22px 24px 16px 28px}
   .tbl td{padding:20px 24px 20px 28px}
 }
+
+/* Vishal 2026-10-19 (all case studies): the concept line under the facts opens with a small label, not body text */
+.note .nlab{display:inline-flex;align-items:center;vertical-align:1px;margin-right:12px;padding:4px 10px;border:1px solid currentColor;border-radius:999px;font-size:11px;line-height:1;font-weight:600;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
 </style>
