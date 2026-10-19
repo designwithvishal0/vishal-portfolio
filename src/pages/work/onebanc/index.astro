@@ -368,8 +368,8 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
 @media (max-width:900px){.fonts{grid-template-columns:1fr 1fr}.scr .blks{gap:28px}}
 @media (max-width:620px){
   .pal{grid-template-columns:1fr 1fr}
-  .arc3{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-28px;padding:0 28px 8px;scroll-padding-inline:28px;gap:14px}
-  .arc3 .iph{flex:0 0 80%;scroll-snap-align:start}
+  .arc3{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-28px;padding:52px 28px 28px;scroll-padding-inline:28px;gap:24px}
+  .arc3 .iph{flex:0 0 76%;scroll-snap-align:start}
   .ba{grid-template-columns:minmax(0,1fr)}
   .tbl,.tbl tbody,.tbl tr,.tbl td{display:block}.tbl thead{display:none}
   .tbl tr{padding:14px 0;border-top:1px solid var(--line)}.tbl td{border:0;padding:2px 0}
@@ -1072,10 +1072,15 @@ html.steps .scr .blk.on{opacity:1;transform:none}
 .foundline{max-width:none}
 .pcol{display:grid;gap:22px}
 /* Vishal 2026-10-19: on phones Screens 1 to 3 had too much text; each point keeps its label and headline, the paragraph is hidden */
+/* the page never slides sideways on phones, whatever pokes past the edge */
+html,body{overflow-x:clip}
 @media (max-width:620px){.scr .blk>p{display:none}.scr .blks{gap:20px}.scr .blk{gap:6px}}
 /* arc: the nav bar stays on the frame's bottom edge while the screen scrolls under it, as on Reward Centre */
 .iph>.navfix{position:absolute;left:5px;right:5px;bottom:5px;background-repeat:no-repeat;background-size:100% auto;background-position:bottom;border-radius:0 0 41px 41px;pointer-events:none}
 .iph:has(.navfix)>.fsb{bottom:auto;top:20px;right:20px}
+/* Vishal 2026-10-19: the Full screen icon sat on the phone's status bar; it now sits just above the frame's top right corner */
+.arc3 .iph:has(.navfix)>.fsb{top:-44px;right:0}
+@media (min-width:621px){.arc3{margin-top:72px}}
 /* top of the page: a little more room around the concept line */
 .wrap>p.note{margin-top:28px;max-width:none}
 .wrap>.summary{margin-top:56px}
