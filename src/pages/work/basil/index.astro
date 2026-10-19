@@ -1158,8 +1158,9 @@ html.calm .endsec .closing>*{opacity:1!important;transform:none!important;transi
 <style is:inline>/* typography: keep the What I learned paragraphs at a readable line length (about 75 characters) */
 .list>div p{max-width:68ch}</style>
 
-<style is:inline>/* Vishal 2026-10-18 "apply all": the lessons are not steps, so no numbers; "Next" sits as a small label above its heading */
-#learned .list>div{grid-template-columns:minmax(0,1fr)!important}#learned .list h3,#learned .list p,#learned .list .n{grid-column:1!important}#learned .list .nx .n{padding-top:0;font-size:16px}</style>
+<style is:inline>/* Vishal 2026-10-19: the lessons are not steps, so a bullet in the old number column instead of 01 to 04; "Next" keeps its label */
+#learned .list>div:not(.nx)::before{content:"";grid-column:1;grid-row:1/span 2;width:12px;height:12px;border-radius:50%;background:var(--acc);margin-top:9px}
+#learned .list>div:not(.nx) h3,#learned .list>div:not(.nx) p{grid-column:2}</style>
 
 <style is:inline>/* Vishal 2026-10-18 "apply all": one-off text sizes and corner roundings snapped to the shared steps (13, 16, 18 px text; 12, 16 px corners) */
 .bbox li{border-radius:12px}
