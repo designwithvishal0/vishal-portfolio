@@ -155,7 +155,7 @@ export const graphics = [
   { key: 'social', cap: 'Social media posts', alt: 'Social media posts for fashion and motorbike brands' },
   { key: 'realestate', cap: 'Real estate and event posters', alt: 'Real estate flyer and Content Conclave event poster' },
   { key: 'moi', cap: 'Museum of Illusions invites', alt: 'Birthday party invitation posters for Museum of Illusions' },
-  { key: 'trigo', cap: 'TriGo roll up standee', alt: 'TriGo roll up standee' },
+  { key: 'trigo', cap: 'TriGo roll up standee', alt: 'Yellow and navy TriGo standee with a phone showing ride options' },
 ];
 // footer colophon (Vishal 2026-10-18, from the portfolio collection review): month of the last build, so it updates on every push
 export const updated = new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' });

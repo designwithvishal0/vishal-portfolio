@@ -283,7 +283,7 @@ blockquote,.dek,.closing>p,.metric b,.next h2{font-size:22px}
 .fixes{border-top:0;gap:12px}
 .fix{background:var(--card);border:0;border-radius:16px;padding:24px 28px}
 .fix>div{display:grid;gap:6px;align-content:start}
-.k.pr{color:var(--warm)}
+.k.pr{color:#965200} /* a touch darker than --warm so the small label clears 4.5:1 on the grey card */
 /* the closing line reads as the point, not a footnote */
 .closing>p{font-weight:600;color:var(--acc)}
 /* more work: a picture and a clear hover */
@@ -316,7 +316,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
 
 <SiteHeader home="/" theme={false} book />
 
-<div class="wrap">
+<main class="wrap">
 
   <header class="hero">
     <p class="eyebrow">Case study · B2B product design</p>
@@ -557,7 +557,7 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
     </div>
   </nav>
   </div>
-</div>
+</main>
 <style is:inline>
 /* Closing (Vishal 2026-10-13): same words, order and layout as before; only the look changes.
    Closing and More work are ONE section. No boxed card (dark, navy and blue boxes all read as a slab dropped on the page):
