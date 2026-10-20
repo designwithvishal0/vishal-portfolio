@@ -458,7 +458,7 @@ body{background:#fff}
 
   <header class="hero">
     <p class="eyebrow">Product page concept · yourbasil.com</p>
-    <h1>Basil</h1>
+    <h1>Basil set builder</h1>
     <p class="hook">Sell the set, not the second product.</p>
     <p class="dek">An upsell section for Basil’s product page (PDP). It turns one lunchbox into a matching school kit, and makes the Buy 2 and Buy 3 offer something a parent can watch fill up.</p>
   </header>
@@ -471,15 +471,15 @@ body{background:#fff}
   </div>
   <p class="note"><span class="nlab">Independent concept</span>Not affiliated with Basil. Prices and products from the live store on 24 September 2026.</p>
   <figure class="reel" style="margin-top:32px"><video data-inview class="shot wide" poster="img/00-hero-poster.jpg" width="1920" height="1080" muted loop playsinline preload="metadata" aria-label="Basil set builder showreel"></video>
-    <div class="pills"><button type="button" class="pill" data-act="play" aria-pressed="false" aria-label="Play"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg><span class="lb">PLAY</span></button><button type="button" class="pill fs" data-act="fs" aria-label="Full screen"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/></svg><span class="lb">FULL SCREEN</span></button></div></figure>
+    <div class="pills"><button type="button" class="pill" data-act="play" aria-pressed="false" aria-label="Play"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg><span class="lb">Play</span></button><button type="button" class="pill fs" data-act="fs" aria-label="Full screen"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/></svg><span class="lb">Full screen</span></button></div></figure>
   <script is:inline>(()=>{
     // This reel has no sound, so it only needs Play and Full screen. Same look and behaviour as the JARVIS reel otherwise.
     const f=document.currentScript.previousElementSibling, v=f.querySelector('video'); const tall=matchMedia('(max-width:620px)').matches; if(tall){v.poster='img/00-hero-poster-tall.jpg';v.width=1080;v.height=1920} v.src=tall?'showreel-tall.mp4':'showreel.mp4'; const pb=f.querySelector('[data-act=play]');
     const ip='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg>', ia='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><rect x="6" y="4.5" width="4.2" height="15" rx="1.4" fill="currentColor"/><rect x="13.8" y="4.5" width="4.2" height="15" rx="1.4" fill="currentColor"/></svg>';
-    const paint=()=>{pb.innerHTML=v.paused?ip+'<span class="lb">PLAY</span>':ia+'<span class="lb">PAUSE</span>';pb.setAttribute('aria-label',v.paused?'Play':'Pause');pb.setAttribute('aria-pressed',String(!v.paused))};
+    const paint=()=>{pb.innerHTML=v.paused?ip+'<span class="lb">Play</span>':ia+'<span class="lb">Pause</span>';pb.setAttribute('aria-label',v.paused?'Play':'Pause');pb.setAttribute('aria-pressed',String(!v.paused))};
     const fb=f.querySelector('.fs'),fsOn=()=>document.fullscreenElement===f;
     fb.onclick=()=>{if(fsOn())document.exitFullscreen();else if(f.requestFullscreen)f.requestFullscreen();else if(v.webkitEnterFullscreen)v.webkitEnterFullscreen()};
-    document.addEventListener('fullscreenchange',()=>{const o=fsOn();fb.setAttribute('aria-label',o?'Exit full screen':'Full screen');fb.querySelector('.lb').textContent=o?'EXIT FULL SCREEN':'FULL SCREEN'});
+    document.addEventListener('fullscreenchange',()=>{const o=fsOn();fb.setAttribute('aria-label',o?'Exit full screen':'Full screen');fb.querySelector('.lb').textContent=o?'Exit full screen':'Full screen'});
     pb.onclick=()=>{if(v.paused)v.play();else v.pause()};
     v.onclick=()=>pb.onclick();v.style.cursor='pointer';
     ['play','pause'].forEach(e=>v.addEventListener(e,paint));
@@ -512,7 +512,7 @@ body{background:#fff}
     </nav>
     <button type="button" class="tocpill" popovertarget="tocsheet" aria-label="Contents"><span class="k">Contents</span><b>The problem</b><i aria-hidden="true">1 / 11</i><span class="chev" aria-hidden="true"></span></button>
     <div id="tocsheet" class="tocsheet" popover><span class="k">Contents</span></div>
-    <div class="dockfade" aria-hidden="true"></div><nav class="dock" aria-label="Contents"><button type="button" class="dkb" data-go="-1" aria-label="Previous section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="dkm"><div class="dkt"><b></b><i></i></div><div class="dks"></div></div><a class="dkn" href="#"><small>NEXT</small><span></span></a><button type="button" class="dkb" data-go="1" aria-label="Next section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></nav>
+    <div class="dockfade" aria-hidden="true"></div><nav class="dock" aria-label="Contents"><button type="button" class="dkb" data-go="-1" aria-label="Previous section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="dkm"><div class="dkt"><b></b><i></i></div><div class="dks"></div></div><a class="dkn" href="#"><small>Next</small><span></span></a><button type="button" class="dkb" data-go="1" aria-label="Next section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></nav>
 
     <article>
       <section id="problem" class="lt">
@@ -882,6 +882,8 @@ nav.toc.light{--fg:#1A332E;--muted:#5F6B67;--line:#E3E5D3;--warm:#A6480C}
 .pill{height:44px;padding:0 16px;gap:8px;justify-content:center;border-radius:22px;border:0;box-shadow:0 0 0 1px rgba(242,241,236,.28);background:rgba(12,12,14,.72);color:#F2F1EC;font:700 12px/1 var(--sans);letter-spacing:.02em}
 .pill:hover{background:rgba(12,12,14,.85)}
 @media (max-width:620px){.pills{right:10px;bottom:10px;gap:6px}.pill{width:40px;height:40px;padding:0;border-radius:50%}.pill .lb{display:none}}
+@media (max-width:620px){.pill{width:44px;height:44px}} /* 44px thumb target on phones */
+.pill .lb,.dkn small{text-transform:uppercase} /* labels are written in sentence case so screen readers say words, not letters */
 /* desktop (Vishal 2026-10-13): icons only; on hover or keyboard focus the button stretches and shows its label inside; full screen is desktop only */
 @media (min-width:621px){.pill{width:auto;min-width:44px;padding:0 13px;gap:0;border-radius:22px;transition:gap .2s var(--out,ease),padding .2s var(--out,ease)}.pill .lb{display:inline-block;max-width:0;overflow:hidden;white-space:nowrap;opacity:0;transition:max-width .25s var(--out,ease),opacity .2s}.pill:hover,.pill:focus-visible{gap:8px;padding:0 16px}.pill:hover .lb,.pill:focus-visible .lb{max-width:160px;opacity:1}}
 @media (max-width:620px){.pill.fs{display:none}}
@@ -1171,7 +1173,7 @@ html.calm .endsec .closing>*{opacity:1!important;transform:none!important;transi
 @media (max-width: 620px){.states figcaption{font-size:13px}}</style>
 <style is:inline>/* video buttons: at least a 44px touch area, look unchanged */.pills .pill{position:relative}.pills .pill::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}
 /* Vishal 2026-10-19 (all case studies): the concept line under the facts opens with a small label, not body text */
-.note .nlab{display:inline-flex;align-items:center;vertical-align:1px;margin-right:12px;padding:4px 10px;border:1px solid currentColor;border-radius:999px;font-size:11px;line-height:1;font-weight:600;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.note .nlab{display:inline-flex;align-items:center;vertical-align:1px;margin-right:12px;padding:4px 10px;border:1px solid currentColor;border-radius:999px;font-size:12px;line-height:1;font-weight:600;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
 </style>
 
 <style is:inline>/* Vishal 2026-10-19 "so much space on the right": on desktop, section intros that carry a paragraph sit as heading left, paragraph right, so the line fills the width. Phones unchanged */

@@ -55,3 +55,14 @@ const nav = [['Work', home ? '/work/' : '#work'], ['About', home + '#about'], ['
   },{passive:true});
 })();
 </script>
+<!-- Board 20 Oct (d-dock): on desktop the chapter bar fades back while it sits over a phone screen or prototype, and comes back on hover or keyboard focus -->
+<style is:global>
+.dock.show.dk-dim:not(:hover):not(:focus-within){opacity:.22}
+.dock.show.dk-dim~.dockfade{opacity:0}
+</style>
+<script is:inline>
+addEventListener('DOMContentLoaded',()=>{const d=document.querySelector('.dock[aria-label="Contents"]');if(!d)return;let q=0;
+const run=()=>{q=0;if(getComputedStyle(d).display==='none')return d.classList.remove('dk-dim');const r=d.getBoundingClientRect();
+d.classList.toggle('dk-dim',[...document.querySelectorAll('.iph,.scrimg,iframe,.screen img')].some(e=>{const s=e.getBoundingClientRect();if((Math.min(s.right,r.right)-Math.max(s.left,r.left))<r.width*.3||s.top>=r.bottom||s.bottom<=r.top)return false;for(let n=e;n&&n!==document.body;n=n.parentElement){const c=getComputedStyle(n);if(+c.opacity<.5||c.visibility==='hidden')return false}return true}))};
+const tick=()=>{if(!q)q=requestAnimationFrame(run)};addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);addEventListener('transitionend',tick,true);addEventListener('animationend',tick,true);tick()});
+</script>

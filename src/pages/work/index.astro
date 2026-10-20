@@ -16,10 +16,10 @@ const resume = intro.links.find(l => l.label === 'Resume')!;
 
 const shipped = [lead, ...pages.filter(p => p.tag.startsWith('Shipped'))];
 const concepts = pages.filter(p => p.tag === 'Concept');
+// Board 20 Oct (a-groups): same group names as home. Shipped pages lead Pages that sell; each card keeps its Shipped or Concept tag.
 const groups = [
-  { id: 'shipped', h: 'Shipped work', items: shipped },
-  { id: 'product', h: 'More product work', items: more.map(m => ({ ...m, tag: '' })) },
-  { id: 'concepts', h: 'Concept pages', items: concepts },
+  { id: 'product', h: 'More case studies', items: more.map(m => ({ ...m, tag: '' })) },
+  { id: 'pages', h: 'Pages that sell', items: [...shipped, ...concepts] },
 ];
 
 const ld = [

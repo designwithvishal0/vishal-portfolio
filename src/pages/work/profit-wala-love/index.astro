@@ -370,17 +370,17 @@ article>section:first-child{padding-top:120px}
     <div><span class="k">Format</span><p>Landing page, banners, in app, emailer</p></div>
   </div>
   <figure class="reel" style="margin-top:32px"><video data-inview class="shot wide" id="pwl-film" poster="img/reel-poster.webp" width="1200" height="900" muted loop playsinline preload="metadata" aria-label="Profit Wala Love campaign film with music"></video>
-    <div class="pills"><button type="button" class="pill" data-act="play" aria-pressed="false" aria-label="Play"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg><span class="lb">PLAY</span></button><button type="button" class="pill" data-act="sound" aria-pressed="false" aria-label="Turn sound on"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6A2 2 0 0 1 5 8.2H3a1 1 0 0 0-1 1v5.6a1 1 0 0 0 1 1h2a2 2 0 0 1 1.4.6l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg><span class="lb">SOUND ON</span></button><button type="button" class="pill fs" data-act="fs" aria-label="Full screen"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/></svg><span class="lb">FULL SCREEN</span></button></div></figure>
+    <div class="pills"><button type="button" class="pill" data-act="play" aria-pressed="false" aria-label="Play"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg><span class="lb">Play</span></button><button type="button" class="pill" data-act="sound" aria-pressed="false" aria-label="Turn sound on"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6A2 2 0 0 1 5 8.2H3a1 1 0 0 0-1 1v5.6a1 1 0 0 0 1 1h2a2 2 0 0 1 1.4.6l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg><span class="lb">Sound on</span></button><button type="button" class="pill fs" data-act="fs" aria-label="Full screen"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/></svg><span class="lb">Full screen</span></button></div></figure>
   <script is:inline>(()=>{
     // Same look and behaviour as the JARVIS reel: autoplay with sound if the browser allows it, else muted until the first tap
     const f=document.currentScript.previousElementSibling, v=f.querySelector('video'); const tall=matchMedia('(max-width:620px)').matches; if(tall){v.poster='img/reel-poster-tall.webp';v.width=1080;v.height=1920} v.src=tall?'showreel-tall.mp4':'showreel.mp4'; const pb=f.querySelector('[data-act=play]'), sb=f.querySelector('[data-act=sound]');
     const on='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6A2 2 0 0 1 5 8.2H3a1 1 0 0 0-1 1v5.6a1 1 0 0 0 1 1h2a2 2 0 0 1 1.4.6l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M16 9a5 5 0 0 1 0 6M19.4 18.4a9 9 0 0 0 0-12.8"/></svg>', off=sb.querySelector('svg').outerHTML;
     const ip='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg>', ia='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><rect x="6" y="4.5" width="4.2" height="15" rx="1.4" fill="currentColor"/><rect x="13.8" y="4.5" width="4.2" height="15" rx="1.4" fill="currentColor"/></svg>';
-    const paint=()=>{pb.innerHTML=v.paused?ip+'<span class="lb">PLAY</span>':ia+'<span class="lb">PAUSE</span>';pb.setAttribute('aria-label',v.paused?'Play':'Pause');pb.setAttribute('aria-pressed',String(!v.paused));
-      sb.innerHTML=v.muted?off+'<span class="lb">SOUND ON</span>':on+'<span class="lb">SOUND OFF</span>';sb.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');sb.setAttribute('aria-pressed',String(!v.muted))};
+    const paint=()=>{pb.innerHTML=v.paused?ip+'<span class="lb">Play</span>':ia+'<span class="lb">Pause</span>';pb.setAttribute('aria-label',v.paused?'Play':'Pause');pb.setAttribute('aria-pressed',String(!v.paused));
+      sb.innerHTML=v.muted?off+'<span class="lb">Sound on</span>':on+'<span class="lb">Sound off</span>';sb.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');sb.setAttribute('aria-pressed',String(!v.muted))};
     const fb=f.querySelector('.fs'),fsOn=()=>document.fullscreenElement===f;
     fb.onclick=()=>{if(fsOn())document.exitFullscreen();else if(f.requestFullscreen)f.requestFullscreen();else if(v.webkitEnterFullscreen)v.webkitEnterFullscreen()};
-    document.addEventListener('fullscreenchange',()=>{const o=fsOn();fb.setAttribute('aria-label',o?'Exit full screen':'Full screen');fb.querySelector('.lb').textContent=o?'EXIT FULL SCREEN':'FULL SCREEN'});
+    document.addEventListener('fullscreenchange',()=>{const o=fsOn();fb.setAttribute('aria-label',o?'Exit full screen':'Full screen');fb.querySelector('.lb').textContent=o?'Exit full screen':'Full screen'});
     let chose=false, blocked=false;
     pb.onclick=()=>{if(v.paused){if(!chose)v.muted=false;v.play()}else v.pause()};
     v.onclick=()=>{if(blocked){blocked=false;if(!chose)v.muted=false;if(v.paused)v.play();return}pb.onclick()};v.style.cursor='pointer';
@@ -406,13 +406,13 @@ article>section:first-child{padding-top:120px}
       <span class="k">Contents</span>
       <a href="#overview">Overview</a>
       <a href="#results">Results</a>
-      <a href="#page">Landing Page</a>
+      <a href="#page">Landing page</a>
       <a href="#assets">Assets</a>
-      <a href="#marketing">Marketing Assets</a>
+      <a href="#marketing">Marketing assets</a>
     </nav>
     <button type="button" class="tocpill" popovertarget="tocsheet" aria-label="Contents"><span class="k">Contents</span><b>Overview</b><i aria-hidden="true">1 / 5</i><span class="chev" aria-hidden="true"></span></button>
     <div id="tocsheet" class="tocsheet" popover><span class="k">Contents</span></div>
-    <div class="dockfade" aria-hidden="true"></div><nav class="dock" aria-label="Contents"><button type="button" class="dkb" data-go="-1" aria-label="Previous section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="dkm"><div class="dkt"><b></b><i></i></div><div class="dks"></div></div><a class="dkn" href="#"><small>NEXT</small><span></span></a><button type="button" class="dkb" data-go="1" aria-label="Next section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></nav>
+    <div class="dockfade" aria-hidden="true"></div><nav class="dock" aria-label="Contents"><button type="button" class="dkb" data-go="-1" aria-label="Previous section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="dkm"><div class="dkt"><b></b><i></i></div><div class="dks"></div></div><a class="dkn" href="#"><small>Next</small><span></span></a><button type="button" class="dkb" data-go="1" aria-label="Next section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></nav>
 
     <article>
       <section id="overview" class="lt">
@@ -432,7 +432,7 @@ article>section:first-child{padding-top:120px}
       </section>
 
       <section id="page" class="lt wide">
-        <h2>Landing Page</h2>
+        <h2>Landing page</h2>
         <p>Each day from Rose Day to Promise Day got its own card with an inactive and an active state. Tapping a day lifts it and swaps the deal carousel to that day’s gifts. Every deal card shows the retailer, the price hook and the profit you earn. Further down, a For Her / For Him switch changes the whole product edit while the categories stay in place. The same story ran across home banners, in app placements and the emailer.</p>
         <p class="eyebrow dv dvd">Desktop</p>
         <div class="lap"><div class="lapbar" aria-hidden="true"><i></i><i></i><i></i><span>cashkaro.com/profit-wala-love</span></div><div class="sc" tabindex="0" aria-label="Scroll the screen"><img src="img/02-desktop-lp.webp" width="1440" height="2760" alt="The Profit Wala Love landing page on desktop: the Profit Wala Love logo, a heart shaped card for each day from Rose Day to Promise Day, the deal carousel for the chosen day, and Shop by Recipient with the For Her and For Him switch" loading="lazy"></div></div>
@@ -442,12 +442,12 @@ article>section:first-child{padding-top:120px}
 
       <section id="assets" class="lt">
         <h2>Assets</h2>
-        <p>Icons for Day wise selection</p>
+        <p>The five day cards, each with a resting and a chosen state, so the tapped day is clear at a glance.</p>
         <figure class="cut dark pwbig"><img src="img/07-day-cards.webp" width="1960" height="900" alt="The five day cards, Rose Day, Propose Day, Chocolate Day, Teddy Day and Promise Day, each in its inactive state on top and its active state below" loading="lazy"><img src="img/08-deal-cards.webp" width="1960" height="1003" alt="The fifteen deal cards, three for each day from Rose Day to Promise Day, each showing the retailer, the gift, the starting price and the profit you earn" loading="lazy"></figure>
       </section>
 
       <section id="marketing" class="lt wide">
-        <h2>Marketing Assets</h2>
+        <h2>Marketing assets</h2>
         <p>Home Page Banners, In-App and Emailer</p>
         <div class="mk">
           <figure class="b1"><img src="img/05-desk-banner.webp" width="1068" height="500" alt="Desktop home page banner: This Valentine's Day, Turn Love into Profit, with a Share Deals, Spread Love button" loading="lazy"><figcaption class="mkl">Home page banner, desktop</figcaption></figure>
@@ -467,16 +467,16 @@ article>section:first-child{padding-top:120px}
       <a class="btn primary" href="https://www.figma.com/design/8sj0nACokWFitSHKP6nhrm/Profit-wala-Love" target="_blank" rel="noopener">View the Figma file<svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill-opacity="0" fill="currentColor" height="9.75px" transform="translate(8.25 6)" width="9.75px"></path><path d="M 0 7.125 L 7.125 0" fill="transparent" height="7.125px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(6 10.875)" width="7.125px"></path><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill="transparent" height="9.75px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(8.25 6)" width="9.75px"></path></svg></a>
       <a class="btn ghost" href="/"><svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill-opacity="0" fill="currentColor" height="13.5px" transform="translate(3.75 5.25)" width="6.75px"></path><path d="M 9.75 0 L 0 0" fill="transparent" height="1px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(10.5 12)" width="9.75px"></path><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill="transparent" height="13.5px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(3.75 5.25)" width="6.75px"></path></svg>Back to home</a>
     </div>
-    <p class="founder">Building a product people need to trust? I take on freelance work. <a href="https://cal.com/designwvishal" target="_blank" rel="noopener">Book a call</a></p>
+    <p class="founder">Need a page that sells? I take on freelance work. <a href="https://cal.com/designwvishal" target="_blank" rel="noopener">Book a call</a></p>
   </footer>
 
   <nav class="next" aria-label="More work">
     <span class="k">More work</span>
     <h2>Check out more work</h2>
     <div class="nextgrid">
-      <a href="/work/cosiq/"><img src="img/more-cosiq.webp" width="800" height="837" alt="" loading="lazy"><b>CosIQ · Beauty Brand Landing Page</b></a>
-      <a href="/work/big-birthday-bash/"><img src="img/more-bbb.webp" width="800" height="837" alt="" loading="lazy"><b>Big Birthday Bash · Campaign Landing Page and Game</b></a>
-      <a href="/work/reward-centre/"><img src="img/more-reward.webp" width="800" height="837" alt="" loading="lazy"><b>Unified Reward Centre · Mobile Product Design</b></a>
+      <a href="/work/cosiq/"><img src="img/more-cosiq.webp" width="800" height="837" alt="" loading="lazy"><b>CosIQ · Build your own routine</b></a>
+      <a href="/work/big-birthday-bash/"><img src="img/more-bbb.webp" width="800" height="837" alt="" loading="lazy"><b>Big Birthday Bash · One spin, one deal, one day</b></a>
+      <a href="/work/reward-centre/"><img src="img/more-reward.webp" width="800" height="837" alt="" loading="lazy"><b>Unified Reward Centre · Every reward. One place.</b></a>
     </div>
   </nav>
   </div>
@@ -881,6 +881,8 @@ h1 .h1s{display:block;font-weight:400!important;font-size:.5em;line-height:1.2;l
 .pill{height:44px;padding:0 16px;gap:8px;justify-content:center;border-radius:22px;border:0;box-shadow:0 0 0 1px rgba(242,241,236,.28);background:rgba(12,12,14,.72);color:#F2F1EC;font:700 12px/1 var(--sans);letter-spacing:.02em}
 .pill:hover{background:rgba(12,12,14,.85)}
 @media (max-width:620px){.pills{right:10px;bottom:10px;gap:6px}.pill{width:40px;height:40px;padding:0;border-radius:50%}.pill .lb{display:none}}
+@media (max-width:620px){.pill{width:44px;height:44px}} /* 44px thumb target on phones */
+.pill .lb,.dkn small{text-transform:uppercase} /* labels are written in sentence case so screen readers say words, not letters */
 @media (min-width:621px){.pill{width:auto;min-width:44px;padding:0 13px;gap:0;border-radius:22px;transition:gap .2s ease,padding .2s ease}.pill .lb{display:inline-block;max-width:0;overflow:hidden;white-space:nowrap;opacity:0;transition:max-width .25s ease,opacity .2s}.pill:hover,.pill:focus-visible{gap:8px;padding:0 16px}.pill:hover .lb,.pill:focus-visible .lb{max-width:160px;opacity:1}}
 </style>
 <style is:inline>
