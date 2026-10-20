@@ -7,6 +7,8 @@ html{scroll-padding-top:var(--bar)}
 .bar-light{--bg:#FAFAF8;--ink:#0B0B0C;--muted:#55565C;--edge:#76777D;--line:#E2E2DE;--btn:#0B0B0C;--on-btn:#FAFAF8}
 /* not fixed (Vishal 2026-10-15): on every page and size the bar slides away while you read down and comes back the moment you scroll up. SiteHeader.astro sets hdr-hide. */
 html.hdr-hide .bar{transform:translateY(calc(-100% - 16px))}
+/* no rubber band (Vishal 2026-10-20, "this header also comes down"): on a Mac trackpad or an iPhone, pulling past the top of the page dragged the whole page down and a strip of page colour showed above the header. The page now stops dead at the top and bottom instead of bouncing. */
+html{overscroll-behavior-y:none}
 /* frosted glass at 96% (Vishal 2026-10-15): enough cover that the bar reads as the same light bar over light and dark sections alike, with only a soft blur of what passes under; the page shows through, blurred, as it scrolls under the bar; solid where blur isn't supported or less transparency is asked for */
 @supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
   .bar{background:color-mix(in srgb,var(--bg) 96%,transparent);backdrop-filter:blur(18px) saturate(1.8);-webkit-backdrop-filter:blur(18px) saturate(1.8)}
