@@ -81,7 +81,7 @@ const ld = [
 <link rel="canonical" href={canonical}>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="article">
-<meta property="og:image" content={`/graphics/${g.key}.webp`}><meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content={new URL(`/graphics/${g.key}.webp`, Astro.site).href}><meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json" set:html={JSON.stringify(ld)} />
 <style is:inline>
 /* Neutral: only the site tokens (tokens.css), light and dark. The shared header reads --line --edge --btn --on-btn --bar --gut --out. */
