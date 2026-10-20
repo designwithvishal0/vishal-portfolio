@@ -200,6 +200,7 @@ figcaption{font-size:14px;color:var(--muted)}
   article{gap:80px}
   .summary{padding:22px}
 }
+.sh{display:contents}
 </style>
 <style is:inline>.proto{display:block;width:100%;aspect-ratio:16/10;border:0;border-radius:24px;background:var(--card)}@media (max-width:640px){.proto{aspect-ratio:9/16}}video.shot{background:var(--card)}
 .reel{position:relative}
@@ -520,8 +521,8 @@ article>section.lt,article>section#matcher{padding-top:120px}
 
     <article>
       <section id="rule" class="lt">
-        <p class="eyebrow">The hardest call</p>
-        <h2>Put the answer next to the doubt</h2>
+        <hgroup class="sh"><p class="eyebrow">The hardest call</p>
+        <h2>Put the answer next to the doubt</h2></hgroup>
         <p>Every product page has the same sections: photos, price, options, delivery, reviews. The order is where they differ, and almost every store orders them by what the store wants to say.</p>
         <p>I ordered mine by what the buyer is unsure about. A foundation buyer has one doubt: will this shade match me? A dress buyer has one doubt: will this size fit me? Everything on both pages follows from putting the evidence for that one doubt exactly where it is felt, and keeping everything else quiet until the choice is made.</p>
         <p>That rule decided the fold, the order of sections, what became a tool, what became a single sentence, and most of the edge cases.</p>
@@ -529,8 +530,8 @@ article>section.lt,article>section#matcher{padding-top:120px}
       </section>
 
       <section id="who" class="lt sf">
-        <p class="eyebrow">Who this is for</p>
-        <h2>Two buyers, two doubts that stop the sale</h2>
+        <hgroup class="sh"><p class="eyebrow">Who this is for</p>
+        <h2>Two buyers, two doubts that stop the sale</h2></hgroup>
         <div class="doubts">
           <div><span>Buying a foundation from a brand she has never worn</span><b>Will this shade match me?</b></div>
           <div><span>Buying a dress from a brand he has never bought</span><b>Will this size fit me?</b></div>
@@ -545,8 +546,8 @@ article>section.lt,article>section#matcher{padding-top:120px}
       </section>
 
       <section id="try" class="lt">
-        <p class="eyebrow">Try it yourself</p>
-        <h2>Is 290 warm or cool?</h2>
+        <hgroup class="sh"><p class="eyebrow">Try it yourself</p>
+        <h2>Is 290 warm or cool?</h2></hgroup>
         <p>That is the full label one major beauty store gives a shade. Just “290”.</p>
         <div class="qt">
           <span class="sw" aria-hidden="true"></span><b>290</b>
@@ -559,8 +560,8 @@ article>section.lt,article>section#matcher{padding-top:120px}
       </section>
 
       <section id="stores" class="lt sf">
-        <p class="eyebrow">Six stores, twelve surfaces</p>
-        <h2>Every store built the right tool, then hid it</h2>
+        <hgroup class="sh"><p class="eyebrow">Six stores, twelve surfaces</p>
+        <h2>Every store built the right tool, then hid it</h2></hgroup>
         <p>The surprise was not what was missing. Almost everything a buyer needs already exists somewhere. It is just never where the buyer is standing.</p>
         <div class="sos">
           <div><h3>Ajio built a chart of how a size actually fits. It is in the app only. Two words on web.</h3><p><b>So I:</b> put fit as one honest sentence directly above the size buttons.</p></div>
@@ -672,8 +673,8 @@ article>section.lt,article>section#matcher{padding-top:120px}
       </section>
 
       <section id="wrong" class="lt sf">
-        <p class="eyebrow">What I got wrong first</p>
-        <h2>Four things I built, then cut</h2>
+        <hgroup class="sh"><p class="eyebrow">What I got wrong first</p>
+        <h2>Four things I built, then cut</h2></hgroup>
         <div class="cuts">
           <div><h3>A buy rail pinned to the side</h3><p>It repeated the product, price and button from the very first pixel and squeezed the photo to 460px on a 1440 screen. Now a bar slides in only after the page’s own buttons scroll away.</p></div>
           <div><h3>A shade dropdown</h3><p>Copied from a store with fifty shades, where it makes sense. With six shades all visible, mine opened a list of exactly what was already on screen.</p></div>
@@ -698,8 +699,8 @@ article>section.lt,article>section#matcher{padding-top:120px}
       </section>
 
       <section id="system" class="lt sf">
-        <p class="eyebrow">Under the hood</p>
-        <h2>Built from parts, not drawn twice</h2>
+        <hgroup class="sh"><p class="eyebrow">Under the hood</p>
+        <h2>Built from parts, not drawn twice</h2></hgroup>
         <div class="nums">
           <div><b>21</b><span>colour tokens</span></div>
           <div><b>19</b><span>text styles</span></div>
@@ -710,8 +711,8 @@ article>section.lt,article>section#matcher{padding-top:120px}
       </section>
 
       <section id="changed" class="lt">
-        <p class="eyebrow">What changed</p>
-        <h2>The same foundation, bought two ways</h2>
+        <hgroup class="sh"><p class="eyebrow">What changed</p>
+        <h2>The same foundation, bought two ways</h2></hgroup>
         <div class="beforeafter">
           <div class="b"><span class="k">Before (a typical store)</span><p>Six circles with numbers. One quietly preselected. The returns rule buried in the policy. Coupon maths left to you. The shade gets checked when the box arrives. ₹441, and a coin toss.</p></div>
           <div class="a"><span class="k">After (this page)</span><p>Find my shade on the photo. Two questions, three matches with real match rates. Every shade named with depth and undertone. ₹375, already worked out. No returns stated before Buy. ₹375, and a reason to trust it.</p></div>
@@ -721,16 +722,16 @@ article>section.lt,article>section#matcher{padding-top:120px}
       </section>
 
       <section id="breaks" class="lt sf">
-        <p class="eyebrow">Stated plainly</p>
-        <h2>Where this breaks</h2>
+        <hgroup class="sh"><p class="eyebrow">Stated plainly</p>
+        <h2>Where this breaks</h2></hgroup>
         <p>If wrong shade reports do not fall, the two questions are a nice story and nothing more. Nothing in this project proves they work. Only real purchase data can.</p>
         <p>“Runs small” from four exchanges is noise dressed as data. The fit sentence should only appear once there are enough exchanges to mean something, and that threshold needs real numbers to set.</p>
         <p>And one of my own placements should move. Once a pincode is known, delivery stops being homework and becomes a fact. Then it belongs above the buttons.</p>
       </section>
 
       <section id="learned" class="lt">
-        <p class="eyebrow">What I learned</p>
-        <h2>Where a fact sits changes what it says</h2>
+        <hgroup class="sh"><p class="eyebrow">What I learned</p>
+        <h2>Where a fact sits changes what it says</h2></hgroup>
         <p>I went in thinking hierarchy meant ranking things by importance. The no returns warning taught me it is really about neighbours. The same five words read as trivia beside the shades and as a condition of sale right before Buy.</p>
         <p>The second lesson came from copying. Almost every pattern I borrowed was right for the store I took it from and wrong for mine. Amazon’s delivery placement assumes it already knows where you live. A shade dropdown assumes fifty shades. Now, before I copy a pattern, I ask what it quietly depends on.</p>
       </section>
@@ -799,9 +800,10 @@ body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
 @media (min-width:1100px){
   article>section:not(.wide){max-width:none;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(48px,6vw,120px);row-gap:0}
   article>section:not(.wide)>*{grid-column:2;min-width:0}
-  article>section:not(.wide)>:is(.eyebrow,h2){grid-column:1;grid-row:1/span 60;align-self:start}
-  article>section:not(.wide)>h2{padding-top:36px}
-  article>section:not(.wide)>:not(.eyebrow,h2)~:not(.eyebrow,h2){margin-top:22px}
+  article>section:not(.wide)>.sh{grid-column:1;grid-row:1/span 60;align-self:start;position:sticky;top:120px;display:grid}
+  article>section:not(.wide)>.sh>*{grid-area:1/1;align-self:start}
+  article>section:not(.wide)>.sh>h2{padding-top:36px}
+  article>section:not(.wide)>:not(.eyebrow,h2,.sh)~:not(.eyebrow,h2,.sh){margin-top:22px}
 }
 </style>
 
