@@ -43,6 +43,7 @@ const ld = [
 @font-face{font-family:Metropolis;font-weight:800;font-display:swap;src:url(/work/profit-wala-love/fonts/metropolis-latin-800-normal.woff2) format("woff2")}
 @font-face{font-family:Sansita;font-weight:400;font-display:swap;src:url(/work/profit-wala-love/fonts/sansita-latin-400-normal.woff2) format("woff2")}
 @font-face{font-family:Sansita;font-weight:700;font-display:swap;src:url(/work/profit-wala-love/fonts/sansita-latin-700-normal.woff2) format("woff2")}
+.sh{display:contents}
 </style>
 <style is:inline>
 /* Layout: text column of ~66ch beside a sticky contents rail on desktop; one column on phones.
@@ -458,6 +459,9 @@ article>section:first-child{padding-top:120px}
         </div>
       </section>
     </article>
+    <script is:inline>/* Vishal 2026-10-20: a pinned left heading stops before a full width picture instead of sliding under it */
+    (()=>{const fit=()=>{document.querySelectorAll('article>section:not(.wide)').forEach(s=>{const hs=s.querySelectorAll(':scope>:is(.sh,h2,.eyebrow)');let k=0;for(const c of s.children){const g=getComputedStyle(c);if(g.gridColumnStart==='1'&&g.gridColumnEnd==='-1'){if(k)hs.forEach(h=>h.style.gridRow='1 / span '+k);return}if(g.gridColumnStart==='2')k++}})};fit();addEventListener('resize',fit)})();
+    </script>
   </div>
 
   <div class="endsec">
@@ -524,7 +528,12 @@ body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
   article>section:not(.wide)>*{grid-column:2;min-width:0}
   article>section:not(.wide)>:is(.eyebrow,h2){grid-column:1;grid-row:1/span 60;align-self:start}
   article>section:not(.wide)>h2{padding-top:36px}
-  article>section:not(.wide)>:not(.eyebrow,h2)~:not(.eyebrow,h2){margin-top:22px}
+  article>section:not(.wide)>:not(.eyebrow,h2,.sh)~:not(.eyebrow,h2,.sh){margin-top:22px}
+  /* Vishal 2026-10-20 (Beauty PDP, then every page): the left label and heading stay pinned while the right side scrolls, until the section ends */
+  article>section:not(.wide)>.sh{grid-column:1;grid-row:1/span 60;align-self:start;position:sticky;top:120px;display:grid}
+  article>section:not(.wide)>.sh>*{grid-area:1/1;align-self:start}
+  article>section:not(.wide)>.sh>h2{padding-top:36px}
+  article>section:not(.wide)>:is(.eyebrow,h2){position:sticky;top:120px}
 }
 </style>
 

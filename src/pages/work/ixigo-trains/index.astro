@@ -197,6 +197,7 @@ figcaption{font-size:14px;color:var(--muted)}
   article{gap:80px}
   .summary{padding:22px}
 }
+.sh{display:contents}
 </style>
 <style is:inline>.proto{display:block;width:100%;aspect-ratio:16/10;border:0;border-radius:24px;background:var(--card)}@media (max-width:640px){.proto{aspect-ratio:9/16}}video.shot{background:var(--card)}
 .reel{position:relative}
@@ -418,8 +419,8 @@ figcaption{text-align:center}
 
     <article>
       <section id="overview" class="lt">
-        <p class="eyebrow">Overview</p>
-        <h2>What this is</h2>
+        <hgroup class="sh"><p class="eyebrow">Overview</p>
+        <h2>What this is</h2></hgroup>
         <p>ixigo is one of India’s largest travel apps, used by crores of people to book trains. It helps you brilliantly right up to payment. After that, during the hours when a waitlist decides whether you travel at all, it goes quiet. I rebuilt that stretch of the experience as a system rather than a screen. Six states cover the calm path and both failures, with honest odds, a countdown, and a real backup plan.</p>
       </section>
 
@@ -439,8 +440,8 @@ figcaption{text-align:center}
       </section>
 
       <section id="research" class="lt">
-        <p class="eyebrow">What the research showed</p>
-        <h2>The detail that settled the direction</h2>
+        <hgroup class="sh"><p class="eyebrow">What the research showed</p>
+        <h2>The detail that settled the direction</h2></hgroup>
         <p>There is an entire industry of apps built for one job: predicting whether your train ticket will confirm. ConfirmTkt, RailYatri, RailMitra, and more. Millions of downloads between them. They exist because people do not trust the raw status the official app gives them. Someone has already booked their ticket, and they still go somewhere else to find out what it means.</p>
         <blockquote>That is not a feature gap. That is a trust gap.</blockquote>
         <div class="stats">
@@ -452,8 +453,8 @@ figcaption{text-align:center}
       </section>
 
       <section id="reframe">
-        <p class="eyebrow">The reframe</p>
-        <h2>Every screen answers one question</h2>
+        <hgroup class="sh"><p class="eyebrow">The reframe</p>
+        <h2>Every screen answers one question</h2></hgroup>
         <p class="big">What do I do now.</p>
         <p>Not what is happening. Not what your status is. What your next move is. A status tracker shows you a state and leaves you to interpret it. A decision support system tells you what the state means and what you can do about it. Same data, completely different job.</p>
         <p>And because a trip is one continuous thing rather than a set of unrelated pages, this is not six screens. It is one hub that changes as the journey moves.</p>
@@ -585,8 +586,8 @@ figcaption{text-align:center}
       </section>
 
       <section id="tradeoffs" class="lt">
-        <p class="eyebrow">What it cost</p>
-        <h2>Trade offs</h2>
+        <hgroup class="sh"><p class="eyebrow">What it cost</p>
+        <h2>Trade offs</h2></hgroup>
         <div class="list">
           <div><span class="n">01</span><h3>Hierarchy over completeness</h3><p>The main trade off was hierarchy. The decision leads, so the ticket, the payment and the utilities move below it. That is the right call for an anxious waitlisted passenger, who cares about their seat first and the paperwork second. It is arguably the wrong call once the trip is calm and confirmed. I accepted that because the anxious state is where the app is failing hardest right now.</p></div>
           <div><span class="n">02</span><h3>Honesty over comfort</h3><p>The second was honesty over comfort. Showing 70 percent means showing that 30 percent exists. That is a harder screen to look at, and it is the only version that survives being wrong.</p></div>
@@ -594,8 +595,8 @@ figcaption{text-align:center}
       </section>
 
       <section id="assumptions" class="lt">
-        <p class="eyebrow">Assumptions and scope</p>
-        <h2>What I took as given</h2>
+        <hgroup class="sh"><p class="eyebrow">Assumptions and scope</p>
+        <h2>What I took as given</h2></hgroup>
         <div class="list">
           <div><span class="n">01</span><p>This is a single direct train, so missed connections do not apply. I swapped that case for the missed train check, which is the real equivalent failure on a direct journey.</p></div>
           <div><span class="n">02</span><p>The held backup builds on ixigo’s existing Alternate Travel Plan, reframed from a passive refund into an active seat hold. The honest version is Vikalp made usable, not magic inventory.</p></div>
@@ -604,8 +605,8 @@ figcaption{text-align:center}
       </section>
 
       <section id="ai" class="lt">
-        <p class="eyebrow">How I used AI</p>
-        <h2>A thinking partner, not the designer</h2>
+        <hgroup class="sh"><p class="eyebrow">How I used AI</p>
+        <h2>A thinking partner, not the designer</h2></hgroup>
         <p>It moved fast through the searchable and mechanical parts: pulling and sanity checking rail data, mapping the full space of post booking states so I could see the system before committing to screens, generating options to react against, and drafting copy I then cut back.</p>
         <blockquote>What I rejected matters more than what I accepted.</blockquote>
         <div class="fixes">
@@ -618,8 +619,8 @@ figcaption{text-align:center}
       </section>
 
       <section id="review" class="lt">
-        <p class="eyebrow">What the design review changed</p>
-        <h2>A screen can be strategically right and operationally useless</h2>
+        <hgroup class="sh"><p class="eyebrow">What the design review changed</p>
+        <h2>A screen can be strategically right and operationally useless</h2></hgroup>
         <p>Practising designers reviewed the first build and pushed back on the information architecture. Their point was that a post booking screen has four things a passenger reaches for, the PNR, the e ticket and QR, the train details, and the ticket details, and the first version had buried two of them.</p>
         <div class="list">
           <div><span class="n">01</span><p>PNR was styled as a subtitle in the header. It is an identifier a passenger reads aloud to a TTE and types into status checks, so it moved onto the journey card as a labelled field with a copy action.</p></div>
@@ -632,8 +633,8 @@ figcaption{text-align:center}
       </section>
 
       <section id="next" class="lt">
-        <p class="eyebrow">What I would do next</p>
-        <h2>Ship the confidence model first</h2>
+        <hgroup class="sh"><p class="eyebrow">What I would do next</p>
+        <h2>Ship the confidence model first</h2></hgroup>
         <p>It is the smallest change with the largest trust return, and it does not depend on anything else. Then measure the thing that actually indicates success: not engagement, but a drop in refresh frequency.</p>
         <div class="metric"><span class="k">The one metric that matters</span><b>A drop in refresh frequency</b></div>
       </section>
@@ -704,7 +705,12 @@ body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
   article>section:not(.wide)>*{grid-column:2;min-width:0}
   article>section:not(.wide)>:is(.eyebrow,h2){grid-column:1;grid-row:1/span 60;align-self:start}
   article>section:not(.wide)>h2{padding-top:36px}
-  article>section:not(.wide)>:not(.eyebrow,h2)~:not(.eyebrow,h2){margin-top:22px}
+  article>section:not(.wide)>:not(.eyebrow,h2,.sh)~:not(.eyebrow,h2,.sh){margin-top:22px}
+  /* Vishal 2026-10-20 (Beauty PDP, then every page): the left label and heading stay pinned while the right side scrolls, until the section ends */
+  article>section:not(.wide)>.sh{grid-column:1;grid-row:1/span 60;align-self:start;position:sticky;top:120px;display:grid}
+  article>section:not(.wide)>.sh>*{grid-area:1/1;align-self:start}
+  article>section:not(.wide)>.sh>h2{padding-top:36px}
+  article>section:not(.wide)>:is(.eyebrow,h2){position:sticky;top:120px}
 }
 </style>
 
