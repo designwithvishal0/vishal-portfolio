@@ -198,7 +198,6 @@ figcaption{font-size:14px;color:var(--muted)}
   article{gap:80px}
   .summary{padding:22px}
 }
-.sh{display:contents}
 </style>
 <style is:inline>.proto{display:block;width:100%;aspect-ratio:16/10;border:0;border-radius:24px;background:var(--card)}@media (max-width:640px){.proto{aspect-ratio:9/16}}video.shot{background:var(--card)}
 .reel{position:relative}
@@ -464,8 +463,8 @@ article>section:first-child{padding-top:120px}
       </section>
 
       <section id="ctas" class="lt">
-        <hgroup class="sh"><p class="eyebrow">07</p>
-        <h2>Clear and Compelling CTAs</h2></hgroup>
+        <p class="eyebrow">07</p>
+        <h2>Clear and Compelling CTAs</h2>
         <p>The CTAs were designed to be simple, bold, and action oriented, leading users down a clear path:</p>
         <ul class="pts">
           <li>Buttons like “Start Customizing” and “Shop Now” were placed strategically throughout the page to encourage users to take action at every point of their journey.</li>
@@ -474,15 +473,15 @@ article>section:first-child{padding-top:120px}
       </section>
 
       <section id="urgency" class="lt">
-        <hgroup class="sh"><p class="eyebrow">08</p>
-        <h2>Limited Time Offer for Urgency</h2></hgroup>
+        <p class="eyebrow">08</p>
+        <h2>Limited Time Offer for Urgency</h2>
         <p>A sense of urgency was created with a banner saying, “Skintelligent Shopping Ends Soon!”. This motivated users to act quickly and created FOMO (Fear of Missing Out), which is a strong motivator for Gen Z consumers.</p>
         <figure class="cut"><img src="img/08-urgency.webp" width="800" height="1100" alt="The urgency banner with three reasons to buy and a Limited Time Offer ribbon across a CosIQ exfoliant" loading="lazy"></figure>
       </section>
 
       <section id="testing" class="lt">
-        <hgroup class="sh"><p class="eyebrow">09</p>
-        <h2>Informal Testing</h2></hgroup>
+        <p class="eyebrow">09</p>
+        <h2>Informal Testing</h2>
         <p>After creating the initial design, I did some informal testing by showing the landing page to people who had never heard of CosIQ. Their feedback confirmed that:</p>
         <ul class="pts">
           <li>The brand message was clear, and they understood the product’s value instantly.</li>
@@ -502,9 +501,6 @@ article>section:first-child{padding-top:120px}
         <p>This landing page is designed to educate, engage, and convert users into customers for CosIQ. By simplifying the experience, incorporating trust building elements, and ensuring the design was aligned with Gen Z’s preferences, the landing page effectively drives the user journey. The use of vibrant colors, interactive sections, and engaging CTAs all help to create an optimized, mobile first experience that not only informs users but also convinces them to take the next step in their shopping journey with CashKaro.</p>
       </section>
     </article>
-    <script is:inline>/* Vishal 2026-10-20: a pinned left heading stops before a full width picture instead of sliding under it */
-    (()=>{const fit=()=>{document.querySelectorAll('article>section:not(.wide)').forEach(s=>{const hs=s.querySelectorAll(':scope>:is(.sh,h2,.eyebrow)');let k=0;for(const c of s.children){const g=getComputedStyle(c);if(g.gridColumnStart==='1'&&g.gridColumnEnd==='-1'){if(k)hs.forEach(h=>h.style.gridRow='1 / span '+k);return}if(g.gridColumnStart==='2')k++}})};fit();addEventListener('resize',fit)})();
-    </script>
   </div>
 
   <div class="endsec">
@@ -570,12 +566,7 @@ body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
   article>section:not(.wide)>*{grid-column:2;min-width:0}
   article>section:not(.wide)>:is(.eyebrow,h2){grid-column:1;grid-row:1/span 60;align-self:start}
   article>section:not(.wide)>h2{padding-top:36px}
-  article>section:not(.wide)>:not(.eyebrow,h2,.sh)~:not(.eyebrow,h2,.sh){margin-top:22px}
-  /* Vishal 2026-10-20 (Beauty PDP, then every page): the left label and heading stay pinned while the right side scrolls, until the section ends */
-  article>section:not(.wide)>.sh{grid-column:1;grid-row:1/span 60;align-self:start;position:sticky;top:120px;display:grid}
-  article>section:not(.wide)>.sh>*{grid-area:1/1;align-self:start}
-  article>section:not(.wide)>.sh>h2{padding-top:36px}
-  article>section:not(.wide)>:is(.eyebrow,h2){position:sticky;top:120px}
+  article>section:not(.wide)>:not(.eyebrow,h2)~:not(.eyebrow,h2){margin-top:22px}
 }
 </style>
 

@@ -202,7 +202,6 @@ figcaption{font-size:14px;color:var(--muted)}
   article{gap:80px}
   .summary{padding:22px}
 }
-.sh{display:contents}
 </style>
 <style is:inline>.proto{display:block;width:100%;aspect-ratio:16/10;border:0;border-radius:24px;background:var(--card)}@media (max-width:640px){.proto{aspect-ratio:9/16}}video.shot{background:var(--card)}
 .reel{position:relative}
@@ -614,8 +613,8 @@ figcaption{font-size:16px;color:var(--muted)}
       </section>
 
       <section id="learned" class="lt">
-        <hgroup class="sh"><p class="eyebrow">What I learned</p>
-        <h2>A game only works when its rule fits in one line</h2></hgroup>
+        <p class="eyebrow">What I learned</p>
+        <h2>A game only works when its rule fits in one line</h2>
         <p>One spin, one deal, one day. Every surface repeated that line, from the first banner to the last emailer.</p>
       </section>
     </article>
@@ -686,12 +685,7 @@ body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
   article>section:not(.wide)>*{grid-column:2;min-width:0}
   article>section:not(.wide)>:is(.eyebrow,h2){grid-column:1;grid-row:1/span 60;align-self:start}
   article>section:not(.wide)>h2{padding-top:36px}
-  article>section:not(.wide)>:not(.eyebrow,h2,.sh)~:not(.eyebrow,h2,.sh){margin-top:22px}
-  /* Vishal 2026-10-20 (Beauty PDP, then every page): the left label and heading stay pinned while the right side scrolls, until the section ends */
-  article>section:not(.wide)>.sh{grid-column:1;grid-row:1/span 60;align-self:start;position:sticky;top:120px;display:grid}
-  article>section:not(.wide)>.sh>*{grid-area:1/1;align-self:start}
-  article>section:not(.wide)>.sh>h2{padding-top:36px}
-  article>section:not(.wide)>:is(.eyebrow,h2){position:sticky;top:120px}
+  article>section:not(.wide)>:not(.eyebrow,h2)~:not(.eyebrow,h2){margin-top:22px}
 }
 /* Metropolis is wider than Figtree: keep the closing title on one line on phones */
 @media (max-width:620px){.closing h2{font-size:clamp(34px,10.4vw,56px)!important}}

@@ -196,7 +196,6 @@ figcaption{font-size:14px;color:var(--muted)}
   article{gap:80px}
   .summary{padding:22px}
 }
-.sh{display:contents}
 </style>
 <style is:inline>.proto{display:block;width:100%;aspect-ratio:16/10;border:0;border-radius:24px;background:var(--card)}@media (max-width:640px){.proto{aspect-ratio:9/16}}video.shot{background:var(--card)}
 .reel{position:relative}
@@ -391,8 +390,8 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
 
     <article>
       <section id="hardest">
-        <hgroup class="sh"><p class="eyebrow">The hardest call</p>
-        <h2>The false alert wasn’t the problem. The silent dismiss was.</h2></hgroup>
+        <p class="eyebrow">The hardest call</p>
+        <h2>The false alert wasn’t the problem. The silent dismiss was.</h2>
         <p>The obvious brief is “fewer false alerts”. But that’s a model problem, and no screen I design retrains a model.</p>
         <p>So I looked at what happens after a false alert lands. Someone opens it, sees their own car or their own night guard, and swipes it away. And then nothing. No sign the swipe counted. Tomorrow the same camera fires the same alert, and the system looks exactly as dumb as yesterday, even if it’s quietly getting better.</p>
         <p>That’s where I spent the design. Not on another filter screen, but on making every correction visible.</p>
@@ -401,8 +400,8 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
       </section>
 
       <section id="who">
-        <hgroup class="sh"><p class="eyebrow">Who this is for</p>
-        <h2>The person holding the phone at 3:14 AM</h2></hgroup>
+        <p class="eyebrow">Who this is for</p>
+        <h2>The person holding the phone at 3:14 AM</h2>
         <p>JARVIS turns a business’s existing CCTV into alerts: a retail store, a warehouse, a factory floor. Those alerts land on a phone. The person holding it is usually not a security analyst in a control room. It’s a store manager or a site head with a dozen other jobs.</p>
         <p>At 3:14 AM their phone says Restricted Entry, Camera 7, Zone B. At 5:16 PM the next day it says Unknown Car, Camera 2, Zone F. It’s their own car. After a week of that, they stop opening alerts. And the one that matters arrives looking exactly like the dozens that didn’t.</p>
         <div class="stats">
@@ -415,8 +414,8 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
       </section>
 
       <section id="found">
-        <hgroup class="sh"><p class="eyebrow">What I found</p>
-        <h2>Three reasons good alerts get ignored</h2></hgroup>
+        <p class="eyebrow">What I found</p>
+        <h2>Three reasons good alerts get ignored</h2>
         <div class="list">
           <div><span class="n">01</span><h3>Generic models, specific sites</h3><p>A model trained on generic footage meets a store under neon at 8 PM and a warehouse at 4 AM. The problem isn’t that thresholds exist. It’s that tuning them for every site is ongoing work nobody on site has time for.</p></div>
           <div><span class="n">02</span><h3>The invisible correction</h3><p>When someone dismisses a false alert, does anything tell them it counted? If not, the feedback loop can work perfectly and still be invisible. Trust never builds, even while accuracy does.</p></div>
@@ -429,8 +428,8 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
       </section>
 
       <section id="options">
-        <hgroup class="sh"><p class="eyebrow">The options</p>
-        <h2>I had three answers. I built the one that lives inside the alert.</h2></hgroup>
+        <p class="eyebrow">The options</p>
+        <h2>I had three answers. I built the one that lives inside the alert.</h2>
         <div class="options">
           <div class="opt built"><h3><span class="mono">01</span> Confidence tiers and a visible feedback loop</h3><span class="tag">BUILT</span><p>Alerts arrive in tiers, so the system only interrupts for what it’s sure about. Every alert carries a way to say “this was wrong”, and every correction gets an answer.</p></div>
           <div class="opt"><h3><span class="mono">02</span> Zone and time rules</h3><span class="tag">LATER</span><p>Let people draw zones on a camera and set rules per zone, because a loading dock at 2 AM and 2 PM are different places. Powerful, but it hands the tuning job back to the exact person who has no time for it. That’s problem 01 again.</p></div>
@@ -492,8 +491,8 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
       </section>
 
       <section id="change" class="lt">
-        <hgroup class="sh"><p class="eyebrow">What I’d change</p>
-        <h2>Built in a day, so here’s what I’d fix on day two</h2></hgroup>
+        <p class="eyebrow">What I’d change</p>
+        <h2>Built in a day, so here’s what I’d fix on day two</h2>
         <div class="fixes">
           <div class="fix"><div><span class="k pr">Problem</span><h3>The tiers lost their verbs.</h3></div><div><span class="k">Fix</span><p>My first sketch called them Act now, Review soon and FYI. The screens shipped as High, Medium and Low, which only say how loud an alert is, not what to do about it. I’d put the verb back on the tag.</p></div></div>
           <div class="fix"><div><span class="k pr">Problem</span><h3>Checkboxes under a “pick the closest reason” question.</h3></div><div><span class="k">Fix</span><p>The control says “pick many”, the copy says “pick one”. I’d switch to single select rows, since one clear reason is more useful to the model than three vague ones.</p></div></div>
@@ -503,8 +502,8 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
       </section>
 
       <section id="tradeoffs" class="lt">
-        <hgroup class="sh"><p class="eyebrow">Trade offs</p>
-        <h2>Every decision closed a door</h2></hgroup>
+        <p class="eyebrow">Trade offs</p>
+        <h2>Every decision closed a door</h2>
         <div class="trades">
           <div class="trade"><span class="n">01</span><div><h3>Visible proof over silent learning</h3><p>Showing the result of a correction is what builds trust.</p></div><p class="cost"><span class="k">What it cost</span>once you promise a number, the model has to be able to back it.</p></div>
           <div class="trade"><span class="n">02</span><div><h3>Feedback on the card, not in settings</h3><p>The correction lives where the frustration happens.</p></div><p class="cost"><span class="k">What it cost</span>one more line on every single alert.</p></div>
@@ -515,8 +514,8 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
       </section>
 
       <section id="changed" class="lt">
-        <hgroup class="sh"><p class="eyebrow">What changed</p>
-        <h2>The same Unknown Car, two different tomorrows</h2></hgroup>
+        <p class="eyebrow">What changed</p>
+        <h2>The same Unknown Car, two different tomorrows</h2>
         <div class="beforeafter">
           <div class="b"><span class="k">Before (dismiss and hope)</span><p>Unknown Car, Camera 2. It’s my car. I swipe it away. Nothing tells me that mattered. Tomorrow at 5:16 PM, same car, same alert, and I trust JARVIS a little less.</p></div>
           <div class="a"><span class="k">After (flag and see)</span><p>Tell us if not. Something else: “The unidentified vehicle was my own car.” Submit. JARVIS answers: 27 similar alerts won’t interrupt you again. Tomorrow at 5:16 PM, my phone stays quiet, and I know why.</p></div>
@@ -530,8 +529,8 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
       </section>
 
       <section id="learned">
-        <hgroup class="sh"><p class="eyebrow">What I learned</p>
-        <h2>In B2B AI, trust is a UI problem before it’s a model problem</h2></hgroup>
+        <p class="eyebrow">What I learned</p>
+        <h2>In B2B AI, trust is a UI problem before it’s a model problem</h2>
         <p>I came in thinking the job was to reduce false alerts. But the model can get better every week and the customer can still churn, because nobody on site ever sees it get better. The most valuable screen in this project isn’t a dashboard or a filter. It’s one sentence after you submit a correction.</p>
         <p>Having one day also taught me something. I found the single screen that carries the idea, the Noted screen, and built everything else backwards from it. The tiers, the reasons, the free text all exist to earn that one sentence.</p>
       </section>
@@ -601,12 +600,7 @@ body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
   article>section:not(.wide)>*{grid-column:2;min-width:0}
   article>section:not(.wide)>:is(.eyebrow,h2){grid-column:1;grid-row:1/span 60;align-self:start}
   article>section:not(.wide)>h2{padding-top:36px}
-  article>section:not(.wide)>:not(.eyebrow,h2,.sh)~:not(.eyebrow,h2,.sh){margin-top:22px}
-  /* Vishal 2026-10-20 (Beauty PDP, then every page): the left label and heading stay pinned while the right side scrolls, until the section ends */
-  article>section:not(.wide)>.sh{grid-column:1;grid-row:1/span 60;align-self:start;position:sticky;top:120px;display:grid}
-  article>section:not(.wide)>.sh>*{grid-area:1/1;align-self:start}
-  article>section:not(.wide)>.sh>h2{padding-top:36px}
-  article>section:not(.wide)>:is(.eyebrow,h2){position:sticky;top:120px}
+  article>section:not(.wide)>:not(.eyebrow,h2)~:not(.eyebrow,h2){margin-top:22px}
 }
 </style>
 
