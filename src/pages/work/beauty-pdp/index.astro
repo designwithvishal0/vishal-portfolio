@@ -577,7 +577,7 @@ article>section.lt,article>section#matcher{padding-top:120px}
           <p>Read it the way a buyer moves through it: discover, evaluate, select, purchase. At every stop the one rule shows up in a different form.</p>
         </div>
         <div class="walk">
-          <figure><div class="iph"><div class="fg"><iframe src="https://embed.figma.com/proto/Pwe7AzXT42dYgkLY90nwVY/PDP-%E2%80%94-Vishal-Yadav?node-id=80-2&starting-point-node-id=80%3A2&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&footer=false&embed-host=share" title="Prototype of the foundation product page on a phone, from Figma" loading="lazy" allowfullscreen></iframe></div></div><figcaption>The prototype from my Figma file. Scroll and tap inside the phone.</figcaption></figure>
+          <figure><div class="iph"><div class="sc" tabindex="0"><img src="img/01-mobile-beauty-full-page.webp" width="780" height="9809" alt="The full foundation product page on mobile, from the photo down to the pairings" loading="lazy"></div></div><figcaption>Keep scrolling and the phone scrolls through the full page.</figcaption></figure>
           <div class="stops">
             <div class="stop"><span class="k">Discover · The photo</span><h3>The matcher sits on the photo</h3><img src="img/10-stop-beauty-photo.webp" width="780" height="1240" alt="The product photo with a pink Find my shade pill and the selected shade named in the top corner" loading="lazy"><span class="k">This page</span><p>Find my shade is a pink pill on the photo, where the doubt starts. The selected shade is named in the top corner.</p><span class="k">Other pages</span><p class="other">Try on hides as an unlabelled thumbnail.</p></div>
             <div class="stop"><span class="k">Evaluate · Price and offer</span><h3>A price you do not have to calculate</h3><img src="img/11-stop-beauty-price.webp" width="780" height="560" alt="The price block: ₹441 with Buy at ₹375 with NEW15 worked out underneath" loading="lazy"><span class="k">This page</span><p>Buy at ₹375 with NEW15, worked out and sitting right under the ₹441 price. It comes before the shades, because if the price rules the product out, choosing a shade was wasted effort.</p><span class="k">Other pages</span><p class="other">A row of coupon codes. The maths is yours.</p></div>
@@ -595,14 +595,16 @@ article>section.lt,article>section#matcher{padding-top:120px}
           <h2>Two questions. Three honest answers. No promises.</h2>
           <p>It does not ask for a selfie. It asks two things anyone can answer, and tells you how to answer them.</p>
         </div>
-        <div class="mtry">
-          <div class="mtxt">
-            <p class="eyebrow">Try it on the phone</p>
-            <ol class="msteps"><li><b>Find my shade</b><p>Find my shade is on the photo, right where you are already looking.</p></li><li><b>Depth</b><p>How deep is your skin? Look at your jaw in daylight, not your hand. Hands run darker.</p></li><li><b>Undertone</b><p>Which way do you lean? Hold gold, then silver, against your face.</p></li><li><b>Three shades</b><p>Three shades, closest first, each with how often it actually matched. And it says plainly that nothing here is a guarantee.</p></li><li><b>Applied</b><p>The page remembers: “Matched to medium, warm”, with a Redo if you change your mind.</p></li></ol>
-            <div class="why"><span class="k">Why three and not one</span><p>A single answer would sound confident. Three with real match rates is honest about how fuzzy skin tone is, and still narrows twenty one shades to a choice you can make.</p></div>
-          </div>
-          <figure class="mph"><div class="iph lt noisl"><div class="fg"><iframe src="https://embed.figma.com/proto/Pwe7AzXT42dYgkLY90nwVY/PDP-%E2%80%94-Vishal-Yadav?node-id=462-3528&starting-point-node-id=462%3A3528&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&footer=false&embed-host=share" title="Shade matcher prototype from Figma: tap Find my shade" loading="lazy" allowfullscreen></iframe></div></div><figcaption>Live prototype from my Figma file. Tap Find my shade on the photo.</figcaption></figure>
-        </div>
+        <ul class="car" aria-label="Shade matcher, five steps">
+          <li><div class="iph"><div class="sc"><img src="img/20-matcher-1-closed.webp" width="780" height="1688" alt="The product photo with the Find my shade pill" loading="lazy"></div></div><p>Find my shade is on the photo, right where you are already looking.</p></li>
+          <li><div class="iph"><div class="sc"><img src="img/21-matcher-2-depth.webp" width="780" height="1688" alt="Matcher step asking how deep your skin is" loading="lazy"></div></div><p>How deep is your skin? Look at your jaw in daylight, not your hand. Hands run darker.</p></li>
+          <li><div class="iph"><div class="sc"><img src="img/22-matcher-3-undertone.webp" width="780" height="1688" alt="Matcher step asking which way your undertone leans" loading="lazy"></div></div><p>Which way do you lean? Hold gold, then silver, against your face.</p></li>
+          <li><div class="iph"><div class="sc"><img src="img/23-matcher-4-result.webp" width="780" height="1688" alt="Matcher result with three shades, closest first, each with its match rate" loading="lazy"></div></div><p>Three shades, closest first, each with how often it actually matched. And it says plainly that nothing here is a guarantee.</p></li>
+          <li><div class="iph"><div class="sc"><img src="img/24-matcher-5-applied.webp" width="780" height="1688" alt="The product page after matching, showing Matched to medium, warm with a Redo link" loading="lazy"></div></div><p>The page remembers: “Matched to medium, warm”, with a Redo if you change your mind.</p></li>
+        </ul>
+        <p class="count" aria-hidden="true"><span>1</span> of 5</p>
+        <script is:inline>(()=>{const c=document.currentScript.previousElementSibling,ul=c.previousElementSibling,n=c.querySelector('span'),li=[...ul.children];ul.addEventListener('scroll',()=>{const x=ul.scrollLeft+8;let i=0;li.forEach((l,j)=>{if(l.offsetLeft-ul.offsetLeft<=x)i=j});if(ul.scrollLeft+ul.clientWidth>=ul.scrollWidth-4)i=li.length-1;n.textContent=i+1},{passive:true})})()</script>
+        <div class="why"><span class="k">Why three and not one</span><p>A single answer would sound confident. Three with real match rates is honest about how fuzzy skin tone is, and still narrows twenty one shades to a choice you can make.</p></div>
         <h3 class="h3x">On a laptop it changes shape, not just size</h3>
         <p style="max-width:66ch">The bottom sheet becomes a side panel, so the product stays fully in view while you answer. You close it with Escape or a click outside instead of a swipe.</p>
         <div class="two-up">
@@ -621,7 +623,7 @@ article>section.lt,article>section#matcher{padding-top:120px}
           <p>It blames the brand, not your body.</p>
         </div>
         <div class="walk">
-          <figure><div class="iph"><div class="fg"><iframe src="https://embed.figma.com/proto/Pwe7AzXT42dYgkLY90nwVY/PDP-%E2%80%94-Vishal-Yadav?node-id=139-372&starting-point-node-id=139%3A372&scaling=scale-down-width&content-scaling=fixed&hide-ui=1&footer=false&embed-host=share" title="Prototype of the dress product page on a phone, from Figma" loading="lazy" allowfullscreen></iframe></div></div><figcaption>The prototype from my Figma file. Scroll and tap inside the phone.</figcaption></figure>
+          <figure><div class="iph"><div class="sc" tabindex="0"><img src="img/02-mobile-fashion-full-page.webp" width="780" height="7671" alt="The full dress product page on mobile, from the photo down to the reviews" loading="lazy"></div></div><figcaption>Keep scrolling and the phone scrolls through the full page.</figcaption></figure>
           <div class="stops">
             <div class="stop"><span class="k">Discover · The photo</span><h3>Fit help on the photo</h3><img src="img/16-stop-fashion-photo.webp" width="780" height="1240" alt="The dress photo with Model wears M, 5 foot 7 in the corner and a Size button on the photo" loading="lazy"><span class="k">This page</span><p>“Model wears M, 5′7″” in the corner, and a Size button on the photo itself.</p><span class="k">Other pages</span><p class="other">Fit data on the app only. Two words on web.</p></div>
             <div class="stop"><span class="k">Select · Size</span><h3>The sentence that changes your pick</h3><img src="img/17-stop-fashion-size.webp" width="780" height="400" alt="The fit sentence Sangria’s M runs a size small above the size buttons" loading="lazy"><span class="k">This page</span><p>Sangria’s M runs a size small, sitting directly above the sizes.</p><span class="k">Other pages</span><p class="other">Pick a size with nothing to go on.</p></div>
@@ -640,8 +642,6 @@ article>section.lt,article>section#matcher{padding-top:120px}
           <figure><div class="lap"><div class="sc" tabindex="0"><img src="img/03-desktop-beauty-full-page.webp" width="1600" height="5409" alt="The full foundation product page on desktop" loading="lazy"></div></div><figcaption>Foundation: a rail beside one big photo</figcaption></figure>
           <figure><div class="lap"><div class="sc" tabindex="0"><img src="img/04-desktop-fashion-full-page.webp" width="1600" height="4151" alt="The full dress product page on desktop" loading="lazy"></div></div><figcaption>Dress: a grid of every angle</figcaption></figure>
         </div>
-        <p class="dtry"><button type="button" class="dgo">Try the foundation page on desktop, with the shade matcher</button></p>
-        <dialog class="ddlg" aria-label="Desktop prototype of the foundation page"><button type="button" class="dx" aria-label="Close the prototype"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button><div class="dscr"><div class="fg"><iframe src="https://embed.figma.com/proto/Pwe7AzXT42dYgkLY90nwVY/PDP-%E2%80%94-Vishal-Yadav?node-id=176-707&starting-point-node-id=176%3A707&scaling=scale-down&content-scaling=fixed&hide-ui=1&footer=false&embed-host=share" title="Prototype of the foundation product page on desktop, from Figma" loading="lazy" allowfullscreen></iframe></div></div></dialog>
         <div style="display:grid;gap:22px;max-width:66ch;margin-top:40px">
           <p>Because the photos do different jobs. Beauty photos are reference: a bottle, a claims graphic, a shade chart. You pick one to look at, so it is a rail beside one big stage. Fashion photos are evidence: front, back, side. Fit reads across angles, so it is a grid that shows them together.</p>
           <p>There is a second reason. A grid scrolls. The beauty buy column is tall, so a scrolling gallery would drag the shade choice out of view. The fashion column is short. The gallery is decided by its neighbour, not by taste.</p>
@@ -1051,8 +1051,6 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 /* Phones only (Vishal 04:29, the ixigo hero pattern): hero heading bold (700) at the same size; a two line hook sits tight under it. Desktop unchanged. */
 @media (max-width:640px){header.hero h1{font-weight:700}}
 </style>
-
-<script is:inline>(()=>{const d=document.querySelector(".ddlg"),g=document.querySelector(".dgo");if(d&&g){g.onclick=()=>d.showModal();d.querySelector(".dx").onclick=()=>d.close()}})();</script>
 <script is:inline src="/js/pin-frames.js" defer></script>
 <script is:inline src="/js/flowdlg.js" defer></script>
 <script is:inline src="/js/pin-screen.js" defer></script>
@@ -1133,59 +1131,4 @@ body{background:#B8005A}
 
 /* Vishal 19 Oct: phones skip the scrolling desktop frames; the two desktop fold images below still show the difference */
 @media (max-width:899px){#desktop .laps{display:none}}
-
-/* Vishal 19 Oct "mismatch in both phone pages": pin-frames turned the walk phone into a 300px row with its caption beside it.
-   Keep the phone its intended size with the caption under it; it still scrolls through the page before the page moves */
-.walk .screen{grid-template-columns:minmax(0,1fr)!important;max-width:none!important;gap:10px!important;width:min(340px,calc((100svh - 190px) * 402 / 874))}
-.walk .screen figcaption{text-align:center}
-.walk .iph.pm{width:auto!important;max-width:none!important}
-@media (max-width:900px){.walk .screen{width:min(300px,100%);justify-self:center}.walk>.pin-wrap{justify-self:center}}
-.stop img{max-width:330px}
-/* Two questions carousel (his 14:13 "don't cut it"): it bleeds to the window edge, so a card is only ever cut by the screen edge, never mid page */
-@media (min-width:621px){#matcher .car{margin-right:calc(50% - 50vw);padding-right:max(24px,calc(50vw - 50%));scroll-padding-inline:4px}}
-
-/* Figma prototype embeds (his 14:29 ask: embed from Figma, no images) */
-.iph>.fg{aspect-ratio:390/844;border-radius:41px;overflow:hidden;background:#fff}
-.fg iframe{display:block;width:100%;height:100%;border:0}
-.walk .iph{width:min(340px,calc((100svh - 190px) * 402 / 874))}
-/* mobile prototype block */
-.ptry{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(32px,6vw,96px);align-items:center;margin:72px 0 88px}
-.ptry .ptxt{display:grid;gap:16px;max-width:52ch}
-.ptry .phint{color:var(--acc);font-weight:600}
-.ptry .iph{width:min(340px,calc((100svh - 190px) * 402 / 874))}
-@media (max-width:900px){.ptry{grid-template-columns:minmax(0,1fr);justify-items:center;margin:48px 0 64px}.ptry .ptxt{justify-self:stretch}.ptry .iph{width:min(320px,100%)}}
-/* desktop prototype: opens full screen in this tab */
-.dtry{display:flex;justify-content:center;margin:28px 0 0}
-.dgo{all:unset;cursor:pointer;padding:14px 22px;border-radius:999px;background:#141414;color:#fff;font:600 16px/1 var(--sans)}
-.dgo:hover{background:#C70063}.dgo:focus-visible{outline:2px solid #C70063;outline-offset:3px}
-@media (max-width:899px){.dtry{display:none}}
-.ddlg{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:56px 24px 24px;border:0;background:#0F0F10;box-sizing:border-box}
-.ddlg[open]{display:flex;flex-direction:column;align-items:center;gap:14px}
-.ddlg::backdrop{background:#0F0F10}
-.ddlg .dx{all:unset;cursor:pointer;position:absolute;top:12px;right:16px;width:40px;height:40px;display:grid;place-items:center;border-radius:50%;background:#F2F1EC;color:#141414}
-.ddlg .dhint{position:absolute;top:20px;left:24px;right:72px;margin:0;color:#F2F1EC;font:500 15px/1.4 var(--sans)}
-.dscr{position:relative;width:min(100%,calc((100svh - 96px) * 1.6));aspect-ratio:16/10;border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.12)}
-.dscr>.fg{position:absolute;inset:0}
-html:has(.ddlg[open]){overflow:hidden}
-.ptry.screen{grid-template-columns:minmax(0,1fr) auto!important;max-width:none!important;gap:clamp(32px,6vw,96px)!important;align-items:center!important}
-.ptry .iph.pm{max-width:none!important}
-@media (max-width:900px){.ptry.screen{grid-template-columns:minmax(0,1fr)!important;justify-items:center}}
-/* Two questions: phone and caption fit one view (his 14:27) */
-#matcher .car li{flex-basis:min(250px,calc((100svh - 300px) * 390 / 844));gap:12px}
-#matcher .car p{font-size:16px}
-@media (max-width:620px){#matcher .car li{flex-basis:min(220px,calc((100svh - 330px) * 390 / 844))}}
-/* Shade matcher: five steps beside one live prototype (his 14:36, replaces the image carousel and the second embed) */
-.mtry{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(32px,6vw,96px);align-items:start;margin:40px 0 88px}
-.mtxt{display:grid;gap:28px;max-width:56ch}
-.msteps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:m}
-.msteps li{counter-increment:m;display:grid;grid-template-columns:36px minmax(0,1fr);column-gap:16px;row-gap:4px;padding:16px 0;border-top:1px solid var(--line)}
-.msteps li:last-child{border-bottom:1px solid var(--line)}
-.msteps li::before{content:counter(m);grid-row:1/3;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:var(--acc);color:#141414;font:600 15px/1 var(--sans)}
-.msteps b{font-weight:600;font-size:18px;color:var(--fg)}
-.msteps p{font-size:16px;line-height:1.5;color:var(--body);margin:0}
-.mtxt .why{margin:0}
-.mph{position:sticky;top:96px;margin:0;display:grid;gap:12px;justify-items:center}
-.mph .iph{width:min(340px,calc((100svh - 170px) * 402 / 874))}
-.mph figcaption{text-align:center;font-size:15px;color:var(--muted);max-width:30ch}
-@media (max-width:900px){.mtry{grid-template-columns:minmax(0,1fr);gap:40px}.mph{position:static}.mph .iph{width:min(300px,100%)}}
 </style>
