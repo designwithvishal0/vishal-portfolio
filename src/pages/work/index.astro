@@ -48,6 +48,8 @@ const ld = [
 /* Same shell as the graphics pages: site tokens only, light and dark. The shared header reads --line --edge --btn --on-btn --bar --gut --out. */
 :root{--line:var(--rule);--edge:var(--muted);--btn:var(--ink);--on-btn:var(--bg);--bar:56px;--gut:32px;--out:var(--ease-out);--max:1376px}
 @media (max-width:759px){:root{--bar:52px;--gut:16px}}
+/* header spans the same width as on every other page; tokens.css resets --max to 1200 for this page's content */
+.bar{--max:1376px}
 *{box-sizing:border-box}
 html{overflow-x:clip}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--fs-body)/1.6 var(--sans);-webkit-font-smoothing:antialiased}
