@@ -26,6 +26,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--fs-body)/1.6 
 main{width:min(720px,100% - var(--gut) * 2);margin:0 auto;min-height:calc(100svh - var(--bar));display:flex;flex-direction:column;justify-content:center;padding-block:var(--s12)}
 h1{margin:0 0 var(--s4);font:var(--w-head) clamp(36px,6vw,56px)/1.05 'Bricolage Grotesque Variable',sans-serif;letter-spacing:var(--track-head);text-wrap:balance}
 p{margin:0 0 var(--s8);color:var(--muted);font-size:18px}
+.eyebrow{margin:0 0 var(--s3);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .cta{display:flex;flex-wrap:wrap;gap:8px}
 .cta a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 22px;border-radius:999px;font-size:15px;font-weight:650;text-decoration:none;color:var(--ink);border:1px solid var(--edge)}
 .cta a:first-child{background:var(--btn);color:var(--on-btn);border-color:var(--btn)}
@@ -33,8 +34,9 @@ p{margin:0 0 var(--s8);color:var(--muted);font-size:18px}
 </head>
 <SiteHeader home="/" book calm={false} />
 <main id="content">
-  <h1>This page isn’t here anymore.</h1>
-  <p>My portfolio moved to a new site, so some older links lead nowhere. Every case study is one tap away.</p>
-  <div class="cta"><a href="/work/">See all case studies</a><a href="/">Go to the home page</a></div>
+  <p class="eyebrow">404 · Page not found</p>
+  <h1>This link didn’t make the move.</h1>
+  <p>I rebuilt my portfolio from scratch, and a few old addresses were left behind. Everything you came for is still here: every case study, with the problem, the decisions and what changed.</p>
+  <div class="cta"><a href="/work/">See the case studies</a><a href="/">Go to the home page</a></div>
 </main>
 </html>
