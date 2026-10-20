@@ -26,7 +26,7 @@ a.who{position:relative}a.who::after{content:"";position:absolute;left:-8px;righ
 @media (hover:hover) and (pointer:fine){.nav a:hover{text-decoration-line:underline}}
 /* right side of the bar: Book a call (Kinetic, shown once the hero button scrolls away) and Accessibility */
 .bar-r{justify-self:end;display:flex;align-items:center;gap:8px}
-.bar-book{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:999px;background:var(--btn);color:var(--on-btn);font-size:14px;font-weight:650;text-decoration:none;
+.bar-book{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:999px;background:var(--btn);color:var(--on-btn);font-size:14px;font-weight:650;text-decoration:none;white-space:nowrap;flex-shrink:0;
   visibility:hidden;opacity:0;transform:translateY(-4px);transition:opacity 180ms var(--out),transform 180ms var(--out),visibility 0s 180ms}
 .bar.book-on .bar-book{visibility:visible;opacity:1;transform:none;transition:opacity 180ms var(--out),transform 180ms var(--out)}
 @media (hover:hover){.bar-book:hover{background:color-mix(in oklab,var(--btn) 84%,var(--bg))}}
@@ -116,7 +116,7 @@ html.calm .sw .knob{transition:none}
 }
 @media (max-width:359px){.bar-r{gap:10px}}
 /* desktop (Vishal 2026-10-13, "add a button for Resume"): the outline twin of Book a call, same pair as the hero, shown and hidden with it */
-.bar-cv{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:999px;border:1px solid var(--edge);color:var(--ink);font-size:14px;font-weight:650;text-decoration:none;
+.bar-cv{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:999px;border:1px solid var(--edge);color:var(--ink);font-size:14px;font-weight:650;text-decoration:none;white-space:nowrap;flex-shrink:0;
   visibility:hidden;opacity:0;transform:translateY(-4px);transition:opacity 180ms var(--out),transform 180ms var(--out),visibility 0s 180ms,background-color 150ms}
 .bar.book-on .bar-cv{visibility:visible;opacity:1;transform:none;transition:opacity 180ms var(--out),transform 180ms var(--out),background-color 150ms}
 @media (hover:hover){.bar-cv:hover{background:var(--line)}}
