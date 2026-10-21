@@ -23,6 +23,7 @@ const ld = [
 <Boot />
 <meta name="description" content={description}>
 <link rel="stylesheet" href="/css/iphone.css">
+<link rel="stylesheet" href="/css/cs-bar.css">
 <link rel="stylesheet" href="/css/closing-cta.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="article">
@@ -1010,6 +1011,7 @@ html.calm .endsec .closing>*{opacity:1!important;transform:none!important;transi
 <script is:inline>/* Vishal 2026-10-17, same rule as Twelve (2026-10-15): no pale fade over the phone screens. The dock fade switches off while any phone sits at the bottom of the window */
 (()=>{const f=document.querySelector('.dockfade'),ph=[...document.querySelectorAll('.iph,.scr .scrimg')];if(!f||!ph.length)return;const u=()=>{const h=innerHeight;f.style.visibility=ph.some(e=>{const r=e.getBoundingClientRect();return r.width&&r.top<h-8&&r.bottom>h-104})?'hidden':''};addEventListener('scroll',u,{passive:true});addEventListener('resize',u);u()})();</script>
 <script is:inline src="/js/flowdlg.js" defer></script>
+<script is:inline src="/js/cs-bar.js" defer></script>
 <style is:inline>
 /* Vishal 2026-10-14 02:28: each case study uses the type of its own design. OneBanc's active typeface is Stack Sans:
    Headline for display sizes, Text for reading sizes, the same split the design system uses. Max weight is 700. */

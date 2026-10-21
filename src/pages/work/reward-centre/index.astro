@@ -25,6 +25,7 @@ const ld = [
 <meta name="description" content={description}>
 <link rel="canonical" href="https://vishal-designs.vercel.app/work/reward-centre/"><meta property="og:url" content="https://vishal-designs.vercel.app/work/reward-centre/">
 <link rel="stylesheet" href="/css/iphone.css">
+<link rel="stylesheet" href="/css/cs-bar.css">
 <link rel="stylesheet" href="/css/closing-cta.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="article">
@@ -1090,6 +1091,7 @@ addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true
 addEventListener('touchmove',function(e){if(!root.classList.contains('toclock'))return;var dy=e.touches[0].clientY-ty;if(!s.contains(e.target)||(dy>0&&s.scrollTop<=0)||(dy<0&&s.scrollTop+s.clientHeight>=s.scrollHeight-1))e.preventDefault()},{passive:false});})();</script>
 
 <script is:inline src="/js/flowdlg.js" defer></script>
+<script is:inline src="/js/cs-bar.js" defer></script>
 <script is:inline id="fold-phone">if(matchMedia("(max-width:759px)").matches)document.querySelectorAll("details.fold").forEach(d=>d.open=false);document.querySelectorAll("details.fold>summary").forEach(s=>s.addEventListener("click",e=>{if(!matchMedia("(max-width:759px)").matches)e.preventDefault()}))</script>
 <style is:inline>
 /* Audit 2026-10-15: the lowest value blocks (assumptions, notes, file foundations) fold behind their own label, so the page reads shorter. Nothing is cut. */

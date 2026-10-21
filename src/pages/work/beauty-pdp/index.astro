@@ -25,6 +25,7 @@ const ld = [
 <meta name="description" content={description}>
 <link rel="canonical" href={canonical}>
 <link rel="stylesheet" href="/css/iphone.css">
+<link rel="stylesheet" href="/css/cs-bar.css">
 <link rel="stylesheet" href="/css/closing-cta.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="article"><meta property="og:url" content={canonical}>
@@ -1061,6 +1062,7 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 <script is:inline src="/js/pin-frames.js" defer></script>
 <script is:inline src="/js/flowdlg.js" defer></script>
 <script is:inline src="/js/pin-screen.js" defer></script>
+<script is:inline src="/js/cs-bar.js" defer></script>
 <script is:inline>/* Beauty PDP desktop pages side by side: both frames stay pinned until the longer page has scrolled (Vishal 19 Oct) */
 addEventListener('DOMContentLoaded',()=>{const sync=()=>{const w=[...document.querySelectorAll('.laps>.pin-wrap')].filter(e=>e.style.height);if(w.length<2)return;const m=Math.max(...w.map(e=>parseFloat(e.style.height)));w.forEach(e=>e.style.height=m+'px')};sync();addEventListener('load',sync);addEventListener('resize',()=>setTimeout(sync,60))});</script>
 </html>

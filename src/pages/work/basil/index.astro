@@ -24,6 +24,7 @@ const ld = [
 <meta name="description" content={description}>
 <link rel="canonical" href={canonical}><meta property="og:url" content={canonical}>
 <link rel="stylesheet" href="/css/iphone.css">
+<link rel="stylesheet" href="/css/cs-bar.css">
 <link rel="stylesheet" href="/css/closing-cta.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="article">
@@ -1102,6 +1103,7 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 <script is:inline src="/js/flowdlg.js" defer></script>
 <script is:inline id="fold-phone">if(matchMedia("(max-width:759px)").matches)document.querySelectorAll("details.fold").forEach(d=>d.open=false);document.querySelectorAll("details.fold>summary").forEach(s=>s.addEventListener("click",e=>{if(!matchMedia("(max-width:759px)").matches)e.preventDefault()}))</script>
 <script is:inline src="/js/pin-screen.js" defer></script>
+<script is:inline src="/js/cs-bar.js" defer></script>
 </html>
 <style is:inline>
 /* Phones (Vishal 04:31): project details as one row per fact, label left and value right, as on Split and Twelve, instead of squeezed or uneven columns */

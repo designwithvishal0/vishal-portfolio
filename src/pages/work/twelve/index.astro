@@ -22,6 +22,7 @@ const ld = [
 <Boot />
 <meta name="description" content={description}>
 <link rel="stylesheet" href="/css/iphone.css">
+<link rel="stylesheet" href="/css/cs-bar.css">
 <link rel="stylesheet" href="/css/closing-cta.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="article">
@@ -1055,6 +1056,7 @@ d.addEventListener('close',()=>{document.documentElement.style.overflow=''});d.q
 let t=0;pan.addEventListener('click',e=>{const n=Date.now();if(n-t<320){const r=pan.getBoundingClientRect(),fx=(e.clientX-r.left+pan.scrollLeft)/pan.scrollWidth,fy=(e.clientY-r.top+pan.scrollTop)/pan.scrollHeight;d.classList.toggle('zoom');pan.scrollLeft=fx*pan.scrollWidth-r.width/2;pan.scrollTop=fy*pan.scrollHeight-r.height/2;t=0}else t=n});
 pan.addEventListener('dblclick',e=>e.preventDefault())})();</script>
 <script is:inline src="/js/pin-screen.js" defer></script>
+<script is:inline src="/js/cs-bar.js" defer></script>
 </html>
 
 <script is:inline>(function(){var s=document.getElementById('tocsheet'),mq=matchMedia('(max-width:759px)'),root=document.documentElement,ty=0;if(!s)return;
