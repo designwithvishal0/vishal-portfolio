@@ -26,10 +26,4 @@ color=c=white:s=625x655:d=1,format=gray,geq=lum='255*min(min(X/34\\,(W-1-X)/34)\
 # Split posters show all four states (SP 60.5), not the empty first frame, like the ixigo "lit" posters
 $FF -ss 60.5 -i "$SP" -frames:v 1 -vf scale=1280:720:flags=lanczos -q:v 3 split-scene.jpg
 $FF -ss 12 -i split-phone.mp4 -frames:v 1 -q:v 3 split-phone.jpg
-# Lighter hero reel for phones (mobile polish 2026-10-12): the same cut as hero-tall.mp4 at 720x900, about 0.8 MB instead of 1.8 MB
-# phones: the tall reel scaled down, with the Split chapter swapped for the two phone moments of the Split row loop (margins kept, no lone phone off centre); chapters move to 0, 6.3, 14.1, 22.3 s (phoneChapters in kinetic.astro) (Vishal 2026-10-12)
-$FF -i hero-tall.mp4 -vf scale=720:900:flags=lanczos -c:v libx264 -crf 27 -preset slow -movflags +faststart -an hero-phone-base.mp4
-# Twelve (Vishal 2026-10-12): its own phone render, copy centred and the whole phone centred below it (tools/twelve-loop/render.mjs <dir> phone raw; set TWP to that dir)
-TWP=${TWP:?set TWP to the folder holding twelve-hero-phone-raw.mkv}
-$FF -i hero-phone-base.mp4 -i split-phone.mp4 -i "$TWP/twelve-hero-phone-raw.mkv" -filter_complex "[0:v]trim=0:6.1,setpts=PTS-STARTPTS,fps=30,format=yuv420p,tpad=stop_mode=clone:stop_duration=0.4,settb=AVTB[a];[1:v]trim=2.8:4.9,setpts=PTS-STARTPTS,fps=30,format=yuv420p,settb=AVTB[b1];[1:v]trim=7.6:14.0,setpts=PTS-STARTPTS,fps=30,format=yuv420p,settb=AVTB[b2];[b1][b2]xfade=transition=fade:duration=0.3:offset=1.8[b];[2:v]trim=0:8.4,setpts=PTS-STARTPTS,scale=720:900:flags=lanczos,fps=30,format=yuv420p,setsar=1,tpad=start_mode=clone:start_duration=0.4,settb=AVTB[c];[0:v]trim=30.1,setpts=PTS-STARTPTS,fps=30,format=yuv420p,tpad=start_mode=clone:start_duration=0.4,settb=AVTB[d];[a][b]xfade=transition=fade:duration=0.4:offset=6.1[ab];[ab][c]xfade=transition=fade:duration=0.4:offset=13.9[abc];[abc][d]xfade=transition=fade:duration=0.4:offset=21.9[out]" -map "[out]" -an -c:v libx264 -crf 27 -preset slow -pix_fmt yuv420p -movflags +faststart hero-phone.mp4
-rm hero-phone-base.mp4
+# Phone hero reel (Vishal 2026-10-13, "on mobile, showcase the contra showreel in the mobile format"): rebuilt from scratch on 2026-10-13, see tools/motion/contra-phone/render.sh

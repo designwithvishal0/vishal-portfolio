@@ -7,6 +7,8 @@ export const intro = {
   supporting:
     'Product designer in Gurugram, with 4.5 years in design and 2+ in core UI/UX. At CashKaro I watched where people dropped off in session recordings, then designed for that moment. My recent concepts take on fintech and B2B.',
   availability: 'Open to product design roles and freelance projects',
+  // phones (Vishal 2026-10-13 Vercel comment, "this line is very long. Shorten it.")
+  availabilityShort: 'Open to full time and freelance work',
   links: [
     { label: 'Resume', href: '/Vishal_Yadav_Resume.pdf' },
     { label: 'Book a call', href: 'https://cal.com/designwvishal' },
@@ -121,20 +123,20 @@ export const loops = ['ixigo', 'split', 'twelve', 'jarvis'];
 // Each number counts up from zero the first time it scrolls into view.
 export const results = [
   { n: '60%', label: 'conversion lift on critical flows, with my UI on the homepage modules, collections and landing pages', short: 'conversion lift on critical flows' },
-  { n: '50%', label: 'click through lift on campaign landing pages, after Hotjar and Clarity showed me where people dropped off and I rebuilt the hierarchy and CTAs', short: 'click through lift on campaign landing pages' },
+  { n: '50%', label: 'click through lift on campaign landing pages, after I fixed the hierarchy and CTAs at the exact spots Hotjar and Clarity showed people leaving', short: 'click through lift on campaign landing pages' },
   { n: '30%', label: 'faster campaign turnaround, from one design system I built in Figma for product and marketing', short: 'faster campaign turnaround, from one design system' },
 ];
 export const more = [
-  { img: 'reward', name: 'Unified Reward Centre', line: 'Every reward a player has earned, on one screen.', href: behance('256413187') },
-  { img: 'onebanc', name: 'OneBanc', line: 'Plan the month your salary has to last.', href: live('onebanc') },
+  { img: 'reward', name: 'Unified Reward Centre', line: 'Every reward a player has earned, on one screen.', href: '/work/reward-centre/' },
+  { img: 'onebanc', name: 'OneBanc', line: 'Plan the month your salary has to last.', href: '/work/onebanc/' },
 ];
-export const lead = { img: 'pwl', name: 'Profit Wala Love, CashKaro', tag: 'Shipped, February 2026', line: "Valentine’s week campaign across app, web and social: seven days, seven ways to earn.", href: 'https://dribbble.com/shots/27168211-Valentines-Day-Landing-Page', stats: [['1,542', 'transactions'], ['₹9.89 lakh', 'GMV'], ['+51%', 'retailer commission']] };
+export const lead = { img: 'pwl', name: 'Profit Wala Love, CashKaro', tag: 'Shipped, February 2026', line: "Valentine’s week campaign across app, web and social: seven days, seven ways to earn.", href: '/work/profit-wala-love/', stats: [['1,542', 'transactions'], ['₹9.89 lakh', 'GMV'], ['+51%', 'retailer commission']] };
 // Shipped pages first, then concepts (two lens audit 2026-10-11: a client reading "Pages that sell" should meet the real results before the concepts)
 export const pages = [
-  { img: 'bbb', name: 'Big Birthday Bash, EarnKaro', tag: 'Shipped, July 2026', line: 'A week long campaign landing page, plus the 777 Jackpot game with a new deal every day.', href: behance('256577531') },
-  { img: 'cosiq', name: 'CosIQ landing page', tag: 'Shipped, January 2026', line: 'Build your own routine.', href: behance('230420275') },
-  { img: 'basil', name: 'Basil product page', tag: 'Concept', line: 'Sell the set, not the second product.', href: behance('256493837') },
-  { img: 'pdp', name: 'Beauty product page', tag: 'Concept', line: 'Will this shade match me?', href: behance('256556067') },
+  { img: 'bbb', name: 'Big Birthday Bash, EarnKaro', tag: 'Shipped, July 2026', line: 'A week long campaign landing page, plus the 777 Jackpot game with a new deal every day.', href: '/work/big-birthday-bash/' },
+  { img: 'cosiq', name: 'CosIQ landing page', tag: 'Shipped, January 2026', line: 'Build your own routine.', href: '/work/cosiq/' },
+  { img: 'basil', name: 'Basil product page', tag: 'Concept', line: 'Sell the set, not the second product.', href: '/work/basil/' },
+  { img: 'pdp', name: 'Beauty product page', tag: 'Concept', line: 'Will this shade match me?', href: '/work/beauty-pdp/' },
 ];
 export const how = [
   { h: 'Start where people drop off', p: 'I read the recordings and the reviews before I draw anything. At CashKaro that meant hours of Hotjar and Clarity sessions, and the results at the top of this page came out of them.', link: 'See the results', href: '#results' },
@@ -147,3 +149,13 @@ export const jobs = [
   ['EKarma India', 'UI/UX Design Trainee', '2021 to 2022'],
 ];
 
+// Graphic design pages (/work/graphics/<key>/), for the /work list. Captions and alt text as on the home tiles.
+export const graphics = [
+  { key: 'eid', cap: 'BuyKaro Eid sale banners', alt: 'BuyKaro Eid sale banners on the home page, on laptop and phone' },
+  { key: 'social', cap: 'Social media posts', alt: 'Social media posts for fashion and motorbike brands' },
+  { key: 'realestate', cap: 'Real estate and event posters', alt: 'Real estate flyer and Content Conclave event poster' },
+  { key: 'moi', cap: 'Museum of Illusions invites', alt: 'Birthday party invitation posters for Museum of Illusions' },
+  { key: 'trigo', cap: 'TriGo roll up standee', alt: 'Yellow and navy TriGo standee with a phone showing ride options' },
+];
+// footer colophon (Vishal 2026-10-18, from the portfolio collection review): month of the last build, so it updates on every push
+export const updated = new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' });

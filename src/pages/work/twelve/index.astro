@@ -1,0 +1,1074 @@
+---
+// Twelve case study, ported word for word from the live Framer page on the JARVIS template (Vishal 2026-10-13 "Start making all of the case studies").
+import SiteHeader from '../../../components/SiteHeader.astro';
+import Boot from '../../../components/Boot.astro';
+const title = 'Twelve case study, Vishal Yadav, Product Designer';
+const description = 'A self initiated AI product design concept: a finance app that plans across the next twelve months and answers one question every day: am I okay?';
+const ld = [
+  { '@context': 'https://schema.org', '@type': 'CreativeWork', name: 'Twelve', headline: 'Plans in years, not months.', description,
+    author: { '@type': 'Person', name: 'Vishal Yadav' }, dateCreated: '2026-08', genre: 'AI product design case study', image: '/work/twelve/img/00-hero-poster.jpg' },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: '/' },
+    { '@type': 'ListItem', position: 2, name: 'Twelve' } ] },
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href}>
+<Boot />
+<meta name="description" content={description}>
+<link rel="stylesheet" href="/css/iphone.css">
+<link rel="stylesheet" href="/css/cs-bar.css">
+<link rel="stylesheet" href="/css/closing-cta.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="article">
+<meta property="og:image" content="https://vishal-designs.vercel.app/work/twelve/img/00-hero-poster.jpg"><meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json" set:html={JSON.stringify(ld)} />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap">
+<style is:inline>
+/* Layout: text column of ~66ch beside a sticky contents rail on desktop; one column on phones.
+   Single dark theme by choice: the calmer navy agreed for JARVIS. */
+:root{
+  --bg:#062219; --card:#0B3227; --fg:#EFEDE3; --muted:#8FA79B; --line:#154336;
+  --warm:#E8B14E; --cool:#CDE86F;
+  --sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  color-scheme:dark;
+  /* tokens the shared site header reads */
+  --ink:var(--fg); --edge:#4F6E60; --btn:var(--fg); --on-btn:var(--bg);
+  --bar:56px; --gut:32px; --max:1376px; --out:cubic-bezier(.23,1,.32,1);
+}
+@media (max-width:759px){:root{--bar:52px;--gut:16px}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html.calm{scroll-behavior:auto}
+body{background:var(--bg);color:var(--fg);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;padding-inline:20px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cool);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{text-wrap:balance;margin:0;font-weight:600;letter-spacing:-.015em}
+p{margin:0}
+.mono,.eyebrow,.k{font-family:var(--mono)}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.k{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:10;padding-top:env(safe-area-inset-top,0px)}
+.progress i{display:block;height:100%;width:0;background:var(--warm)}
+
+.wrap{max-width:1120px;margin:0 auto;padding-block:56px 96px}
+.top{display:flex;justify-content:space-between;gap:16px;font-size:14px;color:var(--muted);padding-bottom:56px}
+.top a{text-decoration:none}.top a:hover{color:var(--fg)}
+
+header.hero{max-width:66ch;display:grid;gap:20px}
+h1{font-size:clamp(40px,7vw,68px);line-height:1.02;letter-spacing:-.03em}
+.hook{font-size:clamp(22px,3vw,30px);font-weight:500;letter-spacing:-.015em;color:var(--warm);margin-top:-8px}
+.dek{font-size:clamp(19px,2.2vw,22px);line-height:1.5;color:var(--fg)}
+.alertline{font-family:var(--mono);font-size:13px;color:var(--warm);display:flex;gap:10px;align-items:center}
+.alertline::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--warm)}
+
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:40px;padding-block:24px;border-block:1px solid var(--line)}
+.facts div{display:grid;gap:6px;min-width:0}
+.facts p{font-size:15px;line-height:1.45}
+.note{margin-top:16px;font-size:14px;color:var(--muted);max-width:72ch}
+
+.summary{margin-top:48px;background:var(--card);border-radius:14px;padding:28px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+.summary h2{grid-column:1/-1;font-size:14px;font-family:var(--mono);font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.summary div{display:grid;gap:8px;align-content:start;min-width:0}
+.summary p{font-size:15.5px;line-height:1.5}
+
+.layout{display:grid;grid-template-columns:200px minmax(0,1fr);gap:64px;margin-top:80px}
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 32px);align-self:start;display:grid;gap:4px;font-size:14px}
+nav.toc .k{margin-bottom:10px}
+nav.toc a{text-decoration:none;color:var(--muted);padding:5px 0 5px 14px;border-left:1px solid var(--line)}
+nav.toc a:hover{color:var(--fg)}
+nav.toc a.on{color:var(--fg);border-left-color:var(--warm)}
+
+article{display:grid;gap:104px;min-width:0}
+section{display:grid;gap:22px;max-width:66ch;scroll-margin-top:32px}
+section.wide{max-width:none}
+section h2{font-size:clamp(28px,3.6vw,38px);line-height:1.12}
+section p{color:#D5DDCF}
+section p strong{color:var(--fg);font-weight:600}
+
+blockquote{margin:8px 0 0;padding:4px 0 4px 20px;border-left:2px solid var(--warm);font-size:22px;line-height:1.4;color:var(--fg);font-weight:500;letter-spacing:-.01em}
+
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-top:8px}
+.stats div{display:grid;gap:6px;align-content:start}
+.stats b{font-size:32px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stats span{font-size:15px;color:var(--muted);line-height:1.45}
+.source{font-size:13px;color:var(--muted)}
+
+.list{display:grid;gap:28px;counter-reset:n}
+.list > div{display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 12px}
+.list .n{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:4px}
+.list h3{font-size:20px}
+.list p{grid-column:2}
+
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.goals div{background:var(--card);border-radius:12px;padding:20px;display:grid;gap:8px}
+.goals p{color:var(--fg)}
+
+.options{display:grid;gap:12px}
+.opt{border:1px solid var(--line);border-radius:12px;padding:20px 22px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 20px}
+.opt h3{font-size:18px}
+.opt p{grid-column:1/-1;font-size:16px}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:3px 8px;border-radius:4px;align-self:start;color:var(--muted);border:1px solid var(--line)}
+.opt.built{border-color:var(--warm)}
+.opt.built .tag{color:var(--bg);background:var(--warm);border-color:var(--warm)}
+
+figure{margin:0;display:grid;gap:10px}
+.slot{background:var(--card);border:1px dashed var(--line);border-radius:12px;display:grid;place-items:center;text-align:center;padding:20px;color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.04em;max-width:100%}
+.slot.flow{aspect-ratio:3/2}
+.shot{display:block;max-width:100%;height:auto;border-radius:16px}
+.shot.wide{width:100%}
+.shot.phone{width:100%;max-width:300px;border-radius:32px;border:1px solid var(--line)}
+.slot.phone{aspect-ratio:412/917;border-radius:28px;width:100%;max-width:300px}
+figcaption{font-size:14px;color:var(--muted)}
+
+.screen{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:40px;align-items:start;max-width:880px}
+.screen > div{display:grid;gap:14px;min-width:0}
+.screen h3{font-size:24px;line-height:1.2}
+.screens{display:grid;gap:72px}
+
+.fixes{display:grid;gap:0;border-top:1px solid var(--line)}
+.fix{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:24px;padding-block:22px;border-bottom:1px solid var(--line)}
+.fix h3{font-size:18px;line-height:1.35}
+.fix p{font-size:16px}
+
+.trades{display:grid;gap:0;border-top:1px solid var(--line)}
+.trade{display:grid;grid-template-columns:28px minmax(0,1fr) minmax(0,1fr);gap:8px 20px;padding-block:20px;border-bottom:1px solid var(--line)}
+.trade .n{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:3px}
+.trade h3{font-size:17px;margin-bottom:6px}
+.trade p{font-size:15.5px}
+.trade .cost{color:var(--warm);font-size:15.5px}
+.trade .cost .k{display:block;margin-bottom:4px}
+
+.beforeafter{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.beforeafter div{border-radius:12px;padding:22px;display:grid;gap:10px;align-content:start}
+.beforeafter .b{border:1px solid var(--line)}
+.beforeafter .a{background:var(--card);box-shadow:inset 0 0 0 1px var(--cool)}
+.beforeafter .a .k{color:var(--cool)}
+.metric{display:grid;gap:6px;padding:22px 0 4px;border-top:1px solid var(--line)}
+.metric b{font-size:clamp(24px,3vw,30px);font-weight:600;letter-spacing:-.02em;color:var(--warm)}
+.measures{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.measures div{display:grid;gap:8px}
+
+.closing{margin-top:120px;padding-top:48px;border-top:1px solid var(--line);display:grid;gap:18px}
+.closing h2{font-size:clamp(32px,5vw,48px);letter-spacing:-.025em}
+.closing > p{color:var(--muted);font-size:19px}
+.btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:54px;padding:0 24px;border-radius:100px;font-weight:600;font-size:18px;line-height:1.3;text-decoration:none;transition:transform .2s ease,opacity .2s ease}
+.btn .ic{flex:none;width:16px;height:16px}
+.btn.primary{background:#CDE86F;color:var(--bg)}
+.btn.ghost{border:1px solid #ffffff47;color:var(--fg)}
+.btn:hover{transform:translateY(-1px);opacity:.92}
+@media (max-width:620px){.btns{flex-direction:column}.btn{width:100%}}
+
+.next{margin-top:64px;display:grid;gap:14px}
+.nextgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.nextgrid a{background:var(--card);border-radius:12px;padding:20px;display:grid;gap:8px;text-decoration:none;align-content:start}
+.nextgrid a:hover{box-shadow:inset 0 0 0 1px var(--line)}
+.nextgrid b{font-size:18px;font-weight:600;letter-spacing:-.01em}
+.nextgrid span{font-size:14px;color:var(--muted)}
+
+@media (max-width:900px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:0}
+  nav.toc{display:none}
+  .summary{grid-template-columns:1fr 1fr}
+  .screen{grid-template-columns:minmax(0,1fr);gap:20px}
+  .slot.phone{max-width:240px}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  .wrap{padding-block:32px 64px}
+  .top{padding-bottom:40px}
+  .facts,.summary,.goals,.beforeafter,.measures,.nextgrid{grid-template-columns:minmax(0,1fr)}
+  .facts{gap:18px}
+  .stats{grid-template-columns:minmax(0,1fr)}
+  .fix{grid-template-columns:minmax(0,1fr);gap:8px}
+  .trade{grid-template-columns:28px minmax(0,1fr)}
+  .trade .cost{grid-column:2}
+  article{gap:80px}
+  .summary{padding:22px}
+}
+</style>
+<style is:inline>.proto{display:block;width:100%;aspect-ratio:16/10;border:0;border-radius:24px;background:var(--card)}@media (max-width:640px){.proto{aspect-ratio:9/16}}video.shot{background:var(--card)}
+.reel{position:relative}
+.pills{position:absolute;right:16px;bottom:16px;display:flex;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:100px;border:1px solid rgba(255,255,255,.22);background:rgba(6,34,25,.78);color:#fff;font:600 12px/1 var(--sans);letter-spacing:.08em;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.pill:hover{background:rgba(8,44,33,.9)}
+.pill:focus-visible{outline:2px solid #CDE86F;outline-offset:2px}
+@media (max-width:620px){.pills{right:10px;bottom:10px}.pill{height:32px;padding:0 11px;font-size:11px}}
+.up{opacity:0;transform:translateY(20px);transition:opacity .4s ease,transform .4s ease;transition-delay:var(--d,0ms)}
+.up.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.up{opacity:1;transform:none;transition:none}}
+html.calm .up{opacity:1;transform:none;transition:none}
+</style>
+<style is:inline>
+/* Matched to the live Framer JARVIS page (measured 2026-10-09): Albert Sans, full width bands that swap
+   navy and light, one 760px reading column, the screens as text left and a 360px phone right. */
+:root{--sans:"Albert Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:var(--sans);
+  --bg:#062219;--card:#0B3227;--fg:#EFEDE3;--body:#EFEDE3;--muted:#8FA79B;--acc:#CDE86F;--warm:#E8B14E;--line:#154336;--band:#062219}
+.lt{--fg:#062219;--body:#3F554B;--muted:#5B6B62;--acc:#46600F;--card:#E9E5D8;--line:#D9D4C3;--band:#F2EFE4;--warm:#8A5300}
+html{overflow-x:clip}
+.eyebrow,.k{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.14em;color:var(--acc)}
+.wrap{max-width:1080px}
+.layout{display:block;margin-top:96px}
+nav.toc{display:none}
+article{gap:0}
+article>section{padding-block:120px;max-width:760px;margin-inline:auto;color:var(--fg);border-image:conic-gradient(var(--band) 0 0) fill 0//0 100vmax}
+article>section.wide{max-width:1080px}
+section h2{font-size:clamp(32px,4vw,48px);font-weight:700;line-height:1.08;letter-spacing:-.02em;color:var(--fg)}
+section h3{color:var(--fg)}
+section p{color:var(--body);font-size:18px;line-height:1.6}
+.stats b{color:var(--acc)}
+#screens .screens{gap:120px;margin-top:56px}
+#screens .screen{grid-template-columns:minmax(0,640px) 360px;justify-content:space-between;gap:48px;max-width:none;align-items:start}
+#screens .screen>figure{order:2;margin:0}
+#screens .screen h3{font-size:32px;line-height:1.2;letter-spacing:-.01em}
+#screens .shot.phone{width:360px;max-width:100%;border:0;border-radius:40px;box-shadow:0 16px 40px rgba(6,34,25,.12)}
+.lt :focus-visible{outline-color:#46600F}
+@media (max-width:900px){article>section{padding-block:80px}#screens .screen{grid-template-columns:minmax(0,1fr);gap:24px}#screens .screen>figure{order:0}}
+article>section{width:100%}
+/* site top bar, same as the home page; no theme toggle because this case study keeps its own fixed look */
+.wrap{padding-top:40px}
+.bar{margin-inline:calc(50% - 50vw)}
+/* Vishal 2026-10-13: header keeps the frosted blur, same as the home page (the solid navy try is undone) */
+/* Vishal 2026-10-13: header looks exactly like the home page header (its dark look, since this page is dark), with no navy tint.
+   Same frosted blur; a touch more opaque than home so the navy page behind doesn't tint it blue. */
+/* Vishal 2026-10-14 ("Match the top"): this page opens light, so the header uses the home page's light look; dark topped case studies keep the dark bar */
+body{margin-top:0}
+.progress{z-index:30}
+.summary{max-width:1080px;margin-inline:auto}
+.summary h2{font-size:13px;font-family:var(--sans);font-weight:600;letter-spacing:.14em;color:var(--acc)}
+.summary p{font-size:16px}
+/* 21 Oct (Vishal): Captions stays dark when on; the captions themselves show it is on */
+video::cue{font:500 18px/1.4 var(--sans);background:rgba(6,34,25,.82);color:#fff}
+.beforeafter .a{box-shadow:inset 0 0 0 1px #46600F}
+.beforeafter .a .k{color:#46600F}
+.swipe{display:none}
+@media (max-width:620px){
+  #flow figure{display:none}
+  .swipe{display:flex;gap:16px;list-style:none;margin:32px -28px 0;padding:0 28px 8px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:28px;overscroll-behavior-x:contain}
+  .swipe li{flex:0 0 260px;scroll-snap-align:start;display:grid;gap:8px;align-content:start}
+  .swipe p{font-size:17px;font-weight:600;line-height:1.3;color:var(--fg);min-height:2.6em}
+  .swipe img{width:100%;height:auto;border-radius:28px;margin-top:8px;box-shadow:0 12px 32px rgba(6,34,25,.12)}
+}
+@media (max-width:620px){article>section{padding-block:64px}.layout{margin-top:64px}#screens .screens{gap:72px}#screens .screen h3{font-size:26px}}
+
+/* ---- audit Phase 2 and 3 ---- */
+/* one break between two bands of the same colour, not two */
+article>section.lt+section.lt,article>section:not(.lt)+section:not(.lt){padding-top:0}
+/* desktop (Vishal 2026-10-13): the four navy sections after the 30 second version (hardest call, who, found, options) were one flat navy;
+   each now sits on its own step of JARVIS indigo blue, getting lighter as the story builds, so section breaks read */
+/* phones too since 2026-10-13 15:04 (Vishal: on phones the content blended into the page navy) */
+article>section#hardest{--band:#FBFAF5;--card:#F2EFE4}
+article>section#who{--band:#F2EFE4;--card:#FBFAF5}
+article>section#claim{--band:#FBFAF5;--card:#F2EFE4}
+article>section#model{--band:#0E372C;--card:#164A3A}
+article>section:is(#who,#claim,#model,#flow){padding-top:120px}
+@media (max-width:900px){article>section:is(#who,#claim,#model,#flow){padding-top:80px}}
+@media (max-width:620px){article>section:is(#who,#claim,#model,#flow){padding-top:64px}}
+/* type scale: 13 label, 16 small, 18 body, 22 lead, 32 titles, 48 sections, 68 page title */
+.facts p,.stats span,.note,.source,figcaption,.opt p,.fix p,.trade p,.trade .cost,.nextgrid span{font-size:16px}
+.list .n,.trade .n,.tag{font-size:13px}
+.opt h3,.fix h3,.trade h3,.list h3,.nextgrid b{font-size:18px}
+blockquote,.dek,.closing>p,.metric b,.next h2{font-size:22px}
+.closing h2,.stats b{font-size:32px}
+@media (min-width:621px){.closing h2{font-size:48px}}
+/* what I'd change: each pair on its own card, Problem in amber */
+.fixes{border-top:0;gap:12px}
+.fix{background:var(--card);border:0;border-radius:16px;padding:24px 28px}
+.fix>div{display:grid;gap:6px;align-content:start}
+.k.pr{color:var(--warm)}
+/* the closing line reads as the point, not a footnote */
+.closing>p{font-weight:600;color:var(--acc)}
+/* more work: a picture and a clear hover */
+.nextgrid a{padding:0;overflow:hidden;gap:0;transition:transform .2s ease,box-shadow .2s ease}
+.nextgrid img{display:block;width:100%;height:auto;aspect-ratio:800/837;object-fit:cover}
+.nextgrid b{padding:16px 20px 20px;line-height:1.35}
+.nextgrid a:hover,.nextgrid a:focus-visible{transform:translateY(-2px);box-shadow:0 0 0 1px var(--acc)}
+.nextgrid a:hover b{text-decoration:underline;text-underline-offset:.2em}
+/* prototype: a still and a way out while Figma loads */
+.protowrap{position:relative;margin:0}
+/* Desktop: the prototype fits one screen between the sticky header and the bottom dock (Vishal 2026-10-13 "going into two scrolls") */
+@media (min-width:641px){.protowrap{width:min(100%,calc((100svh - 120px) * 16 / 10));margin-inline:auto}}
+.protowait{position:absolute;inset:0;border-radius:24px;background:var(--card);display:grid;place-content:center;justify-items:center;gap:12px;text-align:center;transition:opacity .3s ease}
+.protowait img{width:120px;height:auto;border-radius:16px;opacity:.9}
+.protowait p{font-size:16px;color:var(--muted)}
+.protowait a{font-size:16px;font-weight:600;color:var(--fg);padding:10px 4px}
+.protowrap.ready .protowait{opacity:0;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.nextgrid a,.protowait{transition:none}}
+html.calm .nextgrid a,html.calm .protowait{transition:none}
+@media (max-width:620px){
+  .opt{grid-template-columns:minmax(0,1fr)}
+  .opt .tag{order:-1;justify-self:start}
+  .fix{padding:20px}
+}
+</style>
+<style is:inline>
+/* Twelve on the JARVIS template: forest and cream from the Twelve identity, citrus where JARVIS uses its blue.
+   Rupee figures in Instrument Serif with Inter Light's rupee at 86% and a small gap, the same as the Twelve reels (Vishal 2026-10-11). */
+@font-face{font-family:TwRupee;src:url(/work/twelve/rupee.woff2) format("woff2");unicode-range:U+20B9;size-adjust:86%}
+.num,.stats b,.say,.metric b{font-family:TwRupee,"Instrument Serif",serif;font-weight:400;letter-spacing:-.01em}
+.rs{margin-right:.05em}
+/* Vishal 2026-10-15: the stats rupee had fallen to 16px (caught by .stats span); it now matches its number */
+.stats b .rs{font-size:inherit;color:inherit}
+.stats b{font-size:44px!important;line-height:1;color:var(--fg)!important}
+@media (max-width:620px){.stats b{font-size:30px!important}}
+.metric b{font-size:clamp(34px,4.4vw,52px)!important;line-height:1.05;color:var(--fg)}
+/* same number, different claim */
+#claim .cl-in{display:grid;gap:22px;max-width:880px}
+#claim .vs{display:grid;gap:12px;margin-top:8px}
+#claim .vs>div{border-radius:16px;padding:26px 28px;display:grid;gap:10px}
+#claim .other{background:var(--card)}
+#claim .other .say{color:var(--muted)}
+#claim .other s{text-decoration-thickness:1.5px}
+#claim .tw{background:#062219;--acc:#CDE86F}
+#claim .tw .say{color:#F2EFE4}
+#claim .tw em{font-style:normal;box-shadow:inset 0 -.12em 0 #CDE86F}
+#claim .say{font-size:clamp(28px,3.4vw,40px);line-height:1.15}
+#claim>.cl-in>p:last-child{font-size:20px}
+/* flow, IA, identity boards */
+#flow figure.board,#ia figure.board,#identity figure.board{display:grid!important;margin-top:40px}
+figure.board a{display:block;border-radius:16px;overflow:hidden}
+figure.board img{border-radius:16px;box-shadow:0 0 0 1px var(--line)}
+figure.board a:hover img{box-shadow:0 0 0 2px var(--acc)}
+.notbuilt{margin-top:40px;display:grid;gap:14px;max-width:880px}
+.notbuilt ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 32px}
+.notbuilt li{font-size:18px;line-height:1.5;color:var(--fg);padding-left:22px;position:relative}
+.notbuilt li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:1.5px;background:var(--warm)}
+.rules{margin-top:32px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.rules>div{background:var(--card);border-radius:14px;padding:20px 22px;display:grid;gap:8px;align-content:start}
+.rules h3{font-size:18px;line-height:1.35}
+.rules p{font-size:16px}
+.eyebrow.pr{color:var(--warm)}
+.hook{color:var(--acc)}
+/* screen labels in citrus green on cream read as the system speaking */
+#screens .shot.phone{border-radius:36px}
+.closing .mark{margin-bottom:6px}
+@media (max-width:900px){.rules{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.notbuilt ul,.rules{grid-template-columns:minmax(0,1fr)}#claim .vs>div{padding:22px}}
+</style>
+<script is:inline>addEventListener("DOMContentLoaded",()=>{for(const el of document.querySelectorAll(".stats b,.say,.metric b")){const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT),h=[];while(w.nextNode())if(w.currentNode.data.includes("₹"))h.push(w.currentNode);for(const n of h){const t=document.createElement("template");t.innerHTML=n.data.replace(/₹/g,'<span class="rs">₹</span>');n.replaceWith(t.content)}}})</script>
+
+</head>
+
+
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
+
+<SiteHeader home="/" theme={false} book />
+
+<main class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Case study · AI product design</p>
+    <h1>Twelve</h1>
+    <p class="hook">Plans in years, not months.</p>
+    <p class="dek">An AI finance app that plans on a twelve month horizon and answers one question every day: am I okay?</p>
+  </header>
+
+  <div class="facts">
+    <div><span class="k">Role</span><p>Solo. Research, concept, flow, IA, UI, identity and copy</p></div>
+    <div><span class="k">Type</span><p>Self initiated concept</p></div>
+    <div><span class="k">Timeline</span><p>3 days, August 2026</p></div>
+    <div><span class="k">Tools</span><p>Figma</p></div>
+  </div>
+  <p class="note"><span class="nlab">Independent concept</span>Not affiliated with any bank or finance company. The numbers are a worked example, not real account data.</p>
+  <figure class="reel" style="margin-top:32px"><video data-inview class="shot wide" poster="img/00-hero-poster.jpg" width="1920" height="1080" muted loop playsinline preload="metadata" aria-label="Twelve showreel with voiceover"><track kind="captions" src="captions.vtt" srclang="en" label="English"></video>
+    <div class="pills"><button type="button" class="pill" data-act="play" aria-pressed="false" aria-label="Play"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg><span class="lb">Play</span></button><button type="button" class="pill" data-act="sound" aria-pressed="false" aria-label="Turn sound on"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6A2 2 0 0 1 5 8.2H3a1 1 0 0 0-1 1v5.6a1 1 0 0 0 1 1h2a2 2 0 0 1 1.4.6l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg><span class="lb">Sound on</span></button><button type="button" class="pill" data-act="cc" aria-pressed="false" aria-label="Captions"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M10.5 10.2a2 2 0 1 0 0 3.6M17 10.2a2 2 0 1 0 0 3.6"/></svg><span class="lb">Captions</span></button><button type="button" class="pill fs" data-act="fs" aria-label="Full screen"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/></svg><span class="lb">Full screen</span></button></div></figure>
+  <script is:inline>(()=>{
+    const f=document.currentScript.previousElementSibling, v=f.querySelector('video'); const tall=matchMedia('(max-width:620px)').matches; if(tall){v.poster='img/00-hero-poster-tall.jpg';v.width=1080;v.height=1920} v.src=tall?'showreel-tall.mp4':'showreel.mp4'; const [pb,sb,cb]=f.querySelectorAll('.pill'), tr=v.textTracks[0];
+    tr.mode='hidden';
+    cb.onclick=()=>{const on=tr.mode!=='showing';tr.mode=on?'showing':'hidden';cb.setAttribute('aria-pressed',String(on))};
+    const on='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6A2 2 0 0 1 5 8.2H3a1 1 0 0 0-1 1v5.6a1 1 0 0 0 1 1h2a2 2 0 0 1 1.4.6l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M16 9a5 5 0 0 1 0 6M19.4 18.4a9 9 0 0 0 0-12.8"/></svg>';
+    const off='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6A2 2 0 0 1 5 8.2H3a1 1 0 0 0-1 1v5.6a1 1 0 0 0 1 1h2a2 2 0 0 1 1.4.6l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>';
+    const ip='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg>', ia='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><rect x="6" y="4.5" width="4.2" height="15" rx="1.4" fill="currentColor"/><rect x="13.8" y="4.5" width="4.2" height="15" rx="1.4" fill="currentColor"/></svg>';
+    const paint=()=>{pb.innerHTML=v.paused?ip+'<span class="lb">Play</span>':ia+'<span class="lb">Pause</span>';pb.setAttribute('aria-label',v.paused?'Play':'Pause');pb.setAttribute('aria-pressed',String(!v.paused));
+      sb.innerHTML=v.muted?off+'<span class="lb">Sound on</span>':on+'<span class="lb">Sound off</span>';sb.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');sb.setAttribute('aria-pressed',String(!v.muted));};
+    const fb=f.querySelector('.fs'),fsOn=()=>document.fullscreenElement===f;
+    fb.onclick=()=>{if(fsOn())document.exitFullscreen();else if(f.requestFullscreen)f.requestFullscreen();else if(v.webkitEnterFullscreen)v.webkitEnterFullscreen()};
+    document.addEventListener('fullscreenchange',()=>{const o=fsOn();fb.setAttribute('aria-label',o?'Exit full screen':'Full screen');fb.querySelector('.lb').textContent=o?'Exit full screen':'Full screen'});
+    let chose=false;
+    let blocked=false;
+    pb.onclick=()=>{if(v.paused){if(!chose)v.muted=false;v.play()}else v.pause()};
+    // If the browser blocked sound, the first tap on the video turns sound on and keeps it playing; after that a tap pauses and plays
+    v.onclick=()=>{if(blocked){blocked=false;if(!chose)v.muted=false;if(v.paused)v.play();return}pb.onclick()};v.style.cursor='pointer';
+    sb.onclick=()=>{chose=true;v.muted=!v.muted;if(!v.muted&&v.paused)v.play()};
+    // Sound on by default: browsers only allow sound after a tap or key press, so autoplay starts muted and the first tap anywhere turns sound on
+    const wake=e=>{if(!chose&&!(e.target.closest&&e.target.closest('.reel .pill'))){v.muted=false;if(e.target!==v)blocked=false}removeEventListener('pointerdown',wake,true);removeEventListener('keydown',wake,true)};
+    addEventListener('pointerdown',wake,true);addEventListener('keydown',wake,true);
+    ['play','pause','volumechange'].forEach(e=>v.addEventListener(e,paint));
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('calm')){v.muted=false;v.play().catch(e=>{if(e.name==='NotAllowedError'){blocked=true;v.muted=true;v.play().catch(()=>{})}})}paint();
+  })()</script>
+
+  <section class="summary" aria-labelledby="sum">
+    <h2 id="sum">The 30 second version</h2>
+    <div><span class="k">Problem</span><p>Yearly and termly bills, about eight in a normal year, stay invisible to a monthly budget until they land.</p></div>
+    <div><span class="k">Decision</span><p>Plan the next twelve months first, and let today’s number fall out of that plan.</p></div>
+    <div><span class="k">The one metric that matters</span><p>Bills that arrive already covered. If Twelve works, this share climbs every month.</p></div>
+    <div><span class="k">What I learned</span><p>You can’t assert AI. You have to show it working.</p></div>
+  </section>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Contents">
+      <div class="tid" aria-hidden="true"><b>Twelve</b><span>Solo · 3 days, August 2026<br>Self initiated concept</span><i></i></div>
+      <span class="k">Contents</span>
+      <a href="#hardest">The hardest call</a>
+      <a href="#who">Who it’s for</a>
+      <a href="#claim">Same number, different claim</a>
+      <a href="#model">Why a model</a>
+      <a href="#flow">The flow</a>
+      <a href="#ia">Information architecture</a>
+      <a href="#screens">The screens</a>
+      <a href="#wrong">What I got wrong first</a>
+      <a href="#tradeoffs">Trade offs</a>
+      <a href="#identity">Identity</a>
+      <a href="#changed">What changed</a>
+      <a href="#breaks">Where this breaks</a>
+      <a href="#learned">What I learned</a>
+    </nav>
+    <button type="button" class="tocpill" popovertarget="tocsheet" aria-label="Contents"><span class="k">Contents</span><b>The hardest call</b><i aria-hidden="true">1 / 13</i><span class="chev" aria-hidden="true"></span></button>
+    <div id="tocsheet" class="tocsheet" popover><span class="k">Contents</span></div>
+    <div class="dockfade" aria-hidden="true"></div><nav class="dock" aria-label="Contents"><button type="button" class="dkb" data-go="-1" aria-label="Previous section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="dkm"><div class="dkt"><b></b><i></i></div><div class="dks"></div></div><a class="dkn" href="#"><small>Next</small><span></span></a><button type="button" class="dkb" data-go="1" aria-label="Next section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></nav>
+
+    <article>
+      <section id="hardest" class="lt">
+        <div class="lhead"><p class="eyebrow">The hardest call</p>
+        <h2>Every money app plans in months. Money runs in years.</h2></div>
+        <p>The first version of this idea led with a single “safe to spend” number. It was a good number and a weak product, because every budgeting app already shows you a number for the month.</p>
+        <p>The things that actually break a budget don’t run on a monthly clock. Car insurance is yearly. A car service comes round every six months or so. School fees are termly, festivals are seasonal. In a normal year there are around eight of these, and a monthly view sees none of them until they land.</p>
+        <p>So I flipped the model. Twelve plans across the next twelve months, and today’s number is what falls out of that plan. The year is why the number is true. The number is why you open the app.</p>
+        <blockquote>The year is the engine. Today is the surface.</blockquote>
+      </section>
+
+      <section id="who" class="lt">
+        <div class="lhead"><p class="eyebrow">Who this is for</p>
+        <h2>Your balance is a lie</h2></div>
+        <p>Picture someone on a salary in an Indian city, paying rent and an EMI, with a car and a kid in school. The bank says ₹84,000. Rent leaves on the 5th, the EMI on the 7th, and there’s a car insurance renewal on 22 March they’ve forgotten about.</p>
+        <p>They fail twice. First they overspend early, because the balance looked healthy. Then in March they put ₹18,000 on a credit card. They could afford it all along. Nothing told them it was coming.</p>
+        <div class="stats">
+          <div><b>₹84,000</b><span>what the bank says is there</span></div>
+          <div><b>8</b><span>irregular bills a year that a monthly view never sees</span></div>
+          <div><b>₹18,000</b><span>the March renewal that ends up on a credit card</span></div>
+        </div>
+      </section>
+
+      <section id="claim" class="lt wide">
+        <div class="cl-in">
+          <p class="eyebrow">Same number, different claim</p>
+          <div class="vs">
+            <div class="other"><span class="k">Every other app says</span><p class="say"><s>₹1,850 left this month.</s></p></div>
+            <div class="tw"><span class="k">Twelve says</span><p class="say">₹1,850 safe today, because March insurance still needs <em>₹4,200 reserved</em>.</p></div>
+          </div>
+          <p>Same number. The second sentence is the product, and no monthly app can write it, because it needs to know what March looks like before March arrives.</p>
+        </div>
+      </section>
+
+      <section id="model">
+        <div class="lhead"><p class="eyebrow">Why a model, not rules</p>
+        <h2>A rule can’t find a bill it has seen once</h2></div>
+        <div class="list">
+          <div><span class="n">01</span><h3>Detection</h3><p>Finding a charge that happened once, eleven months ago, under a merchant name you don’t recognise, and knowing it will come back.</p></div>
+          <div><span class="n">02</span><h3>Prediction</h3><p>The date drifts and the amount creeps up at renewal. Both need an estimate with honest confidence attached, not a fixed rule.</p></div>
+          <div><span class="n">03</span><h3>Re planning</h3><p>Every new transaction re runs the whole year, so today’s number moves on its own, without anyone asking.</p></div>
+        </div>
+      </section>
+
+      <section id="flow" class="lt wide">
+        <div style="display:grid;gap:22px;max-width:66ch">
+          <p class="eyebrow">The flow</p>
+          <h2>Six ways into the loop, and only two start with you</h2>
+          <p>Setup happens once. Twelve reads 14 months of accounts, finds the irregular bills, and hands them back for you to correct. After that the loop runs every day. Twelve computes, notices, asks and audits itself on its own. You come in through only two doors: asking it something, or asking why.</p>
+          <p>Every path ends in the same place. The twelve month plan gets re solved and tomorrow’s number changes.</p>
+        </div>
+        <figure class="board flowfig">
+          <a href="img/11-user-flow.webp" class="fsopen" aria-label="Open the user flow full size"><img class="shot wide" src="img/11-user-flow.webp" width="3520" height="2316" alt="Twelve user flow: six ways into the daily loop" loading="lazy"></a><button type="button" class="flowfs" aria-label="Open the user flow full screen"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>Full screen</button>
+          <figcaption>Dark boxes are Twelve acting. Light boxes are you or the screen. The app uses the same colour rule, so the flow and the UI teach each other.</figcaption>
+        </figure>
+      </section>
+
+      <section id="ia" class="lt wide">
+        <div style="display:grid;gap:22px;max-width:66ch">
+          <p class="eyebrow">Information architecture</p>
+          <h2>No navigation, because there is one destination</h2>
+          <p>Am I okay, and if not, what do I do about it? Home answers that in two states, on track and off pace. Things you ask for open from inside home. Things Twelve decides you need arrive on top. Nothing sits more than one level deep.</p>
+        </div>
+        <figure class="board flowfig">
+          <a href="img/12-information-architecture.webp" class="fsopen" aria-label="Open the information architecture full size"><img class="shot wide" src="img/12-information-architecture.webp" width="4280" height="1800" alt="Twelve information architecture: one surface, two states" loading="lazy"></a><button type="button" class="flowfs" aria-label="Open the information architecture full screen"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>Full screen</button>
+        </figure>
+        <div class="notbuilt">
+          <span class="k pr">Deliberately not built</span>
+          <ul>
+            <li>No transaction list.</li>
+            <li>No category chart.</li>
+            <li>No budgets you set yourself.</li>
+            <li>No chat.</li>
+            <li>No day, week or month toggle, because a switcher means the app has stopped having an opinion.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="screens" class="lt wide">
+        <div style="display:grid;gap:22px;max-width:66ch">
+          <p class="eyebrow">The screens</p>
+          <h2>Nine screens, each one a different way the AI shows up</h2>
+          <p>I ordered these by what the model is doing, not by where they sit in the app. Read the labels alone and you get the whole AI story.</p>
+        </div>
+        <div class="screens">
+          <div class="screen">
+            <div><span class="k">01 · AI proposes</span><h3>Here is what I found</h3><p>Setup ends with Twelve handing back what it found in 14 months of accounts: car insurance every March, school fees every April, Diwali every October, a car service it has only seen once. Each one carries a confidence label and an Edit button. The card at the top says it plainly: these are my guesses, not your data.</p></div>
+            <div class="iph lt noisl pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img src="img/01-rhythm-check.webp" width="780" height="2776" alt="Twelve screen: Here is what I found" loading="lazy"></div></div>
+          </div>
+          <div class="screen">
+            <div><span class="k">02 · AI computes</span><h3>One number, with its reason attached</h3><p>₹1,850 safe today, and right under it the reason: March insurance still needs ₹4,200. The year ahead sits below as a strip of twelve months, with the next bill and its confidence. Home changes every day without you touching it, because every spend re plans the year.</p></div>
+            <div class="iph lt noisl pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img src="img/02-home-on-track.webp" width="780" height="2776" alt="Twelve screen: One number, with its reason attached" loading="lazy"></div></div>
+          </div>
+          <div class="screen">
+            <div><span class="k">03 · AI shows its working</span><h3>Tap the number and it opens its working</h3><p>Every input it used, and how sure it is about each one. It points out its own weakest guess (the car service, seen once) and lets you switch it off to see the number move from ₹1,850 to ₹1,940. This is the screen that proves it’s a model and not a formula.</p></div>
+            <div class="iph lt noisl pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img src="img/03-why-1850.webp" width="780" height="2648" alt="Twelve screen: Tap the number and it opens its working" loading="lazy"></div></div>
+          </div>
+          <div class="screen">
+            <div><span class="k">04 · You ask</span><h3>It only offers questions it can answer</h3><p>There’s no blank chat box. Ask Twelve opens a short list of questions the model has enough data to answer well, grouped by today, the year and the plan. At the bottom it says what it won’t do: guess.</p></div>
+            <div class="iph lt noisl pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img src="img/04-ask-twelve.webp" width="780" height="2358" alt="Twelve screen: It only offers questions it can answer" loading="lazy"></div></div>
+          </div>
+          <div class="screen">
+            <div><span class="k">05 · AI answers live</span><h3>Type a number, watch tomorrow move</h3><p>A number pad, not a text field. Type ₹14,000 and before you spend a rupee it tells you what happens: past ₹4,200 this starts eating March, and tomorrow’s number drops from ₹1,850 to ₹1,240. Adjust the plan, or leave it. Nothing changes until you say so.</p></div>
+            <div class="iph lt noisl pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img src="img/05-can-i-afford-this.webp" width="780" height="2012" alt="Twelve screen: Type a number, watch tomorrow move" loading="lazy"></div></div>
+          </div>
+          <div class="screen">
+            <div><span class="k">06 · AI admits it doesn’t know</span><h3>₹8,400 went to Sharma Motors and I’ve never seen it before</h3><p>When something new lands, Twelve refuses to guess. It asks one question (every year, every few months, or one off), shows exactly what your answer will change, and promises to ask only once.</p></div>
+            <div class="iph lt noisl pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img src="img/06-it-asks-you.webp" width="780" height="2598" alt="Twelve screen: ₹8,400 went to Sharma Motors and I’ve never seen it before" loading="lazy"></div></div>
+          </div>
+          <div class="screen">
+            <div><span class="k">07 · AI notices</span><h3>You just spent ₹14,000</h3><p>This arrives after the spend, on purpose. A UPI payment can’t be stopped mid flight in India, so a screen that pretends to catch you before you pay would be lying. It states the damage in terms of your year (March insurance is now ₹6,400 short) and gives you two real paths. It never blocks anything.</p></div>
+            <div class="iph lt noisl pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img src="img/07-intervention.webp" width="780" height="2190" alt="Twelve screen: You just spent ₹14,000" loading="lazy"></div></div>
+          </div>
+          <div class="screen">
+            <div><span class="k">08 · AI holds the line</span><h3>Off pace, and the way back</h3><p>The same home, second state. ₹740 safe today, down from ₹1,850, with what drifted (food delivery is ₹2,900 over across 11 orders) and two ways back, each with its cost: hold ₹740 a day for 19 days, or spend ₹950 and push part of the March reserve.</p></div>
+            <div class="iph lt noisl pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img src="img/08-home-off-pace.webp" width="780" height="2614" alt="Twelve screen: Off pace, and the way back" loading="lazy"></div></div>
+          </div>
+          <div class="screen">
+            <div><span class="k">09 · AI audits itself</span><h3>I got two things wrong</h3><p>At month end Twelve marks its own homework. Car service came in 40% over its estimate, electricity 62% over. It says so, raises the next car service estimate to ₹8,900, and tells you March is still covered.</p></div>
+            <div class="iph lt noisl pm"><div class="sc pm-scr" tabindex="0" aria-label="Scroll the screen"><img src="img/09-month-close.webp" width="780" height="3026" alt="Twelve screen: I got two things wrong" loading="lazy"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="wrong" class="lt">
+        <div class="lhead"><p class="eyebrow">What I got wrong first</p>
+        <h2>The screens were rebuilt four times</h2></div>
+        <div class="fixes">
+          <div class="fix"><div><span class="k pr">Mistake</span><h3>The intervention assumed I could catch a payment before it happened.</h3></div><div><span class="k">Fix</span><p>Nothing in India can intercept a UPI or card payment in the moment. I reframed it as “You just spent”, a notice after the fact that openly says nothing has changed yet, and added a way in before spending (Ask Twelve) so the “before” moment still exists, started by the person.</p></div></div>
+          <div class="fix"><div><span class="k pr">Mistake</span><h3>The screens said they were AI without showing it.</h3></div><div><span class="k">Fix</span><p>First person copy and a signature badge still read as a forecasting app. What actually reads as AI is visible reasoning, live answers, named uncertainty and the model changing in front of you. That’s why “Why ₹1,850”, “It asks you” and the live number pad exist.</p></div></div>
+          <div class="fix"><div><span class="k pr">Mistake</span><h3>Home led with the year.</h3></div><div><span class="k">Fix</span><p>An annual planner gives nobody a reason to open it daily. Today’s number moved to the top with the year as its stated reason, and the twelve month strip dropped to second.</p></div></div>
+          <div class="fix"><div><span class="k pr">Mistake</span><h3>The colour was cool on cool.</h3></div><div><span class="k">Fix</span><p>A mint accent on a green ground had no temperature contrast. I moved to forest and cream with a single citrus accent, so the moments when Twelve speaks (cream panels) break the dark instead of blending into it.</p></div></div>
+        </div>
+      </section>
+
+      <section id="tradeoffs" class="lt">
+        <div class="lhead"><p class="eyebrow">Trade offs</p>
+        <h2>Every decision closed a door</h2></div>
+        <div class="trades">
+          <div class="trade"><span class="n">01</span><div><h3>Annual engine, daily surface</h3><p>The year is why the number is true. The number is why you open the app.</p></div><p class="cost"><span class="k">What it cost</span>Someone skimming home may take it for a budgeting app before they read the line underneath.</p></div>
+          <div class="trade"><span class="n">02</span><div><h3>One question, not a dashboard</h3><p>Anything that doesn’t answer “am I okay” was cut.</p></div><p class="cost"><span class="k">What it cost</span>No transaction list, no category breakdown. People who like browsing their spending aren’t served at all.</p></div>
+          <div class="trade"><span class="n">03</span><div><h3>An opinion, never a veto</h3><p>The intervention states the consequence and offers two paths. It never blocks a payment.</p></div><p class="cost"><span class="k">What it cost</span>Some people will spend anyway and end the month short.</p></div>
+          <div class="trade"><span class="n">04</span><div><h3>Correction by touch, not by chat</h3><p>Every forecast is tappable and editable.</p></div><p class="cost"><span class="k">What it cost</span>A correction a sentence could express easily now needs direct manipulation.</p></div>
+          <div class="trade"><span class="n">05</span><div><h3>Confidence over precision</h3><p>“Around ₹18,000, medium confidence” is trusted more than a false ₹18,412.</p></div><p class="cost"><span class="k">What it cost</span>The interface keeps reminding you it might be wrong.</p></div>
+          <div class="trade"><span class="n">06</span><div><h3>Two states, one surface</h3><p>On track and off pace share home, because they’re the same question with different answers.</p></div><p class="cost"><span class="k">What it cost</span>The off pace state can’t have a layout of its own.</p></div>
+          <div class="trade"><span class="n">07</span><div><h3>One way in, and it only offers what it can answer</h3><p>A set of answerable questions instead of a blank field.</p></div><p class="cost"><span class="k">What it cost</span>A question outside the set has no route.</p></div>
+          <div class="trade"><span class="n">08</span><div><h3>No navigation, because there is one destination</h3><p>Sheets open from home, takeovers arrive on top.</p></div><p class="cost"><span class="k">What it cost</span>Settings, history and deeper reports have nowhere to live yet.</p></div>
+        </div>
+      </section>
+
+      <section id="identity" class="lt wide">
+        <div style="display:grid;gap:22px;max-width:66ch">
+          <p class="eyebrow">Identity</p>
+          <h2>Light marks who is speaking</h2>
+          <p>The app sits in deep forest. When Twelve speaks, the surface turns cream, so the system is the thing that breaks the dark. The mark is a year that doesn’t quite close, with the next thing you need to be ready for sitting in the gap. It signs every panel the system speaks through, so it has to survive at 22px.</p>
+        </div>
+        <figure class="board flowfig">
+          <a href="img/13-identity.webp" class="fsopen" aria-label="Open the identity board full size"><img class="shot wide" src="img/13-identity.webp" width="4280" height="2600" alt="Twelve identity: mark, colour and type" loading="lazy"></a><button type="button" class="flowfs" aria-label="Open the identity board full screen"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>Full screen</button>
+        </figure>
+        <div class="rules">
+          <div><h3>Numbers are never abbreviated</h3><p>₹18,000 stays ₹18,000, never 18K.</p></div>
+          <div><h3>No shadows, no gradients.</h3></div>
+          <div><h3>Confidence is written, not implied.</h3></div>
+          <div><h3>Cream appears once per screen.</h3></div>
+        </div>
+      </section>
+
+      <section id="changed" class="lt">
+        <div class="lhead"><p class="eyebrow">What changed</p>
+        <h2>The same ₹18,000 bill, two different Marches</h2></div>
+        <div class="beforeafter">
+          <div class="b"><span class="k">Before (a monthly app)</span><p>The balance looks healthy all year. March arrives, the ₹18,000 renewal lands, and it goes on a credit card.</p></div>
+          <div class="a"><span class="k">After (Twelve)</span><p>The renewal is found in setup, seen twice, high confidence. Twelve sets money aside for it every month, so by August ₹13,800 is already held and only ₹4,200 is left to find. That ₹4,200 is the reason today’s number is ₹1,850, and in March the money is simply there.</p></div>
+        </div>
+        <p>The number I’d measure is the share of irregular bills that arrive already fully reserved. A monthly app scores close to zero here by design, because it never sees those bills coming. In the worked example, that’s the gap between a ₹18,000 renewal landing on a credit card and landing on money that’s already set aside. If Twelve works, this share climbs every month, and the month close screen is where you’d watch it happen.</p>
+        <div class="metric"><span class="k">The one metric that matters</span><b>Bills that arrive already covered</b></div>
+      </section>
+
+      <section id="breaks" class="lt">
+        <div class="lhead"><p class="eyebrow pr">Stated plainly</p>
+        <h2>Where this breaks</h2></div>
+        <p>Year one is weaker than year two. Until it has your history, Twelve guesses from category priors and asks questions, and a bill it learns about in July has fewer months left to reserve for, so the daily number drops.</p>
+        <p>Forecast accuracy for irregular bills needs checking against real statement data before this ships.</p>
+        <p>And only one of the three rhythms (daily glance, the nudge after a spend, the month close) depends on you remembering to open the app. That’s honest, and it’s also the part I’m least sure about.</p>
+      </section>
+
+      <section id="learned">
+        <div class="lhead"><p class="eyebrow">What I learned</p>
+        <h2>You can’t assert AI. You have to show it working.</h2></div>
+        <p>My early screens said “I” everywhere and carried a little Twelve badge, and they still read as a forecasting app. Adding more AI language never fixed that. What fixed it was letting the model do visible things: open its working, answer as you type, admit it doesn’t know, and mark its own homework at month end.</p>
+        <p>The other lesson came from the payment rails. I designed a beautiful “about to spend” moment before checking whether anything in India could actually trigger it. Nothing can. Now I check the real constraint before I design the screen that depends on it.</p>
+      </section>
+    </article>
+  </div>
+
+  <div class="endsec">
+  <footer class="closing">
+    <h2>Twelve</h2>
+    <p>The year is the engine. Today is the surface.</p>
+    <div class="btns" style="--cta-ink:#062219;--cta-on:#E4F3B4">
+      <a class="btn primary" href="https://www.figma.com/design/omDtxqqTkCEyOotkGDjegN/Twelve-An-AI-finance-app?node-id=0-1" target="_blank" rel="noopener">View the Figma file<svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill-opacity="0" fill="currentColor" height="9.75px" transform="translate(8.25 6)" width="9.75px"></path><path d="M 0 7.125 L 7.125 0" fill="transparent" height="7.125px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(6 10.875)" width="7.125px"></path><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill="transparent" height="9.75px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(8.25 6)" width="9.75px"></path></svg></a>
+      <a class="btn ghost" href="/"><svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill-opacity="0" fill="currentColor" height="13.5px" transform="translate(3.75 5.25)" width="6.75px"></path><path d="M 9.75 0 L 0 0" fill="transparent" height="1px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(10.5 12)" width="9.75px"></path><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill="transparent" height="13.5px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(3.75 5.25)" width="6.75px"></path></svg>Back to home</a>
+    </div>
+    <p class="founder">Building a product people need to trust? I take on freelance work. <a href="https://cal.com/designwvishal" target="_blank" rel="noopener">Book a call</a></p>
+  </footer>
+
+  <nav class="next" aria-label="More work">
+    <span class="k">More work</span>
+    <h2>Check out more work</h2>
+    <div class="nextgrid">
+      <a href="/work/ixigo-trains/"><img src="/work/staqu-jarvis/img/more-ixigo.webp" width="800" height="837" alt="" loading="lazy"><b>ixigo Trains · The four hours nobody designs for</b></a>
+      <a href="/work/split-and-request/"><img src="/work/staqu-jarvis/img/more-split.webp" width="800" height="837" alt="" loading="lazy"><b>Google Pay Split and Request</b></a>
+      <a href="/work/reward-centre/"><img src="img/more-reward.webp" width="800" height="837" alt="" loading="lazy"><b>Unified Reward Centre · Every reward. One place.</b></a>
+    </div>
+  </nav>
+  </div>
+</main>
+
+<style is:inline>
+.lhead{display:contents}
+/* Closing (Vishal 2026-10-13): same words, order and layout as before; only the look changes.
+   Closing and More work are ONE section. No boxed card (dark, navy and blue boxes all read as a slab dropped on the page):
+   a full width ending band that grows out of the page navy into JARVIS blue light, in the page's own font. */
+body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
+.endsec{position:relative;margin:140px calc(50% - 50vw) 0;padding:clamp(72px,9vw,128px) calc((100vw - min(100vw - 56px,1376px)) / 2 + clamp(24px,4.5vw,88px)) clamp(64px,8vw,104px);background:radial-gradient(70% 55% at 50% 0%,rgba(205,232,111,.55),rgba(205,232,111,0) 70%),linear-gradient(180deg,#062219 0%,#072A1F 55%,#0A3326 100%);border-top:1px solid rgba(205,232,111,.35);color:#EFEDE3}
+.endsec .closing{margin:0;padding:0;border:0;gap:18px}
+.closing h2{font-family:var(--sans);font-size:clamp(56px,8.4vw,116px)!important;font-weight:800;line-height:.95;letter-spacing:-.035em;color:#E4F3B4} /* very light JARVIS blue, 14:1 on navy (Vishal 2026-10-13) */
+.closing>p{font-size:clamp(20px,2.2vw,28px)!important;font-weight:500;line-height:1.3;color:#D5DDCF}
+.closing .btns{margin-top:22px;gap:12px}
+.closing .btn{height:52px;padding:0 22px;font-size:16px;font-weight:650}
+.closing .btn.primary{background:#F2F1EC;color:#062219}
+.closing .btn.ghost{border-color:rgba(201,214,238,.4);color:#F2F1EC}
+.endsec .next>.k{color:#E4F3B4}.endsec .next>h2{color:#F2F1EC}
+/* centred on every screen size, phones too (Vishal 2026-10-13) */
+.endsec .closing{text-align:center;justify-items:center}.endsec .closing .btns{justify-content:center}.endsec .next>.k,.endsec .next>h2{text-align:center}
+.endsec .nextgrid a{background:#0E3A2D;color:#F2F1EC;box-shadow:0 0 0 1px rgba(242,241,236,.14)} /* navy blue caption: darker than the thumbnail, not black (Vishal 2026-10-13) */
+.endsec .nextgrid b{color:#F2F1EC}
+.endsec .nextgrid a:hover,.endsec .nextgrid a:focus-visible{box-shadow:0 0 0 2px #CDE86F}
+/* phones (Vishal 2026-10-15): a tap leaves no coloured stroke on the More work cards; desktop keeps its hover stroke */
+@media (max-width:759px){.endsec .nextgrid a:hover{box-shadow:0 0 0 1px rgba(242,241,236,.14)}}
+/* audit 2026-10-13: on phones More work is one swipe row (next card peeks in) instead of three full screens of cards */
+@media (max-width:620px){.endsec .nextgrid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-28px;padding:0 28px 6px;scroll-padding-inline:28px;scrollbar-width:none}.endsec .nextgrid::-webkit-scrollbar{display:none}.endsec .nextgrid a{flex:0 0 87%;scroll-snap-align:start}}
+.endsec .closing .founder{margin-top:14px;font-size:17px!important;font-weight:500;color:#D5DDCF}.endsec .closing .founder a{color:#F2F1EC;font-weight:700;text-underline-offset:4px}
+@media (max-width:620px){.endsec .closing .founder{font-size:15px!important;line-height:1.5;max-width:30ch;margin-left:auto;margin-right:auto;text-wrap:balance}.endsec .closing .founder a{white-space:nowrap}}
+.endsec .next{margin-top:clamp(56px,7vw,96px);padding-top:0;border-top:0}
+/* Phones use the same band as desktop (Vishal 2026-10-13 "make the same for Mobile"), only sized down */
+@media (max-width:620px){.endsec{margin-top:48px;padding-inline:28px}.closing h2{font-size:min(52px,11.4vw)!important;white-space:nowrap}}
+
+/* Desktop spacing (Vishal 2026-10-13: "make the sections responsive"): the page grows with the window up to the home page width (1376px)
+   instead of a fixed 760/1080 column. On wide screens each reading section puts its eyebrow and heading on the left
+   and the text on the right, so both sides of the screen are used. Phones and tablets are unchanged. */
+@media (min-width:901px){
+  .wrap,.summary,article>section.wide{max-width:1376px}
+  .wrap{padding-inline:clamp(24px,4.5vw,88px)} /* more side margin on desktop (Vishal 2026-10-13 "going too wide") */
+}
+@media (min-width:1100px){
+  article>section:not(.wide){max-width:none;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(48px,6vw,120px);row-gap:0}
+  article>section:not(.wide)>*{grid-column:2;min-width:0}
+  article>section:not(.wide)>.lhead{display:block;grid-column:1;grid-row:1/span 60;align-self:start}
+  article>section:not(.wide)>.lhead>h2{margin-top:19px}
+  article>section:not(.wide)>:not(.lhead)~:not(.lhead){margin-top:22px}
+  /* Vishal 2026-10-15: the left heading stays in view while its section scrolls, so the left side is never empty */
+  article>section:not(.wide)>.lhead{position:sticky;top:88px}
+}
+/* Vishal 2026-10-15 "too much space on the right": the wide sections use the same split as the top ones,
+   label and heading on the left, text on the right; the claim cards sit side by side */
+@media (min-width:1100px){
+  article>section.wide>div[style*="66ch"]{max-width:none!important;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(48px,6vw,120px);row-gap:0!important}
+  article>section.wide>div[style*="66ch"]>*{grid-column:2;min-width:0}
+  article>section.wide>div[style*="66ch"]>:is(.eyebrow,h2){grid-column:1;grid-row:1/span 30;align-self:start}
+  article>section.wide>div[style*="66ch"]>h2{padding-top:36px}
+  article>section.wide>div[style*="66ch"]>:not(.eyebrow,h2)~:not(.eyebrow,h2){margin-top:22px}
+  #claim .cl-in{max-width:none}
+  #claim .vs{grid-template-columns:1fr 1fr;align-items:stretch}
+  #claim .vs>div{align-content:start}
+  #claim .say{font-size:clamp(28px,2.6vw,38px)}
+  .notbuilt{max-width:none;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(48px,6vw,120px)}
+  .notbuilt>.k{grid-column:1;align-self:start;padding-top:4px}
+  .notbuilt>ul{grid-column:2}
+}
+</style>
+
+<script is:inline>
+(function(){
+  var bar=document.getElementById('bar');
+  var links=[];
+  function onScroll(){
+    var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';
+    var cur=null;
+    links.forEach(function(a){var s=document.querySelector(a.getAttribute('href'));if(s&&s.getBoundingClientRect().top<160)cur=a;});
+    links.forEach(function(a){a.classList.toggle('on',a===cur)});
+  }
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+<script is:inline>
+(function(){
+  var sec=document.getElementById('screens'); if(!sec||!('IntersectionObserver' in window))return;
+  var groups=[].slice.call(document.querySelectorAll('article>section')).concat([].slice.call(sec.querySelectorAll('.screen')));
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -10% 0px'});
+  groups.forEach(function(g){[].slice.call(g.children).forEach(function(el,i){if(el.classList.contains('screens'))return;el.classList.add('up');el.style.setProperty('--d',i*60+'ms');io.observe(el)})});
+})();
+</script>
+
+<style is:inline>
+/* Screens as on Framer: the text stays pinned 120px from the top while its phone scrolls past */
+#screens .screen>div{position:sticky;top:120px}
+#screens .shot.phone{border:1px solid rgba(14,20,36,.1)}
+@media (max-width:900px){#screens .screen>div{position:static}#screens .screen>figure{order:2;justify-self:center}#screens .shot.phone{width:min(320px,100%)}}
+/* Contents: a rail in the left margin on wide screens, a pill that opens the list everywhere else */
+nav.toc{display:grid;position:fixed;left:28px;top:50%;width:170px;transform:translateY(-50%);z-index:20;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s;gap:2px;font-size:13px;line-height:1.3}
+nav.toc.show{opacity:1;visibility:visible}
+nav.toc{left:20px;width:188px;padding:16px 14px 14px;border-radius:16px;background:rgba(6,30,22,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 32px rgba(2,12,8,.25);transition:opacity .3s ease,visibility .3s,background-color .3s}
+nav.toc.light{background:rgba(255,255,255,.86);border-color:rgba(14,20,36,.08);box-shadow:0 12px 32px rgba(6,34,25,.10)}
+nav.toc .k{margin-bottom:8px;font-size:11px}
+nav.toc a{padding:6px 0 6px 12px;border-left:2px solid var(--line);color:var(--muted);transition:color .2s,border-color .2s}
+nav.toc a.on{color:var(--fg);border-left-color:var(--warm)}
+nav.toc.light{--fg:#062219;--muted:#5B6B62;--line:#D9D4C3;--warm:#8A5300}
+.tocpill{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translate(-50%,16px);z-index:20;display:none;align-items:center;gap:10px;max-width:calc(100vw - 32px);height:46px;padding:0 18px;border-radius:100px;border:1px solid rgba(255,255,255,.16);background:rgba(6,34,25,.88);color:#EFEDE3;font:500 15px/1 var(--sans);cursor:pointer;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(2,12,8,.3);opacity:0;visibility:hidden;transition:opacity .3s ease,transform .3s var(--out),visibility .3s}
+.tocpill.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.tocpill .k{color:#8FA79B;font-size:11px}
+.tocpill b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tocpill i{font-style:normal;color:#8FA79B;font-size:13px;font-variant-numeric:tabular-nums}
+.tocsheet{position:fixed;inset:auto 16px calc(72px + env(safe-area-inset-bottom,0px));margin:0 auto;width:min(360px,calc(100vw - 32px));padding:18px 10px 10px;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:#0A2C22;color:#EFEDE3;box-shadow:0 20px 50px rgba(2,12,8,.45)}
+.tocsheet:popover-open{display:grid;gap:2px}
+.tocsheet .k{padding:0 12px 8px;color:#8FA79B;font-size:11px}
+.tocsheet a{display:flex;gap:12px;padding:11px 12px;border-radius:12px;text-decoration:none;font-size:16px;color:#D5DDCF}
+.tocsheet a span{color:#6E8A7D;font-variant-numeric:tabular-nums;width:20px}
+.tocsheet a.on{background:#134236;color:#fff}
+.tocsheet::backdrop{background:rgba(2,12,8,.35)}
+@media (max-width:1399px){nav.toc{display:none}.tocpill{display:inline-flex}}
+.tocpill i{white-space:nowrap}
+.tocpill b{max-width:46vw}
+@media (max-width:620px){
+  .facts{grid-template-columns:1fr 1fr;gap:20px 16px}
+  /* audit 2026-10-13: one compact block, a row per number, instead of three tall cards */
+  .stats{gap:0;background:var(--card);border-radius:16px;padding:4px 18px}
+  .stats div{grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center;padding:14px 0}
+  .stats div+div{border-top:1px solid var(--line)}
+  .stats b{font-size:22px;line-height:1.15;white-space:nowrap;min-width:112px}
+  .stats span{font-size:15px}
+  .endsec .closing .founder a{display:inline-block;padding:13px 0;margin:-13px 0}
+  /* Vishal 2026-10-13 15:06: on phones the boxes in the navy sections are light, so they stand out instead of dark on dark */
+  #who .stats{background:var(--card);color:var(--fg);border-color:transparent}
+  #screens .screen{gap:28px}
+}
+/* 30 second version on desktop: two by two with hairlines, so every label sits on one line and each answer has room */
+@media (min-width:901px){
+  .summary{grid-template-columns:1fr 1fr;gap:0;padding:40px 44px 20px}
+  .summary h2{margin-bottom:12px}
+  .summary div{padding:26px 0 30px;gap:12px;border-top:1px solid rgba(255,255,255,.09)}
+  .summary div:nth-of-type(odd){padding-right:44px}
+  .summary div:nth-of-type(even){padding-left:44px;border-left:1px solid rgba(255,255,255,.09)}
+  .summary p{font-size:19px;line-height:1.5;color:#EFEDE3;max-width:46ch}
+}
+/* Phones: the prototype box is exactly the shape of the app screen (412 by 917 in Figma), with Figma's own bars hidden, so nothing is cut */
+@media (max-width:640px){.proto{aspect-ratio:412/917;width:min(100%,340px,calc((100svh - 200px) * 412 / 917));margin-inline:auto;border-radius:28px}.protowrap{display:flex;justify-content:center}.protowait{width:min(100%,340px,calc((100svh - 200px) * 412 / 917));left:50%;transform:translateX(-50%);border-radius:28px}}
+/* Phones: the header slides away while reading down and comes back the moment you scroll up; the contents bar moves up with it */
+@media (max-width:759px){
+  .tocpill{transition:opacity .3s ease,transform .3s ease,visibility .3s,top .28s ease}
+  html.hdr-hide .tocpill{top:env(safe-area-inset-top,0px)}
+  html.hdr-hide .tocsheet{inset:calc(env(safe-area-inset-top,0px) + 52px) 16px auto}
+}
+/* Reel controls: labelled pills on desktop (icon plus PLAY, SOUND ON); icon only round buttons on phones, bottom right */
+.pill{height:44px;padding:0 16px;gap:8px;justify-content:center;border-radius:22px;border:0;box-shadow:0 0 0 1px rgba(242,241,236,.28);background:rgba(12,12,14,.72);color:#F2F1EC;font:700 12px/1 var(--sans);letter-spacing:.02em}
+.pill:hover{background:rgba(12,12,14,.85)}
+@media (max-width:620px){.pills{right:10px;bottom:10px;gap:6px}.pill{width:40px;height:40px;padding:0;border-radius:50%}.pill .lb{display:none}}
+@media (max-width:620px){.pill{width:44px;height:44px}} /* 44px thumb target on phones */
+.pill .lb,.dkn small{text-transform:uppercase} /* labels are written in sentence case so screen readers say words, not letters */
+/* desktop (Vishal 2026-10-13): icons only; on hover or keyboard focus the button stretches and shows its label inside; full screen is desktop only */
+@media (min-width:621px){.pill{width:auto;min-width:44px;padding:0 13px;gap:0;border-radius:22px;transition:gap .2s var(--out,ease),padding .2s var(--out,ease)}.pill .lb{display:inline-block;max-width:0;overflow:hidden;white-space:nowrap;opacity:0;transition:max-width .25s var(--out,ease),opacity .2s}.pill:hover,.pill:focus-visible{gap:8px;padding:0 16px}.pill:hover .lb,.pill:focus-visible .lb{max-width:160px;opacity:1}}
+@media (max-width:620px){.pill.fs{display:none}}
+.reel:fullscreen{display:flex;align-items:center;justify-content:center;background:#000;margin:0!important}.reel:fullscreen video{width:100%;height:100%;max-height:none;object-fit:contain;border-radius:0}
+/* Contents bar: docked under the header on every width, one look over navy and light sections alike */
+nav.toc{display:none!important}
+.tocpill{display:flex!important;left:0;right:0;top:var(--hb,56px);bottom:auto;width:100%;max-width:none;height:44px;justify-content:center;gap:12px;padding:0 20px;border:0;border-bottom:1px solid rgba(255,255,255,.08);border-radius:0;background:rgba(6,34,25,.9);box-shadow:none;transform:translateY(-6px);font-size:14px;z-index:19}
+.tocpill.show{transform:none}
+.tocpill .chev{width:10px;height:10px;border-right:1.5px solid #8FA79B;border-bottom:1.5px solid #8FA79B;transform:rotate(45deg) translateY(-3px)}
+.tocpill b{max-width:52vw}
+.tocsheet{inset:calc(var(--hb,56px) + 52px) 16px auto}
+/* phones (Vishal 2026-10-15): the open Contents list scrolls on its own; the page behind stays still */
+@media (max-width:759px){.tocsheet{max-height:calc(100dvh - var(--hb,56px) - 68px - env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain}html.hdr-hide .tocsheet{max-height:calc(100dvh - env(safe-area-inset-top,0px) - 68px - env(safe-area-inset-bottom,0px))}html.toclock{overflow:hidden}}
+.tid{display:none}
+/* Desktop first fold (Vishal 2026-10-13, "like this?" with the Profit Wala Love top): text left, reel right, like the Contra style tops.
+   Facts, the concept note and everything after stay full width below. Phones keep their own order (below). */
+@media (min-width:1000px){
+  .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);column-gap:clamp(40px,4vw,72px)}
+  .wrap>*{grid-column:1/-1}
+  .wrap>.facts{grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr))} /* Role line stays on one line */
+  .wrap>.summary{width:100%} /* auto side margins would shrink it to its text inside the grid */
+  .wrap>header.hero{grid-column:1;grid-row:1;align-self:center;max-width:none}
+  .wrap>.reel{grid-column:2;grid-row:1;align-self:center;margin-top:0!important}
+}
+/* Phone first fold: title, hook and a shorter intro, then the reel straight away. Facts and the concept note follow the reel. */
+@media (max-width:620px){
+  .wrap{display:flex;flex-direction:column}
+  .wrap>*{order:5}
+  .wrap>header.hero{order:1;gap:14px}
+  .wrap>.reel{order:2;margin-top:28px!important}
+  .wrap>.facts{order:3;margin-top:32px}
+  .wrap>.note{order:4}
+  .hero .dek{font-size:18px;line-height:1.5;color:var(--muted)}
+  .hero h1{line-height:1.05}
+  .facts div{align-content:start}
+  /* Vishal 04:31: project details on phones as one row per fact, label left and value right, so the long Role line no longer leaves a lopsided gap */
+  .wrap>.facts{grid-template-columns:minmax(0,1fr);gap:0;padding-block:4px}
+  .wrap>.facts div{grid-template-columns:88px minmax(0,1fr);gap:12px;align-items:baseline;padding-block:14px}
+  .wrap>.facts div+div{border-top:1px solid var(--line)}
+  .wrap>.facts p{font-size:16px;line-height:1.45}
+}
+/* Phones: the prototype keeps its full app screen size, and the page keeps scrolling over it. A cover passes scrolls through to the page;
+   tapping it hands touches to the prototype, and "Done" (or scrolling it out of view) gives them back. */
+.protogo,.protodone{display:none}
+@media (max-width:640px){
+  #try{padding-bottom:48px}
+  .protowrap{flex-direction:column;align-items:flex-start;gap:12px;min-width:0;max-width:100%}
+  .protowrap:not(.live) .proto{pointer-events:none}
+  .protogo{display:flex;position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(100%,340px,calc((100svh - 200px) * 412 / 917));aspect-ratio:412/917;border:0;border-radius:28px;background:linear-gradient(180deg,transparent 60%,rgba(4,22,16,.55));align-items:flex-end;justify-content:center;padding-bottom:22px;cursor:pointer;font:inherit}
+  .protogo span{padding:12px 18px;border-radius:999px;background:#F2F1EC;color:#062219;font-size:15px;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+  .protowrap.live .protogo{display:none}
+  /* Once tapped, the prototype opens as a full screen overlay showing the whole app frame, nothing cut (Vishal 2026-10-13) */
+  .protowrap.live{position:fixed;inset:0;z-index:1000;max-width:none;margin:0;padding:16px 16px calc(16px + env(safe-area-inset-bottom));background:rgba(6,12,30,.94);flex-direction:column;align-items:center;justify-content:center;gap:16px}
+  .protowrap.live .proto{width:min(100%,calc((100dvh - 110px) * 412 / 917));height:auto;aspect-ratio:412/917;max-width:none;flex:none;margin:0}
+  html:has(.protowrap.live){overflow:hidden}
+  .protowrap.live .protodone{display:inline-flex;position:static;align-self:center;transform:none;white-space:nowrap;padding:12px 18px;border:0;border-radius:999px;background:#062219;box-shadow:0 0 0 1px rgba(242,241,236,.3),0 6px 18px rgba(0,0,0,.3);color:#F2F1EC;font:600 15px/1 var(--sans);cursor:pointer}
+}
+/* Phones: long sections show the heading, the first paragraph and the visuals; the rest opens in place with Read more. No words are cut. */
+.rmore{display:none}
+@media (max-width:620px){
+  .rm-hid{display:none!important}
+  .rmore{display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:10px 0;min-height:44px;border:0;background:none;color:var(--warm);font:600 16px/1 var(--sans);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+  .rmore::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
+  .rm-clamp{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
+}
+/* Desktop contents: a floating dock at the bottom, like a video player. Section name, n / 11, one segment per section
+   (read ones fill orange, the current one fills as you read), the next section, and back and next arrows. Phones keep the top bar. */
+.dock{display:none}
+.dockfade{display:none}
+@media (min-width:1280px){
+  .tocpill{display:none!important}
+  .dock{display:flex;position:fixed;left:50%;bottom:24px;z-index:20;align-items:center;gap:14px;padding:10px 12px;border-radius:16px;background:rgba(4,22,16,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 0 0 1px rgba(255,255,255,.1),0 16px 40px rgba(0,0,0,.3);font:600 14px/1 var(--sans);color:#F2F1EC;opacity:0;visibility:hidden;transform:translate(-50%,16px);transition:opacity .3s ease,transform .3s ease,visibility .3s}
+  .dock.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+  /* audit 2026-10-13: text slides under a soft fade of the section colour instead of colliding with the dock */
+  .dockfade{display:block;position:fixed;left:0;right:0;bottom:0;height:104px;z-index:19;pointer-events:none;background:linear-gradient(to bottom,transparent,var(--fade,#062219) 78%);opacity:0;transition:opacity .3s ease;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 78%);mask-image:linear-gradient(to bottom,transparent,#000 78%)}
+  .dock.show~.dockfade,.dockfade.show{opacity:1}
+  /* Vishal 2026-10-13: the contents bar stays on screen while scrolling down too, so first time readers see it */
+  .dkb{all:unset;cursor:pointer;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.07);transition:background .2s}
+  .dkb:hover{background:rgba(255,255,255,.14)}.dkb:disabled{opacity:.35;cursor:default}
+  .dkb:focus-visible,.dkn:focus-visible,.dks button:focus-visible{outline:2px solid #E8B14E;outline-offset:2px}
+  .dkm{display:flex;flex-direction:column;gap:9px;width:420px}
+  .dkt{display:flex;justify-content:space-between;gap:12px}.dkt i{font-style:normal;color:#8FA79B;font-variant-numeric:tabular-nums}
+  .dks{display:flex;gap:4px}
+  .dks button{all:unset;cursor:pointer;flex:1;height:14px;display:flex;align-items:center}
+  .dks button::before{content:"";flex:1;height:4px;border-radius:2px;background:linear-gradient(90deg,#E8B14E var(--f,0%),rgba(242,241,236,.18) var(--f,0%))}
+  .dks button:hover::before{background:linear-gradient(90deg,#E8B14E var(--f,0%),rgba(242,241,236,.36) var(--f,0%))}
+  .dkn{display:flex;flex-direction:column;gap:4px;min-width:118px;padding-left:14px;border-left:1px solid rgba(255,255,255,.12);color:#F2F1EC;text-decoration:none}
+  .dkn small{font-size:10px;letter-spacing:.12em;color:#8FA79B}
+  .dkn.end{visibility:hidden}
+  /* hover a segment to see which section it is (Vishal 2026-10-13) */
+  .dks button{position:relative}
+  .dks button::after{content:attr(data-name);position:absolute;left:50%;bottom:calc(100% + 34px);transform:translate(-50%,4px);white-space:nowrap;padding:8px 12px;border-radius:10px;background:#F2F1EC;color:#062219;font:600 13px/1 var(--sans);box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease}
+  .dks button:hover::after,.dks button:focus-visible::after{opacity:1;transform:translate(-50%,0)}
+}
+html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{transition:none}
+</style>
+<script is:inline>
+(function(){
+  var rail=document.querySelector('nav.toc'), pill=document.querySelector('.tocpill'), sheet=document.getElementById('tocsheet'), art=document.querySelector('article');
+  var links=[].slice.call(rail.querySelectorAll('a')), secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  var items=links.map(function(a,i){var b=document.createElement('a');b.href=a.getAttribute('href');b.innerHTML='<span>'+String(i+1).padStart(2,'0')+'</span>'+a.textContent;b.onclick=function(){sheet.hidePopover()};sheet.appendChild(b);return b});
+  var last=-1;
+  function tick(){
+    var r=art.getBoundingClientRect(), on=secs[0].getBoundingClientRect().top<innerHeight*.3&&r.bottom>innerHeight*.4;
+    rail.classList.toggle('show',on);pill.classList.toggle('show',on);
+    var hd=document.querySelector('header.bar');if(hd&&!document.documentElement.classList.contains('hdr-hide')&&!hd.style.transform){var hb=hd.getBoundingClientRect().bottom;if(hb>20)document.documentElement.style.setProperty('--hb',hb+'px')}
+    rail.style.setProperty('--p',Math.min(100,Math.max(0,(-r.top+innerHeight*.3)/(r.height)*100))+'%');
+    pill.style.setProperty('--p',Math.min(100,Math.max(0,(-r.top+innerHeight*.3)/(r.height)*100))+'%');
+    var cur=0;secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<innerHeight*.35)cur=i});
+    if(cur!==last){last=cur;links.forEach(function(a,i){a.classList.toggle('on',i===cur)});items.forEach(function(a,i){a.classList.toggle('on',i===cur)});
+      pill.querySelector('b').textContent=links[cur].textContent;pill.querySelector('i').textContent=(cur+1)+' / '+links.length;}
+    var mid=null;secs.forEach(function(s){if(s){var b=s.getBoundingClientRect();if(b.top<=innerHeight/2&&b.bottom>innerHeight/2)mid=s}});
+    rail.classList.toggle('light',!!(mid&&mid.classList.contains('lt')));
+  }
+  // Desktop dock
+  var dock=document.querySelector('.dock'),fade=document.querySelector('.dockfade'),bands=[].slice.call(document.querySelectorAll('article>section')),segs=links.map(function(a,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label',(i+1)+'. '+a.textContent);b.dataset.name=a.textContent;b.onclick=function(){go(i)};dock.querySelector('.dks').appendChild(b);return b}),
+      dn=dock.querySelector('.dkn'),pv=dock.querySelector('[data-go="-1"]'),nx=dock.querySelector('[data-go="1"]'),dc=0;
+  function go(i){i=Math.max(0,Math.min(secs.length-1,i));secs[i].scrollIntoView({behavior:document.documentElement.classList.contains('calm')||matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
+  pv.onclick=function(){go(dc-1)};nx.onclick=function(){go(dc+1)};dn.onclick=function(e){e.preventDefault();go(dc+1)};
+  function dtick(){
+    var r=art.getBoundingClientRect(),y=innerHeight*.35,shown=secs[0].getBoundingClientRect().top<innerHeight*.3&&r.bottom>innerHeight-24;dock.classList.toggle('show',shown);fade.classList.toggle('show',shown);
+    if(shown){var fh=fade.offsetHeight,ft=innerHeight-fh,st=[];bands.forEach(function(s){var q=s.getBoundingClientRect(),a=Math.max(q.top-ft,0),z=Math.min(q.bottom-ft,fh);if(z>a){var c=getComputedStyle(s).getPropertyValue('--band').trim();if(c){var m=c.match(/#[0-9a-f]{3,8}|rgba?\([^)]*\)/gi);if(m)c=m[m.length-1]}if(c)st.push(c+' '+a+'px '+z+'px')}});if(st.length)fade.style.background='linear-gradient('+st.join(',')+')'}
+    dc=0;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<y)dc=i});
+    segs.forEach(function(b,i){var f=i<dc?100:i>dc?0:(function(){var t=secs[i].getBoundingClientRect(),e=i<secs.length-1?secs[i+1].getBoundingClientRect().top:r.bottom;return Math.max(0,Math.min(100,(y-t.top)/(e-t.top)*100))})();b.style.setProperty('--f',f+'%');b.toggleAttribute('aria-current',i===dc)});
+    dock.querySelector('.dkt b').textContent=links[dc].textContent;dock.querySelector('.dkt i').textContent=(dc+1)+' / '+links.length;
+    var n=links[dc+1];dn.classList.toggle('end',!n);if(n){dn.href=n.getAttribute('href');dn.querySelector('span').textContent=n.textContent}
+    pv.disabled=dc===0;nx.disabled=dc===links.length-1;
+  }
+  addEventListener('scroll',dtick,{passive:true});addEventListener('resize',dtick);dtick();
+  addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);tick();
+})();
+</script>
+<script is:inline>
+(function(){
+  if(!matchMedia('(max-width:620px)').matches)return;
+  function btn(before,open){var b=document.createElement('button');b.type='button';b.className='rmore';b.textContent='Read more';b.setAttribute('aria-expanded','false');b.onclick=function(){open();b.remove()};before.parentNode.insertBefore(b,before);return b}
+  // Section body: keep the first paragraph, fold the rest of the paragraphs and quotes
+  document.querySelectorAll('article>section').forEach(function(sec){
+    var body=[].filter.call(sec.children,function(e){return (e.tagName==='P'&&!e.classList.contains('eyebrow'))||e.tagName==='BLOCKQUOTE'});
+    var rest=body.slice(1), words=rest.reduce(function(n,e){return n+e.textContent.split(/\s+/).length},0);
+    if(!rest.length||words<30)return;
+    rest.forEach(function(e){e.classList.add('rm-hid')});
+    btn(rest[0],function(){rest.forEach(function(e){e.classList.remove('rm-hid')})});
+  });
+  // Long single paragraphs beside the screens: show four lines, then Read more
+  document.querySelectorAll('.screen>div>p').forEach(function(p){
+    p.classList.add('rm-clamp');if(p.scrollHeight<=p.clientHeight+2){p.classList.remove('rm-clamp');return}
+    var b=btn(p,function(){p.classList.remove('rm-clamp')});p.after(b);
+  });
+})();
+</script>
+<script is:inline src="/js/inview-video.js" defer></script>
+<style is:inline>
+/* Vishal 2026-10-13: the screens exactly as on Framer. Each one is a card (text left, a 300 by 650 iPhone right) that sticks 96px from the top so the next card slides over it; the long screen scrolls inside the phone */
+#screens .screens{display:flex;flex-direction:column;gap:48px;margin-top:40px}
+#screens .screen{position:sticky;top:96px;z-index:1;display:flex;align-items:center;gap:64px;max-width:none;padding:32px 48px;background:#F2EFE4;border:1px solid #0622191f;border-radius:32px;transform-origin:50% 0}
+#screens .screen>div:not(.iph){position:static;flex:1 1 0;min-width:0}
+#screens .screen>.iph{display:block;position:relative;top:auto}
+.iph{display:block;flex:0 0 auto;width:300px;height:650px}
+.iph .sc{height:100%;background:#062219;overflow:hidden auto;scrollbar-width:none;overscroll-behavior:contain}
+.iph .sc::-webkit-scrollbar{display:none}
+.iph .sc img{display:block;width:100%;height:auto}
+/* Frame itself: /css/iphone.css, the one Split frame on every case study, light because Twelve screens are dark (Vishal 2026-10-15) */
+@media (max-width:809.98px){
+  #screens .screens{gap:24px;margin-top:16px}
+  #screens .screen{position:relative;top:auto;flex-direction:column;align-items:stretch;gap:28px;padding:24px 20px;border-radius:24px}
+  .iph{width:280px;height:606px;align-self:center}
+}
+</style>
+<script is:inline>
+(function(){
+  // As on Framer: a card eases back (scale toward .95, from its top edge) while the next card slides over it
+  var cs=[].slice.call(document.querySelectorAll('#screens .screen'));
+  var mq=matchMedia('(min-width:810px) and (prefers-reduced-motion:no-preference)');
+  function tick(){cs.forEach(function(c,i){var nx=cs[i+1];var s=1;if(mq.matches&&nx&&!document.documentElement.classList.contains('calm')){var a=c.getBoundingClientRect(),b=nx.getBoundingClientRect();var p=1-(b.top-a.top)/a.height;s=1-.05*Math.max(0,Math.min(1,p))}c.style.scale=s===1?'':s.toFixed(4)})}
+  addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);tick();
+})();
+</script>
+<style is:inline>
+/* Vishal 2026-10-14: the reel is dark forest, so the top is cream to let it stand out. The 30 second version keeps its own forest card */
+body{background:#F2EFE4}
+.wrap>header.hero,.wrap>.facts,.wrap>.note{--fg:#062219;--body:#3F554B;--muted:#5B6B62;--acc:#46600F;--line:#D9D4C3;--warm:#8A5300;color:var(--fg)}
+.wrap>header.hero .hook{color:#46600F}
+.reel video{box-shadow:0 24px 50px rgba(6,34,25,.22)}
+</style>
+<style is:inline>
+/* Vishal 2026-10-14: each case study uses its product's own type. Twelve is Instrument Serif for titles and figures, Instrument Sans for everything else (Twelve-Final build notes) */
+:root{--sans:"Instrument Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap>header.hero h1,article>section h2:not(#sum),.closing h2,article blockquote{font-family:"Instrument Serif",serif!important;font-weight:400!important;letter-spacing:-.01em!important}
+.closing h2{line-height:.98}
+.wrap>header.hero h1{font-size:clamp(48px,7vw,80px)!important;line-height:1!important}
+/* Phones only (his ixigo approval, 04:27): hero heading bold, same size; desktop unchanged */
+@media (max-width:640px){.wrap>header.hero h1{font-weight:700!important}}
+article blockquote,article blockquote p{font-size:clamp(22px,2.4vw,30px)!important;line-height:1.2!important}
+</style>
+<script is:inline>/* Vishal 2026-10-15: no pale fade over the phone screens; the dock fade switches off while the screens section is at the bottom of the window */
+(()=>{const f=document.querySelector('.dockfade'),s=document.getElementById('screens');if(!f||!s)return;const u=()=>{const r=s.getBoundingClientRect();f.style.visibility=(r.top<innerHeight-40&&r.bottom>innerHeight)?'hidden':''};addEventListener('scroll',u,{passive:true});addEventListener('resize',u);u()})();</script>
+<style is:inline>
+/* Vishal 2026-10-15 "make a better closing": no cream gap between What I learned and the closing (two dark bands now meet on a citrus hairline),
+   a bigger serif sign off, buttons with their icon in its own circle, the freelance line set off by a hairline, and a slow staggered rise as it comes into view */
+.endsec{margin-top:0!important}
+.endsec .closing>p:not(.founder){text-wrap:balance;max-width:24ch;margin-inline:auto}
+.endsec .closing h2{font-size:clamp(76px,10vw,152px)!important;line-height:.9;letter-spacing:-.02em!important}
+.endsec .closing .btns{margin-top:30px;gap:14px}
+.endsec .closing .btn{height:58px;font-size:16px;transition:transform .5s cubic-bezier(.32,.72,0,1),background-color .5s cubic-bezier(.32,.72,0,1),border-color .5s cubic-bezier(.32,.72,0,1)}
+.endsec .closing .btn:active{transform:scale(.98)}
+.endsec .closing .btn.primary{padding:0 7px 0 26px;gap:14px}
+.endsec .closing .btn.ghost{padding:0 26px 0 7px;gap:14px}
+.endsec .closing .btn .ic{box-sizing:content-box;width:16px;height:16px;padding:14px;border-radius:50%;transition:transform .6s cubic-bezier(.32,.72,0,1)}
+.endsec .closing .btn.primary .ic{background:#062219;color:#E4F3B4}
+.endsec .closing .btn.ghost .ic{background:rgba(242,241,236,.1)}
+.endsec .closing .btn.primary:hover .ic{transform:translate(2px,-2px) scale(1.05)}
+.endsec .closing .btn.ghost:hover .ic{transform:translateX(-3px) scale(1.05)}
+.endsec .closing .btn.ghost:hover{border-color:rgba(242,241,236,.7)}
+.endsec .closing .founder{margin-top:40px!important;padding-top:28px;border-top:1px solid rgba(242,241,236,.14);width:min(640px,100%)}
+html.js .endsec .closing>*{transition:opacity 1s cubic-bezier(.32,.72,0,1),transform 1s cubic-bezier(.32,.72,0,1)}
+html.js .endsec:not(.in) .closing>*{opacity:0;transform:translateY(28px)}
+.endsec .closing>:nth-child(2){transition-delay:.08s}.endsec .closing>:nth-child(3){transition-delay:.16s}.endsec .closing>:nth-child(4){transition-delay:.24s}
+@media (prefers-reduced-motion:reduce){html.js .endsec .closing>*{opacity:1!important;transform:none!important;transition:none}}
+html.calm .endsec .closing>*{opacity:1!important;transform:none!important;transition:none}
+@media (max-width:620px){.endsec .closing h2{font-size:min(68px,17vw)!important}.endsec .closing .btns{flex-direction:column;align-items:center;gap:12px}.endsec .closing .btn{height:54px;gap:12px;width:auto;min-width:0}.endsec .closing .btn.primary{padding:0 6px 0 22px}.endsec .closing .btn.ghost{padding:0 22px 0 6px}.endsec .closing .btn .ic{padding:13px}.endsec .closing .founder{margin-top:28px!important;padding-top:22px}}
+/* phones (Vishal 2026-10-15 "spacing making it worse"): same centred, equal width pair as ixigo and the other case studies; buttons hug their words and keep the icon circles (his 15:53 "I like the circle thing") */
+</style>
+<script is:inline>(()=>{const e=document.querySelector('.endsec');if(!e)return;if(!('IntersectionObserver'in window)){e.classList.add('in');return}const o=new IntersectionObserver(r=>{if(r[0].isIntersecting){e.classList.add('in');o.disconnect()}},{threshold:.15});o.observe(e)})();</script>
+<dialog class="flowdlg" aria-label="Diagram, full screen"><button type="button" class="flowx" aria-label="Close full screen"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button><div class="flowpan"><img alt=""></div><p class="flowhint">Pinch or double tap to zoom</p></dialog>
+<style is:inline>
+/* Diagrams full screen on phones, same as ixigo (his 03:44, applied to every case study 03:53) */
+.flowfig{position:relative}
+/* Vishal 2026-10-15: the Full screen button shows on desktop too */
+@media (min-width:0px){.flowfs{display:inline-flex;position:absolute;right:10px;bottom:10px;align-items:center;gap:6px;padding:9px 12px;border:0;border-radius:999px;background:rgba(6,34,25,.88);color:#F2EFE4;font:600 13px/1 var(--sans);box-shadow:0 6px 18px rgba(0,0,0,.25)}.flowfig{display:grid}.flowfig>a,.flowfig>.flowfs{grid-area:1/1}.flowfig>.flowfs{position:static;align-self:end;justify-self:end;margin:0 10px 10px 0;z-index:1}}
+@media (min-width:901px){.flowfig>.flowfs{align-self:start;margin:16px 16px 0 0;padding:11px 16px;font-size:14px;cursor:pointer}.flowfig>.flowfs:hover{background:#062219}.flowfig>figcaption{grid-area:auto}}
+.flowdlg{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#0D0F17}
+.flowdlg::backdrop{background:#0D0F17}
+.flowpan{position:absolute;inset:0;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom;display:grid;place-items:center}
+.flowpan img{display:block;width:100%;height:auto;max-width:none;transition:width .2s ease}
+.flowdlg.zoom .flowpan{place-items:start}.flowdlg.zoom .flowpan img{width:260%}
+@media (min-width:901px){.flowdlg:not(.zoom) .flowpan img{width:auto;max-width:calc(100% - 48px);max-height:calc(100% - 48px)}}
+.flowx{position:fixed;top:max(12px,env(safe-area-inset-top));right:12px;z-index:2;width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:50%;background:rgba(13,15,23,.86);color:#F2F1EC;box-shadow:0 0 0 1px rgba(255,255,255,.18)}
+.flowhint{position:fixed;left:50%;transform:translateX(-50%);bottom:max(14px,env(safe-area-inset-bottom));margin:0;padding:9px 14px;border-radius:999px;background:rgba(13,15,23,.86);color:#F2F1EC;font:500 13px/1 var(--sans);white-space:nowrap;pointer-events:none}
+</style>
+<script is:inline>(()=>{const d=document.querySelector('.flowdlg');if(!d)return;const pan=d.querySelector('.flowpan'),im=pan.querySelector('img');
+/* Standing rule (Vishal 04:41): full screen always opens here in the current tab, never a second tab */
+const open=s=>{im.src=s.currentSrc||s.src;im.alt=s.alt;d.classList.remove('zoom');d.querySelector('.flowhint').textContent=matchMedia('(pointer:coarse)').matches?'Pinch or double tap to zoom':'Double click to zoom, Esc to close';d.showModal();document.documentElement.style.overflow='hidden'};
+document.querySelectorAll('.flowfs').forEach(b=>b.onclick=()=>open(b.closest('figure').querySelector('img')));
+document.querySelectorAll('a.fsopen').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();open(a.querySelector('img'))}));
+d.addEventListener('close',()=>{document.documentElement.style.overflow=''});d.querySelector('.flowx').onclick=()=>d.close();
+let t=0;pan.addEventListener('click',e=>{const n=Date.now();if(n-t<320){const r=pan.getBoundingClientRect(),fx=(e.clientX-r.left+pan.scrollLeft)/pan.scrollWidth,fy=(e.clientY-r.top+pan.scrollTop)/pan.scrollHeight;d.classList.toggle('zoom');pan.scrollLeft=fx*pan.scrollWidth-r.width/2;pan.scrollTop=fy*pan.scrollHeight-r.height/2;t=0}else t=n});
+pan.addEventListener('dblclick',e=>e.preventDefault())})();</script>
+<script is:inline src="/js/pin-screen.js" defer></script>
+<script is:inline src="/js/cs-bar.js" defer></script>
+</html>
+
+<script is:inline>(function(){var s=document.getElementById('tocsheet'),mq=matchMedia('(max-width:759px)'),root=document.documentElement,ty=0;if(!s)return;
+function lock(e){root.classList.toggle('toclock',e.newState==='open'&&mq.matches)}s.addEventListener('beforetoggle',lock);s.addEventListener('toggle',lock);
+addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true});
+addEventListener('touchmove',function(e){if(!root.classList.contains('toclock'))return;var dy=e.touches[0].clientY-ty;if(!s.contains(e.target)||(dy>0&&s.scrollTop<=0)||(dy<0&&s.scrollTop+s.clientHeight>=s.scrollHeight-1))e.preventDefault()},{passive:false});})();</script>
+<style is:inline>/* video buttons: at least a 44px touch area, look unchanged */.pills .pill{position:relative}.pills .pill::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}
+/* Vishal 2026-10-19 (all case studies): the concept line under the facts opens with a small label, not body text */
+.note .nlab{display:inline-flex;align-items:center;vertical-align:1px;margin-right:12px;padding:4px 10px;border:1px solid currentColor;border-radius:999px;font-size:12px;line-height:1;font-weight:600;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+</style>
+
+<style is:inline>
+/* Universal (Vishal 19 Oct 13:09): project names in the footer are never white; a light tint of the page colour, like OneBanc */
+.endsec .nextgrid b{color:#E4F3B4!important}
+</style>

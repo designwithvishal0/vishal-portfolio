@@ -1,10 +1,76 @@
 {
+  "git": {
+    "deploymentEnabled": {
+      "claude/**": false
+    }
+  },
   "redirects": [
     {
-      "source": "/",
-      "has": [{ "type": "host", "value": "vishal-(designs?|yadav|yadav-design)\\.vercel\\.app" }],
-      "destination": "/looks/kinetic",
+      "source": "/looks",
+      "destination": "/",
       "permanent": false
+    },
+    {
+      "source": "/looks/(.*)",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/directions",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/directions/(.*)",
+      "destination": "/",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "vishal-designs-preview.vercel.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "vishal-preview.vercel.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "vishal-portfolio-pink-ten.vercel.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ]
 }
