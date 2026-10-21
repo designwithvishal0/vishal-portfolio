@@ -335,8 +335,8 @@ article>section:first-child{padding-top:120px}
 #design{justify-items:center;text-align:center}
 #design h2{color:#F7EEF4}
 .iph.lpd{width:min(340px,100%);margin-top:24px}
-@media (min-width:1100px){.iph.lpd{width:260px}}
-#design .pin-wrap{width:100%}#design .screen{display:flex;justify-content:center;max-width:none;width:100%} /* Vishal 21 Oct: one pinned phone on desktop too; 260px keeps it clear of the chapter bar on an 800px window */
+@media (min-width:1100px){.iph.lpd{width:310px}}
+#design .pin-wrap{width:100%}#design .screen{display:flex;justify-content:center;max-width:none;width:100%} /* Vishal 21 Oct: one pinned phone on desktop too; 310px is the biggest that still pins on an 800px laptop window; the chapter bar steps aside while it is pinned */
 </style>
 </head>
 
@@ -807,6 +807,12 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 <script is:inline src="/js/pin-frames.js" defer></script>
 <script is:inline src="/js/flowdlg.js" defer></script>
 <script is:inline src="/js/pin-screen.js" defer></script>
+<script is:inline>
+/* Vishal 21 Oct: the chapter bar steps aside while the full page phone is on screen, so it never covers the screen */
+addEventListener('DOMContentLoaded',()=>{const d=document.querySelector('.dock'),f=document.querySelector('#design .iph');if(!d||!f)return;
+new IntersectionObserver(([e])=>d.classList.toggle('away',e.isIntersecting),{rootMargin:'-20% 0px -20% 0px'}).observe(f)});
+</script>
+<style is:inline>.dock.away{opacity:0!important;visibility:hidden!important;transform:translate(-50%,16px)!important}</style>
 </html>
 
 <style is:inline>

@@ -18,6 +18,7 @@ const ld = [
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/closing-cta.css">
+<link rel="stylesheet" href="/css/cs-bar.css">
 <title>{title}</title>
 <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href}>
 <Boot />
@@ -867,6 +868,7 @@ html.calm .endsec .closing>*{opacity:1!important;transform:none!important;transi
 <style is:inline>/* Full screen on JARVIS phone screens sits at the bottom corner, clear of the app bar, as on the framed phones of the other case studies */
 .swipe li>.fsb,.screen figure>.fsb{top:auto!important;bottom:14px!important;right:14px!important}</style>
 <script is:inline src="/js/flowdlg.js" defer></script>
+<script is:inline src="/js/cs-bar.js" defer></script>
 
 <script is:inline>/* on phones the closed prototype is not a stop for Tab; "Tap to try the prototype" is. Desktop is unchanged */
 document.querySelectorAll(".protowrap").forEach(w=>{const f=w.querySelector(".proto"),g=w.querySelector(".protogo");if(!f||!g)return;const u=()=>f.tabIndex=w.classList.contains("live")||getComputedStyle(g).display==="none"?0:-1;u();new MutationObserver(u).observe(w,{attributes:true,attributeFilter:["class"]});addEventListener("resize",u)})</script>
