@@ -335,6 +335,8 @@ article>section:first-child{padding-top:120px}
 #design{justify-items:center;text-align:center}
 #design h2{color:#F7EEF4}
 .iph.lpd{width:min(340px,100%);margin-top:24px}
+@media (min-width:1100px){.iph.lpd{width:260px}}
+#design .pin-wrap{width:100%}#design .screen{display:flex;justify-content:center;max-width:none;width:100%} /* Vishal 21 Oct: one pinned phone on desktop too; 260px keeps it clear of the chapter bar on an 800px window */
 </style>
 </head>
 
@@ -465,7 +467,6 @@ article>section:first-child{padding-top:120px}
       <section id="design" class="wide">
         <h2>The full page</h2>
         <div class="iph lpd noisl"><div class="sc" tabindex="0" aria-label="Scroll the screen"><img src="img/10-landing-page.webp" width="720" height="10761" alt="The full CosIQ landing page on a phone, from the Where Skin Meets Science hero through Build Your Own Routine, Bestsellers, Real Reviews, Why Buy via CashKaro, the urgency banner and Ready to Boost Your Skin IQ?" loading="lazy"></div></div>
-        <div class="strip" aria-hidden="true"><div><img style="transform:translateY(-0.0000%)" loading="lazy" aria-hidden="true" src="img/10-landing-page.webp" width="720" height="10761" alt=""></div><div><img style="transform:translateY(-33.3333%)" loading="lazy" aria-hidden="true" src="img/10-landing-page.webp" width="720" height="10761" alt=""></div><div><img style="transform:translateY(-66.6667%)" loading="lazy" aria-hidden="true" src="img/10-landing-page.webp" width="720" height="10761" alt=""></div></div>
       </section>
 
       <section id="conclusion" class="lt">
@@ -538,6 +539,7 @@ body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
   article>section:not(.wide)>*{grid-column:2;min-width:0}
   article>section:not(.wide)>:is(.eyebrow,h2){grid-column:1;grid-row:1/span 60;align-self:start}
   article>section:not(.wide)>h2{padding-top:36px}
+  #conclusion>h2{padding-top:0} /* Vishal 21 Oct: one line of text, so the heading lines up with it */
   article>section:not(.wide)>:not(.eyebrow,h2)~:not(.eyebrow,h2){margin-top:22px}
 }
 </style>
@@ -792,15 +794,10 @@ html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{t
 <style is:inline>
 /* Vishal 2026-10-14 02:50: on desktop the screens were too small (400px cards tucked in the text column, a 340px phone for the full page).
    Section screens now sit on their own stage under the text, at full size; the full landing page is shown whole, in three tall columns, read top to bottom. Phones keep the phone. */
-.strip{display:none}
 @media (min-width:1100px){
   article>section:not(.wide)>figure.cut,article>section:not(.wide)>.cuts{grid-column:1/-1;margin-top:56px!important;padding:clamp(40px,4vw,64px);border-radius:28px;background:color-mix(in srgb,var(--acc) 7%,var(--band,#fff));display:flex;justify-content:center;gap:40px;align-items:flex-start}
   article>section:not(.wide)>figure.cut img{width:min(560px,100%);max-width:none}
   .cuts .cut{margin:0}.cuts .cut img{width:min(480px,100%)}
-  #design .iph.lpd{display:none}
-  .strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,2.4vw,40px);margin-top:48px;max-width:1240px;margin-inline:auto}
-  .strip>div{aspect-ratio:720/3587;overflow:hidden;border-radius:20px;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 24px 60px rgba(0,0,0,.35);background:#fff}
-  .strip img{display:block;width:100%;height:auto}
 }
 </style>
 <style is:inline>
