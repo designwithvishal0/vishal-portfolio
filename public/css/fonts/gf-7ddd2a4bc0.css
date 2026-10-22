@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(/fonts/gf-7ddd2a4bc0/f248070c86c8.woff2) format('woff2');
+  unicode-range: U+2c, U+30-32, U+34, U+37, U+20b9;
+}
+@font-face {
+  font-family: 'Stack Sans Headline';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(/fonts/gf-7ddd2a4bc0/e9cf6017723f.woff2) format('woff2');
+  unicode-range: U+2c, U+30-32, U+34, U+37, U+20b9;
+}
