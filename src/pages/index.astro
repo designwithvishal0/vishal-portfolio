@@ -182,7 +182,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
           <h3 class="tt"><a href={cs(w.slug)}><span class="ln">{titles[w.slug][0]}</span> <span class="ln">{titles[w.slug][1].replace(/\.$/, '')}{titles[w.slug][1].endsWith('.') && <span aria-hidden="true">.</span>}</span><span class="vh">, the {w.name} case study</span></a></h3>
           <div class="rg">
             <div class="tx">
-              <p class="meta">{w.name} · {w.type} · {w.year}</p>
+              <p class="meta">{w.name} · {w.kind} · {w.type} · {w.year}</p>
               <p class="pb">{w.problem}</p>
               <p class="role">{w.role}</p>
               <p class="det">{w.detail}</p>
@@ -218,7 +218,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
           <img class="mthumb" src={`/pages/${m.img}.webp`} alt="" width="160" height="160" loading="lazy" decoding="async" />
           <h3><a href={m.href}>{m.name}</a></h3>
           <p class="mline">{m.line}</p>
-          <span class="pill">Concept</span>
+          <span class="pill">{m.kind}</span>
           {/* phones show where the row goes instead of the Concept label (Vishal 2026-10-19) */}
           <span class="more mw-go" aria-hidden="true">View the case study <Arrow /></span>
         </li>
