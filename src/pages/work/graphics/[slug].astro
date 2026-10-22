@@ -54,7 +54,8 @@ const items = await Promise.all(g.items.map(async it => {
   const file = `public/work/graphics/${g.key}/${it.f}.webp`;
   if (!existsSync(file)) return null;
   const { width, height } = await sharp(file).metadata();
-  return { ...it, src: `/work/graphics/${g.key}/${it.f}.webp`, width, height };
+  const small = `public/work/graphics/${g.key}/${it.f}-800.webp`;
+  return { ...it, src: `/work/graphics/${g.key}/${it.f}.webp`, width, height, small: existsSync(small) ? `/work/graphics/${g.key}/${it.f}-800.webp` : undefined };
 })).then(a => a.filter(Boolean)) as ({ t: string } | { src: string; alt: string; width: number; height: number })[];
 const lead = items.find(x => 'src' in x);
 
@@ -151,7 +152,7 @@ html.calm .btn,html.calm .more img{transition:none}
 
     <div class="gal">
       {items.map(it => 'src' in it
-        ? <img src={it.src} alt={it.alt} width={it.width} height={it.height} decoding="async" loading={it === lead ? 'eager' : 'lazy'} fetchpriority={it === lead ? 'high' : undefined} />
+        ? <img src={it.src} srcset={it.small ? `${it.small} 800w, ${it.src} ${it.width}w` : undefined} sizes={it.small ? '(max-width: 900px) 100vw, 900px' : undefined} alt={it.alt} width={it.width} height={it.height} decoding="async" loading={it === lead ? 'eager' : 'lazy'} fetchpriority={it === lead ? 'high' : undefined} />
         : <p class="lbl">{it.t}</p>)}
     </div>
 
