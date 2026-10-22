@@ -22,7 +22,7 @@ const ld = [
 <link rel="stylesheet" href="/css/cs-bar.css">
 <title>{title}</title>
 <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href}>
-<link rel="preload" as="image" href="img/00-hero-poster.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="img/00-hero-poster.jpg" media="(min-width: 621px)" fetchpriority="high"><link rel="preload" as="image" href="img/00-hero-poster-tall.jpg" media="(max-width: 620px)" fetchpriority="high">
 <Boot />
 <meta name="description" content={description}>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">

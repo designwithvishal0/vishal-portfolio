@@ -20,7 +20,7 @@ const ld = [
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href}>
-<link rel="preload" as="image" href="img/00-hero-poster.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="img/00-hero-poster.jpg" media="(min-width: 621px)" fetchpriority="high"><link rel="preload" as="image" href="img/00-hero-poster-tall.jpg" media="(max-width: 620px)" fetchpriority="high">
 <Boot />
 <meta name="description" content={description}>
 <link rel="stylesheet" href="/css/iphone.css">
