@@ -3,7 +3,8 @@
 // home: where Work, About and Contact live ('' on the home page itself).
 // theme: false on pages that only come in one theme, so the menu does not offer a switch that does nothing there.
 // book: true shows Book a call from the start; the home page shows it only once its hero button scrolls away.
-import '@fontsource-variable/bricolage-grotesque/standard.css';
+// Weight only (41 KB, not 129 KB): the header never changes width. Pages that stretch the type import standard.css themselves.
+import '@fontsource-variable/bricolage-grotesque/wght.css';
 import '../styles/header.css';
 import { intro } from '../data/home';
 // One header on every page, case studies included (Vishal 2026-10-14: "keep the header universal across all").
