@@ -179,7 +179,7 @@ const qfile = (v: string, t: string) => `/kinetic/motion/questions-${v}-${t}`;
         <div class="c">
           <p class="rk" aria-hidden="true">{String(i + 1).padStart(2, '0')} / {String(work.length).padStart(2, '0')}</p>
           <p class="q">{w.question}</p>
-          <h3 class="tt"><a href={cs(w.slug)}><span class="ln">{titles[w.slug][0]}</span> <span class="ln">{titles[w.slug][1].replace(/\.$/, '')}{titles[w.slug][1].endsWith('.') && <span aria-hidden="true">.</span>}</span><span class="vh">, the {w.name} case study</span></a></h3>
+          <h3 class="tt"><a href={cs(w.slug)}><span class="ln">{titles[w.slug][0]}</span> <span class="ln">{titles[w.slug][1].replace(/\.$/, '')}{titles[w.slug][1].endsWith('.') && <span aria-hidden="true">.</span>}</span><span class="vh">{titles[w.slug][1].endsWith('.') ? ' ' : ', the '}{w.name} case study</span></a></h3>
           <div class="rg">
             <div class="tx">
               <p class="meta">{w.name} · {w.kind} · {w.type} · {w.year}</p>
