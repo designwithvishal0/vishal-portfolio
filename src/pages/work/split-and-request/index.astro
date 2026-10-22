@@ -29,9 +29,8 @@ const ld = [
 <meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="article">
 <meta property="og:image" content="https://vishal-designs.vercel.app/work/split-and-request/img/social.png"><meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json" set:html={JSON.stringify(ld)} />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400..700&display=swap">
+<link rel="preload" as="font" type="font/woff2" href="fonts/google-sans-flex-latin-wght.woff2" crossorigin>
+<style is:inline>@font-face{font-family:"Google Sans Flex";font-style:normal;font-weight:400 700;font-display:swap;src:url("fonts/google-sans-flex-latin-wght.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}</style>
 <style is:inline>
 /* Layout: text column of ~66ch beside a sticky contents rail on desktop; one column on phones.
    Single dark theme by choice: the calmer navy agreed for JARVIS. */
