@@ -1,0 +1,69 @@
+---
+// The one site header, used on every page (Vishal 2026-10-12). Markup moved from the home page (index.astro) unchanged.
+// home: where Work, About and Contact live ('' on the home page itself).
+// theme: false on pages that only come in one theme, so the menu does not offer a switch that does nothing there.
+// book: true shows Book a call from the start; the home page shows it only once its hero button scrolls away.
+// Weight only (41 KB, not 129 KB): the header never changes width. Pages that stretch the type import standard.css themselves.
+import '@fontsource-variable/bricolage-grotesque/wght.css';
+import '../styles/header.css';
+import { intro } from '../data/home';
+// One header on every page, case studies included (Vishal 2026-10-14: "keep the header universal across all").
+interface Props { home?: string; theme?: boolean; book?: boolean; calm?: boolean }
+const { home = '', theme = true, book = false, calm = true } = Astro.props;
+const bookLink = intro.links.find(l => l.label === 'Book a call')!;
+const cvLink = intro.links.find(l => l.label === 'Resume')!;
+// Work (Vishal 2026-10-14): on home it jumps to the case studies; on every other page it opens the full list at /work/
+const nav = [['Work', home ? '/work/' : '#work'], ['About', home + '#about'], ['Contact', home + '#contact']];
+---
+{home && <a class="skip" href="#content">Skip to content</a>}
+<header class:list={['bar', { 'book-on': book, 'bar-light': !theme }]}>
+  <div class="bar-in">
+    {home ? <a class="who" href={home}>Vishal Yadav</a> : <span class="who">Vishal Yadav</span>}
+    {/* phones (mobile layout 2026-10-12): once you scroll, the name gives way to the section you are in; tapping it goes back to the top */}
+    <button class="bar-sec" type="button" hidden>Back to top</button>
+    <nav class="nav" aria-label="Sections">{nav.map(([t, h]) => <a href={h}>{t}</a>)}</nav>
+    <div class="bar-r">
+      <!-- appears once the hero's own Book a call scrolls away, hides again at Contact (audit 2026-10-10) -->
+      <a class="bar-book" href={bookLink.href}>{bookLink.label}</a>
+      {/* desktop (Vishal 2026-10-13): Resume sits beside Book a call and comes and goes with it; phones have it in the bottom bar */}
+      <a class="bar-cv" href={cvLink.href} target="_blank" rel="noopener">{cvLink.label}</a>
+      <button class="a11y" type="button" popovertarget="a11y-menu"><span class="t-a">Accessibility</span><span class="t-m">Menu</span></button>
+    </div>
+    <div id="a11y-menu" class="a11y-menu" popover>
+      {/* phones (mobile audit 2026-10-12): the section links live here, so the bar fits name, Book a call and Menu on one line */}
+      <nav class="m-nav" aria-label="Sections">{nav.map(([t, h]) => <a href={h}>{t}</a>)}</nav>
+      <p class="a11y-h">Accessibility</p>
+      {theme && <div class="a11y-row"><span id="l-night">Dark mode</span><button id="theme" class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="l-night"><i class="sun"></i><i class="moon"></i><span class="knob"></span></button></div>}
+      {calm && <div class="a11y-row"><span id="l-calm">Reduce motion</span><button id="calm" class="sw" type="button" role="switch" aria-checked="false" aria-labelledby="l-calm"><span class="knob"></span></button></div>}
+    </div>
+  </div>
+</header>
+{/* design audit 2026-10-15: keyboard users land here past the header; home has its own Skip to work */}
+{home && <span id="content" tabindex="-1"></span>}
+<script>
+  import '../scripts/ui';
+  // the phone menu closes once a section link is chosen
+  document.querySelectorAll('.m-nav a').forEach(a => a.addEventListener('click', () => document.getElementById('a11y-menu')?.hidePopover()));
+</script>
+<script is:inline>
+/* not fixed (Vishal 2026-10-15): hide while scrolling down, show on any scroll up, always shown near the top or while a header control has focus. One copy for every page and size. */
+(function(){
+  var root=document.documentElement,last=scrollY,hd=document.querySelector('header.bar');
+  addEventListener('scroll',function(){
+    var y=scrollY,d=y-last;
+    if(y<120||(hd&&hd.contains(document.activeElement))){root.classList.remove('hdr-hide');last=y;return}
+    if(d>6){root.classList.add('hdr-hide');last=y}else if(d<-6){root.classList.remove('hdr-hide');last=y}
+  },{passive:true});
+})();
+</script>
+<!-- Board 20 Oct (d-dock): on desktop the chapter bar fades back while it sits over a phone screen or prototype, and comes back on hover or keyboard focus -->
+<style is:global>
+.dock.show.dk-dim:not(:hover):not(:focus-within){opacity:.22}
+.dock.show.dk-dim~.dockfade{opacity:0}
+</style>
+<script is:inline>
+addEventListener('DOMContentLoaded',()=>{const d=document.querySelector('.dock[aria-label="Contents"]');if(!d)return;let q=0;
+const run=()=>{q=0;if(getComputedStyle(d).display==='none')return d.classList.remove('dk-dim');const r=d.getBoundingClientRect();
+d.classList.toggle('dk-dim',[...document.querySelectorAll('.iph,.scrimg,iframe,.screen img')].some(e=>{const s=e.getBoundingClientRect();if((Math.min(s.right,r.right)-Math.max(s.left,r.left))<r.width*.3||s.top>=r.bottom||s.bottom<=r.top)return false;for(let n=e;n&&n!==document.body;n=n.parentElement){const c=getComputedStyle(n);if(+c.opacity<.5||c.visibility==='hidden')return false}return true}))};
+const tick=()=>{if(!q)q=requestAnimationFrame(run)};addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);addEventListener('transitionend',tick,true);addEventListener('animationend',tick,true);tick()});
+</script>

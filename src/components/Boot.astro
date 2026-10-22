@@ -1,0 +1,6 @@
+---
+// Runs before paint: saved theme and motion choices, so nothing flashes.
+---
+<script is:inline>(()=>{const r=document.documentElement;r.classList.add('js');try{const t=localStorage.getItem('theme');if(t)r.dataset.theme=t;if(localStorage.getItem('calm')==='1')r.classList.add('calm')}catch(e){}})()</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script is:inline>document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e.target.closest('a'):null;if(!a)return;var h=a.getAttribute('href')||'';var n=null;if(/cal\.com/.test(h))n='Book a call';else if(/Resume[^\/]*\.pdf/i.test(h))n='Resume';else if(/^\/work\/[^\/]+/.test(h))n='Case study read';if(n&&window.va)window.va('event',{name:n,path:location.pathname});});</script>

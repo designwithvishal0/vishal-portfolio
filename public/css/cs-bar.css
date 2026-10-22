@@ -1,0 +1,12 @@
+/* Phones only: the home page bottom bar (Book a call + Resume) on case studies. See /js/cs-bar.js */
+.csbar{display:none}
+@media (max-width:759px){
+  .csbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:fixed;z-index:25;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom));padding:6px;border-radius:999px;
+    background:rgba(250,249,246,.78);-webkit-backdrop-filter:blur(18px) saturate(1.8);backdrop-filter:blur(18px) saturate(1.8);box-shadow:0 0 0 1px rgba(0,0,0,.08),0 12px 32px rgba(0,0,0,.14);
+    transform:translateY(calc(100% + 24px));opacity:0;pointer-events:none;transition:transform 260ms cubic-bezier(.2,.8,.2,1),opacity 200ms}
+  .csbar.on{transform:none;opacity:1;pointer-events:auto}
+  .csbar .cb{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;font:600 16px/1 'Bricolage Grotesque Variable',system-ui,sans-serif;text-decoration:none;color:#141414;border:1px solid rgba(0,0,0,.18)}
+  .csbar .cb.p{background:#141414;color:#fff;border-color:#141414}
+  .csbar .cb:focus-visible{outline:3px solid #141414;outline-offset:2px}
+}
+@media (prefers-reduced-motion:reduce){.csbar{transition:none}}

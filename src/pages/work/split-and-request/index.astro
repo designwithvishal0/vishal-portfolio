@@ -1,0 +1,1171 @@
+---
+// Google Pay Split and Request case study, built on the JARVIS template (a copy, so JARVIS stays untouched). Copy is word for word from the live Framer page.
+import SiteHeader from '../../../components/SiteHeader.astro';
+import Boot from '../../../components/Boot.astro';
+const title = 'Google Pay Split and Request case study, Vishal Yadav';
+const description = 'A Google Pay redesign where a bill split stays alive after you send it: a board everyone sees, good news when someone pays, a memory once it settles and a recap a month later.';
+const ld = [
+  { '@context': 'https://schema.org', '@type': 'CreativeWork', name: 'Google Pay Split and Request', headline: 'The split that stays alive', description,
+    author: { '@type': 'Person', name: 'Vishal Yadav' }, dateCreated: '2026', genre: 'Product design case study', image: '/work/split-and-request/img/social.png' },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: '/' },
+    { '@type': 'ListItem', position: 2, name: 'Google Pay Split and Request' } ] },
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/closing-cta.css">
+<link rel="stylesheet" href="/css/cs-bar.css">
+<title>{title}</title>
+<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href}>
+<link rel="preload" as="image" href="img/00-showreel-poster.webp" media="(min-width: 621px)" fetchpriority="high">
+<link rel="preload" as="image" href="img/00-showreel-poster-vertical.webp" media="(max-width: 620px)" fetchpriority="high">
+<Boot />
+<meta name="description" content={description}>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="article">
+<meta property="og:image" content="https://vishal-designs.vercel.app/work/split-and-request/img/social.png"><meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json" set:html={JSON.stringify(ld)} />
+<link rel="preload" as="font" type="font/woff2" href="fonts/google-sans-flex-latin-wght.woff2" crossorigin>
+<style is:inline>@font-face{font-family:"Google Sans Flex";font-style:normal;font-weight:400 700;font-display:swap;src:url("fonts/google-sans-flex-latin-wght.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}</style>
+<style is:inline>
+/* Layout: text column of ~66ch beside a sticky contents rail on desktop; one column on phones.
+   Single dark theme by choice: the calmer navy agreed for JARVIS. */
+:root{
+  --bg:#12141A; --card:#1E2129; --fg:#E6EAF2; --muted:#9AA0AB; --line:#2C313B;
+  --warm:#8AB4F8; --cool:#86B4F0;
+  --sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  color-scheme:dark;
+  /* tokens the shared site header reads */
+  --ink:var(--fg); --edge:#5A6B92; --btn:var(--fg); --on-btn:var(--bg);
+  --bar:56px; --gut:32px; --max:1376px; --out:cubic-bezier(.23,1,.32,1);
+}
+@media (max-width:759px){:root{--bar:52px;--gut:16px}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html.calm{scroll-behavior:auto}
+body{background:var(--bg);color:var(--fg);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;padding-inline:20px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cool);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{text-wrap:balance;margin:0;font-weight:600;letter-spacing:-.015em}
+p{margin:0}
+.mono,.eyebrow,.k{font-family:var(--mono)}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.k{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:10;padding-top:env(safe-area-inset-top,0px)}
+.progress i{display:block;height:100%;width:0;background:var(--warm)}
+
+.wrap{max-width:1120px;margin:0 auto;padding-block:56px 96px}
+.top{display:flex;justify-content:space-between;gap:16px;font-size:14px;color:var(--muted);padding-bottom:56px}
+.top a{text-decoration:none}.top a:hover{color:var(--fg)}
+
+header.hero{max-width:66ch;display:grid;gap:20px}
+h1{font-size:clamp(40px,7vw,68px);line-height:1.02;letter-spacing:-.03em}
+.hook{font-size:clamp(22px,3vw,30px);font-weight:500;letter-spacing:-.015em;color:var(--warm);margin-top:-8px}
+.dek{font-size:clamp(19px,2.2vw,22px);line-height:1.5;color:var(--fg)}
+.alertline{font-family:var(--mono);font-size:13px;color:var(--warm);display:flex;gap:10px;align-items:center}
+.alertline::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--warm)}
+
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:40px;padding-block:24px;border-block:1px solid var(--line)}
+.facts div{display:grid;gap:6px;min-width:0}
+.facts p{font-size:15px;line-height:1.45}
+.note{margin-top:16px;font-size:14px;color:var(--muted);max-width:72ch}
+
+.summary{margin-top:48px;background:var(--card);border-radius:14px;padding:28px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+.summary h2{grid-column:1/-1;font-size:14px;font-family:var(--mono);font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.summary div{display:grid;gap:8px;align-content:start;min-width:0}
+.summary p{font-size:15.5px;line-height:1.5}
+
+.layout{display:grid;grid-template-columns:200px minmax(0,1fr);gap:64px;margin-top:80px}
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 32px);align-self:start;display:grid;gap:4px;font-size:14px}
+nav.toc .k{margin-bottom:10px}
+nav.toc a{text-decoration:none;color:var(--muted);padding:5px 0 5px 14px;border-left:1px solid var(--line)}
+nav.toc a:hover{color:var(--fg)}
+nav.toc a.on{color:var(--fg);border-left-color:var(--warm)}
+
+article{display:grid;gap:104px;min-width:0}
+section{display:grid;gap:22px;max-width:66ch;scroll-margin-top:32px}
+section.wide{max-width:none}
+section h2{font-size:clamp(28px,3.6vw,38px);line-height:1.12}
+section p{color:#C9D1E2}
+section p strong{color:var(--fg);font-weight:600}
+
+blockquote{margin:8px 0 0;padding:4px 0 4px 20px;border-left:2px solid var(--warm);font-size:22px;line-height:1.4;color:var(--fg);font-weight:500;letter-spacing:-.01em}
+
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-top:8px}
+.stats div{display:grid;gap:6px;align-content:start}
+.stats b{font-size:32px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stats span{font-size:15px;color:var(--muted);line-height:1.45}
+.source{font-size:13px;color:var(--muted)}
+
+.list{display:grid;gap:28px;counter-reset:n}
+.list > div{display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 12px}
+.list .n{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:4px}
+.list h3{font-size:20px}
+.list p{grid-column:2}
+
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.goals div{background:var(--card);border-radius:12px;padding:20px;display:grid;gap:8px}
+.goals p{color:var(--fg)}
+
+.options{display:grid;gap:12px}
+.opt{border:1px solid var(--line);border-radius:12px;padding:20px 22px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 20px}
+.opt h3{font-size:18px}
+.opt p{grid-column:1/-1;font-size:16px}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:3px 8px;border-radius:4px;align-self:start;color:var(--muted);border:1px solid var(--line)}
+.opt.built{border-color:var(--warm)}
+.opt.built .tag{color:var(--bg);background:var(--warm);border-color:var(--warm)}
+
+figure{margin:0;display:grid;gap:10px}
+.slot{background:var(--card);border:1px dashed var(--line);border-radius:12px;display:grid;place-items:center;text-align:center;padding:20px;color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.04em;max-width:100%}
+.slot.flow{aspect-ratio:3/2}
+.shot{display:block;max-width:100%;height:auto;border-radius:16px}
+.shot.wide{width:100%}
+.shot.phone{width:100%;max-width:300px;border-radius:32px;border:1px solid var(--line)}
+.slot.phone{aspect-ratio:412/917;border-radius:28px;width:100%;max-width:300px}
+figcaption{font-size:14px;color:var(--muted)}
+
+.screen{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:40px;align-items:start;max-width:880px}
+.screen > div{display:grid;gap:14px;min-width:0}
+.screen h3{font-size:24px;line-height:1.2}
+.screens{display:grid;gap:72px}
+
+.fixes{display:grid;gap:0;border-top:1px solid var(--line)}
+.fix{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:24px;padding-block:22px;border-bottom:1px solid var(--line)}
+.fix h3{font-size:18px;line-height:1.35}
+.fix p{font-size:16px}
+
+.trades{display:grid;gap:0;border-top:1px solid var(--line)}
+.trade{display:grid;grid-template-columns:28px minmax(0,1fr) minmax(0,1fr);gap:8px 20px;padding-block:20px;border-bottom:1px solid var(--line)}
+.trade .n{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:3px}
+.trade h3{font-size:17px;margin-bottom:6px}
+.trade p{font-size:15.5px}
+.trade .cost{color:var(--warm);font-size:15.5px}
+.trade .cost .k{display:block;margin-bottom:4px}
+
+.beforeafter{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.beforeafter div{border-radius:12px;padding:22px;display:grid;gap:10px;align-content:start}
+.beforeafter .b{border:1px solid var(--line)}
+.beforeafter .a{background:var(--card);box-shadow:inset 0 0 0 1px var(--cool)}
+.beforeafter .a .k{color:var(--cool)}
+.metric{display:grid;gap:6px;padding:22px 0 4px;border-top:1px solid var(--line)}
+.metric b{font-size:clamp(24px,3vw,30px);font-weight:600;letter-spacing:-.02em;color:var(--warm)}
+.measures{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.measures div{display:grid;gap:8px}
+
+.closing{margin-top:120px;padding-top:48px;border-top:1px solid var(--line);display:grid;gap:18px}
+.closing h2{font-size:clamp(32px,5vw,48px);letter-spacing:-.025em}
+.closing > p{color:var(--muted);font-size:19px}
+.btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:54px;padding:0 24px;border-radius:100px;font-weight:600;font-size:18px;line-height:1.3;text-decoration:none;transition:transform .2s ease,opacity .2s ease}
+.btn .ic{flex:none;width:16px;height:16px}
+.btn.primary{background:#A8C7FA;color:var(--bg)}
+.btn.ghost{border:1px solid #ffffff47;color:var(--fg)}
+.btn:hover{transform:translateY(-1px);opacity:.92}
+@media (max-width:620px){.btns{flex-direction:column}.btn{width:100%}}
+
+.next{margin-top:64px;display:grid;gap:14px}
+.nextgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.nextgrid a{background:var(--card);border-radius:12px;padding:20px;display:grid;gap:8px;text-decoration:none;align-content:start}
+.nextgrid a:hover{box-shadow:inset 0 0 0 1px var(--line)}
+.nextgrid b{font-size:18px;font-weight:600;letter-spacing:-.01em}
+.nextgrid span{font-size:14px;color:var(--muted)}
+
+@media (max-width:900px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:0}
+  nav.toc{display:none}
+  .summary{grid-template-columns:1fr 1fr}
+  .screen{grid-template-columns:minmax(0,1fr);gap:20px}
+  .slot.phone{max-width:240px}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  .wrap{padding-block:32px 64px}
+  .top{padding-bottom:40px}
+  .facts,.summary,.goals,.beforeafter,.measures,.nextgrid{grid-template-columns:minmax(0,1fr)}
+  .facts{gap:18px}
+  .stats{grid-template-columns:minmax(0,1fr)}
+  .fix{grid-template-columns:minmax(0,1fr);gap:8px}
+  .trade{grid-template-columns:28px minmax(0,1fr)}
+  .trade .cost{grid-column:2}
+  article{gap:80px}
+  .summary{padding:22px}
+}
+</style>
+<style is:inline>.proto{display:block;width:100%;aspect-ratio:16/10;border:0;border-radius:24px;background:var(--card)}@media (max-width:640px){.proto{aspect-ratio:9/16}}video.shot{background:var(--card)}.reel video.shot{aspect-ratio:16/9}@media (max-width:620px){.reel video.shot{aspect-ratio:9/16}}
+.reel{position:relative}
+.pills{position:absolute;right:16px;bottom:16px;display:flex;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:100px;border:1px solid rgba(255,255,255,.22);background:rgba(13,31,94,.78);color:#fff;font:600 12px/1 var(--sans);letter-spacing:.08em;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.pill:hover{background:rgba(22,41,122,.9)}
+.pill:focus-visible{outline:2px solid #AFC6FF;outline-offset:2px}
+@media (max-width:620px){.pills{right:10px;bottom:10px}.pill{height:32px;padding:0 11px;font-size:11px}}
+.up{opacity:0;transform:translateY(20px);transition:opacity .4s ease,transform .4s ease;transition-delay:var(--d,0ms)}
+.up.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.up{opacity:1;transform:none;transition:none}}
+html.calm .up{opacity:1;transform:none;transition:none}
+</style>
+<style is:inline>
+/* Matched to the live Framer JARVIS page (measured 2026-10-09): full width bands that swap
+   navy and light, one 760px reading column, the screens as text left and a 360px phone right. */
+:root{--sans:"Google Sans Flex","Google Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:var(--sans);
+  --bg:#12141A;--card:#1E2129;--fg:#E6EAF2;--body:#E6EAF2;--muted:#9AA0AB;--acc:#A8C7FA;--warm:#8AB4F8;--line:#2C313B;--band:#12141A}
+.lt{--fg:#0E1424;--body:#3B4458;--muted:#5A6478;--acc:#0B57D0;--card:#E8F0FE;--line:#DCE3EF;--band:#F3F6FC;--warm:#0B57D0}
+html{overflow-x:clip}
+.eyebrow,.k{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.14em;color:var(--acc)}
+.wrap{max-width:1080px}
+.layout{display:block;margin-top:96px}
+nav.toc{display:none}
+article{gap:0}
+article>section{padding-block:120px;max-width:760px;margin-inline:auto;color:var(--fg);background:var(--band);border-image:conic-gradient(var(--band) 0 0) fill 0//0 100vmax}
+article>section.wide{max-width:1080px}
+section h2{font-size:clamp(32px,4vw,48px);font-weight:700;line-height:1.08;letter-spacing:-.02em;color:var(--fg)}
+section h3{color:var(--fg)}
+section p{color:var(--body);font-size:18px;line-height:1.6}
+.stats b{color:var(--acc)}
+.screens{gap:120px;margin-top:56px}
+.screens .screen{grid-template-columns:minmax(0,640px) 360px;justify-content:space-between;gap:48px;max-width:none;align-items:start}
+.screens .screen>figure{order:2;margin:0}
+.screens .screen h3{font-size:32px;line-height:1.2;letter-spacing:-.01em}
+.screens .shot.phone{width:360px;max-width:100%;border:0;border-radius:40px;box-shadow:0 16px 40px rgba(13,31,94,.12)}
+.lt :focus-visible{outline-color:#0B57D0}
+@media (max-width:900px){article>section{padding-block:80px}.screens .screen{grid-template-columns:minmax(0,1fr);gap:24px}.screens .screen>figure{order:0}}
+article>section{width:100%}
+/* site top bar, same as the home page; no theme toggle because this case study keeps its own fixed look */
+.wrap{padding-top:40px}
+.bar{margin-inline:calc(50% - 50vw)}
+/* Vishal 2026-10-13: header keeps the frosted blur, same as the home page (the solid navy try is undone) */
+/* Vishal 2026-10-13: header looks exactly like the home page header (its dark look, since this page is dark), with no navy tint.
+   Same frosted blur; a touch more opaque than home so the navy page behind doesn't tint it blue. */
+body{margin-top:0}
+.progress{z-index:30}
+.summary{max-width:1080px;margin-inline:auto}
+.summary h2{font-size:13px;font-family:var(--sans);font-weight:600;letter-spacing:.14em;color:var(--acc)}
+.summary p{font-size:16px}
+.pill[aria-pressed=true][data-act=cc]{background:#fff;color:#12141A}
+video::cue{font:500 18px/1.4 var(--sans);background:rgba(18,20,26,.82);color:#fff}
+.beforeafter .a{box-shadow:inset 0 0 0 1px #0B57D0}
+.beforeafter .a .k{color:#0B57D0}
+@media (max-width:620px){article>section{padding-block:64px}.layout{margin-top:64px}.screens{gap:72px}.screens .screen h3{font-size:26px}}
+
+/* ---- audit Phase 2 and 3 ---- */
+/* one break between two bands of the same colour, not two */
+article>section.lt+section.lt,article>section:not(.lt)+section:not(.lt){padding-top:0}
+/* desktop (Vishal 2026-10-13): the four navy sections after the 30 second version (hardest call, who, found, options) were one flat navy;
+   each now sits on its own step of JARVIS indigo blue, getting lighter as the story builds, so section breaks read */
+/* phones too since 2026-10-13 15:04 (Vishal: on phones the content blended into the page navy) */
+article>section#problem{--band:#FFFFFF;--card:#F3F6FC}
+article>section#found{--band:#F3F6FC;--card:#FFFFFF}
+article>section#hardest{--band:#18202F;--card:#283246}
+article>section:is(#found,#hardest,#system){padding-top:120px}
+@media (max-width:900px){article>section:is(#found,#hardest,#system){padding-top:80px}}
+@media (max-width:620px){article>section:is(#found,#hardest,#system){padding-top:64px}}
+/* type scale: 13 label, 16 small, 18 body, 22 lead, 32 titles, 48 sections, 68 page title */
+.facts p,.stats span,.note,.source,figcaption,.opt p,.fix p,.trade p,.trade .cost,.nextgrid span{font-size:16px}
+.list .n,.trade .n,.tag{font-size:13px}
+.opt h3,.fix h3,.trade h3,.list h3,.nextgrid b{font-size:18px}
+blockquote,.dek,.closing>p,.metric b,.next h2{font-size:22px}
+.closing h2,.stats b{font-size:32px}
+@media (min-width:621px){.closing h2{font-size:48px}}
+/* what I'd change: each pair on its own card, Problem in amber */
+.fixes{border-top:0;gap:12px}
+.fix{background:var(--card);border:0;border-radius:16px;padding:24px 28px}
+.fix>div{display:grid;gap:6px;align-content:start}
+.k.pr{color:var(--warm)}
+/* the closing line reads as the point, not a footnote */
+.closing>p{font-weight:600;color:var(--acc)}
+/* more work: a picture and a clear hover */
+.nextgrid a{padding:0;overflow:hidden;gap:0;transition:transform .2s ease,box-shadow .2s ease}
+.nextgrid img{display:block;width:100%;height:auto;aspect-ratio:800/837;object-fit:cover}
+.nextgrid b{padding:16px 20px 20px;line-height:1.35}
+.nextgrid a:hover,.nextgrid a:focus-visible{transform:translateY(-2px);box-shadow:0 0 0 1px var(--acc)}
+.nextgrid a:hover b{text-decoration:underline;text-underline-offset:.2em}
+/* prototype: a still and a way out while Figma loads */
+.protowrap{position:relative;margin:0}
+/* Desktop: the prototype fits one screen between the sticky header and the bottom dock (Vishal 2026-10-13 "going into two scrolls") */
+@media (min-width:641px){.protowrap{width:min(100%,calc((100svh - 120px) * 16 / 10));margin-inline:auto}}
+.protowait{position:absolute;inset:0;border-radius:24px;background:var(--card);display:grid;place-content:center;justify-items:center;gap:12px;text-align:center;transition:opacity .3s ease}
+.protowait img{width:120px;height:auto;border-radius:16px;opacity:.9}
+.protowait p{font-size:16px;color:var(--muted)}
+.protowait a{font-size:16px;font-weight:600;color:var(--fg);padding:10px 4px}
+.protowrap.ready .protowait{opacity:0;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.nextgrid a,.protowait{transition:none}}
+html.calm .nextgrid a,html.calm .protowait{transition:none}
+@media (max-width:620px){
+  .opt{grid-template-columns:minmax(0,1fr)}
+  .opt .tag{order:-1;justify-self:start}
+  .fix{padding:20px}
+}
+</style>
+<style is:inline>
+/* Closing (Vishal 2026-10-13): same words, order and layout as before; only the look changes.
+   Closing and More work are ONE section. No boxed card (dark, navy and blue boxes all read as a slab dropped on the page):
+   a full width ending band that grows out of the page navy into JARVIS blue light, in the page's own font. */
+body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
+.endsec{position:relative;margin:140px calc(50% - 50vw) 0;padding:clamp(72px,9vw,128px) calc((100vw - min(100vw - 56px,1376px)) / 2 + clamp(24px,4.5vw,88px)) clamp(64px,8vw,104px);background:radial-gradient(70% 55% at 50% 0%,rgba(11,87,208,.55),rgba(11,87,208,0) 70%),linear-gradient(180deg,#12141A 0%,#101A2E 55%,#0E2247 100%);border-top:1px solid rgba(138,180,248,.35);color:#E6EAF2}
+.endsec .closing{margin:0;padding:0;border:0;gap:18px}
+.closing h2{font-family:var(--sans);font-size:clamp(56px,8.4vw,116px)!important;font-weight:800;line-height:.95;letter-spacing:-.035em;color:#D3E3FD} /* very light JARVIS blue, 14:1 on navy (Vishal 2026-10-13) */
+.closing>p{font-size:clamp(20px,2.2vw,28px)!important;font-weight:500;line-height:1.3;color:#C9D6EE}
+.closing .btns{margin-top:22px;gap:12px}
+.closing .btn{height:52px;padding:0 22px;font-size:16px;font-weight:650}
+.closing .btn.primary{background:#F2F1EC;color:#12141A}
+.closing .btn.ghost{border-color:rgba(201,214,238,.4);color:#F2F1EC}
+.endsec .next>.k{color:#D3E3FD}.endsec .next>h2{color:#F2F1EC}
+/* centred on every screen size, phones too (Vishal 2026-10-13) */
+.endsec .closing{text-align:center;justify-items:center}.endsec .closing .btns{justify-content:center}.endsec .next>.k,.endsec .next>h2{text-align:center}
+.endsec .nextgrid a{background:#1B2A47;color:#F2F1EC;box-shadow:0 0 0 1px rgba(242,241,236,.14)} /* navy blue caption: darker than the thumbnail, not black (Vishal 2026-10-13) */
+.endsec .nextgrid b{color:#F2F1EC}
+.endsec .nextgrid a:hover,.endsec .nextgrid a:focus-visible{box-shadow:0 0 0 2px #8AB4F8}
+/* phones (Vishal 2026-10-15): a tap leaves no coloured stroke on the More work cards; desktop keeps its hover stroke */
+@media (max-width:759px){.endsec .nextgrid a:hover{box-shadow:0 0 0 1px rgba(242,241,236,.14)}}
+/* audit 2026-10-13: on phones More work is one swipe row (next card peeks in) instead of three full screens of cards */
+@media (max-width:620px){.endsec .nextgrid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-28px;padding:0 28px 6px;scroll-padding-inline:28px;scrollbar-width:none}.endsec .nextgrid::-webkit-scrollbar{display:none}.endsec .nextgrid a{flex:0 0 87%;scroll-snap-align:start}}
+.endsec .closing .founder{margin-top:14px;font-size:17px!important;font-weight:500;color:#C9D6EE}.endsec .closing .founder a{color:#F2F1EC;font-weight:700;text-underline-offset:4px}
+@media (max-width:620px){.endsec .closing .founder{font-size:15px!important;line-height:1.5;max-width:30ch;margin-left:auto;margin-right:auto;text-wrap:balance}.endsec .closing .founder a{white-space:nowrap}}
+.endsec .next{margin-top:clamp(56px,7vw,96px);padding-top:0;border-top:0}
+/* Phones use the same band as desktop (Vishal 2026-10-13 "make the same for Mobile"), only sized down */
+@media (max-width:620px){.endsec{margin-top:48px;padding-inline:28px}.closing h2{font-size:min(52px,11.4vw)!important;white-space:nowrap}}
+
+/* Desktop spacing (Vishal 2026-10-13: "make the sections responsive"): the page grows with the window up to the home page width (1376px)
+   instead of a fixed 760/1080 column. On wide screens each reading section puts its eyebrow and heading on the left
+   and the text on the right, so both sides of the screen are used. Phones and tablets are unchanged. */
+@media (min-width:901px){
+  .wrap,.summary,article>section.wide{max-width:1376px}
+  .wrap{padding-inline:clamp(24px,4.5vw,88px)} /* more side margin on desktop (Vishal 2026-10-13 "going too wide") */
+}
+@media (min-width:1100px){
+  article>section:not(.wide){max-width:none;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(48px,6vw,120px);row-gap:0}
+  article>section:not(.wide)>*{grid-column:2;min-width:0}
+  article>section:not(.wide)>:is(.eyebrow,h2){grid-column:1;grid-row:1/span 60;align-self:start}
+  article>section:not(.wide)>h2{padding-top:36px}
+  article>section:not(.wide)>:not(.eyebrow,h2)~:not(.eyebrow,h2){margin-top:22px}
+}
+</style>
+<style is:inline>
+/* Screens as on Framer: the text stays pinned 120px from the top while its phone scrolls past */
+.screens .screen>div{position:sticky;top:120px}
+.screens .shot.phone{border:1px solid rgba(14,20,36,.1)}
+@media (max-width:900px){.screens .screen>div{position:static}.screens .screen>figure{order:2;justify-self:center}.screens .shot.phone{width:min(320px,100%)}}
+/* Contents: a rail in the left margin on wide screens, a pill that opens the list everywhere else */
+nav.toc{display:grid;position:fixed;left:28px;top:50%;width:170px;transform:translateY(-50%);z-index:20;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s;gap:2px;font-size:13px;line-height:1.3}
+nav.toc.show{opacity:1;visibility:visible}
+nav.toc{left:20px;width:188px;padding:16px 14px 14px;border-radius:16px;background:rgba(18,20,26,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 32px rgba(5,10,30,.25);transition:opacity .3s ease,visibility .3s,background-color .3s}
+nav.toc.light{background:rgba(255,255,255,.86);border-color:rgba(14,20,36,.08);box-shadow:0 12px 32px rgba(13,31,94,.10)}
+nav.toc .k{margin-bottom:8px;font-size:11px}
+nav.toc a{padding:6px 0 6px 12px;border-left:2px solid var(--line);color:var(--muted);transition:color .2s,border-color .2s}
+nav.toc a.on{color:var(--fg);border-left-color:var(--warm)}
+nav.toc.light{--fg:#0E1424;--muted:#6A7488;--line:#DCE3EF;--warm:#0B57D0}
+.tocpill{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translate(-50%,16px);z-index:20;display:none;align-items:center;gap:10px;max-width:calc(100vw - 32px);height:46px;padding:0 18px;border-radius:100px;border:1px solid rgba(255,255,255,.16);background:rgba(18,20,26,.88);color:#E6EAF2;font:500 15px/1 var(--sans);cursor:pointer;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(5,10,30,.3);opacity:0;visibility:hidden;transition:opacity .3s ease,transform .3s var(--out),visibility .3s}
+.tocpill.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.tocpill .k{color:#9AA0AB;font-size:11px}
+.tocpill b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tocpill i{font-style:normal;color:#9AA0AB;font-size:13px;font-variant-numeric:tabular-nums}
+.tocsheet{position:fixed;inset:auto 16px calc(72px + env(safe-area-inset-bottom,0px));margin:0 auto;width:min(360px,calc(100vw - 32px));padding:18px 10px 10px;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:#1A1D24;color:#E6EAF2;box-shadow:0 20px 50px rgba(5,10,30,.45)}
+.tocsheet:popover-open{display:grid;gap:2px}
+.tocsheet .k{padding:0 12px 8px;color:#9AA0AB;font-size:11px}
+.tocsheet a{display:flex;gap:12px;padding:11px 12px;border-radius:12px;text-decoration:none;font-size:16px;color:#C9D1E2}
+.tocsheet a span{color:#6B7079;font-variant-numeric:tabular-nums;width:20px}
+.tocsheet a.on{background:#263044;color:#fff}
+.tocsheet::backdrop{background:rgba(5,10,30,.35)}
+@media (max-width:1399px){nav.toc{display:none}.tocpill{display:inline-flex}}
+.tocpill i{white-space:nowrap}
+.tocpill b{max-width:46vw}
+@media (max-width:620px){
+  .facts{grid-template-columns:1fr 1fr;gap:20px 16px}
+  /* audit 2026-10-13: one compact block, a row per number, instead of three tall cards */
+  .stats{gap:0;background:var(--card);border-radius:16px;padding:4px 18px}
+  .stats div{grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:baseline;padding:14px 0}
+  .stats div+div{border-top:1px solid var(--line)}
+  .stats b{font-size:22px;line-height:1.15;white-space:nowrap;min-width:112px}
+  .stats span{font-size:15px}
+  .endsec .closing .founder a{display:inline-block;padding:13px 0;margin:-13px 0}
+  /* Vishal 2026-10-13 15:06: on phones the boxes in the navy sections are light, so they stand out instead of dark on dark */
+  #found .stats{background:var(--card);color:var(--fg);border-color:transparent}
+  .screens .screen{gap:28px}
+}
+/* 30 second version on desktop: two by two with hairlines, so every label sits on one line and each answer has room */
+@media (min-width:901px){
+  .summary{grid-template-columns:1fr 1fr;gap:0;padding:40px 44px 20px}
+  .summary h2{margin-bottom:12px}
+  .summary div{padding:26px 0 30px;gap:12px;border-top:1px solid rgba(255,255,255,.09)}
+  .summary div:nth-of-type(odd){padding-right:44px}
+  .summary div:nth-of-type(even){padding-left:44px;border-left:1px solid rgba(255,255,255,.09)}
+  .summary p{font-size:19px;line-height:1.5;color:#E6EAF2;max-width:46ch}
+}
+/* Phones: the prototype box is exactly the shape of the app screen (412 by 917 in Figma), with Figma's own bars hidden, so nothing is cut */
+@media (max-width:640px){.proto{aspect-ratio:412/917;width:min(100%,340px,calc((100svh - 200px) * 412 / 917));margin-inline:auto;border-radius:28px}.protowrap{display:flex;justify-content:center}.protowait{width:min(100%,340px,calc((100svh - 200px) * 412 / 917));left:50%;transform:translateX(-50%);border-radius:28px}}
+/* Phones: the header slides away while reading down and comes back the moment you scroll up; the contents bar moves up with it */
+@media (max-width:759px){
+  .tocpill{transition:opacity .3s ease,transform .3s ease,visibility .3s,top .28s ease}
+  html.hdr-hide .tocpill{top:env(safe-area-inset-top,0px)}
+  html.hdr-hide .tocsheet{inset:calc(env(safe-area-inset-top,0px) + 52px) 16px auto}
+}
+/* Reel controls: labelled pills on desktop (icon plus PLAY, SOUND ON); icon only round buttons on phones, bottom right */
+.pill{height:44px;padding:0 16px;gap:8px;justify-content:center;border-radius:22px;border:0;box-shadow:0 0 0 1px rgba(242,241,236,.28);background:rgba(12,12,14,.72);color:#F2F1EC;font:700 12px/1 var(--sans);letter-spacing:.02em}
+.pill:hover{background:rgba(12,12,14,.85)}
+@media (max-width:620px){.pills{right:10px;bottom:10px;gap:6px}.pill{width:40px;height:40px;padding:0;border-radius:50%}.pill .lb{display:none}}
+@media (max-width:620px){.pill{width:44px;height:44px}} /* 44px thumb target on phones */
+.pill .lb,.dkn small{text-transform:uppercase} /* labels are written in sentence case so screen readers say words, not letters */
+/* desktop (Vishal 2026-10-13): icons only; on hover or keyboard focus the button stretches and shows its label inside; full screen is desktop only */
+@media (min-width:621px){.pill{width:auto;min-width:44px;padding:0 13px;gap:0;border-radius:22px;transition:gap .2s var(--out,ease),padding .2s var(--out,ease)}.pill .lb{display:inline-block;max-width:0;overflow:hidden;white-space:nowrap;opacity:0;transition:max-width .25s var(--out,ease),opacity .2s}.pill:hover,.pill:focus-visible{gap:8px;padding:0 16px}.pill:hover .lb,.pill:focus-visible .lb{max-width:160px;opacity:1}}
+@media (max-width:620px){.pill.fs{display:none}}
+.reel:fullscreen{display:flex;align-items:center;justify-content:center;background:#000;margin:0!important}.reel:fullscreen video{width:100%;height:100%;max-height:none;object-fit:contain;border-radius:0}
+/* Contents bar: docked under the header on every width, one look over navy and light sections alike */
+nav.toc{display:none!important}
+.tocpill{display:flex!important;left:0;right:0;top:var(--hb,56px);bottom:auto;width:100%;max-width:none;height:44px;justify-content:center;gap:12px;padding:0 20px;border:0;border-bottom:1px solid rgba(255,255,255,.08);border-radius:0;background:rgba(18,20,26,.9);box-shadow:none;transform:translateY(-6px);font-size:14px;z-index:19}
+.tocpill.show{transform:none}
+.tocpill .chev{width:10px;height:10px;border-right:1.5px solid #9AA0AB;border-bottom:1.5px solid #9AA0AB;transform:rotate(45deg) translateY(-3px)}
+.tocpill b{max-width:52vw}
+.tocsheet{inset:calc(var(--hb,56px) + 52px) 16px auto}
+/* phones (Vishal 2026-10-15): the open Contents list scrolls on its own; the page behind stays still */
+@media (max-width:759px){.tocsheet{max-height:calc(100dvh - var(--hb,56px) - 68px - env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain}html.hdr-hide .tocsheet{max-height:calc(100dvh - env(safe-area-inset-top,0px) - 68px - env(safe-area-inset-bottom,0px))}html.toclock{overflow:hidden}}
+.tid{display:none}
+/* Desktop first fold (Vishal 2026-10-13, "like this?" with the Profit Wala Love top): text left, reel right, like the Contra style tops.
+   Facts, the concept note and everything after stay full width below. Phones keep their own order (below). */
+@media (min-width:1000px){
+  .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);column-gap:clamp(40px,4vw,72px)}
+  .wrap>*{grid-column:1/-1}
+  .wrap>.facts{grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr))} /* Role line stays on one line */
+  .wrap>.summary{width:100%} /* auto side margins would shrink it to its text inside the grid */
+  .wrap>header.hero{grid-column:1;grid-row:1;align-self:center;max-width:none}
+  .wrap>.reel{grid-column:2;grid-row:1;align-self:center;margin-top:0!important}
+}
+/* Phone first fold: title, hook and a shorter intro, then the reel straight away. Facts and the concept note follow the reel. */
+@media (max-width:620px){
+  .wrap{display:flex;flex-direction:column}
+  .wrap>*{order:5}
+  .wrap>header.hero{order:1;gap:14px}
+  .wrap>.reel{order:2;margin-top:28px!important}
+  .wrap>.facts{order:3;margin-top:32px}
+  .wrap>.note{order:4}
+  .hero .dek{font-size:18px;line-height:1.5;color:var(--muted)}
+  .hero h1{line-height:1.05}
+  .facts div{align-content:start}
+}
+/* Phones: the prototype keeps its full app screen size, and the page keeps scrolling over it. A cover passes scrolls through to the page;
+   tapping it hands touches to the prototype, and "Done" (or scrolling it out of view) gives them back. */
+.protogo,.protodone{display:none}
+@media (max-width:640px){
+  #try{padding-bottom:48px}
+  .protowrap{flex-direction:column;align-items:flex-start;gap:12px;min-width:0;max-width:100%}
+  .protowrap:not(.live) .proto{pointer-events:none}
+  .protogo{display:flex;position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(100%,340px,calc((100svh - 200px) * 412 / 917));aspect-ratio:412/917;border:0;border-radius:28px;background:linear-gradient(180deg,transparent 60%,rgba(14,16,22,.55));align-items:flex-end;justify-content:center;padding-bottom:22px;cursor:pointer;font:inherit}
+  .protogo span{padding:12px 18px;border-radius:999px;background:#F2F1EC;color:#0E1424;font-size:15px;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+  .protowrap.live .protogo{display:none}
+  /* Once tapped, the prototype opens as a full screen overlay showing the whole app frame, nothing cut (Vishal 2026-10-13) */
+  .protowrap.live{position:fixed;inset:0;z-index:1000;max-width:none;margin:0;padding:16px 16px calc(16px + env(safe-area-inset-bottom));background:rgba(6,12,30,.94);flex-direction:column;align-items:center;justify-content:center;gap:16px}
+  .protowrap.live .proto{width:min(100%,calc((100dvh - 110px) * 412 / 917));height:auto;aspect-ratio:412/917;max-width:none;flex:none;margin:0}
+  html:has(.protowrap.live){overflow:hidden}
+  .protowrap.live .protodone{display:inline-flex;position:static;align-self:center;transform:none;white-space:nowrap;padding:12px 18px;border:0;border-radius:999px;background:#0E1424;box-shadow:0 0 0 1px rgba(242,241,236,.3),0 6px 18px rgba(0,0,0,.3);color:#F2F1EC;font:600 15px/1 var(--sans);cursor:pointer}
+}
+/* Phones: long sections show the heading, the first paragraph and the visuals; the rest opens in place with Read more. No words are cut. */
+.rmore{display:none}
+@media (max-width:620px){
+  .rm-hid{display:none!important}
+  .rmore{display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:10px 0;min-height:44px;border:0;background:none;color:var(--warm);font:600 16px/1 var(--sans);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+  .rmore::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
+  .rm-clamp{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
+}
+/* Desktop contents: a floating dock at the bottom, like a video player. Section name, n / 11, one segment per section
+   (read ones fill orange, the current one fills as you read), the next section, and back and next arrows. Phones keep the top bar. */
+.dock{display:none}
+.dockfade{display:none}
+@media (min-width:1280px){
+  .tocpill{display:none!important}
+  .dock{display:flex;position:fixed;left:50%;bottom:24px;z-index:20;align-items:center;gap:14px;padding:10px 12px;border-radius:16px;background:rgba(14,16,22,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 0 0 1px rgba(255,255,255,.1),0 16px 40px rgba(0,0,0,.3);font:600 14px/1 var(--sans);color:#F2F1EC;opacity:0;visibility:hidden;transform:translate(-50%,16px);transition:opacity .3s ease,transform .3s ease,visibility .3s}
+  .dock.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+  /* audit 2026-10-13: text slides under a soft fade of the section colour instead of colliding with the dock */
+  .dockfade{display:block;position:fixed;left:0;right:0;bottom:0;height:104px;z-index:19;pointer-events:none;background:linear-gradient(to bottom,transparent,var(--fade,#12141A) 78%);opacity:0;transition:opacity .3s ease;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 78%);mask-image:linear-gradient(to bottom,transparent,#000 78%)}
+  .dock.show~.dockfade,.dockfade.show{opacity:1}
+  /* Vishal 2026-10-13: the contents bar stays on screen while scrolling down too, so first time readers see it */
+  .dkb{all:unset;cursor:pointer;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.07);transition:background .2s}
+  .dkb:hover{background:rgba(255,255,255,.14)}.dkb:disabled{opacity:.35;cursor:default}
+  .dkb:focus-visible,.dkn:focus-visible,.dks button:focus-visible{outline:2px solid #8AB4F8;outline-offset:2px}
+  .dkm{display:flex;flex-direction:column;gap:9px;width:420px}
+  .dkt{display:flex;justify-content:space-between;gap:12px}.dkt i{font-style:normal;color:#9AA0AB;font-variant-numeric:tabular-nums}
+  .dks{display:flex;gap:4px}
+  .dks button{all:unset;cursor:pointer;flex:1;height:14px;display:flex;align-items:center}
+  .dks button::before{content:"";flex:1;height:4px;border-radius:2px;background:linear-gradient(90deg,#8AB4F8 var(--f,0%),rgba(242,241,236,.18) var(--f,0%))}
+  .dks button:hover::before{background:linear-gradient(90deg,#8AB4F8 var(--f,0%),rgba(242,241,236,.36) var(--f,0%))}
+  .dkn{display:flex;flex-direction:column;gap:4px;min-width:118px;padding-left:14px;border-left:1px solid rgba(255,255,255,.12);color:#F2F1EC;text-decoration:none}
+  .dkn small{font-size:10px;letter-spacing:.12em;color:#9AA0AB}
+  .dkn.end{visibility:hidden}
+  /* hover a segment to see which section it is (Vishal 2026-10-13) */
+  .dks button{position:relative}
+  .dks button::after{content:attr(data-name);position:absolute;left:50%;bottom:calc(100% + 34px);transform:translate(-50%,4px);white-space:nowrap;padding:8px 12px;border-radius:10px;background:#F2F1EC;color:#0E1424;font:600 13px/1 var(--sans);box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease}
+  .dks button:hover::after,.dks button:focus-visible::after{opacity:1;transform:translate(-50%,0)}
+}
+html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{transition:none}
+</style>
+</head>
+
+
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
+
+<SiteHeader home="/" theme={false} book />
+
+
+<main class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Case study · Google Pay</p>
+    <h1>Google Pay Split and Request</h1>
+    <p class="hook">The split that stays alive</p>
+    <p class="dek">In Google Pay, the split and the request that follows it are the whole relationship. I made the split fun to do, and gave the request a life after it is sent.</p>
+  </header>
+
+  <div class="facts">
+    <div><span class="k">Role</span><p>Self initiated. I owned research, flows, UI, interface copy and the prototype</p></div>
+    <div><span class="k">Year</span><p>2026</p></div>
+    <div><span class="k">Scope</span><p>5 flows, 40+ screens, one clickable prototype</p></div>
+  </div>
+  <p class="note"><span class="nlab">Self initiated redesign</span>Bill splitting in Google Pay. Amounts, names and photos are illustrative.</p>
+  <figure class="reel" style="margin-top:32px"><video data-inview class="shot wide" data-poster="img/00-showreel-poster.webp" width="1920" height="1080" muted loop playsinline preload="metadata" aria-label="Google Pay Split and Request showreel with music"></video>
+    <div class="pills"><button type="button" class="pill" data-act="play" aria-pressed="false" aria-label="Play"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg><span class="lb">Play</span></button><button type="button" class="pill" data-act="sound" aria-pressed="false" aria-label="Turn sound on"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6A2 2 0 0 1 5 8.2H3a1 1 0 0 0-1 1v5.6a1 1 0 0 0 1 1h2a2 2 0 0 1 1.4.6l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg><span class="lb">Sound on</span></button><button type="button" class="pill fs" data-act="fs" aria-label="Full screen"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/></svg><span class="lb">Full screen</span></button></div></figure>
+  <script is:inline>(()=>{
+    const f=document.currentScript.previousElementSibling, v=f.querySelector('video'); const tall=matchMedia('(max-width:620px)').matches; v.poster=tall?'img/00-showreel-poster-vertical.webp':v.dataset.poster;if(tall){v.width=1080;v.height=1920} v.src=tall?'showreel-tall.mp4':'showreel.mp4'; const [pb,sb]=f.querySelectorAll('.pill');
+    const on='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6A2 2 0 0 1 5 8.2H3a1 1 0 0 0-1 1v5.6a1 1 0 0 0 1 1h2a2 2 0 0 1 1.4.6l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M16 9a5 5 0 0 1 0 6M19.4 18.4a9 9 0 0 0 0-12.8"/></svg>';
+    const off='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6A2 2 0 0 1 5 8.2H3a1 1 0 0 0-1 1v5.6a1 1 0 0 0 1 1h2a2 2 0 0 1 1.4.6l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>';
+    const ip='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg>', ia='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><rect x="6" y="4.5" width="4.2" height="15" rx="1.4" fill="currentColor"/><rect x="13.8" y="4.5" width="4.2" height="15" rx="1.4" fill="currentColor"/></svg>';
+    const paint=()=>{pb.innerHTML=v.paused?ip+'<span class="lb">Play</span>':ia+'<span class="lb">Pause</span>';pb.setAttribute('aria-label',v.paused?'Play':'Pause');pb.setAttribute('aria-pressed',String(!v.paused));
+      sb.innerHTML=v.muted?off+'<span class="lb">Sound on</span>':on+'<span class="lb">Sound off</span>';sb.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');sb.setAttribute('aria-pressed',String(!v.muted));};
+    const fb=f.querySelector('.fs'),fsOn=()=>document.fullscreenElement===f;
+    fb.onclick=()=>{if(fsOn())document.exitFullscreen();else if(f.requestFullscreen)f.requestFullscreen();else if(v.webkitEnterFullscreen)v.webkitEnterFullscreen()};
+    document.addEventListener('fullscreenchange',()=>{const o=fsOn();fb.setAttribute('aria-label',o?'Exit full screen':'Full screen');fb.querySelector('.lb').textContent=o?'Exit full screen':'Full screen'});
+    let chose=false;
+    let blocked=false;
+    pb.onclick=()=>{if(v.paused){if(!chose)v.muted=false;v.play()}else v.pause()};
+    // If the browser blocked sound, the first tap on the video turns sound on and keeps it playing; after that a tap pauses and plays
+    v.onclick=()=>{if(blocked){blocked=false;if(!chose)v.muted=false;if(v.paused)v.play();return}pb.onclick()};v.style.cursor='pointer';
+    sb.onclick=()=>{chose=true;v.muted=!v.muted;if(!v.muted&&v.paused)v.play()};
+    // Sound on by default: browsers only allow sound after a tap or key press, so autoplay starts muted and the first tap anywhere turns sound on
+    const wake=e=>{if(!chose&&!(e.target.closest&&e.target.closest('.reel .pill'))){v.muted=false;if(e.target!==v)blocked=false}removeEventListener('pointerdown',wake,true);removeEventListener('keydown',wake,true)};
+    addEventListener('pointerdown',wake,true);addEventListener('keydown',wake,true);
+    ['play','pause','volumechange'].forEach(e=>v.addEventListener(e,paint));
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('calm')){v.muted=false;v.play().catch(e=>{if(e.name==='NotAllowedError'){blocked=true;v.muted=true;v.play().catch(()=>{})}})}paint();
+  })()</script>
+
+  <section class="summary" aria-labelledby="sum">
+    <h2 id="sum">The 30 second version</h2>
+    <div><span class="k">Problem</span><p>People open Google Pay only to move money, so a split is over the moment it is sent.</p></div>
+    <div><span class="k">Decision</span><p>Kill the reminder. The request becomes a board both people see, and social visibility does the reminder’s job.</p></div>
+    <div><span class="k">How I would measure it</span><p>Weekly opens that no money request triggered, in the 21 to 30 cohort.</p></div>
+    <div><span class="k">What I learned</span><p>The fix for retention was not a new feature but a longer life for one people already use.</p></div>
+  </section>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Contents">
+      <span class="k">Contents</span>
+      <a href="#problem">The problem</a>
+      <a href="#found">What I found</a>
+      <a href="#hardest">The hardest call</a>
+      <a href="#system">The system</a>
+      <a href="#flow">Flow 1, end to end</a>
+      <a href="#scale">Big group</a>
+      <a href="#owes">The person who owes</a>
+      <a href="#receipt">No receipt</a>
+      <a href="#groups">Surface what exists</a>
+      <a href="#try">Prototype</a>
+      <a href="#decisions">Decisions</a>
+      <a href="#changed">What changed</a>
+      <a href="#learned">What I learned</a>
+    </nav>
+    <button type="button" class="tocpill" popovertarget="tocsheet" aria-label="Contents"><span class="k">Contents</span><b>The problem</b><i aria-hidden="true">1 / 13</i><span class="chev" aria-hidden="true"></span></button>
+    <div id="tocsheet" class="tocsheet" popover><span class="k">Contents</span></div>
+    <div class="dockfade" aria-hidden="true"></div><nav class="dock" aria-label="Contents"><button type="button" class="dkb" data-go="-1" aria-label="Previous section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="dkm"><div class="dkt"><b></b><i></i></div><div class="dks"></div></div><a class="dkn" href="#"><small>Next</small><span></span></a><button type="button" class="dkb" data-go="1" aria-label="Next section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></nav>
+
+    <article>
+      <section id="problem" class="lt">
+        <p class="eyebrow">The problem</p>
+        <h2>The app opens only when money has to move</h2>
+        <p>People aged 21 to 30 in India split dinners, trips and flat bills with the same three to twelve friends. For them, Google Pay opens only when money has to move. A nicer split screen improves that moment but never creates a second one, and retention needs a second moment.</p>
+        <p>Groups already exist, three taps deep behind a chat menu, and an active group never shows up on Home. The split is a total and a rule: evenly, by amounts, by shares or by percentages. No items, no who had what.</p>
+      </section>
+
+      <section id="found" class="lt">
+        <p class="eyebrow">What I found</p>
+        <div class="stats">
+          <div><b>50 million</b><span>installs Tez drove with scratch cards, which faded once the rewards thinned</span></div>
+          <div><b>3 taps</b><span>how deep groups sit in Google Pay today, behind a chat menu</span></div>
+          <div><b>1 trigger</b><span>the only reason to come back is Send reminder, which the app itself calls a private reminder</span></div>
+        </div>
+        <p>Venmo showed the other side: people open it multiple times a week just to see what friends are doing, and the note on each split is the content. A Google Pay review from July 2026 named the gap from the user’s side: after a few days, older split payments become hard to find. The record exists and gets buried.</p>
+      </section>
+
+      <section id="hardest">
+        <p class="eyebrow">The hardest call</p>
+        <h2>Kill the reminder</h2>
+        <p>It was the one return trigger the app had, and I removed it. A reminder is a nag, and it feels bad for both people. You cannot bolt fun onto nagging. So the request becomes a board both people see, and social visibility does the reminder’s job.</p>
+        <blockquote>A split does not end at send. Give it a <em>lifecycle</em>.</blockquote>
+      </section>
+
+      <section id="system" class="lt wide">
+        <div style="display:grid;gap:22px;max-width:66ch">
+          <p class="eyebrow">The system</p>
+          <h2>Five flows around one idea: a split that stays alive</h2>
+          <p>Flow 1 is a small group, item by item. Flow 2 is a big group where twelve people claim in parallel. Flow 3 is a bill with no receipt. Flow 4 is the person who owes. Flow 5 is the whole notification loop. Every path ends in the same place: a reason to come back.</p>
+        </div>
+        <figure>
+          <a class="zoom" href="img/00-user-flow.webp" target="_blank" rel="noopener" aria-label="Open the user flow full size"><img class="shot wide" src="img/00-user-flow.webp" width="5000" height="3722" alt="Split and Request user flow: five flows around one split" loading="lazy"><span class="zi" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span></a><button type="button" class="flowfs" aria-label="Open the user flow full screen"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>Full screen</button>
+          <dialog class="flowdlg" aria-label="User flow, full screen"><button type="button" class="flowx" aria-label="Close full screen"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button><div class="flowpan"><img src="img/00-user-flow.webp" width="5000" height="3722" alt="Split and Request user flow: five flows around one split" loading="lazy"></div><p class="flowhint">Pinch or double tap to zoom</p></dialog>
+          <figcaption>Green paths are the happy route, red paths are the fallback. Every box is a screen in the Figma file.</figcaption>
+        </figure>
+        <p><a class="tl" href="https://www.figma.com/board/5lCaixaqTJpvqKOogiZjYD/GPay-Split-%E2%80%94-User-Flow--all-five-journeys-" target="_blank" rel="noopener">See the flow in Figma</a></p>
+      </section>
+
+      <section id="flow" class="lt wide">
+        <div style="display:grid;gap:22px;max-width:66ch">
+          <p class="eyebrow">Flow 1, end to end</p>
+          <h2>Making the split, then everything after it</h2>
+          <p>The first four screens make the split fun to do. The next four are the lifecycle: the reasons to come back after money has moved.</p>
+        </div>
+        <div class="screens">
+          <div class="screen">
+            <figure><img class="shot phone" src="img/01-bill-in.webp" width="780" height="1720" alt="Bill in: scan or type" loading="lazy"></figure>
+            <div><span class="k">01 · Bill in</span><h3>Scan or type</h3><p>Scan the receipt and every dish comes in on its own, or type the total when there is no bill.</p></div>
+          </div>
+          <div class="screen">
+            <figure><img class="shot phone" src="img/02-plates-nothing-claimed.webp" width="780" height="1972" alt="Who had what: everyone starts at zero" loading="lazy"></figure>
+            <div><span class="k">02 · Who had what</span><h3>Everyone starts at zero</h3><p>My first version was a checkbox list and it read like a hospital form. The reveal is the fun part: whose plate is heavy, who claimed nothing.</p></div>
+          </div>
+          <div class="screen">
+            <figure><img class="shot phone" src="img/03-drag-a-dish.webp" width="780" height="1972" alt="Drag a dish onto a face" loading="lazy"></figure>
+            <div><span class="k">03 · Drag a dish onto a face</span><h3>Totals move as you go</h3><p>Drag each dish onto a person and the totals move as you assign. Claimed items stay tappable, so two people on the naan divide it automatically. Nobody gets greyed out of a dish they shared.</p></div>
+          </div>
+          <div class="screen">
+            <figure class="pop"><img src="img/03-drag-a-dish.webp" width="780" height="1972" alt="" loading="lazy"><img src="img/03a-shared-dish-sheet.webp" width="780" height="1004" alt="Shared dish sheet open over the screen" loading="lazy"></figure>
+            <div><span class="k">Pop up · Shared dish</span><h3>Garlic naan × 6, four people</h3><p>Tap any dish still on the table and this sheet opens. Everyone who ate some gets their pieces, and the money follows the pieces, ₹120 each here. Done stays locked until the sheet says “All 6 pieces accounted for”.</p></div>
+          </div>
+          <div class="screen">
+            <figure><img class="shot phone" src="img/04-everything-claimed.webp" width="780" height="1980" alt="Everything claimed" loading="lazy"></figure>
+            <div><span class="k">04 · Everything claimed</span><h3>Nothing left on the table</h3><p>One tap to send. Split evenly stays one tap away on every screen, because fun you cannot opt out of is a tax.</p></div>
+          </div>
+          <div class="screen">
+            <figure class="pop"><img src="img/04-everything-claimed.webp" width="780" height="1980" alt="" loading="lazy"><img src="img/04a-send-request-sheet.webp" width="780" height="896" alt="Send request sheet open over the screen" loading="lazy"></figure>
+            <div><span class="k">Pop up · Send request</span><h3>One last look before it goes</h3><p>Tap Send request and everyone’s line shows up with the dishes behind it, so nobody gets a number they have to question. Your own ₹890 stays with you, so the request is ₹2,910, not ₹3,800.</p></div>
+          </div>
+          <div class="screen">
+            <figure><img class="shot phone" src="img/05-open-board.webp" width="780" height="1678" alt="Open: the request becomes a board" loading="lazy"></figure>
+            <div><span class="state open">Open</span><h3>The request becomes a board</h3><p>It does not end at send. Everyone sees the same board: who paid, who has seen it, who has not.</p></div>
+          </div>
+          <div class="screen">
+            <figure><img class="shot phone" src="img/06-paid-moment.webp" width="780" height="1756" alt="Paid: good news on the board" loading="lazy"></figure>
+            <div><span class="state paid">Paid</span><h3>Good news, not a receipt</h3><p>When someone pays, it arrives as good news on the board everyone shares.</p></div>
+          </div>
+          <div class="screen">
+            <figure><img class="shot phone" src="img/07-settled-memory.webp" width="780" height="1912" alt="Settled: the split becomes a memory" loading="lazy"></figure>
+            <div><span class="state settled">Settled</span><h3>Once it settles, it becomes a memory</h3><p>The total, how long it took, who paid first, and photos from the group. Photos earn their place here because the memory needs somewhere to live.</p></div>
+          </div>
+          <div class="screen">
+            <figure><img class="shot phone" src="img/08-monthly-recap.webp" width="780" height="1964" alt="A month later: the monthly recap" loading="lazy"></figure>
+            <div><span class="state recap">A month later</span><h3>It comes back as a recap</h3><p>A month later the group gets a recap of where they went and who picked up the most. Four states, four reasons to open the app, and none of them need money to move.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="scale" class="lt wide">
+        <div class="screens">
+          <div class="screen">
+            <figure><img class="shot phone" src="img/09-claiming-live.webp" width="780" height="1884" alt="Big group: everyone claims live" loading="lazy"></figure>
+            <div><p class="eyebrow">Flow 2 · Big group</p><h2>Twelve people. Fifty items.</h2><p>Twelve people and fifty items break any assigning screen. Bulk assign was my first attempt and it still took fifty decisions. So the organiser stops assigning, and everyone claims their own, live, on their own phone. Claiming online also means it works after everyone has gone home, or for a trip or a grocery run.</p></div>
+          </div>
+          <div class="screen">
+            <figure class="pop"><img src="img/09-claiming-live.webp" width="780" height="1884" alt="" loading="lazy"><img src="img/09a-assign-leftovers.webp" width="780" height="888" alt="Assign the leftovers open over the screen" loading="lazy"></figure>
+            <div><span class="k">Pop up · Leftovers</span><h3>Two items nobody claimed</h3><p>While the group claims, the organiser can pick what is still unclaimed and tap “Give 2 selected to someone”. Choose who had the sangria and nachos and the sheet splits them equally, ₹655 each.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="owes" class="lt wide">
+        <div class="screens">
+          <div class="screen owes">
+            <figure class="right"><div class="locks">
+                <div><span class="k">Lock screen · Small group</span><h3>“Your bit is ₹350”</h3><p>Kabir sees his exact share and what it was for, the cold coffee and gulab jamun. One tap opens the same board everyone else sees.</p><img src="img/10b-notification-small-group.webp" width="780" height="276" alt="Small group lock screen notification" loading="lazy"></div>
+                <div><span class="k">Lock screen · Big group</span><h3>“Tap what you had at Office Lunch”</h3><p>Fifty items and twelve people, so nobody gets a number yet. Kabir is asked to claim his own, and the message promises it takes a minute.</p><img src="img/10-notification.webp" width="780" height="276" alt="Big group lock screen notification" loading="lazy"></div>
+                <div><span class="k">Lock screen · Nudge</span><h3>“Kabir hasn’t opened the split”</h3><p>Forty minutes later he gets a nudge, not a nag. If nobody taps their items, the leftovers split evenly, so the bill never waits on one person.</p><img src="img/10c-notification-nudge.webp" width="780" height="276" alt="Nudge lock screen notification" loading="lazy"></div>
+              </div>
+              <img class="shot phone" src="img/10a-their-board.webp" width="780" height="2124" alt="Their view of the same board" loading="lazy">
+            </figure>
+            
+            <div>
+              <p class="eyebrow">Flow 4 · The person who owes</p>
+              <h2>One notification, the same board</h2>
+              <p>The person who owes gets one notification and opens the same board, not a payment sheet that closes. They review their own items and pay from inside it, and the board is still there afterwards.</p>
+              
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="receipt" class="lt wide">
+        <div class="screens">
+          <div class="screen">
+            <figure><img class="shot phone" src="img/11-no-receipt.webp" width="780" height="1678" alt="No receipt: type the total and split evenly" loading="lazy"></figure>
+            <div><p class="eyebrow">Flow 3 · No receipt</p><h2>Nothing to itemise</h2><p>No bill, nothing to itemise. Type the total and split evenly, and the item by item option is not shown at all.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="groups" class="lt wide">
+        <div style="display:grid;gap:22px;max-width:66ch">
+          <p class="eyebrow">Surface what exists</p>
+          <h2>The group was already there</h2>
+          <p>Groups already existed three taps deep. They move above People on Home, and the group page leads with the balance and memories, with settings at the bottom. Nothing needed inventing, it needed surfacing.</p>
+        </div>
+        <div class="pair">
+          <a class="zoom crop" href="img/12-home.webp" target="_blank" rel="noopener" aria-label="Open the full Home screen"><img class="shot phone" src="img/12-home.webp" width="780" height="4520" alt="Home with Groups moved above People" loading="lazy"><span class="zi" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span></a>
+          <img class="shot phone" src="img/12a-group-page.webp" width="780" height="2824" alt="Group page: balance and memories first" loading="lazy">
+        </div>
+      </section>
+
+      <section id="try" class="lt wide">
+        <div style="display:grid;gap:22px;max-width:66ch">
+          <p class="eyebrow">Prototype</p>
+          <h2>Click through every flow</h2>
+          <p>Pick a flow and tap through it, from Home to the monthly recap.</p>
+        </div>
+        <div class="tryit">
+          <div class="flows" role="group" aria-label="Flows">
+            <button type="button" data-n="217:191" aria-pressed="true">Flow 1 · Small group, item by item</button>
+            <button type="button" data-n="217:5300" aria-pressed="false">Flow 2 · Big group, everyone claims</button>
+            <button type="button" data-n="51:2" aria-pressed="false">Flow 3 · No receipt, split evenly</button>
+            <button type="button" data-n="217:4098" aria-pressed="false">Flow 4 · The person who owes, small group</button>
+            <button type="button" data-n="217:4193" aria-pressed="false">Flow 4b · The person who owes, big group</button>
+            <button type="button" data-n="217:4542" aria-pressed="false">Flow 4c · When nobody claims</button>
+            <button type="button" data-n="217:4315" aria-pressed="false">Flow 5 · Notification loop, reference</button>
+            <button type="button" class="protofs"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>Open full screen, with zoom</button>
+          </div>
+          <div class="trycol">
+            <figure class="pwrap"><div class="pframe"><iframe class="pembed" title="Google Pay Split and Request Figma prototype" loading="lazy" allowfullscreen src="https://embed.figma.com/proto/lC9pdClUznIhehVGRnLVMb/?node-id=217:191&amp;starting-point-node-id=217:191&amp;scaling=scale-down-width&amp;content-scaling=fixed&amp;hide-ui=1&amp;embed-host=share"></iframe><div class="pwait"><img src="img/01-bill-in.webp" width="780" height="1720" alt="" loading="lazy"><p>Loading the prototype</p></div></div><button type="button" class="pgo"><span>Try the prototype</span></button><button type="button" class="pdone">Close prototype</button><button type="button" class="protofsx" aria-label="Close full screen"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></figure>
+            <p class="protolink">Prototype not loading? <a class="popen" href="https://www.figma.com/proto/lC9pdClUznIhehVGRnLVMb/?node-id=217:191&amp;starting-point-node-id=217:191&amp;scaling=scale-down-width&amp;content-scaling=fixed" target="_blank" rel="noopener">Open it in a new tab</a></p>
+          </div>
+        </div>
+        <script is:inline>(()=>{
+          const s=document.currentScript.previousElementSibling,fr=s.querySelector('iframe'),w=s.querySelector('.pwrap'),op=s.querySelector('.popen'),bs=[...s.querySelectorAll('.flows button[data-n]')];
+          const q=n=>'?node-id='+n+'&starting-point-node-id='+n+'&scaling=scale-down-width&content-scaling=fixed';
+          fr.addEventListener('load',()=>w.classList.add('ready'));
+          const src=n=>'https://embed.figma.com/proto/lC9pdClUznIhehVGRnLVMb/'+q(n)+'&hide-ui=1&embed-host=share';
+          /* Desktop full screen (Vishal 03:53, as on ixigo): the prototype at its real size with Figma's own zoom controls */
+          const fsrc=n=>'https://www.figma.com/embed?embed_host=share&url='+encodeURIComponent('https://www.figma.com/proto/lC9pdClUznIhehVGRnLVMb/'+q(n));
+          let cur='217:191';
+          bs.forEach(b=>b.onclick=()=>{bs.forEach(x=>x.setAttribute('aria-pressed',String(x===b)));w.classList.remove('ready');cur=b.dataset.n;fr.src=w.classList.contains('fs')?fsrc(cur):src(cur);op.href='https://www.figma.com/proto/lC9pdClUznIhehVGRnLVMb/'+q(cur)});
+          const fs=on=>{if(on===w.classList.contains('fs'))return;w.classList.remove('ready');w.classList.toggle('fs',on);fr.src=on?fsrc(cur):src(cur);(on?w.querySelector('.protofsx'):s.querySelector('.protofs')).focus({preventScroll:true})};
+          s.querySelector('.protofs').onclick=()=>fs(true);op.addEventListener('click',e=>{if(matchMedia('(min-width:901px)').matches){e.preventDefault();fs(true)}});w.querySelector('.protofsx').onclick=()=>fs(false);addEventListener('keydown',e=>{if(e.key==='Escape'&&w.classList.contains('fs'))fs(false)});
+          /* Phones: the flows ride along inside the open prototype, so switching needs no Close first (Vishal 03:53, as on ixigo) */
+          const lc=document.createElement('div');lc.className='livechaps';lc.setAttribute('role','group');lc.setAttribute('aria-label','Switch flow');
+          bs.forEach(o=>{const c=o.cloneNode(true);c.onclick=()=>{o.click();sync();c.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'})};lc.append(c)});
+          const sync=()=>bs.forEach((o,i)=>lc.children[i].setAttribute('aria-pressed',o.getAttribute('aria-pressed')));w.prepend(lc);
+          // Phones: the page keeps scrolling over the prototype until it is tapped; then it opens full screen with a Close button
+          let ph,y;const live=on=>{if(on===w.classList.contains('live'))return;if(on){y=scrollY;ph=document.createElement('div');ph.style.height=w.offsetHeight+'px';w.before(ph)}w.classList.toggle('live',on);if(on){w.querySelector('.pdone').focus({preventScroll:true});requestAnimationFrame(()=>scrollTo(0,y))}else{ph.remove();scrollTo(0,y)}};
+          w.querySelector('.pgo').onclick=()=>live(true);w.querySelector('.pdone').onclick=()=>{live(false);w.querySelector('.pgo').focus({preventScroll:true})};addEventListener('keydown',e=>{if(e.key==='Escape'&&w.classList.contains('live'))live(false)});
+        })()</script>
+      </section>
+
+      <section id="decisions" class="lt">
+        <p class="eyebrow">Decisions</p>
+        <h2>Every call, and what I turned down to make it</h2>
+        <div class="trades">
+          <div class="trade"><span class="n">01</span><div><h3>Solve the split, not the whole app</h3><p><span class="k">Why</span>The one action people already do is the only surface worth investing in</p></div><p class="cost"><span class="k">Rejected</span>Surfacing rewards, offers and bill categories</p></div>
+          <div class="trade"><span class="n">02</span><div><h3>Give the request a lifecycle</h3><p><span class="k">Why</span>Four states means four reasons to come back without money moving</p></div><p class="cost"><span class="k">Rejected</span>Making the split screen prettier and calling it the fix</p></div>
+          <div class="trade"><span class="n">03</span><div><h3>Kill the reminder</h3><p><span class="k">Why</span>A shared board replaces a private nag</p></div><p class="cost"><span class="k">Rejected</span>Softening the reminder copy or adding emoji to it</p></div>
+          <div class="trade"><span class="n">04</span><div><h3>Items onto faces, not a form</h3><p><span class="k">Why</span>The reveal of who had what is the joke people already make at the table</p></div><p class="cost"><span class="k">Rejected</span>An itemised list with dropdowns</p></div>
+          <div class="trade"><span class="n">05</span><div><h3>Tap to join, never grey out</h3><p><span class="k">Why</span>Sharing a dish is normal, so no one gets locked out</p></div><p class="cost"><span class="k">Rejected</span>Disabling items once claimed</p></div>
+          <div class="trade"><span class="n">06</span><div><h3>At scale, everyone claims their own</h3><p><span class="k">Why</span>Parallel claiming turns data entry into the social part</p></div><p class="cost"><span class="k">Rejected</span>Bulk assign, which still took fifty decisions</p></div>
+          <div class="trade"><span class="n">07</span><div><h3>Online claiming, not pass the phone</h3><p><span class="k">Why</span>It works after people leave the table, and for trips and grocery runs</p></div><p class="cost"><span class="k">Rejected</span>Handing the phone around</p></div>
+          <div class="trade"><span class="n">08</span><div><h3>One board, same for everyone</h3><p><span class="k">Why</span>A payment sheet that closes leaves nothing behind</p></div><p class="cost"><span class="k">Rejected</span>A separate screen for the person who owes</p></div>
+          <div class="trade"><span class="n">09</span><div><h3>Surface the group that already exists</h3><p><span class="k">Why</span>Groups were three taps deep, they needed surfacing, not inventing</p></div><p class="cost"><span class="k">Rejected</span>A new social layer built from scratch</p></div>
+          <div class="trade"><span class="n">10</span><div><h3>Photos, because the memory needs somewhere to live</h3><p><span class="k">Why</span>A photo earns its place only where the memory lives</p></div><p class="cost"><span class="k">Rejected</span>Photos as decoration with nowhere to go</p></div>
+          <div class="trade"><span class="n">11</span><div><h3>Every fun idea passes one test</h3><p><span class="k">Why</span>Would anyone open the app less next month without it?</p></div><p class="cost"><span class="k">Rejected</span>Reward fun tied to money rather than people</p></div>
+          <div class="trade"><span class="n">12</span><div><h3>Itemising is always optional</h3><p><span class="k">Why</span>Fun you cannot opt out of is a tax</p></div><p class="cost"><span class="k">Rejected</span>Item by item as the only path</p></div>
+        </div>
+        <div class="funtest"><span class="k">The test every fun idea had to pass</span><p>If you removed it, would anyone open the app less next month? Confetti, stickers, scratch cards and reactions on requests all failed and were cut. Tez showed why: scratch cards drove 50 million installs and faded once the rewards thinned. Reward fun runs out. People fun does not.</p></div>
+      </section>
+
+      <section id="assumptions" class="lt">
+        <p class="eyebrow">Assumptions</p>
+        <p>Amounts, names and photos are illustrative. Receipt scanning assumes the bill comes in as line items. Everyone in the split is assumed to be on the same app.</p>
+      </section>
+
+      <section id="changed" class="lt">
+        <p class="eyebrow">What changed</p>
+        <h2>The same split, four more moments</h2>
+        <div class="beforeafter">
+          <div class="b"><span class="k">Before</span><p>A split ends the moment it is sent, and the only way back is a reminder.</p></div>
+          <div class="a"><span class="k">After</span><p>The same split returns four times, as a board, good news, a memory and a recap.</p></div>
+        </div>
+        <span class="k meask">How I would measure it, in the 21 to 30 cohort</span>
+        <div class="list">
+          <div><span class="n">1</span><h3>Weekly opens that no money request triggered</h3></div>
+          <div><span class="n">2</span><h3>Share of splits made item by item</h3></div>
+          <div><span class="n">3</span><h3>Median time for a split to settle</h3></div>
+        </div>
+      </section>
+
+      <section id="learned">
+        <p class="eyebrow">What I learned</p>
+        <h2>The fix was a longer life for an old feature</h2>
+        <p>The biggest lesson: the fix for retention was not a new feature but a longer life for one people already use.</p>
+        <div class="still"><span class="k">Still open</span>
+        <p>Nothing stops someone from removing all their own claims, so a real build needs a confirm step. If two people claim the same item and disagree, I have not designed that moment yet. The big group flow has no monthly recap yet. That is an omission, not a decision.</p></div>
+      </section>
+    </article>
+  </div>
+
+  <div class="endsec">
+  <footer class="closing">
+    <h2>Google Pay<br><span class="nw">Split and Request</span></h2>
+    <p>A split does not end at send.</p>
+    <div class="btns" style="--cta-ink:#12141A">
+      <a class="btn primary" href="https://www.figma.com/design/lC9pdClUznIhehVGRnLVMb" target="_blank" rel="noopener">View the Figma file<svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill-opacity="0" fill="currentColor" height="9.75px" transform="translate(8.25 6)" width="9.75px"></path><path d="M 0 7.125 L 7.125 0" fill="transparent" height="7.125px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(6 10.875)" width="7.125px"></path><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill="transparent" height="9.75px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(8.25 6)" width="9.75px"></path></svg></a>
+      <a class="btn ghost" href="/"><svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill-opacity="0" fill="currentColor" height="13.5px" transform="translate(3.75 5.25)" width="6.75px"></path><path d="M 9.75 0 L 0 0" fill="transparent" height="1px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(10.5 12)" width="9.75px"></path><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill="transparent" height="13.5px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(3.75 5.25)" width="6.75px"></path></svg>Back to home</a>
+    </div>
+  </footer>
+
+  <nav class="next" aria-label="More work">
+    <span class="k">More work</span>
+    <h2>Check out more work</h2>
+    <div class="nextgrid">
+      <a href="/work/twelve/"><img src="/work/staqu-jarvis/img/more-twelve.webp" width="800" height="837" alt="" loading="lazy"><b>Twelve · Plans in years, not months</b></a>
+      <a href="/work/ixigo-trains/"><img src="/work/staqu-jarvis/img/more-ixigo.webp" width="800" height="837" alt="" loading="lazy"><b>ixigo Trains · The four hours nobody designs for</b></a>
+      <a href="/work/basil/"><img src="/pages/basil.webp" width="960" height="1004" alt="" loading="lazy"><b>Basil · Sell the set, not the second product</b></a>
+    </div>
+  </nav>
+  </div>
+</main>
+
+
+<script is:inline>
+(function(){
+  var bar=document.getElementById('bar');
+  var links=[];
+  function onScroll(){
+    var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';
+    var cur=null;
+    links.forEach(function(a){var s=document.querySelector(a.getAttribute('href'));if(s&&s.getBoundingClientRect().top<160)cur=a;});
+    links.forEach(function(a){a.classList.toggle('on',a===cur)});
+  }
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+<script is:inline>
+(function(){
+  if(!('IntersectionObserver' in window))return;
+  var groups=[].slice.call(document.querySelectorAll('.screens .screen'));
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -10% 0px'});
+  groups.forEach(function(g){[].slice.call(g.children).forEach(function(el,i){el.classList.add('up');el.style.setProperty('--d',i*60+'ms');io.observe(el)})});
+})();
+</script>
+
+<script is:inline>
+(function(){
+  var rail=document.querySelector('nav.toc'), pill=document.querySelector('.tocpill'), sheet=document.getElementById('tocsheet'), art=document.querySelector('article');
+  var links=[].slice.call(rail.querySelectorAll('a')), secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  var items=links.map(function(a,i){var b=document.createElement('a');b.href=a.getAttribute('href');b.innerHTML='<span>'+String(i+1).padStart(2,'0')+'</span>'+a.textContent;b.onclick=function(){sheet.hidePopover()};sheet.appendChild(b);return b});
+  var last=-1;
+  function tick(){
+    var r=art.getBoundingClientRect(), on=secs[0].getBoundingClientRect().top<innerHeight*.3&&r.bottom>innerHeight*.4;
+    rail.classList.toggle('show',on);pill.classList.toggle('show',on);
+    var hd=document.querySelector('header.bar');if(hd&&!document.documentElement.classList.contains('hdr-hide')&&!hd.style.transform){var hb=hd.getBoundingClientRect().bottom;if(hb>20)document.documentElement.style.setProperty('--hb',hb+'px')}
+    rail.style.setProperty('--p',Math.min(100,Math.max(0,(-r.top+innerHeight*.3)/(r.height)*100))+'%');
+    pill.style.setProperty('--p',Math.min(100,Math.max(0,(-r.top+innerHeight*.3)/(r.height)*100))+'%');
+    var cur=0;secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<innerHeight*.35)cur=i});
+    if(cur!==last){last=cur;links.forEach(function(a,i){a.classList.toggle('on',i===cur)});items.forEach(function(a,i){a.classList.toggle('on',i===cur)});
+      pill.querySelector('b').textContent=links[cur].textContent;pill.querySelector('i').textContent=(cur+1)+' / '+links.length;}
+    var mid=null;secs.forEach(function(s){if(s){var b=s.getBoundingClientRect();if(b.top<=innerHeight/2&&b.bottom>innerHeight/2)mid=s}});
+    rail.classList.toggle('light',!!(mid&&mid.classList.contains('lt')));
+  }
+  // Desktop dock
+  var dock=document.querySelector('.dock'),fade=document.querySelector('.dockfade'),bands=[].slice.call(document.querySelectorAll('article>section')),segs=links.map(function(a,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label',(i+1)+'. '+a.textContent);b.dataset.name=a.textContent;b.onclick=function(){go(i)};dock.querySelector('.dks').appendChild(b);return b}),
+      dn=dock.querySelector('.dkn'),pv=dock.querySelector('[data-go="-1"]'),nx=dock.querySelector('[data-go="1"]'),dc=0;
+  function go(i){i=Math.max(0,Math.min(secs.length-1,i));secs[i].scrollIntoView({behavior:document.documentElement.classList.contains('calm')||matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
+  pv.onclick=function(){go(dc-1)};nx.onclick=function(){go(dc+1)};dn.onclick=function(e){e.preventDefault();go(dc+1)};
+  function dtick(){
+    var r=art.getBoundingClientRect(),y=innerHeight*.35,shown=secs[0].getBoundingClientRect().top<innerHeight*.3&&r.bottom>innerHeight-24;dock.classList.toggle('show',shown);fade.classList.toggle('show',shown);
+    if(shown){var fh=fade.offsetHeight,ft=innerHeight-fh,st=[];bands.forEach(function(s){var q=s.getBoundingClientRect(),a=Math.max(q.top-ft,0),z=Math.min(q.bottom-ft,fh);if(z>a){var c=getComputedStyle(s).getPropertyValue('--band').trim();if(c){var m=c.match(/#[0-9a-f]{3,8}|rgba?\([^)]*\)/gi);if(m)c=m[m.length-1]}if(c)st.push(c+' '+a+'px '+z+'px')}});if(st.length)fade.style.background='linear-gradient('+st.join(',')+')'}
+    dc=0;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<y)dc=i});
+    segs.forEach(function(b,i){var f=i<dc?100:i>dc?0:(function(){var t=secs[i].getBoundingClientRect(),e=i<secs.length-1?secs[i+1].getBoundingClientRect().top:r.bottom;return Math.max(0,Math.min(100,(y-t.top)/(e-t.top)*100))})();b.style.setProperty('--f',f+'%');b.toggleAttribute('aria-current',i===dc)});
+    dock.querySelector('.dkt b').textContent=links[dc].textContent;dock.querySelector('.dkt i').textContent=(dc+1)+' / '+links.length;
+    var n=links[dc+1];dn.classList.toggle('end',!n);if(n){dn.href=n.getAttribute('href');dn.querySelector('span').textContent=n.textContent}
+    pv.disabled=dc===0;nx.disabled=dc===links.length-1;
+  }
+  addEventListener('scroll',dtick,{passive:true});addEventListener('resize',dtick);dtick();
+  addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);tick();
+})();
+</script>
+<script is:inline>
+(function(){
+  if(!matchMedia('(max-width:620px)').matches)return;
+  function btn(before,open){var b=document.createElement('button');b.type='button';b.className='rmore';b.textContent='Read more';b.setAttribute('aria-expanded','false');b.onclick=function(){open();b.remove()};before.parentNode.insertBefore(b,before);return b}
+  // Section body: keep the first paragraph, fold the rest of the paragraphs and quotes
+  document.querySelectorAll('article>section').forEach(function(sec){
+    var body=[].filter.call(sec.children,function(e){return (e.tagName==='P'&&!e.classList.contains('eyebrow'))||e.tagName==='BLOCKQUOTE'});
+    var rest=body.slice(1), words=rest.reduce(function(n,e){return n+e.textContent.split(/\s+/).length},0);
+    if(!rest.length||words<30)return;
+    rest.forEach(function(e){e.classList.add('rm-hid')});
+    btn(rest[0],function(){rest.forEach(function(e){e.classList.remove('rm-hid')})});
+  });
+  // Long single paragraphs beside the screens: show four lines, then Read more
+  document.querySelectorAll('.screen>div>p').forEach(function(p){
+    p.classList.add('rm-clamp');if(p.scrollHeight<=p.clientHeight+2){p.classList.remove('rm-clamp');return}
+    var b=btn(p,function(){p.classList.remove('rm-clamp')});p.after(b);
+  });
+})();
+</script>
+<script is:inline src="/js/inview-video.js" defer></script>
+<script is:inline src="/js/cs-bar.js" defer></script>
+<style is:inline>
+/* ---- Split and Request only (this page is a copy of the JARVIS template; JARVIS is untouched) ---- */
+/* Google Pay blue where JARVIS uses its blue; green only for paid, the other Google colours never as fills */
+.lt{--band:linear-gradient(#fff,#F3F6FC)}
+article>section.lt{border-image:linear-gradient(#FFFFFF,#F3F6FC) fill 0//0 100vmax}
+blockquote em{font-style:normal;color:var(--warm)}
+.hook{color:#8AB4F8}
+/* facts: three, not four */
+.facts{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (min-width:1000px){.wrap>.facts{grid-template-columns:minmax(0,1.6fr) repeat(2,minmax(0,1fr))}}
+/* the four states of a request */
+.state{justify-self:start;font-size:13px;font-weight:700;letter-spacing:.02em;padding:6px 12px;border-radius:100px}
+.state.open{color:#0B57D0;background:#E8F0FE}.state.paid{color:#137333;background:#E6F4EA}.state.settled{color:#7B3FD6;background:#F1EAFD}.state.recap{color:#8F4E00;background:#FEF3E0}
+/* pop ups: the sheet docked over the dimmed screen, inside a full phone */
+.pop{position:relative;width:360px;max-width:100%;aspect-ratio:390/844;border-radius:40px;overflow:hidden;box-shadow:0 16px 40px rgba(11,40,90,.12);border:1px solid rgba(14,20,36,.1)}
+.pop img{display:block;width:100%;height:auto}
+.pop::after{content:"";position:absolute;inset:0;background:rgba(18,20,26,.42)}
+.pop img+img{position:absolute;left:0;right:0;bottom:0;z-index:1}
+@media (max-width:900px){.screens .screen>figure.pop{width:min(320px,100%)}}
+/* screens inside dark and single screen sections */
+#scale .screens,#owes .screens,#receipt .screens{margin-top:0}
+.screens .screen h2{font-size:clamp(32px,4vw,48px)}
+
+.locks{display:grid;gap:28px;margin-top:20px}
+.locks>div{display:grid;gap:10px}
+.locks h3{font-size:22px!important}
+.locks img{width:100%;max-width:390px;height:auto;margin-top:4px}
+/* clickable images carry an expand icon */
+.zoom{position:relative;display:block}
+.zi{position:absolute;right:14px;top:14px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(18,20,26,.72);color:#fff}
+.tl{color:var(--acc);font-weight:600;text-underline-offset:4px}
+/* design audit 2026-10-15: a standalone link gets a 44px tap area, no visual change */
+p>.tl:only-child{position:relative}p>.tl:only-child::after{content:"";position:absolute;inset:-11px -4px}
+/* groups: Home cropped to the Groups area, the full screen behind a tap */
+.pair{display:flex;flex-wrap:wrap;justify-content:center;gap:48px;margin-top:56px;align-items:flex-start}
+.pair .shot.phone{width:360px;max-width:100%;border-radius:40px;border:1px solid rgba(14,20,36,.1);box-shadow:0 16px 40px rgba(11,40,90,.12)}
+.crop{width:360px;max-width:100%;aspect-ratio:780/2300;overflow:hidden;border-radius:40px}
+.crop .shot.phone{border-radius:0;border:0;box-shadow:none}
+.pair>.crop{border:1px solid rgba(14,20,36,.1);box-shadow:0 16px 40px rgba(11,40,90,.12)}
+@media (max-width:620px){.pair{gap:28px;margin-top:32px}.pair>*{width:min(320px,100%)!important}}
+/* prototype: flow list left, phone right; list above the phone on phones */
+.tryit{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:clamp(32px,6vw,96px);align-items:start;margin-top:48px;max-width:1000px}
+.flows{display:grid;gap:8px;align-content:start}
+.flows button{all:unset;box-sizing:border-box;cursor:pointer;min-height:52px;padding:14px 18px;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 1px var(--line);font:500 17px/1.35 var(--sans);color:var(--fg)}
+.flows button:hover{box-shadow:inset 0 0 0 1px #0B57D0}
+.flows button[aria-pressed=true]{background:#E8F0FE;box-shadow:inset 0 0 0 2px #0B57D0;color:#0B57D0;font-weight:600}
+.flows button:focus-visible{outline:2px solid #0B57D0;outline-offset:2px}
+.trycol{display:grid;gap:16px;justify-items:center}
+.pwrap{position:relative;margin:0}
+.pframe{position:relative;width:340px;height:700px;padding:14px;border-radius:44px;background:#12141A}
+.pembed{display:block;width:100%;height:100%;border:0;border-radius:30px;background:#fff}
+.pwait{position:absolute;inset:14px;border-radius:30px;overflow:hidden;background:#F3F6FC;display:grid;place-content:center;justify-items:center;gap:12px;text-align:center;transition:opacity .3s ease}
+.pwait img{width:110px;height:auto;border-radius:14px}
+.pwait p{font-size:16px;color:var(--muted)}
+.pwrap.ready .pwait{opacity:0;pointer-events:none}
+/* Board 20 Oct (d-poster): the first screen shows big while Figma loads, and stays 2.5s after the frame reports loaded, because Figma paints its canvas after that */
+.pwrap.ready .pwait{transition-delay:2.5s}
+.pwait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.pwait p{position:relative;align-self:end;margin-bottom:24px;padding:8px 14px;border-radius:100px;background:rgba(255,255,255,.92);box-shadow:0 4px 16px rgba(0,0,0,.12)}
+.btn.popen{background:#0B57D0;color:#fff;height:48px;font-size:16px}
+.pgo,.pdone{display:none}
+@media (max-width:900px){.tryit{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){
+  .flows button{font-size:16px}
+  .pframe{width:100%;height:auto;aspect-ratio:340/700}
+  .pwrap{width:min(340px,100%,calc((100svh - 200px) * 340 / 700))}
+  .pwrap:not(.live) .pembed{pointer-events:none}
+  .pgo{display:flex;position:absolute;inset:0;border:0;border-radius:44px;background:linear-gradient(180deg,transparent 60%,rgba(8,16,38,.55));align-items:flex-end;justify-content:center;padding-bottom:28px;cursor:pointer;font:inherit}
+  .pgo span{padding:12px 18px;border-radius:999px;background:#F2F1EC;color:#0E1424;font-size:15px;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+  .pwrap.live .pgo{display:none}
+  .pwrap.live{position:fixed;inset:0;z-index:1000;width:auto;padding:16px 16px calc(16px + env(safe-area-inset-bottom));background:rgba(6,12,30,.94);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+  .pwrap.live .pframe{width:min(100%,calc((100dvh - 110px) * 340 / 700))}
+  html:has(.pwrap.live){overflow:hidden}
+  .pwrap.live .pdone{display:inline-flex;padding:12px 18px;border:0;border-radius:999px;background:#0E1424;box-shadow:0 0 0 1px rgba(242,241,236,.3);color:#F2F1EC;font:600 15px/1 var(--sans);cursor:pointer}
+}
+/* decisions: Why and Rejected labelled on every row */
+.trade p .k,.trade .cost .k{display:block;margin-bottom:4px}
+.trade .cost{color:var(--body)}
+.funtest{margin-top:32px;background:var(--card);border-radius:16px;padding:24px 28px;display:grid;gap:10px}
+.meask,.still{margin-top:32px}
+.still{display:grid;gap:10px}
+@media (max-width:620px){.closing h2{white-space:normal!important;font-size:min(44px,11.4vw)!important}}
+.list>div{align-items:baseline}
+@media (max-width:620px){.funtest{padding:20px}}
+
+/* Vishal 2026-10-13: screens exactly as on Framer. Text left and centred on its screen, screen right at 320px
+   (radius 34, 1px #E7E9EE border, soft shadow), a hairline between rows, text and screen fade up 20px */
+.screens{gap:0}
+.screens .screen{grid-template-columns:minmax(0,560px) 320px;align-items:center;padding-block:60px;border-top:1px solid #E7E9EE}
+.screens .screen:first-child{border-top:0;padding-top:0}
+.screens .screen:last-child{padding-bottom:0}
+
+.screens .screen>div{position:static}
+.screens .shot.phone,.pop,.pair .shot.phone,.crop{width:320px;max-width:100%;border-radius:34px;border:1px solid #E7E9EE;box-shadow:0 10px 30px rgba(0,0,0,.1)}
+.screens .screen>figure.pop{width:320px}
+.crop .shot.phone{border:0;border-radius:0;box-shadow:none;width:100%}
+.pair{gap:24px}
+.screen.owes .right{display:grid;gap:40px;width:320px}
+.screen.owes .locks{margin-top:0;gap:40px}
+.screen.owes .locks img{max-width:100%}
+@media (max-width:900px){
+  .screens .screen{grid-template-columns:minmax(0,1fr);gap:28px;padding-block:44px}
+  .screens .screen>figure{order:2;justify-self:center}
+  .screens .shot.phone,.pop,.screens .screen>figure.pop,.pair .shot.phone,.crop,.pair>*{width:min(260px,100%)!important}
+  .screen.owes .right{width:100%;max-width:390px}
+  .screen.owes .right>img{width:min(260px,100%);justify-self:center}
+}
+
+/* Product type (Vishal 2026-10-14): the Split screens are set in Google Sans, so the page is too, at Google's
+   lighter weights. The shared header keeps its own font. */
+h1,h2,h3,h4,section h2,.stats b,.metric b,.nextgrid b{font-weight:500}
+section h2{letter-spacing:-.01em}
+h1{letter-spacing:-.02em}
+.closing h2{font-weight:500;letter-spacing:-.025em}
+
+/* User flow full screen on phones (Vishal 03:53, as on ixigo): pinch and double tap zoom */
+.flowfs{display:none}
+@media (max-width:900px){.flowfs{display:inline-flex;position:absolute;right:10px;top:10px;align-items:center;gap:6px;padding:9px 12px;border:0;border-radius:999px;background:rgba(13,15,23,.86);color:#F2F1EC;font:500 13px/1 var(--sans);box-shadow:0 6px 18px rgba(0,0,0,.25)}.zi{display:none}}
+figure:has(>.flowfs){position:relative}
+.flowdlg{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:#0D0F17}
+.flowdlg::backdrop{background:#0D0F17}
+.flowpan{position:absolute;inset:0;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom;display:grid;place-items:center}
+.flowpan img{display:block;width:100%;height:auto;max-width:none;transition:width .2s ease}
+.flowdlg.zoom .flowpan{place-items:start}.flowdlg.zoom .flowpan img{width:260%}
+.flowx{position:fixed;top:max(12px,env(safe-area-inset-top));right:12px;z-index:2;width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:50%;background:rgba(13,15,23,.86);color:#F2F1EC;box-shadow:0 0 0 1px rgba(255,255,255,.18)}
+.flowhint{position:fixed;left:50%;transform:translateX(-50%);bottom:max(14px,env(safe-area-inset-bottom));margin:0;padding:9px 14px;border-radius:999px;background:rgba(13,15,23,.86);color:#F2F1EC;font:500 13px/1 var(--sans);white-space:nowrap;pointer-events:none}
+/* Desktop prototype: bigger, plus full screen with zoom (Vishal 03:53, as on ixigo) */
+.flows button.protofs,.protofsx{display:none}
+@media (min-width:901px){
+  .tryit{grid-template-columns:minmax(0,1fr) auto}
+  .pframe{height:min(860px,calc(100svh - 180px));width:auto;aspect-ratio:340/700}
+  .flows button.protofs{display:inline-flex;justify-self:start;min-height:0;box-shadow:none;align-items:center;gap:8px;margin-top:8px;padding:13px 18px;border:0;border-radius:999px;background:#0E1424;color:#fff;font:500 14px/1 var(--sans);cursor:pointer}
+  .flows button.protofs:hover{background:#0B57D0;box-shadow:none}
+  .flows button.protofs:focus-visible{outline:2px solid #0B57D0;outline-offset:3px}
+  .pwrap.fs{position:fixed;inset:0;z-index:1000;margin:0;padding:24px;background:#0D0F17;display:flex;justify-content:center;align-items:center}
+  .pwrap.fs .pframe{width:min(1280px,100%);height:calc(100dvh - 48px);aspect-ratio:auto;padding:0;border-radius:16px;background:transparent}
+  .pwrap.fs .pembed{border-radius:16px}
+  .pwrap.fs .pwait{display:none}
+  .pwrap.fs .protofsx{display:grid;place-items:center;position:fixed;top:20px;right:20px;z-index:2;width:44px;height:44px;border:0;border-radius:50%;background:rgba(13,15,23,.86);color:#F2F1EC;box-shadow:0 0 0 1px rgba(255,255,255,.2);cursor:pointer}
+  html:has(.pwrap.fs){overflow:hidden}
+}
+/* Phones: flow chips inside the open prototype, solid backdrop (Vishal 03:53, as on ixigo) */
+.livechaps{display:none}
+@media (max-width:640px){
+  .pwrap.live{background:#0D0F17}
+  .pwrap.live .livechaps{display:flex;gap:8px;width:100%;overflow-x:auto;scrollbar-width:none;padding:2px 2px 4px;flex:none;scroll-snap-type:x proximity;-webkit-mask-image:linear-gradient(90deg,transparent,#000 16px,#000 calc(100% - 16px),transparent);mask-image:linear-gradient(90deg,transparent,#000 16px,#000 calc(100% - 16px),transparent)}
+  .livechaps::-webkit-scrollbar{display:none}
+  .livechaps button{all:unset;box-sizing:border-box;flex:none;scroll-snap-align:center;padding:10px 14px;border-radius:999px;background:rgba(242,241,236,.12);color:#F2F1EC;font:500 14px/1 var(--sans);white-space:nowrap;cursor:pointer}
+  .livechaps button[aria-pressed="true"]{background:#F2F1EC;color:#0B57D0}
+  .pwrap.live .pframe{width:min(100%,calc((100dvh - 170px) * 340 / 700))}
+}
+/* Prototype frame (Vishal 04:10): the slim iPhone frame used on the other case studies. The Split screens are light, so the frame stays dark. */
+.pwrap:not(.fs) .pframe{padding:5px;border-radius:46px;background:#0B0B0B;box-shadow:0 0 0 1.5px #C4C1B9,0 0 0 2.5px #8F8C85,0 24px 50px rgba(11,40,90,.16)}
+.pwrap:not(.fs) .pembed{border-radius:41px}
+.pwrap:not(.fs) .pwait{inset:5px;border-radius:41px}
+.pwrap:not(.fs) .pframe::before{content:"";position:absolute;top:16px;left:50%;width:86px;height:25px;margin-left:-43px;border-radius:99px;background:#0B0B0B;pointer-events:none;z-index:2}
+.pwrap:not(.fs):not(.live)::before,.pwrap:not(.fs):not(.live)::after{content:"";position:absolute;width:3px;border-radius:2px;background:#ABA8A0;pointer-events:none}
+.pwrap:not(.fs):not(.live)::before{left:-4.5px;top:19%;height:9%}
+.pwrap:not(.fs):not(.live)::after{right:-4.5px;top:25%;height:9%}
+/* Phones only (Vishal 04:27, same as ixigo): hero heading bolder at the same size, hook line set tight under it */
+@media (max-width:640px){header.hero h1{font-weight:700}header.hero .hook{line-height:1.2}}
+/* Phones (Vishal 04:31): project details as one row each, label left and value right, instead of three squeezed columns */
+@media (max-width:620px){
+  .wrap>.facts{grid-template-columns:minmax(0,1fr);gap:0;padding-block:4px}
+  .wrap>.facts div{grid-template-columns:72px minmax(0,1fr);gap:16px;align-items:baseline;padding-block:14px}
+  .wrap>.facts div+div{border-top:1px solid var(--line)}
+}
+/* Flow 1 starts a new band (white after the pale blue flow map), so it gets its own top space instead of the merged 0 (Vishal 04:40) */
+article>section#flow{padding-top:clamp(64px,8vw,120px)}
+/* Full screen opens in this tab everywhere; tall phone screens open at a readable width and scroll (Vishal 04:41) */
+.flowdlg.tall .flowpan{place-items:start center}
+.flowdlg.tall .flowpan img{width:min(480px,100%)}
+.flowdlg.tall.zoom .flowpan img{width:min(960px,200%)}
+/* The whole user flow fits one screen when opened (Vishal 04:48); double click still zooms in to read it */
+.flowdlg:not(.tall):not(.zoom) .flowpan img{width:auto;max-width:calc(100% - 48px);max-height:calc(100dvh - 120px)}
+
+/* Vishal 2026-10-14 (04:50): desktop screens laid out like the StackYou JARVIS screens (text 640px at the top and sticky,
+   phone 360px on the right, no hairlines). Phones: screens centred in their row, text stays left. */
+@media (min-width:901px){
+  .screens .screen{grid-template-columns:minmax(0,640px) 360px;justify-content:space-between;align-items:start;gap:48px;padding-block:72px;border-top:0}
+  .screens .screen>div{position:sticky;top:120px}
+  .screens .shot.phone,.pop,.pair .shot.phone,.crop{width:360px;border-radius:40px;border:1px solid rgba(14,20,36,.1);box-shadow:0 16px 40px rgba(13,31,94,.12)}
+  .screens .screen>figure.pop{width:360px}
+  #scale .screens .screen{border-top:0}
+}
+@media (max-width:900px){
+  .screens .screen>figure{width:100%;text-align:center}
+  .screens .screen>figure>img{display:block;margin-inline:auto}
+}
+
+/* Vishal 2026-10-14 (04:57): sections after another light section had no top padding, so the prototype, Decisions,
+   Assumptions and What changed headings sat flush against the band above. Restore the normal section space on those four. */
+article>section:is(#receipt,#groups,#try,#decisions,#assumptions,#changed){padding-top:120px}
+@media (max-width:900px){article>section:is(#receipt,#groups,#try,#decisions,#assumptions,#changed){padding-top:80px}}
+@media (max-width:620px){article>section:is(#receipt,#groups,#try,#decisions,#assumptions,#changed){padding-top:64px}article>section#try{padding-bottom:64px}}
+
+/* Vishal 2026-10-14 (05:07): on phones the prototype flows sit as one horizontal row that scrolls sideways,
+   not a vertical stack. Each flow is a pill that keeps its label on one line. */
+@media (max-width:640px){
+  .flows{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;padding-bottom:6px;scrollbar-width:none}
+  .flows::-webkit-scrollbar{display:none}
+  .flows button{flex:0 0 auto;white-space:nowrap;scroll-snap-align:start;min-height:44px;padding:11px 16px;border-radius:999px;font-size:15px}
+}
+
+/* Vishal 2026-10-15 (14:09): on desktop the prototype phone sits a bit higher, its top edge 24px above Flow 1 */
+@media (min-width:901px){.tryit .pwrap:not(.fs){margin-top:-215px}}
+
+/* Vishal 2026-10-15 (14:10): closing reads Google Pay on one line and Split and Request on the next, on every screen size.
+   On phones the heading is sized so Split and Request fits the 28px gutter without wrapping. */
+.endsec .closing h2 .nw{white-space:nowrap}
+@media (max-width:620px){.endsec .closing h2{font-size:min(40px,10.2vw)!important;white-space:normal!important}}
+
+/* Vishal 2026-10-15 (14:21, 14:23): the big "Open the prototype" button under the phone is gone; since 2026-10-16 it is the quiet "Prototype not loading?" line instead. */
+.tryit .popen{display:inline}
+/* Vishal 2026-10-15 (14:37): light screen, so the phone frame on phones is fully dark, no silver rim or buttons */
+@media (max-width:640px){
+  .pwrap:not(.fs) .pframe{box-shadow:0 0 0 1.5px #2B2E35,0 0 0 2.5px #1A1C21,0 24px 50px rgba(11,40,90,.16)}
+  .pwrap:not(.fs):not(.live)::before,.pwrap:not(.fs):not(.live)::after{background:#2B2E35}
+}
+/* Vishal 2026-10-16: "Prototype not loading? Open it in a new tab" under every prototype, as on his Framer site */
+.protolink{margin:16px auto 0;text-align:center;font-size:16px;line-height:1.5;color:var(--muted)}.protolink a{font-weight:600;color:var(--fg);text-underline-offset:3px}
+</style>
+<script is:inline>(()=>{const d=document.querySelector('.flowdlg'),b=document.querySelector('.flowfs');if(!d||!b)return;const pan=d.querySelector('.flowpan'),a=b.previousElementSibling;
+const open=e=>{if(e)e.preventDefault();d.classList.remove('zoom');d.showModal();document.documentElement.style.overflow='hidden'};
+const di=pan.querySelector('img'),hint=d.querySelector('.flowhint'),fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+const show=(src,alt,w,h)=>{di.src=src;di.alt=alt;di.width=w;di.height=h;d.classList.toggle('tall',h>w*1.3);hint.textContent=fine?'Double click to zoom, Esc to close':'Pinch or double tap to zoom'};
+b.onclick=()=>{show(a.getAttribute('href'),a.querySelector('img').alt,5000,3722);open()};
+/* Every Full screen on the page opens here, in this tab, on desktop and phones (Vishal 04:41) */
+document.querySelectorAll('a.zoom').forEach(z=>{z.removeAttribute('target');z.addEventListener('click',e=>{const i=z.querySelector('img');show(z.getAttribute('href'),i.alt,+i.getAttribute('width'),+i.getAttribute('height'));open(e)})});
+d.addEventListener('close',()=>{document.documentElement.style.overflow=''});d.querySelector('.flowx').onclick=()=>d.close();
+let t=0;pan.addEventListener('click',e=>{const n=Date.now();if(n-t<320){const r=pan.getBoundingClientRect(),fx=(e.clientX-r.left+pan.scrollLeft)/pan.scrollWidth,fy=(e.clientY-r.top+pan.scrollTop)/pan.scrollHeight;d.classList.toggle('zoom');pan.scrollLeft=fx*pan.scrollWidth-r.width/2;pan.scrollTop=fy*pan.scrollHeight-r.height/2;t=0}else t=n});
+pan.addEventListener('dblclick',e=>e.preventDefault())})();</script>
+</html>
+
+<script is:inline>(function(){var s=document.getElementById('tocsheet'),mq=matchMedia('(max-width:759px)'),root=document.documentElement,ty=0;if(!s)return;
+function lock(e){root.classList.toggle('toclock',e.newState==='open'&&mq.matches)}s.addEventListener('beforetoggle',lock);s.addEventListener('toggle',lock);
+addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true});
+addEventListener('touchmove',function(e){if(!root.classList.contains('toclock'))return;var dy=e.touches[0].clientY-ty;if(!s.contains(e.target)||(dy>0&&s.scrollTop<=0)||(dy<0&&s.scrollTop+s.clientHeight>=s.scrollHeight-1))e.preventDefault()},{passive:false});})();</script>
+<style is:inline>/* video buttons: at least a 44px touch area, look unchanged */.pills .pill{position:relative}.pills .pill::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}
+/* Vishal 2026-10-19, phones default: "Prototype not loading?" on line 1, the whole "Open it in a new tab" link on line 2, never split */
+@media (max-width:759px){.protolink a{display:block!important;white-space:nowrap}}
+
+/* Vishal 2026-10-19 (all case studies): the concept line under the facts opens with a small label, not body text */
+.note .nlab{display:inline-flex;align-items:center;vertical-align:1px;margin-right:12px;padding:4px 10px;border:1px solid currentColor;border-radius:999px;font-size:12px;line-height:1;font-weight:600;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+</style>
+
+<style is:inline>
+/* Universal (Vishal 19 Oct 13:09): project names in the footer are never white; a light tint of the page colour, like OneBanc */
+.endsec .nextgrid b{color:#D3E3FD!important}
+</style>

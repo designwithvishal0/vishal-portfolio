@@ -1,0 +1,89 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Vishal's Contra showreel, rebuilt for a 4:5 phone frame (720x900). Same words, same product clips, laid out for the phone.
+     render(t) draws the frame at t seconds; render.mjs steps it. Clip frames live in ./frames/<clip>/NNN.jpg (see render.sh). -->
+<style>
+@font-face{font-family:D;src:url(fonts/InterDisplay-Bold.otf);font-weight:700}
+@font-face{font-family:T;src:url(fonts/Inter-Medium.otf);font-weight:500}
+@font-face{font-family:S;src:url(fonts/InstrumentSerif-Italic.ttf);font-style:italic}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:720px;height:900px;overflow:hidden;background:#0c0d0b}
+#st{position:relative;width:720px;height:900px;overflow:hidden;background:#0c0d0b;color:#F2F1EC;font-family:D;-webkit-font-smoothing:antialiased}
+.glow{position:absolute;inset:-20%;background:radial-gradient(48% 38% at var(--gx,70%) var(--gy,22%),var(--gc,#2a3a12) 0%,transparent 70%);opacity:var(--go,1)}
+.l{position:absolute;opacity:0;will-change:transform,opacity}
+.h{font-weight:700;letter-spacing:-.045em;line-height:.98}
+.s{font-family:S;font-style:italic;font-weight:400;letter-spacing:-.01em}
+.t{font-family:T;font-weight:500;letter-spacing:-.01em}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:99px;font-family:T;font-size:17px;border:1px solid}
+.chip b{font-weight:500;opacity:.7}
+.ph{position:absolute;overflow:hidden;border-radius:38px;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.06)}
+.ph img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+.pill{position:absolute;opacity:0;font-family:T;font-size:17px;padding:8px 14px;border-radius:99px;white-space:nowrap}
+.bar{height:22px;border-radius:7px;background:rgba(255,255,255,.08);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:7px}
+</style></head><body><div id="st">
+<div class="glow" id="glow"></div>
+
+<!-- 0 hook -->
+<div class="l h" id="hook" style="left:44px;top:320px;font-size:66px">Your visitors give you<br><span class="s" style="color:#C9F158;font-size:74px;letter-spacing:-.02em">a few seconds.</span></div>
+<div class="l" id="ring" style="left:160px;top:250px;width:400px;height:400px">
+  <svg width="400" height="400" viewBox="0 0 400 400"><circle cx="200" cy="200" r="180" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="3"/><circle id="arc" cx="200" cy="200" r="180" fill="none" stroke="#C9F158" stroke-width="5" stroke-linecap="round" stroke-dasharray="1131" transform="rotate(-90 200 200)"/></svg>
+  <div id="num" class="h" style="position:absolute;inset:0;display:grid;place-items:center;font-size:118px;letter-spacing:-.05em">2.30</div>
+</div>
+<div class="l t" id="then" style="left:0;right:0;top:690px;text-align:center;font-size:26px;color:rgba(242,241,236,.8)">Then they...</div>
+<div class="l h" id="stay" style="left:0;right:0;top:300px;text-align:center;font-size:230px;color:#C9F158;letter-spacing:-.06em">STAY</div>
+<div class="l s" id="leave" style="left:0;right:0;top:470px;text-align:center;font-size:120px">or leave.</div>
+<div class="l" id="me" style="left:44px;top:230px">
+  <div class="t" style="font-size:30px;color:rgba(242,241,236,.6)">I'm</div>
+  <div class="h" style="font-size:190px;letter-spacing:-.065em;margin-left:-8px">Vishal.</div>
+  <div class="h" style="font-size:46px;margin-top:40px;letter-spacing:-.035em">I design what makes them <span id="stayw" class="s" style="color:#C9F158;font-size:54px;opacity:0">stay.</span></div>
+</div>
+
+<!-- banner -->
+<div class="l" id="bash" style="left:0;top:0;width:720px;height:900px">
+  <img id="bashbg" style="position:absolute;left:50%;top:50%;height:900px;transform:translate(-50%,-50%) scale(1.15);filter:blur(30px) brightness(.55)">
+  <img id="bashim" style="position:absolute;left:24px;top:270px;width:672px;border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.5)">
+</div>
+
+<!-- shared section head -->
+<div class="l" id="head" style="left:44px;top:64px;right:44px"></div>
+
+<!-- phones -->
+<div class="ph" id="phA"><img id="imA"></div>
+<div class="ph" id="phB"><img id="imB"></div>
+<div class="pill" id="p1"></div><div class="pill" id="p2"></div><div class="pill" id="p3"></div>
+<svg id="lines" class="l" style="left:0;top:0" width="720" height="900"></svg>
+
+<!-- audit panel -->
+<div class="l" id="audit" style="left:44px;right:44px;top:420px;padding:28px 30px;border-radius:24px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)">
+  <div class="t" style="display:flex;justify-content:space-between;font-size:14px;letter-spacing:.14em;color:rgba(242,241,236,.45)"><span>STORE FUNNEL</span><span>AUDIT</span></div>
+  <div class="t" style="font-size:19px;margin:22px 0 10px">Visits</div><div class="bar"><i id="b1" style="background:#C9F158"></i></div>
+  <div class="t" style="font-size:19px;margin:20px 0 10px">Product page</div><div class="bar"><i id="b2" style="background:#C9F158"></i></div>
+  <div class="t" style="font-size:19px;margin:20px 0 10px;display:flex;justify-content:space-between;align-items:center"><span id="lk" style="color:#F2F1EC">Add to cart</span><span id="leak" class="t" style="font-size:16px;padding:5px 12px;border-radius:99px;background:#FF6B8A;color:#fff;opacity:0">● Biggest leak</span></div><div class="bar"><i id="b3" style="background:#C9F158"></i></div>
+  <div class="t" style="font-size:19px;margin:20px 0 10px">Checkout</div><div class="bar"><i id="b4" style="background:#C9F158"></i></div>
+  <div id="fix" class="t" style="display:inline-block;margin-top:26px;font-size:17px;padding:8px 16px;border-radius:99px;border:1px solid rgba(255,255,255,.25);opacity:0">Fix list, ranked by impact</div>
+</div>
+
+<!-- app question -->
+<div class="l" id="q" style="left:44px;right:44px;top:250px"></div>
+
+<!-- results -->
+<div class="l" id="res" style="left:44px;top:96px;width:640px">
+  <div class="h" style="font-size:40px;letter-spacing:-.035em">One campaign. <span id="wk" style="color:rgba(242,241,236,.55)">One week.</span></div>
+</div>
+<div class="l" id="r1" style="left:40px;top:210px"><span class="h" id="gmv" style="font-size:112px;color:#FF4D6D;letter-spacing:-.06em">₹9.89</span><span class="s" style="font-size:60px;color:#FF4D6D;margin-left:8px">lakh</span><div class="h" style="font-size:30px;margin-top:4px;letter-spacing:-.02em">in sales</div></div>
+<div class="l" id="r2" style="left:42px;top:420px"><div class="h" id="sh" style="font-size:96px;letter-spacing:-.05em">13,707</div><div class="s" style="font-size:38px;color:rgba(242,241,236,.8)">shares, in seven days.</div></div>
+<div id="hearts"></div>
+
+<!-- end -->
+<div class="l" id="end" style="left:0;right:0;top:200px;text-align:center">
+  <div class="h" style="font-size:58px">What are we building</div>
+  <div class="s" style="font-size:96px;color:#C9F158;margin-top:-4px">next?</div>
+  <div class="h" id="nm" style="font-size:62px;margin-top:110px;letter-spacing:-.045em">Vishal Yadav</div>
+  <div class="t" style="font-size:22px;color:rgba(242,241,236,.6);margin-top:8px">Product (UI/UX) Designer</div>
+  <div id="tags" style="display:flex;gap:10px;justify-content:center;margin-top:26px;flex-wrap:wrap;padding:0 40px"></div>
+  <div class="t" id="open" style="margin-top:28px;font-size:16px;letter-spacing:.16em;color:#C9F158">● TAKING ON NEW PROJECTS</div>
+</div>
+</div>
+<script src="scene.js"></script>
+</body></html>

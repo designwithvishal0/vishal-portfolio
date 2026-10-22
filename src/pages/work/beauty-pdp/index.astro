@@ -1,0 +1,1142 @@
+---
+// Beauty and fashion product page case study, ported word for word from Vishal's build file (PDP-Final/04-pdp-case-study-framer-build.md)
+// onto the JARVIS template, copied from OneBanc. Light pattern (2026-10-13): top and 30 second version on ink, story on light, the shade matcher is the one dark band;
+// colours are the product page's own tokens from that file: ink #141414, pink #E80070, surface #F7F7F7.
+import SiteHeader from '../../../components/SiteHeader.astro';
+import Boot from '../../../components/Boot.astro';
+const title = 'Beauty product page case study, Vishal Yadav, Product Designer';
+const description = 'A product page for foundation and dresses, built on one rule: put the answer next to the doubt.';
+const canonical = new URL('/work/beauty-pdp/', Astro.site).href;
+const ld = [
+  { '@context': 'https://schema.org', '@type': 'CreativeWork', name: 'Beauty and fashion product page', headline: 'Will this shade match me?', description,
+    author: { '@type': 'Person', name: 'Vishal Yadav' }, dateCreated: '2026', genre: 'Product design case study', image: '/work/beauty-pdp/img/og.jpg' },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: '/' },
+    { '@type': 'ListItem', position: 2, name: 'Beauty and fashion product page' } ] },
+];
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<Boot />
+<meta name="description" content={description}>
+<link rel="canonical" href={canonical}>
+<link rel="preload" as="image" href="img/00-hero-poster.jpg" media="(min-width: 621px)" fetchpriority="high"><link rel="preload" as="image" href="img/00-hero-poster-tall.jpg" media="(max-width: 620px)" fetchpriority="high">
+<link rel="stylesheet" href="/css/iphone.css">
+<link rel="stylesheet" href="/css/cs-bar.css">
+<link rel="stylesheet" href="/css/closing-cta.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content={title}><meta property="og:description" content={description}><meta property="og:type" content="article"><meta property="og:url" content={canonical}>
+<meta property="og:image" content="https://vishal-designs.vercel.app/work/beauty-pdp/img/og.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json" set:html={JSON.stringify(ld)} />
+<link rel="stylesheet" href="/css/fonts/gf-823ce7ca3c.css">
+<style is:inline>
+/* Layout: text column of ~66ch beside a sticky contents rail on desktop; one column on phones.
+   Single dark theme by choice: the calmer navy agreed for JARVIS. */
+:root{
+  --bg:#141414; --card:#222225; --fg:#F5F5F6; --muted:#A3A6AD; --line:#333338;
+  --warm:#FF5CA8; --cool:#FF5CA8;
+  --sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  color-scheme:dark;
+  /* tokens the shared site header reads */
+  --ink:var(--fg); --edge:#6B6B72; --btn:var(--fg); --on-btn:var(--bg);
+  --bar:56px; --gut:32px; --max:1376px; --out:cubic-bezier(.23,1,.32,1);
+}
+@media (max-width:759px){:root{--bar:52px;--gut:16px}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html.calm{scroll-behavior:auto}
+body{background:var(--bg);color:var(--fg);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;padding-inline:20px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cool);outline-offset:3px;border-radius:4px}
+h1,h2,h3,h4{text-wrap:balance;margin:0;font-weight:600;letter-spacing:-.015em}
+p{margin:0}
+.mono,.eyebrow,.k{font-family:var(--mono)}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:inline-block;margin-right:6px}
+.k{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:inline-block;margin-right:6px}
+
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:10;padding-top:env(safe-area-inset-top,0px)}
+.progress i{display:block;height:100%;width:0;background:var(--warm)}
+
+.wrap{max-width:1120px;margin:0 auto;padding-block:56px 96px}
+.top{display:flex;justify-content:space-between;gap:16px;font-size:14px;color:var(--muted);padding-bottom:56px}
+.top a{text-decoration:none}.top a:hover{color:var(--fg)}
+
+header.hero{max-width:66ch;display:grid;gap:20px}
+h1{font-size:clamp(40px,7vw,68px);line-height:1.02;letter-spacing:-.03em}
+.hook{font-size:clamp(22px,3vw,30px);font-weight:500;letter-spacing:-.015em;color:var(--warm);margin-top:-8px}
+.dek{font-size:clamp(19px,2.2vw,22px);line-height:1.5;color:var(--fg)}
+.alertline{font-family:var(--mono);font-size:13px;color:var(--warm);display:flex;gap:10px;align-items:center}
+.alertline::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--warm)}
+
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:40px;padding-block:24px;border-block:1px solid var(--line)}
+.facts div{display:grid;gap:6px;min-width:0}
+.facts p{font-size:15px;line-height:1.45}
+.note{margin-top:16px;font-size:14px;color:var(--muted);max-width:72ch}
+
+.summary{margin-top:48px;background:var(--card);border-radius:14px;padding:28px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+.summary h2{grid-column:1/-1;font-size:14px;font-family:var(--mono);font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:inline-block;margin-right:6px}
+.summary div{display:grid;gap:8px;align-content:start;min-width:0}
+.summary p{font-size:15.5px;line-height:1.5}
+
+.layout{display:grid;grid-template-columns:200px minmax(0,1fr);gap:64px;margin-top:80px}
+nav.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 32px);align-self:start;display:grid;gap:4px;font-size:14px}
+nav.toc .k{margin-bottom:10px}
+nav.toc a{text-decoration:none;color:var(--muted);padding:5px 0 5px 14px;border-left:1px solid var(--line)}
+nav.toc a:hover{color:var(--fg)}
+nav.toc a.on{color:var(--fg);border-left-color:var(--warm)}
+
+article{display:grid;gap:104px;min-width:0}
+section{display:grid;gap:22px;max-width:66ch;scroll-margin-top:32px}
+section.wide{max-width:none}
+section h2{font-size:clamp(28px,3.6vw,38px);line-height:1.12}
+section p{color:#D9DADF}
+section p strong{color:var(--fg);font-weight:600}
+
+blockquote{margin:8px 0 0;padding:4px 0 4px 20px;border-left:2px solid var(--warm);font-size:22px;line-height:1.4;color:var(--fg);font-weight:500;letter-spacing:-.01em}
+
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-top:8px}
+.stats div{display:grid;gap:6px;align-content:start}
+.stats b{font-size:32px;font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stats span{font-size:15px;color:var(--muted);line-height:1.45}
+.source{font-size:13px;color:var(--muted)}
+
+.list{display:grid;gap:28px;counter-reset:n}
+.list > div{display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 12px}
+.list .n{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:4px}
+.list h3{font-size:20px}
+.list p{grid-column:2}
+
+.goals{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.goals div{background:var(--card);border-radius:12px;padding:20px;display:grid;gap:8px}
+.goals p{color:var(--fg)}
+
+.options{display:grid;gap:12px}
+.opt{border:1px solid var(--line);border-radius:12px;padding:20px 22px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 20px}
+.opt h3{font-size:18px}
+.opt p{grid-column:1/-1;font-size:16px}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:3px 8px;border-radius:4px;align-self:start;color:var(--muted);border:1px solid var(--line)}
+.opt.built{border-color:var(--warm)}
+.opt.built .tag{color:var(--bg);background:var(--warm);border-color:var(--warm)}
+
+figure{margin:0;display:grid;gap:10px}
+.slot{background:var(--card);border:1px dashed var(--line);border-radius:12px;display:grid;place-items:center;text-align:center;padding:20px;color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.04em;max-width:100%}
+.slot.flow{aspect-ratio:3/2}
+.shot{display:block;max-width:100%;height:auto;border-radius:16px}
+.shot.wide{width:100%}
+.shot.phone{width:100%;max-width:300px;border-radius:32px;border:1px solid var(--line)}
+.slot.phone{aspect-ratio:412/917;border-radius:28px;width:100%;max-width:300px}
+figcaption{font-size:14px;color:var(--muted)}
+
+.screen{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:40px;align-items:start;max-width:880px}
+.screen > div{display:grid;gap:14px;min-width:0}
+.screen h3{font-size:24px;line-height:1.2}
+.screens{display:grid;gap:72px}
+
+.fixes{display:grid;gap:0;border-top:1px solid var(--line)}
+.fix{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:24px;padding-block:22px;border-bottom:1px solid var(--line)}
+.fix h3{font-size:18px;line-height:1.35}
+.fix p{font-size:16px}
+
+.trades{display:grid;gap:0;border-top:1px solid var(--line)}
+.trade{display:grid;grid-template-columns:28px minmax(0,1fr) minmax(0,1fr);gap:8px 20px;padding-block:20px;border-bottom:1px solid var(--line)}
+.trade .n{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:3px}
+.trade h3{font-size:17px;margin-bottom:6px}
+.trade p{font-size:15.5px}
+.trade .cost{color:var(--warm);font-size:15.5px}
+.trade .cost .k{display:block;margin-bottom:4px}
+
+.beforeafter{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.beforeafter div{border-radius:12px;padding:22px;display:grid;gap:10px;align-content:start}
+.beforeafter .b{border:1px solid var(--line)}
+.beforeafter .a{background:var(--card);box-shadow:inset 0 0 0 1px var(--cool)}
+.beforeafter .a .k{color:var(--cool)}
+.metric{display:grid;gap:6px;padding:22px 0 4px;border-top:1px solid var(--line)}
+.metric b{font-size:clamp(24px,3vw,30px);font-weight:600;letter-spacing:-.02em;color:var(--warm)}
+.measures{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.measures div{display:grid;gap:8px}
+
+.closing{margin-top:120px;padding-top:48px;border-top:1px solid var(--line);display:grid;gap:18px}
+.closing h2{font-size:clamp(32px,5vw,48px);letter-spacing:-.025em}
+.closing > p{color:var(--muted);font-size:19px}
+.btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:54px;padding:0 24px;border-radius:100px;font-weight:600;font-size:18px;line-height:1.3;text-decoration:none;transition:transform .2s ease,opacity .2s ease}
+.btn .ic{flex:none;width:16px;height:16px}
+.btn.primary{background:#FF5CA8;color:var(--bg)}
+.btn.ghost{border:1px solid #ffffff47;color:var(--fg)}
+.btn:hover{transform:translateY(-1px);opacity:.92}
+@media (max-width:620px){.btns{flex-direction:column}.btn{width:100%}}
+
+.next{margin-top:64px;display:grid;gap:14px}
+.nextgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.nextgrid a{background:var(--card);border-radius:12px;padding:20px;display:grid;gap:8px;text-decoration:none;align-content:start}
+.nextgrid a:hover{box-shadow:inset 0 0 0 1px var(--line)}
+.nextgrid b{font-size:18px;font-weight:600;letter-spacing:-.01em}
+.nextgrid span{font-size:14px;color:var(--muted)}
+
+@media (max-width:900px){
+  .layout{grid-template-columns:minmax(0,1fr);gap:0}
+  nav.toc{display:none}
+  .summary{grid-template-columns:1fr 1fr}
+  .screen{grid-template-columns:minmax(0,1fr);gap:20px}
+  .slot.phone{max-width:240px}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  .wrap{padding-block:32px 64px}
+  .top{padding-bottom:40px}
+  .facts,.summary,.goals,.beforeafter,.measures,.nextgrid{grid-template-columns:minmax(0,1fr)}
+  .facts{gap:18px}
+  .stats{grid-template-columns:minmax(0,1fr)}
+  .fix{grid-template-columns:minmax(0,1fr);gap:8px}
+  .trade{grid-template-columns:28px minmax(0,1fr)}
+  .trade .cost{grid-column:2}
+  article{gap:80px}
+  .summary{padding:22px}
+}
+.sh{display:contents}
+</style>
+<style is:inline>.proto{display:block;width:100%;aspect-ratio:16/10;border:0;border-radius:24px;background:var(--card)}@media (max-width:640px){.proto{aspect-ratio:9/16}}video.shot{background:var(--card)}
+.reel{position:relative}
+.pills{position:absolute;right:16px;bottom:16px;display:flex;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border-radius:100px;border:1px solid rgba(255,255,255,.22);background:rgba(20,20,20,.78);color:#fff;font:600 12px/1 var(--sans);letter-spacing:.08em;cursor:pointer;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.pill:hover{background:rgba(40,40,44,.9)}
+.pill:focus-visible{outline:2px solid #FF5CA8;outline-offset:2px}
+@media (max-width:620px){.pills{right:10px;bottom:10px}.pill{height:32px;padding:0 11px;font-size:11px}}
+.up{opacity:0;transform:translateY(20px);transition:opacity .4s ease,transform .4s ease;transition-delay:var(--d,0ms)}
+.up.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.up{opacity:1;transform:none;transition:none}}
+html.calm .up{opacity:1;transform:none;transition:none}
+</style>
+<style is:inline>
+/* Matched to the live Framer JARVIS page (measured 2026-10-09): Albert Sans, full width bands that swap
+   navy and light, one 760px reading column, the screens as text left and a 360px phone right. */
+/* Vishal 2026-10-14 02:28: the page uses the font of the design itself, as JARVIS does; loaded up to 700 so headings stay light rather than heavy */
+:root{--sans:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--mono:var(--sans);
+  --bg:#141414;--card:#222225;--fg:#F5F5F6;--body:#F5F5F6;--muted:#A3A6AD;--acc:#FF5CA8;--warm:#FF5CA8;--line:#333338;--band:#141414}
+.lt{--fg:#141414;--body:#4A4D55;--muted:#6B6F78;--acc:#C70063;--card:#F7F7F7;--line:#E6E7EB;--band:#FFFFFF;--warm:#C70063}
+html{overflow-x:clip}
+.eyebrow,.k{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.14em;color:var(--acc)}
+.wrap{max-width:1080px}
+.layout{display:block;margin-top:96px}
+nav.toc{display:none}
+article{gap:0}
+article>section{padding-block:120px;max-width:760px;margin-inline:auto;color:var(--fg);background:var(--band);border-image:conic-gradient(var(--band) 0 0) fill 0//0 100vmax}
+article>section.wide{max-width:1080px}
+section h2{font-size:clamp(32px,4vw,48px);font-weight:700;line-height:1.08;letter-spacing:-.02em;color:var(--fg)}
+section h3{color:var(--fg)}
+section p{color:var(--body);font-size:18px;line-height:1.6}
+.stats b{color:var(--acc)}
+.scr .screens{gap:120px;margin-top:56px}
+.scr .screen{grid-template-columns:minmax(0,640px) 360px;justify-content:space-between;gap:48px;max-width:none;align-items:start}
+.scr .screen>figure{order:2;margin:0}
+.scr .screen h3{font-size:32px;line-height:1.2;letter-spacing:-.01em}
+.lt :focus-visible{outline-color:#C70063}
+@media (max-width:900px){article>section{padding-block:80px}.scr .screen{grid-template-columns:minmax(0,1fr);gap:24px}.scr .screen>figure{order:0}}
+article>section{width:100%}
+/* site top bar, same as the home page; no theme toggle because this case study keeps its own fixed look */
+.wrap{padding-top:40px}
+.bar{margin-inline:calc(50% - 50vw)}
+/* Vishal 2026-10-13: header keeps the frosted blur, same as the home page (the solid navy try is undone) */
+/* Vishal 2026-10-13: header looks exactly like the home page header (its dark look, since this page is dark), with no navy tint.
+   Same frosted blur; a touch more opaque than home so the navy page behind doesn't tint it blue. */
+body{margin-top:0}
+.progress{z-index:30}
+.summary{max-width:1080px;margin-inline:auto}
+.summary h2{font-size:13px;font-family:var(--sans);font-weight:600;letter-spacing:.14em;color:var(--acc)}
+.summary p{font-size:16px}
+/* 21 Oct (Vishal): Captions stays dark when on; the captions themselves show it is on */
+video::cue{font:500 18px/1.4 var(--sans);background:rgba(20,20,20,.82);color:#fff}
+.beforeafter .a{box-shadow:inset 0 0 0 1px #C70063}
+.beforeafter .a .k{color:#C70063}
+.swipe{display:none}
+@media (max-width:620px){
+  #flow figure{display:none}
+  .swipe{display:flex;gap:16px;list-style:none;margin:32px -28px 0;padding:0 28px 8px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:28px;overscroll-behavior-x:contain}
+  .swipe li{flex:0 0 260px;scroll-snap-align:start;display:grid;gap:8px;align-content:start}
+  .swipe p{font-size:17px;font-weight:600;line-height:1.3;color:var(--fg);min-height:2.6em}
+  .swipe img{width:100%;height:auto;border-radius:28px;margin-top:8px;box-shadow:0 12px 32px rgba(20,20,20,.12)}
+}
+@media (max-width:620px){article>section{padding-block:64px}.layout{margin-top:64px}.scr .screens{gap:72px}.scr .screen h3{font-size:26px}}
+
+/* ---- audit Phase 2 and 3 ---- */
+/* one break between two bands of the same colour, not two */
+/* type scale: 13 label, 16 small, 18 body, 22 lead, 32 titles, 48 sections, 68 page title */
+.facts p,.stats span,.note,.source,figcaption,.opt p,.fix p,.trade p,.trade .cost,.nextgrid span{font-size:16px}
+.list .n,.trade .n,.tag{font-size:13px}
+.opt h3,.fix h3,.trade h3,.list h3,.nextgrid b{font-size:18px}
+blockquote,.dek,.closing>p,.metric b,.next h2{font-size:22px}
+.closing h2,.stats b{font-size:32px}
+@media (min-width:621px){.closing h2{font-size:48px}}
+/* what I'd change: each pair on its own card, Problem in amber */
+.fixes{border-top:0;gap:12px}
+.fix{background:var(--card);border:0;border-radius:16px;padding:24px 28px}
+.fix>div{display:grid;gap:6px;align-content:start}
+.k.pr{color:var(--warm)}
+/* the closing line reads as the point, not a footnote */
+.closing>p{font-weight:600;color:var(--acc)}
+/* more work: a picture and a clear hover */
+.nextgrid a{padding:0;overflow:hidden;gap:0;transition:transform .2s ease,box-shadow .2s ease}
+.nextgrid img{display:block;width:100%;height:auto;aspect-ratio:800/837;object-fit:cover}
+.nextgrid b{padding:16px 20px 20px;line-height:1.35}
+.nextgrid a:hover,.nextgrid a:focus-visible{transform:translateY(-2px);box-shadow:0 0 0 1px var(--acc)}
+.nextgrid a:hover b{text-decoration:underline;text-underline-offset:.2em}
+/* prototype: a still and a way out while Figma loads */
+.protowrap{position:relative;margin:0}
+/* Desktop: the prototype fits one screen between the sticky header and the bottom dock (Vishal 2026-10-13 "going into two scrolls") */
+@media (min-width:641px){.protowrap{width:min(100%,calc((100svh - 120px) * 16 / 10));margin-inline:auto}}
+.protowait{position:absolute;inset:0;border-radius:24px;background:var(--card);display:grid;place-content:center;justify-items:center;gap:12px;text-align:center;transition:opacity .3s ease}
+.protowait img{width:120px;height:auto;border-radius:16px;opacity:.9}
+.protowait p{font-size:16px;color:var(--muted)}
+.protowait a{font-size:16px;font-weight:600;color:var(--fg);padding:10px 4px}
+.protowrap.ready .protowait{opacity:0;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.nextgrid a,.protowait{transition:none}}
+html.calm .nextgrid a,html.calm .protowait{transition:none}
+@media (max-width:620px){
+  .opt{grid-template-columns:minmax(0,1fr)}
+  .opt .tag{order:-1;justify-self:start}
+  .fix{padding:20px}
+}
+</style>
+<style is:inline>
+/* Beauty PDP only. Light page: white and surface bands alternate (tokens from the build file). Pink marks the thing to act on.
+   Pink text uses a deeper pink (#C70063) so small labels pass 4.5:1 on white and surface; #E80070 stays for fills, pins and underlines. */
+:root{--pink:#E80070;--pinkt:#C70063;--tint:#FFF6ED;--offer:#EDF6F5;--offerg:#0E7A5F}
+.lt{--fg:#141414;--body:#4A4D55;--muted:#6B6F78;--acc:#C70063;--warm:#C70063;--card:#F7F7F7;--line:#E6E7EB;--band:#FFFFFF}
+.lt.sf{--band:#F7F7F7;--card:#FFFFFF}
+body{background:#141414}
+.wrap>.facts{grid-template-columns:repeat(4,minmax(0,1fr))}
+.facts div{align-content:start}
+@media (max-width:620px){.wrap>.facts{grid-template-columns:1fr 1fr}.wrap>.facts>div:first-child{grid-column:1/-1}}
+.hook{color:var(--acc)}
+.wrap>.layout{border-image:conic-gradient(#FFFFFF 0 0) fill 0//0 100vmax;padding-bottom:0}
+.wrap>.endsec{margin-top:0}
+.reel video{box-shadow:0 16px 40px rgba(0,0,0,.4)}
+/* light pattern: story bands on light, each pads its own top; the shade matcher is the one dark band */
+article>section.lt,article>section#matcher{padding-top:120px}
+@media (max-width:900px){article>section.lt,article>section#matcher{padding-top:80px}}
+@media (max-width:620px){article>section.lt,article>section#matcher{padding-top:64px}}
+#matcher .flat{border-color:rgba(255,255,255,.12)}
+#matcher .count{color:var(--muted)}
+.lt :focus-visible{outline-color:#C70063}
+
+/* closing title is four words, not one: let it wrap, 80px max as in the build file */
+.endsec .closing h2{white-space:normal!important;font-size:clamp(40px,6vw,80px)!important;text-wrap:balance;max-width:14ch}
+/* four facts on one row on desktop, as the build file's meta row */
+@media (min-width:1000px){.wrap>.facts.f4{grid-template-columns:repeat(4,minmax(0,max-content))}}
+/* the one rule */
+.pq{font-size:clamp(24px,3vw,32px);font-weight:600;line-height:1.2;letter-spacing:-.02em;color:var(--fg);margin-top:8px}
+.pq u{text-decoration:underline;text-decoration-color:var(--pink);text-decoration-thickness:3px;text-underline-offset:6px}
+/* who */
+.doubts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.doubts div{background:var(--card);border-radius:16px;padding:24px;display:grid;gap:10px;align-content:start;box-shadow:0 0 0 1px var(--line)}
+.doubts span{font-size:15px;color:var(--muted)}
+.doubts b{font-size:clamp(22px,2.4vw,28px);font-weight:600;line-height:1.2;letter-spacing:-.015em;color:var(--fg)}
+.lt .stats div{background:var(--card);border-radius:16px;padding:20px;box-shadow:0 0 0 1px var(--line)}
+.lt .stats b{color:var(--fg);font-size:clamp(32px,4vw,48px);font-weight:700;letter-spacing:-.03em;line-height:1}
+/* quick test */
+.qt{background:var(--card);border-radius:20px;padding:28px;display:grid;justify-items:center;gap:18px;text-align:center;box-shadow:0 0 0 1px var(--line)}
+.qt .sw{width:88px;height:88px;border-radius:50%;background:#C8946A;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.qt .sw+b{font-size:28px;font-weight:700;color:var(--fg);margin-top:-6px}
+.qt .two{display:flex;gap:12px}
+.qt button{height:48px;min-width:112px;padding:0 22px;border-radius:100px;border:1px solid #141414;background:#fff;color:#141414;font:600 16px/1 var(--sans);cursor:pointer}
+.qt button:hover{background:#141414;color:#fff}
+.qt .ans{font-size:20px;font-weight:600;color:var(--fg);min-height:1.4em}
+.qt .ans[hidden]{display:block;visibility:hidden}
+.colimg{display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--line)}
+/* stores */
+.sos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.sos div{background:var(--card);border-radius:16px;padding:22px;display:grid;gap:12px;align-content:start;box-shadow:0 0 0 1px var(--line)}
+.sos h3{font-size:18px;line-height:1.4;font-weight:600}
+.sos p{font-size:16px;color:var(--pinkt);font-weight:500}
+.sos p b{font-weight:700}
+/* the page walk: phone sticky left, stops right */
+.walk{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(40px,6vw,96px);margin-top:56px;align-items:start}
+.walk>figure{position:sticky;top:120px;width:min(340px,calc((100svh - 190px) * 402 / 874))}
+.walk>figure figcaption{text-align:center;margin-top:6px}
+.stops{display:grid;gap:96px;max-width:560px}
+.stop{display:grid;gap:14px}
+.stop h3{font-size:clamp(24px,2.6vw,32px);line-height:1.2;letter-spacing:-.01em}
+.stop img{display:block;width:100%;max-width:390px;height:auto;border-radius:16px;border:1px solid var(--line)}
+.stop .k{margin-top:6px}
+.stop .other{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--pink);text-decoration-thickness:1.5px}
+.stop .k+p{margin-top:-8px}
+/* matcher carousel */
+.car{display:flex;gap:24px;list-style:none;margin:32px 0 0;padding:4px 4px 12px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:thin}
+.car li{flex:0 0 300px;scroll-snap-align:start;display:grid;gap:16px;align-content:start}
+.car .iph .sc{aspect-ratio:390/844}
+.car p{font-size:17px;line-height:1.5;color:var(--fg)}
+.count{font-size:14px;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.why{background:var(--card);box-shadow:0 0 0 1px rgba(255,255,255,.08);color:#fff;border-radius:20px;padding:28px;display:grid;gap:10px;margin-top:24px;max-width:760px}
+.why .k{color:#FF5CA8}
+.why p{color:#E6E7EB}
+.h3x{font-size:clamp(24px,2.6vw,32px);line-height:1.2;margin-top:48px}
+.two-up{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.flat{display:block;width:100%;height:auto;border-radius:16px;border:1px solid var(--line)}
+.two-up figure,.full{display:grid;gap:10px}
+/* fashion quote on the warning tint */
+.warnq{background:var(--tint);border-radius:16px;padding:22px 24px;font-size:clamp(20px,2.4vw,26px);font-weight:600;line-height:1.3;color:#141414;max-width:760px;margin:0}
+/* desktop laptop frames */
+.lap{background:#141414;border-radius:18px;padding:10px 10px 14px;box-shadow:0 24px 50px rgba(20,20,20,.16)}
+.lap .sc{height:min(680px,70svh);overflow-y:auto;border-radius:10px;background:#fff;scrollbar-width:none}
+.lap .sc::-webkit-scrollbar{display:none}
+.lap .sc img{display:block;width:100%;height:auto}
+.lap .sc:focus-visible{outline:3px solid #C70063;outline-offset:4px}
+.laps{display:grid;gap:48px;margin-top:40px}
+.laps figure{display:grid;gap:12px}
+/* edge cases */
+.edges{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;list-style:none;margin:32px 0 0;padding:0}
+.edges li{display:grid;gap:10px;align-content:start}
+.edges img{display:block;width:100%;height:auto;border-radius:20px;border:1px solid var(--line)}
+.edges h3{font-size:18px;line-height:1.3;margin-top:6px}
+.edges p{font-size:16px;line-height:1.5}
+/* cut */
+.cuts{display:grid;gap:0;border-top:1px solid var(--line)}
+.cuts div{display:grid;gap:8px;padding-block:22px;border-bottom:1px solid var(--line)}
+.cuts h3{font-size:20px;text-decoration:line-through;text-decoration-color:var(--pink);text-decoration-thickness:2px}
+/* trade offs */
+.costs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
+.costs div{background:var(--card);border-radius:16px;padding:22px;display:grid;gap:10px;align-content:start;box-shadow:0 0 0 1px var(--line)}
+.costs .n{font-size:13px;font-weight:700;color:var(--muted)}
+.costs h3{font-size:19px;line-height:1.35}
+.costs p{font-size:16px}
+.costs .cost{background:var(--tint);border-radius:10px;padding:12px 14px;color:#141414}
+.costs .cost .k{display:block;color:#8A4B00;margin-bottom:4px}
+/* system */
+.nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.nums div{display:grid;gap:6px;align-content:start}
+.nums b{font-size:clamp(40px,5vw,64px);font-weight:700;line-height:1;letter-spacing:-.04em;color:var(--fg)}
+.nums span{font-size:15px;color:var(--muted);line-height:1.4}
+/* what changed */
+.lt .beforeafter .b{background:var(--card);border:0;box-shadow:0 0 0 1px var(--line)}
+.lt .beforeafter .a{background:var(--card);box-shadow:inset 0 0 0 2px var(--pink)}
+.lt .beforeafter .a .k{color:var(--pinkt)}
+.beforeafter p{font-size:17px}
+.bigm{display:grid;gap:8px;padding-top:12px}
+.bigm b{font-size:clamp(40px,6vw,64px);font-weight:700;line-height:1;letter-spacing:-.03em;color:var(--fg)}
+@media (max-width:900px){
+  .walk{grid-template-columns:minmax(0,1fr)}
+  .walk>figure{position:static;justify-self:center;width:min(300px,100%)}
+  .walk>figure .sc{aspect-ratio:auto;height:600px}
+  .edges{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-28px;padding:0 28px 8px;scroll-padding-inline:28px}
+  .edges li{flex:0 0 240px;scroll-snap-align:start}
+  .sos{grid-template-columns:minmax(0,1fr)}
+  .nums{grid-template-columns:1fr 1fr;row-gap:28px}
+}
+@media (max-width:620px){
+  .doubts,.two-up,.costs{grid-template-columns:minmax(0,1fr)}
+  .car{margin-inline:-28px;padding:4px 28px 12px;scroll-padding-inline:28px}
+  .car li{flex:0 0 240px}
+  .lap{padding:6px 6px 10px;border-radius:14px}
+  .lap .sc{height:440px}
+  .stops{gap:64px}
+  .qt .two{flex-direction:column;width:100%}
+  .lt .stats div{background:none;box-shadow:none;border-radius:0;padding:14px 0}
+}
+</style>
+</head>
+
+
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
+
+<SiteHeader home="/" theme={false} book />
+
+<main class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Case study · Ecommerce product design</p>
+    <h1>Beauty and fashion product page</h1>
+    <p class="hook">Will this shade match me?</p>
+    <p class="dek">A product page for foundation and dresses, built on one rule: put the answer next to the doubt.</p>
+  </header>
+
+  <div class="facts f4">
+    <div><span class="k">Role</span><p>Solo. Store audit, IA, interaction, UI, design system and copy</p></div>
+    <div><span class="k">Type</span><p>Self initiated concept</p></div>
+    <div><span class="k">Timeline</span><p>5 days, September 2026</p></div>
+    <div><span class="k">Tools</span><p>Figma</p></div>
+  </div>
+  <p class="note"><span class="nlab">Independent concept</span>Not affiliated with Maybelline, Sangria or any store. Match rates, exchange rates and review counts are a worked example, not real data.</p>
+  <figure class="reel" style="margin-top:32px"><video data-inview class="shot wide" data-poster="img/00-hero-poster.jpg" width="1280" height="720" muted loop playsinline preload="metadata" aria-label="Beauty and fashion product page showreel with voiceover"><track kind="captions" src="captions.vtt" srclang="en" label="English"></video>
+    <div class="pills"><button type="button" class="pill" data-act="play" aria-pressed="false" aria-label="Play"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg><span class="lb">Play</span></button><button type="button" class="pill" data-act="sound" aria-pressed="false" aria-label="Turn sound on"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6A2 2 0 0 1 5 8.2H3a1 1 0 0 0-1 1v5.6a1 1 0 0 0 1 1h2a2 2 0 0 1 1.4.6l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg><span class="lb">Sound on</span></button><button type="button" class="pill" data-act="cc" aria-pressed="false" aria-label="Captions"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M10.5 10.2a2 2 0 1 0 0 3.6M17 10.2a2 2 0 1 0 0 3.6"/></svg><span class="lb">Captions</span></button><button type="button" class="pill fs" data-act="fs" aria-label="Full screen"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/></svg><span class="lb">Full screen</span></button></div></figure>
+  <script is:inline>(()=>{
+    // Same reel behaviour as JARVIS: sound requested, muted fallback, first tap turns sound on, tap toggles play. Captions button as on Twelve; the captions use the words shown on screen.
+    const f=document.currentScript.previousElementSibling, v=f.querySelector('video'); const tall=matchMedia('(max-width:620px)').matches; v.poster=tall?'img/00-hero-poster-tall.jpg':v.dataset.poster;if(tall){v.width=720;v.height=1280} v.src=tall?'showreel-tall.mp4':'showreel.mp4'; const [pb,sb,cb]=f.querySelectorAll('.pill'), tr=v.textTracks[0];
+    tr.mode='hidden';
+    cb.onclick=()=>{const on=tr.mode!=='showing';tr.mode=on?'showing':'hidden';cb.setAttribute('aria-pressed',String(on))};
+
+    const on='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6A2 2 0 0 1 5 8.2H3a1 1 0 0 0-1 1v5.6a1 1 0 0 0 1 1h2a2 2 0 0 1 1.4.6l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M16 9a5 5 0 0 1 0 6M19.4 18.4a9 9 0 0 0 0-12.8"/></svg>';
+    const off='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.4 7.6A2 2 0 0 1 5 8.2H3a1 1 0 0 0-1 1v5.6a1 1 0 0 0 1 1h2a2 2 0 0 1 1.4.6l3.4 3.4a.7.7 0 0 0 1.2-.5z"/><path d="M22 9l-6 6M16 9l6 6"/></svg>';
+    const ip='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M7 5.3v13.4a1.2 1.2 0 0 0 1.8 1l10.6-6.7a1.2 1.2 0 0 0 0-2L8.8 4.3A1.2 1.2 0 0 0 7 5.3z" fill="currentColor"/></svg>', ia='<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><rect x="6" y="4.5" width="4.2" height="15" rx="1.4" fill="currentColor"/><rect x="13.8" y="4.5" width="4.2" height="15" rx="1.4" fill="currentColor"/></svg>';
+    const paint=()=>{pb.innerHTML=v.paused?ip+'<span class="lb">Play</span>':ia+'<span class="lb">Pause</span>';pb.setAttribute('aria-label',v.paused?'Play':'Pause');pb.setAttribute('aria-pressed',String(!v.paused));
+      sb.innerHTML=v.muted?off+'<span class="lb">Sound on</span>':on+'<span class="lb">Sound off</span>';sb.setAttribute('aria-label',v.muted?'Turn sound on':'Turn sound off');sb.setAttribute('aria-pressed',String(!v.muted));};
+    const fb=f.querySelector('.fs'),fsOn=()=>document.fullscreenElement===f;
+    fb.onclick=()=>{if(fsOn())document.exitFullscreen();else if(f.requestFullscreen)f.requestFullscreen();else if(v.webkitEnterFullscreen)v.webkitEnterFullscreen()};
+    document.addEventListener('fullscreenchange',()=>{const o=fsOn();fb.setAttribute('aria-label',o?'Exit full screen':'Full screen');fb.querySelector('.lb').textContent=o?'Exit full screen':'Full screen'});
+    let chose=false;
+    let blocked=false;
+    pb.onclick=()=>{if(v.paused){if(!chose)v.muted=false;v.play()}else v.pause()};
+    v.onclick=()=>{if(blocked){blocked=false;if(!chose)v.muted=false;if(v.paused)v.play();return}pb.onclick()};v.style.cursor='pointer';
+    sb.onclick=()=>{chose=true;v.muted=!v.muted;if(!v.muted&&v.paused)v.play()};
+    const wake=e=>{if(!chose&&!(e.target.closest&&e.target.closest('.reel .pill'))){v.muted=false;if(e.target!==v)blocked=false}removeEventListener('pointerdown',wake,true);removeEventListener('keydown',wake,true)};
+    addEventListener('pointerdown',wake,true);addEventListener('keydown',wake,true);
+    ['play','pause','volumechange'].forEach(e=>v.addEventListener(e,paint));
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.classList.contains('calm')){v.muted=false;v.play().catch(e=>{if(e.name==='NotAllowedError'){blocked=true;v.muted=true;v.play().catch(()=>{})}})}paint();
+  })()</script>
+
+  <section class="summary" aria-labelledby="sum">
+    <h2 id="sum">The 30 second version</h2>
+    <div><span class="k">Problem</span><p>Each buyer has one question that stops the sale: the shade for a foundation, the size for a dress.</p></div>
+    <div><span class="k">Decision</span><p>The proof for that question sits right where it comes up, never in a tab further down.</p></div>
+    <div><span class="k">The one metric that matters</span><p>Wrong shade reports. If the matcher works, that line falls.</p></div>
+    <div><span class="k">What I learned</span><p>Now, before I copy a pattern, I ask what it quietly depends on.</p></div>
+  </section>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Contents">
+      <div class="tid" aria-hidden="true"><b>Beauty and fashion product page</b><span>Self initiated · 2026</span><i></i></div>
+      <span class="k">Contents</span>
+      <a href="#rule">The one rule</a>
+      <a href="#who">Who this is for</a>
+      <a href="#try">Try it yourself</a>
+      <a href="#stores">What stores already had</a>
+      <a href="#page">The full page</a>
+      <a href="#matcher">Shade matcher</a>
+      <a href="#fashion">Fashion</a>
+      <a href="#desktop">Desktop</a>
+      <a href="#edges">Edge cases</a>
+      <a href="#wrong">What I got wrong first</a>
+      <a href="#trades">Trade offs</a>
+      <a href="#system">Under the hood</a>
+      <a href="#changed">What changed</a>
+      <a href="#breaks">Where this breaks</a>
+      <a href="#learned">What I learned</a>
+    </nav>
+    <button type="button" class="tocpill" popovertarget="tocsheet" aria-label="Contents"><span class="k">Contents</span><b>The one rule</b><i aria-hidden="true">1 / 15</i><span class="chev" aria-hidden="true"></span></button>
+    <div id="tocsheet" class="tocsheet" popover><span class="k">Contents</span></div>
+    <div class="dockfade" aria-hidden="true"></div><nav class="dock" aria-label="Contents"><button type="button" class="dkb" data-go="-1" aria-label="Previous section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><div class="dkm"><div class="dkt"><b></b><i></i></div><div class="dks"></div></div><a class="dkn" href="#"><small>Next</small><span></span></a><button type="button" class="dkb" data-go="1" aria-label="Next section"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button></nav>
+
+    <article>
+      <section id="rule" class="lt">
+        <hgroup class="sh"><p class="eyebrow">The hardest call</p>
+        <h2>Put the answer next to the doubt</h2></hgroup>
+        <p>Every product page has the same sections: photos, price, options, delivery, reviews. The order is where they differ, and almost every store orders them by what the store wants to say.</p>
+        <p>I ordered mine by what the buyer is unsure about. A foundation buyer has one doubt: will this shade match me? A dress buyer has one doubt: will this size fit me? Everything on both pages follows from putting the evidence for that one doubt exactly where it is felt, and keeping everything else quiet until the choice is made.</p>
+        <p>That rule decided the fold, the order of sections, what became a tool, what became a single sentence, and most of the edge cases.</p>
+        <blockquote class="pq">The answer goes <u>next to the doubt</u>, not in a tab after it.</blockquote>
+      </section>
+
+      <section id="who" class="lt sf">
+        <hgroup class="sh"><p class="eyebrow">Who this is for</p>
+        <h2>Two buyers, two doubts that stop the sale</h2></hgroup>
+        <div class="doubts">
+          <div><span>Buying a foundation from a brand she has never worn</span><b>Will this shade match me?</b></div>
+          <div><span>Buying a dress from a brand he has never bought</span><b>Will this size fit me?</b></div>
+        </div>
+        <p>Both are shopping on a phone, from a product they cannot touch. For the foundation buyer the cost of a wrong guess is total, because foundation is sealed for hygiene and cannot be sent back. For the dress buyer the cost is a return trip and a week of waiting.</p>
+        <div class="stats">
+          <div><b>1st</b><span>shade mismatch is the top reason complexion products come back</span></div>
+          <div><b>38%</b><span>of mobile product pages are even decent (Baymard benchmark of 344 ecommerce sites)</span></div>
+          <div><b>0 of 6</b><span>Indian stores whose shade selector said depth or undertone</span></div>
+        </div>
+        <p class="source">The six stores are Nykaa, Tira, Amazon India, Flipkart, Myntra and Ajio, checked firsthand on desktop and mobile web, with the same foundation wherever possible.</p>
+      </section>
+
+      <section id="try" class="lt">
+        <hgroup class="sh"><p class="eyebrow">Try it yourself</p>
+        <h2>Is 290 warm or cool?</h2></hgroup>
+        <p>That is the full label one major beauty store gives a shade. Just “290”.</p>
+        <div class="qt">
+          <span class="sw" aria-hidden="true"></span><b>290</b>
+          <div class="two"><button type="button">Warm</button><button type="button">Cool</button></div>
+          <div class="ans" aria-live="polite" hidden>Nobody can tell. That is the problem.</div>
+        </div>
+        <script is:inline>(()=>{const q=document.currentScript.previousElementSibling,a=q.querySelector('.ans');q.querySelectorAll('button').forEach(b=>b.onclick=()=>{a.hidden=false})})()</script>
+        <p>One store ran three naming systems inside the same row of shades. On my page every shade says three things: a number, a name and where it sits. 230 Natural Buff, medium, warm. Ordered light to deep.</p>
+        <img class="colimg" src="img/12-stop-beauty-shade.webp" width="780" height="620" alt="The shade row on the product page: named shades from light to deep, with 230 Natural Buff, medium, warm selected" loading="lazy">
+      </section>
+
+      <section id="stores" class="lt sf">
+        <hgroup class="sh"><p class="eyebrow">Six stores, twelve surfaces</p>
+        <h2>Every store built the right tool, then hid it</h2></hgroup>
+        <p>The surprise was not what was missing. Almost everything a buyer needs already exists somewhere. It is just never where the buyer is standing.</p>
+        <div class="sos">
+          <div><h3>Ajio built a chart of how a size actually fits. It is in the app only. Two words on web.</h3><p><b>So I:</b> put fit as one honest sentence directly above the size buttons.</p></div>
+          <div><h3>Tira built a shade finder. It disappears on desktop.</h3><p><b>So I:</b> put the matcher on the photo on mobile and beside the shades on desktop, always within reach of the choice.</p></div>
+          <div><h3>Nykaa built virtual try on. It is an unlabelled thumbnail with no words on the page.</h3><p><b>So I:</b> gave the matcher a name, a pink pill and one job: Find my shade.</p></div>
+        </div>
+        <p class="source">I also tested three behaviours instead of just looking at them: adding to bag with no shade picked, how sold out shades render, and whether ratings carry over to the category grid.</p>
+      </section>
+
+      <section id="page" class="lt wide">
+        <div style="display:grid;gap:22px;max-width:66ch">
+          <p class="eyebrow">The page</p>
+          <h2>Here is the whole product page, top to bottom</h2>
+          <p>Read it the way a buyer moves through it: discover, evaluate, select, purchase. At every stop the one rule shows up in a different form.</p>
+        </div>
+        <div class="walk">
+          <figure><div class="iph"><div class="sc" tabindex="0"><img src="img/01-mobile-beauty-full-page.webp" width="780" height="9809" alt="The full foundation product page on mobile, from the photo down to the pairings" loading="lazy"></div></div><figcaption>Keep scrolling and the phone scrolls through the full page.</figcaption></figure>
+          <div class="stops">
+            <div class="stop"><span class="k">Discover · The photo</span><h3>The matcher sits on the photo</h3><img src="img/10-stop-beauty-photo.webp" width="780" height="1240" alt="The product photo with a pink Find my shade pill and the selected shade named in the top corner" loading="lazy"><span class="k">This page</span><p>Find my shade is a pink pill on the photo, where the doubt starts. The selected shade is named in the top corner.</p><span class="k">Other pages</span><p class="other">Try on hides as an unlabelled thumbnail.</p></div>
+            <div class="stop"><span class="k">Evaluate · Price and offer</span><h3>A price you do not have to calculate</h3><img src="img/11-stop-beauty-price.webp" width="780" height="560" alt="The price block: ₹441 with Buy at ₹375 with NEW15 worked out underneath" loading="lazy"><span class="k">This page</span><p>Buy at ₹375 with NEW15, worked out and sitting right under the ₹441 price. It comes before the shades, because if the price rules the product out, choosing a shade was wasted effort.</p><span class="k">Other pages</span><p class="other">A row of coupon codes. The maths is yours.</p></div>
+            <div class="stop"><span class="k">Select · Shade</span><h3>The decision comes before the button</h3><img src="img/12-stop-beauty-shade.webp" width="780" height="620" alt="Named shades from light to deep, followed by the note that shades cannot be returned" loading="lazy"><span class="k">This page</span><p>Named shades, light to deep, then the one fact that matters: shades cannot be returned. It is the last thing between the shades and the buy bar.</p><span class="k">Other pages</span><p class="other">“290”. “Shade 128”. Add to Bag sits 97 pixels above the shade row.</p></div>
+            <div class="stop"><span class="k">Purchase · Getting it to you</span><h3>Delivery waits until after the choice</h3><img src="img/13-stop-beauty-delivery.webp" width="780" height="580" alt="The delivery block with pincode, cash on delivery and a delivery date" loading="lazy"><span class="k">This page</span><p>Pincode, cash on delivery and a real date, placed after the buy decision. An empty pincode box between “I want this” and Buy is homework, and it makes everyone pay for a problem a few people have.</p></div>
+            <div class="stop"><span class="k">Evaluate · Reviews</span><h3>Reviews about your shade, not the bottle</h3><img src="img/14-stop-beauty-reviews.webp" width="780" height="1440" alt="Reviews with a Did 230 Natural Buff match block showing 64% matched, 23% slightly off and 13% wrong shade" loading="lazy"><span class="k">This page</span><p>“Did 230 Natural Buff match?” with 64% matched, 23% slightly off and 13% wrong shade. Reviews filter to shades near yours, and each one says what the person bought and what they moved to.</p><span class="k">Other pages</span><p class="other">One star average for every shade. 43% of sites show no rating breakdown at all.</p></div>
+            <div class="stop"><span class="k">Purchase · Pairings</span><h3>Goes with the shade you pick</h3><img src="img/15-stop-beauty-pairings.webp" width="780" height="620" alt="A row of primer, compact and setting products picked for the chosen shade" loading="lazy"><span class="k">This page</span><p>Primer, compact and setting products picked for the shade you chose, not a generic bestseller row.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="matcher" class="wide">
+        <div style="display:grid;gap:22px;max-width:66ch">
+          <p class="eyebrow">Inside the shade step</p>
+          <h2>Two questions. Three honest answers. No promises.</h2>
+          <p>It does not ask for a selfie. It asks two things anyone can answer, and tells you how to answer them.</p>
+        </div>
+        <ul class="car" aria-label="Shade matcher, five steps">
+          <li><div class="iph"><div class="sc"><img src="img/20-matcher-1-closed.webp" width="780" height="1688" alt="The product photo with the Find my shade pill" loading="lazy"></div></div><p>Find my shade is on the photo, right where you are already looking.</p></li>
+          <li><div class="iph"><div class="sc"><img src="img/21-matcher-2-depth.webp" width="780" height="1688" alt="Matcher step asking how deep your skin is" loading="lazy"></div></div><p>How deep is your skin? Look at your jaw in daylight, not your hand. Hands run darker.</p></li>
+          <li><div class="iph"><div class="sc"><img src="img/22-matcher-3-undertone.webp" width="780" height="1688" alt="Matcher step asking which way your undertone leans" loading="lazy"></div></div><p>Which way do you lean? Hold gold, then silver, against your face.</p></li>
+          <li><div class="iph"><div class="sc"><img src="img/23-matcher-4-result.webp" width="780" height="1688" alt="Matcher result with three shades, closest first, each with its match rate" loading="lazy"></div></div><p>Three shades, closest first, each with how often it actually matched. And it says plainly that nothing here is a guarantee.</p></li>
+          <li><div class="iph"><div class="sc"><img src="img/24-matcher-5-applied.webp" width="780" height="1688" alt="The product page after matching, showing Matched to medium, warm with a Redo link" loading="lazy"></div></div><p>The page remembers: “Matched to medium, warm”, with a Redo if you change your mind.</p></li>
+        </ul>
+        <p class="count" aria-hidden="true"><span>1</span> of 5</p>
+        <script is:inline>(()=>{const c=document.currentScript.previousElementSibling,ul=c.previousElementSibling,n=c.querySelector('span'),li=[...ul.children];ul.addEventListener('scroll',()=>{const x=ul.scrollLeft+8;let i=0;li.forEach((l,j)=>{if(l.offsetLeft-ul.offsetLeft<=x)i=j});if(ul.scrollLeft+ul.clientWidth>=ul.scrollWidth-4)i=li.length-1;n.textContent=i+1},{passive:true})})()</script>
+        <div class="why"><span class="k">Why three and not one</span><p>A single answer would sound confident. Three with real match rates is honest about how fuzzy skin tone is, and still narrows twenty one shades to a choice you can make.</p></div>
+        <h3 class="h3x">On a laptop it changes shape, not just size</h3>
+        <p style="max-width:66ch">The bottom sheet becomes a side panel, so the product stays fully in view while you answer. You close it with Escape or a click outside instead of a swipe.</p>
+        <div class="two-up">
+          <img class="flat" src="img/25-matcher-desktop-depth.webp" width="1600" height="1000" alt="Desktop shade matcher as a side panel, asking for skin depth" loading="lazy">
+          <img class="flat" src="img/26-matcher-desktop-result.webp" width="1600" height="1000" alt="Desktop shade matcher side panel showing three matched shades" loading="lazy">
+        </div>
+        <img class="flat" src="img/27-matcher-desktop-applied.webp" width="1600" height="1000" alt="Desktop product page after matching, with the matched shade applied" loading="lazy">
+      </section>
+
+      <section id="fashion" class="lt wide">
+        <div style="display:grid;gap:22px;max-width:66ch">
+          <p class="eyebrow">The second category</p>
+          <h2>A dress does not need a tool. It needs one honest sentence.</h2>
+          <p>You know your size. What you do not know is whether this brand’s M is anyone else’s M. So fashion gets a sentence instead of a matcher, placed above the size buttons so it changes your pick before you make it.</p>
+          <blockquote class="warnq">Sangria’s M runs a size small. 23% of buyers exchanged for the next size up.</blockquote>
+          <p>It blames the brand, not your body.</p>
+        </div>
+        <div class="walk">
+          <figure><div class="iph"><div class="sc" tabindex="0"><img src="img/02-mobile-fashion-full-page.webp" width="780" height="7671" alt="The full dress product page on mobile, from the photo down to the reviews" loading="lazy"></div></div><figcaption>Keep scrolling and the phone scrolls through the full page.</figcaption></figure>
+          <div class="stops">
+            <div class="stop"><span class="k">Discover · The photo</span><h3>Fit help on the photo</h3><img src="img/16-stop-fashion-photo.webp" width="780" height="1240" alt="The dress photo with Model wears M, 5 foot 7 in the corner and a Size button on the photo" loading="lazy"><span class="k">This page</span><p>“Model wears M, 5′7″” in the corner, and a Size button on the photo itself.</p><span class="k">Other pages</span><p class="other">Fit data on the app only. Two words on web.</p></div>
+            <div class="stop"><span class="k">Select · Size</span><h3>The sentence that changes your pick</h3><img src="img/17-stop-fashion-size.webp" width="780" height="400" alt="The fit sentence Sangria’s M runs a size small above the size buttons" loading="lazy"><span class="k">This page</span><p>Sangria’s M runs a size small, sitting directly above the sizes.</p><span class="k">Other pages</span><p class="other">Pick a size with nothing to go on.</p></div>
+            <div class="stop"><span class="k">Purchase · Returns</span><h3>Same slot, opposite meaning</h3><img src="img/18-stop-fashion-returns.webp" width="780" height="760" alt="The returns block: free 7 day returns and one free exchange" loading="lazy"><span class="k">This page</span><p>Free 7 day returns and one free exchange. On foundation this part of the page warns. On a dress it reassures, because the risk is opposite.</p></div>
+            <div class="stop"><span class="k">Evaluate · Reviews</span><h3>Did size M fit?</h3><img src="img/19-stop-fashion-reviews.webp" width="780" height="1660" alt="Dress reviews showing 64% true to size and 23% ran small" loading="lazy"><span class="k">This page</span><p>64% true to size, 23% ran small, filtered to people near your size and height.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="desktop" class="lt sf wide">
+        <div style="display:grid;gap:22px;max-width:66ch">
+          <p class="eyebrow">Desktop</p>
+          <h2>Why the two desktop pages look different</h2>
+        </div>
+        <div class="laps">
+          <figure><div class="lap"><div class="sc" tabindex="0"><img src="img/03-desktop-beauty-full-page.webp" width="1600" height="5409" alt="The full foundation product page on desktop" loading="lazy"></div></div><figcaption>Foundation: a rail beside one big photo</figcaption></figure>
+          <figure><div class="lap"><div class="sc" tabindex="0"><img src="img/04-desktop-fashion-full-page.webp" width="1600" height="4151" alt="The full dress product page on desktop" loading="lazy"></div></div><figcaption>Dress: a grid of every angle</figcaption></figure>
+        </div>
+        <div style="display:grid;gap:22px;max-width:66ch;margin-top:40px">
+          <p>Because the photos do different jobs. Beauty photos are reference: a bottle, a claims graphic, a shade chart. You pick one to look at, so it is a rail beside one big stage. Fashion photos are evidence: front, back, side. Fit reads across angles, so it is a grid that shows them together.</p>
+          <p>There is a second reason. A grid scrolls. The beauty buy column is tall, so a scrolling gallery would drag the shade choice out of view. The fashion column is short. The gallery is decided by its neighbour, not by taste.</p>
+        </div>
+        <div class="two-up" style="margin-top:32px">
+          <figure><img class="flat" src="img/05-desktop-beauty-fold.webp" width="1600" height="1000" alt="Desktop foundation page fold with a thumbnail rail beside one large photo" loading="lazy"><figcaption>Reference: pick one to look at</figcaption></figure>
+          <figure><img class="flat" src="img/06-desktop-fashion-fold.webp" width="1600" height="1000" alt="Desktop dress page fold with a grid of front, back and side photos" loading="lazy"><figcaption>Evidence: compare them all</figcaption></figure>
+        </div>
+      </section>
+
+      <section id="edges" class="lt wide">
+        <div style="display:grid;gap:22px;max-width:66ch">
+          <p class="eyebrow">Seven edge cases</p>
+          <h2>Bad news, said once, with a way out</h2>
+          <p>Every state follows the same three rules. Say what is true. Do not pad it. Leave one useful thing to do.</p>
+        </div>
+        <ul class="edges">
+          <li><img src="img/30-edge-sold-out.webp" width="780" height="1688" alt="Sold out state with the badge above the name and a Notify me button" loading="lazy"><h3>When it is gone</h3><p>The badge sits above the name, because stock is about the product, not the photo. The button becomes Notify me, and promises one message.</p></li>
+          <li><img src="img/31-edge-size-gone.webp" width="780" height="1688" alt="Size gone state with M struck and outlined and XL dimmed" loading="lazy"><h3>When your size is gone</h3><p>M is struck and outlined because it was your pick. XL is just dimmed. The fit sentence becomes the way out: L is the closest fit.</p></li>
+          <li><img src="img/32-edge-no-reviews.webp" width="780" height="1688" alt="No reviews yet state" loading="lazy"><h3>When nobody has bought it yet</h3><p>It says so and stops. No borrowed rating from other shades to look busy.</p></li>
+          <li><img src="img/33-edge-cannot-deliver.webp" width="780" height="1688" alt="Cannot deliver state with the pincode kept in the box" loading="lazy"><h3>When we cannot reach you</h3><p>Your pincode stays in the box so you can see what went wrong. One action left: tell me when you deliver here.</p></li>
+          <li><img src="img/34-edge-21-shades.webp" width="780" height="1688" alt="Twenty one shades with a depth filter and See all 21 shades" loading="lazy"><h3>When there are 21 shades</h3><p>A depth filter appears, and See all 21 shades comes back, because now something actually overflows.</p></li>
+        </ul>
+        <div class="two-up" style="margin-top:40px">
+          <figure><img class="flat" src="img/35-edge-sold-out-desktop.webp" width="1600" height="1000" alt="Sold out state on desktop" loading="lazy"><figcaption>On desktop, four things change instead of one.</figcaption></figure>
+          <figure><img class="flat" src="img/36-edge-21-shades-desktop.webp" width="1600" height="1000" alt="Twenty one shades on desktop wrapping into rows" loading="lazy"><figcaption>Twenty one shades wrap into rows instead of scrolling four at a time.</figcaption></figure>
+        </div>
+      </section>
+
+      <section id="wrong" class="lt sf">
+        <hgroup class="sh"><p class="eyebrow">What I got wrong first</p>
+        <h2>Four things I built, then cut</h2></hgroup>
+        <div class="cuts">
+          <div><h3>A buy rail pinned to the side</h3><p>It repeated the product, price and button from the very first pixel and squeezed the photo to 460px on a 1440 screen. Now a bar slides in only after the page’s own buttons scroll away.</p></div>
+          <div><h3>A shade dropdown</h3><p>Copied from a store with fifty shades, where it makes sense. With six shades all visible, mine opened a list of exactly what was already on screen.</p></div>
+          <div><h3>A borrowed rating</h3><p>The empty review state quoted 4.4 from the other shades. Reviews belong to the product, not the shade. I had invented a number, so it went.</p></div>
+          <div><h3>Three helpful paragraphs</h3><p>A note explaining the matcher, one explaining the gallery, a box explaining delivery. All three deleted. If a control needs a paragraph, the control is wrong.</p></div>
+        </div>
+      </section>
+
+      <section id="trades" class="lt wide">
+        <div style="display:grid;gap:22px;max-width:66ch">
+          <p class="eyebrow">Trade offs</p>
+          <h2>What each decision cost</h2>
+        </div>
+        <div class="costs">
+          <div><span class="n">01</span><h3>The no returns warning sits right before Buy</h3><p class="cost"><span class="k">What it cost</span>The last thing you read before paying is a warning. Some impulse buys will die there.</p></div>
+          <div><span class="n">02</span><h3>Delivery waits until after the buttons</h3><p class="cost"><span class="k">What it cost</span>Someone in an unserved pincode finds out one step later.</p></div>
+          <div><span class="n">03</span><h3>Three shades, not one</h3><p class="cost"><span class="k">What it cost</span>The matcher hands you a shortlist instead of deciding for you.</p></div>
+          <div><span class="n">04</span><h3>A tool for beauty, a sentence for fashion</h3><p class="cost"><span class="k">What it cost</span>The two pages look less alike, and someone skimming may call it inconsistent.</p></div>
+          <div><span class="n">05</span><h3>Defaults stated out loud</h3><p>230 and M are preselected because they sell most, and the page says so.</p><p class="cost"><span class="k">What it cost</span>One more line in the busiest part of the page.</p></div>
+          <div><span class="n">06</span><h3>Pink means commit, nowhere else</h3><p>Buy, the real price, the match bars and the shade you bought. Never a heading.</p><p class="cost"><span class="k">What it cost</span>A quieter page that leans on type for structure.</p></div>
+        </div>
+      </section>
+
+      <section id="system" class="lt sf">
+        <hgroup class="sh"><p class="eyebrow">Under the hood</p>
+        <h2>Built from parts, not drawn twice</h2></hgroup>
+        <div class="nums">
+          <div><b>21</b><span>colour tokens</span></div>
+          <div><b>19</b><span>text styles</span></div>
+          <div><b>17</b><span>component sets</span></div>
+          <div><b>0</b><span>unbound fills on the main screens</span></div>
+        </div>
+        <p>Spacing tokens switch between mobile and desktop modes, and components adapt through device variants instead of stretching a phone part to laptop width. Four full pages, nine matcher states and seven edge cases, all built from the same parts.</p>
+      </section>
+
+      <section id="changed" class="lt">
+        <hgroup class="sh"><p class="eyebrow">What changed</p>
+        <h2>The same foundation, bought two ways</h2></hgroup>
+        <div class="beforeafter">
+          <div class="b"><span class="k">Before (a typical store)</span><p>Six circles with numbers. One quietly preselected. The returns rule buried in the policy. Coupon maths left to you. The shade gets checked when the box arrives. ₹441, and a coin toss.</p></div>
+          <div class="a"><span class="k">After (this page)</span><p>Find my shade on the photo. Two questions, three matches with real match rates. Every shade named with depth and undertone. ₹375, already worked out. No returns stated before Buy. ₹375, and a reason to trust it.</p></div>
+        </div>
+        <p>The number I would measure is the share of buyers who report the wrong shade, the Wrong shade line in the “Did it match?” block under reviews. In the worked example it is 13% for 230 Natural Buff. Returns cannot measure this, because there are no returns, so it gets measured where buyers actually report it. If the matcher works, that line falls. For fashion, the matching number is the size exchange rate on brands that carry a fit sentence.</p>
+        <div class="bigm"><b>Wrong shade reports</b><span class="k">The one metric that matters</span></div>
+      </section>
+
+      <section id="breaks" class="lt sf">
+        <hgroup class="sh"><p class="eyebrow">Stated plainly</p>
+        <h2>Where this breaks</h2></hgroup>
+        <p>If wrong shade reports do not fall, the two questions are a nice story and nothing more. Nothing in this project proves they work. Only real purchase data can.</p>
+        <p>“Runs small” from four exchanges is noise dressed as data. The fit sentence should only appear once there are enough exchanges to mean something, and that threshold needs real numbers to set.</p>
+        <p>And one of my own placements should move. Once a pincode is known, delivery stops being homework and becomes a fact. Then it belongs above the buttons.</p>
+      </section>
+
+      <section id="learned" class="lt">
+        <hgroup class="sh"><p class="eyebrow">What I learned</p>
+        <h2>Where a fact sits changes what it says</h2></hgroup>
+        <p>I went in thinking hierarchy meant ranking things by importance. The no returns warning taught me it is really about neighbours. The same five words read as trivia beside the shades and as a condition of sale right before Buy.</p>
+        <p>The second lesson came from copying. Almost every pattern I borrowed was right for the store I took it from and wrong for mine. Amazon’s delivery placement assumes it already knows where you live. A shade dropdown assumes fifty shades. Now, before I copy a pattern, I ask what it quietly depends on.</p>
+      </section>
+    </article>
+  </div>
+
+  <div class="endsec">
+  <footer class="closing">
+    <h2>Beauty and fashion product page</h2>
+    <p>One rule, on every section: put the answer next to the doubt.</p>
+    <div class="btns">
+      <a class="btn primary" href="https://www.figma.com/design/Pwe7AzXT42dYgkLY90nwVY/PDP-%E2%80%94-Vishal-Yadav?node-id=464-2" target="_blank" rel="noopener">View the Figma file<svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill-opacity="0" fill="currentColor" height="9.75px" transform="translate(8.25 6)" width="9.75px"></path><path d="M 0 7.125 L 7.125 0" fill="transparent" height="7.125px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(6 10.875)" width="7.125px"></path><path d="M 0 0 L 9.75 0 L 9.75 9.75 Z" fill="transparent" height="9.75px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(8.25 6)" width="9.75px"></path></svg></a>
+      <a class="btn ghost" href="/"><svg class="ic" aria-hidden="true" width="16" height="16" role="presentation" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill-opacity="0" fill="currentColor" height="13.5px" transform="translate(3.75 5.25)" width="6.75px"></path><path d="M 9.75 0 L 0 0" fill="transparent" height="1px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(10.5 12)" width="9.75px"></path><path d="M 6.75 0 L 0 6.75 L 6.75 13.5 Z" fill="transparent" height="13.5px" stroke-dasharray="" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" transform="translate(3.75 5.25)" width="6.75px"></path></svg>Back to home</a>
+    </div>
+    <p class="founder">Building a product people need to trust? I take on freelance work. <a href="https://cal.com/designwvishal" target="_blank" rel="noopener">Book a call</a></p>
+  </footer>
+
+  <nav class="next" aria-label="More work">
+    <span class="k">More work</span>
+    <h2>Check out more work</h2>
+    <div class="nextgrid">
+      <a href="/work/twelve/"><img src="img/more-twelve.webp" width="800" height="837" alt="" loading="lazy"><b>Twelve · Plans in years, not months</b></a>
+      <a href="/work/ixigo-trains/"><img src="img/more-ixigo.webp" width="800" height="837" alt="" loading="lazy"><b>ixigo Trains · The four hours nobody designs for</b></a>
+      <a href="/work/split-and-request/"><img src="img/more-split.webp" width="800" height="837" alt="" loading="lazy"><b>Google Pay Split and Request</b></a>
+    </div>
+  </nav>
+  </div>
+</main>
+
+<style is:inline>
+/* Closing (Vishal 2026-10-13): same words, order and layout as before; only the look changes.
+   Closing and More work are ONE section. No boxed card (dark, navy and blue boxes all read as a slab dropped on the page):
+   a full width ending band that grows out of the page ink into a soft pink light, in the page's own font. */
+body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
+.endsec{position:relative;margin:140px calc(50% - 50vw) 0;padding:clamp(72px,9vw,128px) calc((100vw - min(100vw - 56px,1376px)) / 2 + clamp(24px,4.5vw,88px)) clamp(64px,8vw,104px);background:radial-gradient(70% 55% at 50% 0%,rgba(232,0,112,.30),rgba(232,0,112,0) 70%),linear-gradient(180deg,#141414 0%,#121212 55%,#2A0F1C 100%);border-top:1px solid rgba(232,0,112,.45);color:#F5F5F6}
+.endsec .closing{margin:0;padding:0;border:0;gap:18px}
+.closing h2{font-family:var(--sans);font-size:clamp(56px,8.4vw,116px)!important;font-weight:800;line-height:.95;letter-spacing:-.035em;color:#FFD1E6} /* very light pink on ink */
+.closing>p{font-size:clamp(20px,2.2vw,28px)!important;font-weight:500;line-height:1.3;color:#D9DADF}
+.closing .btns{margin-top:22px;gap:12px}
+.closing .btn{height:52px;padding:0 22px;font-size:16px;font-weight:650}
+.closing .btn.primary{background:#F2F1EC;color:#141414}
+.closing .btn.ghost{border-color:rgba(214,220,207,.4);color:#F2F1EC}
+.endsec .next>.k{color:#FFD1E6}.endsec .next>h2{color:#F2F1EC}
+/* centred on every screen size, phones too (Vishal 2026-10-13) */
+.endsec .closing{text-align:center;justify-items:center}.endsec .closing .btns{justify-content:center}.endsec .next>.k,.endsec .next>h2{text-align:center}
+.endsec .nextgrid a{background:#3B1A2A;color:#F2F1EC;box-shadow:0 0 0 1px rgba(242,241,236,.14)} /* Vishal 19 Oct 14:06: no grey; one soft step lighter than the plum band, like OneBanc */
+.endsec .nextgrid b{color:#F2F1EC}
+.endsec .nextgrid a:hover,.endsec .nextgrid a:focus-visible{box-shadow:0 0 0 2px #FF5CA8}
+/* phones (Vishal 2026-10-15): a tap leaves no coloured stroke on the More work cards; desktop keeps its hover stroke */
+@media (max-width:759px){.endsec .nextgrid a:hover{box-shadow:0 0 0 1px rgba(242,241,236,.14)}}
+/* audit 2026-10-13: on phones More work is one swipe row (next card peeks in) instead of three full screens of cards */
+@media (max-width:620px){.endsec .nextgrid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-28px;padding:0 28px 6px;scroll-padding-inline:28px;scrollbar-width:none}.endsec .nextgrid::-webkit-scrollbar{display:none}.endsec .nextgrid a{flex:0 0 87%;scroll-snap-align:start}}
+.endsec .closing .founder{margin-top:14px;font-size:17px!important;font-weight:500;color:#D9DADF}.endsec .closing .founder a{color:#F2F1EC;font-weight:700;text-underline-offset:4px}
+@media (max-width:620px){.endsec .closing .founder{font-size:15px!important;line-height:1.5;max-width:30ch;margin-left:auto;margin-right:auto;text-wrap:balance}.endsec .closing .founder a{white-space:nowrap}}
+.endsec .next{margin-top:clamp(56px,7vw,96px);padding-top:0;border-top:0}
+/* Phones use the same band as desktop (Vishal 2026-10-13 "make the same for Mobile"), only sized down */
+@media (max-width:620px){.endsec{margin-top:48px;padding-inline:28px}.closing h2{font-size:min(52px,11.4vw)!important;white-space:nowrap}}
+
+/* Desktop spacing (Vishal 2026-10-13: "make the sections responsive"): the page grows with the window up to the home page width (1376px)
+   instead of a fixed 760/1080 column. On wide screens each reading section puts its eyebrow and heading on the left
+   and the text on the right, so both sides of the screen are used. Phones and tablets are unchanged. */
+@media (min-width:901px){
+  .wrap,.summary,article>section.wide{max-width:1376px}
+  .wrap{padding-inline:clamp(24px,4.5vw,88px)} /* more side margin on desktop (Vishal 2026-10-13 "going too wide") */
+}
+@media (min-width:1100px){
+  article>section:not(.wide){max-width:none;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(48px,6vw,120px);row-gap:0}
+  article>section:not(.wide)>*{grid-column:2;min-width:0}
+  article>section:not(.wide)>.sh{grid-column:1;grid-row:1/span 60;align-self:start;position:sticky;top:120px;display:grid}
+  article>section:not(.wide)>.sh>*{grid-area:1/1;align-self:start}
+  article>section:not(.wide)>.sh>h2{padding-top:36px}
+  article>section:not(.wide)>:not(.eyebrow,h2,.sh)~:not(.eyebrow,h2,.sh){margin-top:22px}
+}
+</style>
+
+<script is:inline>
+(function(){
+  var bar=document.getElementById('bar');
+  var links=[];
+  function onScroll(){
+    var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';
+    var cur=null;
+    links.forEach(function(a){var s=document.querySelector(a.getAttribute('href'));if(s&&s.getBoundingClientRect().top<160)cur=a;});
+    links.forEach(function(a){a.classList.toggle('on',a===cur)});
+  }
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+<script is:inline>
+(function(){
+  // As on the Framer page: each section's content fades up 20px as it comes into view
+  if(!('IntersectionObserver' in window))return;
+  var groups=[].slice.call(document.querySelectorAll('article>section, .scr .screen'));
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -10% 0px'});
+  groups.forEach(function(g){[].slice.call(g.children).forEach(function(el,i){if(el.classList.contains('screens'))return;el.classList.add('up');el.style.setProperty('--d',i*60+'ms');io.observe(el)})});
+})();
+</script>
+
+<style is:inline>
+/* Screens as on Framer: the text stays pinned 120px from the top while its phone scrolls past */
+.scr .screen>div{position:sticky;top:120px}
+@media (max-width:900px){.scr .screen>div{position:static}.scr .screen>figure{order:2;justify-self:center;width:min(300px,100%)}}
+/* Contents: a rail in the left margin on wide screens, a pill that opens the list everywhere else */
+nav.toc{display:grid;position:fixed;left:28px;top:50%;width:170px;transform:translateY(-50%);z-index:20;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s;gap:2px;font-size:13px;line-height:1.3}
+nav.toc.show{opacity:1;visibility:visible}
+nav.toc{left:20px;width:188px;padding:16px 14px 14px;border-radius:16px;background:rgba(20,20,20,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 32px rgba(0,0,0,.25);transition:opacity .3s ease,visibility .3s,background-color .3s}
+nav.toc.light{background:rgba(255,255,255,.86);border-color:rgba(20,20,20,.08);box-shadow:0 12px 32px rgba(20,20,20,.10)}
+nav.toc .k{margin-bottom:8px;font-size:11px}
+nav.toc a{padding:6px 0 6px 12px;border-left:2px solid var(--line);color:var(--muted);transition:color .2s,border-color .2s}
+nav.toc a.on{color:var(--fg);border-left-color:var(--warm)}
+nav.toc.light{--fg:#141414;--muted:#6B6F78;--line:#E6E7EB;--warm:#C70063}
+.tocpill{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translate(-50%,16px);z-index:20;display:none;align-items:center;gap:10px;max-width:calc(100vw - 32px);height:46px;padding:0 18px;border-radius:100px;border:1px solid rgba(255,255,255,.16);background:rgba(20,20,20,.88);color:#F5F5F6;font:500 15px/1 var(--sans);cursor:pointer;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;visibility:hidden;transition:opacity .3s ease,transform .3s var(--out),visibility .3s}
+.tocpill.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.tocpill .k{color:#A3A6AD;font-size:11px}
+.tocpill b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tocpill i{font-style:normal;color:#A3A6AD;font-size:13px;font-variant-numeric:tabular-nums}
+.tocsheet{position:fixed;inset:auto 16px calc(72px + env(safe-area-inset-bottom,0px));margin:0 auto;width:min(360px,calc(100vw - 32px));padding:18px 10px 10px;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:#1C1C1F;color:#F5F5F6;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.tocsheet:popover-open{display:grid;gap:2px}
+.tocsheet .k{padding:0 12px 8px;color:#A3A6AD;font-size:11px}
+.tocsheet a{display:flex;gap:12px;padding:11px 12px;border-radius:12px;text-decoration:none;font-size:16px;color:#D9DADF}
+.tocsheet a span{color:#7A7E87;font-variant-numeric:tabular-nums;width:20px}
+.tocsheet a.on{background:#2A2A2E;color:#fff}
+.tocsheet::backdrop{background:rgba(0,0,0,.35)}
+@media (max-width:1399px){nav.toc{display:none}.tocpill{display:inline-flex}}
+.tocpill i{white-space:nowrap}
+.tocpill b{max-width:46vw}
+@media (max-width:620px){
+  .facts{grid-template-columns:1fr 1fr;gap:20px 16px}
+  /* audit 2026-10-13: one compact block, a row per number, instead of three tall cards */
+  .stats{gap:0;background:var(--card);border-radius:16px;padding:4px 18px}
+  .stats div{grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:baseline;padding:14px 0}
+  .stats div+div{border-top:1px solid var(--line)}
+  .stats b{font-size:22px;line-height:1.15;white-space:nowrap;min-width:112px}
+  .stats span{font-size:15px}
+  .endsec .closing .founder a{display:inline-block;padding:13px 0;margin:-13px 0}
+  /* Vishal 2026-10-13 15:06: on phones the boxes in the navy sections are light, so they stand out instead of dark on dark */
+  .scr .screen{gap:28px}
+}
+/* 30 second version on desktop: two by two with hairlines, so every label sits on one line and each answer has room */
+@media (min-width:901px){
+  .summary{grid-template-columns:1fr 1fr;gap:0;padding:40px 44px 20px}
+  .summary h2{margin-bottom:12px}
+  .summary div{padding:26px 0 30px;gap:12px;border-top:1px solid rgba(255,255,255,.09)}
+  .summary div:nth-of-type(odd){padding-right:44px}
+  .summary div:nth-of-type(even){padding-left:44px;border-left:1px solid rgba(255,255,255,.09)}
+  .summary p{font-size:19px;line-height:1.5;color:#F5F5F6;max-width:46ch}
+}
+/* Phones: the prototype box is exactly the shape of the app screen (412 by 917 in Figma), with Figma's own bars hidden, so nothing is cut */
+@media (max-width:640px){.proto{aspect-ratio:412/917;width:min(100%,340px,calc((100svh - 200px) * 412 / 917));margin-inline:auto;border-radius:28px}.protowrap{display:flex;justify-content:center}.protowait{width:min(100%,340px,calc((100svh - 200px) * 412 / 917));left:50%;transform:translateX(-50%);border-radius:28px}}
+/* Phones: the header slides away while reading down and comes back the moment you scroll up; the contents bar moves up with it */
+@media (max-width:759px){
+  .tocpill{transition:opacity .3s ease,transform .3s ease,visibility .3s,top .28s ease}
+  html.hdr-hide .tocpill{top:env(safe-area-inset-top,0px)}
+  html.hdr-hide .tocsheet{inset:calc(env(safe-area-inset-top,0px) + 52px) 16px auto}
+}
+/* Reel controls: labelled pills on desktop (icon plus PLAY, SOUND ON); icon only round buttons on phones, bottom right */
+.pill{height:44px;padding:0 16px;gap:8px;justify-content:center;border-radius:22px;border:0;box-shadow:0 0 0 1px rgba(242,241,236,.28);background:rgba(12,12,14,.72);color:#F2F1EC;font:700 12px/1 var(--sans);letter-spacing:.02em}
+.pill:hover{background:rgba(12,12,14,.85)}
+@media (max-width:620px){.pills{right:10px;bottom:10px;gap:6px}.pill{width:40px;height:40px;padding:0;border-radius:50%}.pill .lb{display:none}}
+@media (max-width:620px){.pill{width:44px;height:44px}} /* 44px thumb target on phones */
+.pill .lb,.dkn small{text-transform:uppercase} /* labels are written in sentence case so screen readers say words, not letters */
+/* desktop (Vishal 2026-10-13): icons only; on hover or keyboard focus the button stretches and shows its label inside; full screen is desktop only */
+@media (min-width:621px){.pill{width:auto;min-width:44px;padding:0 13px;gap:0;border-radius:22px;transition:gap .2s var(--out,ease),padding .2s var(--out,ease)}.pill .lb{display:inline-block;max-width:0;overflow:hidden;white-space:nowrap;opacity:0;transition:max-width .25s var(--out,ease),opacity .2s}.pill:hover,.pill:focus-visible{gap:8px;padding:0 16px}.pill:hover .lb,.pill:focus-visible .lb{max-width:160px;opacity:1}}
+@media (max-width:620px){.pill.fs{display:none}}
+.reel:fullscreen{display:flex;align-items:center;justify-content:center;background:#000;margin:0!important}.reel:fullscreen video{width:100%;height:100%;max-height:none;object-fit:contain;border-radius:0}
+/* Contents bar: docked under the header on every width, one look over navy and light sections alike */
+nav.toc{display:none!important}
+.tocpill{display:flex!important;left:0;right:0;top:var(--hb,56px);bottom:auto;width:100%;max-width:none;height:44px;justify-content:center;gap:12px;padding:0 20px;border:0;border-bottom:1px solid rgba(255,255,255,.08);border-radius:0;background:rgba(20,20,20,.9);box-shadow:none;transform:translateY(-6px);font-size:14px;z-index:19}
+.tocpill.show{transform:none}
+.tocpill .chev{width:10px;height:10px;border-right:1.5px solid #A3A6AD;border-bottom:1.5px solid #A3A6AD;transform:rotate(45deg) translateY(-3px)}
+.tocpill b{max-width:52vw}
+.tocsheet{inset:calc(var(--hb,56px) + 52px) 16px auto}
+/* phones (Vishal 2026-10-15): the open Contents list scrolls on its own; the page behind stays still */
+@media (max-width:759px){.tocsheet{max-height:calc(100dvh - var(--hb,56px) - 68px - env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain}html.hdr-hide .tocsheet{max-height:calc(100dvh - env(safe-area-inset-top,0px) - 68px - env(safe-area-inset-bottom,0px))}html.toclock{overflow:hidden}}
+.tid{display:none}
+/* Desktop first fold (Vishal 2026-10-13, "like this?" with the Profit Wala Love top): text left, reel right, like the Contra style tops.
+   Facts, the concept note and everything after stay full width below. Phones keep their own order (below). */
+@media (min-width:1000px){
+  .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);column-gap:clamp(40px,4vw,72px)}
+  .wrap>*{grid-column:1/-1}
+  .wrap>.facts{grid-template-columns:repeat(3,minmax(0,max-content));justify-content:space-between;column-gap:56px} /* Role and Scope stay on one line (Vishal 2026-10-13) */
+  .wrap>.summary{width:100%} /* auto side margins would shrink it to its text inside the grid */
+  .wrap>header.hero{grid-column:1;grid-row:1;align-self:center;max-width:none}
+  .wrap>.reel{grid-column:2;grid-row:1;align-self:center;margin-top:0!important}
+}
+/* Phone first fold: title, hook and a shorter intro, then the reel straight away. Facts and the concept note follow the reel. */
+@media (max-width:620px){
+  .wrap{display:flex;flex-direction:column}
+  .wrap>*{order:5}
+  .wrap>header.hero{order:1;gap:14px}
+  .wrap>.reel{order:2;margin-top:28px!important}
+  .wrap>.facts{order:3;margin-top:32px}
+  .wrap>.note{order:4}
+  .hero .dek{font-size:18px;line-height:1.5;color:var(--muted)}
+  .hero h1{line-height:1.05}
+  .facts div{align-content:start}
+}
+/* Phones: the prototype keeps its full app screen size, and the page keeps scrolling over it. A cover passes scrolls through to the page;
+   tapping it hands touches to the prototype, and "Done" (or scrolling it out of view) gives them back. */
+.protogo,.protodone{display:none}
+@media (max-width:640px){
+  #try{padding-bottom:48px}
+  .protowrap{flex-direction:column;align-items:flex-start;gap:12px;min-width:0;max-width:100%}
+  .protowrap:not(.live) .proto{pointer-events:none}
+  .protogo{display:flex;position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(100%,340px,calc((100svh - 200px) * 412 / 917));aspect-ratio:412/917;border:0;border-radius:28px;background:linear-gradient(180deg,transparent 60%,rgba(20,20,20,.55));align-items:flex-end;justify-content:center;padding-bottom:22px;cursor:pointer;font:inherit}
+  .protogo span{padding:12px 18px;border-radius:999px;background:#F2F1EC;color:#141414;font-size:15px;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+  .protowrap.live .protogo{display:none}
+  /* Once tapped, the prototype opens as a full screen overlay showing the whole app frame, nothing cut (Vishal 2026-10-13) */
+  .protowrap.live{position:fixed;inset:0;z-index:1000;max-width:none;margin:0;padding:16px 16px calc(16px + env(safe-area-inset-bottom));background:rgba(10,10,10,.94);flex-direction:column;align-items:center;justify-content:center;gap:16px}
+  .protowrap.live .proto{width:min(100%,calc((100dvh - 110px) * 412 / 917));height:auto;aspect-ratio:412/917;max-width:none;flex:none;margin:0}
+  html:has(.protowrap.live){overflow:hidden}
+  .protowrap.live .protodone{display:inline-flex;position:static;align-self:center;transform:none;white-space:nowrap;padding:12px 18px;border:0;border-radius:999px;background:#141414;box-shadow:0 0 0 1px rgba(242,241,236,.3),0 6px 18px rgba(0,0,0,.3);color:#F2F1EC;font:600 15px/1 var(--sans);cursor:pointer}
+}
+/* Phones: long sections show the heading, the first paragraph and the visuals; the rest opens in place with Read more. No words are cut. */
+.rmore{display:none}
+@media (max-width:620px){
+  .rm-hid{display:none!important}
+  .rmore{display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:10px 0;min-height:44px;border:0;background:none;color:var(--warm);font:600 16px/1 var(--sans);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+  .rmore::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
+  .rm-clamp{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
+}
+/* Desktop contents: a floating dock at the bottom, like a video player. Section name, n / 11, one segment per section
+   (read ones fill orange, the current one fills as you read), the next section, and back and next arrows. Phones keep the top bar. */
+.dock{display:none}
+.dockfade{display:none}
+@media (min-width:1280px){
+  .tocpill{display:none!important}
+  .dock{display:flex;position:fixed;left:50%;bottom:24px;z-index:20;align-items:center;gap:14px;padding:10px 12px;border-radius:16px;background:rgba(20,20,20,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 0 0 1px rgba(255,255,255,.1),0 16px 40px rgba(0,0,0,.3);font:600 14px/1 var(--sans);color:#F2F1EC;opacity:0;visibility:hidden;transform:translate(-50%,16px);transition:opacity .3s ease,transform .3s ease,visibility .3s}
+  .dock.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+  /* audit 2026-10-13: text slides under a soft fade of the section colour instead of colliding with the dock */
+  .dockfade{display:block;position:fixed;left:0;right:0;bottom:0;height:104px;z-index:19;pointer-events:none;background:linear-gradient(to bottom,transparent,var(--fade,#141414) 78%);opacity:0;transition:opacity .3s ease;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 78%);mask-image:linear-gradient(to bottom,transparent,#000 78%)}
+  .dock.show~.dockfade,.dockfade.show{opacity:1}
+  /* Vishal 2026-10-13: the contents bar stays on screen while scrolling down too, so first time readers see it */
+  .dkb{all:unset;cursor:pointer;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.07);transition:background .2s}
+  .dkb:hover{background:rgba(255,255,255,.14)}.dkb:disabled{opacity:.35;cursor:default}
+  .dkb:focus-visible,.dkn:focus-visible,.dks button:focus-visible{outline:2px solid #FF5CA8;outline-offset:2px}
+  .dkm{display:flex;flex-direction:column;gap:9px;width:420px}
+  .dkt{display:flex;justify-content:space-between;gap:12px}.dkt i{font-style:normal;color:#A3A6AD;font-variant-numeric:tabular-nums}
+  .dks{display:flex;gap:4px}
+  .dks button{all:unset;cursor:pointer;flex:1;height:24px;display:flex;align-items:center}
+  .dks button::before{content:"";flex:1;height:4px;border-radius:2px;background:linear-gradient(90deg,#FF5CA8 var(--f,0%),rgba(242,241,236,.18) var(--f,0%))}
+  .dks button:hover::before{background:linear-gradient(90deg,#FF5CA8 var(--f,0%),rgba(242,241,236,.36) var(--f,0%))}
+  .dkn{display:flex;flex-direction:column;gap:4px;min-width:118px;padding-left:14px;border-left:1px solid rgba(255,255,255,.12);color:#F2F1EC;text-decoration:none}
+  .dkn small{font-size:10px;letter-spacing:.12em;color:#A3A6AD}
+  .dkn.end{visibility:hidden}
+  /* hover a segment to see which section it is (Vishal 2026-10-13) */
+  .dks button{position:relative}
+  .dks button::after{content:attr(data-name);position:absolute;left:50%;bottom:calc(100% + 29px);transform:translate(-50%,4px);white-space:nowrap;padding:8px 12px;border-radius:10px;background:#F2F1EC;color:#141414;font:600 13px/1 var(--sans);box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease}
+  .dks button:hover::after,.dks button:focus-visible::after{opacity:1;transform:translate(-50%,0)}
+}
+html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{transition:none}
+</style>
+<script is:inline>
+(function(){
+  var rail=document.querySelector('nav.toc'), pill=document.querySelector('.tocpill'), sheet=document.getElementById('tocsheet'), art=document.querySelector('article');
+  var links=[].slice.call(rail.querySelectorAll('a')), secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  var items=links.map(function(a,i){var b=document.createElement('a');b.href=a.getAttribute('href');b.innerHTML='<span>'+String(i+1).padStart(2,'0')+'</span>'+a.textContent;b.onclick=function(){sheet.hidePopover()};sheet.appendChild(b);return b});
+  var last=-1;
+  function tick(){
+    var r=art.getBoundingClientRect(), on=secs[0].getBoundingClientRect().top<innerHeight*.3&&r.bottom>innerHeight*.4;
+    rail.classList.toggle('show',on);pill.classList.toggle('show',on);
+    var hd=document.querySelector('header.bar');if(hd&&!document.documentElement.classList.contains('hdr-hide')&&!hd.style.transform){var hb=hd.getBoundingClientRect().bottom;if(hb>20)document.documentElement.style.setProperty('--hb',hb+'px')}
+    rail.style.setProperty('--p',Math.min(100,Math.max(0,(-r.top+innerHeight*.3)/(r.height)*100))+'%');
+    pill.style.setProperty('--p',Math.min(100,Math.max(0,(-r.top+innerHeight*.3)/(r.height)*100))+'%');
+    var cur=0;secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<innerHeight*.35)cur=i});
+    if(cur!==last){last=cur;links.forEach(function(a,i){a.classList.toggle('on',i===cur)});items.forEach(function(a,i){a.classList.toggle('on',i===cur)});
+      pill.querySelector('b').textContent=links[cur].textContent;pill.querySelector('i').textContent=(cur+1)+' / '+links.length;}
+    var mid=null;secs.forEach(function(s){if(s){var b=s.getBoundingClientRect();if(b.top<=innerHeight/2&&b.bottom>innerHeight/2)mid=s}});
+    rail.classList.toggle('light',!!(mid&&mid.classList.contains('lt')));
+  }
+  // Desktop dock
+  var dock=document.querySelector('.dock'),fade=document.querySelector('.dockfade'),bands=[].slice.call(document.querySelectorAll('article>section')),segs=links.map(function(a,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label',(i+1)+'. '+a.textContent);b.dataset.name=a.textContent;b.onclick=function(){go(i)};dock.querySelector('.dks').appendChild(b);return b}),
+      dn=dock.querySelector('.dkn'),pv=dock.querySelector('[data-go="-1"]'),nx=dock.querySelector('[data-go="1"]'),dc=0;
+  function go(i){i=Math.max(0,Math.min(secs.length-1,i));secs[i].scrollIntoView({behavior:document.documentElement.classList.contains('calm')||matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
+  pv.onclick=function(){go(dc-1)};nx.onclick=function(){go(dc+1)};dn.onclick=function(e){e.preventDefault();go(dc+1)};
+  function dtick(){
+    var r=art.getBoundingClientRect(),y=innerHeight*.35,shown=secs[0].getBoundingClientRect().top<innerHeight*.3&&r.bottom>innerHeight-24;dock.classList.toggle('show',shown);fade.classList.toggle('show',shown);
+    if(shown){var fh=fade.offsetHeight,ft=innerHeight-fh,st=[];bands.forEach(function(s){var q=s.getBoundingClientRect(),a=Math.max(q.top-ft,0),z=Math.min(q.bottom-ft,fh);if(z>a){var c=getComputedStyle(s).getPropertyValue('--band').trim();if(c){var m=c.match(/#[0-9a-f]{3,8}|rgba?\([^)]*\)/gi);if(m)c=m[m.length-1]}if(c)st.push(c+' '+a+'px '+z+'px')}});if(st.length)fade.style.background='linear-gradient('+st.join(',')+')'}
+    dc=0;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<y)dc=i});
+    segs.forEach(function(b,i){var f=i<dc?100:i>dc?0:(function(){var t=secs[i].getBoundingClientRect(),e=i<secs.length-1?secs[i+1].getBoundingClientRect().top:r.bottom;return Math.max(0,Math.min(100,(y-t.top)/(e-t.top)*100))})();b.style.setProperty('--f',f+'%');b.toggleAttribute('aria-current',i===dc)});
+    dock.querySelector('.dkt b').textContent=links[dc].textContent;dock.querySelector('.dkt i').textContent=(dc+1)+' / '+links.length;
+    var n=links[dc+1];dn.classList.toggle('end',!n);if(n){dn.href=n.getAttribute('href');dn.querySelector('span').textContent=n.textContent}
+    pv.disabled=dc===0;nx.disabled=dc===links.length-1;
+  }
+  addEventListener('scroll',dtick,{passive:true});addEventListener('resize',dtick);dtick();
+  addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);tick();
+})();
+</script>
+<script is:inline>
+(function(){
+  if(!matchMedia('(max-width:620px)').matches)return;
+  function btn(before,open){var b=document.createElement('button');b.type='button';b.className='rmore';b.textContent='Read more';b.setAttribute('aria-expanded','false');b.onclick=function(){open();b.remove()};before.parentNode.insertBefore(b,before);return b}
+  // Section body: keep the first paragraph, fold the rest of the paragraphs and quotes
+  document.querySelectorAll('article>section').forEach(function(sec){
+    var body=[].filter.call(sec.children,function(e){return (e.tagName==='P'&&!e.classList.contains('eyebrow'))||e.tagName==='BLOCKQUOTE'});
+    var rest=body.slice(1), words=rest.reduce(function(n,e){return n+e.textContent.split(/\s+/).length},0);
+    if(!rest.length||words<30)return;
+    rest.forEach(function(e){e.classList.add('rm-hid')});
+    btn(rest[0],function(){rest.forEach(function(e){e.classList.remove('rm-hid')})});
+  });
+  // Long single paragraphs beside the screens: show four lines, then Read more
+  document.querySelectorAll('.screen>div>p').forEach(function(p){
+    p.classList.add('rm-clamp');if(p.scrollHeight<=p.clientHeight+2){p.classList.remove('rm-clamp');return}
+    var b=btn(p,function(){p.classList.remove('rm-clamp')});p.after(b);
+  });
+})();
+</script>
+<script is:inline src="/js/inview-video.js" defer></script>
+<style is:inline>
+/* Vishal 2026-10-13 16:02: every screen sits in an iPhone frame one fold tall, and you scroll the screen inside the frame yourself */
+/* Frame itself: /css/iphone.css, the one Split frame on every case study (Vishal 2026-10-15) */
+.iph{width:100%}
+.iph .sc{aspect-ratio:402/874;border-radius:41px;overflow-y:auto;overscroll-behavior-y:auto;scrollbar-width:none;background:#fff}
+.iph .sc::-webkit-scrollbar{display:none}
+.iph .sc img{display:block;width:100%;height:auto}
+.iph .sc:focus-visible{outline:3px solid #C70063;outline-offset:4px}
+@media (min-width:901px){.scr .screen{grid-template-columns:minmax(0,640px) 320px}.scr .screen>figure{width:320px}}
+@media (min-width:621px){.arc3{grid-template-columns:repeat(3,minmax(0,300px));justify-content:center;column-gap:clamp(24px,5vw,72px)}}
+</style>
+<style is:inline>
+/* Phones only (Vishal 04:29, the ixigo hero pattern): hero heading bold (700) at the same size; a two line hook sits tight under it. Desktop unchanged. */
+@media (max-width:640px){header.hero h1{font-weight:700}}
+</style>
+<script is:inline src="/js/pin-frames.js" defer></script>
+<script is:inline src="/js/flowdlg.js" defer></script>
+<script is:inline src="/js/pin-screen.js" defer></script>
+<script is:inline src="/js/cs-bar.js" defer></script>
+<script is:inline>/* Beauty PDP desktop pages side by side: both frames stay pinned until the longer page has scrolled (Vishal 19 Oct) */
+addEventListener('DOMContentLoaded',()=>{const sync=()=>{const w=[...document.querySelectorAll('.laps>.pin-wrap')].filter(e=>e.style.height);if(w.length<2)return;const m=Math.max(...w.map(e=>parseFloat(e.style.height)));w.forEach(e=>e.style.height=m+'px')};sync();addEventListener('load',sync);addEventListener('resize',()=>setTimeout(sync,60))});</script>
+</html>
+
+<style is:inline>
+/* Phones (Vishal 04:31): project details as one row per fact, label left and value right, as on Split and Twelve, instead of squeezed or uneven columns */
+@media (max-width:620px){
+  .wrap>.facts{grid-template-columns:minmax(0,1fr)!important;gap:0;padding-block:4px}
+  .wrap>.facts>div{grid-column:auto!important;display:grid;grid-template-columns:104px minmax(0,1fr);gap:12px;align-items:baseline;padding-block:14px}
+  .wrap>.facts>div+div{border-top:1px solid var(--line)}
+  .wrap>.facts>div>:not(.k){font-size:16px;line-height:1.45;text-wrap:pretty}
+  .wrap>.facts .k{margin:0}
+}
+/* Vishal 17 Oct: no empty light band above the closing; the last section's own padding is the gap, as on Twelve */
+.endsec{margin-top:0!important}
+/* Vishal 17 Oct 13:47: less light space above the closing; the room now sits inside the dark closing */
+article>section.lt:last-child{padding-bottom:clamp(40px,4vw,56px)!important}
+</style>
+
+<script is:inline>(function(){var s=document.getElementById('tocsheet'),mq=matchMedia('(max-width:759px)'),root=document.documentElement,ty=0;if(!s)return;
+function lock(e){root.classList.toggle('toclock',e.newState==='open'&&mq.matches)}s.addEventListener('beforetoggle',lock);s.addEventListener('toggle',lock);
+addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true});
+addEventListener('touchmove',function(e){if(!root.classList.contains('toclock'))return;var dy=e.touches[0].clientY-ty;if(!s.contains(e.target)||(dy>0&&s.scrollTop<=0)||(dy<0&&s.scrollTop+s.clientHeight>=s.scrollHeight-1))e.preventDefault()},{passive:false});})();</script>
+
+<style is:inline>
+/* Vishal 2026-10-18, same as Twelve and OneBanc: the closing rises in slowly as it comes into view */
+html.js .endsec .closing>*{transition:opacity 1s cubic-bezier(.32,.72,0,1),transform 1s cubic-bezier(.32,.72,0,1)}
+html.js .endsec:not(.in) .closing>*{opacity:0;transform:translateY(28px)}
+.endsec .closing>:nth-child(2){transition-delay:.08s}.endsec .closing>:nth-child(3){transition-delay:.16s}.endsec .closing>:nth-child(4){transition-delay:.24s}
+@media (prefers-reduced-motion:reduce){html.js .endsec .closing>*{opacity:1!important;transform:none!important;transition:none}}
+html.calm .endsec .closing>*{opacity:1!important;transform:none!important;transition:none}
+</style>
+<script is:inline>(()=>{const e=document.querySelector('.endsec');if(!e)return;if(!('IntersectionObserver'in window)){e.classList.add('in');return}const o=new IntersectionObserver(r=>{if(r[0].isIntersecting){e.classList.add('in');o.disconnect()}},{threshold:.15});o.observe(e)})();</script>
+<script is:inline>/* Vishal 2026-10-15 on Twelve: no pale fade over the phone screens. The dock fade switches off while any phone or laptop frame sits at the bottom of the window */
+(()=>{const f=document.querySelector('.dockfade'),ph=[...document.querySelectorAll('.iph,.lap,.screen,.shot.phone')];if(!f||!ph.length)return;const u=()=>{const h=innerHeight;f.style.visibility=ph.some(e=>{const r=e.getBoundingClientRect();return r.width&&r.top<h-8&&r.bottom>h-104})?'hidden':''};addEventListener('scroll',u,{passive:true});addEventListener('resize',u);u()})();</script>
+
+<style is:inline>/* Vishal 2026-10-18 "apply all": hero headline at most two lines on desktop */
+@media (min-width:901px){header.hero h1{font-size:clamp(40px,4.4vw,60px)}}</style>
+
+<style is:inline>/* Vishal 2026-10-18 "apply all": one-off text sizes and corner roundings snapped to the shared steps (13, 16, 18 px text; 12, 16 px corners) */
+.doubts span{font-size:16px}
+.car p{font-size:18px}
+.count{font-size:13px}
+.costs h3{font-size:18px}
+.costs .cost{border-radius:12px}
+.nums span{font-size:16px}
+.beforeafter p{font-size:18px}</style>
+<style is:inline>/* video buttons: at least a 44px touch area, look unchanged */.pills .pill{position:relative}.pills .pill::after{content:"";position:absolute;left:50%;top:50%;width:max(100%,44px);height:max(100%,44px);transform:translate(-50%,-50%)}
+/* Vishal 2026-10-19 (all case studies): the concept line under the facts opens with a small label, not body text */
+.note .nlab{display:inline-flex;align-items:center;vertical-align:1px;margin-right:12px;padding:4px 10px;border:1px solid currentColor;border-radius:999px;font-size:12px;line-height:1;font-weight:600;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+</style>
+
+<style is:inline>
+/* Universal (Vishal 19 Oct 13:09): project names in the footer are never white; a light tint of the page colour, like OneBanc */
+.endsec .nextgrid b{color:#FFD1E6!important}
+
+/* Vishal 19 Oct: top band in the Behance pink with white type; 14:04 "too much pink": a deeper shade of it */
+body{background:#B8005A}
+.wrap>header.hero,.wrap>.facts,.wrap>.note,.wrap>.summary,.wrap>figure.reel{--fg:#FFFFFF;--body:#FFFFFF;--muted:rgba(255,255,255,.92);--acc:#FFE0EE;--warm:#FFE0EE;--line:rgba(255,255,255,.3);--card:#9E004D;color:var(--fg)}
+.wrap>.note .nlab{border-color:rgba(255,255,255,.6);color:#fff}
+.wrap>figure.reel .shot{box-shadow:0 24px 60px rgba(90,0,40,.35)}
+
+/* Vishal 19 Oct "Desktop... looks off": the two desktop pages side by side in landscape screens, not two narrow frames stacked on the left */
+@media (min-width:900px){.laps{grid-template-columns:1fr 1fr;gap:32px}.lap .sc{height:auto;aspect-ratio:16/10}}
+.laps figure{min-width:0}
+.laps .screen{grid-template-columns:minmax(0,1fr)!important;max-width:none!important;gap:12px!important}
+.laps .lap.pm{width:auto!important;max-width:none!important;grid-template-columns:minmax(0,1fr)!important}
+.laps .lap .pm-scr{width:auto!important}
+/* Trade offs "seems very off": one flat card per decision, its cost under a thin rule instead of a cream box inside a grey box */
+.costs{gap:16px}
+.costs div{grid-template-rows:auto auto 1fr auto;padding:24px 24px 22px}
+.costs .cost{background:none;border-radius:0;padding:14px 0 0;margin-top:6px;border-top:1px solid var(--line);color:var(--body)}
+.costs .cost .k{color:var(--acc)}
+.costs .n{color:var(--acc)}
+
+/* Vishal 19 Oct: phones skip the scrolling desktop frames; the two desktop fold images below still show the difference */
+@media (max-width:899px){#desktop .laps{display:none}}
+</style>

@@ -1,0 +1,144 @@
+/* The site header: one bar on every page (Vishal 2026-10-12, "Header will be universal across all").
+   Moved here from kinetic.css unchanged. Pages supply the tokens: --bg --ink --muted --edge --line --btn --on-btn --bar --gut --max --out. */
+/* ---------- top bar */
+html{scroll-padding-top:var(--bar)}
+.bar{font-family:'Bricolage Grotesque Variable',system-ui,sans-serif;font-stretch:100%;color:var(--ink);position:sticky;top:0;z-index:30;height:var(--bar);background:var(--bg);border-bottom:1px solid transparent;transition:border-color 200ms var(--out),transform .28s var(--out)}
+/* one look on every page (Vishal 2026-10-15, "make the header the same across all pages"): pages with a single theme get the home page's light tokens, so no case study paints its own solid, dark or tinted bar. Home keeps following its light and dark mode. */
+.bar-light{--bg:#FAFAF8;--ink:#0B0B0C;--muted:#55565C;--edge:#76777D;--line:#E2E2DE;--btn:#0B0B0C;--on-btn:#FAFAF8}
+/* not fixed (Vishal 2026-10-15): on every page and size the bar slides away while you read down and comes back the moment you scroll up. SiteHeader.astro sets hdr-hide. */
+html.hdr-hide .bar{transform:translateY(calc(-100% - 16px))}
+/* no rubber band (Vishal 2026-10-20, "this header also comes down"): on a Mac trackpad or an iPhone, pulling past the top of the page dragged the whole page down and a strip of page colour showed above the header. The page now stops dead at the top and bottom instead of bouncing. */
+html{overscroll-behavior-y:none}
+/* frosted glass at 96% (Vishal 2026-10-15): enough cover that the bar reads as the same light bar over light and dark sections alike, with only a soft blur of what passes under; the page shows through, blurred, as it scrolls under the bar; solid where blur isn't supported or less transparency is asked for */
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .bar{background:color-mix(in srgb,var(--bg) 96%,transparent);backdrop-filter:blur(18px) saturate(1.8);-webkit-backdrop-filter:blur(18px) saturate(1.8)}
+}
+@media (prefers-reduced-transparency:reduce){.bar{background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none}}
+.bar.scrolled{border-bottom-color:var(--line)}
+.bar-in{width:min(var(--max),100% - var(--gut) * 2);margin-inline:auto;height:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+.who{font-size:15px;font-weight:600}
+a.who{text-decoration:none;text-underline-offset:.25em;text-decoration-thickness:1px}
+/* Vishal 2026-10-18 "apply all": the name is a 44px tall tap target without looking any different */
+a.who{position:relative}a.who::after{content:"";position:absolute;left:-8px;right:-8px;top:50%;height:44px;transform:translateY(-50%)}
+@media (hover:hover) and (pointer:fine){a.who:hover{text-decoration-line:underline}}
+.nav{display:flex;gap:32px;font-size:15px;font-weight:500}
+.nav a{text-decoration:none;padding:12px 0;text-underline-offset:.25em;text-decoration-thickness:1px}
+@media (hover:hover) and (pointer:fine){.nav a:hover{text-decoration-line:underline}}
+/* right side of the bar: Book a call (Kinetic, shown once the hero button scrolls away) and Accessibility */
+.bar-r{justify-self:end;display:flex;align-items:center;gap:8px}
+.bar-book{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:999px;background:var(--btn);color:var(--on-btn);font-size:14px;font-weight:650;text-decoration:none;white-space:nowrap;flex-shrink:0;
+  visibility:hidden;opacity:0;transform:translateY(-4px);transition:opacity 180ms var(--out),transform 180ms var(--out),visibility 0s 180ms}
+.bar.book-on .bar-book{visibility:visible;opacity:1;transform:none;transition:opacity 180ms var(--out),transform 180ms var(--out)}
+@media (hover:hover){.bar-book:hover{background:color-mix(in oklab,var(--btn) 84%,var(--bg))}}
+.calm .bar-book{transition:none}
+@media (prefers-reduced-motion:reduce){.bar-book{transition:none}}
+/* Accessibility menu: night mode and reduce motion, one tap from every screen */
+.a11y{justify-self:end;height:36px;padding:0 16px;border-radius:999px;border:1px solid var(--edge);background:transparent;color:var(--ink);font:inherit;font-size:14px;font-weight:550;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.a11y::before{content:"";width:18px;height:18px;background:currentColor;-webkit-mask:var(--a11y-ic) center/contain no-repeat;mask:var(--a11y-ic) center/contain no-repeat}
+.a11y{--a11y-ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Ccircle cx='12' cy='7' r='1.2' fill='%23000'/%3E%3Cpath d='M7.5 10l4.5 1 4.5-1M12 11v3.5l-2.5 4M12 14.5l2.5 4'/%3E%3C/svg%3E")}
+.a11y-menu{position:fixed;inset:auto;top:calc(var(--bar) + 8px);right:max(var(--gut),calc((100vw - var(--max)) / 2));margin:0;width:280px;padding:8px 20px;border:1px solid var(--line);border-radius:16px;background:var(--bg);color:var(--ink);box-shadow:0 16px 40px rgba(0,0,0,.14)}
+.a11y{transition:background-color 150ms,color 150ms,border-color 150ms}
+@media (hover:hover){.a11y:hover{background:var(--line)}}
+.a11y[aria-expanded=true]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.a11y-menu{opacity:0;transform:translateY(-6px);transition:opacity 120ms,transform 120ms var(--out),display 120ms allow-discrete,overlay 120ms allow-discrete}
+.a11y-menu:popover-open{opacity:1;transform:none;transition-duration:180ms}
+@starting-style{.a11y-menu:popover-open{opacity:0;transform:translateY(-6px)}}
+.calm .a11y-menu,.calm .a11y{transition:none}
+@media (prefers-reduced-motion:reduce){.a11y-menu,.a11y{transition:none}}
+.a11y-h{font-size:13px;font-weight:600;color:var(--muted);padding:12px 0 4px}
+.a11y-row{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:56px;font-size:15px;font-weight:550}
+.a11y-row+.a11y-row{border-top:1px solid var(--line)}
+/* switches: the knob slides to the side that is on */
+.sw{position:relative;flex:none;width:62px;height:34px;padding:0;border-radius:999px;border:1px solid var(--edge);background:transparent;color:var(--ink);cursor:pointer}
+.sw::after{content:"";position:absolute;inset:-6px -2px}
+.sw .knob{position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:50%;background:var(--muted);transition:transform 260ms var(--out),background-color 260ms}
+.sw[aria-checked=true]{background:var(--ink);border-color:var(--ink)}
+.sw[aria-checked=true] .knob{transform:translateX(28px);background:var(--bg)}
+#theme{--sun:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='4.6'/%3E%3Cg stroke='%23000' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M12 1.8v2.4M12 19.8v2.4M1.8 12h2.4M19.8 12h2.4M4.8 4.8l1.7 1.7M17.5 17.5l1.7 1.7M4.8 19.2l1.7-1.7M17.5 6.5l1.7-1.7'/%3E%3C/g%3E%3C/svg%3E");--moon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z'/%3E%3C/svg%3E")}
+#theme,#theme[aria-checked=true]{background:transparent;border-color:var(--edge)}
+#theme i{position:absolute;top:50%;width:14px;height:14px;margin-top:-7px;background:var(--muted);-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
+#theme .sun{--m:var(--sun);left:9px}#theme .moon{--m:var(--moon);right:9px}
+#theme .knob,#theme[aria-checked=true] .knob{background:var(--ink)}
+#theme .knob::before{content:"";position:absolute;inset:6px;background:var(--bg);-webkit-mask:var(--sun) center/contain no-repeat;mask:var(--sun) center/contain no-repeat}
+#theme[aria-checked=true] .knob::before{-webkit-mask-image:var(--moon);mask-image:var(--moon)}
+@media (prefers-reduced-motion:reduce){.sw .knob{transition:none}}
+html.calm .sw .knob{transition:none}
+@media (max-width:759px){
+  .bar-in{grid-template-columns:auto 1fr auto;gap:8px}
+  .who{font-size:14px}
+  .nav{justify-self:center;gap:18px;font-size:14px}
+  .a11y{width:44px;height:44px;padding:0;justify-content:center}
+  .a11y span{display:none}
+  .a11y-menu{width:auto;left:var(--gut);right:var(--gut)}
+}
+
+.a11y .t-m,.m-nav{display:none}
+@media (max-width:759px){
+  /* 1. top bar: name on one line, Book a call from the first screen, Work/About/Contact move into Menu */
+  .bar-in{grid-template-columns:minmax(0,1fr) auto}
+  .bar-in>.nav{display:none}
+  .who{white-space:nowrap}
+  .bar-r{gap:8px}
+  .bar-book{visibility:visible;opacity:1;transform:none;height:40px;padding:0 14px;white-space:nowrap}
+  .bar.at-end .bar-book{visibility:hidden;opacity:0}
+  .a11y{width:auto;padding:0 14px}
+  .a11y .t-a{display:none}
+  .a11y .t-m{display:inline}
+  .m-nav{display:grid;margin:0 0 8px;border-bottom:1px solid var(--line)}
+  .m-nav a{display:flex;align-items:center;min-height:48px;font-size:20px;font-weight:650;color:var(--ink);text-decoration:none}
+  .bar-book{height:44px}
+}
+/* the smallest phones (iPhone SE): a little less padding so the name never runs under Book a call */
+@media (max-width:359px){.bar-r{gap:6px}.bar-book,.a11y{padding:0 10px}.who{font-size:13px}}
+/* Phones (mobile layout 2026-10-12): the section name takes the name's place once you scroll; Book a call moves to the bottom bar on the home page */
+.bar-sec{display:none}
+@media (max-width:759px){
+  .bar-in{position:relative}
+  .bar-sec{position:absolute;left:0;top:50%;translate:0 -50%;max-width:calc(100% - 110px);display:block;padding:12px 0;border:0;background:none;color:var(--ink);font:inherit;font-size:15px;font-weight:650;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;opacity:0;pointer-events:none;transition:opacity 180ms var(--out)}
+  .bar-sec[hidden]{display:none}
+  .bar.has-sec .bar-sec{opacity:1;pointer-events:auto}
+  .bar.has-sec .who{opacity:0;pointer-events:none}
+  .who{transition:opacity 180ms var(--out)}
+  .bar:has(.bar-sec:not([hidden])) .bar-book{display:none}
+}
+@media (prefers-reduced-motion:reduce){.bar-sec,.who{transition:none}}
+/* phones (Vishal 2026-10-12): the button opens the site menu, so it looks like a menu (two lines, no outline), not a second call to action */
+@media (max-width:759px){
+  .a11y{--a11y-ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round'%3E%3Cpath d='M4 9h16M4 15h16'/%3E%3C/svg%3E");
+    height:44px;padding:0 4px 0 12px;margin-right:-4px;border-color:transparent;font-size:15px;font-weight:650;flex-direction:row-reverse}
+  .a11y[aria-expanded=true]{background:var(--line);border-color:transparent;color:var(--ink)}
+}
+/* phones (Vishal 2026-10-13): Book a call had no room around it; a slimmer pill with clear space to Menu, tap area stays 44px */
+@media (max-width:759px){
+  .bar-r{gap:18px}
+  .bar-book{position:relative;height:34px;padding:0 14px;font-size:14px}
+  .bar-book::after{content:"";position:absolute;inset:-5px -4px}
+}
+@media (max-width:359px){.bar-r{gap:10px}}
+/* desktop (Vishal 2026-10-13, "add a button for Resume"): the outline twin of Book a call, same pair as the hero, shown and hidden with it */
+.bar-cv{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:999px;border:1px solid var(--edge);color:var(--ink);font-size:14px;font-weight:650;text-decoration:none;white-space:nowrap;flex-shrink:0;
+  visibility:hidden;opacity:0;transform:translateY(-4px);transition:opacity 180ms var(--out),transform 180ms var(--out),visibility 0s 180ms,background-color 150ms}
+.bar.book-on .bar-cv{visibility:visible;opacity:1;transform:none;transition:opacity 180ms var(--out),transform 180ms var(--out),background-color 150ms}
+@media (hover:hover){.bar-cv:hover{background:var(--line)}}
+.calm .bar-cv{transition:none}
+@media (prefers-reduced-motion:reduce){.bar-cv{transition:none}}
+/* Vishal 2026-10-14 02:52 ("Remove all CTAs from the header that are on mobile"): on phones the header carries no buttons, only the name and Menu; Book a call and Resume live in the page itself */
+@media (max-width:759px){.bar-cv,.bar-book{display:none}}
+/* desktop (Vishal 2026-10-13, "Accessibility cannot look like Resume"): Book a call and Resume are the calls to action, so Accessibility steps back
+   to a quiet utility: no outline, lighter text, set apart by a hairline once the two buttons are showing */
+@media (min-width:760px){
+  .bar-r{gap:10px}
+  /* spacing (Vishal 2026-10-15, "Fix the spacing in all headers"): the hairline sits exactly midway, 16px from Resume and 16px from the icon,
+     and the word Accessibility ends on the content edge, mirroring where the name starts */
+  .bar .a11y{position:relative;border-color:transparent;padding:0 10px;font-weight:500;color:var(--muted);margin-left:12px;margin-right:-10px}
+  .bar .a11y::before{color:var(--ink)}
+  @media (hover:hover){.bar .a11y:hover{background:var(--line);color:var(--ink)}}
+  .bar .a11y[aria-expanded=true]{background:var(--line);border-color:transparent;color:var(--ink)}
+  .bar .a11y::after{content:"";position:absolute;left:-6px;top:9px;bottom:9px;width:1px;background:var(--edge);opacity:0;transition:opacity 180ms var(--out)}
+  .bar.book-on .a11y::after{opacity:1}
+}
+
+/* skip link, every page (moved from kinetic.css, design audit 2026-10-15) */
+.skip{position:fixed;left:16px;top:-80px;z-index:100;padding:10px 16px;border-radius:999px;background:#0B0B0C;color:#FAFAF8;font:600 15px/1.2 'Bricolage Grotesque Variable',system-ui,sans-serif;text-decoration:none}
+.skip:focus-visible{top:12px}
+#content:focus{outline:none}

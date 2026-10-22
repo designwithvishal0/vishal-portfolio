@@ -1,0 +1,42 @@
+---
+// Dead links (old Framer URLs, typos) land here instead of Vercel's default page. Same shell as the Work page.
+import '@fontsource-variable/hanken-grotesk';
+import '@fontsource-variable/bricolage-grotesque/standard.css';
+import '../styles/tokens.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import Boot from '../components/Boot.astro';
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found · Vishal Yadav</title>
+<meta name="robots" content="noindex">
+<Boot />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style is:inline>
+:root{--line:var(--rule);--edge:var(--muted);--btn:var(--ink);--on-btn:var(--bg);--bar:56px;--gut:32px;--out:var(--ease-out)}
+.bar{--max:1376px} /* same header width as every other page */
+@media (max-width:759px){:root{--bar:52px;--gut:16px}}
+*{box-sizing:border-box}
+a{color:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--fs-body)/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:var(--r-focus)}
+main{width:min(720px,100% - var(--gut) * 2);margin:0 auto;min-height:calc(100svh - var(--bar));display:flex;flex-direction:column;justify-content:center;padding-block:var(--s12)}
+h1{margin:0 0 var(--s4);font:var(--w-head) clamp(36px,6vw,56px)/1.05 'Bricolage Grotesque Variable',sans-serif;letter-spacing:var(--track-head);text-wrap:balance}
+p{margin:0 0 var(--s8);color:var(--muted);font-size:18px}
+.eyebrow{margin:0 0 var(--s3);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.cta{display:flex;flex-wrap:wrap;gap:8px}
+.cta a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 22px;border-radius:999px;font-size:15px;font-weight:650;text-decoration:none;color:var(--ink);border:1px solid var(--edge)}
+.cta a:first-child{background:var(--btn);color:var(--on-btn);border-color:var(--btn)}
+</style>
+</head>
+<SiteHeader home="/" book calm={false} />
+<main id="content">
+  <p class="eyebrow">404 · Page not found</p>
+  <h1>This link didn’t make the move.</h1>
+  <p>I rebuilt my portfolio from scratch, and a few old addresses were left behind. Everything you came for is still here: every case study, with the problem, the decisions and what changed.</p>
+  <div class="cta"><a href="/work/">See the case studies</a><a href="/">Go to the home page</a></div>
+</main>
+</html>

@@ -1,0 +1,83 @@
+/* Behaviour shared by every look in /looks. No colours or type here: each look sets
+   --bg --ink --muted --rule --focus and its own fonts. Rules ported from components.css. */
+:root{--ease-out:cubic-bezier(.23,1,.32,1);--press:120ms;--hover:180ms;--enter:360ms;--section:500ms}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+h1,h2,h3{text-wrap:balance}
+p,dd,li{text-wrap:pretty}
+a{color:inherit}
+a,button{-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--focus,currentColor);outline-offset:3px;border-radius:4px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* text link: faint underline at rest, a full one draws in on hover */
+.ul{text-decoration:none;background:linear-gradient(color-mix(in srgb,currentColor 30%,transparent),color-mix(in srgb,currentColor 30%,transparent)) no-repeat 0 100%/100% 1px,linear-gradient(currentColor,currentColor) no-repeat 100% 100%/0 1px;transition:background-size var(--hover) var(--ease-out)}
+.ul:hover,.ul:focus-visible{background-size:100% 1px,100% 1px;background-position:0 100%,0 100%}
+
+/* arrow chevron grows a stem on hover of its .go parent */
+.arrow{flex:none;width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.arrow .stem{opacity:0;transition:opacity var(--hover) var(--ease-out)}
+.arrow .tip{transition:transform var(--hover) var(--ease-out)}
+.go:focus-visible .arrow .stem{opacity:1}
+.go:focus-visible .arrow .tip{transform:translateX(3px)}
+@media (hover:hover) and (pointer:fine){.go:hover .arrow .stem{opacity:1}.go:hover .arrow .tip{transform:translateX(3px)}}
+@media (hover:none),(pointer:coarse){.arrow .stem{opacity:1}.arrow .tip{transform:translateX(3px)}}
+
+/* availability dot, always next to its text */
+.dot{position:relative;flex:none;width:7px;height:7px;border-radius:50%;background:var(--live,#1F9D55)}
+.dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:inherit;animation:ping 2.4s var(--ease-out) infinite}
+@keyframes ping{from{transform:scale(1);opacity:.6}to{transform:scale(3);opacity:0}}
+
+/* the headline rises in word by word, once (Words.astro) */
+.words .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.12em;margin-bottom:-.12em}
+.words .w>span{display:inline-block;animation:rise 760ms var(--ease-out) both;animation-delay:calc(var(--i) * 45ms + 80ms)}
+@keyframes rise{from{transform:translateY(110%)}to{transform:none}}
+/* lines under it fade up in order: class="enter" style="--d:260ms" */
+.enter{animation:enter var(--enter) var(--ease-out) both;animation-delay:var(--d,0ms)}
+@keyframes enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* sections enter once as they scroll in; visible without JS */
+.js .reveal{opacity:0;transform:translateY(12px)}
+.js .reveal.on{opacity:1;transform:none;transition:opacity var(--section) var(--ease-out),transform var(--section) var(--ease-out)}
+
+/* work loop (Loop.astro). Only the image, the headline link and "View the case study" open a case study */
+.media{position:relative;isolation:isolate;overflow:hidden;aspect-ratio:4/3;transition:transform var(--press) var(--ease-out)}
+.media img,.media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.media video{opacity:0;transition:opacity var(--enter) var(--ease-out)}
+.media.started video{opacity:1}
+.mlink{position:absolute;inset:0;z-index:1}
+.vctl{position:absolute;right:12px;bottom:12px;z-index:2;width:44px;height:44px;padding:0;border:0;border-radius:50%;display:grid;place-items:center;color:#111;background:rgb(255 255 255/.86);backdrop-filter:blur(8px);cursor:pointer;opacity:.9;transition:opacity var(--hover) var(--ease-out),transform var(--press) var(--ease-out)}
+.vctl:active{transform:scale(.92)}
+.vctl svg{grid-area:1/1;width:14px;height:14px;fill:currentColor;transition:opacity var(--hover) var(--ease-out)}
+.vctl .i-play{opacity:0}
+.media[data-state=paused] .vctl .i-play{opacity:1}
+.media[data-state=paused] .vctl .i-pause{opacity:0}
+@media (hover:hover) and (pointer:fine){
+  .vctl{opacity:0}
+  .project:hover .vctl,.project:focus-within .vctl,.media[data-user] .vctl{opacity:1}
+}
+.project:has(.mlink:active,.p-link:active,.more:active) .media{transform:scale(.985)}
+
+/* theme change spreads from the switch */
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+
+/* copy the email button: Copy crossfades to Copied */
+.copy{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;display:inline-flex;align-items:baseline;gap:8px}
+.copy .tag{display:inline-grid;font-size:.75em;border:1px solid currentColor;border-radius:999px;padding:1px 9px;transition:transform var(--press) var(--ease-out)}
+.copy .tag>span{grid-area:1/1;text-align:center;transition:opacity var(--hover) var(--ease-out)}
+.copy .tag .t-done,.copy.done .tag .t-copy{opacity:0}
+.copy.done .tag .t-done{opacity:1}
+.copy:active .tag{transform:scale(.94)}
+
+/* reduced motion: the OS setting or the footer toggle */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:150ms!important;scroll-behavior:auto!important}
+  .js .reveal{transform:none}
+  .vctl{opacity:1!important}
+  .project:has(.mlink:active,.p-link:active,.more:active) .media{transform:none}
+}
+.calm{scroll-behavior:auto}
+.calm *,.calm *::before,.calm *::after{animation:none!important;transition-duration:150ms!important}
+.calm.js .reveal{opacity:1;transform:none!important}
+.calm .vctl{opacity:1!important}
+.calm .project:has(.mlink:active,.p-link:active,.more:active) .media{transform:none}

@@ -1,0 +1,568 @@
+{
+ "video": "/bento/motion/sky.mp4",
+ "secondsPerHour": 1,
+ "duration": 24,
+ "typeColours": {
+  "ink": "#11131C",
+  "white": "#FFFFFF",
+  "ink_from": "06:30",
+  "white_from": "17:30"
+ },
+ "posters": [
+  {
+   "src": "/bento/motion/sky-night.jpg",
+   "fromHour": 19,
+   "toHour": 5
+  },
+  {
+   "src": "/bento/motion/sky-dawn.jpg",
+   "fromHour": 5,
+   "toHour": 6.5
+  },
+  {
+   "src": "/bento/motion/sky-day.jpg",
+   "fromHour": 6.5,
+   "toHour": 17.5
+  },
+  {
+   "src": "/bento/motion/sky-dusk.jpg",
+   "fromHour": 17.5,
+   "toHour": 19
+  }
+ ],
+ "zones": {
+  "text": "bottom left 55% wide x 45% tall of the video frame",
+  "top": "top 30% x left 85% of the video frame"
+ },
+ "note": "text and top are average colours of each zone at that half hour (grain off). *Contrast is the scheduled type colour against that average; *ContrastP5 is the 5th percentile over every pixel of the zone. The sky flips between dark and light in the 12 minutes before 06:30 and 17:30.",
+ "halfHours": [
+  {
+   "time": "00:00",
+   "t": 0.0,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0D1334",
+   "topContrast": 18.11,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "00:30",
+   "t": 0.5,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0D1334",
+   "topContrast": 18.11,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "01:00",
+   "t": 1.0,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0C1334",
+   "topContrast": 18.13,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "01:30",
+   "t": 1.5,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0C1334",
+   "topContrast": 18.16,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "02:00",
+   "t": 2.0,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0C1334",
+   "topContrast": 18.18,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "02:30",
+   "t": 2.5,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0C1234",
+   "topContrast": 18.21,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "03:00",
+   "t": 3.0,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0C1234",
+   "topContrast": 18.23,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "03:30",
+   "t": 3.5,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0C1234",
+   "topContrast": 18.23,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "04:00",
+   "t": 4.0,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0C1234",
+   "topContrast": 18.23,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "04:30",
+   "t": 4.5,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0C1234",
+   "topContrast": 18.23,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "05:00",
+   "t": 5.0,
+   "type": "white",
+   "text": "#1A224C",
+   "textContrast": 15.27,
+   "textContrastP5": 13.76,
+   "top": "#10173E",
+   "topContrast": 17.32,
+   "topContrastP5": 16.78
+  },
+  {
+   "time": "05:30",
+   "t": 5.5,
+   "type": "white",
+   "text": "#252856",
+   "textContrast": 13.86,
+   "textContrastP5": 11.53,
+   "top": "#1B245C",
+   "topContrast": 14.47,
+   "topContrastP5": 13.51
+  },
+  {
+   "time": "06:00",
+   "t": 6.0,
+   "type": "white",
+   "text": "#363361",
+   "textContrast": 11.63,
+   "textContrastP5": 8.38,
+   "top": "#2C3874",
+   "topContrast": 10.9,
+   "topContrastP5": 9.68
+  },
+  {
+   "time": "06:30",
+   "t": 6.5,
+   "type": "ink",
+   "text": "#D2DBED",
+   "textContrast": 13.35,
+   "textContrastP5": 11.25,
+   "top": "#95B8F0",
+   "topContrast": 9.17,
+   "topContrastP5": 8.68
+  },
+  {
+   "time": "07:00",
+   "t": 7.0,
+   "type": "ink",
+   "text": "#D1DBED",
+   "textContrast": 13.3,
+   "textContrastP5": 11.23,
+   "top": "#94B7F0",
+   "topContrast": 9.09,
+   "topContrastP5": 8.59
+  },
+  {
+   "time": "07:30",
+   "t": 7.5,
+   "type": "ink",
+   "text": "#CFDAEE",
+   "textContrast": 13.15,
+   "textContrastP5": 11.11,
+   "top": "#91B5F0",
+   "topContrast": 8.91,
+   "topContrastP5": 8.4
+  },
+  {
+   "time": "08:00",
+   "t": 8.0,
+   "type": "ink",
+   "text": "#CDD8ED",
+   "textContrast": 12.95,
+   "textContrastP5": 10.91,
+   "top": "#8EB3EF",
+   "topContrast": 8.7,
+   "topContrastP5": 8.22
+  },
+  {
+   "time": "08:30",
+   "t": 8.5,
+   "type": "ink",
+   "text": "#CBD7ED",
+   "textContrast": 12.81,
+   "textContrastP5": 10.79,
+   "top": "#8BB1EF",
+   "topContrast": 8.52,
+   "topContrastP5": 8.03
+  },
+  {
+   "time": "09:00",
+   "t": 9.0,
+   "type": "ink",
+   "text": "#CAD7EE",
+   "textContrast": 12.75,
+   "textContrastP5": 10.77,
+   "top": "#8AB0EF",
+   "topContrast": 8.45,
+   "topContrastP5": 7.95
+  },
+  {
+   "time": "09:30",
+   "t": 9.5,
+   "type": "ink",
+   "text": "#CAD7EE",
+   "textContrast": 12.74,
+   "textContrastP5": 10.77,
+   "top": "#8AB0EF",
+   "topContrast": 8.44,
+   "topContrastP5": 7.95
+  },
+  {
+   "time": "10:00",
+   "t": 10.0,
+   "type": "ink",
+   "text": "#CAD7EE",
+   "textContrast": 12.71,
+   "textContrastP5": 10.77,
+   "top": "#8AB0EF",
+   "topContrast": 8.42,
+   "topContrastP5": 7.95
+  },
+  {
+   "time": "10:30",
+   "t": 10.5,
+   "type": "ink",
+   "text": "#C9D6EE",
+   "textContrast": 12.66,
+   "textContrastP5": 10.67,
+   "top": "#89B0EF",
+   "topContrast": 8.39,
+   "topContrastP5": 7.87
+  },
+  {
+   "time": "11:00",
+   "t": 11.0,
+   "type": "ink",
+   "text": "#C9D6ED",
+   "textContrast": 12.62,
+   "textContrastP5": 10.66,
+   "top": "#89B0EF",
+   "topContrast": 8.36,
+   "topContrastP5": 7.85
+  },
+  {
+   "time": "11:30",
+   "t": 11.5,
+   "type": "ink",
+   "text": "#C8D5ED",
+   "textContrast": 12.57,
+   "textContrastP5": 10.56,
+   "top": "#89AFEF",
+   "topContrast": 8.33,
+   "topContrastP5": 7.85
+  },
+  {
+   "time": "12:00",
+   "t": 12.0,
+   "type": "ink",
+   "text": "#C8D5ED",
+   "textContrast": 12.54,
+   "textContrastP5": 10.56,
+   "top": "#88AFEE",
+   "topContrast": 8.31,
+   "topContrastP5": 7.77
+  },
+  {
+   "time": "12:30",
+   "t": 12.5,
+   "type": "ink",
+   "text": "#C7D5ED",
+   "textContrast": 12.54,
+   "textContrastP5": 10.56,
+   "top": "#88AFEE",
+   "topContrast": 8.3,
+   "topContrastP5": 7.77
+  },
+  {
+   "time": "13:00",
+   "t": 13.0,
+   "type": "ink",
+   "text": "#C8D5ED",
+   "textContrast": 12.54,
+   "textContrastP5": 10.56,
+   "top": "#88AFEE",
+   "topContrast": 8.3,
+   "topContrastP5": 7.77
+  },
+  {
+   "time": "13:30",
+   "t": 13.5,
+   "type": "ink",
+   "text": "#C8D5EC",
+   "textContrast": 12.54,
+   "textContrastP5": 10.56,
+   "top": "#89AFEE",
+   "topContrast": 8.28,
+   "topContrastP5": 7.78
+  },
+  {
+   "time": "14:00",
+   "t": 14.0,
+   "type": "ink",
+   "text": "#C9D5EB",
+   "textContrast": 12.55,
+   "textContrastP5": 10.57,
+   "top": "#89AEED",
+   "topContrast": 8.28,
+   "topContrastP5": 7.78
+  },
+  {
+   "time": "14:30",
+   "t": 14.5,
+   "type": "ink",
+   "text": "#CAD5EB",
+   "textContrast": 12.52,
+   "textContrastP5": 10.57,
+   "top": "#8AAEEC",
+   "topContrast": 8.28,
+   "topContrastP5": 7.79
+  },
+  {
+   "time": "15:00",
+   "t": 15.0,
+   "type": "ink",
+   "text": "#CBD5EA",
+   "textContrast": 12.53,
+   "textContrastP5": 10.58,
+   "top": "#8BAEEC",
+   "topContrast": 8.29,
+   "topContrastP5": 7.8
+  },
+  {
+   "time": "15:30",
+   "t": 15.5,
+   "type": "ink",
+   "text": "#CCD5E9",
+   "textContrast": 12.53,
+   "textContrastP5": 10.58,
+   "top": "#8CAEEB",
+   "topContrast": 8.29,
+   "topContrastP5": 7.8
+  },
+  {
+   "time": "16:00",
+   "t": 16.0,
+   "type": "ink",
+   "text": "#CCD5E9",
+   "textContrast": 12.53,
+   "textContrastP5": 10.58,
+   "top": "#8CAEEB",
+   "topContrast": 8.29,
+   "topContrastP5": 7.8
+  },
+  {
+   "time": "16:30",
+   "t": 16.5,
+   "type": "ink",
+   "text": "#CDD4E7",
+   "textContrast": 12.46,
+   "textContrastP5": 10.6,
+   "top": "#8EAEE8",
+   "topContrast": 8.26,
+   "topContrastP5": 7.8
+  },
+  {
+   "time": "17:00",
+   "t": 17.0,
+   "type": "ink",
+   "text": "#CFD2E3",
+   "textContrast": 12.34,
+   "textContrastP5": 10.55,
+   "top": "#92ADE3",
+   "topContrast": 8.21,
+   "topContrastP5": 7.74
+  },
+  {
+   "time": "17:30",
+   "t": 17.5,
+   "type": "white",
+   "text": "#4E396E",
+   "textContrast": 9.8,
+   "textContrastP5": 6.6,
+   "top": "#50418E",
+   "topContrast": 8.44,
+   "topContrastP5": 7.43
+  },
+  {
+   "time": "18:00",
+   "t": 18.0,
+   "type": "white",
+   "text": "#3F2F62",
+   "textContrast": 11.64,
+   "textContrastP5": 8.41,
+   "top": "#3E3478",
+   "topContrast": 10.69,
+   "topContrastP5": 9.55
+  },
+  {
+   "time": "18:30",
+   "t": 18.5,
+   "type": "white",
+   "text": "#342859",
+   "textContrast": 13.23,
+   "textContrastP5": 10.32,
+   "top": "#302965",
+   "topContrast": 12.91,
+   "topContrastP5": 11.83
+  },
+  {
+   "time": "19:00",
+   "t": 19.0,
+   "type": "white",
+   "text": "#1D214E",
+   "textContrast": 15.22,
+   "textContrastP5": 14.03,
+   "top": "#141843",
+   "topContrast": 16.96,
+   "topContrastP5": 16.5
+  },
+  {
+   "time": "19:30",
+   "t": 19.5,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0C1234",
+   "topContrast": 18.23,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "20:00",
+   "t": 20.0,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0C1234",
+   "topContrast": 18.23,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "20:30",
+   "t": 20.5,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0C1234",
+   "topContrast": 18.23,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "21:00",
+   "t": 21.0,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0C1234",
+   "topContrast": 18.23,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "21:30",
+   "t": 21.5,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0C1234",
+   "topContrast": 18.23,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "22:00",
+   "t": 22.0,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0C1234",
+   "topContrast": 18.21,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "22:30",
+   "t": 22.5,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0C1334",
+   "topContrast": 18.18,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "23:00",
+   "t": 23.0,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0C1334",
+   "topContrast": 18.16,
+   "topContrastP5": 17.75
+  },
+  {
+   "time": "23:30",
+   "t": 23.5,
+   "type": "white",
+   "text": "#161F49",
+   "textContrast": 15.77,
+   "textContrastP5": 14.25,
+   "top": "#0C1334",
+   "topContrast": 18.13,
+   "topContrastP5": 17.75
+  }
+ ]
+}

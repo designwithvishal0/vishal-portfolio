@@ -1,0 +1,106 @@
+---
+import '@fontsource-variable/schibsted-grotesk';
+import '@fontsource/ibm-plex-mono/400.css';
+import { intro, work, caseHeader } from '../../data/home';
+const pad = (n: number) => String(n + 1).padStart(2, '0');
+---
+<html lang="en">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Direction A, Index</title>
+<style>
+  :root{
+    --bg:#EDEFF0; --ink:#17191C; --muted:#5B6168; --rule:#C9CDD1; --accent:#E5481E; --row:#E3E6E8;
+    --sans:'Schibsted Grotesk Variable',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme:dark){:root{--bg:#141618;--ink:#ECEEF0;--muted:#9AA1A8;--rule:#2C3034;--row:#1B1E21}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.45 var(--sans);font-kerning:normal}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  a{color:inherit}
+  a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .mono{font-family:var(--mono);font-size:13px;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+
+  header{display:grid;grid-template-columns:1fr;gap:28px;padding:96px 0 72px;border-bottom:1px solid var(--ink)}
+  h1{font-size:15px;font-weight:600;margin:0}
+  .pos{font-size:clamp(40px,6.4vw,88px);line-height:1.02;font-weight:700;letter-spacing:-.035em;margin:0;max-width:14ch}
+  .sup{max-width:56ch;color:var(--muted);margin:0}
+  .meta{display:flex;flex-wrap:wrap;gap:12px 32px;align-items:center}
+  .status{display:inline-flex;gap:10px;align-items:center}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
+  .links a{font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;margin-right:24px}
+
+  .board-head{display:grid;grid-template-columns:56px 1.2fr 2fr 1fr 64px;gap:24px;padding:14px 0;color:var(--muted);border-bottom:1px solid var(--rule)}
+  .row{position:relative;display:grid;grid-template-columns:56px 1.2fr 2fr 1fr 64px;gap:24px;padding:28px 0;border-bottom:1px solid var(--rule);text-decoration:none;align-items:start}
+  .row:hover,.row:focus-visible{background:var(--row)}
+  .row .name{font-weight:600}
+  .row h3{font-size:24px;line-height:1.15;letter-spacing:-.015em;margin:0 0 8px;font-weight:700}
+  .row p{margin:0;color:var(--muted);max-width:52ch}
+  .row .role{color:var(--muted);font-size:15px}
+  .row .detail{display:block;margin-top:10px;color:var(--ink)}
+  .row img{display:none}
+  @media (hover:hover) and (min-width:900px){
+    .row img{display:block;position:absolute;right:88px;top:50%;width:240px;height:auto;transform:translateY(-50%) rotate(-2deg);opacity:0;pointer-events:none;transition:opacity .15s;border-radius:4px;z-index:2}
+    .row:hover img,.row:focus-visible img{opacity:1}
+  }
+  @media (max-width:899px){
+    .board-head{display:none}
+    .row{grid-template-columns:40px 1fr;gap:8px 16px}
+    .row > :nth-child(n+3){grid-column:2}
+    .row .yr{display:none}
+    .row img{display:block;grid-column:2;width:100%;height:auto;border-radius:4px;margin-top:12px}
+  }
+
+  .case{padding:120px 0 140px}
+  .case .eyebrow{color:var(--muted);margin:0 0 24px}
+  .case h2{font-size:clamp(36px,5.2vw,72px);line-height:1.04;letter-spacing:-.03em;margin:0 0 28px;max-width:16ch}
+  .case .sum{max-width:62ch;font-size:19px;margin:0 0 48px}
+  .facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);margin:0 0 48px}
+  .facts div{padding:16px 16px 18px 0}
+  .facts dt{color:var(--muted);margin-bottom:6px}
+  .facts dd{margin:0;font-weight:600}
+  @media (max-width:640px){.facts{grid-template-columns:1fr 1fr}}
+  .case img{width:100%;height:auto;border-radius:4px;background:var(--row)}
+  .label{padding:28px 0 0;color:var(--muted)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>{intro.name}</h1>
+    <p class="pos">{intro.positioning}</p>
+    <p class="sup">{intro.supporting}</p>
+    <div class="meta">
+      <span class="status"><span class="dot" aria-hidden="true"></span>{intro.availability}</span>
+      <span class="links">{intro.links.map(l => <a href={l.href}>{l.label}</a>)}</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="work">
+    <h2 id="work" class="label mono">Selected work</h2>
+    <div class="board-head mono" aria-hidden="true"><span>No.</span><span>Project</span><span>Problem</span><span>Role</span><span>Year</span></div>
+    {work.map((w, i) => (
+      <a class="row" href={`#${w.slug}`}>
+        <span class="mono">{pad(i)}</span>
+        <span class="name">{w.name}</span>
+        <div><h3>{w.headline}</h3><p>{w.problem}</p></div>
+        <div class="role">{w.role}<span class="detail mono">{w.type} · {w.detail}</span></div>
+        <span class="mono yr">{w.year}</span>
+        <img src={w.image} alt={w.alt} width="480" height="502" loading="lazy" decoding="async" />
+      </a>
+    ))}
+  </section>
+
+  <section class="case" aria-labelledby="case">
+    <p class="label mono" style="padding:0 0 48px">Case study header</p>
+    <p class="eyebrow mono">{caseHeader.eyebrow}</p>
+    <h2 id="case">{caseHeader.title}</h2>
+    <p class="sum">{caseHeader.summary}</p>
+    <dl class="facts">{caseHeader.facts.map(([k, v]) => <div><dt class="mono">{k}</dt><dd>{v}</dd></div>)}</dl>
+    <img src={caseHeader.image} alt={work[0].alt} width="1464" height="1532" />
+  </section>
+</div>
+</body>
+</html>

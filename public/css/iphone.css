@@ -1,0 +1,15 @@
+/* One iPhone frame for every case study (Vishal 2026-10-15 14:51): the Split prototype frame is the single source.
+   Same shape everywhere: 5px band, 46px outer corner (41px screen), thin two step rim, Dynamic Island, one button each side.
+   Colour rule (his 04:10, 14 Oct): dark frame on light screens (default .iph), light frame on dark screens (.iph.lt).
+   Markup: <div class="iph"><div class="sc">screen</div></div>. Pages set only the size and the screen. */
+.iph{--iph-btn:#24262B;--iph-isl:#0B0B0B;position:relative;box-sizing:border-box;padding:5px;border-radius:46px;background:#0B0B0B;box-shadow:0 0 0 1px #24262B,0 16px 36px rgba(11,22,40,.10)}
+/* Subtle, not a feature (his 15:00): the colour only makes the edge visible. Flat quiet tones, one thin rim, soft shadow. */
+.iph.lt{--iph-btn:#C4C2BC;background:#D9D7D1;box-shadow:0 0 0 1px #C4C2BC,0 16px 36px rgba(6,10,20,.14)}
+.iph>.sc{border-radius:41px}
+/* Side buttons: left at 19 to 28% of the height, right at 25 to 34% */
+.iph::before{content:"";position:absolute;left:-4.5px;right:-4.5px;top:19%;height:15%;pointer-events:none;
+  background:linear-gradient(var(--iph-btn),var(--iph-btn)) 0 0/3px 60% no-repeat,linear-gradient(var(--iph-btn),var(--iph-btn)) 100% 100%/3px 60% no-repeat}
+/* Dynamic Island */
+.iph::after{content:"";position:absolute;top:16px;left:50%;width:min(86px,26%);height:25px;transform:translateX(-50%);border-radius:99px;background:var(--iph-isl);pointer-events:none;z-index:2}
+/* Skip the drawn island when the screen image has none to spare: screens that start mid page (it would hide the design) and screens that already show their own island (it would double up): .iph.noisl */
+.iph.noisl::after{display:none}
