@@ -303,6 +303,206 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
   .fix{padding:20px}
 }
 </style>
+<style is:inline>
+/* Closing (Vishal 2026-10-13): same words, order and layout as before; only the look changes.
+   Closing and More work are ONE section. No boxed card (dark, navy and blue boxes all read as a slab dropped on the page):
+   a full width ending band that grows out of the page navy into JARVIS blue light, in the page's own font. */
+body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
+.endsec{position:relative;margin:140px calc(50% - 50vw) 0;padding:clamp(72px,9vw,128px) calc((100vw - min(100vw - 56px,1376px)) / 2 + clamp(24px,4.5vw,88px)) clamp(64px,8vw,104px);background:radial-gradient(70% 55% at 50% 0%,rgba(11,87,208,.55),rgba(11,87,208,0) 70%),linear-gradient(180deg,#12141A 0%,#101A2E 55%,#0E2247 100%);border-top:1px solid rgba(138,180,248,.35);color:#E6EAF2}
+.endsec .closing{margin:0;padding:0;border:0;gap:18px}
+.closing h2{font-family:var(--sans);font-size:clamp(56px,8.4vw,116px)!important;font-weight:800;line-height:.95;letter-spacing:-.035em;color:#D3E3FD} /* very light JARVIS blue, 14:1 on navy (Vishal 2026-10-13) */
+.closing>p{font-size:clamp(20px,2.2vw,28px)!important;font-weight:500;line-height:1.3;color:#C9D6EE}
+.closing .btns{margin-top:22px;gap:12px}
+.closing .btn{height:52px;padding:0 22px;font-size:16px;font-weight:650}
+.closing .btn.primary{background:#F2F1EC;color:#12141A}
+.closing .btn.ghost{border-color:rgba(201,214,238,.4);color:#F2F1EC}
+.endsec .next>.k{color:#D3E3FD}.endsec .next>h2{color:#F2F1EC}
+/* centred on every screen size, phones too (Vishal 2026-10-13) */
+.endsec .closing{text-align:center;justify-items:center}.endsec .closing .btns{justify-content:center}.endsec .next>.k,.endsec .next>h2{text-align:center}
+.endsec .nextgrid a{background:#1B2A47;color:#F2F1EC;box-shadow:0 0 0 1px rgba(242,241,236,.14)} /* navy blue caption: darker than the thumbnail, not black (Vishal 2026-10-13) */
+.endsec .nextgrid b{color:#F2F1EC}
+.endsec .nextgrid a:hover,.endsec .nextgrid a:focus-visible{box-shadow:0 0 0 2px #8AB4F8}
+/* phones (Vishal 2026-10-15): a tap leaves no coloured stroke on the More work cards; desktop keeps its hover stroke */
+@media (max-width:759px){.endsec .nextgrid a:hover{box-shadow:0 0 0 1px rgba(242,241,236,.14)}}
+/* audit 2026-10-13: on phones More work is one swipe row (next card peeks in) instead of three full screens of cards */
+@media (max-width:620px){.endsec .nextgrid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-28px;padding:0 28px 6px;scroll-padding-inline:28px;scrollbar-width:none}.endsec .nextgrid::-webkit-scrollbar{display:none}.endsec .nextgrid a{flex:0 0 87%;scroll-snap-align:start}}
+.endsec .closing .founder{margin-top:14px;font-size:17px!important;font-weight:500;color:#C9D6EE}.endsec .closing .founder a{color:#F2F1EC;font-weight:700;text-underline-offset:4px}
+@media (max-width:620px){.endsec .closing .founder{font-size:15px!important;line-height:1.5;max-width:30ch;margin-left:auto;margin-right:auto;text-wrap:balance}.endsec .closing .founder a{white-space:nowrap}}
+.endsec .next{margin-top:clamp(56px,7vw,96px);padding-top:0;border-top:0}
+/* Phones use the same band as desktop (Vishal 2026-10-13 "make the same for Mobile"), only sized down */
+@media (max-width:620px){.endsec{margin-top:48px;padding-inline:28px}.closing h2{font-size:min(52px,11.4vw)!important;white-space:nowrap}}
+
+/* Desktop spacing (Vishal 2026-10-13: "make the sections responsive"): the page grows with the window up to the home page width (1376px)
+   instead of a fixed 760/1080 column. On wide screens each reading section puts its eyebrow and heading on the left
+   and the text on the right, so both sides of the screen are used. Phones and tablets are unchanged. */
+@media (min-width:901px){
+  .wrap,.summary,article>section.wide{max-width:1376px}
+  .wrap{padding-inline:clamp(24px,4.5vw,88px)} /* more side margin on desktop (Vishal 2026-10-13 "going too wide") */
+}
+@media (min-width:1100px){
+  article>section:not(.wide){max-width:none;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(48px,6vw,120px);row-gap:0}
+  article>section:not(.wide)>*{grid-column:2;min-width:0}
+  article>section:not(.wide)>:is(.eyebrow,h2){grid-column:1;grid-row:1/span 60;align-self:start}
+  article>section:not(.wide)>h2{padding-top:36px}
+  article>section:not(.wide)>:not(.eyebrow,h2)~:not(.eyebrow,h2){margin-top:22px}
+}
+</style>
+<style is:inline>
+/* Screens as on Framer: the text stays pinned 120px from the top while its phone scrolls past */
+.screens .screen>div{position:sticky;top:120px}
+.screens .shot.phone{border:1px solid rgba(14,20,36,.1)}
+@media (max-width:900px){.screens .screen>div{position:static}.screens .screen>figure{order:2;justify-self:center}.screens .shot.phone{width:min(320px,100%)}}
+/* Contents: a rail in the left margin on wide screens, a pill that opens the list everywhere else */
+nav.toc{display:grid;position:fixed;left:28px;top:50%;width:170px;transform:translateY(-50%);z-index:20;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s;gap:2px;font-size:13px;line-height:1.3}
+nav.toc.show{opacity:1;visibility:visible}
+nav.toc{left:20px;width:188px;padding:16px 14px 14px;border-radius:16px;background:rgba(18,20,26,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 32px rgba(5,10,30,.25);transition:opacity .3s ease,visibility .3s,background-color .3s}
+nav.toc.light{background:rgba(255,255,255,.86);border-color:rgba(14,20,36,.08);box-shadow:0 12px 32px rgba(13,31,94,.10)}
+nav.toc .k{margin-bottom:8px;font-size:11px}
+nav.toc a{padding:6px 0 6px 12px;border-left:2px solid var(--line);color:var(--muted);transition:color .2s,border-color .2s}
+nav.toc a.on{color:var(--fg);border-left-color:var(--warm)}
+nav.toc.light{--fg:#0E1424;--muted:#6A7488;--line:#DCE3EF;--warm:#0B57D0}
+.tocpill{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translate(-50%,16px);z-index:20;display:none;align-items:center;gap:10px;max-width:calc(100vw - 32px);height:46px;padding:0 18px;border-radius:100px;border:1px solid rgba(255,255,255,.16);background:rgba(18,20,26,.88);color:#E6EAF2;font:500 15px/1 var(--sans);cursor:pointer;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(5,10,30,.3);opacity:0;visibility:hidden;transition:opacity .3s ease,transform .3s var(--out),visibility .3s}
+.tocpill.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.tocpill .k{color:#9AA0AB;font-size:11px}
+.tocpill b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tocpill i{font-style:normal;color:#9AA0AB;font-size:13px;font-variant-numeric:tabular-nums}
+.tocsheet{position:fixed;inset:auto 16px calc(72px + env(safe-area-inset-bottom,0px));margin:0 auto;width:min(360px,calc(100vw - 32px));padding:18px 10px 10px;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:#1A1D24;color:#E6EAF2;box-shadow:0 20px 50px rgba(5,10,30,.45)}
+.tocsheet:popover-open{display:grid;gap:2px}
+.tocsheet .k{padding:0 12px 8px;color:#9AA0AB;font-size:11px}
+.tocsheet a{display:flex;gap:12px;padding:11px 12px;border-radius:12px;text-decoration:none;font-size:16px;color:#C9D1E2}
+.tocsheet a span{color:#6B7079;font-variant-numeric:tabular-nums;width:20px}
+.tocsheet a.on{background:#263044;color:#fff}
+.tocsheet::backdrop{background:rgba(5,10,30,.35)}
+@media (max-width:1399px){nav.toc{display:none}.tocpill{display:inline-flex}}
+.tocpill i{white-space:nowrap}
+.tocpill b{max-width:46vw}
+@media (max-width:620px){
+  .facts{grid-template-columns:1fr 1fr;gap:20px 16px}
+  /* audit 2026-10-13: one compact block, a row per number, instead of three tall cards */
+  .stats{gap:0;background:var(--card);border-radius:16px;padding:4px 18px}
+  .stats div{grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:baseline;padding:14px 0}
+  .stats div+div{border-top:1px solid var(--line)}
+  .stats b{font-size:22px;line-height:1.15;white-space:nowrap;min-width:112px}
+  .stats span{font-size:15px}
+  .endsec .closing .founder a{display:inline-block;padding:13px 0;margin:-13px 0}
+  /* Vishal 2026-10-13 15:06: on phones the boxes in the navy sections are light, so they stand out instead of dark on dark */
+  #found .stats{background:var(--card);color:var(--fg);border-color:transparent}
+  .screens .screen{gap:28px}
+}
+/* 30 second version on desktop: two by two with hairlines, so every label sits on one line and each answer has room */
+@media (min-width:901px){
+  .summary{grid-template-columns:1fr 1fr;gap:0;padding:40px 44px 20px}
+  .summary h2{margin-bottom:12px}
+  .summary div{padding:26px 0 30px;gap:12px;border-top:1px solid rgba(255,255,255,.09)}
+  .summary div:nth-of-type(odd){padding-right:44px}
+  .summary div:nth-of-type(even){padding-left:44px;border-left:1px solid rgba(255,255,255,.09)}
+  .summary p{font-size:19px;line-height:1.5;color:#E6EAF2;max-width:46ch}
+}
+/* Phones: the prototype box is exactly the shape of the app screen (412 by 917 in Figma), with Figma's own bars hidden, so nothing is cut */
+@media (max-width:640px){.proto{aspect-ratio:412/917;width:min(100%,340px,calc((100svh - 200px) * 412 / 917));margin-inline:auto;border-radius:28px}.protowrap{display:flex;justify-content:center}.protowait{width:min(100%,340px,calc((100svh - 200px) * 412 / 917));left:50%;transform:translateX(-50%);border-radius:28px}}
+/* Phones: the header slides away while reading down and comes back the moment you scroll up; the contents bar moves up with it */
+@media (max-width:759px){
+  .tocpill{transition:opacity .3s ease,transform .3s ease,visibility .3s,top .28s ease}
+  html.hdr-hide .tocpill{top:env(safe-area-inset-top,0px)}
+  html.hdr-hide .tocsheet{inset:calc(env(safe-area-inset-top,0px) + 52px) 16px auto}
+}
+/* Reel controls: labelled pills on desktop (icon plus PLAY, SOUND ON); icon only round buttons on phones, bottom right */
+.pill{height:44px;padding:0 16px;gap:8px;justify-content:center;border-radius:22px;border:0;box-shadow:0 0 0 1px rgba(242,241,236,.28);background:rgba(12,12,14,.72);color:#F2F1EC;font:700 12px/1 var(--sans);letter-spacing:.02em}
+.pill:hover{background:rgba(12,12,14,.85)}
+@media (max-width:620px){.pills{right:10px;bottom:10px;gap:6px}.pill{width:40px;height:40px;padding:0;border-radius:50%}.pill .lb{display:none}}
+@media (max-width:620px){.pill{width:44px;height:44px}} /* 44px thumb target on phones */
+.pill .lb,.dkn small{text-transform:uppercase} /* labels are written in sentence case so screen readers say words, not letters */
+/* desktop (Vishal 2026-10-13): icons only; on hover or keyboard focus the button stretches and shows its label inside; full screen is desktop only */
+@media (min-width:621px){.pill{width:auto;min-width:44px;padding:0 13px;gap:0;border-radius:22px;transition:gap .2s var(--out,ease),padding .2s var(--out,ease)}.pill .lb{display:inline-block;max-width:0;overflow:hidden;white-space:nowrap;opacity:0;transition:max-width .25s var(--out,ease),opacity .2s}.pill:hover,.pill:focus-visible{gap:8px;padding:0 16px}.pill:hover .lb,.pill:focus-visible .lb{max-width:160px;opacity:1}}
+@media (max-width:620px){.pill.fs{display:none}}
+.reel:fullscreen{display:flex;align-items:center;justify-content:center;background:#000;margin:0!important}.reel:fullscreen video{width:100%;height:100%;max-height:none;object-fit:contain;border-radius:0}
+/* Contents bar: docked under the header on every width, one look over navy and light sections alike */
+nav.toc{display:none!important}
+.tocpill{display:flex!important;left:0;right:0;top:var(--hb,56px);bottom:auto;width:100%;max-width:none;height:44px;justify-content:center;gap:12px;padding:0 20px;border:0;border-bottom:1px solid rgba(255,255,255,.08);border-radius:0;background:rgba(18,20,26,.9);box-shadow:none;transform:translateY(-6px);font-size:14px;z-index:19}
+.tocpill.show{transform:none}
+.tocpill .chev{width:10px;height:10px;border-right:1.5px solid #9AA0AB;border-bottom:1.5px solid #9AA0AB;transform:rotate(45deg) translateY(-3px)}
+.tocpill b{max-width:52vw}
+.tocsheet{inset:calc(var(--hb,56px) + 52px) 16px auto}
+/* phones (Vishal 2026-10-15): the open Contents list scrolls on its own; the page behind stays still */
+@media (max-width:759px){.tocsheet{max-height:calc(100dvh - var(--hb,56px) - 68px - env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain}html.hdr-hide .tocsheet{max-height:calc(100dvh - env(safe-area-inset-top,0px) - 68px - env(safe-area-inset-bottom,0px))}html.toclock{overflow:hidden}}
+.tid{display:none}
+/* Desktop first fold (Vishal 2026-10-13, "like this?" with the Profit Wala Love top): text left, reel right, like the Contra style tops.
+   Facts, the concept note and everything after stay full width below. Phones keep their own order (below). */
+@media (min-width:1000px){
+  .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);column-gap:clamp(40px,4vw,72px)}
+  .wrap>*{grid-column:1/-1}
+  .wrap>.facts{grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr))} /* Role line stays on one line */
+  .wrap>.summary{width:100%} /* auto side margins would shrink it to its text inside the grid */
+  .wrap>header.hero{grid-column:1;grid-row:1;align-self:center;max-width:none}
+  .wrap>.reel{grid-column:2;grid-row:1;align-self:center;margin-top:0!important}
+}
+/* Phone first fold: title, hook and a shorter intro, then the reel straight away. Facts and the concept note follow the reel. */
+@media (max-width:620px){
+  .wrap{display:flex;flex-direction:column}
+  .wrap>*{order:5}
+  .wrap>header.hero{order:1;gap:14px}
+  .wrap>.reel{order:2;margin-top:28px!important}
+  .wrap>.facts{order:3;margin-top:32px}
+  .wrap>.note{order:4}
+  .hero .dek{font-size:18px;line-height:1.5;color:var(--muted)}
+  .hero h1{line-height:1.05}
+  .facts div{align-content:start}
+}
+/* Phones: the prototype keeps its full app screen size, and the page keeps scrolling over it. A cover passes scrolls through to the page;
+   tapping it hands touches to the prototype, and "Done" (or scrolling it out of view) gives them back. */
+.protogo,.protodone{display:none}
+@media (max-width:640px){
+  #try{padding-bottom:48px}
+  .protowrap{flex-direction:column;align-items:flex-start;gap:12px;min-width:0;max-width:100%}
+  .protowrap:not(.live) .proto{pointer-events:none}
+  .protogo{display:flex;position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(100%,340px,calc((100svh - 200px) * 412 / 917));aspect-ratio:412/917;border:0;border-radius:28px;background:linear-gradient(180deg,transparent 60%,rgba(14,16,22,.55));align-items:flex-end;justify-content:center;padding-bottom:22px;cursor:pointer;font:inherit}
+  .protogo span{padding:12px 18px;border-radius:999px;background:#F2F1EC;color:#0E1424;font-size:15px;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+  .protowrap.live .protogo{display:none}
+  /* Once tapped, the prototype opens as a full screen overlay showing the whole app frame, nothing cut (Vishal 2026-10-13) */
+  .protowrap.live{position:fixed;inset:0;z-index:1000;max-width:none;margin:0;padding:16px 16px calc(16px + env(safe-area-inset-bottom));background:rgba(6,12,30,.94);flex-direction:column;align-items:center;justify-content:center;gap:16px}
+  .protowrap.live .proto{width:min(100%,calc((100dvh - 110px) * 412 / 917));height:auto;aspect-ratio:412/917;max-width:none;flex:none;margin:0}
+  html:has(.protowrap.live){overflow:hidden}
+  .protowrap.live .protodone{display:inline-flex;position:static;align-self:center;transform:none;white-space:nowrap;padding:12px 18px;border:0;border-radius:999px;background:#0E1424;box-shadow:0 0 0 1px rgba(242,241,236,.3),0 6px 18px rgba(0,0,0,.3);color:#F2F1EC;font:600 15px/1 var(--sans);cursor:pointer}
+}
+/* Phones: long sections show the heading, the first paragraph and the visuals; the rest opens in place with Read more. No words are cut. */
+.rmore{display:none}
+@media (max-width:620px){
+  .rm-hid{display:none!important}
+  .rmore{display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:10px 0;min-height:44px;border:0;background:none;color:var(--warm);font:600 16px/1 var(--sans);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+  .rmore::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
+  .rm-clamp{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
+}
+/* Desktop contents: a floating dock at the bottom, like a video player. Section name, n / 11, one segment per section
+   (read ones fill orange, the current one fills as you read), the next section, and back and next arrows. Phones keep the top bar. */
+.dock{display:none}
+.dockfade{display:none}
+@media (min-width:1280px){
+  .tocpill{display:none!important}
+  .dock{display:flex;position:fixed;left:50%;bottom:24px;z-index:20;align-items:center;gap:14px;padding:10px 12px;border-radius:16px;background:rgba(14,16,22,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 0 0 1px rgba(255,255,255,.1),0 16px 40px rgba(0,0,0,.3);font:600 14px/1 var(--sans);color:#F2F1EC;opacity:0;visibility:hidden;transform:translate(-50%,16px);transition:opacity .3s ease,transform .3s ease,visibility .3s}
+  .dock.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+  /* audit 2026-10-13: text slides under a soft fade of the section colour instead of colliding with the dock */
+  .dockfade{display:block;position:fixed;left:0;right:0;bottom:0;height:104px;z-index:19;pointer-events:none;background:linear-gradient(to bottom,transparent,var(--fade,#12141A) 78%);opacity:0;transition:opacity .3s ease;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 78%);mask-image:linear-gradient(to bottom,transparent,#000 78%)}
+  .dock.show~.dockfade,.dockfade.show{opacity:1}
+  /* Vishal 2026-10-13: the contents bar stays on screen while scrolling down too, so first time readers see it */
+  .dkb{all:unset;cursor:pointer;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.07);transition:background .2s}
+  .dkb:hover{background:rgba(255,255,255,.14)}.dkb:disabled{opacity:.35;cursor:default}
+  .dkb:focus-visible,.dkn:focus-visible,.dks button:focus-visible{outline:2px solid #8AB4F8;outline-offset:2px}
+  .dkm{display:flex;flex-direction:column;gap:9px;width:420px}
+  .dkt{display:flex;justify-content:space-between;gap:12px}.dkt i{font-style:normal;color:#9AA0AB;font-variant-numeric:tabular-nums}
+  .dks{display:flex;gap:4px}
+  .dks button{all:unset;cursor:pointer;flex:1;height:14px;display:flex;align-items:center}
+  .dks button::before{content:"";flex:1;height:4px;border-radius:2px;background:linear-gradient(90deg,#8AB4F8 var(--f,0%),rgba(242,241,236,.18) var(--f,0%))}
+  .dks button:hover::before{background:linear-gradient(90deg,#8AB4F8 var(--f,0%),rgba(242,241,236,.36) var(--f,0%))}
+  .dkn{display:flex;flex-direction:column;gap:4px;min-width:118px;padding-left:14px;border-left:1px solid rgba(255,255,255,.12);color:#F2F1EC;text-decoration:none}
+  .dkn small{font-size:10px;letter-spacing:.12em;color:#9AA0AB}
+  .dkn.end{visibility:hidden}
+  /* hover a segment to see which section it is (Vishal 2026-10-13) */
+  .dks button{position:relative}
+  .dks button::after{content:attr(data-name);position:absolute;left:50%;bottom:calc(100% + 34px);transform:translate(-50%,4px);white-space:nowrap;padding:8px 12px;border-radius:10px;background:#F2F1EC;color:#0E1424;font:600 13px/1 var(--sans);box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease}
+  .dks button:hover::after,.dks button:focus-visible::after{opacity:1;transform:translate(-50%,0)}
+}
+html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{transition:none}
+</style>
 </head>
 
 
@@ -639,50 +839,6 @@ html.calm .nextgrid a,html.calm .protowait{transition:none}
   </div>
 </main>
 
-<style is:inline>
-/* Closing (Vishal 2026-10-13): same words, order and layout as before; only the look changes.
-   Closing and More work are ONE section. No boxed card (dark, navy and blue boxes all read as a slab dropped on the page):
-   a full width ending band that grows out of the page navy into JARVIS blue light, in the page's own font. */
-body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
-.endsec{position:relative;margin:140px calc(50% - 50vw) 0;padding:clamp(72px,9vw,128px) calc((100vw - min(100vw - 56px,1376px)) / 2 + clamp(24px,4.5vw,88px)) clamp(64px,8vw,104px);background:radial-gradient(70% 55% at 50% 0%,rgba(11,87,208,.55),rgba(11,87,208,0) 70%),linear-gradient(180deg,#12141A 0%,#101A2E 55%,#0E2247 100%);border-top:1px solid rgba(138,180,248,.35);color:#E6EAF2}
-.endsec .closing{margin:0;padding:0;border:0;gap:18px}
-.closing h2{font-family:var(--sans);font-size:clamp(56px,8.4vw,116px)!important;font-weight:800;line-height:.95;letter-spacing:-.035em;color:#D3E3FD} /* very light JARVIS blue, 14:1 on navy (Vishal 2026-10-13) */
-.closing>p{font-size:clamp(20px,2.2vw,28px)!important;font-weight:500;line-height:1.3;color:#C9D6EE}
-.closing .btns{margin-top:22px;gap:12px}
-.closing .btn{height:52px;padding:0 22px;font-size:16px;font-weight:650}
-.closing .btn.primary{background:#F2F1EC;color:#12141A}
-.closing .btn.ghost{border-color:rgba(201,214,238,.4);color:#F2F1EC}
-.endsec .next>.k{color:#D3E3FD}.endsec .next>h2{color:#F2F1EC}
-/* centred on every screen size, phones too (Vishal 2026-10-13) */
-.endsec .closing{text-align:center;justify-items:center}.endsec .closing .btns{justify-content:center}.endsec .next>.k,.endsec .next>h2{text-align:center}
-.endsec .nextgrid a{background:#1B2A47;color:#F2F1EC;box-shadow:0 0 0 1px rgba(242,241,236,.14)} /* navy blue caption: darker than the thumbnail, not black (Vishal 2026-10-13) */
-.endsec .nextgrid b{color:#F2F1EC}
-.endsec .nextgrid a:hover,.endsec .nextgrid a:focus-visible{box-shadow:0 0 0 2px #8AB4F8}
-/* phones (Vishal 2026-10-15): a tap leaves no coloured stroke on the More work cards; desktop keeps its hover stroke */
-@media (max-width:759px){.endsec .nextgrid a:hover{box-shadow:0 0 0 1px rgba(242,241,236,.14)}}
-/* audit 2026-10-13: on phones More work is one swipe row (next card peeks in) instead of three full screens of cards */
-@media (max-width:620px){.endsec .nextgrid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-28px;padding:0 28px 6px;scroll-padding-inline:28px;scrollbar-width:none}.endsec .nextgrid::-webkit-scrollbar{display:none}.endsec .nextgrid a{flex:0 0 87%;scroll-snap-align:start}}
-.endsec .closing .founder{margin-top:14px;font-size:17px!important;font-weight:500;color:#C9D6EE}.endsec .closing .founder a{color:#F2F1EC;font-weight:700;text-underline-offset:4px}
-@media (max-width:620px){.endsec .closing .founder{font-size:15px!important;line-height:1.5;max-width:30ch;margin-left:auto;margin-right:auto;text-wrap:balance}.endsec .closing .founder a{white-space:nowrap}}
-.endsec .next{margin-top:clamp(56px,7vw,96px);padding-top:0;border-top:0}
-/* Phones use the same band as desktop (Vishal 2026-10-13 "make the same for Mobile"), only sized down */
-@media (max-width:620px){.endsec{margin-top:48px;padding-inline:28px}.closing h2{font-size:min(52px,11.4vw)!important;white-space:nowrap}}
-
-/* Desktop spacing (Vishal 2026-10-13: "make the sections responsive"): the page grows with the window up to the home page width (1376px)
-   instead of a fixed 760/1080 column. On wide screens each reading section puts its eyebrow and heading on the left
-   and the text on the right, so both sides of the screen are used. Phones and tablets are unchanged. */
-@media (min-width:901px){
-  .wrap,.summary,article>section.wide{max-width:1376px}
-  .wrap{padding-inline:clamp(24px,4.5vw,88px)} /* more side margin on desktop (Vishal 2026-10-13 "going too wide") */
-}
-@media (min-width:1100px){
-  article>section:not(.wide){max-width:none;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:clamp(48px,6vw,120px);row-gap:0}
-  article>section:not(.wide)>*{grid-column:2;min-width:0}
-  article>section:not(.wide)>:is(.eyebrow,h2){grid-column:1;grid-row:1/span 60;align-self:start}
-  article>section:not(.wide)>h2{padding-top:36px}
-  article>section:not(.wide)>:not(.eyebrow,h2)~:not(.eyebrow,h2){margin-top:22px}
-}
-</style>
 
 <script is:inline>
 (function(){
@@ -707,162 +863,6 @@ body{margin-bottom:0}.wrap:has(>.endsec){padding-bottom:0}
 })();
 </script>
 
-<style is:inline>
-/* Screens as on Framer: the text stays pinned 120px from the top while its phone scrolls past */
-.screens .screen>div{position:sticky;top:120px}
-.screens .shot.phone{border:1px solid rgba(14,20,36,.1)}
-@media (max-width:900px){.screens .screen>div{position:static}.screens .screen>figure{order:2;justify-self:center}.screens .shot.phone{width:min(320px,100%)}}
-/* Contents: a rail in the left margin on wide screens, a pill that opens the list everywhere else */
-nav.toc{display:grid;position:fixed;left:28px;top:50%;width:170px;transform:translateY(-50%);z-index:20;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s;gap:2px;font-size:13px;line-height:1.3}
-nav.toc.show{opacity:1;visibility:visible}
-nav.toc{left:20px;width:188px;padding:16px 14px 14px;border-radius:16px;background:rgba(18,20,26,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 32px rgba(5,10,30,.25);transition:opacity .3s ease,visibility .3s,background-color .3s}
-nav.toc.light{background:rgba(255,255,255,.86);border-color:rgba(14,20,36,.08);box-shadow:0 12px 32px rgba(13,31,94,.10)}
-nav.toc .k{margin-bottom:8px;font-size:11px}
-nav.toc a{padding:6px 0 6px 12px;border-left:2px solid var(--line);color:var(--muted);transition:color .2s,border-color .2s}
-nav.toc a.on{color:var(--fg);border-left-color:var(--warm)}
-nav.toc.light{--fg:#0E1424;--muted:#6A7488;--line:#DCE3EF;--warm:#0B57D0}
-.tocpill{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translate(-50%,16px);z-index:20;display:none;align-items:center;gap:10px;max-width:calc(100vw - 32px);height:46px;padding:0 18px;border-radius:100px;border:1px solid rgba(255,255,255,.16);background:rgba(18,20,26,.88);color:#E6EAF2;font:500 15px/1 var(--sans);cursor:pointer;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(5,10,30,.3);opacity:0;visibility:hidden;transition:opacity .3s ease,transform .3s var(--out),visibility .3s}
-.tocpill.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
-.tocpill .k{color:#9AA0AB;font-size:11px}
-.tocpill b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tocpill i{font-style:normal;color:#9AA0AB;font-size:13px;font-variant-numeric:tabular-nums}
-.tocsheet{position:fixed;inset:auto 16px calc(72px + env(safe-area-inset-bottom,0px));margin:0 auto;width:min(360px,calc(100vw - 32px));padding:18px 10px 10px;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:#1A1D24;color:#E6EAF2;box-shadow:0 20px 50px rgba(5,10,30,.45)}
-.tocsheet:popover-open{display:grid;gap:2px}
-.tocsheet .k{padding:0 12px 8px;color:#9AA0AB;font-size:11px}
-.tocsheet a{display:flex;gap:12px;padding:11px 12px;border-radius:12px;text-decoration:none;font-size:16px;color:#C9D1E2}
-.tocsheet a span{color:#6B7079;font-variant-numeric:tabular-nums;width:20px}
-.tocsheet a.on{background:#263044;color:#fff}
-.tocsheet::backdrop{background:rgba(5,10,30,.35)}
-@media (max-width:1399px){nav.toc{display:none}.tocpill{display:inline-flex}}
-.tocpill i{white-space:nowrap}
-.tocpill b{max-width:46vw}
-@media (max-width:620px){
-  .facts{grid-template-columns:1fr 1fr;gap:20px 16px}
-  /* audit 2026-10-13: one compact block, a row per number, instead of three tall cards */
-  .stats{gap:0;background:var(--card);border-radius:16px;padding:4px 18px}
-  .stats div{grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:baseline;padding:14px 0}
-  .stats div+div{border-top:1px solid var(--line)}
-  .stats b{font-size:22px;line-height:1.15;white-space:nowrap;min-width:112px}
-  .stats span{font-size:15px}
-  .endsec .closing .founder a{display:inline-block;padding:13px 0;margin:-13px 0}
-  /* Vishal 2026-10-13 15:06: on phones the boxes in the navy sections are light, so they stand out instead of dark on dark */
-  #found .stats{background:var(--card);color:var(--fg);border-color:transparent}
-  .screens .screen{gap:28px}
-}
-/* 30 second version on desktop: two by two with hairlines, so every label sits on one line and each answer has room */
-@media (min-width:901px){
-  .summary{grid-template-columns:1fr 1fr;gap:0;padding:40px 44px 20px}
-  .summary h2{margin-bottom:12px}
-  .summary div{padding:26px 0 30px;gap:12px;border-top:1px solid rgba(255,255,255,.09)}
-  .summary div:nth-of-type(odd){padding-right:44px}
-  .summary div:nth-of-type(even){padding-left:44px;border-left:1px solid rgba(255,255,255,.09)}
-  .summary p{font-size:19px;line-height:1.5;color:#E6EAF2;max-width:46ch}
-}
-/* Phones: the prototype box is exactly the shape of the app screen (412 by 917 in Figma), with Figma's own bars hidden, so nothing is cut */
-@media (max-width:640px){.proto{aspect-ratio:412/917;width:min(100%,340px,calc((100svh - 200px) * 412 / 917));margin-inline:auto;border-radius:28px}.protowrap{display:flex;justify-content:center}.protowait{width:min(100%,340px,calc((100svh - 200px) * 412 / 917));left:50%;transform:translateX(-50%);border-radius:28px}}
-/* Phones: the header slides away while reading down and comes back the moment you scroll up; the contents bar moves up with it */
-@media (max-width:759px){
-  .tocpill{transition:opacity .3s ease,transform .3s ease,visibility .3s,top .28s ease}
-  html.hdr-hide .tocpill{top:env(safe-area-inset-top,0px)}
-  html.hdr-hide .tocsheet{inset:calc(env(safe-area-inset-top,0px) + 52px) 16px auto}
-}
-/* Reel controls: labelled pills on desktop (icon plus PLAY, SOUND ON); icon only round buttons on phones, bottom right */
-.pill{height:44px;padding:0 16px;gap:8px;justify-content:center;border-radius:22px;border:0;box-shadow:0 0 0 1px rgba(242,241,236,.28);background:rgba(12,12,14,.72);color:#F2F1EC;font:700 12px/1 var(--sans);letter-spacing:.02em}
-.pill:hover{background:rgba(12,12,14,.85)}
-@media (max-width:620px){.pills{right:10px;bottom:10px;gap:6px}.pill{width:40px;height:40px;padding:0;border-radius:50%}.pill .lb{display:none}}
-@media (max-width:620px){.pill{width:44px;height:44px}} /* 44px thumb target on phones */
-.pill .lb,.dkn small{text-transform:uppercase} /* labels are written in sentence case so screen readers say words, not letters */
-/* desktop (Vishal 2026-10-13): icons only; on hover or keyboard focus the button stretches and shows its label inside; full screen is desktop only */
-@media (min-width:621px){.pill{width:auto;min-width:44px;padding:0 13px;gap:0;border-radius:22px;transition:gap .2s var(--out,ease),padding .2s var(--out,ease)}.pill .lb{display:inline-block;max-width:0;overflow:hidden;white-space:nowrap;opacity:0;transition:max-width .25s var(--out,ease),opacity .2s}.pill:hover,.pill:focus-visible{gap:8px;padding:0 16px}.pill:hover .lb,.pill:focus-visible .lb{max-width:160px;opacity:1}}
-@media (max-width:620px){.pill.fs{display:none}}
-.reel:fullscreen{display:flex;align-items:center;justify-content:center;background:#000;margin:0!important}.reel:fullscreen video{width:100%;height:100%;max-height:none;object-fit:contain;border-radius:0}
-/* Contents bar: docked under the header on every width, one look over navy and light sections alike */
-nav.toc{display:none!important}
-.tocpill{display:flex!important;left:0;right:0;top:var(--hb,56px);bottom:auto;width:100%;max-width:none;height:44px;justify-content:center;gap:12px;padding:0 20px;border:0;border-bottom:1px solid rgba(255,255,255,.08);border-radius:0;background:rgba(18,20,26,.9);box-shadow:none;transform:translateY(-6px);font-size:14px;z-index:19}
-.tocpill.show{transform:none}
-.tocpill .chev{width:10px;height:10px;border-right:1.5px solid #9AA0AB;border-bottom:1.5px solid #9AA0AB;transform:rotate(45deg) translateY(-3px)}
-.tocpill b{max-width:52vw}
-.tocsheet{inset:calc(var(--hb,56px) + 52px) 16px auto}
-/* phones (Vishal 2026-10-15): the open Contents list scrolls on its own; the page behind stays still */
-@media (max-width:759px){.tocsheet{max-height:calc(100dvh - var(--hb,56px) - 68px - env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain}html.hdr-hide .tocsheet{max-height:calc(100dvh - env(safe-area-inset-top,0px) - 68px - env(safe-area-inset-bottom,0px))}html.toclock{overflow:hidden}}
-.tid{display:none}
-/* Desktop first fold (Vishal 2026-10-13, "like this?" with the Profit Wala Love top): text left, reel right, like the Contra style tops.
-   Facts, the concept note and everything after stay full width below. Phones keep their own order (below). */
-@media (min-width:1000px){
-  .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);column-gap:clamp(40px,4vw,72px)}
-  .wrap>*{grid-column:1/-1}
-  .wrap>.facts{grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr))} /* Role line stays on one line */
-  .wrap>.summary{width:100%} /* auto side margins would shrink it to its text inside the grid */
-  .wrap>header.hero{grid-column:1;grid-row:1;align-self:center;max-width:none}
-  .wrap>.reel{grid-column:2;grid-row:1;align-self:center;margin-top:0!important}
-}
-/* Phone first fold: title, hook and a shorter intro, then the reel straight away. Facts and the concept note follow the reel. */
-@media (max-width:620px){
-  .wrap{display:flex;flex-direction:column}
-  .wrap>*{order:5}
-  .wrap>header.hero{order:1;gap:14px}
-  .wrap>.reel{order:2;margin-top:28px!important}
-  .wrap>.facts{order:3;margin-top:32px}
-  .wrap>.note{order:4}
-  .hero .dek{font-size:18px;line-height:1.5;color:var(--muted)}
-  .hero h1{line-height:1.05}
-  .facts div{align-content:start}
-}
-/* Phones: the prototype keeps its full app screen size, and the page keeps scrolling over it. A cover passes scrolls through to the page;
-   tapping it hands touches to the prototype, and "Done" (or scrolling it out of view) gives them back. */
-.protogo,.protodone{display:none}
-@media (max-width:640px){
-  #try{padding-bottom:48px}
-  .protowrap{flex-direction:column;align-items:flex-start;gap:12px;min-width:0;max-width:100%}
-  .protowrap:not(.live) .proto{pointer-events:none}
-  .protogo{display:flex;position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(100%,340px,calc((100svh - 200px) * 412 / 917));aspect-ratio:412/917;border:0;border-radius:28px;background:linear-gradient(180deg,transparent 60%,rgba(14,16,22,.55));align-items:flex-end;justify-content:center;padding-bottom:22px;cursor:pointer;font:inherit}
-  .protogo span{padding:12px 18px;border-radius:999px;background:#F2F1EC;color:#0E1424;font-size:15px;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,.25)}
-  .protowrap.live .protogo{display:none}
-  /* Once tapped, the prototype opens as a full screen overlay showing the whole app frame, nothing cut (Vishal 2026-10-13) */
-  .protowrap.live{position:fixed;inset:0;z-index:1000;max-width:none;margin:0;padding:16px 16px calc(16px + env(safe-area-inset-bottom));background:rgba(6,12,30,.94);flex-direction:column;align-items:center;justify-content:center;gap:16px}
-  .protowrap.live .proto{width:min(100%,calc((100dvh - 110px) * 412 / 917));height:auto;aspect-ratio:412/917;max-width:none;flex:none;margin:0}
-  html:has(.protowrap.live){overflow:hidden}
-  .protowrap.live .protodone{display:inline-flex;position:static;align-self:center;transform:none;white-space:nowrap;padding:12px 18px;border:0;border-radius:999px;background:#0E1424;box-shadow:0 0 0 1px rgba(242,241,236,.3),0 6px 18px rgba(0,0,0,.3);color:#F2F1EC;font:600 15px/1 var(--sans);cursor:pointer}
-}
-/* Phones: long sections show the heading, the first paragraph and the visuals; the rest opens in place with Read more. No words are cut. */
-.rmore{display:none}
-@media (max-width:620px){
-  .rm-hid{display:none!important}
-  .rmore{display:inline-flex;align-items:center;gap:6px;margin-top:4px;padding:10px 0;min-height:44px;border:0;background:none;color:var(--warm);font:600 16px/1 var(--sans);cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
-  .rmore::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
-  .rm-clamp{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden}
-}
-/* Desktop contents: a floating dock at the bottom, like a video player. Section name, n / 11, one segment per section
-   (read ones fill orange, the current one fills as you read), the next section, and back and next arrows. Phones keep the top bar. */
-.dock{display:none}
-.dockfade{display:none}
-@media (min-width:1280px){
-  .tocpill{display:none!important}
-  .dock{display:flex;position:fixed;left:50%;bottom:24px;z-index:20;align-items:center;gap:14px;padding:10px 12px;border-radius:16px;background:rgba(14,16,22,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 0 0 1px rgba(255,255,255,.1),0 16px 40px rgba(0,0,0,.3);font:600 14px/1 var(--sans);color:#F2F1EC;opacity:0;visibility:hidden;transform:translate(-50%,16px);transition:opacity .3s ease,transform .3s ease,visibility .3s}
-  .dock.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
-  /* audit 2026-10-13: text slides under a soft fade of the section colour instead of colliding with the dock */
-  .dockfade{display:block;position:fixed;left:0;right:0;bottom:0;height:104px;z-index:19;pointer-events:none;background:linear-gradient(to bottom,transparent,var(--fade,#12141A) 78%);opacity:0;transition:opacity .3s ease;-webkit-mask-image:linear-gradient(to bottom,transparent,#000 78%);mask-image:linear-gradient(to bottom,transparent,#000 78%)}
-  .dock.show~.dockfade,.dockfade.show{opacity:1}
-  /* Vishal 2026-10-13: the contents bar stays on screen while scrolling down too, so first time readers see it */
-  .dkb{all:unset;cursor:pointer;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.07);transition:background .2s}
-  .dkb:hover{background:rgba(255,255,255,.14)}.dkb:disabled{opacity:.35;cursor:default}
-  .dkb:focus-visible,.dkn:focus-visible,.dks button:focus-visible{outline:2px solid #8AB4F8;outline-offset:2px}
-  .dkm{display:flex;flex-direction:column;gap:9px;width:420px}
-  .dkt{display:flex;justify-content:space-between;gap:12px}.dkt i{font-style:normal;color:#9AA0AB;font-variant-numeric:tabular-nums}
-  .dks{display:flex;gap:4px}
-  .dks button{all:unset;cursor:pointer;flex:1;height:14px;display:flex;align-items:center}
-  .dks button::before{content:"";flex:1;height:4px;border-radius:2px;background:linear-gradient(90deg,#8AB4F8 var(--f,0%),rgba(242,241,236,.18) var(--f,0%))}
-  .dks button:hover::before{background:linear-gradient(90deg,#8AB4F8 var(--f,0%),rgba(242,241,236,.36) var(--f,0%))}
-  .dkn{display:flex;flex-direction:column;gap:4px;min-width:118px;padding-left:14px;border-left:1px solid rgba(255,255,255,.12);color:#F2F1EC;text-decoration:none}
-  .dkn small{font-size:10px;letter-spacing:.12em;color:#9AA0AB}
-  .dkn.end{visibility:hidden}
-  /* hover a segment to see which section it is (Vishal 2026-10-13) */
-  .dks button{position:relative}
-  .dks button::after{content:attr(data-name);position:absolute;left:50%;bottom:calc(100% + 34px);transform:translate(-50%,4px);white-space:nowrap;padding:8px 12px;border-radius:10px;background:#F2F1EC;color:#0E1424;font:600 13px/1 var(--sans);box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease}
-  .dks button:hover::after,.dks button:focus-visible::after{opacity:1;transform:translate(-50%,0)}
-}
-html.calm nav.toc,html.calm .tocpill,html.calm .tocpill::after,html.calm .dock{transition:none}
-</style>
 <script is:inline>
 (function(){
   var rail=document.querySelector('nav.toc'), pill=document.querySelector('.tocpill'), sheet=document.getElementById('tocsheet'), art=document.querySelector('article');
