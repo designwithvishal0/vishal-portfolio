@@ -38,6 +38,7 @@ export const work: Work[] = [
     problem:
       'A waitlisted passenger waits four hours for the chart, and the app shows a status when they need a decision.',
     role: 'Solo: research, flow, UI, copy',
+    kind: 'Travel app',
     type: 'Concept',
     year: '2026',
     detail: '1 hub, 6 journey states, 2 decision sheets',
@@ -52,6 +53,7 @@ export const work: Work[] = [
     problem:
       'Google Pay only opens when money has to move, and a split is over the moment you send it.',
     role: 'Solo: research, flows, UI, interface copy, prototype',
+    kind: 'Payments app',
     type: 'Concept',
     year: '2026',
     detail: 'A shared board replaces the reminder, so a split returns 4 times',
@@ -66,6 +68,7 @@ export const work: Work[] = [
     problem:
       'The bank says ₹84,000, and nothing mentions the ₹18,000 insurance renewal coming in March.',
     role: 'Solo: research, concept, IA, UI, identity, copy',
+    kind: 'Finance app',
     type: 'Concept',
     year: '2026',
     detail: 'A 12 month plan behind one safe to spend number, with model confidence on all 9 screens',
@@ -80,6 +83,7 @@ export const work: Work[] = [
     problem:
       'A store manager swipes away a false alert at 3 AM, and nothing tells them it counted.',
     role: 'Solo: problem framing, flow, UI, copy',
+    kind: 'B2B alerts app',
     type: 'Concept',
     year: '2026',
     detail: 'A 3 tier priority system and an operator feedback loop to cut alert fatigue',
@@ -127,8 +131,8 @@ export const results = [
   { n: '30%', label: 'faster campaign turnaround, from one design system I built in Figma for product and marketing', short: 'faster campaign turnaround, from one design system' },
 ];
 export const more = [
-  { img: 'reward', name: 'Unified Reward Centre', line: 'Every reward a player has earned, on one screen.', href: '/work/reward-centre/' },
-  { img: 'onebanc', name: 'OneBanc', line: 'Plan the month your salary has to last.', href: '/work/onebanc/' },
+  { img: 'reward', name: 'Unified Reward Centre', line: 'Every reward a player has earned, on one screen.', kind: 'Gaming app concept', href: '/work/reward-centre/' },
+  { img: 'onebanc', name: 'OneBanc', line: 'Plan the month your salary has to last.', kind: 'Banking app concept', href: '/work/onebanc/' },
 ];
 export const lead = { img: 'pwl', name: 'Profit Wala Love, CashKaro', tag: 'Shipped, February 2026', line: "Valentine’s week campaign across app, web and social: seven days, seven ways to earn.", href: '/work/profit-wala-love/', stats: [['1,542', 'transactions'], ['₹9.89 lakh', 'GMV'], ['+51%', 'retailer commission']] };
 // Shipped pages first, then concepts (two lens audit 2026-10-11: a client reading "Pages that sell" should meet the real results before the concepts)
