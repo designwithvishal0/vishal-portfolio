@@ -622,8 +622,8 @@ nav.toc.light{--fg:#1C0918;--muted:#6E5A67;--line:#EED9E5;--warm:#B0006A}
 }
 /* Phones: the prototype box is exactly the shape of the app screen (412 by 917 in Figma), with Figma's own bars hidden, so nothing is cut */
 @media (max-width:640px){.proto{aspect-ratio:412/917;width:min(100%,340px,calc((100svh - 200px) * 412 / 917));margin-inline:auto;border-radius:28px}.protowrap{display:flex;justify-content:center}.protowait{width:min(100%,340px,calc((100svh - 200px) * 412 / 917));left:50%;transform:translateX(-50%);border-radius:28px}}
-/* Phones: the header slides away while reading down and comes back the moment you scroll up; the contents bar moves up with it */
-@media (max-width:759px){
+/* Phones: the header slides away while reading down and comes back the moment you scroll up; the contents bar moves up with it (every width where the bar shows, not only phones) */
+@media (max-width:1279px){
   .tocpill{transition:opacity .3s ease,transform .3s ease,visibility .3s,top .28s ease}
   html.hdr-hide .tocpill{top:env(safe-area-inset-top,0px)}
   html.hdr-hide .tocsheet{inset:calc(env(safe-area-inset-top,0px) + 52px) 16px auto}
